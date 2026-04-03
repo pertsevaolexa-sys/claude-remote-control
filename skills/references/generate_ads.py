@@ -24,12 +24,20 @@ try:
 except ImportError:
     sys.exit("Missing dependency: pip install requests")
 
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    sys.exit("Missing dependency: pip install python-dotenv")
+
+# Load .env from project root (two levels up from skills/references/)
+load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env")
+
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
 FAL_KEY = os.environ.get("FAL_KEY", "")
 if not FAL_KEY:
-    sys.exit("FAL_KEY environment variable not set. Run: export FAL_KEY='your-key'")
+    sys.exit("FAL_KEY environment variable not set. Add it to .env or run: export FAL_KEY='your-key'")
 
 HEADERS = {"Authorization": f"Key {FAL_KEY}", "Content-Type": "application/json"}
 
