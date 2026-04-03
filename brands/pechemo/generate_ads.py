@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """
-generate_ads.py — Nano Banana 2 Ad Image Generator
-Reads prompts.json, uploads product images to FAL storage,
-fires each prompt to the correct FAL endpoint, downloads results,
-and builds an HTML gallery.
+generate_ads.py — Pollinations.ai Ad Image Generator
+Reads prompts.json, fires each prompt to Pollinations.ai,
+downloads results, and builds an HTML gallery.
 
 Usage:
     python generate_ads.py                        # all prompts
@@ -15,8 +14,7 @@ import sys
 import json
 import time
 import argparse
-import mimetypes
-import urllib.request
+import urllib.parse
 from pathlib import Path
 
 try:
@@ -24,153 +22,77 @@ try:
 except ImportError:
     sys.exit("Missing dependency: pip install requests")
 
-try:
-    from dotenv import load_dotenv
-except ImportError:
-    sys.exit("Missing dependency: pip install python-dotenv")
-
-# Load .env from project root (two levels up from skills/references/)
-load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env")
-
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
-FAL_KEY = os.environ.get("FAL_KEY", "")
-if not FAL_KEY:
-    sys.exit("FAL_KEY environment variable not set. Add it to .env or run: export FAL_KEY='your-key'")
-
-HEADERS = {"Authorization": f"Key {FAL_KEY}", "Content-Type": "application/json"}
-
-ENDPOINT_TEXT  = "fal-ai/nano-banana-2"
-ENDPOINT_EDIT  = "fal-ai/nano-banana-2/edit"
-
-BASE_URL       = "https://fal.run"
-QUEUE_URL      = "https://queue.fal.run"
-STORAGE_URL    = "https://storage.fal.run"
+POLLINATIONS_URL = "https://image.pollinations.ai/prompt"
 
 NUM_IMAGES     = 4       # images generated per prompt
-RESOLUTION     = "2K"    # 0.5K | 1K | 2K | 4K
-POLL_INTERVAL  = 3       # seconds between status checks
-MAX_WAIT       = 300     # max seconds to wait per job
+MAX_RETRIES    = 3       # retries per image on failure
+RETRY_DELAY    = 5       # seconds between retries
+
+# Aspect ratio to pixel dimensions mapping
+ASPECT_DIMENSIONS = {
+    "1:1":  (1024, 1024),
+    "4:5":  (1024, 1280),
+    "5:4":  (1280, 1024),
+    "9:16": (720, 1280),
+    "16:9": (1280, 720),
+    "3:2":  (1200, 800),
+    "2:3":  (800, 1200),
+    "3:4":  (960, 1280),
+    "4:3":  (1280, 960),
+}
 
 
-# ── FAL Storage Upload ────────────────────────────────────────────────────────
+# ── Pollinations.ai Image Generation ─────────────────────────────────────────
 
-def upload_image(image_path: Path) -> str:
-    """Upload a local image to FAL storage and return its public URL."""
-    mime, _ = mimetypes.guess_type(str(image_path))
-    mime = mime or "application/octet-stream"
-
-    with open(image_path, "rb") as f:
-        data = f.read()
-
-    resp = requests.post(
-        STORAGE_URL,
-        headers={"Authorization": f"Key {FAL_KEY}", "Content-Type": mime},
-        data=data,
-        timeout=60,
-    )
-    resp.raise_for_status()
-    url = resp.json().get("url") or resp.json().get("access_url")
-    if not url:
-        raise ValueError(f"No URL in FAL storage response: {resp.text}")
-    print(f"  Uploaded {image_path.name} → {url}")
+def generate_single_image(prompt: str, width: int, height: int, seed: int) -> str:
+    """Build a Pollinations.ai URL for a single image and return the download URL."""
+    encoded_prompt = urllib.parse.quote(prompt)
+    url = f"{POLLINATIONS_URL}/{encoded_prompt}?width={width}&height={height}&seed={seed}&nologo=true&enhance=true"
     return url
 
 
-def upload_product_images(product_images_dir: Path) -> list[str]:
-    """Upload all product images in the folder and return their URLs."""
-    exts = {".png", ".jpg", ".jpeg", ".webp"}
-    images = [p for p in product_images_dir.iterdir() if p.suffix.lower() in exts]
-
-    if not images:
-        print("  No product images found in product-images/")
-        return []
-
-    print(f"  Found {len(images)} product image(s) — uploading…")
-    urls = []
-    for img in images[:14]:   # Nano Banana 2 accepts up to 14 reference images
-        urls.append(upload_image(img))
-    return urls
-
-
-# ── FAL Queue ─────────────────────────────────────────────────────────────────
-
-def submit_job(endpoint: str, payload: dict) -> str:
-    """Submit a job to the FAL queue and return the request_id."""
-    url = f"{QUEUE_URL}/{endpoint}"
-    resp = requests.post(url, headers=HEADERS, json=payload, timeout=30)
-    resp.raise_for_status()
-    request_id = resp.json().get("request_id")
-    if not request_id:
-        raise ValueError(f"No request_id in response: {resp.text}")
-    return request_id
+def download_image(url: str, dest: Path) -> None:
+    """Download an image from a URL and save it to dest."""
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            resp = requests.get(url, timeout=120, stream=True)
+            resp.raise_for_status()
+            with open(dest, "wb") as f:
+                for chunk in resp.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            return
+        except Exception as e:
+            if attempt < MAX_RETRIES:
+                print(f"    Retry {attempt}/{MAX_RETRIES} after error: {e}")
+                time.sleep(RETRY_DELAY)
+            else:
+                raise
 
 
-def poll_job(endpoint: str, request_id: str) -> dict:
-    """Poll until the job is complete and return the result."""
-    status_url = f"{QUEUE_URL}/{endpoint}/requests/{request_id}/status"
-    result_url = f"{QUEUE_URL}/{endpoint}/requests/{request_id}"
-    elapsed = 0
-
-    while elapsed < MAX_WAIT:
-        resp = requests.get(status_url, headers=HEADERS, timeout=30)
-        resp.raise_for_status()
-        status = resp.json().get("status")
-
-        if status == "COMPLETED":
-            result = requests.get(result_url, headers=HEADERS, timeout=30)
-            result.raise_for_status()
-            return result.json()
-
-        if status in ("FAILED", "CANCELLED"):
-            raise RuntimeError(f"Job {request_id} ended with status: {status}")
-
-        print(f"    Status: {status} … ({elapsed}s elapsed)")
-        time.sleep(POLL_INTERVAL)
-        elapsed += POLL_INTERVAL
-
-    raise TimeoutError(f"Job {request_id} did not complete within {MAX_WAIT}s")
-
-
-def generate_images(prompt_data: dict, image_urls: list[str]) -> list[dict]:
+def generate_images(prompt_data: dict) -> list[dict]:
     """
-    Call the correct FAL endpoint and return a list of image dicts
-    with 'url' and optionally 'content_type'.
+    Generate multiple images via Pollinations.ai and return a list of
+    dicts with 'url', 'width', 'height', and 'seed'.
     """
-    needs_product = prompt_data.get("needs_product_images", False)
-    endpoint = ENDPOINT_EDIT if (needs_product and image_urls) else ENDPOINT_TEXT
+    prompt = prompt_data["prompt"]
+    aspect = prompt_data.get("aspect_ratio", "1:1")
+    width, height = ASPECT_DIMENSIONS.get(aspect, (1024, 1024))
 
-    payload = {
-        "prompt":       prompt_data["prompt"],
-        "aspect_ratio": prompt_data.get("aspect_ratio", "1:1"),
-        "num_images":   NUM_IMAGES,
-        "output_format": "png",
-        "resolution":   RESOLUTION,
-    }
+    images = []
+    base_seed = int(time.time()) % 100000
 
-    if endpoint == ENDPOINT_EDIT and image_urls:
-        payload["image_urls"] = image_urls
+    for i in range(NUM_IMAGES):
+        seed = base_seed + i * 111
+        url = generate_single_image(prompt, width, height, seed)
+        images.append({"url": url, "seed": seed, "width": width, "height": height})
 
-    print(f"  Endpoint: {endpoint}")
-    request_id = submit_job(endpoint, payload)
-    print(f"  Job submitted: {request_id}")
-    result = poll_job(endpoint, request_id)
-
-    images = result.get("images") or []
     return images
 
 
 # ── Download & Save ───────────────────────────────────────────────────────────
-
-def download_image(url: str, dest: Path) -> None:
-    """Download an image from a URL and save it to dest."""
-    resp = requests.get(url, timeout=60, stream=True)
-    resp.raise_for_status()
-    with open(dest, "wb") as f:
-        for chunk in resp.iter_content(chunk_size=8192):
-            f.write(chunk)
-
 
 def save_prompt_results(prompt_data: dict, images: list[dict], outputs_dir: Path) -> list[Path]:
     """Save all images + prompt.txt for a single prompt into the outputs folder."""
@@ -184,9 +106,8 @@ def save_prompt_results(prompt_data: dict, images: list[dict], outputs_dir: Path
 
     saved = []
     for i, img in enumerate(images, start=1):
-        url  = img.get("url") or img.get("access_url") or img
-        ext  = ".png"
-        dest = folder / f"{name}_v{i}{ext}"
+        url  = img["url"]
+        dest = folder / f"{name}_v{i}.png"
         print(f"  Downloading image {i}/{len(images)} → {dest.name}")
         download_image(url, dest)
         saved.append(dest)
@@ -216,7 +137,7 @@ HTML_TEMPLATE = """\
 </head>
 <body>
 <h1>{brand} — Generated Ad Gallery</h1>
-<p class="meta">Generated {generated_at} &nbsp;·&nbsp; {total_images} images across {total_templates} templates</p>
+<p class="meta">Generated {generated_at} &nbsp;·&nbsp; {total_images} images across {total_templates} templates &nbsp;·&nbsp; Powered by Pollinations.ai</p>
 {sections}
 </body>
 </html>
@@ -260,14 +181,13 @@ def build_gallery(brand: str, generated_at: str, outputs_dir: Path) -> None:
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate ads via Nano Banana 2 / FAL API")
+    parser = argparse.ArgumentParser(description="Generate ads via Pollinations.ai")
     parser.add_argument("--templates", help="Comma-separated template numbers to run, e.g. 1,7,13")
     parser.add_argument("--brand-dir", help="Path to brand folder (default: current directory)", default=".")
     args = parser.parse_args()
 
     brand_dir = Path(args.brand_dir).resolve()
     prompts_file = brand_dir / "prompts.json"
-    product_images_dir = brand_dir / "product-images"
     outputs_dir = brand_dir / "outputs"
 
     # ── Load prompts.json ──
@@ -292,13 +212,8 @@ def main():
 
     outputs_dir.mkdir(parents=True, exist_ok=True)
 
-    # ── Upload product images once ──
-    print("\n── Uploading product images ──────────────────────────────────")
-    product_image_urls: list[str] = []
-    if product_images_dir.exists():
-        product_image_urls = upload_product_images(product_images_dir)
-    else:
-        print("  product-images/ folder not found — skipping uploads.")
+    print(f"\nUsing Pollinations.ai — generating {NUM_IMAGES} images per prompt")
+    print(f"Total prompts: {len(prompts)} — Expected images: {len(prompts) * NUM_IMAGES}")
 
     # ── Process each prompt ───────────────────────────────────────────────────
     total = len(prompts)
@@ -307,10 +222,12 @@ def main():
     for idx, prompt_data in enumerate(prompts, start=1):
         num  = prompt_data["template_number"]
         name = prompt_data["template_name"]
-        print(f"\n── [{idx}/{total}] Template {num}: {name} ──────────────────────────────")
+        aspect = prompt_data.get("aspect_ratio", "1:1")
+        dims = ASPECT_DIMENSIONS.get(aspect, (1024, 1024))
+        print(f"\n── [{idx}/{total}] Template {num}: {name} ({aspect} → {dims[0]}x{dims[1]}) ──")
 
         try:
-            images = generate_images(prompt_data, product_image_urls)
+            images = generate_images(prompt_data)
             saved  = save_prompt_results(prompt_data, images, outputs_dir)
             all_saved.extend(saved)
             print(f"  ✓ {len(saved)} image(s) saved")
