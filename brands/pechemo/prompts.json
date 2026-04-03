@@ -82,6 +82,22 @@
       "aspect_ratio": "9:16",
       "needs_product_images": true,
       "notes": "Scroll-stopping reel preview of medivnyk cross-section layers. Honey drizzle for satisfying visual effect."
+    },
+    {
+      "template_number": 11,
+      "template_name": "community-poll-story",
+      "prompt": "Warm, golden-hour natural lighting with honey-amber color grading and soft shadows. Ukrainian baking aesthetic: wooden boards, linen cloths, cream ceramic plates, vintage utensils as props. Photography style is overhead flat-lay or 45° elevated angle, shot on 50mm f/2.8, shallow depth of field. Color palette centers on warm charcoal (#3F3F3F) text, golden-brown baked goods against cream/white backgrounds. Bold serif headlines with italic emphasis. Mood is cozy, nostalgic, heritage-proud — a modern Ukrainian grandmother's kitchen. Brand logo \"Печемо\" bottom-right. All visible ad copy in Ukrainian (Cyrillic script). Create: Instagram Story sticker-ready static. Background: two baking options side-by-side — LEFT: golden pampushky (garlic bread rolls) piled on a wooden board, RIGHT: a sliced medivnyk (honey cake) with visible cream layers on a cake stand. Both shot in warm golden light on a linen tablecloth. Top text overlay: interactive question in bold white serif font: \"Що б ви спекли першим? 🍞🍰\" (Which would you bake first?). Bottom corners: two tap zones — left in warm charcoal (#3F3F3F) rounded rectangle with white text \"Пампушки\" (Pampushky), right in golden amber (#D98A14) rounded rectangle with white text \"Медівник\" (Medivnyk). Playful, community-focused energy. Encourages replies and comments. 9:16 vertical Story format.",
+      "aspect_ratio": "9:16",
+      "needs_product_images": false,
+      "notes": "Community poll Story — pampushky vs medivnyk. Interactive engagement driver for Instagram Stories."
+    },
+    {
+      "template_number": 12,
+      "template_name": "beginners-win",
+      "prompt": "Warm, golden-hour natural lighting with honey-amber color grading and soft shadows. Ukrainian baking aesthetic: wooden boards, linen cloths, cream ceramic plates, vintage utensils as props. Photography style is overhead flat-lay or 45° elevated angle, shot on 50mm f/2.8, shallow depth of field. Color palette centers on warm charcoal (#3F3F3F) text, golden-brown baked goods against cream/white backgrounds. Bold serif headlines with italic emphasis. Mood is cozy, nostalgic, heritage-proud — a modern Ukrainian grandmother's kitchen. Brand logo \"Печемо\" bottom-right. All visible ad copy in Ukrainian (Cyrillic script). Create: warm, encouraging tone. Image: overhead of freshly made syrnyky (cottage cheese pancakes) on a cream ceramic plate, golden-brown and slightly imperfect but clearly home-baked and proud. A woman's hands holding the plate up warmly toward camera. Soft, cozy kitchen lighting from a window. A cup of tea and a small bowl of sour cream with berries in the background. Top text: bold warm charcoal (#3F3F3F) serif headline: \"Так, ви це зможете. Серйозно.\" (Yes, you can bake this. Really.). Below in regular weight white text: \"Жодного досвіду не потрібно. Просто слідуйте за нами.\" (No experience needed. Just follow along.). Small badge in top-right corner: green (#008A2E) rounded rectangle with white text \"🟢 ДУЖЕ ЛЕГКО\" (Super Easy). Community-building, inclusive, motivational tone. 4:5 vertical format.",
+      "aspect_ratio": "4:5",
+      "needs_product_images": false,
+      "notes": "Beginner encouragement post featuring syrnyky. Motivational, inclusive tone for new bakers."
     }
   ]
 }
