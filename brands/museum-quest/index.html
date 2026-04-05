@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Museum Quest — Transform Your Museum Into an Adventure</title>
+<style>
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #1a1a2e;
+  line-height: 1.6;
+  background: #fafafa;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ── Utilities ── */
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 80px 0; }
+.section-alt { background: #fff; }
+.section-dark { background: #1a1a2e; color: #eee; }
+.text-center { text-align: center; }
+.text-gold { color: #d4a843; }
+
+/* ── Typography ── */
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 700; margin-bottom: 16px; }
+h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+.subtitle { font-size: 1.15rem; color: #555; max-width: 640px; margin: 0 auto 40px; line-height: 1.7; }
+.section-dark .subtitle { color: #bbb; }
+
+/* ── Navigation ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(26, 26, 46, 0.95); backdrop-filter: blur(8px);
+  padding: 16px 0; color: #fff;
+}
+nav .container { display: flex; align-items: center; justify-content: space-between; }
+nav .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px; }
+nav .logo span { color: #d4a843; }
+nav ul { list-style: none; display: flex; gap: 28px; }
+nav ul li a { font-size: 0.9rem; opacity: 0.8; transition: opacity 0.2s; }
+nav ul li a:hover { opacity: 1; }
+.nav-cta {
+  background: #d4a843; color: #1a1a2e; padding: 8px 20px;
+  border-radius: 6px; font-weight: 600; font-size: 0.85rem;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: #c49a38; }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff; padding-top: 80px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 200%;
+  background: radial-gradient(circle, rgba(212,168,67,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; }
+.hero-text .badge {
+  display: inline-block; background: rgba(212,168,67,0.15); color: #d4a843;
+  padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+  margin-bottom: 20px; letter-spacing: 0.5px;
+}
+.hero-text h1 { margin-bottom: 20px; }
+.hero-text p { font-size: 1.15rem; color: rgba(255,255,255,0.75); max-width: 480px; margin-bottom: 32px; }
+.hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  background: #d4a843; color: #1a1a2e; padding: 14px 32px;
+  border-radius: 8px; font-weight: 700; font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s; display: inline-block;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,168,67,0.3); }
+.btn-outline {
+  border: 2px solid rgba(255,255,255,0.3); padding: 12px 32px;
+  border-radius: 8px; font-weight: 600; font-size: 1rem;
+  transition: border-color 0.2s; display: inline-block;
+}
+.btn-outline:hover { border-color: #fff; }
+
+/* Hero visual */
+.hero-visual {
+  display: flex; justify-content: center; align-items: center;
+}
+.phone-mockup {
+  width: 280px; height: 560px;
+  background: #222; border-radius: 36px;
+  border: 4px solid #444;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 40px 20px; text-align: center;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+  position: relative; overflow: hidden;
+}
+.phone-mockup::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, #1a1a2e 0%, #0f3460 50%, #1a1a2e 100%);
+}
+.phone-mockup > * { position: relative; z-index: 1; }
+.phone-icon { font-size: 3rem; margin-bottom: 16px; }
+.phone-title { font-weight: 700; font-size: 1.1rem; color: #d4a843; margin-bottom: 8px; }
+.phone-sub { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+.phone-progress { width: 100%; }
+.progress-bar { background: rgba(255,255,255,0.1); border-radius: 8px; height: 8px; margin-bottom: 8px; }
+.progress-fill { background: #d4a843; height: 100%; border-radius: 8px; width: 65%; }
+.progress-label { font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+.phone-badges { display: flex; gap: 8px; margin-top: 20px; justify-content: center; }
+.phone-badge {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(212,168,67,0.2); display: flex; align-items: center;
+  justify-content: center; font-size: 1.1rem;
+}
+
+/* ── Stats Bar ── */
+.stats-bar { background: #fff; padding: 40px 0; border-bottom: 1px solid #eee; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
+.stat-number { font-size: 2rem; font-weight: 800; color: #d4a843; }
+.stat-label { font-size: 0.85rem; color: #777; margin-top: 4px; }
+
+/* ── Problem Section ── */
+.problem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 800px; margin: 0 auto; }
+.problem-card {
+  background: rgba(212,168,67,0.06); border: 1px solid rgba(212,168,67,0.15);
+  border-radius: 12px; padding: 28px; text-align: center;
+}
+.problem-icon { font-size: 2rem; margin-bottom: 12px; }
+.problem-card h3 { color: #c0392b; font-size: 1rem; }
+.problem-card p { font-size: 0.9rem; color: #666; margin-top: 6px; }
+
+/* ── Solution ── */
+.solution-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+.flow-step {
+  text-align: center; padding: 32px 16px;
+  background: #fff; border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  position: relative;
+}
+.flow-number {
+  width: 40px; height: 40px; border-radius: 50%; background: #d4a843;
+  color: #1a1a2e; font-weight: 800; display: flex; align-items: center;
+  justify-content: center; margin: 0 auto 16px; font-size: 1.1rem;
+}
+.flow-step h3 { font-size: 1rem; }
+.flow-step p { font-size: 0.85rem; color: #666; margin-top: 8px; }
+
+/* ── Value Cards ── */
+.value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.value-card {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px; padding: 36px 28px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.value-card:hover { transform: translateY(-4px); border-color: rgba(212,168,67,0.4); }
+.value-icon { font-size: 2.2rem; margin-bottom: 16px; }
+.value-card h3 { color: #d4a843; font-size: 1.1rem; margin-bottom: 10px; }
+.value-card p { font-size: 0.9rem; color: #aaa; }
+.value-card ul { list-style: none; margin-top: 12px; }
+.value-card ul li { font-size: 0.88rem; color: #aaa; padding: 4px 0; padding-left: 20px; position: relative; }
+.value-card ul li::before { content: '\2713'; position: absolute; left: 0; color: #d4a843; font-weight: 700; }
+
+/* ── Features ── */
+.features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+.feature-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: #fff; border-radius: 12px; padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.feature-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(212,168,67,0.1); display: flex; align-items: center;
+  justify-content: center; font-size: 1.4rem; flex-shrink: 0;
+}
+.feature-item h3 { font-size: 0.95rem; margin-bottom: 4px; }
+.feature-item p { font-size: 0.85rem; color: #666; }
+
+/* ── Audience ── */
+.audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 900px; margin: 0 auto; }
+.audience-card {
+  text-align: center; padding: 36px 24px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+}
+.audience-icon { font-size: 2.5rem; margin-bottom: 16px; }
+.audience-card h3 { margin-bottom: 8px; color: #d4a843; }
+.audience-card p { font-size: 0.88rem; color: #aaa; }
+
+/* ── Pricing ── */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 960px; margin: 0 auto; }
+.pricing-card {
+  background: #fff; border-radius: 16px; padding: 36px 28px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06); text-align: center;
+  border: 2px solid transparent; transition: border-color 0.2s;
+}
+.pricing-card.featured { border-color: #d4a843; position: relative; }
+.pricing-card.featured::before {
+  content: 'Most Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: #d4a843; color: #1a1a2e; padding: 4px 16px; border-radius: 12px;
+  font-size: 0.75rem; font-weight: 700;
+}
+.pricing-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+.pricing-amount { font-size: 2rem; font-weight: 800; color: #d4a843; margin: 16px 0 8px; }
+.pricing-period { font-size: 0.8rem; color: #999; }
+.pricing-features { list-style: none; margin: 24px 0; text-align: left; }
+.pricing-features li { padding: 8px 0; font-size: 0.88rem; color: #555; padding-left: 24px; position: relative; }
+.pricing-features li::before { content: '\2713'; position: absolute; left: 0; color: #d4a843; font-weight: 700; }
+.pricing-btn {
+  display: block; width: 100%; padding: 12px; border-radius: 8px;
+  font-weight: 700; font-size: 0.95rem; margin-top: 8px;
+  border: 2px solid #d4a843; color: #d4a843; background: transparent;
+  cursor: pointer; transition: all 0.2s;
+}
+.pricing-btn:hover, .pricing-card.featured .pricing-btn {
+  background: #d4a843; color: #1a1a2e;
+}
+
+/* ── Timeline ── */
+.timeline { max-width: 700px; margin: 0 auto; position: relative; }
+.timeline::before {
+  content: ''; position: absolute; left: 20px; top: 0; bottom: 0;
+  width: 3px; background: rgba(212,168,67,0.3);
+}
+.timeline-item { display: flex; gap: 24px; margin-bottom: 32px; align-items: flex-start; }
+.timeline-dot {
+  width: 42px; height: 42px; border-radius: 50%; background: #d4a843;
+  color: #1a1a2e; font-weight: 800; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; font-size: 0.9rem; position: relative; z-index: 1;
+}
+.timeline-content h3 { font-size: 1rem; margin-bottom: 4px; }
+.timeline-content p { font-size: 0.88rem; color: #666; }
+
+/* ── CTA ── */
+.cta-section {
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  color: #fff; padding: 100px 0; text-align: center;
+}
+.cta-section h2 { font-size: clamp(1.6rem, 4vw, 2.5rem); margin-bottom: 16px; }
+.cta-section p { color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto 36px; font-size: 1.1rem; }
+
+/* ── Footer ── */
+footer {
+  background: #111; color: #777; padding: 40px 0; text-align: center;
+  font-size: 0.85rem;
+}
+footer a { color: #d4a843; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero .container { grid-template-columns: 1fr; text-align: center; }
+  .hero-text p { margin: 0 auto 32px; }
+  .hero-buttons { justify-content: center; }
+  .hero-visual { margin-top: 40px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .solution-flow { grid-template-columns: repeat(2, 1fr); }
+  .value-grid, .audience-grid, .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .features-grid { grid-template-columns: 1fr; }
+  .problem-grid { grid-template-columns: 1fr; }
+  nav ul { display: none; }
+}
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .solution-flow { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="container">
+    <div class="logo">Museum<span>Quest</span></div>
+    <ul>
+      <li><a href="#problem">The Problem</a></li>
+      <li><a href="#solution">Solution</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-text">
+      <div class="badge">FOR MUSEUMS, SCHOOLS &amp; FAMILIES</div>
+      <h1>Transform Your Museum Into an <span class="text-gold">Interactive Adventure</span></h1>
+      <p>Museum Quest turns passive museum visits into immersive, story-driven quest experiences that captivate younger audiences and bring collections to life.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">Request a Demo</a>
+        <a href="#solution" class="btn-outline">See How It Works</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="phone-mockup">
+        <div class="phone-icon">&#127963;</div>
+        <div class="phone-title">The Lost Gallery</div>
+        <div class="phone-sub">Quest in progress...</div>
+        <div class="phone-progress">
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+          <div class="progress-label">7 of 12 artworks discovered</div>
+        </div>
+        <div class="phone-badges">
+          <div class="phone-badge">&#11088;</div>
+          <div class="phone-badge">&#128272;</div>
+          <div class="phone-badge">&#127912;</div>
+          <div class="phone-badge">&#128218;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-number">30-60 min</div>
+        <div class="stat-label">Average Quest Duration</div>
+      </div>
+      <div>
+        <div class="stat-number">10-20</div>
+        <div class="stat-label">Artworks Per Quest</div>
+      </div>
+      <div>
+        <div class="stat-number">10-14</div>
+        <div class="stat-label">Primary Age Group</div>
+      </div>
+      <div>
+        <div class="stat-number">&#8364;3-5</div>
+        <div class="stat-label">Per Student Per Visit</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Problem -->
+<section class="section" id="problem">
+  <div class="container text-center">
+    <h2>The Challenge Museums Face Today</h2>
+    <p class="subtitle">Smaller cultural institutions are struggling to stay relevant for digital-native generations. The traditional museum experience is no longer enough.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">&#128201;</div>
+        <h3>Declining Engagement</h3>
+        <p>Younger audiences find passive exhibits uninteresting, leading to fewer repeat visits.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">&#128172;</div>
+        <h3>Low Interaction</h3>
+        <p>Traditional formats offer little to no interactivity, creating a one-way experience.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">&#128176;</div>
+        <h3>Budget Constraints</h3>
+        <p>Smaller institutions lack resources for expensive digital transformation projects.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">&#127912;</div>
+        <h3>Underutilized Collections</h3>
+        <p>Valuable artworks and narratives remain hidden from visitors who never discover them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Solution -->
+<section class="section section-alt" id="solution">
+  <div class="container text-center">
+    <h2>How Museum Quest Works</h2>
+    <p class="subtitle">A gamified experience that transforms museums into interactive learning environments and engaging storytelling spaces.</p>
+    <div class="solution-flow">
+      <div class="flow-step">
+        <div class="flow-number">1</div>
+        <h3>Start a Quest</h3>
+        <p>Visitors choose a narrative quest from the museum's curated collection.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-number">2</div>
+        <h3>Explore &amp; Discover</h3>
+        <p>Follow a curated route through 10-20 artworks, guided by the story.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-number">3</div>
+        <h3>Solve Puzzles</h3>
+        <p>Engage with artwork-connected puzzles that deepen understanding.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-number">4</div>
+        <h3>Earn Rewards</h3>
+        <p>Unlock stories, achievements, and badges as you complete the quest.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Value Proposition -->
+<section class="section section-dark" id="value">
+  <div class="container text-center">
+    <h2>Value for <span class="text-gold">Every Stakeholder</span></h2>
+    <p class="subtitle">Museum Quest creates lasting value for museums, schools, and visitors alike.</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-icon">&#127963;</div>
+        <h3>For Museums</h3>
+        <p>Position your institution as innovative while generating new revenue.</p>
+        <ul>
+          <li>Additional revenue stream</li>
+          <li>Increased visitor engagement time</li>
+          <li>Stronger innovative positioning</li>
+          <li>Reusable digital infrastructure</li>
+        </ul>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">&#127891;</div>
+        <h3>For Schools</h3>
+        <p>A structured tool that aligns museum visits with classroom learning.</p>
+        <ul>
+          <li>Curriculum-aligned content</li>
+          <li>Structured interactive visits</li>
+          <li>Measurable learning outcomes</li>
+          <li>Easy group management</li>
+        </ul>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">&#128106;</div>
+        <h3>For Visitors</h3>
+        <p>Turn a museum trip into an unforgettable adventure for the whole family.</p>
+        <ul>
+          <li>Fun, engaging experience</li>
+          <li>Active participation</li>
+          <li>Memorable storytelling journey</li>
+          <li>Self-guided flexibility</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section section-alt" id="features">
+  <div class="container text-center">
+    <h2>Powerful Features, Simple Experience</h2>
+    <p class="subtitle">Everything visitors and museum staff need, built into one seamless platform.</p>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">&#128506;</div>
+        <div>
+          <h3>Quest Navigation</h3>
+          <p>Interactive maps and wayfinding guide visitors through curated artwork routes.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">&#129513;</div>
+        <div>
+          <h3>Puzzle Mechanics</h3>
+          <p>Engaging puzzles connected to artworks that deepen understanding and retention.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">&#128200;</div>
+        <div>
+          <h3>Progress Tracking</h3>
+          <p>Real-time progress indicators keep visitors motivated throughout the quest.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">&#127942;</div>
+        <div>
+          <h3>Achievement System</h3>
+          <p>Badges, rewards, and unlockable stories celebrate visitor accomplishments.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">&#128221;</div>
+        <div>
+          <h3>Museum CMS</h3>
+          <p>Easy-to-use content management for uploading artworks, narratives, and routes.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">&#128202;</div>
+        <div>
+          <h3>Analytics Dashboard</h3>
+          <p>Monitor visitor engagement, quest completion rates, and usage patterns.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Target Audience -->
+<section class="section section-dark" id="audience">
+  <div class="container text-center">
+    <h2>Built for <span class="text-gold">Everyone</span></h2>
+    <p class="subtitle">Designed for children and families, with depth that appeals to all curious minds.</p>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="audience-icon">&#128103;</div>
+        <h3>Children &amp; Schools</h3>
+        <p>Ages 10-14 and school groups get curriculum-aligned, interactive learning adventures.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">&#128106;</div>
+        <h3>Families</h3>
+        <p>A shared experience that makes museum visits fun for every generation.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">&#127758;</div>
+        <h3>Tourists &amp; Explorers</h3>
+        <p>Discover hidden stories and collections through engaging self-guided quests.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section" id="pricing">
+  <div class="container text-center">
+    <h2>Simple, Scalable Pricing</h2>
+    <p class="subtitle">Flexible plans designed for institutions of every size, with revenue sharing that grows with you.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <p style="color:#888;font-size:0.9rem;">For small museums getting started</p>
+        <div class="pricing-amount">&#8364;199<span style="font-size:1rem;font-weight:400;color:#999;">/mo</span></div>
+        <div class="pricing-period">+ &#8364;3 per student visit</div>
+        <ul class="pricing-features">
+          <li>1 active quest</li>
+          <li>Up to 10 artworks per quest</li>
+          <li>Basic analytics</li>
+          <li>Email support</li>
+          <li>Simple onboarding</li>
+        </ul>
+        <button class="pricing-btn">Get Started</button>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Professional</h3>
+        <p style="color:#888;font-size:0.9rem;">For growing institutions</p>
+        <div class="pricing-amount">&#8364;449<span style="font-size:1rem;font-weight:400;color:#999;">/mo</span></div>
+        <div class="pricing-period">+ &#8364;4 per student visit</div>
+        <ul class="pricing-features">
+          <li>Up to 5 active quests</li>
+          <li>Up to 20 artworks per quest</li>
+          <li>Full analytics dashboard</li>
+          <li>CMS access</li>
+          <li>Priority support</li>
+          <li>School group packages</li>
+        </ul>
+        <button class="pricing-btn">Get Started</button>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <p style="color:#888;font-size:0.9rem;">For museum networks</p>
+        <div class="pricing-amount">Custom</div>
+        <div class="pricing-period">Revenue sharing model</div>
+        <ul class="pricing-features">
+          <li>Unlimited quests</li>
+          <li>Unlimited artworks</li>
+          <li>Multi-location support</li>
+          <li>API access</li>
+          <li>Dedicated account manager</li>
+          <li>Custom integrations</li>
+        </ul>
+        <button class="pricing-btn">Contact Us</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section class="section section-alt" id="timeline">
+  <div class="container text-center">
+    <h2>Roadmap to Launch</h2>
+    <p class="subtitle">A structured 24-26 month journey from concept to a network of partner museums.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">1</div>
+        <div class="timeline-content">
+          <h3>Institutional Alignment</h3>
+          <p>Select pilot museums, define partnerships, and establish educational alignment.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">2</div>
+        <div class="timeline-content">
+          <h3>Content &amp; Game Design</h3>
+          <p>Develop narratives, select artworks, and design the user experience.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">3</div>
+        <div class="timeline-content">
+          <h3>Technical Development</h3>
+          <p>Build the app, backend systems, and core features.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">4</div>
+        <div class="timeline-content">
+          <h3>Pilot Testing</h3>
+          <p>Test with school groups, collect feedback, and optimize the experience.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">5</div>
+        <div class="timeline-content">
+          <h3>Launch &amp; Expansion</h3>
+          <p>Soft launch, marketing push, and scaling to new partner museums.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <h2>Ready to Transform Your Museum?</h2>
+    <p>Join the movement to make culture interactive, engaging, and accessible for the next generation.</p>
+    <a href="mailto:hello@museumquest.eu" class="btn-primary">Request a Demo</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p><strong style="color:#d4a843;">MuseumQuest</strong> &mdash; Culture meets Technology meets Education</p>
+    <p style="margin-top:8px;">&copy; 2026 Museum Quest. Connecting museums with the next generation.</p>
+  </div>
+</footer>
+
+</body>
+</html>
