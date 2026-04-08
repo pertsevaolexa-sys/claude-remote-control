@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sergiy Pertsev — CV</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #111111;
+    --dark: #2D2D2D;
+    --mid: #555555;
+    --light: #888888;
+    --rule: #DDDDDD;
+    --accent: #0A0A0A;
+    --tag-bg: #F2F2F2;
+    --page-w: 210mm;
+  }
+
+  html, body {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.55;
+    color: var(--dark);
+    background: #fff;
+  }
+
+  .page {
+    width: var(--page-w);
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 14mm 14mm 14mm 14mm;
+    background: #fff;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 9px;
+    border-bottom: 2px solid var(--black);
+    margin-bottom: 12px;
+  }
+
+  .header-left h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28pt;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--black);
+    line-height: 1;
+  }
+
+  .header-left .title {
+    font-size: 9pt;
+    font-weight: 500;
+    color: var(--mid);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .header-right {
+    text-align: right;
+    font-size: 8.5pt;
+    color: var(--mid);
+    line-height: 1.7;
+  }
+
+  .header-right a {
+    color: var(--mid);
+    text-decoration: none;
+  }
+
+  .header-right .location {
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  /* ── TWO-COLUMN BODY ── */
+  .body {
+    display: grid;
+    grid-template-columns: 58mm 1fr;
+    gap: 0 12mm;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar { }
+
+  /* ── MAIN ── */
+  .main { }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 14px; }
+
+  .section-title {
+    font-size: 6.5pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--black);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 3px;
+    margin-bottom: 7px;
+  }
+
+  .section p {
+    font-size: 8.8pt;
+    color: var(--dark);
+    line-height: 1.6;
+  }
+
+  /* ── SKILL BLOCKS ── */
+  .skill-group { margin-bottom: 9px; }
+
+  .skill-group-title {
+    font-size: 7.5pt;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+
+  .tag {
+    background: var(--tag-bg);
+    color: var(--dark);
+    font-size: 7pt;
+    font-weight: 500;
+    padding: 2px 6px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .tag.pro {
+    background: var(--black);
+    color: #fff;
+  }
+
+  /* ── EXPERIENCE ITEMS ── */
+  .exp-item { margin-bottom: 12px; }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1px;
+  }
+
+  .exp-role {
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--black);
+  }
+
+  .exp-period {
+    font-size: 7.5pt;
+    font-weight: 500;
+    color: var(--light);
+    white-space: nowrap;
+    margin-left: 8px;
+    margin-top: 1px;
+  }
+
+  .exp-company {
+    font-size: 8.5pt;
+    font-weight: 500;
+    color: var(--mid);
+    margin-bottom: 4px;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    padding: 0;
+  }
+
+  .exp-bullets li {
+    font-size: 8.5pt;
+    color: var(--dark);
+    padding-left: 10px;
+    position: relative;
+    margin-bottom: 2px;
+    line-height: 1.5;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--light);
+    font-size: 8pt;
+  }
+
+  .exp-sub-title {
+    font-size: 8pt;
+    font-weight: 600;
+    color: var(--mid);
+    margin-top: 5px;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── CLIENT GRID ── */
+  .client-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 8px;
+  }
+
+  .client-item {
+    font-size: 7.8pt;
+    color: var(--dark);
+    padding-left: 9px;
+    position: relative;
+  }
+
+  .client-item::before {
+    content: '·';
+    position: absolute;
+    left: 2px;
+    color: var(--light);
+    font-size: 10pt;
+    line-height: 1.1;
+  }
+
+  /* ── LANGUAGE ── */
+  .lang-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  .lang-name {
+    font-size: 8.5pt;
+    font-weight: 500;
+    color: var(--dark);
+  }
+
+  .lang-level {
+    display: flex;
+    gap: 2px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .dot.filled {
+    background: var(--black);
+    border-color: var(--black);
+  }
+
+  /* ── SOCIAL LINKS ── */
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 8pt;
+    color: var(--mid);
+    margin-bottom: 3px;
+    text-decoration: none;
+  }
+
+  .social-icon {
+    font-size: 8pt;
+    color: var(--black);
+    font-weight: 700;
+    width: 12px;
+    text-align: center;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 10px 0;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    html, body { background: #fff; }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 14mm;
+      margin: 0;
+      box-shadow: none;
+    }
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Sergiy Pertsev</h1>
+      <div class="title">Creative Executive &nbsp;·&nbsp; TV &amp; Digital Production &nbsp;·&nbsp; AI-driven Content</div>
+    </div>
+    <div class="header-right">
+      <div class="location">&#127482;&#127462;&nbsp; Kyiv, Ukraine</div>
+      <div><a href="mailto:pertsevsergii@gmail.com">pertsevsergii@gmail.com</a></div>
+      <div>+38 097 100 42 84</div>
+      <div><a href="https://www.instagram.com/sergeypercev/">instagram.com/sergeypercev</a></div>
+      <div><a href="https://www.youtube.com/@PepperProductionHouse">youtube / PepperProductionHouse</a></div>
+      <div><a href="https://www.tiktok.com/@seniorpepitto">tiktok / @seniorpepitto</a></div>
+    </div>
+  </div>
+
+  <!-- BODY: sidebar + main -->
+  <div class="body">
+
+    <!-- ════ SIDEBAR ════ -->
+    <div class="sidebar">
+
+      <!-- SKILLS: AI -->
+      <div class="section">
+        <div class="section-title">AI &amp; Generative</div>
+        <div class="skill-group">
+          <div class="skill-group-title">Video &amp; Animation</div>
+          <div class="tags">
+            <span class="tag pro">ComfyUI</span>
+            <span class="tag pro">LTX 2/3</span>
+            <span class="tag pro">WAN 2/7</span>
+            <span class="tag">Runway Gen-3</span>
+            <span class="tag">Kling AI</span>
+            <span class="tag">Pika Labs</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Model Training</div>
+          <div class="tags">
+            <span class="tag pro">LoRA Training</span>
+            <span class="tag pro">AI Toolkit</span>
+            <span class="tag">Custom Workflows</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Other AI</div>
+          <div class="tags">
+            <span class="tag">AI Voice / Dubbing</span>
+            <span class="tag">Data-driven Content</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILLS: 3D & Real-time -->
+      <div class="section">
+        <div class="section-title">3D &amp; Real-Time</div>
+        <div class="tags">
+          <span class="tag pro">Unreal Engine</span>
+          <span class="tag">Notch</span>
+          <span class="tag pro">Blender</span>
+          <span class="tag">AR / XR</span>
+          <span class="tag">Virtual Scenography</span>
+          <span class="tag">Generative Visuals</span>
+        </div>
+      </div>
+
+      <!-- SKILLS: Production Tools -->
+      <div class="section">
+        <div class="section-title">Production Tools</div>
+        <div class="tags">
+          <span class="tag pro">DaVinci Resolve</span>
+          <span class="tag pro">Adobe Suite</span>
+          <span class="tag pro">After Effects</span>
+          <span class="tag pro">Premiere Pro</span>
+          <span class="tag">Broadcast Graphics</span>
+        </div>
+      </div>
+
+      <!-- SKILLS: Direction & Strategy -->
+      <div class="section">
+        <div class="section-title">Direction &amp; Strategy</div>
+        <div class="tags">
+          <span class="tag">Showrunning</span>
+          <span class="tag">Format Development</span>
+          <span class="tag">Virtual Production</span>
+          <span class="tag">Multi-cam Live</span>
+          <span class="tag">Brand Storytelling</span>
+          <span class="tag">Content Strategy</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">P&amp;L / Budgeting</span>
+          <span class="tag">100+ person teams</span>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="section">
+        <div class="section-title">Education</div>
+        <div style="font-size:8.5pt; font-weight:600; color:var(--black);">Kyiv Institute of the Air Force</div>
+        <div style="font-size:8pt; color:var(--mid); margin-top:2px;">Mathematical &amp; Software Support for Automated Control Systems</div>
+      </div>
+
+      <!-- LANGUAGES -->
+      <div class="section">
+        <div class="section-title">Languages</div>
+        <div class="lang-item">
+          <span class="lang-name">Ukrainian</span>
+          <div class="lang-level">
+            <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+          </div>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">English</span>
+          <div class="lang-level">
+            <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /sidebar -->
+
+    <!-- ════ MAIN ════ -->
+    <div class="main">
+
+      <!-- PROFILE -->
+      <div class="section">
+        <div class="section-title">Profile</div>
+        <p>Visionary media executive with <strong>20+ years</strong> of experience in high-end video production, broadcast, and creative direction. Proven track record of transforming TV brands into cross-platform content ecosystems.</p>
+        <p style="margin-top:5px;">Currently focused on integrating <strong>AI, real-time 3D, and virtual production</strong> into scalable content pipelines for TV, digital, and branded entertainment.</p>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="section">
+        <div class="section-title">Experience</div>
+
+        <!-- Job 1 -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">CEO / General Director</div>
+            <div class="exp-period">2017 – 2023</div>
+          </div>
+          <div class="exp-company">M1 &amp; M2 TV Channels (Teleodin)</div>
+          <ul class="exp-bullets">
+            <li>Full-cycle management of broadcast + digital production ecosystem</li>
+            <li>Transformation from linear TV to multi-platform content distribution</li>
+            <li>Supervision of large-scale live shows, concerts, and awards ceremonies</li>
+          </ul>
+          <div class="exp-sub-title">Production Innovation</div>
+          <ul class="exp-bullets">
+            <li>Integration of real-time graphics &amp; AR elements into live broadcast</li>
+            <li>Development of hybrid TV + digital show formats</li>
+            <li>Optimization of end-to-end production pipelines (pre → production → post)</li>
+          </ul>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">General Producer / Chief Director</div>
+            <div class="exp-period">2013 – 2017</div>
+          </div>
+          <div class="exp-company">M1 TV Channel</div>
+          <ul class="exp-bullets">
+            <li>Creative leadership of all video production units</li>
+            <li>Development of new show formats</li>
+            <li>Scaling in-house production capabilities</li>
+          </ul>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">Art Director / Motion Designer</div>
+            <div class="exp-period">2001 – 2013</div>
+          </div>
+          <div class="exp-company">M1 TV Channel</div>
+          <ul class="exp-bullets">
+            <li>Creation of channel visual identity</li>
+            <li>Broadcast design system development</li>
+            <li>Motion graphics pipeline setup</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- KEY PROJECTS -->
+      <div class="section">
+        <div class="section-title">Key Projects</div>
+        <ul class="exp-bullets">
+          <li><strong>M1 Music Awards</strong> — Large-scale live show production</li>
+          <li><strong>Eurovoice (Greece)</strong> — International music format</li>
+          <li><strong>UEFA Euro 2012</strong> — Unofficial anthem music video</li>
+          <li><strong>Expo 2017</strong> — Ukrainian Day production</li>
+          <li><strong>Lobby Club Forum 2024</strong> — Event production</li>
+          <li>Festivals: Chornomorski Ihry, Atlas Festival, TavriaGames, Dity Help, Bukovel</li>
+        </ul>
+      </div>
+
+      <!-- NOTABLE CLIENTS -->
+      <div class="section">
+        <div class="section-title">Notable Clients &amp; Partners</div>
+        <div class="client-grid">
+          <div class="client-item">M1, M2, K1, 2+2</div>
+          <div class="client-item">Ukraine TV / Inter TV</div>
+          <div class="client-item">PepsiCo</div>
+          <div class="client-item">Coca-Cola</div>
+          <div class="client-item">Red Bull</div>
+          <div class="client-item">PrivatBank (AI Forum)</div>
+          <div class="client-item">Milk Alliance</div>
+          <div class="client-item">Regno Italia</div>
+          <div class="client-item">Good Donations Foundation</div>
+          <div class="client-item">M1 Music Awards</div>
+        </div>
+      </div>
+
+    </div><!-- /main -->
+  </div><!-- /body -->
+
+</div><!-- /page -->
+</body>
+</html>
