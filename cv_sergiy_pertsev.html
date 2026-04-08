@@ -21,17 +21,18 @@
 
   html, body {
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 9.5pt;
-    line-height: 1.55;
+    font-size: 8.5pt;
+    line-height: 1.45;
     color: var(--dark);
     background: #fff;
   }
 
   .page {
     width: var(--page-w);
-    min-height: 297mm;
+    height: 297mm;
+    overflow: hidden;
     margin: 0 auto;
-    padding: 13mm 13mm 13mm 13mm;
+    padding: 9mm 10mm 9mm 10mm;
     background: #fff;
   }
 
@@ -40,14 +41,14 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    padding-bottom: 9px;
+    padding-bottom: 7px;
     border-bottom: 2px solid var(--black);
-    margin-bottom: 12px;
+    margin-bottom: 9px;
   }
 
   .header-left h1 {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 28pt;
+    font-size: 24pt;
     font-weight: 700;
     letter-spacing: -0.5px;
     color: var(--black);
@@ -55,19 +56,19 @@
   }
 
   .header-left .title {
-    font-size: 8.5pt;
+    font-size: 7.5pt;
     font-weight: 500;
     color: var(--mid);
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-top: 4px;
+    margin-top: 3px;
   }
 
   .header-right {
     text-align: right;
-    font-size: 8pt;
+    font-size: 7.5pt;
     color: var(--mid);
-    line-height: 1.75;
+    line-height: 1.65;
   }
 
   .header-right a {
@@ -86,38 +87,38 @@
   /* ── TWO-COLUMN BODY ── */
   .body {
     display: grid;
-    grid-template-columns: 57mm 1fr;
-    gap: 0 11mm;
+    grid-template-columns: 54mm 1fr;
+    gap: 0 9mm;
   }
 
   /* ── SECTION ── */
-  .section { margin-bottom: 13px; }
+  .section { margin-bottom: 9px; }
 
   .section-title {
-    font-size: 6.5pt;
+    font-size: 6pt;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--black);
     border-bottom: 1px solid var(--rule);
-    padding-bottom: 3px;
-    margin-bottom: 7px;
+    padding-bottom: 2px;
+    margin-bottom: 5px;
   }
 
   .section p {
-    font-size: 8.8pt;
+    font-size: 8pt;
     color: var(--dark);
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
   /* ── SKILL BLOCKS ── */
-  .skill-group { margin-bottom: 8px; }
+  .skill-group { margin-bottom: 6px; }
 
   .skill-group-title {
-    font-size: 7.5pt;
+    font-size: 7pt;
     font-weight: 600;
     color: var(--black);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     letter-spacing: 0.3px;
   }
 
@@ -130,9 +131,9 @@
   .tag {
     background: var(--tag-bg);
     color: var(--dark);
-    font-size: 7pt;
+    font-size: 6.5pt;
     font-weight: 500;
-    padding: 2px 6px;
+    padding: 1.5px 5px;
     border-radius: 2px;
     white-space: nowrap;
   }
@@ -148,23 +149,23 @@
   }
 
   /* ── EXPERIENCE ITEMS ── */
-  .exp-item { margin-bottom: 11px; }
+  .exp-item { margin-bottom: 8px; }
 
   .exp-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 1px;
+    margin-bottom: 0px;
   }
 
   .exp-role {
-    font-size: 9pt;
+    font-size: 8.5pt;
     font-weight: 700;
     color: var(--black);
   }
 
   .exp-period {
-    font-size: 7.5pt;
+    font-size: 7pt;
     font-weight: 500;
     color: var(--light);
     white-space: nowrap;
@@ -173,10 +174,10 @@
   }
 
   .exp-company {
-    font-size: 8.5pt;
+    font-size: 7.8pt;
     font-weight: 500;
     color: var(--mid);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
 
   .exp-bullets {
@@ -185,12 +186,12 @@
   }
 
   .exp-bullets li {
-    font-size: 8.5pt;
+    font-size: 7.8pt;
     color: var(--dark);
     padding-left: 10px;
     position: relative;
-    margin-bottom: 2px;
-    line-height: 1.5;
+    margin-bottom: 1px;
+    line-height: 1.45;
   }
 
   .exp-bullets li::before {
@@ -198,43 +199,29 @@
     position: absolute;
     left: 0;
     color: var(--light);
-    font-size: 8pt;
+    font-size: 7.5pt;
   }
 
   .exp-sub-title {
-    font-size: 7.5pt;
+    font-size: 7pt;
     font-weight: 600;
     color: var(--mid);
-    margin-top: 5px;
-    margin-bottom: 3px;
+    margin-top: 4px;
+    margin-bottom: 2px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
   /* ── CLIENT SECTION ── */
-  .client-block { margin-bottom: 6px; }
-
-  .client-block-title {
-    font-size: 7.5pt;
-    font-weight: 600;
-    color: var(--black);
-    margin-bottom: 2px;
-  }
-
-  .client-block-detail {
-    font-size: 7.5pt;
-    color: var(--mid);
-    padding-left: 10px;
-    font-style: italic;
-  }
+  .client-block { margin-bottom: 3px; }
 
   .client-row {
-    font-size: 8pt;
+    font-size: 7.5pt;
     color: var(--dark);
     padding-left: 10px;
     position: relative;
     margin-bottom: 1px;
-    line-height: 1.5;
+    line-height: 1.45;
   }
 
   .client-row::before {
@@ -242,7 +229,7 @@
     position: absolute;
     left: 2px;
     color: var(--light);
-    font-size: 10pt;
+    font-size: 9pt;
     line-height: 1.1;
   }
 
@@ -337,7 +324,6 @@
           <div class="skill-group-title">Model Training</div>
           <div class="tags">
             <span class="tag pro">LoRA Training</span>
-            <span class="tag pro">AI Toolkit</span>
             <span class="tag">Custom Workflows</span>
           </div>
         </div>
@@ -355,7 +341,6 @@
         <div class="section-title">3D &amp; Real-Time</div>
         <div class="tags">
           <span class="tag pro">Unreal Engine</span>
-          <span class="tag">Notch</span>
           <span class="tag adv">Blender</span>
           <span class="tag">AR / XR</span>
           <span class="tag">Virtual Scenography</span>
@@ -369,8 +354,6 @@
         <div class="tags">
           <span class="tag pro">DaVinci Resolve</span>
           <span class="tag pro">Adobe Creative Suite</span>
-          <span class="tag pro">After Effects</span>
-          <span class="tag pro">Premiere Pro</span>
           <span class="tag">Broadcast Graphics</span>
         </div>
       </div>
@@ -412,7 +395,7 @@
         <div class="lang-item">
           <span class="lang-name">English</span>
           <div class="lang-level">
-            <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+            <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
           </div>
         </div>
       </div>
