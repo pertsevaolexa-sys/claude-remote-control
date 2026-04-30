@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+     width="1400" height="1700" viewBox="0 0 1400 1700"
+     preserveAspectRatio="xMidYMin meet">
+  <foreignObject x="0" y="0" width="1400" height="1700">
+    <xhtml:div style="width:1400px;height:1700px;">
+      <xhtml:style><![CDATA[
+        @font-face { font-family: 'Gotham'; src: url('fonts/Gotham-Light.otf') format('opentype'); font-weight: 300; font-style: normal; }
+        @font-face { font-family: 'Gotham'; src: url('fonts/Gotham-Book.otf') format('opentype'); font-weight: 400; font-style: normal; }
+        @font-face { font-family: 'Gotham'; src: url('fonts/Gotham-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; }
+        @font-face { font-family: 'Gotham'; src: url('fonts/Gotham-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; }
+
+        .root *, .root *::before, .root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        .root {
+          --bg: #F0EBFF;
+          --black: #0A0010;
+          --violet: #5500EE;
+          --violet-soft: #9769C3;
+          --violet-pale: #EAE0FF;
+          --cream: #F5F1EB;
+          --gradient-start: #7733FF;
+          --gradient-end: #58C9F0;
+          font-family: 'Gotham', sans-serif;
+        }
+
+        .poster {
+          width: 1400px;
+          min-height: 1700px;
+          background: var(--bg);
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .orb {
+          position: absolute;
+          border-radius: 50%;
+          background: radial-gradient(circle at 35% 40%,
+            #a8eef0 0%, #c8a8f0 35%, #f0a0c8 55%, #8866ff 75%, #5ac8f0 100%);
+          opacity: 0.75;
+          pointer-events: none;
+        }
+        .orb-1 { width: 340px; height: 340px; top: -80px; right: -60px; opacity: 0.6; }
+        .orb-2 { width: 180px; height: 180px; top: 40px; right: 200px; opacity: 0.5; }
+        .orb-3 { width: 100px; height: 100px; top: 180px; right: 60px; opacity: 0.45; }
+        .orb-4 { width: 220px; height: 220px; bottom: -60px; left: -50px; opacity: 0.4; }
+
+        .header {
+          padding: 44px 56px 32px;
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          position: relative;
+          z-index: 2;
+        }
+
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-mark img { height: 44px; width: auto; display: block; }
+        .logo-text {
+          font-size: 13px; font-weight: 700; letter-spacing: 0.15em;
+          color: var(--black); text-transform: uppercase; line-height: 1.3;
+        }
+        .logo-text span { color: var(--violet); display: block; }
+
+        .header-meta {
+          text-align: right; font-size: 12px; font-weight: 500;
+          letter-spacing: 0.1em; text-transform: uppercase;
+          color: var(--violet-soft); line-height: 1.8;
+        }
+
+        .hero { padding: 0 56px 36px; position: relative; z-index: 2; }
+        .hero-eyebrow {
+          font-size: 11px; font-weight: 700; letter-spacing: 0.25em;
+          text-transform: uppercase; color: var(--violet); margin-bottom: 8px;
+        }
+        .hero-title {
+          font-size: 62px; font-weight: 900; letter-spacing: -0.02em;
+          color: var(--black); line-height: 1; text-transform: uppercase;
+        }
+        .hero-subtitle {
+          font-size: 18px; font-weight: 400; color: var(--black);
+          margin-top: 10px; opacity: 0.65; letter-spacing: 0.04em;
+        }
+
+        .theme-banner {
+          margin: 0 56px 36px; background: var(--violet); color: #fff;
+          padding: 14px 28px; display: inline-flex; align-items: center;
+          gap: 12px; position: relative; z-index: 2; align-self: flex-start;
+        }
+        .theme-label {
+          font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+          text-transform: uppercase; opacity: 0.7; white-space: nowrap;
+        }
+        .theme-text {
+          font-size: 15px; font-weight: 700; letter-spacing: 0.05em;
+          text-transform: uppercase;
+        }
+
+        .days-grid {
+          display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+          flex: 1; padding: 0 56px 48px; position: relative; z-index: 2;
+        }
+        .day-col { padding: 0 20px 0 0; border-right: 1px solid rgba(85, 0, 238, 0.12); padding-right: 28px; }
+        .day-col:last-child { border-right: none; padding-right: 0; }
+        .day-col + .day-col { padding-left: 28px; }
+
+        .day-header { margin-bottom: 20px; }
+        .day-number {
+          font-size: 48px; font-weight: 900; line-height: 1;
+          color: var(--violet); opacity: 0.15; letter-spacing: -0.03em;
+        }
+        .day-name {
+          font-size: 15px; font-weight: 800; letter-spacing: 0.1em;
+          text-transform: uppercase; color: var(--black); margin-top: -8px;
+        }
+        .day-date {
+          font-size: 11px; font-weight: 500; color: var(--violet-soft);
+          letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px;
+        }
+        .day-tag {
+          display: inline-block; margin-top: 6px; background: var(--violet-pale);
+          color: var(--violet); font-size: 9px; font-weight: 700;
+          letter-spacing: 0.15em; text-transform: uppercase; padding: 3px 8px;
+        }
+
+        .session { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+        .session-time {
+          font-size: 10px; font-weight: 700; color: var(--violet-soft);
+          letter-spacing: 0.05em; white-space: nowrap; min-width: 52px; padding-top: 1px;
+        }
+        .session-body { flex: 1; }
+        .session-title {
+          font-size: 12px; font-weight: 700; color: var(--black);
+          line-height: 1.3; text-transform: uppercase; letter-spacing: 0.03em;
+        }
+        .session-detail {
+          font-size: 10.5px; font-weight: 400; color: var(--black);
+          opacity: 0.55; line-height: 1.4; margin-top: 2px;
+        }
+        .session-location {
+          font-size: 9.5px; font-weight: 600; color: var(--violet);
+          margin-top: 3px; letter-spacing: 0.04em;
+        }
+
+        .session.highlight .session-body {
+          background: var(--violet); color: #fff;
+          padding: 8px 12px; margin-left: -12px;
+        }
+        .session.highlight .session-title { color: #fff; }
+        .session.highlight .session-detail { color: rgba(255,255,255,0.7); opacity: 1; }
+        .session.highlight .session-location { color: rgba(255,255,255,0.6); }
+
+        .session.horizon .session-body { border-left: 3px solid var(--violet); padding-left: 10px; }
+        .session.break .session-title { opacity: 0.35; font-weight: 500; }
+
+        .session.evening .session-body {
+          background: var(--black); color: #fff;
+          padding: 8px 12px; margin-left: -12px;
+        }
+        .session.evening .session-title { color: #fff; }
+        .session.evening .session-detail { color: rgba(255,255,255,0.6); opacity: 1; }
+        .session.evening .session-location { color: rgba(255,255,255,0.5); }
+
+        .day-divider { width: 100%; height: 1px; background: rgba(85,0,238,0.1); margin: 10px 0 14px; }
+
+        .footer {
+          position: relative; z-index: 2; padding: 0 56px 32px;
+          display: flex; align-items: center; justify-content: space-between;
+        }
+        .footer-location { display: flex; align-items: center; gap: 16px; }
+        .footer-loc-badge {
+          background: var(--black); color: #fff; font-size: 10px; font-weight: 700;
+          letter-spacing: 0.15em; text-transform: uppercase; padding: 6px 14px;
+        }
+        .footer-loc-detail {
+          font-size: 11px; color: var(--black); opacity: 0.5;
+          letter-spacing: 0.04em; font-weight: 500;
+        }
+        .footer-note {
+          font-size: 10px; color: var(--black); opacity: 0.35;
+          text-align: right; line-height: 1.6; font-weight: 500; letter-spacing: 0.04em;
+        }
+      ]]></xhtml:style>
+
+      <xhtml:div class="root">
+        <xhtml:div class="poster">
+          <xhtml:div class="orb orb-1"></xhtml:div>
+          <xhtml:div class="orb orb-2"></xhtml:div>
+          <xhtml:div class="orb orb-3"></xhtml:div>
+          <xhtml:div class="orb orb-4"></xhtml:div>
+
+          <xhtml:header class="header">
+            <xhtml:div class="logo">
+              <xhtml:div class="logo-mark">
+                <xhtml:img src="assets/FM-logo-black.png" alt="Future Museum"/>
+              </xhtml:div>
+              <xhtml:div class="logo-text">
+                <xhtml:span>Phase IV</xhtml:span>
+              </xhtml:div>
+            </xhtml:div>
+            <xhtml:div class="header-meta">
+              Physical Meeting<xhtml:br/>
+              Madrid, Spain<xhtml:br/>
+              10–12 May 2026
+            </xhtml:div>
+          </xhtml:header>
+
+          <xhtml:div class="hero">
+            <xhtml:div class="hero-eyebrow">Partner Programme</xhtml:div>
+            <xhtml:div class="hero-title">Madrid<xhtml:br/>Agenda</xhtml:div>
+            <xhtml:div class="hero-subtitle">Museo Thyssen-Bornemisza · Art Museum SOLO · Museo Reina Sofía</xhtml:div>
+          </xhtml:div>
+
+          <xhtml:div class="theme-banner">
+            <xhtml:div class="theme-label">Theme</xhtml:div>
+            <xhtml:div class="theme-text">We Are Tackling Sustainability Together</xhtml:div>
+          </xhtml:div>
+
+          <xhtml:div class="days-grid">
+
+            <xhtml:div class="day-col">
+              <xhtml:div class="day-header">
+                <xhtml:div class="day-number">10</xhtml:div>
+                <xhtml:div class="day-name">Sunday</xhtml:div>
+                <xhtml:div class="day-date">10 May 2026</xhtml:div>
+                <xhtml:div class="day-tag">Optional</xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">All day</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Prado Free Visit</xhtml:div>
+                  <xhtml:div class="session-location">Museo Nacional del Prado</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">17:00</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">CaixaForum Tour</xhtml:div>
+                  <xhtml:div class="session-detail">Guided tour of CaixaForum Madrid</xhtml:div>
+                  <xhtml:div class="session-location">P.º del Prado, 36</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session evening">
+                <xhtml:div class="session-time">20:00</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Informal Drinks</xhtml:div>
+                  <xhtml:div class="session-location">Bareto Alcalá, C. Alcalá 55</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+
+            <xhtml:div class="day-col">
+              <xhtml:div class="day-header">
+                <xhtml:div class="day-number">11</xhtml:div>
+                <xhtml:div class="day-name">Monday</xhtml:div>
+                <xhtml:div class="day-date">11 May 2026 · 9:30–17:30</xhtml:div>
+                <xhtml:div class="day-tag">Day 1 · Thyssen-Bornemisza</xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">08:45</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Registration &amp; Welcome Coffee</xhtml:div>
+                  <xhtml:div class="session-location">Garden / Central Hall</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session highlight">
+                <xhtml:div class="session-time">09:30</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Welcome &amp; Thyssen Presentation</xhtml:div>
+                  <xhtml:div class="session-detail">Sofia Widmann · Evelio Acevedo · Guillermo Solana</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">10:00</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Cinema Yoga</xhtml:div>
+                  <xhtml:div class="session-detail">Get to know your colleagues</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">10:20</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Thyssen SGDs Presentation</xhtml:div>
+                  <xhtml:div class="session-detail">Sustainability &amp; strategic development</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">10:50</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Where Are We Standing?</xhtml:div>
+                  <xhtml:div class="session-detail">Research Interest Mapping · 3 Horizons intro</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="day-divider"></xhtml:div>
+
+              <xhtml:div class="session horizon">
+                <xhtml:div class="session-time">11:55</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Horizon 1 · The Old Temple</xhtml:div>
+                  <xhtml:div class="session-detail">What is dying or under pressure?</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session horizon">
+                <xhtml:div class="session-time">14:45</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Horizon 3 · The New World</xhtml:div>
+                  <xhtml:div class="session-detail">The sustainable future 10 years from now</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session horizon">
+                <xhtml:div class="session-time">16:00</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Horizon 2 · The Transition</xhtml:div>
+                  <xhtml:div class="session-detail">Innovations bridging H1 and H3</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="day-divider"></xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">17:00</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Guided Museum Tour</xhtml:div>
+                  <xhtml:div class="session-location">Thyssen-Bornemisza</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session evening">
+                <xhtml:div class="session-time">20:00</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Dinner</xhtml:div>
+                  <xhtml:div class="session-location">El Pimiento Verde · C. de Zorrilla 19</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+
+            <xhtml:div class="day-col">
+              <xhtml:div class="day-header">
+                <xhtml:div class="day-number">12</xhtml:div>
+                <xhtml:div class="day-name">Tuesday</xhtml:div>
+                <xhtml:div class="day-date">12 May 2026 · from 9:00</xhtml:div>
+                <xhtml:div class="day-tag">Day 2 · Thyssen → SOLO</xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">08:30</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Morning Coffee</xhtml:div>
+                  <xhtml:div class="session-location">Garden / Indoor Space</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session highlight">
+                <xhtml:div class="session-time">09:00</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Day 2 Opening</xhtml:div>
+                  <xhtml:div class="session-detail">Welcome back &amp; Day 1 recap</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">09:30</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Fishbowl Discussion</xhtml:div>
+                  <xhtml:div class="session-detail">John Falk, Jevon Chandra, IMMA &amp; experts</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">10:30</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Lightning Talks &amp; Cases</xhtml:div>
+                  <xhtml:div class="session-detail">5–6 presentations: AI mediation, sustainable exhibitions, touring shows &amp; more</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="day-divider"></xhtml:div>
+
+              <xhtml:div class="session horizon">
+                <xhtml:div class="session-time">12:00</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Deep Dive — 6 Stations</xhtml:div>
+                  <xhtml:div class="session-detail">FM Cohort working groups on museum cases</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">15:30</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Group Work Presentations</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">16:20</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Wrapping Up the Two Days</xhtml:div>
+                  <xhtml:div class="session-detail">FM Team</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="day-divider"></xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">17:30</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Art Museum SOLO Tour</xhtml:div>
+                  <xhtml:div class="session-location">Plaza de la Independencia 5</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session evening">
+                <xhtml:div class="session-time">20:00</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Dinner</xhtml:div>
+                  <xhtml:div class="session-location">Restaurant Raimunda · P.º de Recoletos 2</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+
+            <xhtml:div class="day-col">
+              <xhtml:div class="day-header">
+                <xhtml:div class="day-number">13</xhtml:div>
+                <xhtml:div class="day-name">Wednesday</xhtml:div>
+                <xhtml:div class="day-date">13 May 2026</xhtml:div>
+                <xhtml:div class="day-tag">Optional Closing Day</xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div class="session">
+                <xhtml:div class="session-time">All day</xhtml:div>
+                <xhtml:div class="session-body">
+                  <xhtml:div class="session-title">Museo Reina Sofía Free Visit</xhtml:div>
+                  <xhtml:div class="session-detail">Free entry — tickets provided to participants</xhtml:div>
+                  <xhtml:div class="session-location">Museo Nacional Centro de Arte Reina Sofía</xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+
+              <xhtml:div style="margin-top: 32px; padding: 20px; background: rgba(85,0,238,0.05); border: 1px solid rgba(85,0,238,0.12);">
+                <xhtml:div style="font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #5500EE; margin-bottom: 12px;">The 3 Horizons Framework</xhtml:div>
+
+                <xhtml:div style="display: flex; flex-direction: column; gap: 10px;">
+                  <xhtml:div style="display: flex; gap: 10px; align-items: flex-start;">
+                    <xhtml:div style="width: 3px; min-height: 36px; background: #5500EE; flex-shrink: 0; margin-top: 2px;"></xhtml:div>
+                    <xhtml:div>
+                      <xhtml:div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: #0A0010; letter-spacing: 0.05em;">H1 · The Old Temple</xhtml:div>
+                      <xhtml:div style="font-size: 9.5px; color: #0A0010; opacity: 0.55; margin-top: 2px; line-height: 1.4;">What is dying or under pressure in sustainability efforts?</xhtml:div>
+                    </xhtml:div>
+                  </xhtml:div>
+                  <xhtml:div style="display: flex; gap: 10px; align-items: flex-start;">
+                    <xhtml:div style="width: 3px; min-height: 36px; background: #9769C3; flex-shrink: 0; margin-top: 2px;"></xhtml:div>
+                    <xhtml:div>
+                      <xhtml:div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: #0A0010; letter-spacing: 0.05em;">H2 · The Transition</xhtml:div>
+                      <xhtml:div style="font-size: 9.5px; color: #0A0010; opacity: 0.55; margin-top: 2px; line-height: 1.4;">Innovations &amp; pilots bridging old and new</xhtml:div>
+                    </xhtml:div>
+                  </xhtml:div>
+                  <xhtml:div style="display: flex; gap: 10px; align-items: flex-start;">
+                    <xhtml:div style="width: 3px; min-height: 36px; background: #58C9F0; flex-shrink: 0; margin-top: 2px;"></xhtml:div>
+                    <xhtml:div>
+                      <xhtml:div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: #0A0010; letter-spacing: 0.05em;">H3 · The New World</xhtml:div>
+                      <xhtml:div style="font-size: 9.5px; color: #0A0010; opacity: 0.55; margin-top: 2px; line-height: 1.4;">The sustainable museum future, 10 years from now</xhtml:div>
+                    </xhtml:div>
+                  </xhtml:div>
+                </xhtml:div>
+              </xhtml:div>
+            </xhtml:div>
+
+          </xhtml:div>
+
+          <xhtml:footer class="footer">
+            <xhtml:div class="footer-location">
+              <xhtml:div class="footer-loc-badge">Madrid, Spain</xhtml:div>
+              <xhtml:div class="footer-loc-detail">
+                Thyssen-Bornemisza · CaixaForum · Art Museum SOLO · Reina Sofía
+              </xhtml:div>
+            </xhtml:div>
+            <xhtml:div class="footer-note">
+              All sessions at Salón de actos, Thyssen-Bornemisza unless noted<xhtml:br/>
+              Lunch served at Mirador, 5th Floor
+            </xhtml:div>
+          </xhtml:footer>
+        </xhtml:div>
+      </xhtml:div>
+    </xhtml:div>
+  </foreignObject>
+</svg>
