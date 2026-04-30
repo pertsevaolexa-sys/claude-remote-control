@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Future Museum IV — Partner Agenda</title>
+<style>
+  @font-face { font-family: 'Gotham'; src: url('fonts/Gotham-Light.otf') format('opentype'); font-weight: 300; font-style: normal; }
+  @font-face { font-family: 'Gotham'; src: url('fonts/Gotham-Book.otf') format('opentype'); font-weight: 400; font-style: normal; }
+  @font-face { font-family: 'Gotham'; src: url('fonts/Gotham-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; }
+  @font-face { font-family: 'Gotham'; src: url('fonts/Gotham-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; }
+</style>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F0EBFF;
+    --black: #0A0010;
+    --violet: #5500EE;
+    --violet-soft: #9769C3;
+    --violet-pale: #EAE0FF;
+    --cream: #F5F1EB;
+    --gradient-start: #7733FF;
+    --gradient-end: #58C9F0;
+  }
+
+  html, body {
+    width: 100%; min-height: 100%;
+    background: #1a1a2e;
+    display: flex; align-items: flex-start; justify-content: center;
+    font-family: 'Gotham', sans-serif;
+    padding: 0; margin: 0;
+  }
+
+  /* Poster shell — A2 landscape proportions, scales to fit viewport */
+  .poster {
+    width: 1400px;
+    min-height: 900px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform-origin: top center;
+  }
+
+  /* ── Decorative orbs ── */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 40%,
+      #a8eef0 0%, #c8a8f0 35%, #f0a0c8 55%, #8866ff 75%, #5ac8f0 100%);
+    opacity: 0.75;
+    pointer-events: none;
+  }
+  .orb-1 { width: 340px; height: 340px; top: -80px; right: -60px; opacity: 0.6; }
+  .orb-2 { width: 180px; height: 180px; top: 40px; right: 200px; opacity: 0.5; }
+  .orb-3 { width: 100px; height: 100px; top: 180px; right: 60px; opacity: 0.45; }
+  .orb-4 { width: 220px; height: 220px; bottom: -60px; left: -50px; opacity: 0.4; }
+
+  /* ── Header ── */
+  .header {
+    padding: 44px 56px 32px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-mark svg {
+    width: 40px; height: 40px;
+  }
+
+  .logo-text {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--black);
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .logo-text span {
+    color: var(--violet);
+    display: block;
+  }
+
+  .header-meta {
+    text-align: right;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--violet-soft);
+    line-height: 1.8;
+  }
+
+  /* ── Hero title bar ── */
+  .hero {
+    padding: 0 56px 36px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 8px;
+  }
+
+  .hero-title {
+    font-size: 62px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--black);
+    margin-top: 10px;
+    opacity: 0.65;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Theme banner ── */
+  .theme-banner {
+    margin: 0 56px 36px;
+    background: var(--violet);
+    color: #fff;
+    padding: 14px 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .theme-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+
+  .theme-text {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── Days grid ── */
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    flex: 1;
+    padding: 0 56px 48px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .day-col {
+    padding: 0 20px 0 0;
+    border-right: 1px solid rgba(85, 0, 238, 0.12);
+    padding-right: 28px;
+  }
+  .day-col:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+  .day-col + .day-col {
+    padding-left: 28px;
+  }
+
+  /* Day header */
+  .day-header {
+    margin-bottom: 20px;
+  }
+
+  .day-number {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--violet);
+    opacity: 0.15;
+    letter-spacing: -0.03em;
+  }
+
+  .day-name {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-top: -8px;
+  }
+
+  .day-date {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--violet-soft);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .day-tag {
+    display: inline-block;
+    margin-top: 6px;
+    background: var(--violet-pale);
+    color: var(--violet);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+  }
+
+  /* Sessions */
+  .session {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+
+  .session-time {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--violet-soft);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    min-width: 52px;
+    padding-top: 1px;
+  }
+
+  .session-body {
+    flex: 1;
+  }
+
+  .session-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .session-detail {
+    font-size: 10.5px;
+    font-weight: 400;
+    color: var(--black);
+    opacity: 0.55;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  .session-location {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--violet);
+    margin-top: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Highlighted session */
+  .session.highlight .session-body {
+    background: var(--violet);
+    color: #fff;
+    padding: 8px 12px;
+    margin-left: -12px;
+  }
+  .session.highlight .session-title {
+    color: #fff;
+  }
+  .session.highlight .session-detail {
+    color: rgba(255,255,255,0.7);
+    opacity: 1;
+  }
+  .session.highlight .session-location {
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* Accent: horizon sessions */
+  .session.horizon .session-body {
+    border-left: 3px solid var(--violet);
+    padding-left: 10px;
+  }
+
+  /* Break */
+  .session.break .session-title {
+    opacity: 0.35;
+    font-weight: 500;
+  }
+
+  /* Evening event */
+  .session.evening .session-body {
+    background: var(--black);
+    color: #fff;
+    padding: 8px 12px;
+    margin-left: -12px;
+  }
+  .session.evening .session-title {
+    color: #fff;
+  }
+  .session.evening .session-detail {
+    color: rgba(255,255,255,0.6);
+    opacity: 1;
+  }
+  .session.evening .session-location {
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Divider */
+  .day-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(85,0,238,0.1);
+    margin: 10px 0 14px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    position: relative;
+    z-index: 2;
+    padding: 0 56px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-location {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer-loc-badge {
+    background: var(--black);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+  }
+
+  .footer-loc-detail {
+    font-size: 11px;
+    color: var(--black);
+    opacity: 0.5;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  .footer-note {
+    font-size: 10px;
+    color: var(--black);
+    opacity: 0.35;
+    text-align: right;
+    line-height: 1.6;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<div class="poster" id="poster">
+
+  <!-- Decorative orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-mark">
+        <img src="assets/FM-logo-black.png" alt="Future Museum" style="height:44px; width:auto; display:block;">
+      </div>
+      <div class="logo-text">
+        <span>Phase IV</span>
+      </div>
+    </div>
+    <div class="header-meta">
+      Physical Meeting<br>
+      Madrid, Spain<br>
+      10–12 May 2026
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-eyebrow">Partner Programme</div>
+    <div class="hero-title">Madrid<br>Agenda</div>
+    <div class="hero-subtitle">Museo Thyssen-Bornemisza · Art Museum SOLO · Museo Reina Sofía</div>
+  </div>
+
+  <!-- Theme banner -->
+  <div class="theme-banner">
+    <div class="theme-label">Theme</div>
+    <div class="theme-text">We Are Tackling Sustainability Together</div>
+  </div>
+
+  <!-- Days grid -->
+  <div class="days-grid">
+
+    <!-- Sunday -->
+    <div class="day-col">
+      <div class="day-header">
+        <div class="day-number">10</div>
+        <div class="day-name">Sunday</div>
+        <div class="day-date">10 May 2026</div>
+        <div class="day-tag">Optional</div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">All day</div>
+        <div class="session-body">
+          <div class="session-title">Prado Free Visit</div>
+          <div class="session-location">Museo Nacional del Prado</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">17:00</div>
+        <div class="session-body">
+          <div class="session-title">CaixaForum Tour</div>
+          <div class="session-detail">Guided tour of CaixaForum Madrid</div>
+          <div class="session-location">P.º del Prado, 36</div>
+        </div>
+      </div>
+
+      <div class="session evening">
+        <div class="session-time">20:00</div>
+        <div class="session-body">
+          <div class="session-title">Informal Drinks</div>
+          <div class="session-location">Bareto Alcalá, C. Alcalá 55</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monday -->
+    <div class="day-col">
+      <div class="day-header">
+        <div class="day-number">11</div>
+        <div class="day-name">Monday</div>
+        <div class="day-date">11 May 2026 · 9:30–17:30</div>
+        <div class="day-tag">Day 1 · Thyssen-Bornemisza</div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">08:45</div>
+        <div class="session-body">
+          <div class="session-title">Registration & Welcome Coffee</div>
+          <div class="session-location">Garden / Central Hall</div>
+        </div>
+      </div>
+
+      <div class="session highlight">
+        <div class="session-time">09:30</div>
+        <div class="session-body">
+          <div class="session-title">Welcome & Thyssen Presentation</div>
+          <div class="session-detail">Sofia Widmann · Evelio Acevedo · Guillermo Solana</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">10:00</div>
+        <div class="session-body">
+          <div class="session-title">Cinema Yoga</div>
+          <div class="session-detail">Get to know your colleagues</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">10:20</div>
+        <div class="session-body">
+          <div class="session-title">Thyssen SGDs Presentation</div>
+          <div class="session-detail">Sustainability & strategic development</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">10:50</div>
+        <div class="session-body">
+          <div class="session-title">Where Are We Standing?</div>
+          <div class="session-detail">Research Interest Mapping · 3 Horizons intro</div>
+        </div>
+      </div>
+
+      <div class="day-divider"></div>
+
+      <div class="session horizon">
+        <div class="session-time">11:55</div>
+        <div class="session-body">
+          <div class="session-title">Horizon 1 · The Old Temple</div>
+          <div class="session-detail">What is dying or under pressure?</div>
+        </div>
+      </div>
+
+      <div class="session horizon">
+        <div class="session-time">14:45</div>
+        <div class="session-body">
+          <div class="session-title">Horizon 3 · The New World</div>
+          <div class="session-detail">The sustainable future 10 years from now</div>
+        </div>
+      </div>
+
+      <div class="session horizon">
+        <div class="session-time">16:00</div>
+        <div class="session-body">
+          <div class="session-title">Horizon 2 · The Transition</div>
+          <div class="session-detail">Innovations bridging H1 and H3</div>
+        </div>
+      </div>
+
+      <div class="day-divider"></div>
+
+      <div class="session">
+        <div class="session-time">17:00</div>
+        <div class="session-body">
+          <div class="session-title">Guided Museum Tour</div>
+          <div class="session-location">Thyssen-Bornemisza</div>
+        </div>
+      </div>
+
+      <div class="session evening">
+        <div class="session-time">20:00</div>
+        <div class="session-body">
+          <div class="session-title">Dinner</div>
+          <div class="session-location">El Pimiento Verde · C. de Zorrilla 19</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tuesday -->
+    <div class="day-col">
+      <div class="day-header">
+        <div class="day-number">12</div>
+        <div class="day-name">Tuesday</div>
+        <div class="day-date">12 May 2026 · from 9:00</div>
+        <div class="day-tag">Day 2 · Thyssen → SOLO</div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">08:30</div>
+        <div class="session-body">
+          <div class="session-title">Morning Coffee</div>
+          <div class="session-location">Garden / Indoor Space</div>
+        </div>
+      </div>
+
+      <div class="session highlight">
+        <div class="session-time">09:00</div>
+        <div class="session-body">
+          <div class="session-title">Day 2 Opening</div>
+          <div class="session-detail">Welcome back & Day 1 recap</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">09:30</div>
+        <div class="session-body">
+          <div class="session-title">Fishbowl Discussion</div>
+          <div class="session-detail">John Falk, Jevon Chandra, IMMA & experts</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">10:30</div>
+        <div class="session-body">
+          <div class="session-title">Lightning Talks & Cases</div>
+          <div class="session-detail">5–6 presentations: AI mediation, sustainable exhibitions, touring shows & more</div>
+        </div>
+      </div>
+
+      <div class="day-divider"></div>
+
+      <div class="session horizon">
+        <div class="session-time">12:00</div>
+        <div class="session-body">
+          <div class="session-title">Deep Dive — 6 Stations</div>
+          <div class="session-detail">FM Cohort working groups on museum cases</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">15:30</div>
+        <div class="session-body">
+          <div class="session-title">Group Work Presentations</div>
+        </div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">16:20</div>
+        <div class="session-body">
+          <div class="session-title">Wrapping Up the Two Days</div>
+          <div class="session-detail">FM Team</div>
+        </div>
+      </div>
+
+      <div class="day-divider"></div>
+
+      <div class="session">
+        <div class="session-time">17:30</div>
+        <div class="session-body">
+          <div class="session-title">Art Museum SOLO Tour</div>
+          <div class="session-location">Plaza de la Independencia 5</div>
+        </div>
+      </div>
+
+      <div class="session evening">
+        <div class="session-time">20:00</div>
+        <div class="session-body">
+          <div class="session-title">Dinner</div>
+          <div class="session-location">Restaurant Raimunda · P.º de Recoletos 2</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wednesday -->
+    <div class="day-col">
+      <div class="day-header">
+        <div class="day-number">13</div>
+        <div class="day-name">Wednesday</div>
+        <div class="day-date">13 May 2026</div>
+        <div class="day-tag">Optional Closing Day</div>
+      </div>
+
+      <div class="session">
+        <div class="session-time">All day</div>
+        <div class="session-body">
+          <div class="session-title">Museo Reina Sofía Free Visit</div>
+          <div class="session-detail">Free entry — tickets provided to participants</div>
+          <div class="session-location">Museo Nacional Centro de Arte Reina Sofía</div>
+        </div>
+      </div>
+
+      <!-- Horizons legend -->
+      <div style="margin-top: 32px; padding: 20px; background: rgba(85,0,238,0.05); border: 1px solid rgba(85,0,238,0.12);">
+        <div style="font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--violet); margin-bottom: 12px;">The 3 Horizons Framework</div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <div style="width: 3px; min-height: 36px; background: var(--violet); flex-shrink: 0; margin-top: 2px;"></div>
+            <div>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--black); letter-spacing: 0.05em;">H1 · The Old Temple</div>
+              <div style="font-size: 9.5px; color: var(--black); opacity: 0.55; margin-top: 2px; line-height: 1.4;">What is dying or under pressure in sustainability efforts?</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <div style="width: 3px; min-height: 36px; background: var(--violet-soft); flex-shrink: 0; margin-top: 2px;"></div>
+            <div>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--black); letter-spacing: 0.05em;">H2 · The Transition</div>
+              <div style="font-size: 9.5px; color: var(--black); opacity: 0.55; margin-top: 2px; line-height: 1.4;">Innovations & pilots bridging old and new</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <div style="width: 3px; min-height: 36px; background: #58C9F0; flex-shrink: 0; margin-top: 2px;"></div>
+            <div>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--black); letter-spacing: 0.05em;">H3 · The New World</div>
+              <div style="font-size: 9.5px; color: var(--black); opacity: 0.55; margin-top: 2px; line-height: 1.4;">The sustainable museum future, 10 years from now</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-location">
+      <div class="footer-loc-badge">Madrid, Spain</div>
+      <div class="footer-loc-detail">
+        Thyssen-Bornemisza · CaixaForum · Art Museum SOLO · Reina Sofía
+      </div>
+    </div>
+    <div class="footer-note">
+      All sessions at Salón de actos, Thyssen-Bornemisza unless noted<br>
+      Lunch served at Mirador, 5th Floor
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  function scalePoster() {
+    const poster = document.getElementById('poster');
+    const vw = window.innerWidth;
+    const pw = 1400;
+    const scale = Math.min(vw / pw, 1);
+    poster.style.transform = `scale(${scale})`;
+    // After scaling, the poster's visual height changes; update body height
+    const ph = poster.offsetHeight * scale;
+    poster.style.marginBottom = '0';
+    document.body.style.minHeight = ph + 'px';
+  }
+  window.addEventListener('resize', scalePoster);
+  window.addEventListener('load', scalePoster);
+  setTimeout(scalePoster, 300);
+</script>
+</body>
+</html>
