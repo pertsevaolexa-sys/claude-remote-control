@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Future Museum CRM</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #fafafa; color: #1f2937; }
+    .badge { display:inline-flex; align-items:center; padding: 2px 8px; border-radius: 9999px; font-size: 11px; font-weight: 600; }
+    .chip { display:inline-flex; align-items:center; padding: 2px 8px; border-radius: 6px; font-size: 11px; background:#f1f5f9; color:#334155; }
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius: 12px; }
+    .btn { display:inline-flex; align-items:center; gap:6px; padding: 7px 12px; border-radius: 8px; font-size: 13px; font-weight: 500; }
+    .btn-primary { background:#111827; color:#fff; }
+    .btn-primary:hover { background:#000; }
+    .btn-secondary { background:#fff; color:#111827; border:1px solid #e5e7eb; }
+    .btn-secondary:hover { background:#f9fafb; }
+    .btn-danger { background:#fff; color:#b91c1c; border:1px solid #fecaca; }
+    .btn-danger:hover { background:#fef2f2; }
+    .input, .select, .textarea { width:100%; padding: 7px 10px; border:1px solid #e5e7eb; border-radius: 8px; font-size: 13px; background:#fff; }
+    .input:focus, .select:focus, .textarea:focus { outline: none; border-color:#94a3b8; box-shadow: 0 0 0 3px rgba(148,163,184,.15); }
+    .label { font-size: 11px; font-weight: 600; color:#6b7280; text-transform: uppercase; letter-spacing: 0.04em; }
+    .navlink { padding: 8px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; color:#374151; }
+    .navlink:hover { background:#f3f4f6; }
+    .navlink.active { background:#111827; color:#fff; }
+    table { border-collapse: separate; border-spacing: 0; }
+    th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color:#6b7280; text-align: left; padding: 10px 12px; border-bottom: 1px solid #e5e7eb; background:#f9fafb; }
+    td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+    tr:hover td { background:#f9fafb; }
+    .modal-bg { position:fixed; inset:0; background:rgba(15,23,42,.4); display:flex; align-items:flex-start; justify-content:center; z-index:50; padding-top: 5vh; }
+    .modal { background:#fff; border-radius: 14px; width: min(720px, 92vw); max-height: 86vh; overflow-y:auto; box-shadow: 0 25px 50px -12px rgba(0,0,0,.25); }
+    .pill { font-size:11px; font-weight:600; padding:2px 8px; border-radius: 9999px; }
+    .overdue { color:#b91c1c; font-weight: 600; }
+    .muted { color:#6b7280; font-size: 12px; }
+    details > summary { list-style: none; cursor:pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" data-type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1296 @@
+/* Future Museum CRM — single-file React app (loaded via Babel standalone)
+   Data persists in localStorage. Use Export / Import (JSON) under Settings to
+   share state across teammates until a real shared backend is wired up. */
+
+const { useState, useEffect, useMemo, useRef, useCallback } = React;
+
+// ----- Constants -----
+const TEAM = ["AM", "ER", "OK", "OT", "SW"];
+const INSTITUTION_TYPES = ["Museum", "Cultural Institution", "University", "Foundation", "NGO", "Other"];
+const STATUSES = ["Prospect", "Active Participant", "Presenter", "Research Partner", "On Hold"];
+const AREAS = ["Sustainability", "Well-being", "Technology & Revenue"];
+const CHANNELS = ["Email", "Call", "In-person", "Video call", "Event", "Other"];
+const EVENT_TYPES = ["In-person gathering", "Online session", "Workshop", "Pilot", "Other"];
+const EVENT_FORMATS = ["Online", "Onsite", "Hybrid"];
+const INST_EVENT_STATUS = ["Invited", "Confirmed", "Declined", "No response"];
+const CONTACT_ATTEND = ["Online", "Onsite", "Not attending", "No response"];
+const STORAGE_KEY = "future-museum-crm-v1";
+
+const STATUS_COLOR = {
+  "Prospect": "bg-slate-100 text-slate-700",
+  "Active Participant": "bg-emerald-100 text-emerald-800",
+  "Presenter": "bg-sky-100 text-sky-800",
+  "Research Partner": "bg-violet-100 text-violet-800",
+  "On Hold": "bg-amber-100 text-amber-800",
+};
+const EVENT_STATUS_COLOR = {
+  "Invited": "bg-sky-100 text-sky-800",
+  "Confirmed": "bg-emerald-100 text-emerald-800",
+  "Declined": "bg-rose-100 text-rose-700",
+  "No response": "bg-slate-100 text-slate-600",
+};
+const ATTEND_COLOR = {
+  "Online": "bg-indigo-100 text-indigo-800",
+  "Onsite": "bg-emerald-100 text-emerald-800",
+  "Not attending": "bg-rose-100 text-rose-700",
+  "No response": "bg-slate-100 text-slate-600",
+};
+
+// ----- Utilities -----
+const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+const today = () => new Date().toISOString().slice(0, 10);
+const fmtDate = (d) => d || "—";
+const daysSince = (d) => {
+  if (!d) return null;
+  const ms = Date.now() - new Date(d).getTime();
+  return Math.floor(ms / 86400000);
+};
+const isOverdue = (t) => t.status === "Open" && t.dueDate && new Date(t.dueDate) < new Date(today());
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) { return null; }
+}
+function saveState(s) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch (e) {}
+}
+
+const initialState = () => ({
+  currentUser: "AM",
+  institutions: [],
+  events: [],
+});
+
+// Stamp helper — applied to any record on create/update
+const stamp = (user) => ({ lastEditedBy: user, lastEditedAt: today() });
+
+// ----- App root -----
+function App() {
+  const [state, setState] = useState(() => loadState() || initialState());
+  const [view, setView] = useState({ name: "institutions" });
+
+  useEffect(() => { saveState(state); }, [state]);
+
+  // ----- Mutators -----
+  const update = (mutator) => setState((s) => {
+    const draft = JSON.parse(JSON.stringify(s));
+    mutator(draft);
+    return draft;
+  });
+
+  const upsertInstitution = (inst) => update((d) => {
+    const idx = d.institutions.findIndex((i) => i.id === inst.id);
+    const full = { ...inst, ...stamp(d.currentUser) };
+    if (idx >= 0) d.institutions[idx] = { ...d.institutions[idx], ...full };
+    else d.institutions.push({ contacts: [], engagementLog: [], tasks: [], eventAttendance: {}, ...full });
+  });
+  const deleteInstitution = (id) => update((d) => { d.institutions = d.institutions.filter((i) => i.id !== id); });
+
+  const upsertContact = (instId, contact) => update((d) => {
+    const inst = d.institutions.find((i) => i.id === instId);
+    if (!inst) return;
+    const idx = (inst.contacts || []).findIndex((c) => c.id === contact.id);
+    const full = { ...contact, ...stamp(d.currentUser) };
+    if (idx >= 0) inst.contacts[idx] = { ...inst.contacts[idx], ...full };
+    else (inst.contacts = inst.contacts || []).push({ eventAttendance: {}, ...full });
+  });
+  const deleteContact = (instId, cid) => update((d) => {
+    const inst = d.institutions.find((i) => i.id === instId);
+    if (inst) inst.contacts = inst.contacts.filter((c) => c.id !== cid);
+  });
+
+  const upsertLog = (instId, entry) => update((d) => {
+    const inst = d.institutions.find((i) => i.id === instId);
+    if (!inst) return;
+    const idx = (inst.engagementLog || []).findIndex((l) => l.id === entry.id);
+    const full = { ...entry, ...stamp(d.currentUser) };
+    if (idx >= 0) inst.engagementLog[idx] = { ...inst.engagementLog[idx], ...full };
+    else (inst.engagementLog = inst.engagementLog || []).push(full);
+    inst.lastEditedBy = d.currentUser; inst.lastEditedAt = today();
+  });
+  const deleteLog = (instId, lid) => update((d) => {
+    const inst = d.institutions.find((i) => i.id === instId);
+    if (inst) inst.engagementLog = inst.engagementLog.filter((l) => l.id !== lid);
+  });
+
+  const upsertTask = (instId, task) => update((d) => {
+    const inst = d.institutions.find((i) => i.id === instId);
+    if (!inst) return;
+    const idx = (inst.tasks || []).findIndex((t) => t.id === task.id);
+    const full = { ...task, ...stamp(d.currentUser) };
+    if (idx >= 0) inst.tasks[idx] = { ...inst.tasks[idx], ...full };
+    else (inst.tasks = inst.tasks || []).push(full);
+  });
+  const deleteTask = (instId, tid) => update((d) => {
+    const inst = d.institutions.find((i) => i.id === instId);
+    if (inst) inst.tasks = inst.tasks.filter((t) => t.id !== tid);
+  });
+
+  const upsertEvent = (ev) => update((d) => {
+    const idx = d.events.findIndex((e) => e.id === ev.id);
+    if (idx >= 0) d.events[idx] = { ...d.events[idx], ...ev };
+    else d.events.push(ev);
+  });
+  const deleteEvent = (eid) => update((d) => {
+    d.events = d.events.filter((e) => e.id !== eid);
+    d.institutions.forEach((inst) => {
+      if (inst.eventAttendance) delete inst.eventAttendance[eid];
+      (inst.contacts || []).forEach((c) => { if (c.eventAttendance) delete c.eventAttendance[eid]; });
+    });
+  });
+
+  const setInstitutionEventStatus = (instId, eventId, status) => update((d) => {
+    const inst = d.institutions.find((i) => i.id === instId);
+    if (!inst) return;
+    inst.eventAttendance = inst.eventAttendance || {};
+    inst.eventAttendance[eventId] = status;
+    inst.lastEditedBy = d.currentUser; inst.lastEditedAt = today();
+  });
+  const setContactEventAttendance = (instId, contactId, eventId, value) => update((d) => {
+    const inst = d.institutions.find((i) => i.id === instId);
+    if (!inst) return;
+    const c = (inst.contacts || []).find((x) => x.id === contactId);
+    if (!c) return;
+    c.eventAttendance = c.eventAttendance || {};
+    c.eventAttendance[eventId] = value;
+    c.lastEditedBy = d.currentUser; c.lastEditedAt = today();
+  });
+
+  const setCurrentUser = (u) => update((d) => { d.currentUser = u; });
+  const replaceState = (next) => setState(next);
+
+  const api = {
+    state, setView, setCurrentUser, replaceState,
+    upsertInstitution, deleteInstitution,
+    upsertContact, deleteContact,
+    upsertLog, deleteLog,
+    upsertTask, deleteTask,
+    upsertEvent, deleteEvent,
+    setInstitutionEventStatus, setContactEventAttendance,
+  };
+
+  return (
+    <div className="min-h-screen">
+      <TopBar state={state} view={view} setView={setView} setCurrentUser={setCurrentUser} />
+      <main className="max-w-7xl mx-auto px-6 py-8">
+        {view.name === "institutions" && <InstitutionsView api={api} setView={setView} />}
+        {view.name === "institution" && <InstitutionDetail api={api} id={view.id} setView={setView} />}
+        {view.name === "contacts" && <ContactsView api={api} setView={setView} />}
+        {view.name === "events" && <EventsView api={api} setView={setView} />}
+        {view.name === "event" && <EventDetail api={api} id={view.id} setView={setView} />}
+        {view.name === "reports" && <ReportsView api={api} setView={setView} />}
+        {view.name === "settings" && <SettingsView api={api} />}
+      </main>
+      <footer className="max-w-7xl mx-auto px-6 pb-10 text-xs text-slate-400">
+        Future Museum CRM · local storage. Use Settings → Export to share state with the team.
+      </footer>
+    </div>
+  );
+}
+
+// ----- Top bar -----
+function TopBar({ state, view, setView, setCurrentUser }) {
+  const items = [
+    ["institutions", "Institutions"],
+    ["contacts", "Contacts"],
+    ["events", "Events"],
+    ["reports", "Reports"],
+    ["settings", "Settings"],
+  ];
+  const active = (k) => view.name === k || (k === "institutions" && view.name === "institution") || (k === "events" && view.name === "event");
+  return (
+    <header className="bg-white border-b border-slate-200">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-6 flex-wrap">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-white text-sm font-bold">FM</div>
+          <div>
+            <div className="text-sm font-semibold text-slate-900 leading-tight">Future Museum</div>
+            <div className="text-xs text-slate-500 leading-tight">Team CRM & Events</div>
+          </div>
+        </div>
+        <nav className="flex items-center gap-1 ml-2">
+          {items.map(([k, label]) => (
+            <button key={k} className={"navlink " + (active(k) ? "active" : "")} onClick={() => setView({ name: k })}>{label}</button>
+          ))}
+        </nav>
+        <div className="ml-auto flex items-center gap-2">
+          <span className="text-xs text-slate-500">Signed in as</span>
+          <select className="select w-auto" value={state.currentUser} onChange={(e) => setCurrentUser(e.target.value)}>
+            {TEAM.map((t) => <option key={t} value={t}>{t}</option>)}
+          </select>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+// ----- Reusable bits -----
+function StatusBadge({ value, map }) {
+  return <span className={"badge " + (map[value] || "bg-slate-100 text-slate-700")}>{value || "—"}</span>;
+}
+function SectionHeader({ title, right }) {
+  return (
+    <div className="flex items-center justify-between mb-4 mt-2">
+      <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
+      <div className="flex items-center gap-2">{right}</div>
+    </div>
+  );
+}
+function EmptyState({ title, hint }) {
+  return (
+    <div className="card p-10 text-center">
+      <div className="text-base font-medium text-slate-700">{title}</div>
+      {hint && <div className="text-sm text-slate-500 mt-1">{hint}</div>}
+    </div>
+  );
+}
+function Modal({ title, onClose, children, footer }) {
+  return (
+    <div className="modal-bg" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+          <h3 className="text-base font-semibold text-slate-900">{title}</h3>
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-700 text-xl leading-none">×</button>
+        </div>
+        <div className="px-6 py-5">{children}</div>
+        {footer && <div className="px-6 py-4 border-t border-slate-100 bg-slate-50 flex justify-end gap-2 rounded-b-2xl">{footer}</div>}
+      </div>
+    </div>
+  );
+}
+function MultiSelect({ options, value, onChange }) {
+  const sel = new Set(value || []);
+  const toggle = (o) => {
+    const next = new Set(sel);
+    if (next.has(o)) next.delete(o); else next.add(o);
+    onChange(Array.from(next));
+  };
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {options.map((o) => (
+        <button key={o} type="button" onClick={() => toggle(o)}
+          className={"px-2.5 py-1 rounded-md text-xs font-medium border " + (sel.has(o) ? "bg-slate-900 text-white border-slate-900" : "bg-white text-slate-600 border-slate-200 hover:border-slate-400")}>{o}</button>
+      ))}
+    </div>
+  );
+}
+
+// ----- Institutions list view -----
+function InstitutionsView({ api, setView }) {
+  const { state } = api;
+  const [editing, setEditing] = useState(null);
+  const [filters, setFilters] = useState({ q: "", status: "", area: "", lead: "", country: "", mighty: "", lastContact: "", eventId: "", eventStatus: "" });
+
+  const countries = useMemo(() => Array.from(new Set(state.institutions.map((i) => i.country).filter(Boolean))).sort(), [state.institutions]);
+
+  const filtered = useMemo(() => state.institutions.filter((i) => {
+    if (filters.q && !(`${i.name} ${i.country || ""} ${i.notes || ""}`.toLowerCase().includes(filters.q.toLowerCase()))) return false;
+    if (filters.status && i.status !== filters.status) return false;
+    if (filters.area && !(i.areas || []).includes(filters.area)) return false;
+    if (filters.lead && i.lead1 !== filters.lead && i.lead2 !== filters.lead) return false;
+    if (filters.country && i.country !== filters.country) return false;
+    if (filters.mighty && (i.mightyNetwork || "No") !== filters.mighty) return false;
+    if (filters.lastContact) {
+      const logs = (i.engagementLog || []).map((l) => l.date).filter(Boolean).sort();
+      const last = logs[logs.length - 1];
+      const d = daysSince(last);
+      const threshold = parseInt(filters.lastContact, 10);
+      if (d !== null && d < threshold) return false;
+      if (d === null && threshold === 0) {/* allow */}
+    }
+    if (filters.eventId) {
+      const s = (i.eventAttendance || {})[filters.eventId] || "No response";
+      if (filters.eventStatus && s !== filters.eventStatus) return false;
+    }
+    return true;
+  }), [state.institutions, filters]);
+
+  return (
+    <div>
+      <SectionHeader title="Institutions" right={
+        <React.Fragment>
+          <ExcelImportButton api={api} />
+          <button className="btn btn-secondary" onClick={() => exportInstitutionsXlsx(filtered, state.events)}>Export .xlsx</button>
+          <button className="btn btn-primary" onClick={() => setEditing({ id: uid(), name: "", country: "", type: "", status: "Prospect", areas: [], lead1: "", lead2: "", mightyNetwork: "No", notes: "" })}>+ Add institution</button>
+        </React.Fragment>
+      } />
+
+      <div className="card p-4 mb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <input className="input" placeholder="Search name, country, notes…" value={filters.q} onChange={(e) => setFilters({ ...filters, q: e.target.value })} />
+        <select className="select" value={filters.status} onChange={(e) => setFilters({ ...filters, status: e.target.value })}>
+          <option value="">All statuses</option>{STATUSES.map((s) => <option key={s}>{s}</option>)}
+        </select>
+        <select className="select" value={filters.area} onChange={(e) => setFilters({ ...filters, area: e.target.value })}>
+          <option value="">All research areas</option>{AREAS.map((s) => <option key={s}>{s}</option>)}
+        </select>
+        <select className="select" value={filters.lead} onChange={(e) => setFilters({ ...filters, lead: e.target.value })}>
+          <option value="">Any team lead</option>{TEAM.map((s) => <option key={s}>{s}</option>)}
+        </select>
+        <select className="select" value={filters.country} onChange={(e) => setFilters({ ...filters, country: e.target.value })}>
+          <option value="">All countries</option>{countries.map((c) => <option key={c}>{c}</option>)}
+        </select>
+        <select className="select" value={filters.mighty} onChange={(e) => setFilters({ ...filters, mighty: e.target.value })}>
+          <option value="">Mighty Network: any</option><option>Yes</option><option>No</option>
+        </select>
+        <select className="select" value={filters.lastContact} onChange={(e) => setFilters({ ...filters, lastContact: e.target.value })}>
+          <option value="">Last contact: any</option>
+          <option value="30">Not contacted in last 30 days</option>
+          <option value="60">Not contacted in last 60 days</option>
+          <option value="90">Not contacted in last 90 days</option>
+        </select>
+        <div className="flex gap-2">
+          <select className="select" value={filters.eventId} onChange={(e) => setFilters({ ...filters, eventId: e.target.value })}>
+            <option value="">Filter by event…</option>
+            {state.events.map((e) => <option key={e.id} value={e.id}>{e.name}</option>)}
+          </select>
+          <select className="select" disabled={!filters.eventId} value={filters.eventStatus} onChange={(e) => setFilters({ ...filters, eventStatus: e.target.value })}>
+            <option value="">Any</option>{INST_EVENT_STATUS.map((s) => <option key={s}>{s}</option>)}
+          </select>
+        </div>
+      </div>
+
+      {filtered.length === 0 ? <EmptyState title="No institutions match." hint="Add one, or relax the filters above." /> : (
+        <div className="card overflow-hidden">
+          <table className="w-full">
+            <thead>
+              <tr>
+                <th>Institution</th><th>Country</th><th>Type</th><th>Status</th>
+                <th>Areas</th><th>Leads</th><th>MN</th><th>Last contact</th><th>Edited</th><th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((i) => {
+                const last = ((i.engagementLog || []).map((l) => l.date).filter(Boolean).sort().pop());
+                return (
+                  <tr key={i.id} className="cursor-pointer" onClick={() => setView({ name: "institution", id: i.id })}>
+                    <td className="font-medium text-slate-900">{i.name}</td>
+                    <td>{i.country || "—"}</td>
+                    <td>{i.type || "—"}</td>
+                    <td><StatusBadge value={i.status} map={STATUS_COLOR} /></td>
+                    <td><div className="flex flex-wrap gap-1">{(i.areas || []).map((a) => <span key={a} className="chip">{a}</span>)}</div></td>
+                    <td><span className="text-slate-700">{[i.lead1, i.lead2].filter(Boolean).join(" · ") || "—"}</span></td>
+                    <td>{i.mightyNetwork === "Yes" ? <span className="badge bg-emerald-100 text-emerald-800">Yes</span> : <span className="muted">No</span>}</td>
+                    <td>{last ? `${fmtDate(last)} (${daysSince(last)}d)` : <span className="muted">—</span>}</td>
+                    <td className="muted">{i.lastEditedBy ? `${i.lastEditedBy} · ${i.lastEditedAt}` : "—"}</td>
+                    <td onClick={(e) => e.stopPropagation()} className="text-right">
+                      <button className="text-slate-400 hover:text-slate-700 text-sm" onClick={() => setEditing(i)}>Edit</button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {editing && (
+        <InstitutionEditor inst={editing} onClose={() => setEditing(null)} onSave={(v) => { api.upsertInstitution(v); setEditing(null); }} onDelete={() => { api.deleteInstitution(editing.id); setEditing(null); }} isNew={!state.institutions.some((i) => i.id === editing.id)} />
+      )}
+    </div>
+  );
+}
+
+function InstitutionEditor({ inst, onClose, onSave, onDelete, isNew }) {
+  const [draft, setDraft] = useState(inst);
+  const set = (k, v) => setDraft({ ...draft, [k]: v });
+  const valid = draft.name && draft.name.trim().length > 0;
+  return (
+    <Modal title={isNew ? "New institution" : `Edit · ${inst.name}`} onClose={onClose}
+      footer={
+        <React.Fragment>
+          {!isNew && <button className="btn btn-danger mr-auto" onClick={() => { if (confirm("Delete this institution and all its contacts/log/tasks?")) onDelete(); }}>Delete</button>}
+          <button className="btn btn-secondary" onClick={onClose}>Cancel</button>
+          <button className="btn btn-primary" disabled={!valid} onClick={() => onSave(draft)}>Save</button>
+        </React.Fragment>
+      }>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="sm:col-span-2"><div className="label mb-1">Name *</div><input className="input" value={draft.name || ""} onChange={(e) => set("name", e.target.value)} /></div>
+        <div><div className="label mb-1">Country</div><input className="input" value={draft.country || ""} onChange={(e) => set("country", e.target.value)} /></div>
+        <div><div className="label mb-1">Type</div>
+          <select className="select" value={draft.type || ""} onChange={(e) => set("type", e.target.value)}>
+            <option value="">—</option>{INSTITUTION_TYPES.map((t) => <option key={t}>{t}</option>)}
+          </select>
+        </div>
+        <div><div className="label mb-1">Status</div>
+          <select className="select" value={draft.status || ""} onChange={(e) => set("status", e.target.value)}>
+            {STATUSES.map((t) => <option key={t}>{t}</option>)}
+          </select>
+        </div>
+        <div><div className="label mb-1">Mighty Network</div>
+          <select className="select" value={draft.mightyNetwork || "No"} onChange={(e) => set("mightyNetwork", e.target.value)}>
+            <option>No</option><option>Yes</option>
+          </select>
+        </div>
+        <div className="sm:col-span-2"><div className="label mb-1">Research areas</div><MultiSelect options={AREAS} value={draft.areas || []} onChange={(v) => set("areas", v)} /></div>
+        <div><div className="label mb-1">Team lead 1</div>
+          <select className="select" value={draft.lead1 || ""} onChange={(e) => set("lead1", e.target.value)}>
+            <option value="">—</option>{TEAM.map((t) => <option key={t}>{t}</option>)}
+          </select>
+        </div>
+        <div><div className="label mb-1">Team lead 2</div>
+          <select className="select" value={draft.lead2 || ""} onChange={(e) => set("lead2", e.target.value)}>
+            <option value="">—</option>{TEAM.map((t) => <option key={t}>{t}</option>)}
+          </select>
+        </div>
+        <div className="sm:col-span-2"><div className="label mb-1">Notes</div><textarea className="textarea" rows={4} value={draft.notes || ""} onChange={(e) => set("notes", e.target.value)} /></div>
+      </div>
+    </Modal>
+  );
+}
+
+// ----- Institution detail -----
+function InstitutionDetail({ api, id, setView }) {
+  const inst = api.state.institutions.find((i) => i.id === id);
+  const [tab, setTab] = useState("overview");
+  const [editing, setEditing] = useState(null);
+  const [contactEditing, setContactEditing] = useState(null);
+  const [logEditing, setLogEditing] = useState(null);
+  const [taskEditing, setTaskEditing] = useState(null);
+  if (!inst) return <EmptyState title="Institution not found" />;
+  const last = (inst.engagementLog || []).map((l) => l.date).filter(Boolean).sort().pop();
+
+  return (
+    <div>
+      <button className="text-sm text-slate-500 hover:text-slate-900 mb-3" onClick={() => setView({ name: "institutions" })}>← Back to institutions</button>
+      <div className="card p-6 mb-5">
+        <div className="flex items-start gap-6 flex-wrap">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="text-2xl font-semibold text-slate-900">{inst.name}</h1>
+              <StatusBadge value={inst.status} map={STATUS_COLOR} />
+              {(inst.areas || []).map((a) => <span key={a} className="chip">{a}</span>)}
+            </div>
+            <div className="mt-2 text-sm text-slate-600 flex flex-wrap gap-x-5 gap-y-1">
+              <span><span className="label mr-1">Country</span>{inst.country || "—"}</span>
+              <span><span className="label mr-1">Type</span>{inst.type || "—"}</span>
+              <span><span className="label mr-1">Leads</span>{[inst.lead1, inst.lead2].filter(Boolean).join(" · ") || "—"}</span>
+              <span><span className="label mr-1">Mighty Net</span>{inst.mightyNetwork || "No"}</span>
+              <span><span className="label mr-1">Last contact</span>{last ? `${fmtDate(last)} (${daysSince(last)}d)` : "—"}</span>
+            </div>
+            {inst.notes && <p className="mt-3 text-sm text-slate-700 whitespace-pre-wrap">{inst.notes}</p>}
+            <p className="muted mt-3">Last edited by {inst.lastEditedBy || "—"} · {inst.lastEditedAt || "—"}</p>
+          </div>
+          <div className="flex flex-col gap-2">
+            <button className="btn btn-secondary" onClick={() => setEditing(inst)}>Edit profile</button>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex gap-1 mb-4 flex-wrap">
+        {["overview", "contacts", "engagement", "tasks", "events"].map((k) => (
+          <button key={k} className={"navlink " + (tab === k ? "active" : "")} onClick={() => setTab(k)}>
+            {k === "overview" ? "Overview"
+              : k === "contacts" ? `Contacts (${(inst.contacts || []).length})`
+              : k === "engagement" ? `Engagement (${(inst.engagementLog || []).length})`
+              : k === "tasks" ? `Tasks (${(inst.tasks || []).filter((t) => t.status === "Open").length} open)`
+              : `Events (${Object.keys(inst.eventAttendance || {}).length})`}
+          </button>
+        ))}
+      </div>
+
+      {tab === "overview" && <OverviewPane inst={inst} api={api} />}
+      {tab === "contacts" && (
+        <ContactsPane inst={inst} events={api.state.events}
+          onAdd={() => setContactEditing({ id: uid(), name: "", email: "", role: "", country: inst.country || "", eventAttendance: {} })}
+          onEdit={(c) => setContactEditing(c)}
+          onAttend={(cid, eid, v) => api.setContactEventAttendance(inst.id, cid, eid, v)} />
+      )}
+      {tab === "engagement" && (
+        <EngagementPane inst={inst}
+          onAdd={() => setLogEditing({ id: uid(), date: today(), channel: "Email", by: api.state.currentUser, notes: "" })}
+          onEdit={(l) => setLogEditing(l)}
+          onDelete={(lid) => api.deleteLog(inst.id, lid)} />
+      )}
+      {tab === "tasks" && (
+        <TasksPane inst={inst}
+          onAdd={() => setTaskEditing({ id: uid(), description: "", assignee: api.state.currentUser, dueDate: "", status: "Open" })}
+          onEdit={(t) => setTaskEditing(t)}
+          onToggle={(t) => api.upsertTask(inst.id, { ...t, status: t.status === "Open" ? "Done" : "Open" })}
+          onDelete={(tid) => api.deleteTask(inst.id, tid)} />
+      )}
+      {tab === "events" && (
+        <InstitutionEventsPane inst={inst} events={api.state.events}
+          onSetStatus={(eid, s) => api.setInstitutionEventStatus(inst.id, eid, s)} />
+      )}
+
+      {editing && <InstitutionEditor inst={editing} isNew={false} onClose={() => setEditing(null)} onSave={(v) => { api.upsertInstitution(v); setEditing(null); }} onDelete={() => { api.deleteInstitution(inst.id); setView({ name: "institutions" }); }} />}
+      {contactEditing && <ContactEditor draft={contactEditing} events={api.state.events} onClose={() => setContactEditing(null)} onSave={(v) => { api.upsertContact(inst.id, v); setContactEditing(null); }} onDelete={() => { api.deleteContact(inst.id, contactEditing.id); setContactEditing(null); }} isNew={!(inst.contacts || []).some((c) => c.id === contactEditing.id)} />}
+      {logEditing && <LogEditor draft={logEditing} onClose={() => setLogEditing(null)} onSave={(v) => { api.upsertLog(inst.id, v); setLogEditing(null); }} isNew={!(inst.engagementLog || []).some((l) => l.id === logEditing.id)} />}
+      {taskEditing && <TaskEditor draft={taskEditing} onClose={() => setTaskEditing(null)} onSave={(v) => { api.upsertTask(inst.id, v); setTaskEditing(null); }} onDelete={() => { api.deleteTask(inst.id, taskEditing.id); setTaskEditing(null); }} isNew={!(inst.tasks || []).some((t) => t.id === taskEditing.id)} />}
+    </div>
+  );
+}
+
+function OverviewPane({ inst, api }) {
+  const openTasks = (inst.tasks || []).filter((t) => t.status === "Open");
+  const recentLogs = (inst.engagementLog || []).slice().sort((a, b) => (b.date || "").localeCompare(a.date || "")).slice(0, 5);
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="card p-5">
+        <h3 className="text-sm font-semibold text-slate-900 mb-3">Open tasks</h3>
+        {openTasks.length === 0 ? <p className="muted">No open tasks.</p> : (
+          <ul className="space-y-2">
+            {openTasks.map((t) => (
+              <li key={t.id} className="flex items-start gap-2 text-sm">
+                <span className={isOverdue(t) ? "overdue" : "text-slate-700"}>{t.description}</span>
+                <span className="muted ml-auto">{t.assignee} · {t.dueDate || "no date"}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <div className="card p-5">
+        <h3 className="text-sm font-semibold text-slate-900 mb-3">Recent engagement</h3>
+        {recentLogs.length === 0 ? <p className="muted">No log entries yet.</p> : (
+          <ul className="space-y-3">
+            {recentLogs.map((l) => (
+              <li key={l.id} className="text-sm">
+                <div className="flex items-center gap-2"><span className="chip">{l.channel}</span><span className="muted">{l.date} · {l.by}</span></div>
+                {l.notes && <p className="text-slate-700 mt-1 whitespace-pre-wrap">{l.notes}</p>}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ContactsPane({ inst, events, onAdd, onEdit, onAttend }) {
+  const contacts = inst.contacts || [];
+  return (
+    <div>
+      <div className="flex justify-end mb-3"><button className="btn btn-primary" onClick={onAdd}>+ Add contact</button></div>
+      {contacts.length === 0 ? <EmptyState title="No contacts yet." hint="Add a contact to start tracking individuals." /> : (
+        <div className="card overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr>
+                <th>Name</th><th>Role</th><th>Email</th><th>Country</th>
+                {events.map((e) => <th key={e.id}>{e.name}</th>)}
+                <th>Edited</th><th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {contacts.map((c) => (
+                <tr key={c.id}>
+                  <td className="font-medium text-slate-900">{c.name}</td>
+                  <td>{c.role || "—"}</td>
+                  <td>{c.email ? <a className="text-sky-700 hover:underline" href={`mailto:${c.email}`}>{c.email}</a> : "—"}</td>
+                  <td>{c.country || inst.country || "—"}</td>
+                  {events.map((e) => (
+                    <td key={e.id}>
+                      <select className="select w-auto" value={(c.eventAttendance || {})[e.id] || "No response"} onChange={(ev) => onAttend(c.id, e.id, ev.target.value)}>
+                        {CONTACT_ATTEND.map((o) => <option key={o}>{o}</option>)}
+                      </select>
+                    </td>
+                  ))}
+                  <td className="muted">{c.lastEditedBy ? `${c.lastEditedBy} · ${c.lastEditedAt}` : "—"}</td>
+                  <td className="text-right"><button className="text-slate-400 hover:text-slate-700 text-sm" onClick={() => onEdit(c)}>Edit</button></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ContactEditor({ draft, events, onClose, onSave, onDelete, isNew }) {
+  const [d, setD] = useState(draft);
+  const set = (k, v) => setD({ ...d, [k]: v });
+  return (
+    <Modal title={isNew ? "New contact" : `Edit · ${draft.name}`} onClose={onClose}
+      footer={
+        <React.Fragment>
+          {!isNew && <button className="btn btn-danger mr-auto" onClick={() => { if (confirm("Delete this contact?")) onDelete(); }}>Delete</button>}
+          <button className="btn btn-secondary" onClick={onClose}>Cancel</button>
+          <button className="btn btn-primary" onClick={() => onSave(d)} disabled={!d.name}>Save</button>
+        </React.Fragment>
+      }>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="sm:col-span-2"><div className="label mb-1">Full name *</div><input className="input" value={d.name || ""} onChange={(e) => set("name", e.target.value)} /></div>
+        <div><div className="label mb-1">Email</div><input className="input" value={d.email || ""} onChange={(e) => set("email", e.target.value)} /></div>
+        <div><div className="label mb-1">Role / position</div><input className="input" value={d.role || ""} onChange={(e) => set("role", e.target.value)} /></div>
+        <div><div className="label mb-1">Country (overrides institution)</div><input className="input" value={d.country || ""} onChange={(e) => set("country", e.target.value)} /></div>
+      </div>
+      {events.length > 0 && (
+        <div className="mt-5">
+          <div className="label mb-2">Event attendance</div>
+          <div className="space-y-2">
+            {events.map((e) => (
+              <div key={e.id} className="flex items-center gap-3">
+                <div className="text-sm text-slate-700 flex-1">{e.name} <span className="muted">· {e.format} · {e.date || "tbd"}</span></div>
+                <select className="select w-44" value={(d.eventAttendance || {})[e.id] || "No response"} onChange={(ev) => set("eventAttendance", { ...(d.eventAttendance || {}), [e.id]: ev.target.value })}>
+                  {CONTACT_ATTEND.map((o) => <option key={o}>{o}</option>)}
+                </select>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </Modal>
+  );
+}
+
+function EngagementPane({ inst, onAdd, onEdit, onDelete }) {
+  const logs = (inst.engagementLog || []).slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  return (
+    <div>
+      <div className="flex justify-end mb-3"><button className="btn btn-primary" onClick={onAdd}>+ Log contact</button></div>
+      {logs.length === 0 ? <EmptyState title="No engagement entries yet." /> : (
+        <div className="card divide-y divide-slate-100">
+          {logs.map((l) => (
+            <div key={l.id} className="p-4 flex items-start gap-4">
+              <div className="text-sm text-slate-500 w-28 shrink-0">{l.date || "—"}</div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2"><span className="chip">{l.channel}</span><span className="muted">by {l.by}</span></div>
+                {l.notes && <p className="text-sm text-slate-700 mt-1 whitespace-pre-wrap">{l.notes}</p>}
+                <p className="muted mt-1">Edited by {l.lastEditedBy || "—"} · {l.lastEditedAt || "—"}</p>
+              </div>
+              <div className="flex gap-2">
+                <button className="text-slate-400 hover:text-slate-700 text-sm" onClick={() => onEdit(l)}>Edit</button>
+                <button className="text-rose-500 hover:text-rose-700 text-sm" onClick={() => { if (confirm("Delete this log entry?")) onDelete(l.id); }}>Delete</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function LogEditor({ draft, onClose, onSave, isNew }) {
+  const [d, setD] = useState(draft);
+  const set = (k, v) => setD({ ...d, [k]: v });
+  return (
+    <Modal title={isNew ? "Log contact" : "Edit entry"} onClose={onClose} footer={
+      <React.Fragment>
+        <button className="btn btn-secondary" onClick={onClose}>Cancel</button>
+        <button className="btn btn-primary" onClick={() => onSave(d)}>Save</button>
+      </React.Fragment>
+    }>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div><div className="label mb-1">Date</div><input type="date" className="input" value={d.date || ""} onChange={(e) => set("date", e.target.value)} /></div>
+        <div><div className="label mb-1">Channel</div>
+          <select className="select" value={d.channel || ""} onChange={(e) => set("channel", e.target.value)}>{CHANNELS.map((c) => <option key={c}>{c}</option>)}</select>
+        </div>
+        <div><div className="label mb-1">By</div>
+          <select className="select" value={d.by || ""} onChange={(e) => set("by", e.target.value)}>{TEAM.map((t) => <option key={t}>{t}</option>)}</select>
+        </div>
+      </div>
+      <div className="mt-4"><div className="label mb-1">Notes</div><textarea className="textarea" rows={5} value={d.notes || ""} onChange={(e) => set("notes", e.target.value)} /></div>
+    </Modal>
+  );
+}
+
+function TasksPane({ inst, onAdd, onEdit, onToggle, onDelete }) {
+  const tasks = (inst.tasks || []).slice().sort((a, b) => {
+    if (a.status !== b.status) return a.status === "Open" ? -1 : 1;
+    return (a.dueDate || "9999").localeCompare(b.dueDate || "9999");
+  });
+  return (
+    <div>
+      <div className="flex justify-end mb-3"><button className="btn btn-primary" onClick={onAdd}>+ Add task</button></div>
+      {tasks.length === 0 ? <EmptyState title="No tasks yet." /> : (
+        <div className="card divide-y divide-slate-100">
+          {tasks.map((t) => (
+            <div key={t.id} className="p-4 flex items-start gap-3">
+              <input type="checkbox" checked={t.status === "Done"} onChange={() => onToggle(t)} className="mt-1 w-4 h-4 accent-slate-900" />
+              <div className="flex-1">
+                <div className={"text-sm " + (t.status === "Done" ? "line-through text-slate-400" : isOverdue(t) ? "overdue" : "text-slate-800")}>{t.description}</div>
+                <div className="muted mt-1">{t.assignee} · due {t.dueDate || "—"} {isOverdue(t) && <span className="overdue">· overdue</span>}</div>
+              </div>
+              <button className="text-slate-400 hover:text-slate-700 text-sm" onClick={() => onEdit(t)}>Edit</button>
+              <button className="text-rose-500 hover:text-rose-700 text-sm" onClick={() => { if (confirm("Delete task?")) onDelete(t.id); }}>Delete</button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TaskEditor({ draft, onClose, onSave, onDelete, isNew }) {
+  const [d, setD] = useState(draft);
+  const set = (k, v) => setD({ ...d, [k]: v });
+  return (
+    <Modal title={isNew ? "New task" : "Edit task"} onClose={onClose} footer={
+      <React.Fragment>
+        {!isNew && <button className="btn btn-danger mr-auto" onClick={() => { if (confirm("Delete task?")) onDelete(); }}>Delete</button>}
+        <button className="btn btn-secondary" onClick={onClose}>Cancel</button>
+        <button className="btn btn-primary" onClick={() => onSave(d)} disabled={!d.description}>Save</button>
+      </React.Fragment>
+    }>
+      <div className="space-y-3">
+        <div><div className="label mb-1">Description *</div><textarea className="textarea" rows={3} value={d.description || ""} onChange={(e) => set("description", e.target.value)} /></div>
+        <div className="grid grid-cols-3 gap-3">
+          <div><div className="label mb-1">Assignee</div>
+            <select className="select" value={d.assignee || ""} onChange={(e) => set("assignee", e.target.value)}>{TEAM.map((t) => <option key={t}>{t}</option>)}</select>
+          </div>
+          <div><div className="label mb-1">Due date</div><input type="date" className="input" value={d.dueDate || ""} onChange={(e) => set("dueDate", e.target.value)} /></div>
+          <div><div className="label mb-1">Status</div>
+            <select className="select" value={d.status || ""} onChange={(e) => set("status", e.target.value)}><option>Open</option><option>Done</option></select>
+          </div>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
+function InstitutionEventsPane({ inst, events, onSetStatus }) {
+  if (events.length === 0) return <EmptyState title="No events defined yet." hint="Create events under the Events tab." />;
+  return (
+    <div className="card overflow-x-auto">
+      <table className="w-full">
+        <thead><tr><th>Event</th><th>Date</th><th>Format</th><th>Institution status</th></tr></thead>
+        <tbody>
+          {events.map((e) => {
+            const s = (inst.eventAttendance || {})[e.id] || "No response";
+            return (
+              <tr key={e.id}>
+                <td className="font-medium text-slate-900">{e.name}</td>
+                <td>{e.date || "—"}</td>
+                <td>{e.format}</td>
+                <td>
+                  <select className="select w-auto" value={s} onChange={(ev) => onSetStatus(e.id, ev.target.value)}>
+                    {INST_EVENT_STATUS.map((o) => <option key={o}>{o}</option>)}
+                  </select>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// ----- Contacts view -----
+function ContactsView({ api, setView }) {
+  const { state } = api;
+  const [filters, setFilters] = useState({ q: "", institution: "", country: "", eventId: "", attend: "", area: "" });
+  const allContacts = useMemo(() => state.institutions.flatMap((i) => (i.contacts || []).map((c) => ({ ...c, _inst: i }))), [state.institutions]);
+  const countries = useMemo(() => Array.from(new Set(allContacts.map((c) => c.country || c._inst.country).filter(Boolean))).sort(), [allContacts]);
+  const filtered = allContacts.filter((c) => {
+    const country = c.country || c._inst.country;
+    if (filters.q && !(`${c.name} ${c.email || ""} ${c.role || ""}`.toLowerCase().includes(filters.q.toLowerCase()))) return false;
+    if (filters.institution && c._inst.id !== filters.institution) return false;
+    if (filters.country && country !== filters.country) return false;
+    if (filters.area && !((c._inst.areas || []).includes(filters.area))) return false;
+    if (filters.eventId) {
+      const v = (c.eventAttendance || {})[filters.eventId] || "No response";
+      if (filters.attend && v !== filters.attend) return false;
+    }
+    return true;
+  });
+  return (
+    <div>
+      <SectionHeader title="Contacts" right={
+        <button className="btn btn-secondary" onClick={() => exportContactsXlsx(filtered, state.events)}>Export .xlsx</button>
+      } />
+      <div className="card p-4 mb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <input className="input" placeholder="Search name, email, role…" value={filters.q} onChange={(e) => setFilters({ ...filters, q: e.target.value })} />
+        <select className="select" value={filters.institution} onChange={(e) => setFilters({ ...filters, institution: e.target.value })}>
+          <option value="">All institutions</option>
+          {state.institutions.map((i) => <option key={i.id} value={i.id}>{i.name}</option>)}
+        </select>
+        <select className="select" value={filters.country} onChange={(e) => setFilters({ ...filters, country: e.target.value })}>
+          <option value="">All countries</option>{countries.map((c) => <option key={c}>{c}</option>)}
+        </select>
+        <select className="select" value={filters.area} onChange={(e) => setFilters({ ...filters, area: e.target.value })}>
+          <option value="">All research areas</option>{AREAS.map((a) => <option key={a}>{a}</option>)}
+        </select>
+        <select className="select" value={filters.eventId} onChange={(e) => setFilters({ ...filters, eventId: e.target.value, attend: "" })}>
+          <option value="">Filter by event…</option>{state.events.map((e) => <option key={e.id} value={e.id}>{e.name}</option>)}
+        </select>
+        <select className="select" disabled={!filters.eventId} value={filters.attend} onChange={(e) => setFilters({ ...filters, attend: e.target.value })}>
+          <option value="">Any attendance format</option>{CONTACT_ATTEND.map((o) => <option key={o}>{o}</option>)}
+        </select>
+      </div>
+      {filtered.length === 0 ? <EmptyState title="No contacts match." /> : (
+        <div className="card overflow-x-auto">
+          <table className="w-full">
+            <thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Institution</th><th>Country</th><th>Areas</th><th></th></tr></thead>
+            <tbody>
+              {filtered.map((c) => (
+                <tr key={c.id}>
+                  <td className="font-medium text-slate-900">{c.name}</td>
+                  <td>{c.role || "—"}</td>
+                  <td>{c.email ? <a className="text-sky-700 hover:underline" href={`mailto:${c.email}`}>{c.email}</a> : "—"}</td>
+                  <td><button className="text-slate-700 hover:text-slate-900 underline-offset-2 hover:underline" onClick={() => setView({ name: "institution", id: c._inst.id })}>{c._inst.name}</button></td>
+                  <td>{c.country || c._inst.country || "—"}</td>
+                  <td><div className="flex flex-wrap gap-1">{(c._inst.areas || []).map((a) => <span key={a} className="chip">{a}</span>)}</div></td>
+                  <td className="text-right muted">{c.lastEditedBy ? `${c.lastEditedBy} · ${c.lastEditedAt}` : ""}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ----- Events view -----
+function EventsView({ api, setView }) {
+  const { state } = api;
+  const [editing, setEditing] = useState(null);
+  return (
+    <div>
+      <SectionHeader title="Events" right={<button className="btn btn-primary" onClick={() => setEditing({ id: uid(), name: "", type: "In-person gathering", format: "Onsite", date: "", description: "" })}>+ New event</button>} />
+      {state.events.length === 0 ? <EmptyState title="No events yet." hint="Events show up here as soon as you create one." /> : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {state.events.map((e) => {
+            const counts = eventCounts(e, state.institutions);
+            return (
+              <div key={e.id} className="card p-5 hover:shadow-md transition cursor-pointer" onClick={() => setView({ name: "event", id: e.id })}>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-base font-semibold text-slate-900">{e.name}</h3>
+                    <p className="muted">{e.type} · {e.format} · {e.date || "date tbd"}</p>
+                  </div>
+                  <button className="text-slate-400 hover:text-slate-700 text-sm" onClick={(ev) => { ev.stopPropagation(); setEditing(e); }}>Edit</button>
+                </div>
+                <div className="mt-3 flex gap-1.5 flex-wrap text-xs">
+                  <span className="badge bg-emerald-100 text-emerald-800">{counts.confirmed} confirmed</span>
+                  <span className="badge bg-sky-100 text-sky-800">{counts.invited} invited</span>
+                  <span className="badge bg-rose-100 text-rose-700">{counts.declined} declined</span>
+                  <span className="badge bg-slate-100 text-slate-600">{counts.noResp} no response</span>
+                </div>
+                <p className="muted mt-3">{counts.onsite} onsite · {counts.online} online contacts</p>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {editing && <EventEditor draft={editing} onClose={() => setEditing(null)} onSave={(v) => { api.upsertEvent(v); setEditing(null); }} onDelete={() => { api.deleteEvent(editing.id); setEditing(null); }} isNew={!state.events.some((e) => e.id === editing.id)} />}
+    </div>
+  );
+}
+
+function eventCounts(e, institutions) {
+  let confirmed = 0, invited = 0, declined = 0, noResp = 0, onsite = 0, online = 0;
+  institutions.forEach((i) => {
+    const s = (i.eventAttendance || {})[e.id];
+    if (s === "Confirmed") confirmed++;
+    else if (s === "Invited") invited++;
+    else if (s === "Declined") declined++;
+    else noResp++;
+    (i.contacts || []).forEach((c) => {
+      const v = (c.eventAttendance || {})[e.id];
+      if (v === "Onsite") onsite++; else if (v === "Online") online++;
+    });
+  });
+  return { confirmed, invited, declined, noResp, onsite, online };
+}
+
+function EventEditor({ draft, onClose, onSave, onDelete, isNew }) {
+  const [d, setD] = useState(draft);
+  const set = (k, v) => setD({ ...d, [k]: v });
+  return (
+    <Modal title={isNew ? "New event" : `Edit · ${draft.name}`} onClose={onClose} footer={
+      <React.Fragment>
+        {!isNew && <button className="btn btn-danger mr-auto" onClick={() => { if (confirm("Delete this event? Attendance data will be removed.")) onDelete(); }}>Delete</button>}
+        <button className="btn btn-secondary" onClick={onClose}>Cancel</button>
+        <button className="btn btn-primary" onClick={() => onSave(d)} disabled={!d.name}>Save</button>
+      </React.Fragment>
+    }>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="sm:col-span-2"><div className="label mb-1">Name *</div><input className="input" value={d.name || ""} onChange={(e) => set("name", e.target.value)} /></div>
+        <div><div className="label mb-1">Type</div>
+          <select className="select" value={d.type} onChange={(e) => set("type", e.target.value)}>{EVENT_TYPES.map((t) => <option key={t}>{t}</option>)}</select>
+        </div>
+        <div><div className="label mb-1">Format</div>
+          <select className="select" value={d.format} onChange={(e) => set("format", e.target.value)}>{EVENT_FORMATS.map((t) => <option key={t}>{t}</option>)}</select>
+        </div>
+        <div><div className="label mb-1">Date</div><input type="date" className="input" value={d.date || ""} onChange={(e) => set("date", e.target.value)} /></div>
+        <div className="sm:col-span-2"><div className="label mb-1">Description</div><textarea className="textarea" rows={3} value={d.description || ""} onChange={(e) => set("description", e.target.value)} /></div>
+      </div>
+    </Modal>
+  );
+}
+
+function EventDetail({ api, id, setView }) {
+  const ev = api.state.events.find((e) => e.id === id);
+  if (!ev) return <EmptyState title="Event not found." />;
+  const counts = eventCounts(ev, api.state.institutions);
+  const rows = api.state.institutions.map((i) => ({
+    inst: i,
+    status: (i.eventAttendance || {})[id] || "No response",
+    contacts: (i.contacts || []).map((c) => ({ ...c, attend: (c.eventAttendance || {})[id] || "No response" })),
+  }));
+  return (
+    <div>
+      <button className="text-sm text-slate-500 hover:text-slate-900 mb-3" onClick={() => setView({ name: "events" })}>← Back to events</button>
+      <div className="card p-6 mb-5">
+        <h1 className="text-2xl font-semibold text-slate-900">{ev.name}</h1>
+        <p className="muted mt-1">{ev.type} · {ev.format} · {ev.date || "date tbd"}</p>
+        {ev.description && <p className="mt-3 text-sm text-slate-700 whitespace-pre-wrap">{ev.description}</p>}
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          <span className="badge bg-emerald-100 text-emerald-800">{counts.confirmed} confirmed</span>
+          <span className="badge bg-sky-100 text-sky-800">{counts.invited} invited</span>
+          <span className="badge bg-rose-100 text-rose-700">{counts.declined} declined</span>
+          <span className="badge bg-slate-100 text-slate-600">{counts.noResp} no response</span>
+          <span className="badge bg-indigo-100 text-indigo-800">{counts.online} online attendees</span>
+          <span className="badge bg-emerald-100 text-emerald-800">{counts.onsite} onsite attendees</span>
+        </div>
+        <div className="mt-4 flex gap-2 flex-wrap">
+          <button className="btn btn-secondary" onClick={() => exportAttendeesXlsx(ev, api.state.institutions)}>Export attendee list (.xlsx)</button>
+          <button className="btn btn-secondary" onClick={() => exportEventInstitutionsXlsx(ev, api.state.institutions, "Confirmed")}>Confirmed institutions (.xlsx)</button>
+          <button className="btn btn-secondary" onClick={() => exportEventInstitutionsXlsx(ev, api.state.institutions, "Invited")}>Invited (.xlsx)</button>
+          <button className="btn btn-secondary" onClick={() => exportEventInstitutionsXlsx(ev, api.state.institutions, "No response")}>Missing / no response (.xlsx)</button>
+        </div>
+      </div>
+
+      <div className="card overflow-x-auto">
+        <table className="w-full">
+          <thead><tr><th>Institution</th><th>Status</th><th>Country</th><th>Attendees</th></tr></thead>
+          <tbody>
+            {rows.map(({ inst, status, contacts }) => (
+              <tr key={inst.id}>
+                <td className="font-medium text-slate-900"><button className="hover:underline" onClick={() => setView({ name: "institution", id: inst.id })}>{inst.name}</button></td>
+                <td>
+                  <select className="select w-auto" value={status} onChange={(e) => api.setInstitutionEventStatus(inst.id, ev.id, e.target.value)}>
+                    {INST_EVENT_STATUS.map((o) => <option key={o}>{o}</option>)}
+                  </select>
+                </td>
+                <td>{inst.country || "—"}</td>
+                <td>
+                  {contacts.length === 0 ? <span className="muted">—</span> : (
+                    <div className="flex flex-col gap-1">
+                      {contacts.map((c) => (
+                        <div key={c.id} className="flex items-center gap-2 text-xs">
+                          <span className="text-slate-700">{c.name}</span>
+                          <select className="select w-32 text-xs" value={c.attend} onChange={(e) => api.setContactEventAttendance(inst.id, c.id, ev.id, e.target.value)}>
+                            {CONTACT_ATTEND.map((o) => <option key={o}>{o}</option>)}
+                          </select>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// ----- Reports view -----
+function ReportsView({ api }) {
+  const { state } = api;
+  const byStatus = countBy(state.institutions, (i) => i.status || "Unknown");
+  const byArea = (() => {
+    const m = {}; state.institutions.forEach((i) => (i.areas || []).forEach((a) => { m[a] = (m[a] || 0) + 1; })); return m;
+  })();
+  const byLead = (() => {
+    const m = {}; TEAM.forEach((t) => m[t] = 0);
+    state.institutions.forEach((i) => { if (i.lead1) m[i.lead1] = (m[i.lead1] || 0) + 1; if (i.lead2) m[i.lead2] = (m[i.lead2] || 0) + 1; });
+    return m;
+  })();
+  const mighty = { Yes: 0, No: 0 };
+  state.institutions.forEach((i) => mighty[(i.mightyNetwork || "No")]++);
+  const pendingTasks = state.institutions.flatMap((i) => (i.tasks || []).filter((t) => t.status === "Open").map((t) => ({ ...t, inst: i })));
+
+  return (
+    <div>
+      <SectionHeader title="Reports & summaries" right={<button className="btn btn-secondary" onClick={() => exportTasksXlsx(pendingTasks)}>Export pending tasks (.xlsx)</button>} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <ChartCard title="Institutions by status" data={byStatus} kind="doughnut" />
+        <ChartCard title="Institutions by research area" data={byArea} kind="bar" />
+        <ChartCard title="Institutions by team lead" data={byLead} kind="bar" />
+        <ChartCard title="Mighty Network registration" data={mighty} kind="doughnut" />
+      </div>
+
+      <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="card p-5">
+          <h3 className="text-sm font-semibold text-slate-900 mb-3">Mighty Network: not yet registered</h3>
+          <SmallList items={state.institutions.filter((i) => (i.mightyNetwork || "No") === "No").map((i) => i.name)} />
+        </div>
+        <div className="card p-5">
+          <h3 className="text-sm font-semibold text-slate-900 mb-3">Not contacted in 60+ days</h3>
+          <SmallList items={state.institutions.filter((i) => {
+            const last = (i.engagementLog || []).map((l) => l.date).filter(Boolean).sort().pop();
+            const d = daysSince(last);
+            return d === null || d >= 60;
+          }).map((i) => `${i.name}${(() => { const last = (i.engagementLog || []).map((l) => l.date).filter(Boolean).sort().pop(); return last ? ` · ${daysSince(last)}d` : " · never"; })()}`)} />
+        </div>
+      </div>
+
+      <div className="mt-6 card p-5">
+        <h3 className="text-sm font-semibold text-slate-900 mb-3">Pending tasks</h3>
+        {pendingTasks.length === 0 ? <p className="muted">No open tasks.</p> : (
+          <table className="w-full">
+            <thead><tr><th>Task</th><th>Institution</th><th>Assignee</th><th>Due</th></tr></thead>
+            <tbody>
+              {pendingTasks.sort((a, b) => (a.dueDate || "9999").localeCompare(b.dueDate || "9999")).map((t) => (
+                <tr key={t.id}><td>{t.description}</td><td>{t.inst.name}</td><td>{t.assignee}</td><td className={isOverdue(t) ? "overdue" : ""}>{t.dueDate || "—"}{isOverdue(t) && " · overdue"}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      <div className="mt-6">
+        <h3 className="text-sm font-semibold text-slate-900 mb-3">Event attendance breakdown</h3>
+        {state.events.length === 0 ? <EmptyState title="No events yet." /> : (
+          <div className="space-y-4">
+            {state.events.map((e) => {
+              const counts = eventCounts(e, state.institutions);
+              return (
+                <div key={e.id} className="card p-4">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div>
+                      <div className="text-sm font-semibold text-slate-900">{e.name}</div>
+                      <div className="muted">{e.date || "tbd"} · {e.format}</div>
+                    </div>
+                    <div className="flex gap-1.5 flex-wrap">
+                      <span className="badge bg-emerald-100 text-emerald-800">{counts.confirmed} confirmed</span>
+                      <span className="badge bg-sky-100 text-sky-800">{counts.invited} invited</span>
+                      <span className="badge bg-rose-100 text-rose-700">{counts.declined} declined</span>
+                      <span className="badge bg-slate-100 text-slate-600">{counts.noResp} no response</span>
+                      <span className="badge bg-indigo-100 text-indigo-800">{counts.online} online</span>
+                      <span className="badge bg-emerald-100 text-emerald-800">{counts.onsite} onsite</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function countBy(arr, fn) {
+  const m = {}; arr.forEach((x) => { const k = fn(x); m[k] = (m[k] || 0) + 1; }); return m;
+}
+function SmallList({ items }) {
+  if (items.length === 0) return <p className="muted">Nothing here. ✓</p>;
+  return <ul className="text-sm text-slate-700 space-y-1 list-disc pl-5">{items.map((s, i) => <li key={i}>{s}</li>)}</ul>;
+}
+
+function ChartCard({ title, data, kind }) {
+  const ref = useRef(null);
+  const inst = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    if (inst.current) inst.current.destroy();
+    const labels = Object.keys(data);
+    const values = Object.values(data);
+    const palette = ["#0f172a", "#475569", "#0ea5e9", "#10b981", "#6366f1", "#f59e0b", "#ef4444", "#a855f7"];
+    inst.current = new Chart(ref.current, {
+      type: kind,
+      data: { labels, datasets: [{ data: values, backgroundColor: kind === "bar" ? palette[2] : palette, borderWidth: 0 }] },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: kind !== "bar", position: "right" } },
+        scales: kind === "bar" ? { y: { beginAtZero: true, ticks: { precision: 0 } } } : {},
+      },
+    });
+    return () => { if (inst.current) inst.current.destroy(); };
+  }, [JSON.stringify(data), kind]);
+  return (
+    <div className="card p-5">
+      <h3 className="text-sm font-semibold text-slate-900 mb-3">{title}</h3>
+      <div style={{ height: 240 }}><canvas ref={ref}></canvas></div>
+    </div>
+  );
+}
+
+// ----- Settings -----
+function SettingsView({ api }) {
+  const fileRef = useRef(null);
+  const xlsxRef = useRef(null);
+  const downloadJson = () => {
+    const blob = new Blob([JSON.stringify(api.state, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = `future-museum-crm-${today()}.json`; a.click();
+    URL.revokeObjectURL(url);
+  };
+  const importJson = (file) => {
+    const r = new FileReader();
+    r.onload = (e) => {
+      try {
+        const parsed = JSON.parse(e.target.result);
+        if (!parsed.institutions || !parsed.events) throw new Error("Missing fields");
+        if (confirm("Replace current data with imported file?")) api.replaceState(parsed);
+      } catch (err) { alert("Import failed: " + err.message); }
+    };
+    r.readAsText(file);
+  };
+  return (
+    <div>
+      <SectionHeader title="Settings" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="card p-5">
+          <h3 className="text-sm font-semibold text-slate-900 mb-2">Multi-user data sync</h3>
+          <p className="text-sm text-slate-600 mb-3">Data lives in this browser's local storage. To share with the team, export the JSON file and have a colleague import it (or commit it to a shared location). For real-time multi-user sync, this app would need a backend service.</p>
+          <div className="flex gap-2 flex-wrap">
+            <button className="btn btn-primary" onClick={downloadJson}>Export JSON backup</button>
+            <button className="btn btn-secondary" onClick={() => fileRef.current.click()}>Import JSON</button>
+            <input ref={fileRef} type="file" accept="application/json" className="hidden" onChange={(e) => { const f = e.target.files[0]; if (f) importJson(f); e.target.value = ""; }} />
+          </div>
+        </div>
+        <div className="card p-5">
+          <h3 className="text-sm font-semibold text-slate-900 mb-2">Excel import</h3>
+          <p className="text-sm text-slate-600 mb-3">Upload an .xlsx file to bulk-add institutions and contacts. Headers recognised: Institution / Name / Organisation, Country, Type, Status, Areas / Research Areas, Lead 1, Lead 2, Mighty Network, Contact Name, Contact Email, Contact Role / Position. Rows sharing the same institution name will merge contacts under that institution.</p>
+          <button className="btn btn-primary" onClick={() => xlsxRef.current.click()}>Choose .xlsx file</button>
+          <input ref={xlsxRef} type="file" accept=".xlsx,.xls" className="hidden" onChange={(e) => { const f = e.target.files[0]; if (f) handleXlsxImport(f, api); e.target.value = ""; }} />
+        </div>
+        <div className="card p-5">
+          <h3 className="text-sm font-semibold text-slate-900 mb-2">Danger zone</h3>
+          <button className="btn btn-danger" onClick={() => { if (confirm("Wipe all data from this browser? Export a backup first if you need it.")) { localStorage.removeItem(STORAGE_KEY); location.reload(); } }}>Reset all data</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ----- Excel import (top-level standalone component used in Institutions view) -----
+function ExcelImportButton({ api }) {
+  const ref = useRef(null);
+  return (
+    <React.Fragment>
+      <button className="btn btn-secondary" onClick={() => ref.current.click()}>Import .xlsx</button>
+      <input ref={ref} type="file" accept=".xlsx,.xls" className="hidden" onChange={(e) => { const f = e.target.files[0]; if (f) handleXlsxImport(f, api); e.target.value = ""; }} />
+    </React.Fragment>
+  );
+}
+
+function handleXlsxImport(file, api) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const wb = XLSX.read(e.target.result, { type: "array" });
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(ws, { defval: "" });
+      const get = (row, ...keys) => {
+        const lower = {};
+        Object.keys(row).forEach((k) => { lower[k.trim().toLowerCase()] = row[k]; });
+        for (const k of keys) { const v = lower[k.trim().toLowerCase()]; if (v !== undefined && v !== "") return v; }
+        return "";
+      };
+      const byName = new Map();
+      api.state.institutions.forEach((i) => byName.set(i.name.toLowerCase(), i));
+      let createdCount = 0, contactCount = 0;
+      rows.forEach((row) => {
+        const name = String(get(row, "Institution", "Name", "Organisation", "Organization")).trim();
+        if (!name) return;
+        let inst = byName.get(name.toLowerCase());
+        const areasRaw = String(get(row, "Areas", "Research Areas") || "");
+        const areas = areasRaw.split(/[,;\/]+/).map((s) => s.trim()).filter((s) => AREAS.includes(s));
+        const mighty = String(get(row, "Mighty Network", "MightyNetwork") || "").toLowerCase().startsWith("y") ? "Yes" : "No";
+        if (!inst) {
+          inst = {
+            id: uid(), name,
+            country: String(get(row, "Country") || "").trim(),
+            type: String(get(row, "Type") || "").trim(),
+            status: STATUSES.includes(String(get(row, "Status")).trim()) ? String(get(row, "Status")).trim() : "Prospect",
+            areas, lead1: String(get(row, "Lead 1", "Lead1") || "").trim() || "",
+            lead2: String(get(row, "Lead 2", "Lead2") || "").trim() || "",
+            mightyNetwork: mighty, notes: String(get(row, "Notes") || ""),
+            contacts: [], engagementLog: [], tasks: [], eventAttendance: {},
+          };
+          byName.set(name.toLowerCase(), inst);
+          createdCount++;
+        }
+        const cName = String(get(row, "Contact Name", "Contact") || "").trim();
+        if (cName) {
+          inst.contacts = inst.contacts || [];
+          inst.contacts.push({
+            id: uid(), name: cName,
+            email: String(get(row, "Contact Email", "Email") || "").trim(),
+            role: String(get(row, "Contact Role", "Contact Position", "Role", "Position") || "").trim(),
+            country: inst.country || "",
+            eventAttendance: {},
+          });
+          contactCount++;
+        }
+      });
+      const merged = Array.from(byName.values());
+      api.replaceState({ ...api.state, institutions: merged });
+      alert(`Imported: ${createdCount} new institutions, ${contactCount} contacts.`);
+    } catch (err) {
+      alert("Import failed: " + err.message);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ----- Excel exports -----
+function downloadSheet(rows, name) {
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+  XLSX.writeFile(wb, `${name}-${today()}.xlsx`);
+}
+function exportInstitutionsXlsx(insts, events) {
+  const eventCols = {};
+  events.forEach((e) => eventCols[`Event: ${e.name}`] = "");
+  const rows = insts.map((i) => {
+    const last = (i.engagementLog || []).map((l) => l.date).filter(Boolean).sort().pop() || "";
+    const evRow = {};
+    events.forEach((e) => { evRow[`Event: ${e.name}`] = (i.eventAttendance || {})[e.id] || "No response"; });
+    return {
+      Institution: i.name,
+      Country: i.country || "",
+      Type: i.type || "",
+      Status: i.status || "",
+      "Research Areas": (i.areas || []).join(", "),
+      "Lead 1": i.lead1 || "", "Lead 2": i.lead2 || "",
+      "Mighty Network": i.mightyNetwork || "No",
+      "Last Contact": last,
+      Notes: i.notes || "",
+      "Last Edited By": i.lastEditedBy || "", "Last Edited At": i.lastEditedAt || "",
+      ...evRow,
+    };
+  });
+  downloadSheet(rows, "future-museum-institutions");
+}
+function exportContactsXlsx(contacts, events) {
+  const rows = contacts.map((c) => {
+    const ev = {}; events.forEach((e) => ev[`Event: ${e.name}`] = (c.eventAttendance || {})[e.id] || "No response");
+    return {
+      Name: c.name, Email: c.email || "", Role: c.role || "",
+      Institution: c._inst.name, Country: c.country || c._inst.country || "",
+      "Research Areas": (c._inst.areas || []).join(", "),
+      ...ev,
+    };
+  });
+  downloadSheet(rows, "future-museum-contacts");
+}
+function exportAttendeesXlsx(event, institutions) {
+  const rows = [];
+  institutions.forEach((i) => {
+    (i.contacts || []).forEach((c) => {
+      const v = (c.eventAttendance || {})[event.id];
+      if (v === "Online" || v === "Onsite") {
+        rows.push({ Name: c.name, Email: c.email || "", Role: c.role || "", Institution: i.name, Country: c.country || i.country || "", Format: v });
+      }
+    });
+  });
+  downloadSheet(rows, `attendees-${event.name.replace(/\s+/g, "-").toLowerCase()}`);
+}
+function exportEventInstitutionsXlsx(event, institutions, status) {
+  const rows = institutions
+    .filter((i) => ((i.eventAttendance || {})[event.id] || "No response") === status)
+    .map((i) => ({ Institution: i.name, Country: i.country || "", Type: i.type || "", "Research Areas": (i.areas || []).join(", "), "Lead 1": i.lead1 || "", "Lead 2": i.lead2 || "" }));
+  downloadSheet(rows, `${status.toLowerCase().replace(/\s+/g, "-")}-${event.name.replace(/\s+/g, "-").toLowerCase()}`);
+}
+function exportTasksXlsx(tasks) {
+  const rows = tasks.map((t) => ({ Task: t.description, Institution: t.inst.name, Assignee: t.assignee, "Due Date": t.dueDate || "", Overdue: isOverdue(t) ? "Yes" : "No" }));
+  downloadSheet(rows, "future-museum-pending-tasks");
+}
+
+// ----- Boot -----
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
