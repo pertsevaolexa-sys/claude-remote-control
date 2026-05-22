@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silva Salisburgensis — Parfümiertes Papier für DomQuartier Salzburg</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+
+<style>
+  :root {
+    --bg: #1F2A22;
+    --bg-deep: #161E18;
+    --ivory: #F4ECD8;
+    --ivory-soft: #E8DFC8;
+    --gold: #C9A961;
+    --gold-soft: #A88D4B;
+    --parchment: #EFE5D0;
+    --parchment-shadow: #D9CCAE;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300;
+    color: var(--ivory);
+    background:
+      radial-gradient(ellipse at top, #2A3A2E 0%, var(--bg) 45%, var(--bg-deep) 100%);
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ----- Language toggle ----- */
+  body.lang-de .lang-en { display: none; }
+  body.lang-en .lang-de { display: none; }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 48px;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.18);
+    position: sticky;
+    top: 0;
+    background: rgba(22, 30, 24, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 10;
+  }
+
+  .wordmark {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+  }
+
+  .lang-toggle button {
+    background: transparent;
+    border: none;
+    color: rgba(244, 236, 216, 0.45);
+    cursor: pointer;
+    padding: 6px 12px;
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+    transition: color 0.2s ease;
+  }
+
+  .lang-toggle button:hover { color: var(--ivory); }
+  .lang-toggle button.active { color: var(--gold); }
+
+  .lang-toggle .sep {
+    color: rgba(201, 169, 97, 0.4);
+    margin: 0 2px;
+  }
+
+  /* ----- Ornamental fleuron ----- */
+  .fleuron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin: 24px 0;
+    color: var(--gold);
+  }
+
+  .fleuron::before,
+  .fleuron::after {
+    content: '';
+    flex: 0 1 120px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-soft), transparent);
+  }
+
+  .fleuron svg { width: 28px; height: 28px; opacity: 0.85; }
+
+  /* ----- Hero ----- */
+  .hero {
+    text-align: center;
+    padding: 88px 32px 56px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .hero .eyebrow {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.35em;
+    font-size: 0.72rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+    line-height: 1.05;
+    color: var(--ivory);
+    margin-bottom: 18px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    color: var(--ivory-soft);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ----- Gallery ----- */
+  .gallery {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 24px 48px 64px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .card {
+    background: var(--parchment);
+    border: 1px solid rgba(201, 169, 97, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      0 1px 0 rgba(244, 236, 216, 0.06) inset,
+      0 22px 50px -28px rgba(0, 0, 0, 0.55),
+      0 6px 18px -10px rgba(31, 42, 34, 0.6);
+  }
+
+  .card::before,
+  .card::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+  }
+
+  .card::before {
+    top: 10px; left: 10px;
+    border-right: none; border-bottom: none;
+  }
+  .card::after {
+    bottom: 10px; right: 10px;
+    border-left: none; border-top: none;
+  }
+
+  model-viewer {
+    width: 100%;
+    height: 420px;
+    background: linear-gradient(180deg, #F4ECD8 0%, #E0D2B0 100%);
+    --poster-color: transparent;
+  }
+
+  .caption {
+    padding: 22px 26px 26px;
+    text-align: center;
+    border-top: 1px solid rgba(201, 169, 97, 0.4);
+    background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-shadow) 100%);
+  }
+
+  .caption .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #3C2E15;
+    margin-bottom: 4px;
+  }
+
+  .caption .name em {
+    font-style: italic;
+    color: var(--gold-soft);
+  }
+
+  .caption .latin {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.28em;
+    color: var(--gold-soft);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .caption .note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #5A4523;
+    line-height: 1.45;
+  }
+
+  /* ----- Concept ----- */
+  .concept {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 32px 96px;
+    text-align: center;
+  }
+
+  .concept h2 {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .concept p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--ivory-soft);
+    font-weight: 400;
+  }
+
+  .concept p em { color: var(--gold); font-style: italic; }
+
+  /* ----- Footer ----- */
+  footer {
+    text-align: center;
+    padding: 28px 32px 48px;
+    border-top: 1px solid rgba(201, 169, 97, 0.18);
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    color: rgba(244, 236, 216, 0.55);
+    text-transform: uppercase;
+  }
+
+  footer .dot { color: var(--gold); margin: 0 14px; }
+
+  /* ----- Responsive ----- */
+  @media (max-width: 980px) {
+    .grid { grid-template-columns: 1fr; gap: 28px; }
+    .topbar { padding: 22px 24px; }
+    .hero { padding: 56px 24px 32px; }
+    .gallery { padding: 12px 24px 48px; }
+    .concept { padding: 24px 24px 72px; }
+    model-viewer { height: 380px; }
+  }
+
+  @media (max-width: 520px) {
+    .wordmark { font-size: 0.78rem; letter-spacing: 0.18em; }
+    .lang-toggle { font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body class="lang-de">
+
+<header class="topbar">
+  <div class="wordmark">Silva Salisburgensis</div>
+  <nav class="lang-toggle" aria-label="Sprache wechseln">
+    <button id="btn-de" class="active" aria-pressed="true">DE</button>
+    <span class="sep">/</span>
+    <button id="btn-en" aria-pressed="false">EN</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">
+    <span class="lang-de">Ein Vorschlag für DomQuartier Salzburg</span>
+    <span class="lang-en">A Proposal for DomQuartier Salzburg</span>
+  </div>
+
+  <h1>
+    <span class="lang-de">Silva <em>Salisburgensis</em></span>
+    <span class="lang-en">Silva <em>Salisburgensis</em></span>
+  </h1>
+
+  <p class="subtitle">
+    <span class="lang-de">Parfümiertes Papier, geboren aus dem Salzburger Forst — eine duftende Andacht für die barocken Säle.</span>
+    <span class="lang-en">Perfumed paper, born of the Salzburg forest — a fragrant devotion for the baroque halls.</span>
+  </p>
+
+  <div class="fleuron" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2 L13 9 L20 10 L13 11 L12 18 L11 11 L4 10 L11 9 Z"/>
+      <circle cx="12" cy="10" r="1.2"/>
+    </svg>
+  </div>
+</section>
+
+<section class="gallery" aria-label="Drei Stücke / The three pieces">
+  <div class="grid">
+
+    <article class="card">
+      <model-viewer
+        src="models/pine-branch-01.glb"
+        alt="Ivory Pine Branch I — 3D model"
+        camera-controls
+        auto-rotate
+        auto-rotate-delay="2000"
+        rotation-per-second="18deg"
+        interaction-prompt="auto"
+        reveal="interaction"
+        loading="lazy"
+        exposure="1.05"
+        shadow-intensity="0.6"
+        shadow-softness="0.9"
+        environment-image="neutral"
+        camera-orbit="35deg 75deg auto"
+        min-camera-orbit="auto 0deg auto"
+        max-camera-orbit="auto 180deg auto">
+      </model-viewer>
+      <div class="caption">
+        <div class="latin">I · Pinus</div>
+        <div class="name">
+          <span class="lang-de"><em>Tannenzweig</em> I</span>
+          <span class="lang-en"><em>Pine Branch</em> I</span>
+        </div>
+        <div class="note">
+          <span class="lang-de">Ein erster Atemzug: Harz, Schnee und Morgenlicht.</span>
+          <span class="lang-en">A first breath: resin, snow, and morning light.</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <model-viewer
+        src="models/pine-branch-02.glb"
+        alt="Ivory Pine Branch II — 3D model"
+        camera-controls
+        auto-rotate
+        auto-rotate-delay="2000"
+        rotation-per-second="18deg"
+        interaction-prompt="auto"
+        reveal="interaction"
+        loading="lazy"
+        exposure="1.05"
+        shadow-intensity="0.6"
+        shadow-softness="0.9"
+        environment-image="neutral"
+        camera-orbit="-35deg 75deg auto"
+        min-camera-orbit="auto 0deg auto"
+        max-camera-orbit="auto 180deg auto">
+      </model-viewer>
+      <div class="caption">
+        <div class="latin">II · Pinus</div>
+        <div class="name">
+          <span class="lang-de"><em>Tannenzweig</em> II</span>
+          <span class="lang-en"><em>Pine Branch</em> II</span>
+        </div>
+        <div class="note">
+          <span class="lang-de">Tiefer Wald: feuchte Rinde, Moos und Schatten.</span>
+          <span class="lang-en">Deep forest: damp bark, moss, and shadow.</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <model-viewer
+        src="models/ivory-sprig.glb"
+        alt="Ivory Sprig — 3D model"
+        camera-controls
+        auto-rotate
+        auto-rotate-delay="2000"
+        rotation-per-second="18deg"
+        interaction-prompt="auto"
+        reveal="interaction"
+        loading="lazy"
+        exposure="1.05"
+        shadow-intensity="0.6"
+        shadow-softness="0.9"
+        environment-image="neutral"
+        camera-orbit="0deg 75deg auto"
+        min-camera-orbit="auto 0deg auto"
+        max-camera-orbit="auto 180deg auto">
+      </model-viewer>
+      <div class="caption">
+        <div class="latin">III · Frons</div>
+        <div class="name">
+          <span class="lang-de"><em>Waldsprose</em></span>
+          <span class="lang-en"><em>Ivory Sprig</em></span>
+        </div>
+        <div class="note">
+          <span class="lang-de">Ein leises Versprechen: Nadeln, Wind und Erinnerung.</span>
+          <span class="lang-en">A quiet promise: needles, wind, and remembrance.</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="concept" aria-label="Konzept / Concept">
+  <div class="fleuron" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2 C 10 8, 6 9, 2 10 C 6 11, 10 12, 12 18 C 14 12, 18 11, 22 10 C 18 9, 14 8, 12 2 Z"/>
+    </svg>
+  </div>
+
+  <h2>
+    <span class="lang-de">Das Konzept</span>
+    <span class="lang-en">The Concept</span>
+  </h2>
+
+  <p class="lang-de">
+    Der <em>Salzburger Forst</em> trägt einen Duft, den keine Karte verzeichnet — Harz, Nebel, das warme Schweigen alter Mauern. <em>Silva Salisburgensis</em> destilliert diesen Atem auf Bütten- und Pergamentpapier: jedes Blatt eine Reliquie, jeder Bogen ein Gebet aus Holz und Licht. Eine duftende Geste für die Säle des DomQuartiers — geschaffen, um zwischen Marmor und Stuck den Wald zu hören.
+  </p>
+
+  <p class="lang-en">
+    The <em>Salzburg forest</em> carries a scent no map records — resin, mist, the warm silence of ancient walls. <em>Silva Salisburgensis</em> distils this breath onto laid and parchment paper: each sheet a relic, each leaf a prayer of wood and light. A fragrant gesture for the halls of DomQuartier — made so that the forest may be heard between marble and stucco.
+  </p>
+</section>
+
+<footer>
+  <span class="lang-de">Vorschlag für DomQuartier Salzburg</span>
+  <span class="lang-en">Proposal for DomQuartier Salzburg</span>
+  <span class="dot">·</span>
+  Silva Salisburgensis
+  <span class="dot">·</span>
+  MMXXVI
+</footer>
+
+<script>
+  (function () {
+    const body = document.body;
+    const btnDe = document.getElementById('btn-de');
+    const btnEn = document.getElementById('btn-en');
+
+    function setLang(lang) {
+      body.classList.remove('lang-de', 'lang-en');
+      body.classList.add('lang-' + lang);
+      document.documentElement.setAttribute('lang', lang);
+      btnDe.classList.toggle('active', lang === 'de');
+      btnEn.classList.toggle('active', lang === 'en');
+      btnDe.setAttribute('aria-pressed', lang === 'de');
+      btnEn.setAttribute('aria-pressed', lang === 'en');
+    }
+
+    btnDe.addEventListener('click', () => setLang('de'));
+    btnEn.addEventListener('click', () => setLang('en'));
+  })();
+</script>
+
+</body>
+</html>
