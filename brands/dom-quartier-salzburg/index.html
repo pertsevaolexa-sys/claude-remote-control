@@ -3,309 +3,482 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Silva Salisburgensis — Parfümiertes Papier für DomQuartier Salzburg</title>
+<title>Salzburg Forests — Perfume Paper Set · DomQuartier Salzburg</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 
 <style>
   :root {
-    --bg: #1F2A22;
-    --bg-deep: #161E18;
-    --ivory: #F4ECD8;
-    --ivory-soft: #E8DFC8;
-    --gold: #C9A961;
-    --gold-soft: #A88D4B;
-    --parchment: #EFE5D0;
-    --parchment-shadow: #D9CCAE;
+    --paper: #E8DDC8;
+    --paper-deep: #DDD0B4;
+    --paper-soft: #F1E9D6;
+    --ink: #2C2A26;
+    --ink-soft: #6B655B;
+    --hairline: rgba(44, 42, 38, 0.18);
+    --hairline-soft: rgba(44, 42, 38, 0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html, body { height: 100%; }
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
     font-weight: 300;
-    color: var(--ivory);
-    background:
-      radial-gradient(ellipse at top, #2A3A2E 0%, var(--bg) 45%, var(--bg-deep) 100%);
+    color: var(--ink);
+    background: var(--paper);
     min-height: 100vh;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ----- Language toggle ----- */
+  /* Language toggle */
   body.lang-de .lang-en { display: none; }
   body.lang-en .lang-de { display: none; }
 
+  /* ----- Top bar ----- */
   .topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 28px 48px;
-    border-bottom: 1px solid rgba(201, 169, 97, 0.18);
+    padding: 28px 56px;
+    border-bottom: 1px solid var(--hairline-soft);
     position: sticky;
     top: 0;
-    background: rgba(22, 30, 24, 0.85);
+    background: rgba(232, 221, 200, 0.92);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 10;
   }
 
-  .wordmark {
-    font-family: 'Cinzel', serif;
-    font-weight: 600;
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+
+  .brand-text {
+    line-height: 1.1;
+  }
+
+  .brand-text .dq {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
     font-size: 0.95rem;
-    letter-spacing: 0.22em;
-    color: var(--gold);
-    text-transform: uppercase;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  .brand-text .city {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
   }
 
   .lang-toggle {
     display: inline-flex;
     align-items: center;
-    gap: 0;
-    font-family: 'Cinzel', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.78rem;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
   .lang-toggle button {
     background: transparent;
     border: none;
-    color: rgba(244, 236, 216, 0.45);
+    color: var(--ink-soft);
     cursor: pointer;
-    padding: 6px 12px;
+    padding: 4px 10px;
     font-family: inherit;
     font-size: inherit;
     letter-spacing: inherit;
+    text-transform: inherit;
     transition: color 0.2s ease;
   }
 
-  .lang-toggle button:hover { color: var(--ivory); }
-  .lang-toggle button.active { color: var(--gold); }
+  .lang-toggle button:hover { color: var(--ink); }
+  .lang-toggle button.active { color: var(--ink); font-weight: 500; }
+  .lang-toggle .sep { color: var(--hairline); }
 
-  .lang-toggle .sep {
-    color: rgba(201, 169, 97, 0.4);
-    margin: 0 2px;
+  /* ----- Hero with stylized box ----- */
+  .hero {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 80px 56px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
   }
 
-  /* ----- Ornamental fleuron ----- */
-  .fleuron {
+  .hero-text .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+
+  .hero-text h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(2.6rem, 5vw, 4.4rem);
+    line-height: 1.05;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .hero-text .lede {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    color: var(--ink);
+    margin-bottom: 28px;
+    letter-spacing: 0.005em;
+  }
+
+  .hero-text .specs {
+    border-top: 1px solid var(--hairline);
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+  }
+
+  .hero-text .specs strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ----- The box (CSS rendering) ----- */
+  .box-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1400px;
+  }
+
+  .box {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    aspect-ratio: 5 / 3;
+    background:
+      linear-gradient(135deg, var(--paper-soft) 0%, var(--paper) 60%, var(--paper-deep) 100%);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.4) inset,
+      0 32px 60px -28px rgba(44, 42, 38, 0.35),
+      0 12px 24px -16px rgba(44, 42, 38, 0.25);
+    transform: rotate(-2deg);
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 2px;
+  }
+
+  .box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        130deg,
+        transparent 0,
+        transparent 2px,
+        rgba(44, 42, 38, 0.02) 2px,
+        rgba(44, 42, 38, 0.02) 3px
+      );
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .box-top {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 18px;
-    margin: 24px 0;
-    color: var(--gold);
+    gap: 10px;
+    z-index: 1;
   }
 
-  .fleuron::before,
-  .fleuron::after {
-    content: '';
-    flex: 0 1 120px;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold-soft), transparent);
+  .box-top .brand-mark { width: 22px; height: 22px; }
+  .box-top .dq { font-size: 0.82rem; }
+  .box-top .city { font-size: 0.66rem; }
+
+  .box-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+    z-index: 1;
   }
 
-  .fleuron svg { width: 28px; height: 28px; opacity: 0.85; }
-
-  /* ----- Hero ----- */
-  .hero {
-    text-align: center;
-    padding: 88px 32px 56px;
-    max-width: 980px;
-    margin: 0 auto;
-  }
-
-  .hero .eyebrow {
-    font-family: 'Cinzel', serif;
-    letter-spacing: 0.35em;
-    font-size: 0.72rem;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 28px;
-  }
-
-  .hero h1 {
+  .box-bottom .name {
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
-    font-size: clamp(2.4rem, 5.5vw, 4.4rem);
-    line-height: 1.05;
-    color: var(--ivory);
-    margin-bottom: 18px;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  .hero .subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
     font-weight: 400;
-    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
-    color: var(--ivory-soft);
-    max-width: 640px;
-    margin: 0 auto;
+    font-size: 1.55rem;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .box-bottom .sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+
+  .box-bottom .count {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.62rem;
+    color: var(--ink);
+    letter-spacing: 0.06em;
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid var(--ink);
+    display: inline-block;
+  }
+
+  .box-bot {
+    color: var(--ink);
+    opacity: 0.7;
+  }
+
+  /* ----- Section divider ----- */
+  .divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 56px;
+    color: var(--ink-soft);
+  }
+
+  .divider .hairline {
+    flex: 1;
+    height: 1px;
+    background: var(--hairline);
+    max-width: 240px;
+  }
+
+  .divider .mark {
+    margin: 0 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
   }
 
   /* ----- Gallery ----- */
+  .gallery-head {
+    text-align: center;
+    padding: 24px 56px 32px;
+  }
+
+  .gallery-head .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+
+  .gallery-head h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+    color: var(--ink);
+  }
+
   .gallery {
-    max-width: 1320px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 24px 48px 64px;
+    padding: 24px 56px 64px;
   }
 
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    gap: 28px;
   }
 
   .card {
-    background: var(--parchment);
-    border: 1px solid rgba(201, 169, 97, 0.5);
-    border-radius: 4px;
+    background: var(--paper-soft);
+    border: 1px solid var(--hairline);
+    border-radius: 2px;
     overflow: hidden;
-    position: relative;
-    box-shadow:
-      0 1px 0 rgba(244, 236, 216, 0.06) inset,
-      0 22px 50px -28px rgba(0, 0, 0, 0.55),
-      0 6px 18px -10px rgba(31, 42, 34, 0.6);
-  }
-
-  .card::before,
-  .card::after {
-    content: '';
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    border: 1px solid var(--gold);
-    pointer-events: none;
-  }
-
-  .card::before {
-    top: 10px; left: 10px;
-    border-right: none; border-bottom: none;
-  }
-  .card::after {
-    bottom: 10px; right: 10px;
-    border-left: none; border-top: none;
+    box-shadow: 0 18px 36px -28px rgba(44, 42, 38, 0.25);
   }
 
   model-viewer {
     width: 100%;
-    height: 420px;
-    background: linear-gradient(180deg, #F4ECD8 0%, #E0D2B0 100%);
-    --poster-color: transparent;
+    height: 440px;
+    background: linear-gradient(180deg, var(--paper-soft) 0%, var(--paper) 100%);
   }
 
   .caption {
-    padding: 22px 26px 26px;
+    padding: 22px 28px 26px;
     text-align: center;
-    border-top: 1px solid rgba(201, 169, 97, 0.4);
-    background: linear-gradient(180deg, var(--parchment) 0%, var(--parchment-shadow) 100%);
+    border-top: 1px solid var(--hairline-soft);
+    background: var(--paper-soft);
+  }
+
+  .caption .index {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
   }
 
   .caption .name {
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 1.5rem;
-    color: #3C2E15;
-    margin-bottom: 4px;
-  }
-
-  .caption .name em {
-    font-style: italic;
-    color: var(--gold-soft);
-  }
-
-  .caption .latin {
-    font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.28em;
-    color: var(--gold-soft);
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.15;
   }
 
   .caption .note {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 1rem;
-    color: #5A4523;
+    font-weight: 300;
+    font-size: 0.98rem;
+    color: var(--ink-soft);
     line-height: 1.45;
   }
 
   /* ----- Concept ----- */
   .concept {
-    max-width: 760px;
+    max-width: 720px;
     margin: 0 auto;
     padding: 32px 32px 96px;
     text-align: center;
   }
 
-  .concept h2 {
-    font-family: 'Cinzel', serif;
-    font-weight: 500;
-    font-size: 0.78rem;
-    letter-spacing: 0.35em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 28px;
-  }
-
   .concept p {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    line-height: 1.7;
-    color: var(--ivory-soft);
-    font-weight: 400;
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.75;
+    color: var(--ink);
   }
 
-  .concept p em { color: var(--gold); font-style: italic; }
+  .concept p em {
+    font-style: italic;
+    color: var(--ink-soft);
+  }
 
   /* ----- Footer ----- */
   footer {
     text-align: center;
     padding: 28px 32px 48px;
-    border-top: 1px solid rgba(201, 169, 97, 0.18);
-    font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.28em;
-    color: rgba(244, 236, 216, 0.55);
+    border-top: 1px solid var(--hairline-soft);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
     text-transform: uppercase;
   }
 
-  footer .dot { color: var(--gold); margin: 0 14px; }
+  footer .dot { margin: 0 12px; color: var(--hairline); }
 
   /* ----- Responsive ----- */
   @media (max-width: 980px) {
-    .grid { grid-template-columns: 1fr; gap: 28px; }
-    .topbar { padding: 22px 24px; }
-    .hero { padding: 56px 24px 32px; }
-    .gallery { padding: 12px 24px 48px; }
-    .concept { padding: 24px 24px 72px; }
+    .topbar { padding: 22px 28px; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 48px 28px 32px;
+      gap: 40px;
+    }
+    .gallery { padding: 12px 28px 48px; }
+    .gallery-head { padding: 16px 28px 24px; }
+    .grid { grid-template-columns: 1fr; gap: 24px; }
+    .concept { padding: 24px 28px 72px; }
     model-viewer { height: 380px; }
+    .box { max-width: 360px; }
   }
 
   @media (max-width: 520px) {
-    .wordmark { font-size: 0.78rem; letter-spacing: 0.18em; }
-    .lang-toggle { font-size: 0.7rem; }
+    .hero-text h1 { font-size: 2.4rem; }
+    .box-bottom .name { font-size: 1.3rem; }
   }
 </style>
 </head>
 <body class="lang-de">
 
+<!-- Reusable SVG brand mark (stylized) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="dq-mark" viewBox="0 0 32 32">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+        <path d="M3 10 L7 6"/>
+        <path d="M22 6 L26 10"/>
+        <path d="M3 22 L7 26"/>
+        <path d="M22 26 L26 22"/>
+      </g>
+      <path d="M13 13 L19 19 M19 13 L13 19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>
+    </symbol>
+
+    <symbol id="sprig" viewBox="0 0 200 240">
+      <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Main stem -->
+        <path d="M100 230 Q 98 180 95 130 Q 92 80 88 30"/>
+        <!-- Leaves left -->
+        <path d="M95 195 Q 70 188 55 175 Q 70 184 90 190"/>
+        <path d="M93 175 Q 65 170 48 158 Q 65 168 88 172"/>
+        <path d="M91 150 Q 60 145 42 130 Q 62 142 86 148"/>
+        <path d="M90 125 Q 58 120 38 105 Q 60 118 85 123"/>
+        <path d="M89 100 Q 56 95 35 78 Q 58 92 84 98"/>
+        <path d="M88 75 Q 54 68 32 50 Q 56 66 83 73"/>
+        <!-- Leaves right -->
+        <path d="M101 205 Q 128 196 142 184 Q 124 196 106 200"/>
+        <path d="M99 182 Q 130 175 148 160 Q 128 174 104 178"/>
+        <path d="M97 158 Q 132 150 150 132 Q 130 148 102 154"/>
+        <path d="M95 132 Q 132 124 152 105 Q 130 122 100 128"/>
+        <path d="M93 105 Q 130 96 152 76 Q 128 94 98 100"/>
+        <!-- Pine cone -->
+        <ellipse cx="118" cy="208" rx="9" ry="14"/>
+        <path d="M110 200 L126 200 M110 206 L126 206 M111 212 L125 212"/>
+        <path d="M118 194 L118 188"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
 <header class="topbar">
-  <div class="wordmark">Silva Salisburgensis</div>
-  <nav class="lang-toggle" aria-label="Sprache wechseln">
+  <div class="brand">
+    <svg class="brand-mark" aria-hidden="true"><use href="#dq-mark"/></svg>
+    <div class="brand-text">
+      <span class="dq">DomQuartier</span>
+      <span class="city">Salzburg</span>
+    </div>
+  </div>
+  <nav class="lang-toggle" aria-label="Language">
     <button id="btn-de" class="active" aria-pressed="true">DE</button>
     <span class="sep">/</span>
     <button id="btn-en" aria-pressed="false">EN</button>
@@ -313,30 +486,96 @@
 </header>
 
 <section class="hero">
-  <div class="eyebrow">
-    <span class="lang-de">Ein Vorschlag für DomQuartier Salzburg</span>
-    <span class="lang-en">A Proposal for DomQuartier Salzburg</span>
+
+  <div class="hero-text">
+    <div class="eyebrow">
+      <span class="lang-de">Ein Vorschlag · Edition 2026</span>
+      <span class="lang-en">A Proposal · Edition 2026</span>
+    </div>
+
+    <h1>
+      <span class="lang-de">Salzburger Wälder</span>
+      <span class="lang-en">Salzburg Forests</span>
+    </h1>
+
+    <p class="lede">
+      <span class="lang-de">
+        Ein Parfümpapier-Set für DomQuartier Salzburg. Fünf duftende Bögen, gepresst aus Tannenharz, Moos und der stillen Luft des Salzburger Forsts — eine Erinnerung, die zwischen Marmor und Stuck weiterklingt.
+      </span>
+      <span class="lang-en">
+        A perfume paper set for DomQuartier Salzburg. Five scented sheets pressed from pine resin, moss, and the quiet air of the Salzburg forest — a memory that lingers between marble and stucco.
+      </span>
+    </p>
+
+    <div class="specs">
+      <div>
+        <span class="lang-de">Konzept</span>
+        <span class="lang-en">Concept</span>
+        &nbsp;<strong>
+          <span class="lang-de">Parfümpapier-Set</span>
+          <span class="lang-en">perfume paper set</span>
+        </strong>
+      </div>
+      <div>
+        <span class="lang-de">Inhalt</span>
+        <span class="lang-en">Contents</span>
+        &nbsp;<strong>
+          <span class="lang-de">5 duftende Bögen</span>
+          <span class="lang-en">5 scented papers</span>
+        </strong>
+      </div>
+      <div>
+        <span class="lang-de">Für</span>
+        <span class="lang-en">For</span>
+        &nbsp;<strong>DomQuartier Salzburg</strong>
+      </div>
+    </div>
   </div>
 
-  <h1>
-    <span class="lang-de">Silva <em>Salisburgensis</em></span>
-    <span class="lang-en">Silva <em>Salisburgensis</em></span>
-  </h1>
+  <div class="box-wrap" aria-label="Salzburg Forests box mock-up">
+    <div class="box">
+      <div class="box-top brand">
+        <svg class="brand-mark" aria-hidden="true"><use href="#dq-mark"/></svg>
+        <div class="brand-text">
+          <span class="dq">DomQuartier</span>
+          <span class="city">Salzburg</span>
+        </div>
+      </div>
 
-  <p class="subtitle">
-    <span class="lang-de">Parfümiertes Papier, geboren aus dem Salzburger Forst — eine duftende Andacht für die barocken Säle.</span>
-    <span class="lang-en">Perfumed paper, born of the Salzburg forest — a fragrant devotion for the baroque halls.</span>
-  </p>
-
-  <div class="fleuron" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2 L13 9 L20 10 L13 11 L12 18 L11 11 L4 10 L11 9 Z"/>
-      <circle cx="12" cy="10" r="1.2"/>
-    </svg>
+      <div class="box-bottom">
+        <div>
+          <div class="name">
+            <span class="lang-de">Salzburger Wälder</span>
+            <span class="lang-en">Salzburg Forests</span>
+          </div>
+          <div class="sub">
+            <span class="lang-de">parfümpapier-set</span>
+            <span class="lang-en">perfume paper set</span>
+          </div>
+          <div class="count">
+            <span class="lang-de">5 duftende Papiere</span>
+            <span class="lang-en">5 scented papers</span>
+          </div>
+        </div>
+        <svg class="box-bot" width="74" height="100" aria-hidden="true">
+          <use href="#sprig"/>
+        </svg>
+      </div>
+    </div>
   </div>
+
 </section>
 
-<section class="gallery" aria-label="Drei Stücke / The three pieces">
+<div class="divider">
+  <span class="hairline"></span>
+  <span class="mark">
+    <span class="lang-de">Die drei Stücke</span>
+    <span class="lang-en">The three pieces</span>
+  </span>
+  <span class="hairline"></span>
+</div>
+
+<section class="gallery" aria-label="Three pieces">
   <div class="grid">
 
     <article class="card">
@@ -345,24 +584,21 @@
         alt="Ivory Pine Branch I — 3D model"
         camera-controls
         auto-rotate
-        auto-rotate-delay="2000"
+        auto-rotate-delay="1500"
         rotation-per-second="18deg"
         interaction-prompt="auto"
-        reveal="interaction"
         loading="lazy"
         exposure="1.05"
-        shadow-intensity="0.6"
+        shadow-intensity="0.55"
         shadow-softness="0.9"
         environment-image="neutral"
-        camera-orbit="35deg 75deg auto"
-        min-camera-orbit="auto 0deg auto"
-        max-camera-orbit="auto 180deg auto">
+        camera-orbit="35deg 75deg auto">
       </model-viewer>
       <div class="caption">
-        <div class="latin">I · Pinus</div>
+        <div class="index">I · Pinus</div>
         <div class="name">
-          <span class="lang-de"><em>Tannenzweig</em> I</span>
-          <span class="lang-en"><em>Pine Branch</em> I</span>
+          <span class="lang-de">Tannenzweig I</span>
+          <span class="lang-en">Pine Branch I</span>
         </div>
         <div class="note">
           <span class="lang-de">Ein erster Atemzug: Harz, Schnee und Morgenlicht.</span>
@@ -377,24 +613,21 @@
         alt="Ivory Pine Branch II — 3D model"
         camera-controls
         auto-rotate
-        auto-rotate-delay="2000"
+        auto-rotate-delay="1500"
         rotation-per-second="18deg"
         interaction-prompt="auto"
-        reveal="interaction"
         loading="lazy"
         exposure="1.05"
-        shadow-intensity="0.6"
+        shadow-intensity="0.55"
         shadow-softness="0.9"
         environment-image="neutral"
-        camera-orbit="-35deg 75deg auto"
-        min-camera-orbit="auto 0deg auto"
-        max-camera-orbit="auto 180deg auto">
+        camera-orbit="-35deg 75deg auto">
       </model-viewer>
       <div class="caption">
-        <div class="latin">II · Pinus</div>
+        <div class="index">II · Pinus</div>
         <div class="name">
-          <span class="lang-de"><em>Tannenzweig</em> II</span>
-          <span class="lang-en"><em>Pine Branch</em> II</span>
+          <span class="lang-de">Tannenzweig II</span>
+          <span class="lang-en">Pine Branch II</span>
         </div>
         <div class="note">
           <span class="lang-de">Tiefer Wald: feuchte Rinde, Moos und Schatten.</span>
@@ -409,24 +642,21 @@
         alt="Ivory Sprig — 3D model"
         camera-controls
         auto-rotate
-        auto-rotate-delay="2000"
+        auto-rotate-delay="1500"
         rotation-per-second="18deg"
         interaction-prompt="auto"
-        reveal="interaction"
         loading="lazy"
         exposure="1.05"
-        shadow-intensity="0.6"
+        shadow-intensity="0.55"
         shadow-softness="0.9"
         environment-image="neutral"
-        camera-orbit="0deg 75deg auto"
-        min-camera-orbit="auto 0deg auto"
-        max-camera-orbit="auto 180deg auto">
+        camera-orbit="0deg 75deg auto">
       </model-viewer>
       <div class="caption">
-        <div class="latin">III · Frons</div>
+        <div class="index">III · Frons</div>
         <div class="name">
-          <span class="lang-de"><em>Waldsprose</em></span>
-          <span class="lang-en"><em>Ivory Sprig</em></span>
+          <span class="lang-de">Waldsprose</span>
+          <span class="lang-en">Ivory Sprig</span>
         </div>
         <div class="note">
           <span class="lang-de">Ein leises Versprechen: Nadeln, Wind und Erinnerung.</span>
@@ -438,32 +668,22 @@
   </div>
 </section>
 
-<section class="concept" aria-label="Konzept / Concept">
-  <div class="fleuron" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2 C 10 8, 6 9, 2 10 C 6 11, 10 12, 12 18 C 14 12, 18 11, 22 10 C 18 9, 14 8, 12 2 Z"/>
-    </svg>
-  </div>
-
-  <h2>
-    <span class="lang-de">Das Konzept</span>
-    <span class="lang-en">The Concept</span>
-  </h2>
-
+<section class="concept" aria-label="Concept">
   <p class="lang-de">
-    Der <em>Salzburger Forst</em> trägt einen Duft, den keine Karte verzeichnet — Harz, Nebel, das warme Schweigen alter Mauern. <em>Silva Salisburgensis</em> destilliert diesen Atem auf Bütten- und Pergamentpapier: jedes Blatt eine Reliquie, jeder Bogen ein Gebet aus Holz und Licht. Eine duftende Geste für die Säle des DomQuartiers — geschaffen, um zwischen Marmor und Stuck den Wald zu hören.
+    Der <em>Salzburger Forst</em> trägt einen Duft, den keine Karte verzeichnet — Harz, Nebel, das warme Schweigen alter Mauern. <em>Salzburger Wälder</em> destilliert diesen Atem auf fünf Bögen feinen Papiers: jedes ein Blatt aus Holz, Licht und Erinnerung. Eine duftende Geste für die Säle des DomQuartiers, geschaffen, um zwischen Marmor und Stuck den Wald zu hören.
   </p>
-
   <p class="lang-en">
-    The <em>Salzburg forest</em> carries a scent no map records — resin, mist, the warm silence of ancient walls. <em>Silva Salisburgensis</em> distils this breath onto laid and parchment paper: each sheet a relic, each leaf a prayer of wood and light. A fragrant gesture for the halls of DomQuartier — made so that the forest may be heard between marble and stucco.
+    The <em>Salzburg forest</em> carries a scent no map records — resin, mist, the warm silence of ancient walls. <em>Salzburg Forests</em> distils this breath onto five sheets of fine paper: each a leaf of wood, light, and remembrance. A fragrant gesture for the halls of DomQuartier — made so that the forest may be heard between marble and stucco.
   </p>
 </section>
 
 <footer>
-  <span class="lang-de">Vorschlag für DomQuartier Salzburg</span>
-  <span class="lang-en">Proposal for DomQuartier Salzburg</span>
+  <span class="lang-de">Vorschlag</span>
+  <span class="lang-en">Proposal</span>
   <span class="dot">·</span>
-  Silva Salisburgensis
+  DomQuartier Salzburg
+  <span class="dot">·</span>
+  Salzburg Forests
   <span class="dot">·</span>
   MMXXVI
 </footer>
