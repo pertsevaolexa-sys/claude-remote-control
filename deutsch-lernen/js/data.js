@@ -1,0 +1,599 @@
+/* ============================================================
+   Deutsch A2 Bootcamp — Inhalte (Content)
+   Alle Lektionen, Grammatik, Vokabeln und Übungen.
+   Niveau: A2  |  Struktur nach deinem Prüfungsstoff.
+   ============================================================
+   Übungstypen:
+   - mc    : Multiple Choice  { t:'mc', q, options:[], answer:idx, ex }
+   - fill  : Lücken           { t:'fill', q:'... ___ ...', answers:[[...]], hint, ex }
+   - order : Satz bauen       { t:'order', q, words:[], answer:'...' }
+   - match : Zuordnen         { t:'match', q, pairs:[[a,b],...] }
+   ============================================================ */
+
+const COURSE = {
+  modules: [
+    { id: 'm1', num: 1, title: 'Modul 1', subtitle: 'Vergangenheit · Arbeit · Wohnen', emoji: '🏠', lessons: ['l1', 'l2', 'l3'] },
+    { id: 'm2', num: 2, title: 'Modul 2', subtitle: 'Argumente · Termine · Vorschläge', emoji: '🗓️', lessons: ['l4', 'l5', 'l6'] },
+    { id: 'm3', num: 3, title: 'Modul 3', subtitle: 'Meinung · Sport · Wohnung einrichten', emoji: '⚽', lessons: ['l7', 'l8', 'l9'] },
+    { id: 'mB', num: 4, title: 'Bonus', subtitle: 'Höflich fragen', emoji: '🙋', lessons: ['l12'] },
+  ],
+
+  lessons: {
+
+    /* ===================== LEKTION 1 ===================== */
+    l1: {
+      module: 'm1', number: 1, emoji: '🕰️',
+      title: 'Kindheit & Vergangenheit',
+      theme: 'Aktivitäten in der Kindheit und Vergangenheit',
+      grammarTitle: 'Perfekt + Temporale Adjektive',
+      grammar: [
+        { t: 'intro', html: 'Mit dem <b>Perfekt</b> sprichst du über die <b>Vergangenheit</b> (was du gemacht hast). Du brauchst <b>2 Teile</b>: ein Hilfsverb (<b>haben</b> oder <b>sein</b>) + das <b>Partizip&nbsp;II</b> ganz am Ende.' },
+        { t: 'rule', title: 'Die Formel', html: 'Subjekt + <b>haben/sein</b> (Position 2) + … + <b>Partizip II</b> (Ende)<br><span class="muted">Ich <b>habe</b> gestern Fußball <b>gespielt</b>. · Wir <b>sind</b> ins Kino <b>gegangen</b>.</span>' },
+        { t: 'rule', title: 'haben oder sein?', html: '<b>sein</b> bei: Bewegung von A→B (<i>gehen, fahren, kommen, fliegen, laufen, reisen</i>) und Zustandswechsel (<i>aufstehen, einschlafen, aufwachen, werden, passieren, bleiben, sein</i>).<br><b>haben</b>: fast alle anderen Verben.' },
+        {
+          t: 'table', head: ['Verb-Typ', 'Partizip II', 'Beispiel'],
+          rows: [
+            ['Regelmäßig (schwach)', 'ge + Stamm + (e)t', 'machen → <b>gemacht</b>, spielen → <b>gespielt</b>, arbeiten → <b>gearbeitet</b>'],
+            ['Unregelmäßig (stark)', 'ge + … + en (oft Vokalwechsel)', 'gehen → <b>gegangen</b>, essen → <b>gegessen</b>, trinken → <b>getrunken</b>'],
+            ['Verben auf -ieren', '(kein ge-!) … + t', 'studieren → <b>studiert</b>, telefonieren → <b>telefoniert</b>, fotografieren → <b>fotografiert</b>'],
+            ['Trennbar', 'ge- in der Mitte', 'einkaufen → <b>eingekauft</b>, aufstehen → <b>aufgestanden</b>, anrufen → <b>angerufen</b>'],
+            ['Nicht-trennbar (be-,ver-,er-…)', 'kein ge-', 'besuchen → <b>besucht</b>, verstehen → <b>verstanden</b>, bekommen → <b>bekommen</b>'],
+          ]
+        },
+        { t: 'tip', html: 'Verben auf <b>-ieren</b> bekommen <b>NIE ein „ge“</b>. studieren → studiert ✅ (nicht: gestudiert ❌).' },
+        {
+          t: 'examples', items: [
+            { de: 'Als Kind habe ich oft mit Lego gespielt.', en: 'As a child I often played with Lego.' },
+            { de: 'Ich bin früher auf Bäume geklettert.', en: 'I used to climb trees.' },
+            { de: 'Wir haben jeden Sommer die Großeltern besucht.', en: 'Every summer we visited our grandparents.' },
+            { de: 'Meine Schwester ist mit sechs Jahren schwimmen gegangen.', en: 'My sister went swimming at age six.' },
+          ]
+        },
+        { t: 'intro', html: '<b>Temporale Adjektive</b> sagen <b>WANN</b> etwas (war/ist/sein wird). Die Zeitangabe steht meistens im <b>Akkusativ</b>.' },
+        {
+          t: 'table', head: ['Wort', 'der/den', 'das', 'die / Plural'],
+          rows: [
+            ['letzt– (last)', 'letzten Monat', 'letztes Jahr', 'letzte Woche'],
+            ['nächst– (next)', 'nächsten Montag', 'nächstes Wochenende', 'nächste Woche'],
+            ['kommend– (coming)', 'kommenden Freitag', 'kommendes Jahr', 'kommende Woche'],
+            ['jed– (every)', 'jeden Tag', 'jedes Jahr', 'jede Woche'],
+            ['dies– (this)', 'diesen Monat', 'dieses Jahr', 'diese Woche'],
+          ]
+        },
+        { t: 'tip', html: '<b>der</b>-Wörter im Akkusativ → Endung <b>-en</b>: jed<b>en</b> Tag, letzt<b>en</b> Montag, nächst<b>en</b> Monat.' },
+      ],
+      vocab: [
+        { de: 'die Kindheit', en: 'childhood', ex: 'Meine Kindheit war schön.' },
+        { de: 'früher', en: 'in the past / used to', ex: 'Früher hatte ich lange Haare.' },
+        { de: 'damals', en: 'back then', ex: 'Damals war alles anders.' },
+        { de: 'auf Bäume klettern', en: 'to climb trees', ex: 'Wir sind auf Bäume geklettert.' },
+        { de: 'Verstecken spielen', en: 'to play hide and seek', ex: 'Als Kind habe ich Verstecken gespielt.' },
+        { de: 'die Schaukel', en: 'the swing', ex: 'Ich war gern auf der Schaukel.' },
+        { de: 'das Spielzeug', en: 'the toy', ex: 'Mein Spielzeug war ein Teddybär.' },
+        { de: 'die Großeltern', en: 'grandparents', ex: 'Wir haben die Großeltern besucht.' },
+        { de: 'erlauben', en: 'to allow', ex: 'Meine Eltern haben es nicht erlaubt.' },
+        { de: 'verboten', en: 'forbidden', ex: 'Süßigkeiten waren oft verboten.' },
+        { de: 'sich erinnern an', en: 'to remember', ex: 'Ich erinnere mich an meine Schule.' },
+        { de: 'aufwachsen', en: 'to grow up', ex: 'Ich bin in Wien aufgewachsen.' },
+      ],
+      exercises: [
+        { t: 'mc', q: 'Welches Verb bildet das Perfekt mit „sein“?', options: ['spielen', 'fahren', 'kaufen', 'machen'], answer: 1, ex: '„fahren“ ist Bewegung von A nach B → Ich bin gefahren.' },
+        { t: 'mc', q: 'Wie heißt das Partizip II von „telefonieren“?', options: ['getelefoniert', 'telefoniert', 'telefoniren', 'getelefonyt'], answer: 1, ex: '-ieren-Verben bekommen KEIN ge- → telefoniert.' },
+        { t: 'fill', q: 'Gestern ___ ich einen Film ___ . (sehen)', answers: [['habe'], ['gesehen']], hint: 'haben + Partizip II von sehen (unregelmäßig)', ex: 'sehen → gesehen, mit haben: Ich habe … gesehen.' },
+        { t: 'fill', q: 'Wir ___ am Wochenende nach Hamburg ___ . (fahren)', answers: [['sind'], ['gefahren']], hint: 'Bewegung → sein', ex: 'fahren = Bewegung → Wir sind … gefahren.' },
+        { t: 'order', q: 'Bau den Satz: (Kindheit, Fußball gespielt)', words: ['Als', 'Kind', 'habe', 'ich', 'oft', 'Fußball', 'gespielt'], answer: 'Als Kind habe ich oft Fußball gespielt' },
+        { t: 'fill', q: 'Zeitangabe: Ich gehe ___ Montag zum Sport. (jed-)', answers: [['jeden']], hint: 'der Montag → Akkusativ', ex: 'jeden Montag (der-Wort, Akkusativ -en).' },
+        { t: 'match', q: 'Ordne Infinitiv und Partizip II zu:', pairs: [['essen', 'gegessen'], ['kaufen', 'gekauft'], ['studieren', 'studiert'], ['aufstehen', 'aufgestanden']] },
+      ],
+    },
+
+    /* ===================== LEKTION 2 ===================== */
+    l2: {
+      module: 'm1', number: 2, emoji: '💼',
+      title: 'Berufe & Stress am Arbeitsplatz',
+      theme: 'Berufe und Tätigkeiten, Stress am Arbeitsplatz',
+      grammarTitle: 'weil-Sätze (Grund)',
+      grammar: [
+        { t: 'intro', html: '<b>weil</b> = „because“. Es gibt einen <b>Grund</b> an. Achtung: Im weil-Satz geht das <b>konjugierte Verb ganz ans Ende</b>!' },
+        { t: 'rule', title: 'Wortstellung', html: 'Hauptsatz<b>,</b> weil + Subjekt + … + <b>Verb (Ende)</b>.<br><span class="muted">Ich bin müde, <b>weil</b> ich viel <b>arbeite</b>.</span>' },
+        {
+          t: 'examples', items: [
+            { de: 'Ich bin gestresst, weil ich zu viele Termine habe.', en: "I'm stressed because I have too many appointments." },
+            { de: 'Sie macht Überstunden, weil ihr Chef es will.', en: 'She works overtime because her boss wants it.' },
+            { de: 'Ich bin müde, weil ich gestern lange gearbeitet habe.', en: 'I am tired because I worked late yesterday.' },
+            { de: 'Er liebt seinen Job, weil er gern mit Menschen arbeitet.', en: 'He loves his job because he likes working with people.' },
+          ]
+        },
+        { t: 'tip', html: 'Im Perfekt steht das <b>Hilfsverb</b> (habe/ist) ganz am Ende: „…, weil ich viel gearbeitet <b>habe</b>.“' },
+        { t: 'rule', title: 'Frage mit „Warum?“', html: '<b>Warum</b> bist du müde? → … <b>weil</b> ich viel gearbeitet habe.<br>weil beantwortet immer die Frage <b>Warum?</b>' },
+      ],
+      vocab: [
+        { de: 'der Beruf', en: 'profession', ex: 'Was bist du von Beruf?' },
+        { de: 'die Tätigkeit', en: 'activity / task', ex: 'Meine Tätigkeit ist anstrengend.' },
+        { de: 'der/die Angestellte', en: 'employee', ex: 'Er ist Angestellter bei einer Firma.' },
+        { de: 'der Chef / die Chefin', en: 'boss', ex: 'Mein Chef ist sehr nett.' },
+        { de: 'der Kollege / die Kollegin', en: 'colleague', ex: 'Meine Kollegin hilft mir oft.' },
+        { de: 'die Überstunden (Pl.)', en: 'overtime', ex: 'Ich mache viele Überstunden.' },
+        { de: 'der Termin', en: 'appointment', ex: 'Ich habe heute drei Termine.' },
+        { de: 'die Besprechung', en: 'meeting', ex: 'Die Besprechung dauert eine Stunde.' },
+        { de: 'der Druck', en: 'pressure', ex: 'Der Druck im Job ist groß.' },
+        { de: 'die Pause', en: 'break', ex: 'Ich mache jetzt eine Pause.' },
+        { de: 'der Feierabend', en: 'end of work day', ex: 'Schönen Feierabend!' },
+        { de: 'gestresst', en: 'stressed', ex: 'Ich bin total gestresst.' },
+        { de: 'anstrengend', en: 'exhausting', ex: 'Die Arbeit ist anstrengend.' },
+        { de: 'verdienen', en: 'to earn', ex: 'Sie verdient gutes Geld.' },
+      ],
+      exercises: [
+        { t: 'mc', q: 'Wo steht das Verb im weil-Satz? „Ich bleibe zu Hause, weil ich krank ___.“', options: ['bin (am Ende)', 'bin (nach „ich“)', 'gar nicht', 'am Anfang'], answer: 0, ex: 'Im weil-Satz steht das Verb ganz am Ende: …, weil ich krank bin.' },
+        { t: 'order', q: 'Bau den weil-Satz:', words: ['Ich', 'bin', 'müde,', 'weil', 'ich', 'viel', 'gearbeitet', 'habe'], answer: 'Ich bin müde, weil ich viel gearbeitet habe' },
+        { t: 'fill', q: 'Sie ist gestresst, ___ sie zu viele Termine ___ . (weil / haben)', answers: [['weil'], ['hat']], hint: 'Verb ans Ende', ex: '…, weil sie zu viele Termine hat.' },
+        { t: 'order', q: 'Antworte auf „Warum lernst du Deutsch?“', words: ['Ich', 'lerne', 'Deutsch,', 'weil', 'ich', 'in', 'Österreich', 'lebe'], answer: 'Ich lerne Deutsch, weil ich in Österreich lebe' },
+        { t: 'mc', q: 'Was bedeutet „Überstunden“?', options: ['Pausen', 'Extra-Arbeitsstunden', 'Urlaub', 'Mittagessen'], answer: 1, ex: 'Überstunden = zusätzliche Arbeitsstunden.' },
+        { t: 'fill', q: 'Verbinde: „Ich gehe nach Hause. Ich bin müde.“ → Ich gehe nach Hause, ___ ich müde ___ .', answers: [['weil'], ['bin']], hint: 'weil … Verb am Ende', ex: 'Ich gehe nach Hause, weil ich müde bin.' },
+      ],
+    },
+
+    /* ===================== LEKTION 3 ===================== */
+    l3: {
+      module: 'm1', number: 3, emoji: '📦',
+      title: 'Umzug · Hamburg & Wien',
+      theme: 'Umzug in eine andere Wohnung oder Stadt',
+      grammarTitle: 'Possessiv-Artikel (Nom · Akk · Dativ)',
+      grammar: [
+        { t: 'intro', html: '<b>Possessiv-Artikel</b> zeigen, <b>wem etwas gehört</b>: mein, dein, sein, ihr, unser, euer, ihr, Ihr. Die Endung hängt vom <b>Kasus</b> und vom <b>Nomen</b> ab (wie ein/kein).' },
+        {
+          t: 'table', head: ['Person', 'Possessiv'],
+          rows: [['ich', 'mein'], ['du', 'dein'], ['er / es', 'sein'], ['sie', 'ihr'], ['wir', 'unser'], ['ihr', 'euer (→ eure)'], ['sie (Pl.)', 'ihr'], ['Sie (höflich)', 'Ihr']]
+        },
+        {
+          t: 'table', head: ['Kasus', 'der (m)', 'das (n)', 'die (f)', 'die (Pl.)'],
+          rows: [
+            ['Nominativ', 'mein Bruder', 'mein Kind', 'meine Wohnung', 'meine Eltern'],
+            ['Akkusativ', 'mein<b>en</b> Bruder', 'mein Kind', 'meine Wohnung', 'meine Eltern'],
+            ['Dativ', 'mein<b>em</b> Bruder', 'mein<b>em</b> Kind', 'mein<b>er</b> Wohnung', 'mein<b>en</b> Eltern<b>n</b>'],
+          ]
+        },
+        {
+          t: 'examples', items: [
+            { de: 'Das ist meine neue Wohnung. (Nominativ)', en: 'This is my new apartment.' },
+            { de: 'Ich liebe meine neue Wohnung. (Akkusativ)', en: 'I love my new apartment.' },
+            { de: 'Ich wohne in meiner neuen Wohnung. (Dativ)', en: 'I live in my new apartment.' },
+            { de: 'Wir helfen unserem Freund beim Umzug. (Dativ)', en: 'We help our friend with the move.' },
+          ]
+        },
+        { t: 'tip', html: 'Nur <b>maskulin im Akkusativ</b> ändert sich (mein → mein<b>en</b>). Im <b>Dativ</b>: -em (m/n), -er (f), -en (Pl.). Reim: „dem → -<b>em</b>, der → -<b>er</b>“.' },
+      ],
+      vocab: [
+        { de: 'der Umzug', en: 'the move', ex: 'Der Umzug war stressig.' },
+        { de: 'umziehen', en: 'to move (house)', ex: 'Wir ziehen nächste Woche um.' },
+        { de: 'die Wohnung', en: 'apartment', ex: 'Meine Wohnung ist hell.' },
+        { de: 'die Miete', en: 'rent', ex: 'Die Miete ist zu hoch.' },
+        { de: 'der Vermieter', en: 'landlord', ex: 'Mein Vermieter ist nett.' },
+        { de: 'der Karton / die Kiste', en: 'box', ex: 'Wir packen die Kartons.' },
+        { de: 'packen', en: 'to pack', ex: 'Ich packe meine Sachen.' },
+        { de: 'der Stadtteil / das Viertel', en: 'district', ex: 'Mein Viertel ist ruhig.' },
+        { de: 'der Hafen', en: 'harbour (Hamburg)', ex: 'Hamburg hat einen großen Hafen.' },
+        { de: 'gemütlich', en: 'cosy', ex: 'Die Wiener Kaffeehäuser sind gemütlich.' },
+        { de: 'der Stephansdom', en: "St Stephen's (Wien)", ex: 'Der Stephansdom ist berühmt.' },
+        { de: 'sich wohlfühlen', en: 'to feel comfortable', ex: 'Ich fühle mich hier wohl.' },
+      ],
+      exercises: [
+        { t: 'fill', q: 'Akkusativ (m): Ich besuche ___ Bruder. (mein)', answers: [['meinen']], hint: 'maskulin Akkusativ', ex: 'der Bruder → Akkusativ: meinen Bruder.' },
+        { t: 'fill', q: 'Dativ (f): Ich wohne in ___ Wohnung. (mein)', answers: [['meiner']], hint: 'feminin Dativ → -er', ex: 'in meiner Wohnung (Dativ feminin).' },
+        { t: 'mc', q: 'Wähle richtig: „Wir helfen ___ Freund.“ (unser)', options: ['unseren', 'unserem', 'unsere', 'unser'], answer: 1, ex: 'helfen + Dativ, maskulin → unserem Freund.' },
+        { t: 'order', q: 'Bau den Satz (Akkusativ):', words: ['Ich', 'liebe', 'meine', 'neue', 'Wohnung'], answer: 'Ich liebe meine neue Wohnung' },
+        { t: 'match', q: 'Ordne Stadt/Ort und Merkmal zu:', pairs: [['Hamburg', 'der Hafen'], ['Wien', 'der Stephansdom'], ['die Elbe', 'Fluss in Hamburg'], ['Schönbrunn', 'Schloss in Wien']] },
+        { t: 'fill', q: 'Nominativ (n): ___ Kind spielt. (dein)', answers: [['Dein', 'dein']], hint: 'neutrum Nominativ = keine Endung', ex: 'das Kind → dein Kind (Nominativ, keine Endung).' },
+      ],
+    },
+
+    /* ===================== LEKTION 4 ===================== */
+    l4: {
+      module: 'm2', number: 4, emoji: '⚖️',
+      title: 'Vorteile & Nachteile · Vergleichen',
+      theme: 'Vorteile und Nachteile, Vergleichen',
+      grammarTitle: 'deshalb- & denn-Sätze + Komparativ',
+      grammar: [
+        { t: 'intro', html: 'Mit <b>denn</b> und <b>deshalb</b> verbindest du Grund und Folge — aber die Wortstellung ist anders!' },
+        { t: 'rule', title: 'denn (= weil, aber andere Stellung)', html: '<b>denn</b> verbindet zwei Hauptsätze. <b>Normale Wortstellung</b> (Verb auf Position 2).<br><span class="muted">Ich bleibe zu Hause, <b>denn</b> es <b>regnet</b>.</span>' },
+        { t: 'rule', title: 'deshalb (= darum/deswegen = Folge)', html: '<b>deshalb</b> steht auf Position 1 → <b>Verb auf Position 2</b> (Inversion).<br><span class="muted">Es regnet, <b>deshalb bleibe</b> ich zu Hause.</span>' },
+        { t: 'tip', html: '<b>weil/denn</b> = Grund (warum?). <b>deshalb</b> = Folge (was passiert deswegen?). Gleiche Idee, anderer Blickwinkel:<br>Ich bleibe zu Hause, <b>weil</b> es regnet. = Es regnet, <b>deshalb</b> bleibe ich zu Hause.' },
+        { t: 'intro', html: '<b>Vergleichen</b> mit Komparativ (-er + <b>als</b>) und <b>so … wie</b>.' },
+        {
+          t: 'table', head: ['Grundform', 'Komparativ', 'Superlativ'],
+          rows: [
+            ['schnell', 'schnell<b>er</b>', 'am schnellsten'],
+            ['groß', 'größer (Umlaut!)', 'am größten'],
+            ['gut', '<b>besser</b>', 'am besten'],
+            ['viel', '<b>mehr</b>', 'am meisten'],
+            ['gern', '<b>lieber</b>', 'am liebsten'],
+            ['teuer', 'teurer', 'am teuersten'],
+          ]
+        },
+        {
+          t: 'examples', items: [
+            { de: 'Wien ist kleiner als Hamburg.', en: 'Vienna is smaller than Hamburg.' },
+            { de: 'Das Auto ist so teuer wie ein Urlaub.', en: 'The car is as expensive as a holiday.' },
+            { de: 'Ein Vorteil ist die Ruhe, ein Nachteil ist die Miete.', en: 'An advantage is the quiet, a disadvantage is the rent.' },
+            { de: 'Es ist teuer, deshalb kaufe ich es nicht.', en: "It's expensive, that's why I don't buy it." },
+          ]
+        },
+      ],
+      vocab: [
+        { de: 'der Vorteil', en: 'advantage', ex: 'Ein Vorteil ist die Nähe.' },
+        { de: 'der Nachteil', en: 'disadvantage', ex: 'Ein Nachteil ist der Lärm.' },
+        { de: 'einerseits … andererseits', en: 'on one hand … on the other', ex: 'Einerseits gut, andererseits teuer.' },
+        { de: 'das Argument', en: 'argument', ex: 'Das ist ein gutes Argument.' },
+        { de: 'der Unterschied', en: 'difference', ex: 'Der Unterschied ist groß.' },
+        { de: 'günstig', en: 'cheap / good value', ex: 'Das Ticket ist günstig.' },
+        { de: 'praktisch', en: 'practical', ex: 'Ein Auto ist praktisch.' },
+        { de: 'vergleichen', en: 'to compare', ex: 'Wir vergleichen die Preise.' },
+        { de: 'genauso … wie', en: 'just as … as', ex: 'Er ist genauso alt wie ich.' },
+        { de: 'lieber', en: 'rather / prefer', ex: 'Ich trinke lieber Tee.' },
+      ],
+      exercises: [
+        { t: 'mc', q: 'Welcher Satz ist richtig?', options: ['Es regnet, deshalb ich bleibe zu Hause.', 'Es regnet, deshalb bleibe ich zu Hause.', 'Es regnet, deshalb zu Hause ich bleibe.', 'Deshalb es regnet, ich bleibe.'], answer: 1, ex: 'Nach „deshalb“ kommt das Verb (Position 2): deshalb bleibe ich …' },
+        { t: 'fill', q: 'Berlin ist groß. Wien ist klein. → Wien ist ___ als Berlin.', answers: [['kleiner']], hint: 'Komparativ von klein', ex: 'klein → kleiner als.' },
+        { t: 'fill', q: 'gut → Komparativ: Dieses Buch ist ___ als das andere.', answers: [['besser']], hint: 'unregelmäßig!', ex: 'gut → besser.' },
+        { t: 'order', q: 'Bau den denn-Satz:', words: ['Ich', 'bleibe', 'zu', 'Hause,', 'denn', 'es', 'regnet'], answer: 'Ich bleibe zu Hause, denn es regnet' },
+        { t: 'order', q: 'Bau den deshalb-Satz:', words: ['Es', 'ist', 'teuer,', 'deshalb', 'kaufe', 'ich', 'es', 'nicht'], answer: 'Es ist teuer, deshalb kaufe ich es nicht' },
+        { t: 'fill', q: 'so … wie: Heute ist es ___ warm ___ gestern.', answers: [['so'], ['wie']], hint: 'Gleichheit', ex: 'so warm wie = gleich warm.' },
+        { t: 'match', q: 'Ordne zu:', pairs: [['Vorteil', 'positiv (+)'], ['Nachteil', 'negativ (−)'], ['günstig', 'billig'], ['vergleichen', 'A mit B ansehen']] },
+      ],
+    },
+
+    /* ===================== LEKTION 5 ===================== */
+    l5: {
+      module: 'm2', number: 5, emoji: '📅',
+      title: 'Termine & Freizeit vereinbaren',
+      theme: 'Vorschläge machen, Freizeittermine vereinbaren',
+      grammarTitle: 'Temporale Präpositionen (Wann? Wie lange? Seit wann?)',
+      grammar: [
+        { t: 'intro', html: 'Zeit-Präpositionen sagen, <b>wann</b> oder <b>wie lange</b> etwas passiert. Lerne sie in Gruppen!' },
+        {
+          t: 'table', head: ['Frage', 'Präposition', 'Beispiel'],
+          rows: [
+            ['Wann? (Uhrzeit)', '<b>um</b>', 'um 8 Uhr'],
+            ['Wann? (Tag / Datum)', '<b>am</b>', 'am Montag, am Wochenende, am 3. Mai'],
+            ['Wann? (Monat / Jahreszeit)', '<b>im</b>', 'im Januar, im Sommer'],
+            ['Wann? (Zukunft)', '<b>in</b> (+ Dativ)', 'in zwei Tagen, in einer Woche'],
+            ['Wann? (vorher/nachher)', '<b>vor / nach</b> (+ Dativ)', 'vor dem Essen, nach der Arbeit'],
+            ['Seit wann?', '<b>seit</b> (+ Dativ)', 'seit 2020, seit einem Jahr'],
+            ['Wie lange?', '<b>von … bis</b>', 'von Montag bis Freitag, von 9 bis 17 Uhr'],
+          ]
+        },
+        { t: 'tip', html: 'Merksatz: <b>„um</b> die Uhr, <b>am</b> Tag, <b>im</b> Monat“. Und: <b>am = an dem</b>, <b>im = in dem</b>.' },
+        {
+          t: 'examples', items: [
+            { de: 'Wollen wir uns am Freitag um 19 Uhr treffen?', en: 'Shall we meet on Friday at 7pm?' },
+            { de: 'Ich habe seit drei Jahren keinen Urlaub gemacht.', en: "I haven't had a holiday for three years." },
+            { de: 'Nach der Arbeit gehe ich ins Fitnessstudio.', en: 'After work I go to the gym.' },
+            { de: 'Der Kurs ist von Oktober bis Juni.', en: 'The course runs from October to June.' },
+          ]
+        },
+        { t: 'rule', title: 'Vorschläge machen', html: '<b>Wollen wir</b> …? · <b>Hast du Lust</b>, … zu …? · <b>Sollen wir</b> …? · <b>Wie wäre es mit</b> …?<br>Antwort: Gute Idee! / Ja, gern! / Tut mir leid, da kann ich nicht.' },
+      ],
+      vocab: [
+        { de: 'sich treffen', en: 'to meet', ex: 'Wir treffen uns um acht.' },
+        { de: 'vereinbaren / ausmachen', en: 'to arrange', ex: 'Wir machen einen Termin aus.' },
+        { de: 'absagen', en: 'to cancel', ex: 'Ich muss leider absagen.' },
+        { de: 'verschieben', en: 'to postpone', ex: 'Können wir es verschieben?' },
+        { de: 'Lust haben', en: 'to feel like', ex: 'Hast du Lust auf Kino?' },
+        { de: 'Zeit haben', en: 'to have time', ex: 'Hast du am Samstag Zeit?' },
+        { de: 'frei sein', en: 'to be free', ex: 'Ich bin am Sonntag frei.' },
+        { de: 'der Vorschlag', en: 'suggestion', ex: 'Das ist ein guter Vorschlag.' },
+        { de: 'die Verabredung', en: 'the date / arrangement', ex: 'Ich habe eine Verabredung.' },
+        { de: 'pünktlich', en: 'on time', ex: 'Bitte sei pünktlich!' },
+      ],
+      exercises: [
+        { t: 'fill', q: 'Wir treffen uns ___ Montag ___ 18 Uhr.', answers: [['am'], ['um']], hint: 'Tag → am, Uhrzeit → um', ex: 'am Montag um 18 Uhr.' },
+        { t: 'fill', q: 'Ich lerne Deutsch ___ einem Jahr. (Seit wann?)', answers: [['seit']], hint: 'Seit wann? → seit + Dativ', ex: 'seit einem Jahr.' },
+        { t: 'fill', q: 'Der Film läuft ___ 20 ___ 22 Uhr. (Wie lange?)', answers: [['von'], ['bis']], hint: 'von … bis', ex: 'von 20 bis 22 Uhr.' },
+        { t: 'mc', q: 'Was passt? „___ Sommer fahre ich nach Hamburg.“', options: ['Am', 'Um', 'Im', 'Seit'], answer: 2, ex: 'Jahreszeit/Monat → im Sommer.' },
+        { t: 'order', q: 'Mach einen Vorschlag:', words: ['Wollen', 'wir', 'am', 'Samstag', 'ins', 'Kino', 'gehen?'], answer: 'Wollen wir am Samstag ins Kino gehen?' },
+        { t: 'mc', q: '„in zwei Tagen“ bedeutet …', options: ['vor zwei Tagen', 'in der Zukunft (in 2 Tagen)', 'zwei Tage lang', 'jeden zweiten Tag'], answer: 1, ex: 'in + Zeit = Zukunft: in zwei Tagen = übermorgen.' },
+        { t: 'match', q: 'Frage → Präposition:', pairs: [['Wann? (Uhrzeit)', 'um'], ['Wann? (Tag)', 'am'], ['Seit wann?', 'seit'], ['Wie lange?', 'von … bis']] },
+      ],
+    },
+
+    /* ===================== LEKTION 6 ===================== */
+    l6: {
+      module: 'm2', number: 6, emoji: '🎭',
+      title: 'Kultur, Vorschläge & erstes Date',
+      theme: 'Kunst- und Kulturevents, ein erstes Date',
+      grammarTitle: 'könnte / sollte (Konjunktiv II)',
+      grammar: [
+        { t: 'intro', html: 'Mit dem <b>Konjunktiv II</b> machst du <b>höfliche Vorschläge</b> (könnte) und gibst <b>Ratschläge</b> (sollte).' },
+        {
+          t: 'table', head: ['Person', 'könnte (could)', 'sollte (should)'],
+          rows: [
+            ['ich', 'könnte', 'sollte'],
+            ['du', 'könntest', 'solltest'],
+            ['er/sie/es', 'könnte', 'sollte'],
+            ['wir', 'könnten', 'sollten'],
+            ['ihr', 'könntet', 'solltet'],
+            ['sie/Sie', 'könnten', 'sollten'],
+          ]
+        },
+        { t: 'rule', title: 'Satzbau', html: 'Modalverb (Position 2) + … + <b>Infinitiv am Ende</b>.<br><span class="muted">Wir <b>könnten</b> ins Kino <b>gehen</b>. · Du <b>solltest</b> mehr <b>schlafen</b>.</span>' },
+        {
+          t: 'examples', items: [
+            { de: 'Wir könnten zusammen ins Museum gehen.', en: 'We could go to the museum together.' },
+            { de: 'Du solltest nicht zu spät kommen.', en: "You shouldn't come too late." },
+            { de: 'Sie könnten ihm Blumen mitbringen.', en: 'You could bring him flowers.' },
+            { de: 'Beim ersten Date solltest du Fragen stellen.', en: 'On a first date you should ask questions.' },
+          ]
+        },
+        { t: 'tip', html: '<b>könnte</b> = Vorschlag/Möglichkeit. <b>sollte</b> = Rat/Empfehlung. Beides ist höflicher als „muss“ oder „will“.' },
+      ],
+      vocab: [
+        { de: 'die Ausstellung', en: 'exhibition', ex: 'Die Ausstellung ist toll.' },
+        { de: 'das Konzert', en: 'concert', ex: 'Wir gehen ins Konzert.' },
+        { de: 'das Theater', en: 'theatre', ex: 'Im Theater läuft ein Stück.' },
+        { de: 'die Galerie', en: 'gallery', ex: 'Die Galerie zeigt moderne Kunst.' },
+        { de: 'die Eintrittskarte', en: 'ticket', ex: 'Ich kaufe zwei Eintrittskarten.' },
+        { de: 'der Eintritt', en: 'entrance (fee)', ex: 'Der Eintritt ist frei.' },
+        { de: 'sich verabreden', en: 'to make a date', ex: 'Wir haben uns verabredet.' },
+        { de: 'nervös', en: 'nervous', ex: 'Beim Date war ich nervös.' },
+        { de: 'einladen', en: 'to invite', ex: 'Darf ich dich einladen?' },
+        { de: 'das Kompliment', en: 'compliment', ex: 'Er macht mir ein Kompliment.' },
+        { de: 'sich kennenlernen', en: 'to get to know', ex: 'Wir lernen uns kennen.' },
+      ],
+      exercises: [
+        { t: 'fill', q: 'Vorschlag: Wir ___ ins Theater gehen. (können → Konjunktiv)', answers: [['könnten']], hint: 'wir-Form von könnte', ex: 'Wir könnten ins Theater gehen.' },
+        { t: 'fill', q: 'Rat: Du ___ früher ins Bett gehen. (sollen → Konjunktiv)', answers: [['solltest']], hint: 'du-Form von sollte', ex: 'Du solltest früher ins Bett gehen.' },
+        { t: 'order', q: 'Bau den Vorschlag:', words: ['Wir', 'könnten', 'am', 'Samstag', 'ins', 'Konzert', 'gehen'], answer: 'Wir könnten am Samstag ins Konzert gehen' },
+        { t: 'mc', q: 'Welcher Satz gibt einen Rat?', options: ['Du musst sofort gehen!', 'Du solltest mehr Wasser trinken.', 'Ich gehe ins Kino.', 'Wir sind im Museum.'], answer: 1, ex: '„solltest“ = Ratschlag (höflich).' },
+        { t: 'order', q: 'Gib einen Rat fürs Date:', words: ['Du', 'solltest', 'pünktlich', 'sein'], answer: 'Du solltest pünktlich sein' },
+        { t: 'match', q: 'Ort → Aktivität:', pairs: [['das Museum', 'eine Ausstellung ansehen'], ['das Konzert', 'Musik hören'], ['das Theater', 'ein Stück sehen'], ['das Kino', 'einen Film sehen']] },
+      ],
+    },
+
+    /* ===================== LEKTION 7 ===================== */
+    l7: {
+      module: 'm3', number: 7, emoji: '💬',
+      title: 'Meinung & Argumente',
+      theme: 'Argumente: Ich finde / meine / glaube …, dass …',
+      grammarTitle: 'dass-Sätze',
+      grammar: [
+        { t: 'intro', html: 'Mit <b>dass</b> verbindest du deine Meinung mit einem ganzen Satz. Wie bei weil: das <b>Verb geht ans Ende</b>!' },
+        { t: 'rule', title: 'Wortstellung', html: 'Hauptsatz<b>,</b> dass + Subjekt + … + <b>Verb (Ende)</b>.<br><span class="muted">Ich glaube, <b>dass</b> Deutsch wichtig <b>ist</b>.</span>' },
+        { t: 'rule', title: 'Meinung ausdrücken', html: 'Ich <b>finde/meine/glaube/denke</b>, dass … · Ich bin der Meinung, dass … · <b>Meiner Meinung nach</b> + Verb (ohne dass).' },
+        {
+          t: 'examples', items: [
+            { de: 'Ich finde, dass Wien eine schöne Stadt ist.', en: 'I think that Vienna is a beautiful city.' },
+            { de: 'Ich glaube, dass er recht hat.', en: 'I believe that he is right.' },
+            { de: 'Ich meine, dass wir mehr üben sollten.', en: 'I think we should practice more.' },
+            { de: 'Meiner Meinung nach ist das Leben in der Stadt teuer.', en: 'In my opinion, city life is expensive.' },
+          ]
+        },
+        { t: 'tip', html: 'Ohne „dass“ → normale Wortstellung: „Ich glaube, Deutsch <b>ist</b> wichtig.“ Mit „dass“ → Verb ans Ende: „…, dass Deutsch wichtig <b>ist</b>.“' },
+      ],
+      vocab: [
+        { de: 'die Meinung', en: 'opinion', ex: 'Was ist deine Meinung?' },
+        { de: 'der Meinung sein', en: 'to be of the opinion', ex: 'Ich bin der Meinung, dass …' },
+        { de: 'recht haben', en: 'to be right', ex: 'Du hast recht.' },
+        { de: 'zustimmen', en: 'to agree', ex: 'Ich stimme dir zu.' },
+        { de: 'widersprechen', en: 'to disagree', ex: 'Da muss ich widersprechen.' },
+        { de: 'überzeugt sein', en: 'to be convinced', ex: 'Ich bin überzeugt, dass …' },
+        { de: 'das Problem', en: 'problem', ex: 'Das ist ein großes Problem.' },
+        { de: 'die Lösung', en: 'solution', ex: 'Wir brauchen eine Lösung.' },
+        { de: 'einverstanden sein', en: 'to be in agreement', ex: 'Ich bin einverstanden.' },
+        { de: 'meiner Meinung nach', en: 'in my opinion', ex: 'Meiner Meinung nach ist das falsch.' },
+      ],
+      exercises: [
+        { t: 'order', q: 'Bau den dass-Satz:', words: ['Ich', 'glaube,', 'dass', 'Deutsch', 'wichtig', 'ist'], answer: 'Ich glaube, dass Deutsch wichtig ist' },
+        { t: 'fill', q: 'Ich finde, ___ Wien sehr schön ___ .', answers: [['dass'], ['ist']], hint: 'Verb ans Ende', ex: 'Ich finde, dass Wien sehr schön ist.' },
+        { t: 'mc', q: 'Welcher Satz ist richtig?', options: ['Ich denke, dass er kommt morgen.', 'Ich denke, dass er morgen kommt.', 'Ich denke, dass kommt er morgen.', 'Ich denke, morgen dass er kommt.'], answer: 1, ex: 'Verb („kommt“) steht am Ende: …, dass er morgen kommt.' },
+        { t: 'order', q: 'Sag deine Meinung:', words: ['Ich', 'meine,', 'dass', 'wir', 'mehr', 'üben', 'sollten'], answer: 'Ich meine, dass wir mehr üben sollten' },
+        { t: 'fill', q: 'Verbinde: „Sie hat recht.“ → Ich glaube, ___ sie recht ___ .', answers: [['dass'], ['hat']], hint: 'haben ans Ende', ex: 'Ich glaube, dass sie recht hat.' },
+        { t: 'match', q: 'Ordne zu:', pairs: [['zustimmen', 'Ja, genau!'], ['widersprechen', 'Nein, das stimmt nicht.'], ['die Meinung', 'opinion'], ['die Lösung', 'solution']] },
+      ],
+    },
+
+    /* ===================== LEKTION 8 ===================== */
+    l8: {
+      module: 'm3', number: 8, emoji: '⚽',
+      title: 'Sportarten',
+      theme: 'Sportarten',
+      grammarTitle: 'wenn-Sätze (Bedingung / Zeit)',
+      grammar: [
+        { t: 'intro', html: '<b>wenn</b> = „if/when“ (Bedingung oder wiederholte Situation). Wieder: <b>Verb ans Ende</b>!' },
+        { t: 'rule', title: 'Zwei Möglichkeiten', html: '1) Hauptsatz zuerst: Ich mache Sport, <b>wenn</b> ich Zeit <b>habe</b>.<br>2) wenn-Satz zuerst → Hauptsatz beginnt mit Verb: <b>Wenn</b> ich Zeit <b>habe</b>, <b>mache</b> ich Sport.' },
+        {
+          t: 'examples', items: [
+            { de: 'Wenn das Wetter schön ist, fahre ich Rad.', en: "If the weather is nice, I ride my bike." },
+            { de: 'Ich gehe schwimmen, wenn ich Lust habe.', en: 'I go swimming when I feel like it.' },
+            { de: 'Wenn ich Stress habe, mache ich Yoga.', en: 'When I am stressed, I do yoga.' },
+            { de: 'Wenn es regnet, trainiere ich zu Hause.', en: 'If it rains, I train at home.' },
+          ]
+        },
+        { t: 'tip', html: '<b>wenn</b> = Gegenwart/Wiederholung. <b>als</b> = einmal in der Vergangenheit (Lektion 1): „<b>Als</b> ich klein war …“ vs. „<b>Wenn</b> ich Zeit habe …“.' },
+        { t: 'rule', title: 'Sport: welches Verb?', html: '<b>spielen</b>: Ball (Fußball, Tennis) · <b>fahren</b>: Rad, Ski · <b>gehen</b>: schwimmen, joggen · <b>machen</b>: Yoga, Sport allgemein.' },
+      ],
+      vocab: [
+        { de: 'Fußball spielen', en: 'to play football', ex: 'Ich spiele jeden Samstag Fußball.' },
+        { de: 'Rad fahren', en: 'to cycle', ex: 'Im Sommer fahre ich Rad.' },
+        { de: 'schwimmen gehen', en: 'to go swimming', ex: 'Wir gehen schwimmen.' },
+        { de: 'joggen / laufen', en: 'to jog / run', ex: 'Ich jogge im Park.' },
+        { de: 'Ski fahren', en: 'to ski', ex: 'In Österreich fährt man Ski.' },
+        { de: 'Yoga machen', en: 'to do yoga', ex: 'Yoga macht mich ruhig.' },
+        { de: 'das Fitnessstudio', en: 'gym', ex: 'Ich gehe ins Fitnessstudio.' },
+        { de: 'die Mannschaft', en: 'team', ex: 'Unsere Mannschaft gewinnt oft.' },
+        { de: 'das Training', en: 'training', ex: 'Das Training ist am Dienstag.' },
+        { de: 'der Verein', en: 'club', ex: 'Ich bin in einem Sportverein.' },
+        { de: 'gewinnen / verlieren', en: 'to win / lose', ex: 'Wir haben gewonnen!' },
+        { de: 'fit bleiben', en: 'to stay fit', ex: 'Sport hilft, fit zu bleiben.' },
+      ],
+      exercises: [
+        { t: 'order', q: 'Bau den wenn-Satz (Hauptsatz zuerst):', words: ['Ich', 'mache', 'Sport,', 'wenn', 'ich', 'Zeit', 'habe'], answer: 'Ich mache Sport, wenn ich Zeit habe' },
+        { t: 'order', q: 'Bau den wenn-Satz (wenn zuerst → Inversion):', words: ['Wenn', 'es', 'regnet,', 'bleibe', 'ich', 'zu', 'Hause'], answer: 'Wenn es regnet, bleibe ich zu Hause' },
+        { t: 'mc', q: 'Welches Verb passt? „Ich ___ Rad.“', options: ['spiele', 'fahre', 'gehe', 'mache'], answer: 1, ex: 'Rad fahren → ich fahre Rad.' },
+        { t: 'mc', q: 'als oder wenn? „___ ich Zeit habe, lese ich.“', options: ['Als', 'Wenn', 'Weil', 'Dass'], answer: 1, ex: 'Wiederholte Gegenwart → wenn. (als = einmalige Vergangenheit)' },
+        { t: 'fill', q: '___ ich Stress ___ , mache ich Yoga.', answers: [['Wenn'], ['habe']], hint: 'wenn + Verb am Ende', ex: 'Wenn ich Stress habe, mache ich Yoga.' },
+        { t: 'match', q: 'Sportart → Verb:', pairs: [['Fußball', 'spielen'], ['Rad', 'fahren'], ['schwimmen', 'gehen'], ['Yoga', 'machen']] },
+      ],
+    },
+
+    /* ===================== LEKTION 9 ===================== */
+    l9: {
+      module: 'm3', number: 9, emoji: '🛋️',
+      title: 'Wohnung einrichten · Wo? Wohin?',
+      theme: 'Wechselpräpositionen, legen/stellen/hängen',
+      grammarTitle: 'Wechselpräpositionen (Akk + Dativ)',
+      grammar: [
+        { t: 'intro', html: '<b>Wechselpräpositionen</b> können mit <b>Akkusativ ODER Dativ</b> stehen: in, an, auf, über, unter, vor, hinter, neben, zwischen.' },
+        { t: 'rule', title: 'Die goldene Regel', html: '<b>Wohin?</b> (Bewegung, Richtung) → <b>Akkusativ</b>.<br><b>Wo?</b> (Ort, keine Bewegung) → <b>Dativ</b>.' },
+        {
+          t: 'table', head: ['Frage', 'Verb (Beispiel)', 'Kasus', 'Beispiel'],
+          rows: [
+            ['Wohin?', 'legen / stellen / hängen / setzen', 'Akkusativ', 'Ich stelle die Lampe auf <b>den</b> Tisch.'],
+            ['Wo?', 'liegen / stehen / hängen / sitzen', 'Dativ', 'Die Lampe steht auf <b>dem</b> Tisch.'],
+          ]
+        },
+        {
+          t: 'table', head: ['Aktion (Wohin? Akk)', 'Ergebnis (Wo? Dativ)'],
+          rows: [
+            ['legen (hinlegen)', 'liegen'],
+            ['stellen (hinstellen)', 'stehen'],
+            ['hängen (aufhängen)', 'hängen'],
+            ['setzen', 'sitzen'],
+          ]
+        },
+        {
+          t: 'examples', items: [
+            { de: 'Ich hänge das Bild an die Wand. (Wohin? Akk)', en: 'I hang the picture on the wall.' },
+            { de: 'Das Bild hängt an der Wand. (Wo? Dativ)', en: 'The picture hangs on the wall.' },
+            { de: 'Ich lege das Buch auf den Tisch. (Akk)', en: 'I put the book on the table.' },
+            { de: 'Das Buch liegt auf dem Tisch. (Dativ)', en: 'The book lies on the table.' },
+          ]
+        },
+        { t: 'tip', html: 'Bewegung = Akkusativ (kurzes Wort: <b>A</b>kk = <b>A</b>ction). Kein Movement = Dativ. Kurzformen: in+das=<b>ins</b>, in+dem=<b>im</b>, an+das=<b>ans</b>, an+dem=<b>am</b>.' },
+      ],
+      vocab: [
+        { de: 'das Möbel / die Möbel', en: 'furniture', ex: 'Wir kaufen neue Möbel.' },
+        { de: 'der Schrank', en: 'wardrobe / cupboard', ex: 'Der Schrank steht im Schlafzimmer.' },
+        { de: 'das Regal', en: 'shelf', ex: 'Die Bücher sind im Regal.' },
+        { de: 'der Teppich', en: 'carpet / rug', ex: 'Der Teppich liegt auf dem Boden.' },
+        { de: 'die Wand', en: 'wall', ex: 'Das Bild hängt an der Wand.' },
+        { de: 'legen', en: 'to lay (down)', ex: 'Ich lege das Handy auf den Tisch.' },
+        { de: 'liegen', en: 'to lie (be lying)', ex: 'Das Handy liegt auf dem Tisch.' },
+        { de: 'stellen', en: 'to put (upright)', ex: 'Ich stelle die Flasche in den Kühlschrank.' },
+        { de: 'stehen', en: 'to stand (be standing)', ex: 'Die Flasche steht im Kühlschrank.' },
+        { de: 'hängen', en: 'to hang', ex: 'Ich hänge die Jacke in den Schrank.' },
+        { de: 'der Boden', en: 'floor', ex: 'Die Tasche steht auf dem Boden.' },
+      ],
+      exercises: [
+        { t: 'mc', q: 'Wohin? „Ich stelle die Vase auf ___ Tisch.“', options: ['dem (Dativ)', 'den (Akkusativ)', 'der', 'das'], answer: 1, ex: 'Wohin? + Bewegung → Akkusativ: auf den Tisch.' },
+        { t: 'mc', q: 'Wo? „Die Vase steht auf ___ Tisch.“', options: ['den (Akkusativ)', 'dem (Dativ)', 'der', 'die'], answer: 1, ex: 'Wo? + keine Bewegung → Dativ: auf dem Tisch.' },
+        { t: 'fill', q: 'Wohin? Ich hänge das Bild an ___ Wand. (die)', answers: [['die']], hint: 'Bewegung → Akkusativ; die Wand bleibt „die“ im Akk', ex: 'an die Wand (Akkusativ, Wohin?).' },
+        { t: 'fill', q: 'Wo? Das Bild hängt an ___ Wand. (die → Dativ)', answers: [['der']], hint: 'feminin Dativ → der', ex: 'an der Wand (Dativ, Wo?).' },
+        { t: 'mc', q: 'Welches Verb zeigt KEINE Bewegung (Wo? Dativ)?', options: ['stellen', 'legen', 'liegen', 'hängen (etw. aufhängen)'], answer: 2, ex: 'liegen = Position/Ort → Dativ (Wo?).' },
+        { t: 'order', q: 'Bau den Satz (Wohin? Akkusativ):', words: ['Ich', 'lege', 'das', 'Buch', 'auf', 'den', 'Tisch'], answer: 'Ich lege das Buch auf den Tisch' },
+        { t: 'match', q: 'Aktion (Akk) → Ergebnis (Dativ):', pairs: [['legen', 'liegen'], ['stellen', 'stehen'], ['hängen (Akk)', 'hängen (Dat)'], ['setzen', 'sitzen']] },
+      ],
+    },
+
+    /* ===================== LEKTION 12 (BONUS) ===================== */
+    l12: {
+      module: 'mB', number: 12, emoji: '🙋',
+      title: 'Höflich fragen · Fragen & Antworten',
+      theme: 'Fragen & Antworten, indirekte Fragen',
+      grammarTitle: 'Indirekte Fragen (ob, wie lange …)',
+      grammar: [
+        { t: 'intro', html: 'Indirekte Fragen sind <b>höflicher</b>. Sie sind Nebensätze → das <b>Verb steht am Ende</b>.' },
+        { t: 'rule', title: 'W-Frage → mit W-Wort', html: 'Direkt: <i>Wie lange dauert der Film?</i><br>Indirekt: Weißt du, <b>wie lange</b> der Film <b>dauert</b>?' },
+        { t: 'rule', title: 'Ja/Nein-Frage → mit „ob“', html: 'Direkt: <i>Kommt der Bus pünktlich?</i><br>Indirekt: Ich weiß nicht, <b>ob</b> der Bus pünktlich <b>kommt</b>.' },
+        { t: 'rule', title: 'Höfliche Einleitungen', html: 'Können Sie mir sagen, … ? · Weißt du, … ? · Ich möchte wissen, … · Ich frage mich, …' },
+        {
+          t: 'examples', items: [
+            { de: 'Können Sie mir sagen, wo der Bahnhof ist?', en: 'Can you tell me where the station is?' },
+            { de: 'Ich weiß nicht, ob er heute kommt.', en: "I don't know whether he is coming today." },
+            { de: 'Weißt du, wie viel die Karte kostet?', en: 'Do you know how much the ticket costs?' },
+            { de: 'Ich möchte wissen, ob der Kurs am Montag beginnt.', en: 'I would like to know whether the course starts on Monday.' },
+          ]
+        },
+        { t: 'tip', html: 'Ja/Nein-Frage? → nimm <b>ob</b>. W-Frage? → nimm das <b>W-Wort</b> (wo, wann, wie lange, warum …). Verb immer ans Ende!' },
+      ],
+      vocab: [
+        { de: 'ob', en: 'whether / if', ex: 'Ich weiß nicht, ob es regnet.' },
+        { de: 'wie lange', en: 'how long', ex: 'Wie lange dauert das?' },
+        { de: 'wie viel / wie viele', en: 'how much / many', ex: 'Wie viel kostet das?' },
+        { de: 'woher', en: 'from where', ex: 'Woher kommst du?' },
+        { de: 'wohin', en: 'to where', ex: 'Wohin gehst du?' },
+        { de: 'warum', en: 'why', ex: 'Warum lernst du Deutsch?' },
+        { de: 'die Auskunft', en: 'information', ex: 'Ich brauche eine Auskunft.' },
+        { de: 'höflich', en: 'polite', ex: 'Sei bitte höflich.' },
+        { de: 'dauern', en: 'to last / take', ex: 'Wie lange dauert der Film?' },
+        { de: 'kosten', en: 'to cost', ex: 'Was kostet das Ticket?' },
+      ],
+      exercises: [
+        { t: 'mc', q: 'Ja/Nein-Frage indirekt → welches Wort?', options: ['wann', 'ob', 'dass', 'weil'], answer: 1, ex: 'Ja/Nein-Frage → ob: Ich weiß nicht, ob …' },
+        { t: 'order', q: 'Mach die Frage höflich (indirekt):', words: ['Weißt', 'du,', 'wie', 'lange', 'der', 'Film', 'dauert?'], answer: 'Weißt du, wie lange der Film dauert?' },
+        { t: 'fill', q: 'Direkt: „Kommt sie?“ → Ich weiß nicht, ___ sie ___ .', answers: [['ob'], ['kommt']], hint: 'ob + Verb am Ende', ex: 'Ich weiß nicht, ob sie kommt.' },
+        { t: 'fill', q: 'Direkt: „Wo ist der Bahnhof?“ → Können Sie mir sagen, ___ der Bahnhof ___ ?', answers: [['wo'], ['ist']], hint: 'W-Wort + Verb am Ende', ex: 'Können Sie mir sagen, wo der Bahnhof ist?' },
+        { t: 'mc', q: 'Welcher Satz ist richtig (indirekt)?', options: ['Weißt du, wann kommt der Bus?', 'Weißt du, wann der Bus kommt?', 'Weißt du, der Bus wann kommt?', 'Weißt du, kommt wann der Bus?'], answer: 1, ex: 'Verb ans Ende: …, wann der Bus kommt.' },
+        { t: 'match', q: 'W-Wort → Bedeutung:', pairs: [['ob', 'whether'], ['wie lange', 'how long'], ['woher', 'from where'], ['warum', 'why']] },
+      ],
+    },
+  },
+
+  /* ===================== SCHNELLKURS (2 Stunden) ===================== */
+  crash: {
+    title: '⚡ Schnellkurs: In 2 Stunden zur Prüfung',
+    intro: 'Genau für morgen. 5 fokussierte Sprints mit Pausen. Starte den 🍅-Timer und hake jeden Schritt ab. Du musst nicht perfekt sein — du musst durchkommen. Los! 💪',
+    steps: [
+      { time: '0–25 min', title: 'Sprint 1: Vergangenheit & Gründe', do: 'Lektion 1 (Perfekt) + Lektion 2 (weil). Mach die Übungen, nicht nur lesen!', lessons: ['l1', 'l2'] },
+      { time: 'Pause 5 min', title: '☕ Pause', do: 'Aufstehen, Wasser trinken, NICHT aufs Handy.', lessons: [] },
+      { time: '30–55 min', title: 'Sprint 2: Wohnen & Argumente', do: 'Lektion 3 (Possessiv) + Lektion 4 (deshalb/denn + Vergleich).', lessons: ['l3', 'l4'] },
+      { time: 'Pause 5 min', title: '☕ Pause', do: 'Kurz bewegen. Tief atmen.', lessons: [] },
+      { time: '60–85 min', title: 'Sprint 3: Zeit & Vorschläge', do: 'Lektion 5 (Präpositionen) + Lektion 6 (könnte/sollte).', lessons: ['l5', 'l6'] },
+      { time: 'Pause 5 min', title: '☕ Pause', do: 'Snack. Augen vom Bildschirm weg.', lessons: [] },
+      { time: '90–115 min', title: 'Sprint 4: Meinung, Sport, Wohnung', do: 'Lektion 7 (dass) + 8 (wenn) + 9 (Wechselpräp.) + 12 (indirekte Fragen).', lessons: ['l7', 'l8', 'l9', 'l12'] },
+      { time: '115–120 min', title: 'Sprint 5: Test dich!', do: 'Mach die Prüfungssimulation. Falsche Antworten = genau das nochmal ansehen.', lessons: [] },
+    ],
+  },
+
+  /* ===================== 2-WOCHEN-PLAN ===================== */
+  plan: [
+    { day: 1, title: 'Lektion 1 — Perfekt', tasks: ['Grammatik lesen', 'Alle Übungen', '12 Vokabeln (Flashcards)'], weekend: false },
+    { day: 2, title: 'Lektion 2 — weil', tasks: ['weil-Wortstellung üben', 'Berufe-Vokabeln', 'L1 kurz wiederholen'], weekend: false },
+    { day: 3, title: 'Lektion 3 — Possessiv', tasks: ['Tabelle Nom/Akk/Dat', 'Hamburg & Wien Vokabeln', 'Übungen'], weekend: false },
+    { day: 4, title: 'Lektion 4 — deshalb/denn + Vergleich', tasks: ['Komparativ-Liste', 'deshalb vs. weil', 'Übungen'], weekend: false },
+    { day: 5, title: 'Lektion 5 — Zeit-Präpositionen', tasks: ['um/am/im merken', 'seit / von–bis', 'Termin-Dialoge'], weekend: false },
+    { day: 6, title: 'Wochenende: Wiederholung Modul 1+2', tasks: ['Flashcards L1–L5', 'Modul-Übungen nochmal', 'Schwache Themen markieren'], weekend: true },
+    { day: 7, title: 'Wochenende: Mini-Test', tasks: ['Prüfungssimulation Teil 1', 'Fehler ansehen', 'Pause genießen 🌿'], weekend: true },
+    { day: 8, title: 'Lektion 6 — könnte/sollte', tasks: ['Konjunktiv-Tabelle', 'Kultur-Vokabeln', 'Vorschläge üben'], weekend: false },
+    { day: 9, title: 'Lektion 7 — dass', tasks: ['Meinung ausdrücken', 'dass-Wortstellung', 'Übungen'], weekend: false },
+    { day: 10, title: 'Lektion 8 — wenn', tasks: ['wenn vs. als', 'Sport-Vokabeln & Verben', 'Übungen'], weekend: false },
+    { day: 11, title: 'Lektion 9 — Wechselpräpositionen', tasks: ['Wo? Dativ / Wohin? Akk', 'legen/liegen … Paare', 'Übungen'], weekend: false },
+    { day: 12, title: 'Lektion 12 — indirekte Fragen', tasks: ['ob vs. W-Wort', 'höfliche Fragen bilden', 'Übungen'], weekend: false },
+    { day: 13, title: 'Wochenende: Große Wiederholung', tasks: ['Alle Flashcards', 'Alle schwachen Themen', 'Grammatik-Übersicht'], weekend: true },
+    { day: 14, title: 'Wochenende: Generalprobe', tasks: ['Komplette Prüfungssimulation', 'Letzte Lücken schließen', 'Früh schlafen 😴'], weekend: true },
+  ],
+
+  /* ===================== PRÜFUNGSSIMULATION ===================== */
+  exam: [
+    { t: 'mc', q: 'Perfekt: „Gestern ___ ich ins Kino gegangen.“', options: ['habe', 'bin', 'war', 'hatte'], answer: 1, ex: 'gehen = Bewegung → sein: Ich bin gegangen.' },
+    { t: 'mc', q: 'Partizip II von „fotografieren“?', options: ['gefotografiert', 'fotografiert', 'fotografiren', 'fotograft'], answer: 1, ex: '-ieren-Verben: kein ge- → fotografiert.' },
+    { t: 'fill', q: 'weil: Ich bin müde, ___ ich schlecht geschlafen ___ .', answers: [['weil'], ['habe']], hint: 'Verb ans Ende', ex: '…, weil ich schlecht geschlafen habe.' },
+    { t: 'fill', q: 'Possessiv Dativ (f): Ich wohne bei ___ Schwester. (mein)', answers: [['meiner']], hint: 'feminin Dativ', ex: 'bei meiner Schwester.' },
+    { t: 'mc', q: 'deshalb: „Es ist spät, ___ gehe ich jetzt.“', options: ['deshalb', 'weil', 'dass', 'denn'], answer: 0, ex: 'Folge → deshalb + Verb (gehe) auf Position 2.' },
+    { t: 'fill', q: 'Komparativ: Wien ist ___ als Berlin. (klein)', answers: [['kleiner']], hint: '-er', ex: 'klein → kleiner als.' },
+    { t: 'fill', q: 'Zeit: Wir treffen uns ___ Freitag ___ 19 Uhr.', answers: [['am'], ['um']], hint: 'Tag → am, Uhr → um', ex: 'am Freitag um 19 Uhr.' },
+    { t: 'fill', q: 'seit: Ich lerne ___ zwei Monaten Deutsch.', answers: [['seit']], hint: 'Seit wann?', ex: 'seit zwei Monaten.' },
+    { t: 'fill', q: 'Konjunktiv II Rat: Du ___ mehr schlafen. (sollen)', answers: [['solltest']], hint: 'du-Form', ex: 'Du solltest mehr schlafen.' },
+    { t: 'order', q: 'Vorschlag bauen:', words: ['Wir', 'könnten', 'ins', 'Museum', 'gehen'], answer: 'Wir könnten ins Museum gehen' },
+    { t: 'order', q: 'dass-Satz bauen:', words: ['Ich', 'finde,', 'dass', 'Sport', 'gesund', 'ist'], answer: 'Ich finde, dass Sport gesund ist' },
+    { t: 'order', q: 'wenn-Satz bauen:', words: ['Wenn', 'ich', 'Zeit', 'habe,', 'lese', 'ich'], answer: 'Wenn ich Zeit habe, lese ich' },
+    { t: 'mc', q: 'Wechselpräposition Wohin?: „Ich stelle das Glas auf ___ Tisch.“', options: ['dem', 'den', 'der', 'das'], answer: 1, ex: 'Wohin? → Akkusativ: auf den Tisch.' },
+    { t: 'mc', q: 'Wechselpräposition Wo?: „Das Glas steht auf ___ Tisch.“', options: ['den', 'dem', 'der', 'die'], answer: 1, ex: 'Wo? → Dativ: auf dem Tisch.' },
+    { t: 'fill', q: 'Indirekte Frage: Weißt du, ___ der Zug pünktlich ___ ? (Ja/Nein-Frage)', answers: [['ob'], ['ist']], hint: 'Ja/Nein → ob', ex: '…, ob der Zug pünktlich ist.' },
+    { t: 'mc', q: 'als oder wenn? „___ ich ein Kind war, wohnte ich in Wien.“', options: ['Wenn', 'Als', 'Ob', 'Dass'], answer: 1, ex: 'Einmal in der Vergangenheit → als.' },
+    { t: 'match', q: 'Verb-Paare (Wohin/Wo):', pairs: [['legen', 'liegen'], ['stellen', 'stehen'], ['setzen', 'sitzen'], ['hängen', 'hängen']] },
+    { t: 'fill', q: 'denn: Ich bleibe zu Hause, ___ ich bin krank.', answers: [['denn']], hint: 'denn = normale Wortstellung', ex: '…, denn ich bin krank.' },
+  ],
+};
+
+// Helper: ordered lesson ids
+const LESSON_ORDER = ['l1', 'l2', 'l3', 'l4', 'l5', 'l6', 'l7', 'l8', 'l9', 'l12'];

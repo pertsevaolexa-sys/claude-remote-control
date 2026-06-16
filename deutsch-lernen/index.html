@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#6c5ce7" />
+  <title>Deutsch A2 — Dein Prüfungs-Bootcamp 🚀</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇩🇪</text></svg>" />
+</head>
+<body>
+  <!-- Confetti canvas -->
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <!-- ===== HEADER ===== -->
+  <header class="topbar">
+    <div class="brand" id="homeLink" role="button" tabindex="0" title="Zur Startseite">
+      <span class="logo">🇩🇪</span>
+      <span class="brand-text">Deutsch&nbsp;A2 <small>Bootcamp</small></span>
+    </div>
+
+    <div class="stats">
+      <div class="stat" title="Erfahrungspunkte"><span class="stat-ico">⚡</span><span id="xpVal">0</span> XP</div>
+      <div class="stat" title="Level"><span class="stat-ico">🏅</span> Lvl <span id="lvlVal">1</span></div>
+      <div class="stat" title="Tagesstreak"><span class="stat-ico">🔥</span><span id="streakVal">0</span></div>
+    </div>
+
+    <div class="top-actions">
+      <button id="timerBtn" class="icon-btn" title="Fokus-Timer (Pomodoro)">🍅 <span id="timerMini">25:00</span></button>
+      <button id="calmBtn" class="icon-btn" title="Ruhe-Modus (weniger Animationen)">🧘</button>
+      <button id="themeBtn" class="icon-btn" title="Hell/Dunkel umschalten">🌙</button>
+    </div>
+  </header>
+
+  <!-- XP progress to next level -->
+  <div class="levelbar"><div class="levelbar-fill" id="levelFill"></div></div>
+
+  <!-- ===== NAV TABS ===== -->
+  <nav class="tabs" id="tabs">
+    <button data-view="home" class="tab active">🏠 Start</button>
+    <button data-view="crash" class="tab">⚡ Schnellkurs</button>
+    <button data-view="modules" class="tab">📚 Module</button>
+    <button data-view="grammar" class="tab">📝 Grammatik</button>
+    <button data-view="vocab" class="tab">🗂️ Vokabeln</button>
+    <button data-view="exam" class="tab">🎯 Prüfung</button>
+    <button data-view="plan" class="tab">📅 2-Wochen-Plan</button>
+  </nav>
+
+  <!-- ===== MAIN ===== -->
+  <main id="app" class="app"></main>
+
+  <!-- ===== FOCUS TIMER PANEL ===== -->
+  <div id="timerPanel" class="timer-panel hidden" role="dialog" aria-label="Fokus-Timer">
+    <div class="timer-head">
+      <strong>🍅 Fokus-Timer</strong>
+      <button class="icon-btn" id="timerClose" title="Schließen">✕</button>
+    </div>
+    <div class="timer-clock" id="timerClock">25:00</div>
+    <div class="timer-mode" id="timerMode">Fokus-Sprint</div>
+    <div class="timer-controls">
+      <button id="timerStart" class="btn primary">Start</button>
+      <button id="timerPause" class="btn">Pause</button>
+      <button id="timerReset" class="btn ghost">Reset</button>
+    </div>
+    <div class="timer-presets">
+      <button data-min="25" class="chip">25 min Fokus</button>
+      <button data-min="15" class="chip">15 min</button>
+      <button data-min="5" class="chip">5 min Pause</button>
+    </div>
+    <p class="timer-tip">💡 Tipp bei ADHS: Ein Sprint = ein kleines Ziel. Handy weglegen, Timer starten, los! 🚀</p>
+  </div>
+
+  <!-- Toast for feedback -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
