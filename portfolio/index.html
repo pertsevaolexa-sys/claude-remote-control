@@ -351,6 +351,34 @@
   }
 
 
+
+  /* ===== book feel ===== */
+  .idx-row{grid-template-columns:44px max-content 1fr auto}
+  .idx-leader{align-self:baseline;border-bottom:2px dotted var(--muted);opacity:.45;
+    margin:0 14px;transform:translateY(-5px)}
+  .work .lede,.about p{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+  .work .lede::first-letter,.about>p.reveal:first-of-type::first-letter{
+    float:left;font-family:var(--body);font-size:3.3em;line-height:.82;
+    padding:.08em .12em 0 0;font-weight:400}
+  .work>.wrap::after{content:"\2766";display:block;text-align:center;
+    margin-top:72px;font-size:20px;color:var(--muted)}
+  .part .wrap{text-align:center}
+  .part .wrap::before{content:"\2042";display:block;font-size:17px;color:var(--muted);
+    margin-bottom:22px;letter-spacing:.3em}
+  .part p{margin-left:auto;margin-right:auto}
+  .nav-in{position:relative}
+  .runhead{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);white-space:nowrap;opacity:0;transition:opacity .4s ease}
+  .runhead.on{opacity:1}
+  .foot-colophon{font-family:var(--body);font-style:italic;color:var(--muted)}
+  @media (max-width:980px){.runhead{display:none}}
+  @media (max-width:720px){
+    .idx-row{grid-template-columns:32px 1fr}
+    .idx-leader{display:none}
+    .work .lede,.about p{text-align:left;hyphens:none}
+    .work>.wrap::after{margin-top:52px}
+  }
   /* ===== storytelling ===== */
   .idx-lede{max-width:56ch;color:var(--muted);margin:14px 0 26px;font-size:15.5px}
   .idx-part{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.22em;
@@ -490,7 +518,7 @@
 
 <nav>
   <div class="nav-in">
-    <span class="brand">Oleksandra Pertseva</span>
+    <span class="brand">Oleksandra Pertseva</span><span class="runhead" id="runhead" aria-hidden="true"></span>
     <div class="nav-links">
       <a href="#work" data-sec="work">Work</a>
       <a href="#about" data-sec="about">About</a>
@@ -518,16 +546,16 @@
 
 
 <section class="index wrap" id="work">
-  <div class="sec-label">Index</div>
+  <div class="sec-label">Contents</div>
   <p class="idx-lede reveal">Five projects in two parts &mdash; a year inside Vienna&rsquo;s cultural scene, and the Fontys work in Eindhoven where the method formed. One through-line: research-heavy material, made human.</p>
   <div class="idx-list">
     <div class="idx-part">Part I &mdash; The Vienna year</div>
-    <a class="idx-row" href="#w01" data-peek="w01-key"><span class="idx-num">01</span><span class="idx-title">Don&rsquo;t Panic</span><span class="idx-tag">Museum Booster, Vienna — Strategy</span></a>
-    <a class="idx-row" href="#w02" data-peek="w02-key"><span class="idx-num">02</span><span class="idx-title">Future Bridge</span><span class="idx-tag">What Matters Platform, Vienna — Events</span></a>
+    <a class="idx-row" href="#w01" data-peek="w01-key"><span class="idx-num">01</span><span class="idx-title">Don&rsquo;t Panic</span><span class="idx-leader" aria-hidden="true"></span><span class="idx-tag">Museum Booster, Vienna — Strategy</span></a>
+    <a class="idx-row" href="#w02" data-peek="w02-key"><span class="idx-num">02</span><span class="idx-title">Future Bridge</span><span class="idx-leader" aria-hidden="true"></span><span class="idx-tag">What Matters Platform, Vienna — Events</span></a>
     <div class="idx-part">Part II &mdash; Fontys, Eindhoven</div>
-    <a class="idx-row" href="#w03" data-peek="w03-key"><span class="idx-num">03</span><span class="idx-title">Tomorrow&rsquo;s Leadership in Art</span><span class="idx-tag">Fontys &times; Deloitte — Campaign</span></a>
-    <a class="idx-row" href="#w04" data-peek="w04-key"><span class="idx-num">04</span><span class="idx-title">Sustainability You Can Trust</span><span class="idx-tag">Fontys &times; Lumosa — Strategy</span></a>
-    <a class="idx-row" href="#w05" data-peek="w05-key"><span class="idx-num">05</span><span class="idx-title">The Conscious Toolkit</span><span class="idx-tag">Fontys &times; Living Lab 040 — Strategy</span></a>
+    <a class="idx-row" href="#w03" data-peek="w03-key"><span class="idx-num">03</span><span class="idx-title">Tomorrow&rsquo;s Leadership in Art</span><span class="idx-leader" aria-hidden="true"></span><span class="idx-tag">Fontys &times; Deloitte — Campaign</span></a>
+    <a class="idx-row" href="#w04" data-peek="w04-key"><span class="idx-num">04</span><span class="idx-title">Sustainability You Can Trust</span><span class="idx-leader" aria-hidden="true"></span><span class="idx-tag">Fontys &times; Lumosa — Strategy</span></a>
+    <a class="idx-row" href="#w05" data-peek="w05-key"><span class="idx-num">05</span><span class="idx-title">The Conscious Toolkit</span><span class="idx-leader" aria-hidden="true"></span><span class="idx-tag">Fontys &times; Living Lab 040 — Strategy</span></a>
   </div>
 </section>
 
@@ -907,6 +935,7 @@
     <span class="foot-name">Oleksandra Pertseva</span>
     <span><a href="mailto:pertsevaolexa@gmail.com">pertsevaolexa@gmail.com</a><button type="button" class="copy" data-email="pertsevaolexa@gmail.com">Copy</button> &nbsp;/&nbsp; <a href="https://www.linkedin.com/in/oleksandra-pertseva-60574b357" target="_blank" rel="noopener">LinkedIn</a></span>
     <span>Eindhoven, NL</span>
+    <span class="foot-colophon">Set in Montserrat &amp; Lancelot &middot; MMXXVI</span>
   </div>
 </footer>
 
@@ -1269,5 +1298,39 @@
 })();
 </script>
 
+
+<script>
+(function(){
+  'use strict';
+  var run = document.getElementById('runhead');
+  if(!run) return;
+  var chapters = [];
+  var arts = document.querySelectorAll('article.work');
+  for(var i=0;i<arts.length;i++){
+    var n = arts[i].querySelector('.work-meta .n');
+    var t = arts[i].querySelector('.work-title');
+    chapters.push({el: arts[i], label: 'Ch. ' + (n ? n.textContent : '') + ' \u2014 ' + (t ? t.textContent : '')});
+  }
+  var current = '';
+  function update(){
+    var mid = window.innerHeight * 0.5;
+    var label = '';
+    for(var i=0;i<chapters.length;i++){
+      var r = chapters[i].el.getBoundingClientRect();
+      if(r.top <= mid && r.bottom >= mid){ label = chapters[i].label; break; }
+    }
+    if(label !== current){
+      current = label;
+      if(label){ run.textContent = label; run.classList.add('on'); }
+      else run.classList.remove('on');
+    }
+  }
+  var tick = false;
+  window.addEventListener('scroll', function(){
+    if(!tick){ tick = true; requestAnimationFrame(function(){ tick = false; update(); }); }
+  }, {passive:true});
+  update();
+})();
+</script>
 </body>
 </html>
