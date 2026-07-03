@@ -349,6 +349,39 @@
     .hero-photo{margin-top:40px;max-width:540px}
   }
 
+
+  /* ===== storytelling ===== */
+  .idx-lede{max-width:56ch;color:var(--muted);margin:14px 0 26px;font-size:15.5px}
+  .idx-part{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--muted);padding:26px 0 10px;border-bottom:1px solid var(--line)}
+  .part{padding:12vh 0 3vh}
+  .part-n{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:700;
+    letter-spacing:.26em;text-transform:uppercase;margin-bottom:14px;
+    background:linear-gradient(92deg,#8f7fd4,#c99be0 55%,#f2a97e);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .part h3{font-family:var(--display);font-weight:700;letter-spacing:-.02em;
+    font-size:clamp(1.7rem,4.6vw,2.9rem);margin-bottom:14px}
+  .part p{max-width:56ch;color:var(--ink2)}
+  .cta{padding-top:16vh;padding-bottom:15vh}
+  .cta-line{font-family:var(--display);font-weight:700;letter-spacing:-.025em;
+    font-size:clamp(2.3rem,6.5vw,4.8rem);margin:10px 0 34px}
+  .cta-line .grad{background:linear-gradient(92deg,#8f7fd4,#c99be0 45%,#f2a97e);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .cta-actions{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;text-decoration:none;
+    padding:15px 30px;background:var(--ink);color:var(--paper);border:1px solid var(--ink);
+    transition:transform .25s ease,box-shadow .25s ease}
+  .btn:hover{transform:translateY(-2px);box-shadow:6px 6px 0 rgba(17,17,17,.18)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  @media (max-width:720px){
+    .part{padding:9vh 0 2vh}
+    .cta{padding-top:12vh;padding-bottom:11vh}
+    .btn{padding:13px 22px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .btn:hover{transform:none}
+  }
   /* ===== creative hero ===== */
   header.hero{position:relative;overflow:clip}
   .name .lm:last-of-type>span{background:linear-gradient(92deg,#8f7fd4 0%,#c99be0 42%,#f2a97e 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -481,9 +514,12 @@
 
 <section class="index wrap" id="work">
   <div class="sec-label">Index</div>
+  <p class="idx-lede reveal">Five projects in two parts &mdash; a year inside Vienna&rsquo;s cultural scene, and the Fontys work in Eindhoven where the method formed. One through-line: research-heavy material, made human.</p>
   <div class="idx-list">
+    <div class="idx-part">Part I &mdash; The Vienna year</div>
     <a class="idx-row" href="#w01" data-peek="w01-key"><span class="idx-num">01</span><span class="idx-title">Don&rsquo;t Panic</span><span class="idx-tag">Museum Booster, Vienna — Strategy</span></a>
     <a class="idx-row" href="#w02" data-peek="w02-key"><span class="idx-num">02</span><span class="idx-title">Future Bridge</span><span class="idx-tag">What Matters Platform, Vienna — Events</span></a>
+    <div class="idx-part">Part II &mdash; Fontys, Eindhoven</div>
     <a class="idx-row" href="#w03" data-peek="w03-key"><span class="idx-num">03</span><span class="idx-title">Tomorrow&rsquo;s Leadership in Art</span><span class="idx-tag">Fontys &times; Deloitte — Campaign</span></a>
     <a class="idx-row" href="#w04" data-peek="w04-key"><span class="idx-num">04</span><span class="idx-title">Sustainability You Can Trust</span><span class="idx-tag">Fontys &times; Lumosa — Strategy</span></a>
     <a class="idx-row" href="#w05" data-peek="w05-key"><span class="idx-num">05</span><span class="idx-title">The Conscious Toolkit</span><span class="idx-tag">Fontys &times; Living Lab 040 — Strategy</span></a>
@@ -491,6 +527,14 @@
 </section>
 
 <main>
+
+  <section class="part" aria-label="Part one">
+    <div class="wrap">
+      <span class="part-n reveal">Part I</span>
+      <h3 class="reveal">The Vienna year</h3>
+      <p class="reveal">Twelve months inside Vienna&rsquo;s cultural scene &mdash; building the launch strategy for a museum leadership academy, and running a talk series where culture, design and foresight meet.</p>
+    </div>
+  </section>
 
   <!-- 01 — Museum Booster -->
   <article class="work" id="w01">
@@ -690,6 +734,14 @@
     </div>
   </article>
 
+  <section class="part" aria-label="Part two">
+    <div class="wrap">
+      <span class="part-n reveal">Part II</span>
+      <h3 class="reveal">Where the method formed</h3>
+      <p class="reveal">Three strategy projects from Fontys in Eindhoven &mdash; a campaign against workplace bullying, a positioning plan for an energy-tech company, and a communication strategy for a sustainable urban lab. Research first; then make it land.</p>
+    </div>
+  </section>
+
   <!-- 03 — Deloitte -->
   <article class="work" id="w03">
     <div class="scene" data-scene="arch" aria-hidden="true" style="--sg:linear-gradient(180deg,#c3aaed 0%,#eec4e7 35%,#ccb3e4 65%,#b696d5 100%)">
@@ -831,9 +883,18 @@
 </main>
 
 <section class="about wrap" id="about">
-  <div class="sec-label">About</div>
+  <div class="sec-label">Epilogue &mdash; About</div>
   <p class="reveal">I&rsquo;m Sasha Pertseva. I work in communication and events in the cultural sector, and I&rsquo;m finishing a degree in International Communication Management at Fontys in Eindhoven. Over the past year I&rsquo;ve been in Vienna &mdash; at Museum Booster on the communication, editorial, and event side of museum and design programmes, and with the What Matters Platform on cultural events. The &ldquo;Don&rsquo;t Panic&rdquo; launch strategy and the Future Bridge series above both come out of that year.</p>
   <p class="reveal">The remaining projects are from earlier work at Fontys. The through-line is the same: take something research-heavy and make it land with real people.</p>
+</section>
+
+<section class="cta wrap" id="contact">
+  <div class="sec-label">Next</div>
+  <p class="cta-line reveal">Let&rsquo;s make something <span class="grad">land</span>.</p>
+  <div class="cta-actions reveal">
+    <a class="btn" href="mailto:pertsevaolexa@gmail.com">Email me</a>
+    <a class="btn ghost" href="https://www.linkedin.com/in/oleksandra-pertseva-60574b357" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
 </section>
 
 <footer>
