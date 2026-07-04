@@ -377,6 +377,32 @@
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
 
+  /* reliable in-page navigation: snap can hijack a long smooth scroll,
+     so turn it off for the duration of the jump, then restore it */
+  var root = document.documentElement;
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if(id === '#') return;
+      var t = document.querySelector(id);
+      if(!t) return;
+      e.preventDefault();
+      var y = t.getBoundingClientRect().top + window.pageYOffset;
+      var prev = root.style.scrollSnapType;
+      root.style.scrollSnapType = 'none';
+      function restore(){ root.style.scrollSnapType = prev; }
+      if(reduce){ window.scrollTo(0, y); restore(); return; }
+      window.scrollTo({top:y, behavior:'smooth'});
+      if('onscrollend' in window){
+        window.addEventListener('scrollend', function h(){
+          window.removeEventListener('scrollend', h); restore();
+        });
+      } else {
+        setTimeout(restore, 1400);
+      }
+    });
+  });
+
   var els = document.querySelectorAll('.r');
   if(reduce || !('IntersectionObserver' in window)){
     els.forEach(function(e){ e.classList.add('in'); });
