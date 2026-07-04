@@ -6,14 +6,13 @@
 <title>Oleksandra Pertseva — Portfolio</title>
 <meta name="description" content="Oleksandra Pertseva — communication for museums and cultural organisations. Work from Museum Booster and the What Matters Platform in Vienna, and Fontys in Eindhoven.">
 <style>
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-snap-type:y proximity}
   body{
     font-family:"Times New Roman",Times,serif;
     font-size:17px;line-height:1.6;
-    color:#111;background:#fffdf8;
+    color:#111;background:#e7e1d6;
     margin:0;
   }
-  main{max-width:660px;margin:0 auto;padding:14vh 22px 72px}
   a{color:#111;text-decoration:none;
     background-image:linear-gradient(#111,#111);
     background-repeat:no-repeat;background-position:0 100%;background-size:100% 1px;
@@ -23,32 +22,67 @@
   p{margin:0 0 14px}
   .muted{color:#666}
 
-  #progress{position:fixed;top:0;left:0;height:2px;width:0;background:#111;z-index:9}
+  #progress{position:fixed;top:0;left:0;height:2px;width:0;background:#111;z-index:20}
 
-  /* header */
-  h1{font-weight:bold;font-size:clamp(2.7rem,9vw,4.8rem);line-height:.98;
+  /* ---- cover ---- */
+  .cover{min-height:100svh;display:flex;align-items:center;justify-content:center;
+    padding:24px;scroll-snap-align:start;position:relative;overflow:hidden}
+  .cover-inner{width:min(680px,100%);min-height:min(88svh,860px);
+    background:#fffdf8;box-shadow:0 20px 60px rgba(0,0,0,.18);
+    display:flex;align-items:center;justify-content:center;padding:22px;
+    will-change:transform,opacity}
+  .frame{border:1px solid #111;outline:1px solid #111;outline-offset:6px;
+    width:100%;min-height:calc(min(88svh,860px) - 44px);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:9vh 8vw;position:relative}
+  .cover-kicker{font-style:italic;color:#555;letter-spacing:.04em;margin:0 0 6vh}
+  .cover-title{font-weight:bold;font-size:clamp(2.6rem,10vw,5.4rem);line-height:.98;
     letter-spacing:-.02em;margin:0}
+  .cover-sub{font-style:italic;color:#555;font-size:clamp(1rem,2.4vw,1.2rem);
+    margin:34px 0 0;line-height:1.5}
+  .cover-orn{margin-top:6vh;color:#777;letter-spacing:.3em}
+  .cover-begin{position:absolute;left:0;right:0;bottom:5vh;text-align:center;
+    font-style:italic;color:#555;font-size:.98rem}
+  .cover-begin a{background-image:none;color:#555}
+  .cover-begin a:hover{color:#111}
+  .cover-begin .arrow{display:inline-block;margin-left:2px;
+    animation:nudge 1.8s ease-in-out infinite}
+  @keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+  /* staggered rise on load */
   .lm{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.05em;margin-bottom:-.05em}
   .lm>span{display:inline-block;transform:translateY(115%);
-    animation:lm-up .9s cubic-bezier(.16,.84,.24,1) .15s forwards}
-  .lm:nth-of-type(2)>span{animation-delay:.3s}
-  .route{font-style:italic;color:#666;font-size:1.1rem;margin-top:18px;
-    animation:fade-rise .8s .55s both}
-  .intro{animation:fade-rise .8s .7s both}
+    animation:lm-up .9s cubic-bezier(.16,.84,.24,1) .2s forwards}
+  .lm:nth-of-type(2)>span{animation-delay:.34s}
+  .cover-kicker{animation:fade-in .8s .1s both}
+  .cover-sub{animation:fade-rise .9s .7s both}
+  .cover-orn{animation:fade-in 1s 1s both}
+  .cover-begin{animation:fade-in 1s 1.4s both}
   @keyframes lm-up{to{transform:none}}
   @keyframes fade-in{from{opacity:0}to{opacity:1}}
   @keyframes fade-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 
+  /* ---- book / sheets ---- */
+  .book{max-width:840px;margin:0 auto;padding:0 20px 60px}
+  .sheet{background:#fffdf8;border:1px solid #d8d4c8;
+    box-shadow:0 6px 30px rgba(0,0,0,.09);
+    padding:9vh clamp(24px,6vw,72px) 6vh;margin:0 0 30px;
+    min-height:92svh;box-sizing:border-box;position:relative;
+    display:flex;flex-direction:column;scroll-snap-align:start}
+  .sheet-body{flex:1 0 auto}
+  .folio{text-align:center;font-style:italic;color:#999;
+    font-size:.95rem;margin-top:44px;padding-top:8px}
+
   /* prose */
   .prose{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
-  .lede{margin-top:40px;font-size:1.06em}
+  .lede{font-size:1.06em}
   .lede::first-letter{float:left;font-size:3.4em;line-height:.8;padding:.06em .12em 0 0}
 
   /* contents */
-  h2.sec{font-weight:normal;font-style:italic;font-size:1.35rem;margin:84px 0 16px}
+  h2.sec{font-weight:normal;font-style:italic;font-size:1.5rem;margin:0 0 22px}
   .idx-part{font-style:italic;color:#666;padding:20px 0 6px}
   .idx-row{display:grid;grid-template-columns:34px max-content 1fr auto;gap:0 10px;
-    align-items:baseline;padding:8px 2px;border-top:1px solid #ddd;
+    align-items:baseline;padding:10px 2px;border-top:1px solid #ddd;
     background-image:none;transition:padding-left .25s ease}
   .idx-row:hover{padding-left:10px;background-size:0}
   .idx-num{font-size:.95rem;color:#666}
@@ -58,42 +92,56 @@
   .idx-tag{font-style:italic;color:#666;font-size:.95rem;text-align:right}
 
   /* parts */
-  .part{text-align:center;margin:100px 0 40px}
-  .part::before{content:"\2042";display:block;color:#666;letter-spacing:.3em;margin-bottom:18px}
+  .part{text-align:center;margin:0 0 44px}
+  .part::before{content:"\2042";display:block;color:#777;letter-spacing:.3em;margin-bottom:18px}
   .part-n{font-style:italic;color:#666}
-  .part h2{font-weight:bold;font-size:clamp(1.7rem,5vw,2.3rem);letter-spacing:-.01em;margin:6px 0 0}
+  .part h2{font-weight:bold;font-size:clamp(1.8rem,5vw,2.5rem);letter-spacing:-.01em;margin:6px 0 0}
   .part .muted{font-style:italic;margin-top:10px}
-  .fleuron{text-align:center;margin:76px 0;font-size:19px;color:#666}
+  .fleuron{text-align:center;margin:52px 0 0;font-size:19px;color:#777}
 
   /* chapters */
-  .ch{margin:58px 0 0}
+  .ch{margin:0}
+  .ch + .ch{margin-top:64px}
   .ch-meta{font-style:italic;color:#666;margin-bottom:4px}
   .ch-meta .n{font-style:normal;font-weight:bold;color:#111;margin-right:10px}
-  .ch h3{font-weight:bold;font-size:clamp(1.4rem,4vw,1.8rem);line-height:1.1;
-    letter-spacing:-.01em;margin:0 0 14px}
+  .ch h3{font-weight:bold;font-size:clamp(1.5rem,4vw,2rem);line-height:1.1;
+    letter-spacing:-.01em;margin:0 0 16px}
 
   /* plates */
-  figure{margin:36px 0 32px}
+  figure{margin:34px 0 30px}
   figure img{display:block;width:100%;border:1px solid #ddd;box-sizing:border-box}
   figure video{display:block;width:100%;max-width:320px;margin:0 auto;border:1px solid #ddd}
   figcaption{font-style:italic;color:#666;text-align:center;font-size:.98rem;margin-top:12px}
 
-  /* end matter */
-  .contact{margin-top:88px;text-align:center;font-size:1.08rem}
+  /* back cover */
+  .sheet.back{align-items:center;justify-content:center;text-align:center}
+  .back .frame{border:1px solid #111;outline:1px solid #111;outline-offset:6px;
+    width:100%;padding:12vh 8vw;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;min-height:70svh}
+  .back-orn{color:#777;letter-spacing:.3em;margin-bottom:30px}
+  .back h2{font-weight:bold;font-size:clamp(1.6rem,4.5vw,2.2rem);margin:0 0 26px;letter-spacing:-.01em}
+  .contact{font-size:1.1rem;margin:0}
+  .back-top{margin-top:34px;font-style:italic;color:#555}
+  .back-top a{background-image:none;color:#555}
+  .back-top a:hover{color:#111}
 
   /* scroll reveals */
   .r{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
   .r.in{opacity:1;transform:none}
 
   @media (max-width:720px){
-    main{padding:10vh 20px 56px}
+    .book{padding:0 12px 48px}
+    .sheet{padding:7vh 22px 5vh;margin-bottom:20px}
     .prose{text-align:left;hyphens:none}
     .idx-row{grid-template-columns:30px 1fr}
     .idx-leader,.idx-tag{display:none}
+    .frame{padding:7vh 7vw}
   }
   @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    .lm>span,.route,.intro{animation:none;transform:none;opacity:1}
+    html{scroll-behavior:auto;scroll-snap-type:none}
+    .lm>span,.cover-kicker,.cover-sub,.cover-orn,.cover-begin{animation:none;transform:none;opacity:1}
+    .cover-begin .arrow{animation:none}
+    .cover-inner{transform:none!important;opacity:1!important}
     .r{opacity:1;transform:none;transition:none}
     a{transition:none}
     .idx-row{transition:none}
@@ -102,17 +150,31 @@
 </head>
 <body>
 <div id="progress" aria-hidden="true"></div>
-<main>
 
-<h1><span class="lm"><span>Oleksandra</span></span><br><span class="lm"><span>Pertseva</span></span></h1>
-<p class="route">Communication, cultural sector. Kyiv &rarr; Vienna &rarr; Eindhoven.</p>
+<header class="cover" id="top">
+  <div class="cover-inner" id="cover-inner">
+    <div class="frame">
+      <p class="cover-kicker">Portfolio</p>
+      <h1 class="cover-title"><span class="lm"><span>Oleksandra</span></span><br><span class="lm"><span>Pertseva</span></span></h1>
+      <p class="cover-sub">Communication, cultural sector.<br>Kyiv &rarr; Vienna &rarr; Eindhoven.</p>
+      <div class="cover-orn">&#10086;</div>
+      <div class="cover-begin"><a href="#p1">Begin <span class="arrow">&darr;</span></a></div>
+    </div>
+  </div>
+</header>
 
-<div class="intro">
-<p class="prose lede">I plan and produce communication for museums and cultural organisations: press conferences, EU project deliverables, event campaigns, editorial. Communication manager at Museum Booster in Vienna, finishing International Communication Management at Fontys in Eindhoven. I work in Ukrainian, Russian, English and German.</p>
-<p class="prose">Currently looking for a paid graduation internship in the Dutch cultural sector, starting September 2026 or February 2027. <a href="mailto:pertsevaolexa@gmail.com">Write to me.</a></p>
+<main class="book">
+
+<section class="sheet" id="p1">
+<div class="sheet-body">
+<p class="prose lede r">I plan and produce communication for museums and cultural organisations: press conferences, EU project deliverables, event campaigns, editorial. Communication manager at Museum Booster in Vienna, finishing International Communication Management at Fontys in Eindhoven. I work in Ukrainian, Russian, English and German.</p>
+<p class="prose r">Currently looking for a paid graduation internship in the Dutch cultural sector, starting September 2026 or February 2027. <a href="mailto:pertsevaolexa@gmail.com">Write to me.</a></p>
 </div>
+<div class="folio">&middot; 1 &middot;</div>
+</section>
 
-
+<section class="sheet">
+<div class="sheet-body">
 <h2 class="sec r" id="contents">Contents</h2>
 <div class="idx-part r">Part I &mdash; Vienna</div>
 <a class="idx-row r" href="#ch01"><span class="idx-num">01</span><span class="idx-title">Museum Connections, Paris</span><span class="idx-leader"></span><span class="idx-tag">Museum Booster, 2026</span></a>
@@ -122,14 +184,16 @@
 <a class="idx-row r" href="#ch04"><span class="idx-num">04</span><span class="idx-title">Sustainability You Can Trust</span><span class="idx-leader"></span><span class="idx-tag">Lumosa, 2025</span></a>
 <a class="idx-row r" href="#ch05"><span class="idx-num">05</span><span class="idx-title">The Conscious Toolkit</span><span class="idx-leader"></span><span class="idx-tag">Living Lab 040</span></a>
 <a class="idx-row r" href="#ch06"><span class="idx-num">06</span><span class="idx-title">Tomorrow&rsquo;s Leadership in Art</span><span class="idx-leader"></span><span class="idx-tag">with Deloitte</span></a>
+</div>
+<div class="folio">&middot; 2 &middot;</div>
+</section>
 
+<section class="sheet">
+<div class="sheet-body">
 <div class="part r">
 <span class="part-n">Part I</span>
 <h2>Vienna</h2>
 </div>
-
-
-
 <article class="ch" id="ch01">
 <p class="ch-meta r"><span class="n">01</span>Museum Booster, January 2026</p>
 <h3 class="r">Museum Connections, Paris</h3>
@@ -145,7 +209,12 @@
 <figcaption>Plate II. The stand at Museum Connections, Paris, January 2026.</figcaption>
 </figure>
 </article>
+</div>
+<div class="folio">&middot; 3 &middot;</div>
+</section>
 
+<section class="sheet">
+<div class="sheet-body">
 <article class="ch" id="ch02">
 <p class="ch-meta r"><span class="n">02</span>Vienna, 2026</p>
 <h3 class="r">What Matters Platform</h3>
@@ -182,22 +251,29 @@
 <figcaption>Plate VII. Motion loop for Signals that Matter: iSaloni 2026.</figcaption>
 </figure>
 </article>
+</div>
+<div class="folio">&middot; 4 &middot;</div>
+</section>
 
+<section class="sheet">
+<div class="sheet-body">
 <article class="ch" id="ch03">
 <p class="ch-meta r"><span class="n">03</span>Ukraine House Vienna</p>
 <h3 class="r">&#1051;&#1045;&#1051;&#1045;&#1050;&#1040; at Eurovision 2026</h3>
 <p class="prose r">Press conference for Ukraine&rsquo;s Eurovision artist. Media accreditation, guest lists, registration. The most intense coordination work of the year.</p>
 </article>
-
-
 <div class="fleuron r">&#10086;</div>
+</div>
+<div class="folio">&middot; 5 &middot;</div>
+</section>
 
+<section class="sheet">
+<div class="sheet-body">
 <div class="part r">
 <span class="part-n">Part II</span>
 <h2>Eindhoven</h2>
 <p class="muted">Client projects from the Fontys programme.</p>
 </div>
-
 <article class="ch" id="ch04">
 <p class="ch-meta r"><span class="n">04</span>Lumosa, 2025</p>
 <h3 class="r">Sustainability You Can Trust</h3>
@@ -211,32 +287,58 @@
 <figcaption>Plate IX. Presenting the plan to the client.</figcaption>
 </figure>
 </article>
+</div>
+<div class="folio">&middot; 6 &middot;</div>
+</section>
 
+<section class="sheet">
+<div class="sheet-body">
 <article class="ch" id="ch05">
 <p class="ch-meta r"><span class="n">05</span>Living Lab 040, Eindhoven</p>
 <h3 class="r">The Conscious Toolkit</h3>
 <p class="prose r">Living Lab 040 tests sustainable housing on an urban site in Eindhoven, and most of its research sat in dense reports. The toolkit turns that research into AutoCAD templates and Revit models professionals can open in their own software. <a href="https://theconsioustoolkit.my.canva.site/">The site is live.</a></p>
 </article>
+</div>
+<div class="folio">&middot; 7 &middot;</div>
+</section>
 
+<section class="sheet">
+<div class="sheet-body">
 <article class="ch" id="ch06">
 <p class="ch-meta r"><span class="n">06</span>with Deloitte</p>
 <h3 class="r">Tomorrow&rsquo;s Leadership in Art</h3>
 <p class="prose r">A campaign concept against workplace bullying among senior men at Dutch companies. Instead of a lecture, a travelling art exhibition with a VR simulation and workshops. <a href="https://www.canva.com/design/DAGHpqrmeM4/_oJ709-XSRlrMWQ8Bml5Jg/view">Project document.</a></p>
 </article>
+</div>
+<div class="folio">&middot; 8 &middot;</div>
+</section>
 
-
-<p class="contact r"><a href="mailto:pertsevaolexa@gmail.com">pertsevaolexa@gmail.com</a> &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/oleksandra-pertseva-60574b357">LinkedIn</a></p>
-
+<section class="sheet back">
+<div class="frame r">
+<div class="back-orn">&#10086;</div>
+<h2>Thank you for reading.</h2>
+<p class="contact"><a href="mailto:pertsevaolexa@gmail.com">pertsevaolexa@gmail.com</a> &nbsp;&middot;&nbsp; <a href="https://www.linkedin.com/in/oleksandra-pertseva-60574b357">LinkedIn</a></p>
+<p class="back-top"><a href="#top">Return to cover &uarr;</a></p>
+</div>
+</section>
 
 </main>
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var bar = document.getElementById('progress');
+  var cover = document.getElementById('cover-inner');
   function onScroll(){
     var h = document.documentElement;
     var max = h.scrollHeight - h.clientHeight;
-    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    var y = h.scrollTop;
+    bar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    if(cover && !reduce){
+      var vh = window.innerHeight;
+      var p = Math.min(y / vh, 1);
+      cover.style.transform = 'translateY(' + (p * -70) + 'px) scale(' + (1 - p * 0.03) + ')';
+      cover.style.opacity = (1 - p * 0.9).toFixed(3);
+    }
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
