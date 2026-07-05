@@ -56,7 +56,7 @@
 .plates-grid::-webkit-scrollbar-thumb{background:var(--border-soft);border-radius:20px}
 .scroll-hint{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:550;color:var(--color-newsprint-gray);margin:0 0 14px}
 @media(max-width:680px){.plates-grid>.plate{flex-basis:82%}}
-
+/* frameless swipe gallery */.plates-grid>.plate{flex:0 0 auto!important}.plates-grid .plate-frame{aspect-ratio:auto!important;height:clamp(300px,56vh,540px)!important;border:0!important;border-radius:0!important;background:transparent!important;overflow:visible!important;padding:0!important;display:block!important;position:relative}.plates-grid .plate-frame .media-asset{position:static!important;inset:auto!important;width:auto!important;height:100%!important;max-width:none!important;object-fit:contain!important;border-radius:0!important}.plates-grid .plate video.media-asset{background:#000}@media(max-width:680px){.plates-grid .plate-frame{height:clamp(240px,42vh,420px)!important}}
 
 /* --- clean index: text-only cards, no image previews --- */
 .work-card{min-height:clamp(220px,24vw,300px)}
