@@ -45,6 +45,17 @@
 /* --- fit fix: media fully visible inside uniform frame, no overflow crop --- */
 .plate-frame{position:relative;background:var(--color-bone-white);padding:0}
 .plate-frame .media-asset{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:0}
+
+/* --- pictures scroll: horizontal gallery --- */
+.plates-grid{display:flex!important;grid-template-columns:none!important;gap:22px;overflow-x:auto;overflow-y:hidden;padding:4px 2px 16px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;cursor:grab}
+.plates-grid.dragging{cursor:grabbing;scroll-behavior:auto}
+.plates-grid>.plate{flex:0 0 min(86%,560px);margin:0}
+.plates-grid img,.plates-grid video{-webkit-user-drag:none;user-select:none}
+.plates-grid::-webkit-scrollbar{height:8px}
+.plates-grid::-webkit-scrollbar-track{background:transparent}
+.plates-grid::-webkit-scrollbar-thumb{background:var(--border-soft);border-radius:20px}
+.scroll-hint{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:550;color:var(--color-newsprint-gray);margin:0 0 14px}
+@media(max-width:680px){.plates-grid>.plate{flex-basis:82%}}
 </style></head>
 <body id="top"><div class="page-shell"><nav aria-label="Primary navigation" class="site-nav"><div class="nav-inner"><a class="wordmark" href="../index.html">Oleksandra Pertseva</a><div class="nav-links"><a href="../index.html#work">Work</a><a href="../index.html#approach">Approach</a><a href="../index.html#contact">Contact</a></div></div></nav>
 <main class="case-main"><header class="case-hero"><div class="container case-hero-grid"><div class="h-rise"><div class="case-meta"><span>Part II — Eindhoven · 04</span><span>Lumosa · Communication plan</span></div><h1>Sustainability You Can Trust</h1></div><aside><p class="case-summary">A positioning and communication plan for an energy-tech company ahead of its 2025 trade fairs.</p><div class="case-actions"><a class="btn-text" href="../index.html#work">Back to selected work</a></div></aside></div></header>

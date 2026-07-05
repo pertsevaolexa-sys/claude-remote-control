@@ -25,4 +25,15 @@
     lb.addEventListener('click',function(e){if(e.target===lb)cl();});
     document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')cl();if(e.key==='ArrowRight')mv(1);if(e.key==='ArrowLeft')mv(-1);});
   }
+  document.querySelectorAll('.plates-grid').forEach(function(g){
+    if(g.scrollWidth>g.clientWidth+8){
+      var hint=document.createElement('p');hint.className='scroll-hint';hint.textContent='Scroll / swipe →';
+      g.parentNode.insertBefore(hint,g);
+    }
+    var down=false,sx=0,sl=0,moved=false;
+    g.addEventListener('pointerdown',function(e){if(e.pointerType==='touch')return;down=true;moved=false;sx=e.clientX;sl=g.scrollLeft;g.classList.add('dragging');});
+    window.addEventListener('pointerup',function(){if(down){down=false;g.classList.remove('dragging');}});
+    g.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;if(Math.abs(dx)>4)moved=true;g.scrollTo({left:sl-dx,behavior:'auto'});});
+    g.addEventListener('click',function(e){if(moved){e.stopPropagation();e.preventDefault();moved=false;}},true);
+  });
 })();
