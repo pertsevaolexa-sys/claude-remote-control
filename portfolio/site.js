@@ -26,7 +26,7 @@
     document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')cl();if(e.key==='ArrowRight')mv(1);if(e.key==='ArrowLeft')mv(-1);});
   }
   document.querySelectorAll('.plates-grid').forEach(function(g){
-    if(g.scrollWidth>g.clientWidth+8){
+    if(g.querySelectorAll('.plate').length>1){
       var hint=document.createElement('p');hint.className='scroll-hint';hint.textContent='Scroll / swipe →';
       g.parentNode.insertBefore(hint,g);
     }
