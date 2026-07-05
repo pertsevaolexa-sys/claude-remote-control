@@ -161,7 +161,7 @@ SCRIPT = r"""
   // horizontal drag-to-scroll galleries + scroll hint
   document.querySelectorAll('.plates-grid').forEach(function(g){
     if(g.querySelectorAll('.plate').length>1){
-      var hint=document.createElement('p');hint.className='scroll-hint';hint.textContent='Scroll / swipe →';
+      var hint=document.createElement('p');hint.className='scroll-hint container';hint.textContent='Scroll / swipe →';
       g.parentNode.insertBefore(hint,g);
     }
     var down=false,sx=0,sl=0,moved=false;
