@@ -36,4 +36,11 @@
     g.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;if(Math.abs(dx)>4)moved=true;g.scrollTo({left:sl-dx,behavior:'auto'});});
     g.addEventListener('click',function(e){if(moved){e.stopPropagation();e.preventDefault();moved=false;}},true);
   });
+  // scroll-reveal for editorial sections
+  if(!reduce&&'IntersectionObserver' in window){
+    var rev=[].slice.call(document.querySelectorAll('.statement-grid,.section-head,.work-grid,.dark-grid'));
+    rev.forEach(function(el){el.classList.add('reveal-init');});
+    var ro=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('reveal-in');ro.unobserve(x.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    rev.forEach(function(el){ro.observe(el);});
+  }
 })();

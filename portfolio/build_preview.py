@@ -57,10 +57,16 @@ case_css = get_style(case_htmls[CASES[0]])
 # token/base block, so case_css already contains all shared rules. Use case_css as the sheet
 # and additionally include any index-only rules missing from it.
 sheet = case_css
-for chunk in re.findall(r'[^{}]+\{[^{}]*\}', base_css):
-    sel = chunk.split('{')[0].strip()
-    if sel and sel not in sheet:
-        sheet += chunk
+# capture @media blocks atomically (one level of nesting) OR plain rules, so
+# index-only media queries survive intact instead of being split on their braces.
+for chunk in re.findall(r'@media[^{]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}|[^{}]+\{[^{}]*\}', base_css):
+    if chunk.lstrip().startswith('@media'):
+        if chunk not in sheet:
+            sheet += chunk
+    else:
+        sel = chunk.split('{')[0].strip()
+        if sel and sel not in sheet:
+            sheet += chunk
 
 # route display rules + keep only active section visible
 sheet += ('\n.route{display:none}.route.is-active{display:block}'
@@ -170,6 +176,14 @@ SCRIPT = r"""
     g.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;if(Math.abs(dx)>4)moved=true;g.scrollTo({left:sl-dx,behavior:'auto'});});
     g.addEventListener('click',function(e){if(moved){e.stopPropagation();e.preventDefault();moved=false;}},true);
   });
+
+  // scroll-reveal for editorial sections
+  if(!reduce&&'IntersectionObserver' in window){
+    var rev=[].slice.call(document.querySelectorAll('.statement-grid,.section-head,.work-grid,.dark-grid'));
+    rev.forEach(function(el){el.classList.add('reveal-init');});
+    var ro=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('reveal-in');ro.unobserve(x.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    rev.forEach(function(el){ro.observe(el);});
+  }
 })();
 </script>
 """
