@@ -41,7 +41,7 @@ def get_style(html):
 
 CASES = [
     '01-museum-connections','02-what-matters-platform','03-leleka-eurovision',
-    '04-lumosa-sustainability','05-conscious-toolkit','06-tomorrows-leadership',
+    '04-lumosa-sustainability','05-conscious-toolkit','06-tomorrows-leadership','07-tabasamu-karaoke',
 ]
 
 idx_html  = (ROOT/'index.html').read_text()
@@ -125,7 +125,7 @@ SCRIPT = r"""
   function route(){
     var h=(location.hash||'').replace('#','');
     var target='home',anchor=null;
-    if(/^case-0[1-6]$/.test(h)) target=h;
+    if(/^case-0[1-7]$/.test(h)) target=h;
     else if(h===''||h==='home'||h==='top') target='home';
     else { target='home'; anchor=h; }
     show(target);
