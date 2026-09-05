@@ -1,1 +1,4 @@
 .env
+
+# design canvas build output (~2.6MB of editor payload); regenerate by re-seeding
+brands/polygood/carousel/polygood-wall-tiles-carousel.html

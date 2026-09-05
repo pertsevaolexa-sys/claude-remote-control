@@ -1,0 +1,80 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1080,
+      "h": 1350,
+      "title": "01  Main"
+    },
+    {
+      "file": "Problem.dc.html",
+      "x": 1200,
+      "y": 0,
+      "w": 1080,
+      "h": 1350,
+      "title": "02  Problem"
+    },
+    {
+      "file": "Solution.dc.html",
+      "x": 2400,
+      "y": 0,
+      "w": 1080,
+      "h": 1350,
+      "title": "03  Solution"
+    },
+    {
+      "file": "Material.dc.html",
+      "x": 3600,
+      "y": 0,
+      "w": 1080,
+      "h": 1350,
+      "title": "04  Material"
+    },
+    {
+      "file": "Spec.dc.html",
+      "x": 0,
+      "y": 1550,
+      "w": 1080,
+      "h": 1350,
+      "title": "05  Spec"
+    },
+    {
+      "file": "Application.dc.html",
+      "x": 1200,
+      "y": 1550,
+      "w": 1080,
+      "h": 1350,
+      "title": "06  Application"
+    },
+    {
+      "file": "Circularity.dc.html",
+      "x": 2400,
+      "y": 1550,
+      "w": 1080,
+      "h": 1350,
+      "title": "07  Circularity"
+    },
+    {
+      "file": "Samples.dc.html",
+      "x": 3600,
+      "y": 1550,
+      "w": 1080,
+      "h": 1350,
+      "title": "08  Samples"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "brand-note",
+      "x": 0,
+      "y": -190,
+      "w": 900,
+      "text": "Polygood Wall Tiles - Instagram carousel, 8 x 1080x1350.\nColours and type are a placeholder interpretation, not the Figma brand book. Swap the token block at the top of build.py and re-run to apply the real brand values."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}
