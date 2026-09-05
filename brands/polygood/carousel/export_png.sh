@@ -11,9 +11,9 @@ mkdir -p exports .render
 
 python3 - <<'PY'
 import re, os
-order = [("Main","01-cover"),("Problem","02-problem"),("Solution","03-solution"),
-         ("Material","04-material"),("Spec","05-spec"),("Application","06-application"),
-         ("Circularity","07-circularity"),("Samples","08-samples")]
+order = [("Main","01-cover"),("WhatItIs","02-what-it-is"),("Texture","03-texture"),
+         ("NoGrout","04-no-grout"),("Behaves","05-behaves"),("ThroughColour","06-through-colour"),
+         ("Thickness","07-thickness"),("Engravings","08-engravings"),("Custom","09-custom")]
 css = None
 for n, out in order:
     s = open(n + ".dc.html", encoding="utf-8").read()

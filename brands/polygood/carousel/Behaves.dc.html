@@ -163,38 +163,50 @@
     text-transform:uppercase;padding:26px 40px;
   }
   .swipe{display:flex;align-items:center;gap:13px;}
+
+  /* --- engraving swatches (slide 08) ---------------------------------- */
+  .swatches{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:26px 26px;height:100%;
+  }
+  .sw{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+  .sw .field{position:absolute;inset:0;}
+  .sw .cap{
+    position:relative;font-family:var(--pg-mono);font-weight:500;font-size:21px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--pg-ink);
+    background:var(--pg-ground);padding:12px 16px;align-self:flex-start;margin:14px;
+  }
+
+  /* --- thickness bars (slide 07) --------------------------------------- */
+  .gauge{display:flex;flex-direction:column;justify-content:center;gap:58px;height:100%;}
+  .gauge .g{display:flex;align-items:center;gap:30px;}
+  .gauge .bar{position:relative;overflow:hidden;flex:1 1 auto;
+    box-shadow:inset 0 0 0 2px rgba(21,23,26,.16);}
+  .gauge .k{
+    font-family:var(--pg-mono);font-weight:500;font-size:30px;letter-spacing:-.01em;
+    color:var(--pg-ink);width:132px;flex:0 0 132px;
+  }
+  /* the tag sits inside the bar so all three bars keep an identical width
+     and the thickness comparison stays honest */
+  .gauge .tag{
+    position:absolute;right:18px;top:50%;transform:translateY(-50%);
+    font-family:var(--pg-mono);font-weight:500;font-size:20px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--pg-ink);background:var(--pg-ground);
+    padding:7px 14px;white-space:nowrap;
+  }
   </style>
 </helmet>
 <div class="slide">
   <div class="head pad">
-    <p class="label">04 &#8212; Specification</p>
-    <h2 class="h2">The numbers.</h2>
+    <p class="label">04 &#8212; How it behaves</p>
+    <h2 class="h2" style="font-size:70px;">Installs like a panel.<br>Performs like a<br>solid surface.<br>Reads like tile.</h2>
   </div>
-  <div class="figure pad" style="margin-top:44px;">
-    <div class="spec" style="height:100%;justify-content:space-between;">
-      <div class="row">
-        <span class="k">Panel</span>
-        <span class="v">2800 &#215; 1400 mm<small>110 &#215; 55 in</small></span>
-      </div>
-      <div class="row">
-        <span class="k">Thickness</span>
-        <span class="v">12 or 19 mm</span>
-      </div>
-      <div class="row">
-        <span class="k">Weight</span>
-        <span class="v">50&#8211;78 kg<small>110&#8211;172 lb per panel</small></span>
-      </div>
-      <div class="row">
-        <span class="k">Palette</span>
-        <span class="v">50+ colourways</span>
-      </div>
-      <div class="row" style="border-bottom:none;">
-        <span class="k">Surface</span>
-        <span class="v">CNC-machined<small>groove field, pattern to order</small></span>
-      </div>
-    </div>
+  <div class="figure" style="margin-top:50px;">
+    <div class="terrazzo"></div>
+    <div class="grooves"></div>
+    <div class="edge"></div>
   </div>
-<div class="foot pad"><span>05 / 08</span><span>Full guide at polygood.com</span></div>
+<div class="foot pad"><span>05 / 09</span><span>Panel / solid surface / tile</span></div>
 </div>
 </x-dc>
 </body>

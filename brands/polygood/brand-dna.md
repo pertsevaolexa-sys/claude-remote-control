@@ -57,40 +57,45 @@ display face and must be replaced with the real logo asset from the brand book.
 
 MATERIAL AND PRODUCT DETAILS
 ----------------------------
-Sourced from web research (see `carousel/SOURCES.md`), not from the brand book.
+**Primary source: the official launch copy supplied by the client** (see
+`carousel/COPY.md`). Where it conflicts with earlier web research, it wins.
 
-**Panel size:** 2800 × 1400 mm (110 × 55 in)
-**Thickness:** 12 mm or 19 mm
-**Weight:** 50–78 kg (110–172 lb) per panel, depending on thickness
-**Material:** 100% recycled and recyclable polystyrene (PS)
-**Feedstock:** post-consumer and post-industrial PS waste — refrigerator
-insulation, electronics housings, CD cases, disposable food containers, toys,
-building components
-**Palette:** 50+ colourways; patterns resembling terrazzo, marble, resin, acrylic
-**Wall Tiles surface:** grooves precision CNC-machined into slab-format panels
-to create a continuous tiled field with no grout joints
-**Properties:** durable, long-lasting, lightweight, waterproof; cuts and shapes
-with standard tooling
-**Applications:** bathrooms, kitchens, hospitality, offices, reception desks,
-wet zones, public and high-traffic commercial interiors
-**Certification:** Cradle to Cradle Certified® Bronze — first material of its
-kind to achieve it; verified Environmental Product Declaration (EPD)
+**Material:** 100% recycled polystyrene (PS), solid and through-colour, with no
+surface coatings — impact damage exposes the same colour, never a substrate
+**Format:** large-format panels, tile pattern engraved into the surface by CNC
+**Thickness:** 6, 8 and 12 mm — 12 mm made for high-impact environments
+**Surface:** grooves precision-machined into a full slab until the field reads
+as tile; the panel underneath stays continuous, so there is no grout in it
+**Positioning line:** "Installs like a panel, performs like a solid surface,
+reads like tile."
+**Engravings:** four available at launch (names not yet supplied); custom
+engraving to a client's brief, as with Polygood's existing custom patterns
+**Feedstock (per launch copy):** refrigerator insulation, CD cases, single-use
+cutlery, household electronics
 
-**Deliberately NOT claimed** (no verified source found — do not add without
-confirming against the technical guide):
-- fire rating / reaction-to-fire class
-- slip resistance
-- acoustic performance
-- specific CO₂ or embodied-carbon figures
-- warranty period
+**Project economics (LinkedIn copy only — not used on the Instagram slides):**
+- installs as slabs; a 4–5 m² run takes 1–2 hours rather than 12–18
+- installed labour roughly a quarter of ceramic's; material cost comparable
+- around half the weight of ceramic per m²
+- about 3.7 kg CO₂e per m², 14–21 kg/m² below ceramic tile
+
+**Superseded — do not reuse.** Earlier web research gave 12/19 mm thickness,
+which the launch copy contradicts. It also gave panel 2800 × 1400 mm, 50–78 kg
+per panel, 50+ colourways, Cradle to Cradle Certified® Bronze and a verified
+EPD. Those are Polygood-wide claims that the Wall Tiles launch copy does not
+repeat, so they have been removed from the carousel pending confirmation that
+they apply to this product.
+
+**Still unconfirmed, deliberately not claimed:** panel dimensions, weight,
+colourway count, fire rating, slip resistance, acoustic performance, warranty.
 
 DESIGN DIRECTION (as built)
 ---------------------------
 **Concept:** the layout system *is* the product. Every material field is drawn,
 not photographed: a seamless terrazzo of irregular fragments (generated as SVG
 from the `CHIPS` palette) overlaid with a machined V-groove field on a 168px
-pitch. Slide 2 is the only slide that shows conventional tile-and-grout, and it
-is deliberately the least attractive frame in the set.
+pitch. Slide 08 shows four distinct machined patterns as engraving swatches;
+both the patterns and their names are placeholders.
 **Composition:** strict left-aligned single column, 84px side margins, mono
 eyebrow label, display headline, body paragraph, then a full-bleed material
 field that absorbs the remaining height. Every slide closes on a hairline rule
@@ -103,8 +108,9 @@ occupy separate bands, which keeps every slide legible at feed thumbnail size.
 
 AD CREATIVE STYLE
 -----------------
-**Formats:** Instagram carousel 4:5 (1080 × 1350). Slide 1 carries the hook,
-slides 2–3 the problem/solution turn, 4–7 the evidence, 8 the ask.
+**Formats:** Instagram carousel 4:5 (1080 × 1350), 9 slides. Slide 1 announces,
+2–3 introduce the product and the news, 4–6 explain how it behaves, 7–8 give
+the options, 9 makes the ask.
 **Offer presentation:** soft, specifier-appropriate. One CTA, on the last slide
-only: order a sample box.
+only: send a brief for a custom engraving.
 **Emoji:** none.

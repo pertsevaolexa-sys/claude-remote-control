@@ -163,22 +163,52 @@
     text-transform:uppercase;padding:26px 40px;
   }
   .swipe{display:flex;align-items:center;gap:13px;}
+
+  /* --- engraving swatches (slide 08) ---------------------------------- */
+  .swatches{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:26px 26px;height:100%;
+  }
+  .sw{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+  .sw .field{position:absolute;inset:0;}
+  .sw .cap{
+    position:relative;font-family:var(--pg-mono);font-weight:500;font-size:21px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--pg-ink);
+    background:var(--pg-ground);padding:12px 16px;align-self:flex-start;margin:14px;
+  }
+
+  /* --- thickness bars (slide 07) --------------------------------------- */
+  .gauge{display:flex;flex-direction:column;justify-content:center;gap:58px;height:100%;}
+  .gauge .g{display:flex;align-items:center;gap:30px;}
+  .gauge .bar{position:relative;overflow:hidden;flex:1 1 auto;
+    box-shadow:inset 0 0 0 2px rgba(21,23,26,.16);}
+  .gauge .k{
+    font-family:var(--pg-mono);font-weight:500;font-size:30px;letter-spacing:-.01em;
+    color:var(--pg-ink);width:132px;flex:0 0 132px;
+  }
+  /* the tag sits inside the bar so all three bars keep an identical width
+     and the thickness comparison stays honest */
+  .gauge .tag{
+    position:absolute;right:18px;top:50%;transform:translateY(-50%);
+    font-family:var(--pg-mono);font-weight:500;font-size:20px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--pg-ink);background:var(--pg-ground);
+    padding:7px 14px;white-space:nowrap;
+  }
   </style>
 </helmet>
 <div class="slide">
   <div class="head pad">
-    <p class="label">02 &#8212; The move</p>
-    <h2 class="h2">So the tile is<br>machined into<br>the slab.</h2>
-    <p class="body">Grooves are CNC-cut into a single 2800 &#215; 1400 mm
-      panel. You get a continuous tiled field with the joint pattern you
-      specified, and no grout left to fail.</p>
+    <p class="label">02 &#8212; What&#39;s new</p>
+    <h2 class="h2">Our first surface<br>with real,<br>physical texture.</h2>
+    <p class="body">Until now the pattern came from the material&#39;s own
+      speckle. Engraving opens a whole new design language for Polygood.</p>
   </div>
-  <div class="figure" style="margin-top:52px;">
+  <div class="figure" style="margin-top:50px;">
     <div class="terrazzo"></div>
     <div class="grooves"></div>
     <div class="edge"></div>
   </div>
-<div class="foot pad"><span>03 / 08</span><span>One panel, no joints</span></div>
+<div class="foot pad"><span>03 / 09</span><span>A new design language</span></div>
 </div>
 </x-dc>
 </body>

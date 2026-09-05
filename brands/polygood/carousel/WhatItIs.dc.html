@@ -163,27 +163,52 @@
     text-transform:uppercase;padding:26px 40px;
   }
   .swipe{display:flex;align-items:center;gap:13px;}
+
+  /* --- engraving swatches (slide 08) ---------------------------------- */
+  .swatches{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:26px 26px;height:100%;
+  }
+  .sw{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+  .sw .field{position:absolute;inset:0;}
+  .sw .cap{
+    position:relative;font-family:var(--pg-mono);font-weight:500;font-size:21px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--pg-ink);
+    background:var(--pg-ground);padding:12px 16px;align-self:flex-start;margin:14px;
+  }
+
+  /* --- thickness bars (slide 07) --------------------------------------- */
+  .gauge{display:flex;flex-direction:column;justify-content:center;gap:58px;height:100%;}
+  .gauge .g{display:flex;align-items:center;gap:30px;}
+  .gauge .bar{position:relative;overflow:hidden;flex:1 1 auto;
+    box-shadow:inset 0 0 0 2px rgba(21,23,26,.16);}
+  .gauge .k{
+    font-family:var(--pg-mono);font-weight:500;font-size:30px;letter-spacing:-.01em;
+    color:var(--pg-ink);width:132px;flex:0 0 132px;
+  }
+  /* the tag sits inside the bar so all three bars keep an identical width
+     and the thickness comparison stays honest */
+  .gauge .tag{
+    position:absolute;right:18px;top:50%;transform:translateY(-50%);
+    font-family:var(--pg-mono);font-weight:500;font-size:20px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--pg-ink);background:var(--pg-ground);
+    padding:7px 14px;white-space:nowrap;
+  }
   </style>
 </helmet>
 <div class="slide">
   <div class="head pad">
-    <p class="label">01 &#8212; The problem</p>
-    <h2 class="h2">Every grout line<br>is a maintenance<br>contract.</h2>
-    <p class="body">Joints hold moisture. They discolour, they collect
-      build-up, and eventually they get re-done. In a hotel bathroom or a
-      busy washroom, that cycle starts the week you hand over.</p>
+    <p class="label">01 &#8212; What it is</p>
+    <h2 class="h2">Large-format panels,<br>tile pattern cut<br>into the surface.</h2>
+    <p class="body">100% recycled polystyrene, engraved by CNC until the field
+      reads as tile.</p>
   </div>
-  <div class="figure" style="margin-top:52px;">
-    <div class="grout">
-      <div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div>
-      <div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div>
-      <div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div>
-      <div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div>
-      <div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div>
-    </div>
+  <div class="figure" style="margin-top:50px;">
+    <div class="terrazzo"></div>
+    <div class="grooves"></div>
     <div class="edge"></div>
   </div>
-<div class="foot pad"><span>02 / 08</span><span>Conventional tile assembly</span></div>
+<div class="foot pad"><span>02 / 09</span><span>100% recycled polystyrene</span></div>
 </div>
 </x-dc>
 </body>

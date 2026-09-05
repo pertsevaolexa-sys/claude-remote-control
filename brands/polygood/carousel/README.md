@@ -1,6 +1,6 @@
 # Polygood® Wall Tiles — Instagram carousel
 
-8 slides, 1080 × 1350 (Instagram 4:5).
+9 slides, 1080 × 1350 (Instagram 4:5). Built from the official launch copy.
 
 **Canvas:** https://claude.ai/code/artifact/29745673-d72e-4b0b-9d1b-cbf08dc0a9a4
 (view, edit and export PNG/PDF per slide from the Export menu)

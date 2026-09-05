@@ -9,60 +9,68 @@
       "title": "01  Main"
     },
     {
-      "file": "Problem.dc.html",
+      "file": "WhatItIs.dc.html",
       "x": 1200,
       "y": 0,
       "w": 1080,
       "h": 1350,
-      "title": "02  Problem"
+      "title": "02  WhatItIs"
     },
     {
-      "file": "Solution.dc.html",
+      "file": "Texture.dc.html",
       "x": 2400,
       "y": 0,
       "w": 1080,
       "h": 1350,
-      "title": "03  Solution"
+      "title": "03  Texture"
     },
     {
-      "file": "Material.dc.html",
+      "file": "NoGrout.dc.html",
       "x": 3600,
       "y": 0,
       "w": 1080,
       "h": 1350,
-      "title": "04  Material"
+      "title": "04  NoGrout"
     },
     {
-      "file": "Spec.dc.html",
+      "file": "Behaves.dc.html",
+      "x": 4800,
+      "y": 0,
+      "w": 1080,
+      "h": 1350,
+      "title": "05  Behaves"
+    },
+    {
+      "file": "ThroughColour.dc.html",
       "x": 0,
       "y": 1550,
       "w": 1080,
       "h": 1350,
-      "title": "05  Spec"
+      "title": "06  ThroughColour"
     },
     {
-      "file": "Application.dc.html",
+      "file": "Thickness.dc.html",
       "x": 1200,
       "y": 1550,
       "w": 1080,
       "h": 1350,
-      "title": "06  Application"
+      "title": "07  Thickness"
     },
     {
-      "file": "Circularity.dc.html",
+      "file": "Engravings.dc.html",
       "x": 2400,
       "y": 1550,
       "w": 1080,
       "h": 1350,
-      "title": "07  Circularity"
+      "title": "08  Engravings"
     },
     {
-      "file": "Samples.dc.html",
+      "file": "Custom.dc.html",
       "x": 3600,
       "y": 1550,
       "w": 1080,
       "h": 1350,
-      "title": "08  Samples"
+      "title": "09  Custom"
     }
   ],
   "annotations": [
@@ -71,7 +79,7 @@
       "x": 0,
       "y": -190,
       "w": 900,
-      "text": "Polygood Wall Tiles - Instagram carousel, 8 x 1080x1350.\nColours and type are a placeholder interpretation, not the Figma brand book. Swap the token block at the top of build.py and re-run to apply the real brand values."
+      "text": "Polygood Wall Tiles - Instagram carousel, 9 x 1080x1350.\nColours and type are a placeholder interpretation, not the Figma brand book. Swap the token block at the top of build.py and re-run to apply the real brand values."
     }
   ],
   "launch": {

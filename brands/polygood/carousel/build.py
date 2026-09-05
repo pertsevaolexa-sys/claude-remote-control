@@ -273,6 +273,37 @@ __TOKENS__
     text-transform:uppercase;padding:26px 40px;
   }
   .swipe{display:flex;align-items:center;gap:13px;}
+
+  /* --- engraving swatches (slide 08) ---------------------------------- */
+  .swatches{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:26px 26px;height:100%;
+  }
+  .sw{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+  .sw .field{position:absolute;inset:0;}
+  .sw .cap{
+    position:relative;font-family:var(--pg-mono);font-weight:500;font-size:21px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--pg-ink);
+    background:var(--pg-ground);padding:12px 16px;align-self:flex-start;margin:14px;
+  }
+
+  /* --- thickness bars (slide 07) --------------------------------------- */
+  .gauge{display:flex;flex-direction:column;justify-content:center;gap:58px;height:100%;}
+  .gauge .g{display:flex;align-items:center;gap:30px;}
+  .gauge .bar{position:relative;overflow:hidden;flex:1 1 auto;
+    box-shadow:inset 0 0 0 2px rgba(21,23,26,.16);}
+  .gauge .k{
+    font-family:var(--pg-mono);font-weight:500;font-size:30px;letter-spacing:-.01em;
+    color:var(--pg-ink);width:132px;flex:0 0 132px;
+  }
+  /* the tag sits inside the bar so all three bars keep an identical width
+     and the thickness comparison stays honest */
+  .gauge .tag{
+    position:absolute;right:18px;top:50%;transform:translateY(-50%);
+    font-family:var(--pg-mono);font-weight:500;font-size:20px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--pg-ink);background:var(--pg-ground);
+    padding:7px 14px;white-space:nowrap;
+  }
 """
 
 ARROW = ('<svg width="30" height="14" viewBox="0 0 30 14" fill="none" '
@@ -280,10 +311,50 @@ ARROW = ('<svg width="30" height="14" viewBox="0 0 30 14" fill="none" '
          'stroke="currentColor" stroke-width="2" stroke-linecap="square"/></svg>')
 
 
+def engraving(kind, w=420, h=300):
+    """An inline SVG of one machined groove pattern, drawn over the material."""
+    L = []
+    st = 'stroke="rgba(21,23,26,.42)" stroke-width="3"'
+    hl = 'stroke="rgba(255,255,255,.34)" stroke-width="3"'
+    if kind == "grid":
+        for x in range(0, w + 1, 60):
+            L += ['<line x1="%d" y1="0" x2="%d" y2="%d" %s/>' % (x, x, h, st),
+                  '<line x1="%d" y1="0" x2="%d" y2="%d" %s/>' % (x + 3, x + 3, h, hl)]
+        for y in range(0, h + 1, 60):
+            L += ['<line x1="0" y1="%d" x2="%d" y2="%d" %s/>' % (y, w, y, st),
+                  '<line x1="0" y1="%d" x2="%d" y2="%d" %s/>' % (y + 3, w, y + 3, hl)]
+    elif kind == "bond":
+        row = 0
+        for y in range(0, h + 1, 60):
+            L += ['<line x1="0" y1="%d" x2="%d" y2="%d" %s/>' % (y, w, y, st),
+                  '<line x1="0" y1="%d" x2="%d" y2="%d" %s/>' % (y + 3, w, y + 3, hl)]
+            off = -70 if row % 2 == 0 else -140
+            for x in range(off, w + 141, 140):
+                L += ['<line x1="%d" y1="%d" x2="%d" y2="%d" %s/>' % (x, y, x, y + 60, st),
+                      '<line x1="%d" y1="%d" x2="%d" y2="%d" %s/>' % (x + 3, y, x + 3, y + 60, hl)]
+            row += 1
+    elif kind == "flute":
+        for x in range(0, w + 1, 32):
+            L += ['<line x1="%d" y1="0" x2="%d" y2="%d" %s/>' % (x, x, h, st),
+                  '<line x1="%d" y1="0" x2="%d" y2="%d" %s/>' % (x + 3, x + 3, h, hl)]
+    elif kind == "diagonal":
+        for i in range(-h, w + h + 1, 54):
+            L += ['<line x1="%d" y1="%d" x2="%d" y2="0" %s/>' % (i, h, i + h, st),
+                  '<line x1="%d" y1="%d" x2="%d" y2="0" %s/>' % (i + 3, h, i + h + 3, hl)]
+    return ('<svg class="field" xmlns="http://www.w3.org/2000/svg" '
+            'viewBox="0 0 %d %d" preserveAspectRatio="none" '
+            'width="100%%" height="100%%">%s</svg>' % (w, h, "".join(L)))
+
+
+def swatch(kind, caption):
+    return ('<div class="sw"><div class="field terrazzo"></div>%s'
+            '<span class="cap">%s</span></div>' % (engraving(kind), caption))
+
+
 def foot(num, right_html):
     return (
         '<div class="foot pad">'
-        '<span>' + num + ' / 08</span>'
+        '<span>' + num + ' / 09</span>'
         '<span>' + right_html + '</span>'
         '</div>'
     )
@@ -298,8 +369,8 @@ SLIDES = []
 SLIDES.append(("Main", """
 <div class="slide">
   <div class="head pad" style="gap:38px;">
-    <p class="label">Polygood&#174; Wall Tiles</p>
-    <h1 class="h1">Tile,<br>without<br>the grout.</h1>
+    <p class="label">Polygood&#174;</p>
+    <h1 class="h1">Wall Tiles<br>are here.</h1>
   </div>
   <div class="figure" style="margin-top:56px;">
     <div class="terrazzo"></div>
@@ -310,185 +381,156 @@ SLIDES.append(("Main", """
 </div>
 """))
 
-# ---- 02 problem -----------------------------------------------------------
-SLIDES.append(("Problem", """
+# ---- 02 what it is --------------------------------------------------------
+SLIDES.append(("WhatItIs", """
 <div class="slide">
   <div class="head pad">
-    <p class="label">01 &#8212; The problem</p>
-    <h2 class="h2">Every grout line<br>is a maintenance<br>contract.</h2>
-    <p class="body">Joints hold moisture. They discolour, they collect
-      build-up, and eventually they get re-done. In a hotel bathroom or a
-      busy washroom, that cycle starts the week you hand over.</p>
+    <p class="label">01 &#8212; What it is</p>
+    <h2 class="h2">Large-format panels,<br>tile pattern cut<br>into the surface.</h2>
+    <p class="body">100% recycled polystyrene, engraved by CNC until the field
+      reads as tile.</p>
   </div>
-  <div class="figure" style="margin-top:52px;">
-    <div class="grout">
-      <div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div>
-      <div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div>
-      <div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div>
-      <div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div>
-      <div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t"></div>
-    </div>
-    <div class="edge"></div>
-  </div>
-""" + foot("02", "Conventional tile assembly") + """
-</div>
-"""))
-
-# ---- 03 the move ----------------------------------------------------------
-SLIDES.append(("Solution", """
-<div class="slide">
-  <div class="head pad">
-    <p class="label">02 &#8212; The move</p>
-    <h2 class="h2">So the tile is<br>machined into<br>the slab.</h2>
-    <p class="body">Grooves are CNC-cut into a single 2800 &#215; 1400 mm
-      panel. You get a continuous tiled field with the joint pattern you
-      specified, and no grout left to fail.</p>
-  </div>
-  <div class="figure" style="margin-top:52px;">
+  <div class="figure" style="margin-top:50px;">
     <div class="terrazzo"></div>
     <div class="grooves"></div>
     <div class="edge"></div>
   </div>
-""" + foot("03", "One panel, no joints") + """
+""" + foot("02", "100% recycled polystyrene") + """
 </div>
 """))
 
-# ---- 04 material ----------------------------------------------------------
-SLIDES.append(("Material", """
+# ---- 03 the news ----------------------------------------------------------
+SLIDES.append(("Texture", """
 <div class="slide">
   <div class="head pad">
-    <p class="label">03 &#8212; The material</p>
-    <h2 class="h2">100% recycled<br>polystyrene.</h2>
-    <p class="body">Post-consumer and post-industrial waste, sorted and
-      pressed into a solid surface:</p>
-    <ul class="feed">
-      <li><span class="b">/</span> Refrigerator insulation</li>
-      <li><span class="b">/</span> Electronics housings</li>
-      <li><span class="b">/</span> CD cases</li>
-      <li><span class="b">/</span> Food containers</li>
-      <li><span class="b">/</span> Toys</li>
-      <li><span class="b">/</span> Building components</li>
-    </ul>
+    <p class="label">02 &#8212; What&#39;s new</p>
+    <h2 class="h2">Our first surface<br>with real,<br>physical texture.</h2>
+    <p class="body">Until now the pattern came from the material&#39;s own
+      speckle. Engraving opens a whole new design language for Polygood.</p>
   </div>
-  <div class="figure" style="margin-top:48px;">
-    <div class="terrazzo"></div>
-    <div class="edge"></div>
-  </div>
-""" + foot("04", "Waste stream, visible") + """
-</div>
-"""))
-
-# ---- 05 spec --------------------------------------------------------------
-SLIDES.append(("Spec", """
-<div class="slide">
-  <div class="head pad">
-    <p class="label">04 &#8212; Specification</p>
-    <h2 class="h2">The numbers.</h2>
-  </div>
-  <div class="figure pad" style="margin-top:44px;">
-    <div class="spec" style="height:100%;justify-content:space-between;">
-      <div class="row">
-        <span class="k">Panel</span>
-        <span class="v">2800 &#215; 1400 mm<small>110 &#215; 55 in</small></span>
-      </div>
-      <div class="row">
-        <span class="k">Thickness</span>
-        <span class="v">12 or 19 mm</span>
-      </div>
-      <div class="row">
-        <span class="k">Weight</span>
-        <span class="v">50&#8211;78 kg<small>110&#8211;172 lb per panel</small></span>
-      </div>
-      <div class="row">
-        <span class="k">Palette</span>
-        <span class="v">50+ colourways</span>
-      </div>
-      <div class="row" style="border-bottom:none;">
-        <span class="k">Surface</span>
-        <span class="v">CNC-machined<small>groove field, pattern to order</small></span>
-      </div>
-    </div>
-  </div>
-""" + foot("05", "Full guide at polygood.com") + """
-</div>
-"""))
-
-# ---- 06 application -------------------------------------------------------
-SLIDES.append(("Application", """
-<div class="slide">
-  <div class="head pad">
-    <p class="label">05 &#8212; Where it works</p>
-    <h2 class="h2">Wet zones and<br>high traffic.</h2>
-    <div class="tags">
-      <span>Bathrooms</span><span>Kitchens</span><span>Hospitality</span>
-      <span>Offices</span><span>Reception</span><span>Public space</span>
-    </div>
-    <p class="body">Waterproof, hard-wearing and light enough to handle on
-      site. It cuts and shapes with standard woodworking tools.</p>
-  </div>
-  <div class="figure" style="margin-top:48px;">
+  <div class="figure" style="margin-top:50px;">
     <div class="terrazzo"></div>
     <div class="grooves"></div>
     <div class="edge"></div>
   </div>
-""" + foot("06", "Specified surface") + """
+""" + foot("03", "A new design language") + """
 </div>
 """))
 
-# ---- 07 circularity -------------------------------------------------------
-SLIDES.append(("Circularity", """
+# ---- 04 no grout ----------------------------------------------------------
+SLIDES.append(("NoGrout", """
 <div class="slide">
   <div class="head pad">
-    <p class="label">06 &#8212; Circularity</p>
-    <h2 class="h2">Certified,<br>not claimed.</h2>
+    <p class="label">03 &#8212; No grout</p>
+    <h2 class="h2">A wall that appears<br>to have a hundred<br>joints has none.</h2>
+    <p class="body">The grooves are precision-machined into a full slab. The
+      panel underneath stays continuous, so there is no grout anywhere in it.</p>
   </div>
-  <div class="figure pad" style="margin-top:52px;">
-    <div class="proof" style="height:100%;justify-content:space-between;padding-bottom:24px;">
-      <div class="item">
-        <span class="n">01</span>
-        <div>
-          <p class="t">Cradle to Cradle Certified&#174; Bronze</p>
-          <p class="d">The first material of its kind to reach it.</p>
-        </div>
+  <div class="figure" style="margin-top:50px;">
+    <div class="terrazzo"></div>
+    <div class="grooves"></div>
+    <div class="edge"></div>
+  </div>
+""" + foot("04", "One continuous sheet") + """
+</div>
+"""))
+
+# ---- 05 how it behaves ----------------------------------------------------
+SLIDES.append(("Behaves", """
+<div class="slide">
+  <div class="head pad">
+    <p class="label">04 &#8212; How it behaves</p>
+    <h2 class="h2" style="font-size:70px;">Installs like a panel.<br>Performs like a<br>solid surface.<br>Reads like tile.</h2>
+  </div>
+  <div class="figure" style="margin-top:50px;">
+    <div class="terrazzo"></div>
+    <div class="grooves"></div>
+    <div class="edge"></div>
+  </div>
+""" + foot("05", "Panel / solid surface / tile") + """
+</div>
+"""))
+
+# ---- 06 through-colour ----------------------------------------------------
+SLIDES.append(("ThroughColour", """
+<div class="slide">
+  <div class="head pad">
+    <p class="label">05 &#8212; Through-colour</p>
+    <h2 class="h2" style="font-size:72px;">A trolley knock<br>shows the same<br>colour underneath.</h2>
+    <p class="body">Solid and through-colour with no surface coatings, so impact
+      damage never exposes a substrate.</p>
+  </div>
+  <div class="figure" style="margin-top:50px;">
+    <div class="terrazzo"></div>
+    <div class="edge"></div>
+  </div>
+""" + foot("06", "No coatings, no substrate") + """
+</div>
+"""))
+
+# ---- 07 thickness ---------------------------------------------------------
+SLIDES.append(("Thickness", """
+<div class="slide">
+  <div class="head pad">
+    <p class="label">06 &#8212; Thickness</p>
+    <h2 class="h2">6, 8 and 12 mm.</h2>
+    <p class="body">Specify by exposure. 12 mm is made for high-impact
+      environments.</p>
+  </div>
+  <div class="figure pad" style="margin-top:20px;">
+    <div class="gauge">
+      <div class="g">
+        <span class="k">6 mm</span>
+        <span class="bar" style="height:54px;"><span class="terrazzo"></span></span>
       </div>
-      <div class="item">
-        <span class="n">02</span>
-        <div>
-          <p class="t">Verified EPD</p>
-          <p class="d">A published Environmental Product Declaration, so the
-            impact figures can be checked rather than taken on trust.</p>
-        </div>
+      <div class="g">
+        <span class="k">8 mm</span>
+        <span class="bar" style="height:72px;"><span class="terrazzo"></span></span>
       </div>
-      <div class="item">
-        <span class="n">03</span>
-        <div>
-          <p class="t">100% recyclable</p>
-          <p class="d">At end of life the panel goes back in and becomes the
-            next panel.</p>
-        </div>
+      <div class="g">
+        <span class="k">12 mm</span>
+        <span class="bar" style="height:108px;"><span class="terrazzo"></span><span class="tag">High impact</span></span>
       </div>
     </div>
   </div>
-""" + foot("07", "The Good Plastic Company") + """
+""" + foot("07", "Solid through the full thickness") + """
 </div>
 """))
 
-# ---- 08 CTA ---------------------------------------------------------------
-SLIDES.append(("Samples", """
+# ---- 08 launch engravings -------------------------------------------------
+SLIDES.append(("Engravings", """
 <div class="slide">
   <div class="head pad">
-    <p class="label">Polygood&#174; Wall Tiles</p>
-    <h2 class="h2">Order a<br>sample box.</h2>
-    <p class="lede">Fifty-plus colourways read differently in daylight. Get
-      them on the desk before you specify.</p>
+    <p class="label">07 &#8212; At launch</p>
+    <h2 class="h2">Four engravings.</h2>
+  </div>
+  <div class="figure pad" style="margin-top:44px;padding-bottom:8px;">
+    <div class="swatches">
+""" + swatch("grid", "[Engraving 1]") + swatch("bond", "[Engraving 2]")
+    + swatch("flute", "[Engraving 3]") + swatch("diagonal", "[Engraving 4]") + """
+    </div>
+  </div>
+""" + foot("08", "Names and patterns to confirm") + """
+</div>
+"""))
+
+# ---- 09 custom + CTA ------------------------------------------------------
+SLIDES.append(("Custom", """
+<div class="slide">
+  <div class="head pad">
+    <p class="label">08 &#8212; Beyond those</p>
+    <h2 class="h2">The pattern<br>can be yours.</h2>
+    <p class="body">Custom engraving works the way custom patterns have always
+      worked at Polygood. Send us your brief and we&#39;ll create a bespoke
+      engraving for your project.</p>
     <div class="cta">polygood.com</div>
   </div>
-  <div class="figure" style="margin-top:52px;">
+  <div class="figure" style="margin-top:46px;">
     <div class="terrazzo"></div>
     <div class="grooves"></div>
     <div class="edge"></div>
   </div>
-""" + foot("08", '<span class="wordmark">Polygood&#174;</span>') + """
+""" + foot("09", '<span class="wordmark">Polygood&#174;</span>') + """
 </div>
 """))
 
@@ -527,7 +569,7 @@ def main():
     # canvas layout: two rows of four, reading order left to right
     boards = []
     for i, (name, _) in enumerate(SLIDES):
-        col, row = i % 4, i // 4
+        col, row = i % 5, i // 5
         boards.append({
             "file": name + ".dc.html",
             "x": col * (W + 120),
@@ -540,7 +582,7 @@ def main():
         "annotations": [{
             "id": "brand-note",
             "x": 0, "y": -190, "w": 900,
-            "text": ("Polygood Wall Tiles - Instagram carousel, 8 x 1080x1350.\n"
+            "text": ("Polygood Wall Tiles - Instagram carousel, 9 x 1080x1350.\n"
                      "Colours and type are a placeholder interpretation, not the "
                      "Figma brand book. Swap the token block at the top of "
                      "build.py and re-run to apply the real brand values."),

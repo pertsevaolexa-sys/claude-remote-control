@@ -163,41 +163,52 @@
     text-transform:uppercase;padding:26px 40px;
   }
   .swipe{display:flex;align-items:center;gap:13px;}
+
+  /* --- engraving swatches (slide 08) ---------------------------------- */
+  .swatches{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:26px 26px;height:100%;
+  }
+  .sw{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+  .sw .field{position:absolute;inset:0;}
+  .sw .cap{
+    position:relative;font-family:var(--pg-mono);font-weight:500;font-size:21px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--pg-ink);
+    background:var(--pg-ground);padding:12px 16px;align-self:flex-start;margin:14px;
+  }
+
+  /* --- thickness bars (slide 07) --------------------------------------- */
+  .gauge{display:flex;flex-direction:column;justify-content:center;gap:58px;height:100%;}
+  .gauge .g{display:flex;align-items:center;gap:30px;}
+  .gauge .bar{position:relative;overflow:hidden;flex:1 1 auto;
+    box-shadow:inset 0 0 0 2px rgba(21,23,26,.16);}
+  .gauge .k{
+    font-family:var(--pg-mono);font-weight:500;font-size:30px;letter-spacing:-.01em;
+    color:var(--pg-ink);width:132px;flex:0 0 132px;
+  }
+  /* the tag sits inside the bar so all three bars keep an identical width
+     and the thickness comparison stays honest */
+  .gauge .tag{
+    position:absolute;right:18px;top:50%;transform:translateY(-50%);
+    font-family:var(--pg-mono);font-weight:500;font-size:20px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--pg-ink);background:var(--pg-ground);
+    padding:7px 14px;white-space:nowrap;
+  }
   </style>
 </helmet>
 <div class="slide">
   <div class="head pad">
-    <p class="label">06 &#8212; Circularity</p>
-    <h2 class="h2">Certified,<br>not claimed.</h2>
+    <p class="label">03 &#8212; No grout</p>
+    <h2 class="h2">A wall that appears<br>to have a hundred<br>joints has none.</h2>
+    <p class="body">The grooves are precision-machined into a full slab. The
+      panel underneath stays continuous, so there is no grout anywhere in it.</p>
   </div>
-  <div class="figure pad" style="margin-top:52px;">
-    <div class="proof" style="height:100%;justify-content:space-between;padding-bottom:24px;">
-      <div class="item">
-        <span class="n">01</span>
-        <div>
-          <p class="t">Cradle to Cradle Certified&#174; Bronze</p>
-          <p class="d">The first material of its kind to reach it.</p>
-        </div>
-      </div>
-      <div class="item">
-        <span class="n">02</span>
-        <div>
-          <p class="t">Verified EPD</p>
-          <p class="d">A published Environmental Product Declaration, so the
-            impact figures can be checked rather than taken on trust.</p>
-        </div>
-      </div>
-      <div class="item">
-        <span class="n">03</span>
-        <div>
-          <p class="t">100% recyclable</p>
-          <p class="d">At end of life the panel goes back in and becomes the
-            next panel.</p>
-        </div>
-      </div>
-    </div>
+  <div class="figure" style="margin-top:50px;">
+    <div class="terrazzo"></div>
+    <div class="grooves"></div>
+    <div class="edge"></div>
   </div>
-<div class="foot pad"><span>07 / 08</span><span>The Good Plastic Company</span></div>
+<div class="foot pad"><span>04 / 09</span><span>One continuous sheet</span></div>
 </div>
 </x-dc>
 </body>
