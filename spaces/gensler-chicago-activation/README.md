@@ -64,6 +64,8 @@ expected to touch a screen.
 | `app.js` | Renderer, cameras, controls, exports, palette record. |
 | `vendor/three.min.js` | three.js r149 (MIT, licence included). |
 | `exports/` | Review stills, each carrying its status footer. |
+| `build.mjs` | Inlines everything into `dist/index.html`. |
+| `dist/index.html` | **The deployable single file.** Rebuilt by `build.mjs`. |
 
 The previous venue-only model at `spaces/bow-window-lounge/` is **unchanged and
 still runnable**. This is a variant, not a replacement. Its camera work, bay
