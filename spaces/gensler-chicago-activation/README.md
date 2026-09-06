@@ -52,6 +52,42 @@ expected to touch a screen.
 
 ---
 
+## Deploy
+
+`dist/index.html` is the whole model in one file — three.js, all scene code, all
+textures and all copy inlined. It makes **one HTTP request: itself.** 723 KB on
+disk, about 190 KB over the wire once gzipped. Nothing is fetched at run time,
+so it also still works if someone saves it to their desktop or receives it as an
+email attachment.
+
+Rebuild it after editing `config.js` (or anything else):
+
+```
+node build.mjs
+```
+
+Three ways onto Vercel, in increasing order of ceremony:
+
+1. **Drag** `dist/index.html` onto vercel.com/new. No repo, no config.
+2. **CLI**, from inside `dist/`: `vercel deploy --prod`
+3. **Git-connected**: import the repo and set *Root Directory* to
+   `spaces/gensler-chicago-activation/dist`. Framework preset: Other. No build
+   command, no output directory override.
+
+There is deliberately **no `vercel.json` at the repository root** — one there
+would capture every future deployment from this repo, which is not a decision
+this piece of work should make on its own. Route 3 needs no config file.
+
+The built page carries `<meta name="robots" content="noindex, nofollow">`. That
+is intentional: it shows a proposed credit line subject to brand approval,
+placeholder dimensions and illustrative textures. It should be reachable by a
+link you send, not by search. If the client later wants it indexed, remove that
+line in `build.mjs` — but only once the credit and the product data are approved.
+
+**Vercel deployments are public by default.** Anyone with the URL can open it.
+If that matters here, turn on Deployment Protection (Vercel Authentication or a
+password) in the project settings before sharing the link.
+
 ## Files
 
 | File | What it holds |
