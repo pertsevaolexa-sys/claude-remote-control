@@ -127,7 +127,7 @@ scene.traverse(function (o) {
    Furniture inside the allocated zone is RESET, not deleted, and the rest of
    the room is left exactly as photographed.                                 */
 var zone = (function () {
-  var a = [], u = [INS.units.main, INS.units.palette];
+  var a = [], u = Object.keys(INS.units).map(function (k) { return INS.units[k]; });
   u.forEach(function (uu) {
     [-1, 1].forEach(function (s) {
       var p = INS.place(uu.theta, s * uu.w / 2, 0);
@@ -178,6 +178,8 @@ function applyFurniture() {
 INS.groups.main.updateMatrixWorld(); INS.groups.palette.updateMatrixWorld();
 function mainWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.main.matrixWorld); }
 function palWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.palette.matrixWorld); }
+INS.groups.translucent.updateMatrixWorld();
+function transWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.translucent.matrixWorld); }
 
 var A = INS.units.main;
 var junction = mainWorld(0, mm(CFG.install.horizontal.topAboveCounter), INS.anchors.wallZ);
@@ -196,6 +198,8 @@ var VIEWS = [
     p: compCentre.clone().add(new THREE.Vector3(0.02, 2.52, 0.06)), t: compCentre.clone().setY(V.CT.h), fov: 44 },
   { key: 'palette', name: 'Palette interaction',
     p: palWorld(0.10, mm(470), 0.74), t: palWorld(0, mm(50), -0.16), fov: 42 },
+  { key: 'translucent', name: 'Translucent Collection',
+    p: transWorld(0.06, mm(400), 0.66), t: transWorld(0, mm(120), -0.10), fov: 42 },
   { key: 'logistics', name: 'Packed + fallback support',
     p: new THREE.Vector3(0.15, 2.05, 5.75), t: new THREE.Vector3(0.05, 0.35, 3.30), fov: 56 }
 ];
@@ -365,7 +369,7 @@ $('reset').addEventListener('click', function () { goView(activeView, true); });
 
 document.addEventListener('keydown', function (e) {
   if (/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
-  var i = '123456'.indexOf(e.key);
+  var i = '1234567'.indexOf(e.key);
   if (i >= 0 && i < VIEWS.length) { goView(i); e.preventDefault(); }
   if (e.key === '0') { goView(activeView, true); }
 });

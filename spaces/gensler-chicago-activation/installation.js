@@ -58,9 +58,13 @@ var halfA = mm(I.wall.width) / 2, halfB = mm(I.palette.width) / 2;
    converges on the wrong branch and stacks both units on the same spot. */
 var thetaB = thetaA + ((mm(I.gapBetweenUnits) + halfA + halfB) / rFront) / D2R;
 
+var halfC = mm(I.translucentUnit.width) / 2;
+var thetaC = thetaB + ((mm(I.gapBetweenUnits) + halfB + halfC) / rFront) / D2R;
+
 var UNITS = {
-  main:    { theta: thetaA, w: mm(I.wall.width),    d: mm(I.activeDepth) },
-  palette: { theta: thetaB, w: mm(I.palette.width), d: mm(I.palette.depth) }
+  main:        { theta: thetaA, w: mm(I.wall.width),            d: mm(I.activeDepth) },
+  palette:     { theta: thetaB, w: mm(I.palette.width),         d: mm(I.palette.depth) },
+  translucent: { theta: thetaC, w: mm(I.translucentUnit.width), d: mm(I.translucentUnit.depth) }
 };
 
 function unitGroup(theta) {
@@ -71,8 +75,9 @@ function unitGroup(theta) {
   scene.add(g);
   return g;
 }
-var gMain = unitGroup(UNITS.main.theta);
-var gPal  = unitGroup(UNITS.palette.theta);
+var gMain  = unitGroup(UNITS.main.theta);
+var gPal   = unitGroup(UNITS.palette.theta);
+var gTrans = unitGroup(UNITS.translucent.theta);
 
 /* ── surfaces ─────────────────────────────────────────────────────────────
    Wall Tiles carry the four core colours; Growth is its own range. The two
@@ -338,44 +343,40 @@ palTray.position.set(0, padT + trayT / 2, -B.d / 2);
 palTray.castShadow = true; palTray.receiveShadow = true;
 gPal.add(palTray);
 
-// identity card, flat along the front edge
-var idCard = cardMesh(I.palette.width - 24, 44, function (x, w, h, ppm) {
-  PG.text(x, 'Growth', 13 * ppm, 20 * ppm, { x: 12 * ppm, weight: 700 });
-  PG.text(x, CFG.copy.growthCredit, 6.6 * ppm, 32 * ppm, { x: 12 * ppm, weight: 500, colour: '#3d3c39' });
+/* identity and question, two cards on two rows — as they were. The Translucent
+   box no longer needs the depth: it has its own unit to the right. */
+var FRONT_Z = -mm(30), CARD_W = 480, CARD_D = 54;
+var frontCard = cardMesh(CARD_W, CARD_D, function (x, w, h, ppm) {
+  PG.text(x, 'Growth', 12 * ppm, 17 * ppm, { x: 11 * ppm, weight: 700 });
+  PG.text(x, CFG.copy.growthCredit, 5.6 * ppm, 28 * ppm, { x: 11 * ppm, weight: 500, colour: '#3d3c39' });
+  PG.text(x, 'Wall Tiles and Growth are specified separately.', 5.0 * ppm, 38 * ppm,
+    { x: 11 * ppm, weight: 500, colour: '#6c6a66' });
   x.strokeStyle = '#9a9793'; x.lineWidth = 1 * ppm; x.setLineDash([3 * ppm, 3 * ppm]);
-  x.strokeRect(w - 40 * ppm, 8 * ppm, 28 * ppm, 28 * ppm); x.setLineDash([]);
-  x.textAlign = 'center';
-  PG.text(x, 'QR', 6.5 * ppm, 21 * ppm, { x: w - 26 * ppm, align: 'center', weight: 600, colour: '#9a9793' });
-  PG.text(x, 'placeholder', 4.4 * ppm, 29 * ppm, { x: w - 26 * ppm, align: 'center', weight: 500, colour: '#9a9793' });
-  x.textAlign = 'left';
-});
-idCard.position.set(0, trayTop + mm(2), -mm(28));
-idCard.rotation.x = -Math.PI / 2;
-gPal.add(idCard);
-
-// question card and the neutral references
-var qCard = cardMesh(340, 62, function (x, w, h, ppm) {
-  PG.text(x, CFG.copy.action, 9.5 * ppm, 15 * ppm, { x: 10 * ppm, weight: 700 });
-  var yy = 30 * ppm;
+  x.strokeRect(11 * ppm, 41 * ppm, 22 * ppm, 10 * ppm); x.setLineDash([]);
+  PG.text(x, 'QR placeholder', 4.2 * ppm, 48 * ppm, { x: 14 * ppm, weight: 500, colour: '#9a9793' });
+  x.strokeStyle = '#c9c5bc'; x.lineWidth = 1 * ppm;
+  x.beginPath(); x.moveTo(248 * ppm, 8 * ppm); x.lineTo(248 * ppm, (CARD_D - 8) * ppm); x.stroke();
+  PG.text(x, CFG.copy.action, 8 * ppm, 16 * ppm, { x: 262 * ppm, weight: 700 });
+  var yy = 28 * ppm;
   CFG.questions.forEach(function (q) {
-    PG.text(x, '·  ' + q.label, 9 * ppm, yy, { x: 12 * ppm, weight: 600, colour: '#26251f' });
-    yy += 13 * ppm;
+    PG.text(x, '\u00b7  ' + q.label, 7.4 * ppm, yy, { x: 264 * ppm, weight: 600, colour: '#26251f' });
+    yy += 10.5 * ppm;
   });
 });
-qCard.position.set(0, trayTop + mm(2), -mm(92));
-qCard.rotation.x = -Math.PI / 2;
-gPal.add(qCard);
+frontCard.position.set(0, trayTop + mm(2), FRONT_Z);
+frontCard.rotation.x = -Math.PI / 2;
+gPal.add(frontCard);
 
-var qMarker = new THREE.Mesh(new THREE.SphereGeometry(mm(7), 18, 12), matMarker);
+var qMarker = new THREE.Mesh(new THREE.SphereGeometry(mm(6), 18, 12), matMarker);
 qMarker.castShadow = true; gPal.add(qMarker);
-function questionY(idx) { return -mm(92) + mm(62) / 2 - mm(24) - idx * mm(13); }
-function setQuestionMarker(idx) { qMarker.position.set(-mm(186), trayTop + mm(9), questionY(idx)); }
+function questionY(idx) { return FRONT_Z + mm(CARD_D) / 2 - mm(25) - idx * mm(10.5); }
+function setQuestionMarker(idx) { qMarker.position.set(mm(16), trayTop + mm(8), questionY(idx)); }
 
 CFG.references.forEach(function (r, k) {
   var rm = new THREE.MeshStandardMaterial({ color: srgb(r.colour), roughness: r.rough,
     metalness: r.metal || 0, envMapIntensity: 0.4 });
-  var chip = new THREE.Mesh(new THREE.BoxGeometry(mm(60), mm(12), mm(60)), rm);
-  chip.position.set((k ? 1 : -1) * mm(210), trayTop + mm(6), -mm(92));
+  var chip = new THREE.Mesh(new THREE.BoxGeometry(mm(56), mm(12), mm(56)), rm);
+  chip.position.set((k ? 1 : -1) * mm(282), trayTop + mm(6), FRONT_Z);
   chip.castShadow = true; gPal.add(chip);
 });
 
@@ -385,7 +386,7 @@ CFG.references.forEach(function (r, k) {
    choice is made on the swatches and applies to all of them.
    NOTE: this replaces the brief's three plain colour positions with four
    engraved ones, at the client's direction. */
-var sampleW = mm(I.palette.sampleSize), sampleZ = -mm(210);
+var sampleW = mm(I.palette.sampleSize), sampleZ = -mm(200);
 var samplePitch = sampleW + mm(I.palette.sampleGap);
 var samples = [];
 CFG.engravings.forEach(function (e, i) {
@@ -412,7 +413,7 @@ gPal.add(marker);
 var SB = I.sampleBox;
 var stickPalette = ['#2f5fa8', '#1d3f7a', '#161616', '#0f0f10', '#e8e6df', '#cfd2d1',
                     '#8e8e8b', '#5f6260', '#186b52', '#0f4a38', '#efeadc', '#dcd8c8'];
-function sampleBox(spec, x, z) {
+function sampleBox(spec, x, z, withLid) {
   var g = new THREE.Group();
   g.position.set(x, trayTop, z);
   gPal.add(g);
@@ -436,7 +437,9 @@ function sampleBox(spec, x, z) {
     s.castShadow = true; g.add(s);
   }
 
-  // the lid, standing behind the tray as it does in the photograph
+  // the lid stands behind the tray as it does in the photograph — omitted
+  // where the Translucent box sits directly behind
+  if (!withLid) return g;
   var lidC = PG.cardCanvas(SB.width, SB.lidHeight, function (x2, w2, h2, ppm) {
     x2.fillStyle = spec.base; x2.fillRect(0, 0, w2, h2);
     x2.textAlign = 'center';
@@ -459,9 +462,89 @@ function sampleBox(spec, x, z) {
 }
 var boxZ = -mm(330);
 var boxes = [
-  sampleBox(I.sampleBoxes[0], -mm(120), boxZ),
-  sampleBox(I.sampleBoxes[1],  mm(120), boxZ)
+  sampleBox(I.sampleBoxes[0], -mm(120), boxZ, true),
+  sampleBox(I.sampleBoxes[1],  mm(120), boxZ, true)
 ];
+
+/* ── the Translucent Collection box ───────────────────────────────────────
+   From the supplied photograph: a deep presentation box of upright
+   translucent blocks, lid hinged at the back and standing open with the
+   collection printed inside it. Proportions are read off the photograph.
+   The blocks are rendered as high-opacity glossy resin rather than true
+   transmission — an approximation, so eleven overlapping panes cannot
+   mis-sort, and cheap enough to stay smooth on a laptop. */
+/* ── UNIT C — the Translucent Collection box, to the right ────────────────
+   Its own tray, beside the Growth palette rather than behind it. This is
+   what spends the envelope: see the fit check. */
+var TU = I.translucentUnit, TB = I.translucentBox;
+var transTrayTop = padT + trayT;
+[[-0.13, -0.04], [0.13, -0.04], [-0.13, -0.14], [0.13, -0.14]].forEach(function (p) {
+  var pad = new THREE.Mesh(new THREE.BoxGeometry(0.055, padT, 0.055), matPad);
+  pad.position.set(p[0], padT / 2, p[1]); gTrans.add(pad);
+});
+var transTray = new THREE.Mesh(new THREE.BoxGeometry(mm(TU.width), trayT, mm(TU.depth)), matTray);
+transTray.position.set(0, padT + trayT / 2, -mm(TU.depth) / 2);
+transTray.castShadow = true; transTray.receiveShadow = true;
+gTrans.add(transTray);
+
+var transBox = (function () {
+  var g = new THREE.Group();
+  g.position.set(0, transTrayTop, -mm(90));
+  gTrans.add(g);
+  var shell = new THREE.MeshStandardMaterial({ color: srgb(TB.shell), roughness: 0.9, envMapIntensity: 0.18 });
+  var W = mm(TB.width), D = mm(TB.depth), H = mm(TB.height);
+
+  // the box, and the pale insert the blocks stand on
+  var faceC = PG.cardCanvas(TB.width, TB.height, function (x, w, h, ppm) {
+    x.fillStyle = TB.shell; x.fillRect(0, 0, w, h);
+    PG.text(x, TB.mark, 17 * ppm, h * 0.62, { x: 20 * ppm, weight: 700, colour: '#ffffff' });
+    x.textAlign = 'right';
+    PG.text(x, TB.title, 5.2 * ppm, h * 0.60, { x: w - 20 * ppm, align: 'right', weight: 500,
+      colour: 'rgba(255,255,255,0.72)', spacing: 0.8 * ppm });
+    x.textAlign = 'left';
+  });
+  var faceM = new THREE.MeshStandardMaterial({ map: PG.cardTexture(THREE, faceC), roughness: 0.9, envMapIntensity: 0.18 });
+  var body = new THREE.Mesh(new THREE.BoxGeometry(W, H, D), [shell, shell, shell, shell, faceM, shell]);
+  body.position.y = H / 2; body.castShadow = true; body.receiveShadow = true; g.add(body);
+  var insert = new THREE.Mesh(new THREE.BoxGeometry(W - mm(20), mm(4), D - mm(20)),
+    new THREE.MeshStandardMaterial({ color: srgb(TB.insert), roughness: 0.95, envMapIntensity: 0.2 }));
+  insert.position.y = H - mm(2); g.add(insert);
+
+  // eleven translucent blocks, fanned as they are in the photograph
+  var bk = TB.block, ang = bk.angle * D2R;
+  TB.blocks.forEach(function (col, i) {
+    var c = srgb(col);
+    var m = new THREE.MeshStandardMaterial({
+      color: c, roughness: 0.10, metalness: 0.0,
+      transparent: true, opacity: 0.93, envMapIntensity: 1.1,
+      emissive: c.clone().multiplyScalar(0.14)
+    });
+    var b2 = new THREE.Mesh(new THREE.BoxGeometry(mm(bk.width), mm(bk.height), mm(bk.depth)), m);
+    b2.position.set((i - (bk.count - 1) / 2) * mm(bk.pitch), H - mm(4) + mm(bk.height) / 2 - mm(28), 0);
+    b2.rotation.y = ang;
+    b2.castShadow = true;
+    g.add(b2);
+  });
+
+  // the lid, hinged at the back and standing open
+  var lidC = PG.cardCanvas(TB.width, TB.lidHeight, function (x, w, h, ppm) {
+    x.fillStyle = TB.insert; x.fillRect(0, 0, w, h);
+    x.textAlign = 'center';
+    PG.text(x, TB.brandLine, 5.2 * ppm, h * 0.15, { x: w / 2, align: 'center', weight: 500,
+      colour: '#4a4a48', spacing: 1.1 * ppm });
+    PG.text(x, 'TRANSLUCENT', 14 * ppm, h * 0.31, { x: w / 2, align: 'center', weight: 400, colour: '#26262a' });
+    PG.text(x, 'COLLECTION', 14 * ppm, h * 0.45, { x: w / 2, align: 'center', weight: 400, colour: '#26262a' });
+    x.textAlign = 'left';
+  });
+  var lidM = new THREE.MeshStandardMaterial({ map: PG.cardTexture(THREE, lidC), roughness: 0.92, envMapIntensity: 0.18 });
+  var lean = TB.lidLean * D2R, LH = mm(TB.lidHeight);
+  var lid = new THREE.Mesh(new THREE.BoxGeometry(W, LH, mm(TB.lidThickness)),
+    [shell, shell, shell, shell, lidM, shell]);
+  lid.position.set(0, H + LH / 2 * Math.cos(lean), -D / 2 - LH / 2 * Math.sin(lean));
+  lid.rotation.x = -lean;
+  lid.castShadow = true; g.add(lid);
+  return g;
+})();
 
 /* ── selection ────────────────────────────────────────────────────────────
    Wall colour, wall engraving and Growth surface are three INDEPENDENT
@@ -528,7 +611,7 @@ function unitCorners(u) {
 function checkFootprint() {
   var out = [], rIn = mm(CFG.counter.outerRadius - CFG.counter.depthAtActiveZone), rOut = mm(CFG.counter.outerRadius);
   var worstOut = 0, worstIn = 0, minA = 999, maxA = -999;
-  [UNITS.main, UNITS.palette].forEach(function (u) {
+  Object.keys(UNITS).map(function (k) { return UNITS[k]; }).forEach(function (u) {
     unitCorners(u).forEach(function (p) {
       var dx = p.x, dz = p.y - cz, r = Math.sqrt(dx * dx + dz * dz);
       var a = Math.atan2(dx, -dz) / D2R;
@@ -561,8 +644,8 @@ function checkFootprint() {
 }
 
 return {
-  groups: { main: gMain, palette: gPal },
-  units: UNITS, place: place, rFront: rFront, thetaA: thetaA, thetaB: thetaB,
+  groups: { main: gMain, palette: gPal, translucent: gTrans },
+  units: UNITS, place: place, rFront: rFront, thetaA: thetaA, thetaB: thetaB, thetaC: thetaC,
   anchors: {
     wallZ: wallZ, trayTop: trayTop, horizTopY: horizTopY, horizFrontZ: horizFrontZ,
     wallTopY: trayTop + mm(I.wall.height), couponPivot: couponPivot,

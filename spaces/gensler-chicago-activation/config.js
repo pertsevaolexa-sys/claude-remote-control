@@ -111,6 +111,26 @@ window.PG_CONFIG = {
       stick: { width: 14, depth: 58, height: 92, count: 12 }
     },
 
+    // Its own sub-assembly, to the right of the Growth palette.
+    translucentUnit: { width: 400, depth: 180 },
+
+    // The Translucent Collection presentation box, from the supplied
+    // photograph. Proportions are read off that photograph — not a product
+    // drawing. It is markedly larger than the two standard sample boxes.
+    translucentBox: {
+      width: 360, depth: 95, height: 68,
+      lidHeight: 150, lidThickness: 16, lidLean: 4,   // lid hinged at the back
+      block: { width: 58, depth: 16, height: 95, count: 11, pitch: 30, angle: 30 },
+      brandLine: 'THE GOOD PLASTIC COMPANY',
+      title: 'TRANSLUCENT COLLECTION',
+      mark: 'Polygood\u00ae',
+      shell: '#232323', insert: '#d8d8d6',
+      // eleven translucent blocks, colours read off the photograph.
+      // Illustrative: not colour-accurate and not tied to any SKU.
+      blocks: ['#dcdcd8', '#2f9fd8', '#31b9a6', '#a9e02c', '#8f5219', '#ef2a68',
+               '#e4c3ba', '#3d8fd2', '#f07a1e', '#2a86d8', '#b9a887']
+    },
+
     coupon: { width: 150, height: 100, liftHeight: 130 },
 
     base: { plateDepth: 200, plateThickness: 12, blockHeight: null, padThickness: 3 },

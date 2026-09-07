@@ -99,6 +99,11 @@ function palPt(lx, ly, lz) {
   INS.groups.palette.updateMatrixWorld();
   return v.applyMatrix4(INS.groups.palette.matrixWorld);
 }
+function transPt(lx, ly, lz) {
+  var v = new THREE.Vector3(lx, ly, lz);
+  INS.groups.translucent.updateMatrixWorld();
+  return v.applyMatrix4(INS.groups.translucent.matrixWorld);
+}
 
 /* ── plan dimensions ──────────────────────────────────────────────────── */
 var yPlan = V.CT.h + mm(I.wall.height) + 0.16;
@@ -214,6 +219,12 @@ leader(new THREE.Vector3(palPt(0.20, 0.06, -0.21).x, palPt(0.20, 0.06, -0.21).y,
        new THREE.Vector3(palPt(0.70, 0.34, 0.54).x, palPt(0.70, 0.34, 0.54).y, palPt(0.70, 0.34, 0.54).z),
        'Three Growth choices + neutral references',
        'References are comparison aids, not product partners or approvals');
+
+/* the Translucent Collection box, and what adding it costs */
+leader(transPt(0, 0.14, -0.09),
+       transPt(0.18, 0.62, 0.46),
+       'Translucent Collection \u2014 its own sub-assembly',
+       'Sits BEYOND the ' + I.allocatedLength + ' mm allocation. Counter length past it is unverified.');
 
 /* the two sample boxes */
 leader(palPt(0.12, 0.10, INS.anchors.boxZ),

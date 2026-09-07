@@ -131,6 +131,8 @@ needs replacing with supplied data before anything is made.
 | Palette surface | 650 × 400 mm | Deepened from 300 for the sample boxes (inside the 400 mm active-depth cap) and widened from 500 for the four engraved samples — the widening **does** spend envelope. |
 | Engraved Growth samples | 150 × 150 mm × 4 | One per engraving. 150 mm is set by the tallest cell, not chosen. |
 | Sample boxes | 200 × 68 × 46 mm | Proportions from the supplied photographs. |
+| Translucent Collection box | 360 × 95 × 68 mm, 150 mm lid | Proportions from the supplied photograph. Eleven blocks, colours illustrative. |
+| Translucent unit tray | 400 × 180 mm | Our choice. This is what pushes the envelope past 1400 mm. |
 | Coupon | 150 × 100 mm | Brief placeholder. |
 | Clear-floor review band | 1200 mm | Planning overlay. **Not a compliance certification.** |
 | Room, bay, windows, column | see `config.js` | From the photograph. Appearance and adjacency only. |
@@ -233,7 +235,30 @@ placeholder instead.
 
 The fit check runs live against `config.js` and reports rather than absorbs.
 
-**The composition now uses almost all of its allocation.** Adding the four
+### The Translucent Collection box does not fit the allocation
+
+Added as its own sub-assembly to the right of the Growth palette, as asked.
+It is a markedly larger object than the two standard sample boxes — 360 × 95 ×
+68 mm plus a 150 mm lid standing open — so it needs its own 400 × 180 mm tray.
+
+The envelope is now **1826 mm against the 1400 mm allocated — over by 426 mm**,
+and the fit check reports it as a failure rather than absorbing it.
+
+Three ways out, in the order we would recommend:
+
+1. **Raise the allocation.** The counter itself has the length — the run is
+   about 4.4 m and the composition ends around 23° of arc, well clear of the
+   credenza. The 1400 mm was a concept envelope, not a measured limit. This
+   needs the real counter measured and the host's agreement, nothing more.
+2. **Drop the two standard sample boxes** and let the Translucent box be the
+   only box. That returns roughly 480 mm and brings the envelope back inside.
+3. **Crop the exhibition fragment** from 700 mm, which the brief allows once
+   the real engraving pattern has been reviewed — which it now has.
+
+We have not chosen for you. The model shows the arrangement you asked for and
+states the cost.
+
+**Before the box was added, the composition used almost all of its allocation.** Adding the four
 engraved Growth samples took the palette from 500 to 650 mm wide, and the
 envelope from 1228 mm to **1384 mm of the 1400 mm allocated**. It passes, with
 16 mm to spare. Anything further along the counter — a wider palette, a bigger
