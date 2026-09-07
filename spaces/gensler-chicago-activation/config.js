@@ -111,6 +111,23 @@ window.PG_CONFIG = {
       stick: { width: 14, depth: 58, height: 92, count: 12 }
     },
 
+    /* ── the orientation stand, at the LEFT edge ───────────────────────────
+       A Polygood information board in a slotted base, from the supplied
+       photograph. The BOARD ARTWORK IS NOT REPRODUCED: the real one carries
+       GWP figures, certification marks and third-party client logos, none of
+       which this model may assert or redraw from a photograph. What is drawn
+       is a layout placeholder at the right size, so scale, placement and
+       legibility can still be judged.
+       Supply the real print file as a data URI in `artwork` and it is used
+       instead, untouched. */
+    infoStand: {
+      unit:  { width: 500, depth: 200 },
+      board: { width: 440, height: 300, thickness: 19, printInset: 20 },
+      base:  { width: 480, depth: 140, height: 75, slot: 26, lean: 12, embed: 20 },
+      material: 'nightfleck',
+      artwork: null
+    },
+
     // Its own sub-assembly, to the right of the Growth palette.
     translucentUnit: { width: 400, depth: 180 },
 
@@ -192,6 +209,12 @@ window.PG_CONFIG = {
     { id: 'dark',   name: 'Dark — illustrative',   pattern: 'flake', base: '#40403e',
       flake: ['#2a2a29', '#6d6b66', '#8c8880'], density: 1.0, seed: 3119 }
   ],
+  /* material for the orientation stand — dark with a pale blue fleck, from the
+     supplied swatch photograph. Illustrative, like every other surface here. */
+  standSurfaces: [
+    { id: 'nightfleck', name: 'Dark, blue fleck — illustrative', pattern: 'flake', base: '#0a0a0c',
+      flake: ['#d6e6f8', '#eef5fd', '#8fb2d6', '#1c2026'], density: 0.32, seed: 6101 }
+  ],
   growthSurfaces: [
     { id: 'growth-light', name: 'Light — illustrative',  pattern: 'fibre', base: '#c6c6c2',
       flake: ['#efefee', '#a6a6a2', '#dcdcda'],           density: 1.0, seed: 5101 },
@@ -218,7 +241,7 @@ window.PG_CONFIG = {
 
   furnitureReset: {
     stoolAngles:   [-38, -15, 9],
-    resetAngles:   [24, 46, 60],
+    resetAngles:   [34, 48, 62],
     stoolRadius:   1620
   }
 };

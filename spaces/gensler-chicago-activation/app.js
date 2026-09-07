@@ -180,6 +180,8 @@ function mainWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS
 function palWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.palette.matrixWorld); }
 INS.groups.translucent.updateMatrixWorld();
 function transWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.translucent.matrixWorld); }
+INS.groups.info.updateMatrixWorld();
+function infoWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.info.matrixWorld); }
 
 var A = INS.units.main;
 var junction = mainWorld(0, mm(CFG.install.horizontal.topAboveCounter), INS.anchors.wallZ);
@@ -200,6 +202,8 @@ var VIEWS = [
     p: palWorld(0.10, mm(470), 0.74), t: palWorld(0, mm(50), -0.16), fov: 42 },
   { key: 'translucent', name: 'Translucent Collection',
     p: transWorld(0.06, mm(400), 0.66), t: transWorld(0, mm(120), -0.10), fov: 42 },
+  { key: 'orientation', name: 'Orientation stand',
+    p: infoWorld(0.24, mm(520), 1.18), t: infoWorld(0, mm(250), -0.10), fov: 40 },
   { key: 'logistics', name: 'Packed + fallback support',
     p: new THREE.Vector3(0.15, 2.05, 5.75), t: new THREE.Vector3(0.05, 0.35, 3.30), fov: 56 }
 ];
@@ -369,7 +373,7 @@ $('reset').addEventListener('click', function () { goView(activeView, true); });
 
 document.addEventListener('keydown', function (e) {
   if (/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
-  var i = '1234567'.indexOf(e.key);
+  var i = '12345678'.indexOf(e.key);
   if (i >= 0 && i < VIEWS.length) { goView(i); e.preventDefault(); }
   if (e.key === '0') { goView(activeView, true); }
 });
@@ -401,6 +405,11 @@ function refreshRecordLine() {
    The footer travels with the image so a still can never circulate without
    its concept and texture status.                                           */
 function composeExport() {
+  /* A still must never be captured mid-transition. composeExport renders
+     directly rather than through the animation loop, so on a slow frame a
+     Save PNG taken just after a vantage click could show the PREVIOUS
+     vantage while the footer named the new one. Finish the move first. */
+  if (anim) { applyCam(anim.p1, anim.t1, anim.f1); anim = null; }
   renderer.render(scene, camera);
   var src = renderer.domElement;
   var scale = src.width / src.clientWidth;

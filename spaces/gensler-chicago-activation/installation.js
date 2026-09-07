@@ -58,10 +58,14 @@ var halfA = mm(I.wall.width) / 2, halfB = mm(I.palette.width) / 2;
    converges on the wrong branch and stacks both units on the same spot. */
 var thetaB = thetaA + ((mm(I.gapBetweenUnits) + halfA + halfB) / rFront) / D2R;
 
+var halfD = mm(I.infoStand.unit.width) / 2;
+var thetaD = thetaA - ((mm(I.gapBetweenUnits) + halfA + halfD) / rFront) / D2R;
+
 var halfC = mm(I.translucentUnit.width) / 2;
 var thetaC = thetaB + ((mm(I.gapBetweenUnits) + halfB + halfC) / rFront) / D2R;
 
 var UNITS = {
+  info:        { theta: thetaD, w: mm(I.infoStand.unit.width),   d: mm(I.infoStand.unit.depth) },
   main:        { theta: thetaA, w: mm(I.wall.width),            d: mm(I.activeDepth) },
   palette:     { theta: thetaB, w: mm(I.palette.width),         d: mm(I.palette.depth) },
   translucent: { theta: thetaC, w: mm(I.translucentUnit.width), d: mm(I.translucentUnit.depth) }
@@ -75,6 +79,7 @@ function unitGroup(theta) {
   scene.add(g);
   return g;
 }
+var gInfo  = unitGroup(UNITS.info.theta);
 var gMain  = unitGroup(UNITS.main.theta);
 var gPal   = unitGroup(UNITS.palette.theta);
 var gTrans = unitGroup(UNITS.translucent.theta);
@@ -83,7 +88,7 @@ var gTrans = unitGroup(UNITS.translucent.theta);
    Wall Tiles carry the four core colours; Growth is its own range. The two
    lists are separate because the two products are specified separately.     */
 var TILE = CFG.surfaceTileSize;
-var ALL_SURFACES = CFG.wallColours.concat(CFG.growthSurfaces);
+var ALL_SURFACES = CFG.wallColours.concat(CFG.growthSurfaces).concat(CFG.standSurfaces || []);
 var surfaceCanvas = {};
 ALL_SURFACES.forEach(function (s) { surfaceCanvas[s.id] = PG.surfaceCanvas(s, TILE, 1024); });
 
@@ -473,6 +478,224 @@ var boxes = [
    The blocks are rendered as high-opacity glossy resin rather than true
    transmission — an approximation, so eleven overlapping panes cannot
    mis-sort, and cheap enough to stay smooth on a laptop. */
+/* ══════════════ the orientation board's layout placeholder ═══════════════
+   The supplied Polygood board carries global-warming-potential figures and
+   a comparative claim, certification and declaration marks, and a row of
+   third-party client logos. A concept model may not assert any of those,
+   and other companies' trademarks are not redrawn from a photograph, so
+   each of those regions is reserved at its true size and NAMED rather than
+   transcribed. Everything else — the wordmark, the structure, the panel
+   specification, the applications and pattern grids — is laid out so the
+   board can be judged for size, position and legibility from the visitor's
+   standing distance. Set install.infoStand.artwork to a data URI and the
+   real print file replaces all of this untouched. */
+function infoBoardCanvas(pw, ph) {
+  return PG.cardCanvas(pw, ph, function (x, W, H, ppm) {
+    var P = function (v) { return v * ppm; };
+    var FAM = '"Helvetica Neue", Helvetica, Arial, sans-serif';
+
+    function lines(str, px, maxW, weight) {
+      x.font = (weight || 500) + ' ' + px + 'px ' + FAM;
+      var words = str.split(' '), out = [], cur = '';
+      for (var i = 0; i < words.length; i++) {
+        var t = cur ? cur + ' ' + words[i] : words[i];
+        if (cur && x.measureText(t).width > maxW) { out.push(cur); cur = words[i]; }
+        else cur = t;
+      }
+      if (cur) out.push(cur);
+      return out;
+    }
+    function para(str, pxMm, X, Y, wMm, o) {
+      o = o || {};
+      var px = P(pxMm), ls = lines(str, px, P(wMm), o.weight), lead = px * (o.lead || 1.42);
+      for (var i = 0; i < ls.length; i++) {
+        PG.text(x, ls[i], px, P(Y) + i * lead,
+          { x: P(X), weight: o.weight || 500, colour: o.colour || '#44433f', align: o.align });
+      }
+      return Y + ls.length * (lead / ppm);
+    }
+    function rule(X, Y, wMm, col) {
+      x.fillStyle = col || '#c9c5bc';
+      x.fillRect(P(X), P(Y), P(wMm), Math.max(1, P(0.5)));
+    }
+    function heading(str, X, Y, wMm) {
+      PG.text(x, str.toUpperCase(), P(5.4), P(Y), { x: P(X), weight: 700, colour: '#1b1b1e', spacing: P(0.5) });
+      rule(X, Y + 3.2, wMm, '#c9c5bc');
+      return Y;
+    }
+    /* a region of the real board that this model does not reproduce */
+    function reserved(X, Y, wMm, hMm, caption) {
+      x.save();
+      x.fillStyle = '#eae7e0';
+      x.fillRect(P(X), P(Y), P(wMm), P(hMm));
+      x.setLineDash([P(2.4), P(2.0)]);
+      x.strokeStyle = '#b6b1a8';
+      x.lineWidth = Math.max(1, P(0.5));
+      x.strokeRect(P(X) + 0.5, P(Y) + 0.5, P(wMm) - 1, P(hMm) - 1);
+      x.restore();
+      var px = P(4.3), ls = lines(caption, px, P(wMm - 9), 500), lead = px * 1.34;
+      var y0 = P(Y + hMm / 2) - (ls.length - 1) * lead / 2 + px * 0.35;
+      for (var i = 0; i < ls.length; i++) {
+        PG.text(x, ls[i], px, y0 + i * lead,
+          { x: P(X + wMm / 2), align: 'center', weight: 500, colour: '#8b877f' });
+      }
+    }
+
+    var M = 14, colL = M, wL = 148, colR = 176, wR = 210;
+
+    /* masthead */
+    PG.text(x, 'polygood', P(19), P(28), { x: P(M), weight: 700, colour: '#1b1b1e', spacing: P(-0.25) });
+    PG.text(x, CFG.copy.brand, P(5.4), P(37), { x: P(M), weight: 500, colour: '#6c6a66' });
+    PG.text(x, 'ORIENTATION BOARD', P(4.6), P(28), { x: P(pw - M), align: 'right', weight: 700, colour: '#8b877f' });
+    PG.text(x, CFG.meta.dimensionNote, P(4.2), P(37), { x: P(pw - M), align: 'right', weight: 500, colour: '#8b877f' });
+    rule(M, 44, pw - 2 * M, '#1b1b1e');
+
+    /* left column — about, specification, impact */
+    heading('About', colL, 60, wL);
+    para('Polygood is a solid panel pressed from recycled plastic. It is worked ' +
+      'like a sheet material: cut, edged and machined. A groove is machined into ' +
+      'one continuous panel; a joint is where two panels meet.',
+      4.7, colL, 70, wL);
+
+    heading('Panel specification', colL, 104, wL);
+    var spec = [
+      ['Sheet size', '2800 × 1400 mm'],
+      ['Thickness', '12 · 19 mm'],
+      ['Finish', 'matt · satin · gloss'],
+      ['Material', '100% recycled PS']
+    ];
+    spec.forEach(function (row, i) {
+      var y = 116 + i * 10.5;
+      PG.text(x, row[0], P(4.7), P(y), { x: P(colL), weight: 500, colour: '#8b877f' });
+      PG.text(x, row[1], P(4.7), P(y), { x: P(colL + wL), align: 'right', weight: 600, colour: '#1b1b1e' });
+      rule(colL, y + 3.4, wL, '#dcd8d0');
+    });
+    PG.text(x, 'As printed on the supplied board — not verified against a current datasheet.',
+      P(3.9), P(166), { x: P(colL), weight: 500, colour: '#9a968e' });
+
+    heading('Impact', colL, 182, wL);
+    reserved(colL, 190, wL, 42,
+      'Global warming potential and comparative figures — supplied artwork, not reproduced in this model');
+
+    /* right column — applications, patterns, marks */
+    heading('Applications', colR, 60, wR);
+    ['Wall cladding', 'Furniture', 'Retail interiors', 'Hospitality', 'Workplace', 'Joinery']
+      .forEach(function (labelText, i) {
+        var cw = (wR - 2 * 4) / 3, ch = 28;
+        var X = colR + (i % 3) * (cw + 4), Y = 68 + ((i / 3) | 0) * (ch + 4);
+        x.fillStyle = '#e2ded6';
+        x.fillRect(P(X), P(Y), P(cw), P(ch));
+        PG.text(x, labelText, P(4.5), P(Y + ch - 8), { x: P(X + 5), weight: 600, colour: '#4b4945' });
+      });
+
+    heading('Patterns', colR, 138, wR);
+    var byId = function (id) { for (var k = 0; k < ALL_SURFACES.length; k++) if (ALL_SURFACES[k].id === id) return ALL_SURFACES[k]; };
+    var shown = [
+      { id: 'light',        label: 'Wall Tiles \u00b7 light' },
+      { id: 'medium',       label: 'Wall Tiles \u00b7 medium' },
+      { id: 'dark',         label: 'Wall Tiles \u00b7 dark' },
+      { id: 'growth-light', label: 'Growth \u00b7 light' },
+      { id: 'growth-mid',   label: 'Growth \u00b7 medium' },
+      { id: 'growth-dark',  label: 'Growth \u00b7 dark' }
+    ].filter(function (e) { return byId(e.id); });
+    var sw = (wR - (shown.length - 1) * 4) / shown.length;
+    shown.forEach(function (e, i) {
+      var s = byId(e.id);
+      var X = colR + i * (sw + 4), Y = 146, src = surfaceCanvas[s.id];
+      if (src) {
+        /* one swatch shows roughly a 250 mm patch, so the flake reads at print size */
+        var crop = Math.round(src.width * 250 / CFG.surfaceTileSize);
+        x.drawImage(src, (i * 37) % (src.width - crop), (i * 61) % (src.height - crop),
+          crop, crop, P(X), P(Y), P(sw), P(sw));
+      }
+      x.strokeStyle = '#c9c5bc'; x.lineWidth = Math.max(1, P(0.4));
+      x.strokeRect(P(X) + 0.5, P(Y) + 0.5, P(sw) - 1, P(sw) - 1);
+      PG.text(x, e.label, P(3.4), P(Y + sw + 6), { x: P(X), weight: 600, colour: '#6c6a66' });
+    });
+    PG.text(x, 'Illustrative surfaces from this model — not colour accurate, not tied to a SKU.',
+      P(3.9), P(196), { x: P(colR), weight: 500, colour: '#9a968e' });
+
+    reserved(colR, 204, wR * 0.52, 28,
+      'Certification marks and environmental declarations — supplied artwork, not reproduced in this model');
+    reserved(colR + wR * 0.52 + 4, 204, wR * 0.48 - 4, 28,
+      'Client list and logos — supplied artwork, not reproduced in this model');
+
+    /* footer strip */
+    x.fillStyle = '#1b1b1e';
+    x.fillRect(0, P(ph - 20), W, P(20));
+    PG.text(x, 'LAYOUT PLACEHOLDER — final artwork to be supplied by Polygood',
+      P(5.2), P(ph - 7.4), { x: P(M), weight: 700, colour: '#f4f2ed' });
+    PG.text(x, CFG.meta.status, P(4.4), P(ph - 7.6),
+      { x: P(pw - M), align: 'right', weight: 500, colour: 'rgba(244,242,237,0.62)' });
+  });
+}
+
+/* ══════════════ UNIT D — the orientation stand, at the left edge ══════════
+   A Polygood board in a slotted base of the same material. The board artwork
+   is a LAYOUT PLACEHOLDER: the real board carries global-warming figures,
+   certification marks and third-party client logos. None of those may be
+   asserted by this model or redrawn from a photograph, so the placeholder
+   reproduces the board's structure at the right size and names what is
+   missing. Supply the print file as a data URI in config and it replaces
+   this untouched. */
+var IS = I.infoStand;
+(function () {
+  var infoTrayTop = padT + trayT;
+  [[-0.17, -0.05], [0.17, -0.05], [-0.17, -0.15], [0.17, -0.15]].forEach(function (p) {
+    var pad = new THREE.Mesh(new THREE.BoxGeometry(0.055, padT, 0.055), matPad);
+    pad.position.set(p[0], padT / 2, p[1]); gInfo.add(pad);
+  });
+  var tray = new THREE.Mesh(new THREE.BoxGeometry(mm(IS.unit.width), trayT, mm(IS.unit.depth)), matTray);
+  tray.position.set(0, padT + trayT / 2, -mm(IS.unit.depth) / 2);
+  tray.castShadow = true; tray.receiveShadow = true; gInfo.add(tray);
+
+  var B = IS.base, BD = IS.board;
+  var standMat = surfaceMaterial(B.width, B.height, 91);
+  applySurface(standMat, IS.material);
+  var boardMat = surfaceMaterial(BD.width, BD.height, 97);
+  applySurface(boardMat, IS.material);
+
+  // base: two blocks with the slot between them, so the board really sits in it
+  var half = (mm(B.depth) - mm(B.slot)) / 2;
+  [-1, 1].forEach(function (s) {
+    var geo = new THREE.BoxGeometry(mm(B.width), mm(B.height), half);
+    PG.planarUV(geo, mm(B.width) / 2, mm(B.height) / 2, mm(TILE));
+    var blk = new THREE.Mesh(geo, standMat);
+    blk.position.set(0, infoTrayTop + mm(B.height) / 2,
+      -mm(B.depth) / 2 + (s < 0 ? half / 2 : mm(B.depth) - half / 2));
+    blk.castShadow = true; blk.receiveShadow = true; gInfo.add(blk);
+  });
+
+  // the board, leaning back in the slot
+  var lean = B.lean * D2R;
+  var bottomY = infoTrayTop + mm(B.height - B.embed);
+  var board = new THREE.Group();
+  board.position.set(0,
+    bottomY + mm(BD.height) / 2 * Math.cos(lean),
+    -mm(B.depth) / 2 + half + mm(B.slot) / 2 - mm(BD.height) / 2 * Math.sin(lean));
+  board.rotation.x = -lean;
+  gInfo.add(board);
+
+  var panelGeo = new THREE.BoxGeometry(mm(BD.width), mm(BD.height), mm(BD.thickness));
+  PG.planarUV(panelGeo, mm(BD.width) / 2, mm(BD.height) / 2, mm(TILE));
+  var panel = new THREE.Mesh(panelGeo, boardMat);
+  panel.castShadow = true; panel.receiveShadow = true; board.add(panel);
+
+  var pw = BD.width - 2 * BD.printInset, ph = BD.height - 2 * BD.printInset;
+  var printC = IS.artwork ? null : infoBoardCanvas(pw, ph);
+  var printMat;
+  if (IS.artwork) {
+    var tex = new THREE.TextureLoader().load(IS.artwork);
+    tex.encoding = THREE.sRGBEncoding; tex.anisotropy = 8;
+    printMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.88, envMapIntensity: 0.2 });
+  } else {
+    printMat = new THREE.MeshStandardMaterial({ map: PG.cardTexture(THREE, printC), roughness: 0.88, envMapIntensity: 0.2 });
+  }
+  var print = new THREE.Mesh(new THREE.PlaneGeometry(mm(pw), mm(ph)), printMat);
+  print.position.z = mm(BD.thickness) / 2 + mm(0.6);
+  board.add(print);
+})();
+
 /* ── UNIT C — the Translucent Collection box, to the right ────────────────
    Its own tray, beside the Growth palette rather than behind it. This is
    what spends the envelope: see the fit check. */
@@ -644,8 +867,8 @@ function checkFootprint() {
 }
 
 return {
-  groups: { main: gMain, palette: gPal, translucent: gTrans },
-  units: UNITS, place: place, rFront: rFront, thetaA: thetaA, thetaB: thetaB, thetaC: thetaC,
+  groups: { info: gInfo, main: gMain, palette: gPal, translucent: gTrans },
+  units: UNITS, place: place, rFront: rFront, thetaA: thetaA, thetaB: thetaB, thetaC: thetaC, thetaD: thetaD,
   anchors: {
     wallZ: wallZ, trayTop: trayTop, horizTopY: horizTopY, horizFrontZ: horizFrontZ,
     wallTopY: trayTop + mm(I.wall.height), couponPivot: couponPivot,

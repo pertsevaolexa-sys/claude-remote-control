@@ -43,7 +43,7 @@ If WebGL cannot start, the page says so and points here.
 | Drag | Orbit |
 | Scroll | Dolly |
 | Shift + drag (or right-drag) | Pan |
-| `1`–`6` | Vantage points |
+| `1`–`8` | Vantage points |
 | `0` | Reset the current vantage |
 
 Every control in the panel is a real button or checkbox and is keyboard
@@ -121,7 +121,7 @@ needs replacing with supplied data before anything is made.
 | --- | ---: | --- |
 | Counter height | 1000 mm | Brief placeholder. **Unmeasured.** |
 | Counter depth at active zone | 450 mm | Brief placeholder. **Must be measured.** |
-| Allocated display length | 1400 mm | Brief envelope. Model uses 1228 mm of it. |
+| Allocated display length | 1400 mm | Brief envelope. Model now needs 2368 mm — see the fit finding. |
 | Active display depth | 400 mm | Brief placeholder. |
 | Wall fragment | 700 × 650 mm | Cropped exhibition fragment, not a product module. |
 | Growth fragment | 700 × 350 mm | Brief placeholder. |
@@ -132,7 +132,10 @@ needs replacing with supplied data before anything is made.
 | Engraved Growth samples | 150 × 150 mm × 4 | One per engraving. 150 mm is set by the tallest cell, not chosen. |
 | Sample boxes | 200 × 68 × 46 mm | Proportions from the supplied photographs. |
 | Translucent Collection box | 360 × 95 × 68 mm, 150 mm lid | Proportions from the supplied photograph. Eleven blocks, colours illustrative. |
-| Translucent unit tray | 400 × 180 mm | Our choice. This is what pushes the envelope past 1400 mm. |
+| Translucent unit tray | 400 × 180 mm | Our choice. The first thing to push the envelope past 1400 mm. |
+| Orientation board | 440 × 300 × 19 mm | Proportions read from the supplied board photograph. Artwork is a **layout placeholder** — see below. |
+| Orientation base | 480 × 140 × 75 mm, 26 mm slot | Our choice. Two blocks with the slot between them, so the board really sits in it. 12° lean, 20 mm embed. |
+| Orientation unit tray | 500 × 200 mm | Our choice. The second thing to push the envelope past 1400 mm. |
 | Coupon | 150 × 100 mm | Brief placeholder. |
 | Clear-floor review band | 1200 mm | Planning overlay. **Not a compliance certification.** |
 | Room, bay, windows, column | see `config.js` | From the photograph. Appearance and adjacency only. |
@@ -188,6 +191,39 @@ behind. Proportions are read off those photographs — not a product drawing.
 The lid copy is **reproduced from the photograph, not authored here**; confirm
 exact wording and brand assets before this goes anywhere.
 
+### The orientation board is a layout placeholder
+
+The stand at the left edge is modelled as asked: a board leaning back in a
+slotted base, the base in the dark, pale-flecked surface from the supplied
+swatch. The board itself is **not** a reproduction of the supplied artwork.
+
+The supplied board carries global-warming-potential figures and a comparative
+claim, certification and declaration marks, and a row of third-party client
+logos. The brief rules out recycling statistics, certification badges and carbon
+figures in the scene, and redrawing other companies' trademarks from a
+photograph into a page that gets deployed publicly is a separate risk we are not
+taking on your behalf. So each of those regions is **reserved at its true size
+and named** — "supplied artwork, not reproduced in this model" — rather than
+transcribed.
+
+What the placeholder does carry is everything the review actually needs: the
+wordmark, the board's structure, the applications and pattern grids, and the
+panel specification, so the board can be judged for size, position and
+legibility from a visitor's standing distance. A bottom strip reads
+**LAYOUT PLACEHOLDER — final artwork to be supplied by Polygood**.
+
+The panel-specification figures (2800 × 1400 mm, 12 · 19 mm, matt/satin/gloss,
+100% recycled PS) are transcribed from the supplied board and labelled on the
+board itself as *not verified against a current datasheet*.
+
+To drop the real print file in, set `install.infoStand.artwork` in `config.js`
+to a data URI. The placeholder is replaced untouched, at the same size, with no
+other change.
+
+The base surface (`standSurfaces` → `nightfleck`) is an **illustrative**
+placeholder matched by eye to the swatch: not colour accurate, not tied to a
+SKU, and not a substitute for an approved texture map.
+
 ### Groove and joint
 
 The groove is modelled as real geometry cut into **one continuous panel**: a
@@ -227,7 +263,9 @@ conditions: soft daylight and bright backlight. **This is not a sun study.**
 No recycling statistics, no Lake Michigan silhouette, no awards, no
 certification badges, no prices, no carbon figures, and no scannable QR — the
 destination has not been supplied, so the card carries a plainly-labelled
-placeholder instead.
+placeholder instead. The same rule is what makes the orientation board a
+layout placeholder rather than a transcription, and it is why no third-party
+client logo appears anywhere in the scene.
 
 ---
 
@@ -235,44 +273,55 @@ placeholder instead.
 
 The fit check runs live against `config.js` and reports rather than absorbs.
 
-### The Translucent Collection box does not fit the allocation
+### The composition no longer fits the allocation
 
-Added as its own sub-assembly to the right of the Growth palette, as asked.
-It is a markedly larger object than the two standard sample boxes — 360 × 95 ×
-68 mm plus a 150 mm lid standing open — so it needs its own 400 × 180 mm tray.
+Four rigid sub-assemblies now sit along the counter — the orientation stand
+(left), the LOOK CLOSER wall fragment, the Growth palette with its boxes, and
+the Translucent Collection box (right).
 
-The envelope is now **1826 mm against the 1400 mm allocated — over by 426 mm**,
-and the fit check reports it as a failure rather than absorbing it.
+The envelope is **2368 mm against the 1400 mm allocated — over by 968 mm**, and
+the fit check reports it as a failure rather than absorbing it. Depth still
+passes: nothing exceeds the 450 mm counter depth.
+
+It got there in three steps, each of them requested:
+
+| Step | Envelope |
+| --- | ---: |
+| Wall fragment + Growth palette | 1228 mm |
+| \+ four engraved Growth samples (palette 500 → 650 mm) | 1384 mm |
+| \+ Translucent Collection box, right (400 mm tray) | 1826 mm |
+| \+ orientation stand, left (500 mm tray) | **2368 mm** |
 
 Three ways out, in the order we would recommend:
 
 1. **Raise the allocation.** The counter itself has the length — the run is
-   about 4.4 m and the composition ends around 23° of arc, well clear of the
-   credenza. The 1400 mm was a concept envelope, not a measured limit. This
+   about 4.4 m and the composition now spans about 30° of arc, still clear of
+   the credenza. The 1400 mm was a concept envelope, not a measured limit. This
    needs the real counter measured and the host's agreement, nothing more.
 2. **Drop the two standard sample boxes** and let the Translucent box be the
-   only box. That returns roughly 480 mm and brings the envelope back inside.
+   only box. That returns roughly 480 mm.
 3. **Crop the exhibition fragment** from 700 mm, which the brief allows once
    the real engraving pattern has been reviewed — which it now has.
 
-We have not chosen for you. The model shows the arrangement you asked for and
-states the cost.
+Even taken together, 2 and 3 do not recover 968 mm. Realistically the
+allocation has to move; the model shows the arrangement you asked for and
+states the cost rather than quietly shrinking anything to make it fit.
 
-**Before the box was added, the composition used almost all of its allocation.** Adding the four
-engraved Growth samples took the palette from 500 to 650 mm wide, and the
-envelope from 1228 mm to **1384 mm of the 1400 mm allocated**. It passes, with
-16 mm to spare. Anything further along the counter — a wider palette, a bigger
-gap, a rotation — will fail the check rather than fit. That is the number to
-watch if more is asked for.
+Note the third row: at 1384 mm the composition had 16 mm of its allocation
+left. Everything since has been over.
 
 **A finding worth acting on:** the counter is curved (2.28 m mean radius) and the
 composition is rigid. A single 1240 mm object set out across that arc swings
-roughly **78 mm** off the counter. So the composition is set out as **two rigid
-sub-assemblies** — the 700 mm main unit and the 500 mm palette — each tangent to
-the counter at its own centre, with the 40 mm gap measured at the front edge a
-visitor reads. Their individual arc deviations are 25 mm and 13 mm, and the whole
-thing then sits inside the 450 mm depth. As configured: envelope **1228 mm**
-along the counter against 1400 mm allocated.
+roughly **78 mm** off the counter. So the composition is not one object. It is
+set out as **four rigid sub-assemblies**, each tangent to the counter at its own
+centre, spaced by **arc length** from its neighbour's front edge — the 40 mm gap
+is the one a visitor actually reads, not a straight-line corner distance. Each
+unit's own arc deviation stays small (25 mm for the 700 mm main unit, 13 mm for
+the palette), and the whole thing sits inside the 450 mm depth.
+
+That is also why adding a unit costs envelope predictably instead of silently
+swinging the composition off the counter — and why the cost shows up as a failed
+check row rather than as a quietly deeper counter.
 
 Change any dimension in `config.js` and the check re-runs. Overhang, running past
 the end of the counter run, or colliding with the credenza are reported as
@@ -314,6 +363,10 @@ Also modelled honestly:
    consultant.”* — proposed, attributed to Growth only, and covering neither the
    Wall Tiles range nor this installation's assembly.
 9. **QR destination**, if one is wanted.
+9a. **The orientation board's print file**, plus clearance to reproduce the
+    figures, certification marks and client logos it carries. Until then the
+    board stays a labelled layout placeholder. Drop the file in via
+    `install.infoStand.artwork`.
 10. **Accessibility confirmation with the host** — floor circulation, and a
     nearby surface for seated or portable interaction. The photographed high
     counter is not on its own an accessibility answer; the coupon and samples are
