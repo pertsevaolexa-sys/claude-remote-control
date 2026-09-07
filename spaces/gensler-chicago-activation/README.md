@@ -50,6 +50,32 @@ Every control in the panel is a real button or checkbox and is keyboard
 operable. The panel is a review instrument — at the event the visitor is not
 expected to touch a screen.
 
+### Changing the tiles
+
+The three choices — **wall tile**, **wall engraving** and **Growth surface** —
+are independent and stay independent. Every entry in `wallColours`,
+`engravings` and `growthSurfaces` appears as a button, and picking one
+re-materialises the panel and the coupon live. There is deliberately no "match
+the wall" shortcut: same-pattern availability is not confirmed.
+
+Adding a surface to `config.js` adds a button. The stand's own surface lives in
+a separate list (`standSurfaces`) precisely so it does not turn up among the
+tile choices.
+
+### What it opens on
+
+`config.js` → `defaults` sets the **starting** selection and vantage only:
+
+```js
+defaults: { wall: 'dark', growth: 'growth-light',
+            engraving: null, question: null, view: 'approach' }
+```
+
+It opens on the dark tile because that is the combination under review. Nothing
+here removes a control — all three tiles, all three Growth surfaces and all four
+engravings remain selectable. `null` falls back to the first entry in the list,
+and an id that no longer exists falls back the same way rather than failing.
+
 ---
 
 ## Deploy

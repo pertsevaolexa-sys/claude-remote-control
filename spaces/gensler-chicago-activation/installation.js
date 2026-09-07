@@ -773,11 +773,17 @@ var transBox = (function () {
    Wall colour, wall engraving and Growth surface are three INDEPENDENT
    choices. There is deliberately no "match the wall" control: same-pattern
    availability is not confirmed.                                            */
+var DEF = CFG.defaults || {};
+/* the opening selection only — every entry in every list stays selectable */
+function startId(list, wanted) {
+  var hit = list.find(function (x) { return x.id === wanted; });
+  return (hit || list[0]).id;
+}
 var state = {
-  wall: CFG.wallColours[0].id,
-  engraving: CFG.engravings[0].id,
-  growth: CFG.growthSurfaces[0].id,
-  question: CFG.questions[0].id
+  wall: startId(CFG.wallColours, DEF.wall),
+  engraving: startId(CFG.engravings, DEF.engraving),
+  growth: startId(CFG.growthSurfaces, DEF.growth),
+  question: startId(CFG.questions, DEF.question)
 };
 
 function setWall(id) {
@@ -805,7 +811,9 @@ function setQuestion(id) {
   setQuestionMarker(CFG.questions.findIndex(function (q) { return q.id === id; }));
   ctx.invalidate();
 }
-setWall(state.wall); setGrowth(state.growth); setEngraving(state.engraving); setQuestionMarker(0);
+/* the marker followed index 0 rather than the state, which only matched
+   while the opening question was the first one */
+setWall(state.wall); setGrowth(state.growth); setEngraving(state.engraving); setQuestion(state.question);
 
 /* ── inspect: only the coupon moves ───────────────────────────────────── */
 var inspectT = 0;

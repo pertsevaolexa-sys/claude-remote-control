@@ -374,6 +374,20 @@ window.PG_CONFIG = {
 
      A groove is machined into ONE continuous panel. These are engravings, not
      an assembly of loose tiles, and not grout.                              */
+  /* ── what the model OPENS on ───────────────────────────────────────────
+     This sets the STARTING selection only. Every wall tile, every Growth
+     surface and every engraving below stays selectable in the panel — the
+     three choices remain independent, and nothing here removes a control.
+     Set any of these to null to fall back to the first entry in its list. */
+  defaults: {
+    wall:      'dark',          // wallColours id — the dark tile
+    growth:    'growth-light',  // growthSurfaces id
+    engraving: null,            // engravings id
+    question:  null,            // questions id
+    view:      'approach'       // vantage key: approach | eye | detail | overhead |
+                                // palette | translucent | orientation | logistics
+  },
+
   engravingReferenceSheet: 300,   // assumed sheet size the proportions came from
   engravings: [
     { id: 'oyster',     name: 'Oyster',     ref: '01', shape: 'rect',    cellW: 43,   cellH: 43  },
@@ -2404,11 +2418,17 @@ var transBox = (function () {
    Wall colour, wall engraving and Growth surface are three INDEPENDENT
    choices. There is deliberately no "match the wall" control: same-pattern
    availability is not confirmed.                                            */
+var DEF = CFG.defaults || {};
+/* the opening selection only — every entry in every list stays selectable */
+function startId(list, wanted) {
+  var hit = list.find(function (x) { return x.id === wanted; });
+  return (hit || list[0]).id;
+}
 var state = {
-  wall: CFG.wallColours[0].id,
-  engraving: CFG.engravings[0].id,
-  growth: CFG.growthSurfaces[0].id,
-  question: CFG.questions[0].id
+  wall: startId(CFG.wallColours, DEF.wall),
+  engraving: startId(CFG.engravings, DEF.engraving),
+  growth: startId(CFG.growthSurfaces, DEF.growth),
+  question: startId(CFG.questions, DEF.question)
 };
 
 function setWall(id) {
@@ -2436,7 +2456,9 @@ function setQuestion(id) {
   setQuestionMarker(CFG.questions.findIndex(function (q) { return q.id === id; }));
   ctx.invalidate();
 }
-setWall(state.wall); setGrowth(state.growth); setEngraving(state.engraving); setQuestionMarker(0);
+/* the marker followed index 0 rather than the state, which only matched
+   while the opening question was the first one */
+setWall(state.wall); setGrowth(state.growth); setEngraving(state.engraving); setQuestion(state.question);
 
 /* ── inspect: only the coupon moves ───────────────────────────────────── */
 var inspectT = 0;
@@ -3339,7 +3361,8 @@ fitStage();
 
 applyFurniture();
 setLight('soft');
-goView(0, true);
+var startView = VIEWS.findIndex(function (v) { return v.key === (CFG.defaults || {}).view; });
+goView(startView < 0 ? 0 : startView, true);
 refreshStatus();
 refreshRecordLine();
 

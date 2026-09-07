@@ -525,7 +525,8 @@ fitStage();
 
 applyFurniture();
 setLight('soft');
-goView(0, true);
+var startView = VIEWS.findIndex(function (v) { return v.key === (CFG.defaults || {}).view; });
+goView(startView < 0 ? 0 : startView, true);
 refreshStatus();
 refreshRecordLine();
 

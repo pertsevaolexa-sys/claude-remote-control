@@ -166,6 +166,20 @@ window.PG_CONFIG = {
 
      A groove is machined into ONE continuous panel. These are engravings, not
      an assembly of loose tiles, and not grout.                              */
+  /* ── what the model OPENS on ───────────────────────────────────────────
+     This sets the STARTING selection only. Every wall tile, every Growth
+     surface and every engraving below stays selectable in the panel — the
+     three choices remain independent, and nothing here removes a control.
+     Set any of these to null to fall back to the first entry in its list. */
+  defaults: {
+    wall:      'dark',          // wallColours id — the dark tile
+    growth:    'growth-light',  // growthSurfaces id
+    engraving: null,            // engravings id
+    question:  null,            // questions id
+    view:      'approach'       // vantage key: approach | eye | detail | overhead |
+                                // palette | translucent | orientation | logistics
+  },
+
   engravingReferenceSheet: 300,   // assumed sheet size the proportions came from
   engravings: [
     { id: 'oyster',     name: 'Oyster',     ref: '01', shape: 'rect',    cellW: 43,   cellH: 43  },
