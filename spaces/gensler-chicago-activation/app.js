@@ -283,8 +283,8 @@ VIEWS.forEach(function (v, i) {
   $('views').appendChild(b);
 });
 
-function swatchRow(hostId, onPick, initial) {
-  CFG.surfaces.forEach(function (s) {
+function swatchRow(hostId, list, onPick, initial) {
+  list.forEach(function (s) {
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'swatch';
     b.setAttribute('aria-pressed', s.id === initial ? 'true' : 'false');
@@ -305,8 +305,24 @@ function swatchRow(hostId, onPick, initial) {
     $(hostId).appendChild(b);
   });
 }
-swatchRow('wallSwatches', INS.setWall, INS.state.wall);
-swatchRow('growthSwatches', INS.setGrowth, INS.state.growth);
+swatchRow('wallSwatches', CFG.wallColours, INS.setWall, INS.state.wall);
+swatchRow('growthSwatches', CFG.growthSurfaces, INS.setGrowth, INS.state.growth);
+
+/* the four engravings, supplied in the client sheet. Engraving and colour are
+   separate choices — the sheet pairs them, the product does not require it. */
+CFG.engravings.forEach(function (e) {
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.innerHTML = '<b>' + e.ref + '</b> ' + e.name + '<em>' + e.cellW + ' \u00d7 ' + e.cellH + ' mm cell</em>';
+  b.setAttribute('aria-pressed', e.id === INS.state.engraving ? 'true' : 'false');
+  b.addEventListener('click', function () {
+    Array.prototype.forEach.call($('engravings').children, function (o) { o.setAttribute('aria-pressed', 'false'); });
+    b.setAttribute('aria-pressed', 'true');
+    INS.setEngraving(e.id);
+    refreshRecordLine();
+  });
+  $('engravings').appendChild(b);
+});
 
 CFG.questions.forEach(function (q) {
   var b = document.createElement('button');
@@ -373,7 +389,8 @@ function refreshStatus() {
 function refreshRecordLine() {
   var s = INS.state;
   var q = CFG.questions.find(function (x) { return x.id === s.question; });
-  $('recordLine').textContent = 'wall ' + s.wall + ' · Growth ' + s.growth + ' · ' + q.label;
+  $('recordLine').textContent = 'wall ' + s.wall + ' / ' + engravingOf(s.engraving).name +
+    ' · Growth ' + s.growth + ' · ' + q.label;
 }
 
 /* ── PNG export ───────────────────────────────────────────────────────────
@@ -400,8 +417,8 @@ function composeExport() {
   x.fillStyle = '#a8a49c';
   x.font = '500 ' + Math.round(10.5 * scale) + 'px "Helvetica Neue", Helvetica, Arial, sans-serif';
   x.fillText(CFG.textureStatus + ' · ' + CFG.meta.dimensionNote, 20 * scale, src.height + 43 * scale);
-  x.fillText(VIEWS[activeView].name + ' · wall ' + s.wall + ' · Growth ' + s.growth + ' · ' + q.label +
-    ' · ' + CFG.meta.revision, 20 * scale, src.height + 60 * scale);
+  x.fillText(VIEWS[activeView].name + ' · wall ' + s.wall + ' / engraving ' + engravingOf(s.engraving).name +
+    ' · Growth ' + s.growth + ' · ' + q.label + ' · ' + CFG.meta.revision, 20 * scale, src.height + 60 * scale);
 
   return out;
 }
@@ -431,6 +448,9 @@ function saveRecord() {
     project: CFG.meta.project,
     revision: CFG.meta.revision,
     wallChoice: { surface: s.wall, name: nameOf(s.wall), sku: CFG.product.wallTileSku },
+    engraving: { id: s.engraving, name: engravingOf(s.engraving).name,
+                 reference: engravingOf(s.engraving).ref,
+                 referenceConfirmed: CFG.engravingRefsConfirmed },
     growthChoice: { surface: s.growth, name: nameOf(s.growth), sku: CFG.product.growthSurfaceSku },
     projectQuestion: CFG.questions.find(function (q) { return q.id === s.question; }).label,
     textureStatus: CFG.textureStatus,
@@ -448,14 +468,23 @@ function saveRecord() {
   a.click();
   setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
 }
-function nameOf(id) { return CFG.surfaces.find(function (s) { return s.id === id; }).name; }
+function nameOf(id) {
+  var all = CFG.wallColours.concat(CFG.growthSurfaces);
+  var f = all.find(function (s) { return s.id === id; });
+  return f ? f.name : id;
+}
+function engravingOf(id) { return CFG.engravings.find(function (e) { return e.id === id; }); }
 $('saveRecord').addEventListener('click', saveRecord);
 
 /* ── metadata into the panel ──────────────────────────────────────────── */
 $('metaProject').textContent = CFG.meta.project;
 $('metaRev').textContent = CFG.meta.status + ' · ' + CFG.meta.revision;
-$('grooveNote').textContent = 'Groove spacing ' + CFG.install.wall.groove.spacing + ' mm, ' +
-  CFG.install.wall.groove.width + ' × ' + CFG.install.wall.groove.depth + ' mm — ' + CFG.install.wall.groove.profile;
+$('grooveNote').textContent = 'Four engravings supplied (' +
+  CFG.engravings.map(function (e) { return e.ref + ' ' + e.name; }).join(', ') +
+  '). Cell sizes derived from the supplied sheet against an assumed ' +
+  CFG.engravingReferenceSheet + ' mm reference sheet — illustrative. Groove ' +
+  CFG.groove.width + ' \u00d7 ' + CFG.groove.depth + ' mm, ' + CFG.groove.profile + '.' +
+  (CFG.engravingRefsConfirmed ? '' : ' Reference numbers not confirmed.');
 $('jointNote').textContent = CFG.product.panelJointDetailSupplied
   ? 'Panel joint detail supplied.'
   : 'No panel-joint sample is shown: manufacturer detail requested.';
@@ -463,6 +492,11 @@ $('sameNote').textContent = CFG.product.samePatternAvailabilityConfirmed
   ? 'Same-pattern wall/counter option available.'
   : 'Same-pattern wall/counter option withheld — availability not confirmed.';
 $('textureNote').textContent = CFG.textureStatus;
+$('growthEngravingNote').textContent = CFG.product.engravingOnGrowthConfirmed
+  ? 'The four engravings are confirmed available on Growth.'
+  : 'The four engravings are shown here on Growth material. They were supplied ' +
+    'for Wall Tiles \u2014 whether they can be machined into Growth, and in which ' +
+    'thicknesses, is not established.';
 
 /* ── run ──────────────────────────────────────────────────────────────── */
 function fitStage() {

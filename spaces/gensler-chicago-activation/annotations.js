@@ -142,6 +142,12 @@ dimension(mainPt(-A.w / 2, mm(I.wall.height) + 0.10, -A.d + 0.02), mainPt(A.w / 
 // palette plan depth
 dimension(palPt(-B.w / 2 - 0.08, 0.02, 0), palPt(-B.w / 2 - 0.08, 0.02, -B.d),
   new THREE.Vector3(-0.11, 0, 0), I.palette.depth + ' mm palette depth', dimsPlan);
+dimension(palPt(-(CFG.engravings.length * mm(I.palette.sampleSize + I.palette.sampleGap)) / 2,
+                0.03, INS.anchors.samplesZ),
+          palPt((CFG.engravings.length * mm(I.palette.sampleSize + I.palette.sampleGap)) / 2,
+                0.03, INS.anchors.samplesZ),
+          new THREE.Vector3(0, 0, -0.14),
+          I.palette.sampleSize + ' mm engraved Growth \u00d7 ' + CFG.engravings.length, dimsPlan);
 
 // panel and surface thicknesses, read at the close-up camera
 dimension(mainPt(A.w / 2 + 0.03, mm(I.wall.height) - 0.06, -A.d + mm(50) - mm(I.wall.thickness)),
@@ -158,11 +164,21 @@ vs.scale.multiplyScalar(1.12);
 dimNote.add(vs);
 
 /* ── annotations ──────────────────────────────────────────────────────── */
-var g = I.wall.groove;
+var g = CFG.groove;
+var engNames = CFG.engravings.map(function (e) { return e.ref + ' ' + e.name; }).join(' · ');
 leader(mainPt(-0.12, mm(I.wall.height) * 0.62, -A.d + mm(50)),
        mainPt(-0.92, mm(I.wall.height) * 0.92, -A.d + 0.18),
        'Machined groove — one continuous panel',
-       'Illustrative spacing ' + g.spacing + ' mm · ' + g.profile);
+       'Illustrative ' + I.wall.engraving.cellW + ' mm grid \u00b7 groove ' +
+       g.width + ' \u00d7 ' + g.depth + ' mm \u00b7 ' + g.profile);
+
+/* the four supplied engravings, on the Growth collection in the palette */
+leader(palPt(0, 0.05, INS.anchors.samplesZ),
+       palPt(0.30, 0.52, 0.44),
+       'Growth, engraved: ' + engNames,
+       CFG.product.engravingOnGrowthConfirmed
+         ? 'Availability in Growth confirmed'
+         : 'Engravings supplied for Wall Tiles \u2014 availability in Growth NOT confirmed');
 
 leader(mainPt(A.w / 2, mm(I.wall.height) * 0.45, -A.d + mm(50) - mm(I.wall.thickness) / 2),
        mainPt(A.w / 2 + 0.62, mm(I.wall.height) * 0.30, -A.d + 0.34),
@@ -194,10 +210,16 @@ leader(mainPt(0.22, mm(I.horizontal.topAboveCounter) + 0.01, INS.anchors.horizFr
        'Growth surface — specified separately',
        'wallTileSku and growthSurfaceSku are independent');
 
-leader(new THREE.Vector3(palPt(0.20, 0.06, -0.15).x, palPt(0.20, 0.06, -0.15).y, palPt(0.20, 0.06, -0.15).z),
+leader(new THREE.Vector3(palPt(0.20, 0.06, -0.21).x, palPt(0.20, 0.06, -0.21).y, palPt(0.20, 0.06, -0.21).z),
        new THREE.Vector3(palPt(0.70, 0.34, 0.54).x, palPt(0.70, 0.34, 0.54).y, palPt(0.70, 0.34, 0.54).z),
        'Three Growth choices + neutral references',
        'References are comparison aids, not product partners or approvals');
+
+/* the two sample boxes */
+leader(palPt(0.12, 0.10, INS.anchors.boxZ),
+       palPt(0.78, 0.44, -0.02),
+       'Polygood sample boxes \u2014 the full range',
+       'Modelled from the supplied photographs; lid copy reproduced, not authored');
 
 /* seated and portable interaction — the high counter is not on its own an
    accessibility answer */

@@ -41,6 +41,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .stack button:hover,.row button:hover{border-color:#b3ada1}
 .stack button[aria-pressed="true"],.row button[aria-pressed="true"]{
   background:var(--accent-soft);border-color:var(--accent);font-weight:600}
+#engravings button b{font-weight:700;font-variant-numeric:tabular-nums;margin-right:5px;color:var(--accent)}
+#engravings button em{display:block;font-style:normal;font-size:10.5px;color:var(--muted);
+  font-variant-numeric:tabular-nums;margin-top:1px}
 .row{display:flex;gap:4px}
 .row button{flex:1;text-align:center}
 
@@ -123,8 +126,14 @@ button{font:inherit;color:inherit;cursor:pointer}
   <p class="note">Building orientation is unverified. These are legibility
      conditions for review, <strong>not a sun study</strong>.</p>
 
-  <h2>Wall Tiles surface</h2>
-  <div class="swatches" id="wallSwatches" role="group" aria-label="Wall surface"></div>
+  <h2>Wall Tiles colour</h2>
+  <div class="swatches" id="wallSwatches" role="group" aria-label="Wall Tiles colour"></div>
+
+  <h2>Wall Tiles engraving</h2>
+  <div class="stack" id="engravings" role="group" aria-label="Engraving"></div>
+  <p class="note">Patterns supplied by the client. Cell sizes are derived from the
+     reference sheet and are <strong>illustrative</strong> until a profile drawing
+     arrives. Colour and engraving are separate choices.</p>
 
   <h2>Growth surface</h2>
   <div class="swatches" id="growthSwatches" role="group" aria-label="Growth surface"></div>
@@ -159,6 +168,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   <p class="note" id="grooveNote"></p>
   <p class="note" id="jointNote"></p>
   <p class="note" id="textureNote"></p>
+  <p class="note" id="growthEngravingNote"></p>
 
   <h2>Review output</h2>
   <div class="row">

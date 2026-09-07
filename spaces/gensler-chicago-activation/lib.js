@@ -44,8 +44,30 @@ PG.surfaceCanvas = function (def, tileMm, px) {
     x.fillStyle = g; x.fillRect(0, 0, px, px);
   }
 
-  // the flakes themselves: 3–22 mm, angular, in three tones
-  var count = Math.round(tileMm * tileMm / 420);
+  // the Growth range includes fibrous surfaces as well as flaked ones
+  if (def.pattern === 'fibre') {
+    var strands = Math.round(tileMm * tileMm / 260 * (def.density || 1));
+    x.lineCap = 'round';
+    for (var f = 0; f < strands; f++) {
+      var sx = r() * px, sy = r() * px;
+      var ang = r() * Math.PI * 2, len = (18 + r() * 90) * perMm;
+      x.strokeStyle = def.flake[(r() * def.flake.length) | 0];
+      x.globalAlpha = 0.10 + r() * 0.30;
+      x.lineWidth = (0.5 + r() * 1.4) * perMm;
+      x.beginPath();
+      x.moveTo(sx, sy);
+      x.quadraticCurveTo(
+        sx + Math.cos(ang) * len * 0.5 + (r() - 0.5) * len * 0.7,
+        sy + Math.sin(ang) * len * 0.5 + (r() - 0.5) * len * 0.7,
+        sx + Math.cos(ang) * len, sy + Math.sin(ang) * len);
+      x.stroke();
+    }
+    x.globalAlpha = 1;
+    return c;
+  }
+
+  // the flakes themselves: 3–18 mm, angular, in three tones
+  var count = Math.round(tileMm * tileMm / 420 * (def.density || 1));
   for (var i = 0; i < count; i++) {
     var cx = r() * px, cy = r() * px;
     var len = (3 + r() * 15) * perMm, wid = len * (0.34 + r() * 0.46);
@@ -157,6 +179,32 @@ PG.counterPolyline = function (CFG, samples) {
               PG.mm(b.centreZ) - PG.mm(c.outerRadius - c.depthAtActiveZone) * Math.cos(a)]
     });
   }
+  return out;
+};
+
+/* ── merge geometries ─────────────────────────────────────────────────────
+   An engraving can run to several hundred raised fields. Merging them keeps a
+   whole panel at two draw calls instead of one per cell. three's UMD build
+   does not ship BufferGeometryUtils, so this is the small part of it we need. */
+PG.merge = function (THREE, geos) {
+  var pos = [], nor = [], uv = [], idx = [], off = 0;
+  geos.forEach(function (g) {
+    var p = g.attributes.position, nm = g.attributes.normal, u = g.attributes.uv, i;
+    for (i = 0; i < p.count; i++) {
+      pos.push(p.getX(i), p.getY(i), p.getZ(i));
+      nor.push(nm.getX(i), nm.getY(i), nm.getZ(i));
+      uv.push(u.getX(i), u.getY(i));
+    }
+    if (g.index) { for (i = 0; i < g.index.count; i++) idx.push(g.index.getX(i) + off); }
+    else         { for (i = 0; i < p.count; i++)       idx.push(i + off); }
+    off += p.count;
+    g.dispose();
+  });
+  var out = new THREE.BufferGeometry();
+  out.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  out.setAttribute('normal',   new THREE.Float32BufferAttribute(nor, 3));
+  out.setAttribute('uv',       new THREE.Float32BufferAttribute(uv, 2));
+  out.setIndex(idx);
   return out;
 };
 

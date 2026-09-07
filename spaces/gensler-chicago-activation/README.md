@@ -128,7 +128,9 @@ needs replacing with supplied data before anything is made.
 | Growth top above counter | 120 mm | Brief placeholder, subject to fabricator detail. |
 | Wall panel thickness | 12 mm | Visualisation choice. Confirm selected product. |
 | Growth thickness | 19 mm | Visualisation choice. Confirm selected product. |
-| Palette surface | 500 × 300 mm | Brief placeholder. |
+| Palette surface | 650 × 400 mm | Deepened from 300 for the sample boxes (inside the 400 mm active-depth cap) and widened from 500 for the four engraved samples — the widening **does** spend envelope. |
+| Engraved Growth samples | 150 × 150 mm × 4 | One per engraving. 150 mm is set by the tallest cell, not chosen. |
+| Sample boxes | 200 × 68 × 46 mm | Proportions from the supplied photographs. |
 | Coupon | 150 × 100 mm | Brief placeholder. |
 | Clear-floor review band | 1200 mm | Planning overlay. **Not a compliance certification.** |
 | Room, bay, windows, column | see `config.js` | From the photograph. Appearance and adjacency only. |
@@ -145,6 +147,45 @@ approved photographs or texture maps, preserving physical scale.
 
 Because every texture is a same-origin canvas, PNG export can never be tainted.
 
+### Engravings — partly supplied
+
+The four engravings — **01 Oyster, 02 Pearl, 03 Jade, 04 Terracotta** — and
+their shapes come from the client sheet *Polygood® Wall Tiles — Selected Tiles*.
+Three are rectangular cells at different proportions; Jade is a fan/fish-scale
+field with a bowed bottom edge. Those shapes are theirs.
+
+What was **not** supplied is any dimension. The cell sizes in `config.js`
+(43×43, 50×150, 50×150, 18.8×75 mm) are derived from the proportions in that
+photograph against an **assumed 300 mm reference sheet**. They are illustrative.
+The sheet itself says *“Illustrative numbering 01–04; final product codes to be
+confirmed”*, so `engravingRefsConfirmed` is `false` and the model says so.
+
+**The engravings are shown on the Growth collection**, in the palette: four
+150 mm samples lying flat, one per engraving, all carrying the selected Growth
+surface so the row compares engravings rather than colours. The wall fragment
+keeps the coarse illustrative grid it was deployed with.
+
+150 mm is the floor for those samples, not a preference: the Pearl and Jade
+cells are 150 mm tall, so anything smaller cannot show one whole cell.
+
+They were supplied for Wall Tiles. Whether they can be machined into Growth
+panels, and in which thicknesses, is **not established** —
+`product.engravingOnGrowthConfirmed` is `false`, and both the control panel and
+the scene annotation say so. Nothing here should be read as saying Growth is
+available engraved.
+
+This replaces the brief's *three positions for 150 mm samples* with four
+engraved ones, at the client's direction. The three Growth colours are still
+comparable — on the swatches, which retexture all four samples at once.
+
+### Sample boxes
+
+The two Polygood sample boxes are modelled from the supplied product
+photographs: a shallow tray of upright material sticks with the lid standing
+behind. Proportions are read off those photographs — not a product drawing.
+The lid copy is **reproduced from the photograph, not authored here**; confirm
+exact wording and brand assets before this goes anywhere.
+
 ### Groove and joint
 
 The groove is modelled as real geometry cut into **one continuous panel**: a
@@ -153,7 +194,7 @@ eased at its top edge. The material is UV-mapped from its position *in the
 panel*, so it runs unbroken through every groove. This is the point of the
 piece — a groove is machined into one panel; a joint is the line between two.
 
-- Spacing 175 mm, groove 8 × 4 mm, square-cut: **illustrative approximation**,
+- Groove 8 × 4 mm, square-cut with an eased lip: **illustrative approximation**,
   labelled as such in the scene. Manufacturer profile requested.
 - The published 700 × 700 mm reference is described for residential projects. It
   is **not** treated here as the commercial module.
@@ -192,6 +233,13 @@ placeholder instead.
 
 The fit check runs live against `config.js` and reports rather than absorbs.
 
+**The composition now uses almost all of its allocation.** Adding the four
+engraved Growth samples took the palette from 500 to 650 mm wide, and the
+envelope from 1228 mm to **1384 mm of the 1400 mm allocated**. It passes, with
+16 mm to spare. Anything further along the counter — a wider palette, a bigger
+gap, a rotation — will fail the check rather than fit. That is the number to
+watch if more is asked for.
+
 **A finding worth acting on:** the counter is curved (2.28 m mean radius) and the
 composition is rigid. A single 1240 mm object set out across that arc swings
 roughly **78 mm** off the counter. So the composition is set out as **two rigid
@@ -225,8 +273,12 @@ Also modelled honestly:
    polyline. Everything in the table above is a placeholder.
 2. **Counter load capacity and venue permission.** Unknown. Nothing in this model
    is a load approval, and no mass estimate should be read as one.
-3. **Groove profile drawing** — real profile, spacing and depth, and the
-   commercial panel module (the residential 700 × 700 reference is not it).
+3. **Groove profile drawing** — real profile and depth, the real cell sizes for
+   the four engravings, their final product codes, and the commercial panel
+   module (the residential 700 × 700 reference is not it).
+3a. **Whether the four engravings can be produced on Growth at all**, and in
+   which thicknesses. The model shows them there because you asked to see it,
+   not because it is established.
 4. **Panel-to-panel joint detail.** Until supplied, no joint sample is shown.
 5. **Product availability** — which Growth patterns, thicknesses and finishes can
    actually be ordered as Wall Tiles, and whether same-pattern is possible.

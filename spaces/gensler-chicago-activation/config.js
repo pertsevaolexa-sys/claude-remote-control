@@ -2,8 +2,8 @@
    SCENE CONFIGURATION — Gensler Chicago office activation
    Polygood® by The Good Plastic Company · campaign: LOOK CLOSER.
 
-   THIS IS THE FILE TO EDIT. Everything below is a concept placeholder.
-   None of it is a site measurement, a product order, or an approved detail.
+   THIS IS THE FILE TO EDIT. Everything below is a concept placeholder unless
+   marked as supplied. None of it is a site measurement or a product order.
 
    UNITS: every length here is in MILLIMETRES. The scene works in metres;
    conversion happens once, at the boundary, via PG.mm().
@@ -14,9 +14,7 @@ window.PG_CONFIG = {
   meta: {
     project:      'Gensler Chicago office activation',
     status:       'Concept model — not for fabrication',
-    revision:     'rev A · 2026-09-06',
-    // Official event naming and date are not confirmed. Do not print an event
-    // name in the scene until the client supplies one.
+    revision:     'rev B · 2026-09-07',
     eventNaming:  'to be confirmed',
     dimensionNote:'Concept dimensions — verify on site'
   },
@@ -33,158 +31,174 @@ window.PG_CONFIG = {
     growthCredit: 'Growth collection, developed with Gensler serving as product design consultant.'
   },
 
-  /* the three prompts on the project-question card */
   questions: [
     { id: 'wet',   label: 'Wet-area detail' },
     { id: 'clean', label: 'Cleaning and replacement' },
     { id: 'cost',  label: 'Cost and programme' }
   ],
 
-  /* ── THE ROOM ───────────────────────────────────────────────────────────
-     Derived from the reference photograph IMG_3511.jpeg. This establishes
-     appearance and adjacency only. It is not a measured plan, and the
-     building is not identified.                                            */
+  /* ── THE ROOM ─────────────────────────────────────────────────────────── */
   room: {
     ceilingHeight: 3550,
-    // the bay is modelled as a circular arc; the photograph shows a gently
-    // faceted or curved perimeter and does not resolve which
-    bay: { centreZ: 350, radius: 3000, halfAngle: 52 },   // halfAngle in degrees
+    bay: { centreZ: 350, radius: 3000, halfAngle: 52 },
     sillHeight: 950,
     headHeight: 2950,
     wallThickness: 460,
-    // window sashes: centre angle and angular width on the bay arc, degrees
     windows: [ { c: -32, w: 25 }, { c: 0, w: 25 }, { c: 32, w: 25 } ],
     sideWallX: 3950,
     backWallZ: 6300,
-    // decorative columns — position only; the capital is a restrained
-    // approximation and carries no survey value
     columns: [ { x: -2660, z: -780 }, { x: 2660, z: -780 } ]
   },
 
-  /* ── THE HOST COUNTER ───────────────────────────────────────────────────
-     The existing dark window counter is the primary support. Height and
-     depth below are UNMEASURED placeholders from the brief.
-     Modelled as an arc concentric with the bay; PG.counterPolyline() samples
-     it if you need it as a polyline.                                        */
+  /* ── THE HOST COUNTER ─────────────────────────────────────────────────── */
   counter: {
-    height: 1000,          // unmeasured support height; adjustable
-    depthAtActiveZone: 450,// MUST be measured before fabrication
+    height: 1000,
+    depthAtActiveZone: 450,
     topThickness: 45,
-    // arc set-out: outer edge sits nearest the glazing
     outerRadius: 2500,
-    startAngle: -53,       // degrees on the bay arc
+    startAngle: -53,
     endAngle: 70,
-    // load capacity is UNKNOWN. Nothing here constitutes a load approval.
-    loadCapacity: null
+    loadCapacity: null          // UNKNOWN. Nothing here is a load approval.
   },
 
-  /* ── THE INSTALLATION ───────────────────────────────────────────────────
-     Concept placeholders. Not site measurements, not product orders.        */
+  /* ── THE INSTALLATION ─────────────────────────────────────────────────── */
   install: {
-    allocatedLength: 1400,     // maximum initial concept envelope, along the counter
-    activeDepth:     400,      // must sit entirely within the verified support footprint
+    allocatedLength: 1400,
+    activeDepth:     400,
     gapBetweenUnits: 40,
 
-    // set-out: angular centre of the main unit on the counter arc, degrees.
-    // The composition may rotate slightly to improve side lighting; overhang
-    // is flagged, never absorbed by quietly deepening the counter.
     setOutAngle:   -18,
-    extraRotation: 0,          // degrees, applied to both units about their own centres
-    frontEdgeInset: 10,        // front edge held this far back from the counter's room-side edge
+    extraRotation: 0,
+    frontEdgeInset: 10,
 
-    wall: {                    // vertical Wall Tiles fragment
-      width: 700, height: 650, thickness: 12,
-      // GROOVE = machined into ONE continuous panel. NOT a grout joint and
-      // NOT an assembly of loose square tiles.
-      // Profile, spacing and depth below are an ILLUSTRATIVE APPROXIMATION
-      // pending a manufacturer profile drawing.
-      groove: {
-        spacing: 175,          // illustrative only — NOT a product module
-        width: 8,
-        depth: 4,
-        profile: 'approximate square-cut — manufacturer profile requested',
-        verified: false
-      },
-      // The published 700 × 700 mm reference is described for residential
-      // projects. It is not evidence of the required commercial module.
-      moduleVerified: false
+    wall: {
+      width: 700, height: 650, thickness: 12, moduleVerified: false,
+      // the fragment keeps the coarse illustrative grid it was deployed with.
+      // The four supplied engravings are shown on the Growth collection, in
+      // the palette, not on this panel.
+      engraving: { id: 'wallgrid', name: 'Illustrative grid', shape: 'rect', cellW: 175, cellH: 175 }
     },
 
-    horizontal: {              // Growth counter fragment
+    horizontal: {
       width: 700, depth: 350, thickness: 19,
-      topAboveCounter: 120,    // concept support zone, subject to fabricator detail
+      topAboveCounter: 120,
       exposedEdge: 'front'
     },
 
-    palette: {                 // three Growth choices + identity card
-      width: 500, depth: 300,
+    palette: {
+      // Deepened from 300 to 400 mm to take the two sample boxes (400 mm is the
+      // active-depth cap), and widened to carry FOUR engraved Growth samples
+      // rather than three plain ones. The widening spends envelope: watch the
+      // fit check.
+      width: 650, depth: 400,
+      // 150 mm is the floor here, not a preference: the Pearl and Jade cells
+      // are 150 mm tall, so a smaller sample cannot show one whole cell.
       sampleSize: 150,
-      sampleCount: 3
+      sampleGap: 8,
+      sampleCount: 4
     },
 
-    coupon: { width: 150, height: 100, liftHeight: 130 },  // handled demonstration piece
-
-    base: {                    // concept support — fabricator review required
-      plateDepth: 200, plateThickness: 12,
-      blockHeight: null,       // computed from horizontal.topAboveCounter
-      padThickness: 3          // protective contact pads onto the host counter
+    // The two Polygood sample boxes, from the supplied product photographs.
+    // Dimensions are read off those photographs — they are proportions, not a
+    // measured product drawing.
+    sampleBoxes: [
+      { id: 'dark',  base: '#171717', lid: '#171717', text: 'A VISIBLE COMMITMENT TO SUSTAINABILITY', mark: false },
+      { id: 'stone', base: '#8b8489', lid: '#8b8489', text: '',                                        mark: true }
+    ],
+    sampleBox: {
+      width: 200, depth: 68, height: 46,   // tray, from the photographs
+      lidHeight: 104, lidThickness: 12,
+      stick: { width: 14, depth: 58, height: 92, count: 12 }
     },
 
-    clearFloorBand: 1200,      // planning overlay only; not a compliance certification
+    coupon: { width: 150, height: 100, liftHeight: 130 },
 
-    // separately allocated floor area for the fallback freestanding support
+    base: { plateDepth: 200, plateThickness: 12, blockHeight: null, padThickness: 3 },
+
+    clearFloorBand: 1200,
+
     freestanding: { x: 1300, z: 3200, rotation: -22, shown: false }
   },
 
-  /* ── PRODUCT SELECTION ──────────────────────────────────────────────────
-     Wall product and horizontal product are INDEPENDENT choices. Do not
-     assume every Growth pattern, thickness and finish can be ordered as
-     Wall Tiles.                                                             */
+  /* ── ENGRAVINGS ───────────────────────────────────────────────────────────
+     SUPPLIED as patterns in the client photograph "Selected Tiles". The four
+     names and the four shapes are theirs. What is NOT supplied is any
+     dimension: the cell sizes below are derived from the proportions in that
+     photograph against an assumed 300 mm reference sheet. Treat every number
+     here as illustrative until a profile drawing arrives.
+
+     A groove is machined into ONE continuous panel. These are engravings, not
+     an assembly of loose tiles, and not grout.                              */
+  engravingReferenceSheet: 300,   // assumed sheet size the proportions came from
+  engravings: [
+    { id: 'oyster',     name: 'Oyster',     ref: '01', shape: 'rect',    cellW: 43,   cellH: 43  },
+    { id: 'pearl',      name: 'Pearl',      ref: '02', shape: 'rect',    cellW: 50,   cellH: 150 },
+    { id: 'jade',       name: 'Jade',       ref: '03', shape: 'scallop', cellW: 50,   cellH: 150 },
+    { id: 'terracotta', name: 'Terracotta', ref: '04', shape: 'rect',    cellW: 18.8, cellH: 75  }
+  ],
+  groove: {
+    width: 8, depth: 4,
+    profile: 'square-cut, eased lip — approximate; manufacturer profile requested',
+    verified: false
+  },
+  // "Illustrative numbering 01–04; final product codes to be confirmed."
+  engravingRefsConfirmed: false,
+
+  /* ── PRODUCT SELECTION ────────────────────────────────────────────────────
+     Wall product and horizontal product are INDEPENDENT choices.            */
   product: {
-    wallTileSku:       null,   // not supplied
-    growthSurfaceSku:  null,   // not supplied
-    // A same-pattern wall/counter setting is deliberately absent until
-    // availability is confirmed by the manufacturer.
+    wallTileSku:       null,
+    growthSurfaceSku:  null,
     samePatternAvailabilityConfirmed: false,
-    // Real panel-to-panel joint sample is NOT shown. Showing one would imply
-    // an approved connection that has not been detailed.
+    // The four engravings are shown here on Growth material. Whether they can
+    // be machined into Growth panels — and in which thicknesses — is NOT
+    // established. Nothing in this model should be read as saying they can.
+    engravingOnGrowthConfirmed: false,
     panelJointDetailSupplied: false
   },
 
-  /* ── SURFACES ───────────────────────────────────────────────────────────
-     Deterministic, restrained placeholders. NOT colour-accurate. NOT tied to
-     any SKU. Replace with approved photographs or texture maps when supplied,
-     preserving physical scale.                                              */
-  surfaces: [
-    { id: 'light',  name: 'Light — illustrative texture',  base: '#b9b3a6', flake: ['#8f8779', '#d6d1c6', '#6f6a60'], seed: 1041 },
-    { id: 'medium', name: 'Medium — illustrative texture', base: '#7d766b', flake: ['#5b554c', '#a8a196', '#3f3b35'], seed: 2087 },
-    { id: 'dark',   name: 'Dark — illustrative texture',   base: '#40403e', flake: ['#2a2a29', '#6d6b66', '#8c8880'], seed: 3119 }
+  /* ── SURFACES ─────────────────────────────────────────────────────────────
+     Deterministic placeholders. NOT colour-accurate, NOT tied to a SKU.
+     Replace with approved photographs or texture maps, preserving scale.
+
+     Wall Tiles carry the four core colours named alongside the engravings.
+     Growth is a separate range — greys and blacks, some fibrous — so the two
+     product families stay visibly distinct, as they are in specification.    */
+  wallColours: [
+    { id: 'light',  name: 'Light — illustrative',  pattern: 'flake', base: '#b9b3a6',
+      flake: ['#8f8779', '#d6d1c6', '#6f6a60'], density: 1.0, seed: 1041 },
+    { id: 'medium', name: 'Medium — illustrative', pattern: 'flake', base: '#7d766b',
+      flake: ['#5b554c', '#a8a196', '#3f3b35'], density: 1.0, seed: 2087 },
+    { id: 'dark',   name: 'Dark — illustrative',   pattern: 'flake', base: '#40403e',
+      flake: ['#2a2a29', '#6d6b66', '#8c8880'], density: 1.0, seed: 3119 }
   ],
-  // physical size one texture tile represents, so scale survives on every piece
+  growthSurfaces: [
+    { id: 'growth-light', name: 'Light — illustrative',  pattern: 'fibre', base: '#c6c6c2',
+      flake: ['#efefee', '#a6a6a2', '#dcdcda'],           density: 1.0, seed: 5101 },
+    { id: 'growth-mid',   name: 'Medium — illustrative', pattern: 'flake', base: '#8a8a87',
+      flake: ['#2b2b2c', '#e2e2df', '#5b5b59'],           density: 1.1, seed: 5207 },
+    { id: 'growth-dark',  name: 'Dark — illustrative',   pattern: 'flake', base: '#34343a',
+      flake: ['#d8d8d6', '#7c7c80', '#161619'],           density: 0.9, seed: 5313 }
+  ],
   surfaceTileSize: 1000,
   textureStatus: 'Illustrative placeholder textures — not colour-accurate, no SKU assigned',
 
-  /* neutral reference chips in the palette area. These are references the
-     visitor can hold against a choice — NOT product partners, NOT approvals. */
   references: [
     { id: 'oak',   name: 'Wood reference',  colour: '#9a7448', rough: 0.78 },
     { id: 'steel', name: 'Metal reference', colour: '#9498a0', rough: 0.32, metal: 0.85 }
   ],
 
-  /* ── DAYLIGHT REVIEW ────────────────────────────────────────────────────
-     Building orientation is UNKNOWN. These are legibility conditions for
-     review, not a sun study.                                                */
+  /* ── DAYLIGHT REVIEW ──────────────────────────────────────────────────── */
   daylight: {
-    facadeAzimuth: 248,        // assumed WSW so the review has a defined geometry
+    facadeAzimuth: 248,
     soft:      { hour: 10.4, label: 'Soft daylight' },
     backlight: { hour: 16.9, label: 'Bright backlight' },
     orientationVerified: false
   },
 
-  /* existing furniture inside the allocated zone gets reset, not deleted */
   furnitureReset: {
-    stoolAngles:   [-38, -15, 9],   // as photographed
-    resetAngles:   [24, 46, 60],    // indicative reset positions, clear of the zone
+    stoolAngles:   [-38, -15, 9],
+    resetAngles:   [24, 46, 60],
     stoolRadius:   1620
   }
 };
