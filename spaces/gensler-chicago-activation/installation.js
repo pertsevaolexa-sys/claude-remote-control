@@ -590,34 +590,35 @@ function infoBoardCanvas(pw, ph) {
 
     heading('Patterns', colR, 138, wR);
     var byId = function (id) { for (var k = 0; k < ALL_SURFACES.length; k++) if (ALL_SURFACES[k].id === id) return ALL_SURFACES[k]; };
-    var shown = [
-      { id: 'light',        label: 'Wall Tiles \u00b7 light' },
-      { id: 'medium',       label: 'Wall Tiles \u00b7 medium' },
-      { id: 'dark',         label: 'Wall Tiles \u00b7 dark' },
-      { id: 'growth-light', label: 'Growth \u00b7 light' },
-      { id: 'growth-mid',   label: 'Growth \u00b7 medium' },
-      { id: 'growth-dark',  label: 'Growth \u00b7 dark' }
-    ].filter(function (e) { return byId(e.id); });
-    var sw = (wR - (shown.length - 1) * 4) / shown.length;
-    shown.forEach(function (e, i) {
-      var s = byId(e.id);
-      var X = colR + i * (sw + 4), Y = 146, src = surfaceCanvas[s.id];
-      if (src) {
-        /* one swatch shows roughly a 250 mm patch, so the flake reads at print size */
-        var crop = Math.round(src.width * 250 / CFG.surfaceTileSize);
-        x.drawImage(src, (i * 37) % (src.width - crop), (i * 61) % (src.height - crop),
-          crop, crop, P(X), P(Y), P(sw), P(sw));
-      }
-      x.strokeStyle = '#c9c5bc'; x.lineWidth = Math.max(1, P(0.4));
-      x.strokeRect(P(X) + 0.5, P(Y) + 0.5, P(sw) - 1, P(sw) - 1);
-      PG.text(x, e.label, P(3.4), P(Y + sw + 6), { x: P(X), weight: 600, colour: '#6c6a66' });
-    });
-    PG.text(x, 'Illustrative surfaces from this model — not colour accurate, not tied to a SKU.',
-      P(3.9), P(196), { x: P(colR), weight: 500, colour: '#9a968e' });
+    /* two labelled rows rather than one long one: the ranges are separate
+       specifications, and a single row of seven leaves no width for names */
+    function swatchRow(rangeLabel, list, Y, sz) {
+      PG.text(x, rangeLabel, P(3.9), P(Y + sz / 2 + 1.4), { x: P(colR), weight: 700, colour: '#4b4945' });
+      var X0 = colR + 32, names = [];
+      list.forEach(function (s, i) {
+        var X = X0 + i * (sz + 4), src = surfaceCanvas[s.id];
+        if (src) {
+          /* one swatch shows roughly a 250 mm patch, so the chip reads at print size */
+          var crop = Math.round(src.width * 250 / CFG.surfaceTileSize);
+          x.drawImage(src, (i * 37) % (src.width - crop), (i * 61) % (src.height - crop),
+            crop, crop, P(X), P(Y), P(sz), P(sz));
+        }
+        x.strokeStyle = '#c9c5bc'; x.lineWidth = Math.max(1, P(0.4));
+        x.strokeRect(P(X) + 0.5, P(Y) + 0.5, P(sz) - 1, P(sz) - 1);
+        names.push(s.name.split(' — ')[0]);
+      });
+      PG.text(x, names.join(' \u00b7 '), P(3.4), P(Y + sz + 5),
+        { x: P(X0), weight: 600, colour: '#6c6a66' });
+    }
+    swatchRow('Wall Tiles', CFG.wallColours, 144, 16);
+    swatchRow('Growth', CFG.growthSurfaces, 172, 16);
 
-    reserved(colR, 204, wR * 0.52, 28,
+    PG.text(x, 'Illustrative surfaces from this model — not colour accurate, not tied to a SKU.',
+      P(3.9), P(201), { x: P(colR), weight: 500, colour: '#9a968e' });
+
+    reserved(colR, 205, wR * 0.52, 27,
       'Certification marks and environmental declarations — supplied artwork, not reproduced in this model');
-    reserved(colR + wR * 0.52 + 4, 204, wR * 0.48 - 4, 28,
+    reserved(colR + wR * 0.52 + 4, 205, wR * 0.48 - 4, 27,
       'Client list and logos — supplied artwork, not reproduced in this model');
 
     /* footer strip */

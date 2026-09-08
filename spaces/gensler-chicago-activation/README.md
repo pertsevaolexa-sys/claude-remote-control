@@ -67,7 +67,7 @@ tile choices.
 `config.js` → `defaults` sets the **starting** selection and vantage only:
 
 ```js
-defaults: { wall: 'dark', growth: 'growth-light',
+defaults: { wall: 'dark', growth: 'growth-pebble',
             engraving: null, question: null, view: 'approach' }
 ```
 
@@ -170,11 +170,48 @@ needs replacing with supplied data before anything is made.
 
 ### Textures
 
-Three deterministic placeholders — *Light*, *Medium*, *Dark — illustrative
-texture*. Generated from a seeded PRNG as angular flakes in a matte matrix, one
-tile representing 1000 mm so grain size is correct on a 150 mm sample and a
-700 mm panel alike. **Not colour-accurate. No SKU attached.** Replace with
-approved photographs or texture maps, preserving physical scale.
+All deterministic, from a seeded PRNG, in three generators:
+
+| Pattern | Used by | What it draws |
+| --- | --- | --- |
+| `flake` | Wall Tiles | angular shards dispersed in a matte matrix |
+| `fibre` | — | drawn strands, for the fibrous surfaces |
+| `chips` | the Growth collection | a jittered grid of packed cells — `round` runs from an angular chip to a rounded pebble, `coverage` below 1 lets the matrix show between them |
+
+One tile represents **500 mm**, so grain size stays correct on a 150 mm sample
+and a 700 mm panel alike. The tile was halved from 1000 mm to buy pixels: at
+1024 px a 500 mm tile is ~2 px/mm, which is what lets an 8 mm chip read as
+angular instead of as a dot. **That was only safe once every pattern wrapped** —
+each mark is redrawn across whichever tile edge it crosses, so a texture that
+repeats every 500 mm shows no seam on a 700 mm panel. A packed pattern shows
+its seam where a sparse one hides it.
+
+**Not colour accurate. No SKU attached.** Replace with approved photographs or
+texture maps, preserving physical scale.
+
+#### The Growth collection
+
+Four surfaces, redrawn from the supplied close-up photographs. The colours are
+**sampled** from those photographs — mean, luminance percentiles and the most
+saturated fraction — rather than picked by eye:
+
+| Surface | Sampled from | Luminance range |
+| --- | --- | ---: |
+| Pale pebble | dense rounded pebbles, near-white | 153–208 |
+| Soft white | diffuse specks, the softest of the four | 186–215 |
+| Dark chip | pale translucent chips, dark matrix between | 91–194 |
+| Warm chip | packed angular chips, warm, ochre accents | 30–177 |
+
+Two things are still assumptions, in order of how much they matter:
+
+1. **Chip size.** The photographs carry no scale bar, so `cellMm` is read off an
+   *assumed* crop width — roughly 200 mm for the three 3000 px images, 150 mm
+   for the smaller one. Correct these first when a real sample or a scaled
+   photograph arrives; everything else about the surfaces is easier to judge
+   once the grain is right.
+2. **Colour.** A photograph carries its own white balance and exposure. Sampled
+   is better than guessed, but it is not measured, and none of these is tied to
+   a SKU.
 
 Because every texture is a same-origin canvas, PNG export can never be tainted.
 

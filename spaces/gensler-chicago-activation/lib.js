@@ -36,6 +36,17 @@ PG.surfaceCanvas = function (def, tileMm, px) {
 
   x.fillStyle = def.base; x.fillRect(0, 0, px, px);
 
+  /* Every mark is drawn again across whichever tile edges it crosses, so the
+     canvas is seamless. These textures REPEAT, and a mark clipped at the edge
+     puts a visible grid on any surface wider than one tile. */
+  function wrapOffsets(cx, cy, rad) {
+    var o = [[0, 0]];
+    if (cx < rad) o.push([px, 0]); else if (cx > px - rad) o.push([-px, 0]);
+    if (cy < rad) o.push([0, px]); else if (cy > px - rad) o.push([0, -px]);
+    if (o.length === 3) o.push([o[1][0], o[2][1]]);
+    return o;
+  }
+
   // broad mottle, so a large panel does not read as flat vinyl
   for (var m = 0; m < 90; m++) {
     var g = x.createRadialGradient(r() * px, r() * px, 0, r() * px, r() * px, (40 + r() * 130) * perMm);
@@ -54,14 +65,87 @@ PG.surfaceCanvas = function (def, tileMm, px) {
       x.strokeStyle = def.flake[(r() * def.flake.length) | 0];
       x.globalAlpha = 0.10 + r() * 0.30;
       x.lineWidth = (0.5 + r() * 1.4) * perMm;
-      x.beginPath();
-      x.moveTo(sx, sy);
-      x.quadraticCurveTo(
-        sx + Math.cos(ang) * len * 0.5 + (r() - 0.5) * len * 0.7,
-        sy + Math.sin(ang) * len * 0.5 + (r() - 0.5) * len * 0.7,
-        sx + Math.cos(ang) * len, sy + Math.sin(ang) * len);
-      x.stroke();
+      var jx = (r() - 0.5) * len * 0.7, jy = (r() - 0.5) * len * 0.7;
+      wrapOffsets(sx, sy, len).forEach(function (o) {
+        x.beginPath();
+        x.moveTo(sx + o[0], sy + o[1]);
+        x.quadraticCurveTo(
+          sx + o[0] + Math.cos(ang) * len * 0.5 + jx,
+          sy + o[1] + Math.sin(ang) * len * 0.5 + jy,
+          sx + o[0] + Math.cos(ang) * len, sy + o[1] + Math.sin(ang) * len);
+        x.stroke();
+      });
     }
+    x.globalAlpha = 1;
+    return c;
+  }
+
+  /* Densely PACKED chips, for the surfaces that read as pressed fragments
+     rather than as flakes dispersed in a matrix. A jittered grid of irregular
+     cells, each filled from the palette and outlined; `round` runs from an
+     angular chip to a rounded pebble, and `coverage` below 1 shrinks the
+     cells so the matrix shows between them.
+
+     This one WRAPS across the tile edge. A sparse pattern hides its seam; a
+     packed one does not, and these textures repeat. */
+  if (def.pattern === 'chips') {
+    var cell = Math.max(3, (def.cellMm || 8) * perMm);
+    var n = Math.ceil(px / cell);
+    var round = def.round == null ? 0.5 : def.round;
+    var cover = def.coverage == null ? 1 : def.coverage;
+    var alpha = def.alpha == null ? 1 : def.alpha;
+    var lineW = (def.outlineWidth || 0.3) * perMm;
+
+    // shuffled draw order, so the overlaps do not read as a scan
+    var order = [];
+    for (var gy = 0; gy < n; gy++) for (var gx = 0; gx < n; gx++) order.push([gx, gy]);
+    for (var q = order.length - 1; q > 0; q--) {
+      var w = (r() * (q + 1)) | 0, sw = order[q]; order[q] = order[w]; order[w] = sw;
+    }
+
+    x.lineJoin = 'round';
+    order.forEach(function (g) {
+      var jx = (g[0] + 0.5 + (r() - 0.5) * 0.72) * cell;
+      var jy = (g[1] + 0.5 + (r() - 0.5) * 0.72) * cell;
+      var rad = cell * (0.54 + r() * 0.28) * cover;
+      var sides = 5 + ((r() * 4) | 0);
+      var pts = [];
+      for (var v = 0; v < sides; v++) {
+        var a = (v / sides) * Math.PI * 2 + (r() - 0.5) * 0.55;
+        var rr = rad * (0.64 + r() * 0.48);
+        pts.push([Math.cos(a) * rr, Math.sin(a) * rr]);
+      }
+      x.fillStyle = def.flake[(r() * def.flake.length) | 0];
+
+      wrapOffsets(jx, jy, rad).forEach(function (o) {
+        x.save();
+        x.translate(jx + o[0], jy + o[1]);
+        x.globalAlpha = alpha;
+        x.beginPath();
+        if (round <= 0) {
+          // a true polygon: the vertices ARE the corners, so the chip has some
+          x.moveTo(pts[0][0], pts[0][1]);
+          for (var k0 = 1; k0 < pts.length; k0++) x.lineTo(pts[k0][0], pts[k0][1]);
+        } else {
+          // anchors at the edge midpoints, control points pulled toward the
+          // vertex by `round`: 1 is a pebble, lower is a softened chip
+          var mid = function (i, j) { return [(pts[i][0] + pts[j][0]) / 2, (pts[i][1] + pts[j][1]) / 2]; };
+          var m0 = mid(pts.length - 1, 0);
+          x.moveTo(m0[0], m0[1]);
+          for (var k = 0; k < pts.length; k++) {
+            var vtx = pts[k], m1 = mid(k, (k + 1) % pts.length);
+            var flat = [(m0[0] + m1[0]) / 2, (m0[1] + m1[1]) / 2];
+            x.quadraticCurveTo(flat[0] + (vtx[0] - flat[0]) * round,
+                               flat[1] + (vtx[1] - flat[1]) * round, m1[0], m1[1]);
+            m0 = m1;
+          }
+        }
+        x.closePath();
+        x.fill();
+        if (def.outline) { x.strokeStyle = def.outline; x.lineWidth = lineW; x.stroke(); }
+        x.restore();
+      });
+    });
     x.globalAlpha = 1;
     return c;
   }
@@ -72,18 +156,22 @@ PG.surfaceCanvas = function (def, tileMm, px) {
     var cx = r() * px, cy = r() * px;
     var len = (3 + r() * 15) * perMm, wid = len * (0.34 + r() * 0.46);
     var rot = r() * Math.PI;
-    x.save(); x.translate(cx, cy); x.rotate(rot);
-    x.fillStyle = def.flake[(r() * def.flake.length) | 0];
-    x.globalAlpha = 0.20 + r() * 0.38;
-    x.beginPath();
-    var sides = 4 + ((r() * 3) | 0);
+    var fill = def.flake[(r() * def.flake.length) | 0];
+    var al = 0.20 + r() * 0.38;
+    var sides = 4 + ((r() * 3) | 0), shape = [];
     for (var s = 0; s < sides; s++) {
       var a = (s / sides) * Math.PI * 2;
       var rr = (s % 2 ? 0.62 : 1) * (0.5 + r() * 0.22);
-      x.lineTo(Math.cos(a) * len * rr, Math.sin(a) * wid * rr);
+      shape.push([Math.cos(a) * len * rr, Math.sin(a) * wid * rr]);
     }
-    x.closePath(); x.fill();
-    x.restore();
+    wrapOffsets(cx, cy, len).forEach(function (o) {
+      x.save(); x.translate(cx + o[0], cy + o[1]); x.rotate(rot);
+      x.fillStyle = fill; x.globalAlpha = al;
+      x.beginPath();
+      shape.forEach(function (pt) { x.lineTo(pt[0], pt[1]); });
+      x.closePath(); x.fill();
+      x.restore();
+    });
   }
   x.globalAlpha = 1;
   return c;

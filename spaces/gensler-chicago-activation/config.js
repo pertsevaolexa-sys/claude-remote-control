@@ -173,7 +173,7 @@ window.PG_CONFIG = {
      Set any of these to null to fall back to the first entry in its list. */
   defaults: {
     wall:      'dark',          // wallColours id — the dark tile
-    growth:    'growth-light',  // growthSurfaces id
+    growth:    'growth-pebble', // growthSurfaces id
     engraving: null,            // engravings id
     question:  null,            // questions id
     view:      'approach'       // vantage key: approach | eye | detail | overhead |
@@ -229,15 +229,53 @@ window.PG_CONFIG = {
     { id: 'nightfleck', name: 'Dark, blue fleck — illustrative', pattern: 'flake', base: '#0a0a0c',
       flake: ['#d6e6f8', '#eef5fd', '#8fb2d6', '#1c2026'], density: 0.32, seed: 6101 }
   ],
+  /* ── the Growth collection ─────────────────────────────────────────────
+     Four surfaces, redrawn from the supplied close-up photographs. The
+     colours are SAMPLED from those photographs — mean, luminance
+     percentiles and the most saturated fraction — not picked by eye. They
+     are still ILLUSTRATIVE: a photograph carries its own white balance and
+     exposure, so these are not colour accurate, are not tied to a SKU, and
+     are not a substitute for an approved texture map or a physical sample.
+
+     Chip SIZE is the softest assumption here. The photographs carry no
+     scale bar, so cellMm is read off an ASSUMED crop width — roughly
+     200 mm for the three 3000 px images, 150 mm for the smaller one.
+     Correct these first when a real sample or a scaled photograph arrives. */
   growthSurfaces: [
-    { id: 'growth-light', name: 'Light — illustrative',  pattern: 'fibre', base: '#c6c6c2',
-      flake: ['#efefee', '#a6a6a2', '#dcdcda'],           density: 1.0, seed: 5101 },
-    { id: 'growth-mid',   name: 'Medium — illustrative', pattern: 'flake', base: '#8a8a87',
-      flake: ['#2b2b2c', '#e2e2df', '#5b5b59'],           density: 1.1, seed: 5207 },
-    { id: 'growth-dark',  name: 'Dark — illustrative',   pattern: 'flake', base: '#34343a',
-      flake: ['#d8d8d6', '#7c7c80', '#161619'],           density: 0.9, seed: 5313 }
+    // 1 — dense rounded pebbles, near-white, very low contrast (L 153–208)
+    { id: 'growth-pebble', name: 'Pale pebble — illustrative', pattern: 'chips',
+      base: '#bdbdb9', flake: ['#d0d1cc', '#cdccca', '#c6c7c2', '#c9c9c5', '#bcbcba', '#b1b1ac'],
+      cellMm: 7, round: 1, coverage: 1, alpha: 1,
+      outline: 'rgba(128,128,124,0.34)', outlineWidth: 0.8, seed: 5101 },
+
+    // 2 — the softest of the four: broad diffuse blotches, barely any
+    //     contrast at all (L 186–215), so it is drawn large and faint
+    { id: 'growth-mist', name: 'Soft white — illustrative', pattern: 'chips',
+      base: '#cfcfcf', flake: ['#d7d7d7', '#d2d2d2', '#cbcbcb', '#c5c5c5', '#bebebe'],
+      cellMm: 6.5, round: 0.9, coverage: 0.92, alpha: 0.5,
+      outline: null, seed: 5203 },
+
+    // 3 — PALE chips are the majority here and the dark matrix is only the
+    //     web between them, so coverage runs high and the base is the web
+    { id: 'growth-slate', name: 'Dark chip — illustrative', pattern: 'chips',
+      base: '#5d5e58', flake: ['#c3c2bc', '#b6b4ab', '#a09c91', '#a69d8c', '#cac9c3',
+                               '#8f8274', '#736a61'],
+      cellMm: 8, round: 0.35, coverage: 0.95, alpha: 0.97,
+      outline: 'rgba(52,53,49,0.65)', outlineWidth: 1.0, seed: 5307 },
+
+    // 4 — packed ANGULAR chips, warm and muted. The ochre is deliberately
+    //     one entry in twelve: in the photograph it is an accent, not a tone
+    { id: 'growth-clay', name: 'Warm chip — illustrative', pattern: 'chips',
+      base: '#6b6055', flake: ['#b4b1a5', '#aca496', '#a99e8f', '#a2988a', '#9c9184',
+                               '#92897b', '#8a8072', '#847a6c', '#81736a', '#77695f',
+                               '#6f6357', '#665d52', '#585047', '#3f3c37', '#2a2723',
+                               '#8a6b45'],
+      cellMm: 8, round: 0, coverage: 1, alpha: 1,
+      outline: 'rgba(38,34,29,0.6)', outlineWidth: 0.9, seed: 5419 }
   ],
-  surfaceTileSize: 1000,
+  // 500 mm per tile at 1024 px = ~2 px/mm. Every pattern wraps, so the
+  // repeat is invisible; this buys chip detail without a bigger canvas.
+  surfaceTileSize: 500,
   textureStatus: 'Illustrative placeholder textures — not colour-accurate, no SKU assigned',
 
   references: [

@@ -222,7 +222,7 @@ leader(mainPt(0.22, mm(I.horizontal.topAboveCounter) + 0.01, INS.anchors.horizFr
 
 leader(new THREE.Vector3(palPt(0.20, 0.06, -0.21).x, palPt(0.20, 0.06, -0.21).y, palPt(0.20, 0.06, -0.21).z),
        new THREE.Vector3(palPt(0.70, 0.34, 0.54).x, palPt(0.70, 0.34, 0.54).y, palPt(0.70, 0.34, 0.54).z),
-       'Three Growth choices + neutral references',
+       'Four Growth surfaces + neutral references',
        'References are comparison aids, not product partners or approvals');
 
 /* the orientation stand: the board is a layout placeholder, and the stand
