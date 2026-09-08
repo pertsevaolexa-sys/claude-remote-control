@@ -62,30 +62,37 @@ Adding a surface to `config.js` adds a button. The stand's own surface lives in
 a separate list (`standSurfaces`) precisely so it does not turn up among the
 tile choices.
 
-### Production finish — white stands, black base tile
+### Production finish — white panel standing, black panel beneath
 
-`config.js` → `finish` carries the concept the production group is being shown:
-the **support metalwork is white**, and the **tile it stands on is black**.
+The idea being shown to the production group lives in the **panels**, not in
+the metalwork: the panel that stands is **white**, carrying the Oyster
+engraving, and the panel beneath it is **black** — Midnight.
 
 ```js
-finish: { stand: '#f4f4f2', pad: '#e9e9e6', baseTile: 'nightfleck' }
+defaults: { wall: 'white', growth: 'growth-midnight', engraving: 'oyster' }
 ```
 
-Structure and material are deliberately different kinds of thing here.
-`stand` is a **paint or powder-coat colour** on the trays, rails, fins,
-gussets and cradles. `baseTile` names a **Polygood surface** from
-`standSurfaces` — the base is a panel, not a painted tray, which is why it
-carries a texture and is UV-mapped from its own extents like every other
-panel. Painting the base instead of specifying it as a panel would have made
-the model quietly lie about what is being ordered.
+Both are ordinary entries in their ranges, so the swatch rows still drive
+them: `white` is a Wall Tiles colour and `growth-midnight` a Growth surface.
+The concept is a *default*, not a lock.
 
-The base currently uses `nightfleck`, the dark, pale-flecked surface supplied
-as a photograph. It reads black and is illustrative — not colour accurate, no
-SKU. If "Midnight" turns out to be a real product name, that is the value to
-put here.
+White is the right ground for Oyster because a 43 mm cell machined 4 mm deep
+reads as **shadow**, not as colour. On a dark panel the groove and the field
+go the same tone and the engraving disappears — which is the opposite of what
+a campaign called LOOK CLOSER needs.
 
-Note for the record: the supports have been the same dark grey since the first
-commit, so this is a **new decision**, not a restoration of an earlier render.
+`config.js` → `finish` keeps the support metalwork dark and recessive, at the
+values the model has always used, now expressed in sRGB and converted on load.
+`baseTile` is the panel each assembly stands on. It is built as a **panel**,
+not a painted tray: it carries the surface and is UV-mapped from its own
+extents like every other panel, because the schedule orders dark 500 x 500
+panels for the lower part of the pedestal, not paint.
+
+**One consequence to decide on.** The four engraved Growth samples take the
+selected Growth surface, so with Midnight as the default they are now black on
+black and the engravings are hard to read at 150 mm. The palette exists to
+compare engravings. Either pick a lighter Growth from the swatch row for that
+unit, or the samples need decoupling from the horizontal panel.
 
 ### Seeing it without the room
 

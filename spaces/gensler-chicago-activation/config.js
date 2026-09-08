@@ -172,8 +172,8 @@ window.PG_CONFIG = {
      three choices remain independent, and nothing here removes a control.
      Set any of these to null to fall back to the first entry in its list. */
   defaults: {
-    wall:      'dark',          // wallColours id — the dark tile
-    growth:    'growth-pebble', // growthSurfaces id
+    wall:      'white',         // wallColours id — the standing panel
+    growth:    'growth-midnight', // growthSurfaces id — the panel beneath
     engraving: null,            // engravings id
     question:  null,            // questions id
     view:      'approach'       // vantage key: approach | eye | detail | overhead |
@@ -187,11 +187,15 @@ window.PG_CONFIG = {
      real Polygood surface from standSurfaces — the base is a panel, not a
      painted tray, which is why it carries a texture and the stands do not. */
   finish: {
-    stand:      '#f4f4f2',    // trays' structure, rails, fins, gussets, cradles
-    standRough: 0.52,
-    standMetal: 0.0,
-    pad:        '#e9e9e6',    // protective contact pads
-    baseTile:   'nightfleck'  // standSurfaces id — the tile beneath
+    // The support metalwork. Dark and recessive on purpose: the white/black
+    // idea lives in the PANELS, and structure that competes with them would
+    // work against it. These are the values the model has always used,
+    // expressed in sRGB and converted on load.
+    stand:      '#5f6265',    // rails, fins, gussets, cradles
+    standRough: 0.50,
+    standMetal: 0.55,
+    pad:        '#4f535a',    // protective contact pads
+    baseTile:   'nightfleck'  // standSurfaces id — the base each unit stands on
   },
 
   engravingReferenceSheet: 300,   // assumed sheet size the proportions came from
@@ -230,6 +234,10 @@ window.PG_CONFIG = {
      Growth is a separate range — greys and blacks, some fibrous — so the two
      product families stay visibly distinct, as they are in specification.    */
   wallColours: [
+    // the standing panel in the LOOK CLOSER unit. White, so the Oyster
+    // engraving reads as shadow rather than as colour.
+    { id: 'white',  name: 'White — illustrative',  pattern: 'flake', base: '#e9e9e6',
+      flake: ['#f7f7f5', '#d3d3cf', '#bfbfba'],           density: 0.85, seed: 3007 },
     { id: 'light',  name: 'Light — illustrative',  pattern: 'flake', base: '#b9b3a6',
       flake: ['#8f8779', '#d6d1c6', '#6f6a60'], density: 1.0, seed: 1041 },
     { id: 'medium', name: 'Medium — illustrative', pattern: 'flake', base: '#7d766b',
@@ -256,6 +264,13 @@ window.PG_CONFIG = {
      200 mm for the three 3000 px images, 150 mm for the smaller one.
      Correct these first when a real sample or a scaled photograph arrives. */
   growthSurfaces: [
+    // 0 — the panel BENEATH the standing panel. Same dark, pale-flecked
+    //     surface as the base ("Midnight"), carried into the Growth range so
+    //     the Growth swatch row still drives the horizontal panel.
+    { id: 'growth-midnight', name: 'Midnight — illustrative', pattern: 'flake',
+      base: '#0a0a0c', flake: ['#d6e6f8', '#eef5fd', '#8fb2d6', '#1c2026'],
+      density: 0.32, seed: 5501 },
+
     // 1 — dense rounded pebbles, near-white, very low contrast (L 153–208)
     { id: 'growth-pebble', name: 'Pale pebble — illustrative', pattern: 'chips',
       base: '#bdbdb9', flake: ['#d0d1cc', '#cdccca', '#c6c7c2', '#c9c9c5', '#bcbcba', '#b1b1ac'],
