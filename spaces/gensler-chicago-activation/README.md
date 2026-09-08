@@ -62,6 +62,18 @@ Adding a surface to `config.js` adds a button. The stand's own surface lives in
 a separate list (`standSurfaces`) precisely so it does not turn up among the
 tile choices.
 
+### Seeing it without the room
+
+**Installation only** hides the venue and stands the four sub-assemblies on a
+neutral, shadow-catching ground. The daylight stays as it is — the piece is
+judged under the light it will actually sit in, not under a studio rig it will
+never see. Nothing is removed from the scene, only hidden, so the toggle is
+reversible and the fit check keeps running against the real set-out.
+
+It is an appearance view, not a site view: it tells you nothing about how the
+composition sits on the counter. Use it for the object, and the room vantages
+for everything else.
+
 ### What it opens on
 
 `config.js` → `defaults` sets the **starting** selection and vantage only:

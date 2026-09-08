@@ -56,6 +56,10 @@ var ctx = {
 
 /* ── build ────────────────────────────────────────────────────────────── */
 var V   = window.PG_VENUE(ctx);   ctx.venue = V;
+/* Everything the room added, captured before anything else goes in. The
+   venue builds straight into the scene rather than into a group of its own,
+   so this snapshot IS the room. */
+var venueObjects = scene.children.slice();
 var INS = window.PG_INSTALL(ctx); ctx.install = INS;
 
 var mm = PG.mm, D2R = Math.PI / 180;
@@ -359,6 +363,37 @@ $('opt-notes').addEventListener('change', function () { ANNO.setNotes(this.check
 $('opt-band').addEventListener('change', function () { ANNO.setBand(this.checked); });
 $('opt-free').addEventListener('change', function () { freeGroup.visible = this.checked; invalidate(); });
 $('opt-pack').addEventListener('change', function () { packGroup.visible = this.checked; invalidate(); });
+
+/* ── the installation on its own ──────────────────────────────────────────
+   Hides the room and stands the composition on a shadow-catching ground.
+   Lights stay: the piece is judged under the same daylight it will sit in,
+   not under a studio rig it will never see. Reversible — nothing is removed
+   from the scene, only hidden. */
+var soloGround = new THREE.Mesh(
+  new THREE.PlaneGeometry(24, 24),
+  new THREE.ShadowMaterial({ opacity: 0.17 }));
+soloGround.rotation.x = -Math.PI / 2;
+soloGround.receiveShadow = true;
+soloGround.visible = false;
+soloGround.position.y = V.CT.h - 0.0015;
+scene.add(soloGround);
+
+var roomFog = scene.fog, roomBg = scene.background;
+$('opt-solo').addEventListener('change', function () {
+  var solo = this.checked;
+  venueObjects.forEach(function (o) { if (!o.isLight) o.visible = !solo; });
+  soloGround.visible = solo;
+  // Not null: venue.setSun() writes scene.fog.color on every daylight
+  // change, so removing the fog outright breaks the light buttons. Push it
+  // out of range instead — same object, no visible fog.
+  roomFog.near = solo ? 4000 : 60;
+  roomFog.far  = solo ? 4400 : 330;
+  // legacy colour management: a background hex is consumed as linear
+  scene.background = solo
+    ? new THREE.Color(0xeceae4).convertSRGBToLinear()
+    : roomBg;
+  invalidate();
+});
 
 var light = CFG.daylight;
 $('lightSoft').addEventListener('click', function () { setLight('soft'); });
