@@ -390,6 +390,20 @@ window.PG_CONFIG = {
                                 // palette | translucent | orientation | logistics
   },
 
+  /* ── production finish ─────────────────────────────────────────────────
+     The stands are WHITE and the tile they stand on is BLACK. Structure and
+     material are deliberately different things here: `stand` is a paint or
+     powder-coat finish on the support metalwork, while `baseTile` names a
+     real Polygood surface from standSurfaces — the base is a panel, not a
+     painted tray, which is why it carries a texture and the stands do not. */
+  finish: {
+    stand:      '#f4f4f2',    // trays' structure, rails, fins, gussets, cradles
+    standRough: 0.52,
+    standMetal: 0.0,
+    pad:        '#e9e9e6',    // protective contact pads
+    baseTile:   'nightfleck'  // standSurfaces id — the tile beneath
+  },
+
   engravingReferenceSheet: 300,   // assumed sheet size the proportions came from
   engravings: [
     { id: 'oyster',     name: 'Oyster',     ref: '01', shape: 'rect',    cellW: 43,   cellH: 43  },
@@ -1905,9 +1919,27 @@ var sampleMats = CFG.engravings.map(function (e, i) {
   return surfaceMaterial(I.palette.sampleSize, I.palette.sampleSize, 51 + i * 13);
 });
 
-var matTray   = new THREE.MeshStandardMaterial({ color: 0x232527, roughness: 0.44, metalness: 0.62, envMapIntensity: 0.5 });
-var matRail   = new THREE.MeshStandardMaterial({ color: 0x1d1f21, roughness: 0.5,  metalness: 0.55, envMapIntensity: 0.45 });
-var matPad    = new THREE.MeshStandardMaterial({ color: 0x14161a, roughness: 0.95, envMapIntensity: 0.2 });
+/* The stands are white; the tile they stand on is black. Both come from
+   CFG.finish so the production group can move either without touching code.
+   Legacy colour management is on, so every hex here goes through srgb(). */
+var FIN = CFG.finish;
+var matRail = new THREE.MeshStandardMaterial({
+  color: srgb(FIN.stand), roughness: FIN.standRough, metalness: FIN.standMetal, envMapIntensity: 0.42 });
+var matPad  = new THREE.MeshStandardMaterial({
+  color: srgb(FIN.pad), roughness: 0.95, envMapIntensity: 0.2 });
+
+/* The base is a PANEL, not a painted tray, so it carries the surface rather
+   than a flat colour — and it is UV-mapped from its own extents like every
+   other panel, or the tile pattern would stretch to each face. */
+function trayMesh(wM, dM, seed) {
+  var geo = new THREE.BoxGeometry(wM, trayT, dM);
+  PG.planarUV(geo, wM / 2, dM / 2, mm(TILE));
+  var m = surfaceMaterial(wM * 1000, dM * 1000, seed);
+  applySurface(m, FIN.baseTile);
+  var mesh = new THREE.Mesh(geo, m);
+  mesh.castShadow = true; mesh.receiveShadow = true;
+  return mesh;
+}
 var matMarker = new THREE.MeshStandardMaterial({ color: 0x8a6a2e, roughness: 0.35, metalness: 0.8, envMapIntensity: 0.6 });
 function srgb(hex) { return new THREE.Color(hex).convertSRGBToLinear(); }
 
@@ -2018,7 +2050,7 @@ var trayT = mm(6), padT = mm(I.base.padThickness);
   pad.position.set(p[0], padT / 2, p[1]); gMain.add(pad);
 });
 
-var tray = new THREE.Mesh(new THREE.BoxGeometry(A.w, trayT, A.d), matTray);
+var tray = trayMesh(A.w, A.d, 71);
 tray.position.set(0, padT + trayT / 2, -A.d / 2);
 tray.castShadow = true; tray.receiveShadow = true;
 gMain.add(tray);
@@ -2116,7 +2148,7 @@ var B = { w: mm(I.palette.width), d: mm(I.palette.depth) };
   var pad = new THREE.Mesh(new THREE.BoxGeometry(0.06, padT, 0.06), matPad);
   pad.position.set(p[0], padT / 2, p[1]); gPal.add(pad);
 });
-var palTray = new THREE.Mesh(new THREE.BoxGeometry(B.w, trayT, B.d), matTray);
+var palTray = trayMesh(B.w, B.d, 73);
 palTray.position.set(0, padT + trayT / 2, -B.d / 2);
 palTray.castShadow = true; palTray.receiveShadow = true;
 gPal.add(palTray);
@@ -2419,7 +2451,7 @@ var IS = I.infoStand;
     var pad = new THREE.Mesh(new THREE.BoxGeometry(0.055, padT, 0.055), matPad);
     pad.position.set(p[0], padT / 2, p[1]); gInfo.add(pad);
   });
-  var tray = new THREE.Mesh(new THREE.BoxGeometry(mm(IS.unit.width), trayT, mm(IS.unit.depth)), matTray);
+  var tray = trayMesh(mm(IS.unit.width), mm(IS.unit.depth), 79);
   tray.position.set(0, padT + trayT / 2, -mm(IS.unit.depth) / 2);
   tray.castShadow = true; tray.receiveShadow = true; gInfo.add(tray);
 
@@ -2479,7 +2511,7 @@ var transTrayTop = padT + trayT;
   var pad = new THREE.Mesh(new THREE.BoxGeometry(0.055, padT, 0.055), matPad);
   pad.position.set(p[0], padT / 2, p[1]); gTrans.add(pad);
 });
-var transTray = new THREE.Mesh(new THREE.BoxGeometry(mm(TU.width), trayT, mm(TU.depth)), matTray);
+var transTray = trayMesh(mm(TU.width), mm(TU.depth), 83);
 transTray.position.set(0, padT + trayT / 2, -mm(TU.depth) / 2);
 transTray.castShadow = true; transTray.receiveShadow = true;
 gTrans.add(transTray);

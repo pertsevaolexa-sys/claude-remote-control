@@ -180,6 +180,20 @@ window.PG_CONFIG = {
                                 // palette | translucent | orientation | logistics
   },
 
+  /* ── production finish ─────────────────────────────────────────────────
+     The stands are WHITE and the tile they stand on is BLACK. Structure and
+     material are deliberately different things here: `stand` is a paint or
+     powder-coat finish on the support metalwork, while `baseTile` names a
+     real Polygood surface from standSurfaces — the base is a panel, not a
+     painted tray, which is why it carries a texture and the stands do not. */
+  finish: {
+    stand:      '#f4f4f2',    // trays' structure, rails, fins, gussets, cradles
+    standRough: 0.52,
+    standMetal: 0.0,
+    pad:        '#e9e9e6',    // protective contact pads
+    baseTile:   'nightfleck'  // standSurfaces id — the tile beneath
+  },
+
   engravingReferenceSheet: 300,   // assumed sheet size the proportions came from
   engravings: [
     { id: 'oyster',     name: 'Oyster',     ref: '01', shape: 'rect',    cellW: 43,   cellH: 43  },
