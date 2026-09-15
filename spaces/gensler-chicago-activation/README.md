@@ -102,9 +102,9 @@ collaboration box** in front of it, the **six engraved tiles with the two
 general sample boxes**, and the **Translucent Collection box**. Three
 catalogues sit on the counter at the far end, beside the roll-up.
 
-Counts are structural, not hand-placed: the tile grid is , the
-brochure stack is , and the two general boxes come from the
- array. Change the config and the count changes with it.
+Counts are structural, not hand-placed: the tile grid is `cols x rows`, the
+brochure stack is `brochure.count`, and the two general boxes come from the
+ `sampleBoxes` array. Change the config and the count changes with it.
 
 #### The banner does not screen the credenza
 
@@ -130,7 +130,7 @@ drawn as graphic-only on a cassette, the taller reading.
 #### Why the tiles stopped sharing the panel’s surface
 
 The six tiles follow the Growth swatch; the horizontal panel under the
-standing panel takes  instead. They shared one material
+standing panel takes `finish.underPanel` instead. They shared one material
 until the panel went Midnight, at which point six engraved tiles were black on
 black and the comparison they exist for was impossible. Both readings of the
 brief survive this way: the panel beneath is still black, the tiles are still
