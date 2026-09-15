@@ -212,8 +212,8 @@ var VIEWS = [
   { key: 'growth', name: 'Growth sheet + collab box',
     p: growthWorld(0.16, mm(430), 0.92), t: growthWorld(0, mm(150), -0.14), fov: 40 },
   { key: 'banner', name: 'Banner + brochures',
-    p: V.bayPt(CFG.install.banner.angleAtBay - 22, 0.42, 1.62),
-    t: V.bayPt(CFG.install.banner.angleAtBay, 1.58, 0.72), fov: 52 },
+    p: V.bayPt(38, 1.10, 1.62),
+    t: V.bayPt(CFG.install.banner.credenza.angle, 1.70, 0.90), fov: 54 },
   { key: 'logistics', name: 'Packed + fallback support',
     p: new THREE.Vector3(0.15, 2.05, 5.75), t: new THREE.Vector3(0.05, 0.35, 3.30), fov: 56 }
 ];

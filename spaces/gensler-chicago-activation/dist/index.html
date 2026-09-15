@@ -444,10 +444,14 @@ window.PG_CONFIG = {
       /* Past the end of the counter run (which stops at 70 deg) and clear of
          the reset stools, so it screens the credenza's open shelving without
          standing in the staff's way or clashing with the counter. */
-      /* As built: past the credenza's far end, against the window pier. It is
-         not screening the bookshelf in the photograph, and at 457 mm it never
-         could. */
-      angleAtBay: 88, radius: 2050,
+      /* Positioned off the CREDENZA, not off a bay angle. Past its far end,
+         facing into the room the way the credenza does — which is where the
+         photograph puts it. An object set out on the bay at 88 degrees faces
+         the side wall, not the room.
+         credenza values mirror venue.js: bayPt(63, 2.10), 1780 wide. */
+      credenza: { angle: 63, radius: 2100, halfWidth: 890 },
+      alongCredenza: 1270,      // from its centre, toward the far end
+      outFromCredenza: 470,     // toward the room, clear of the 460-deep carcass
       artwork: null
     },
 
@@ -3015,12 +3019,16 @@ scene.add(gBooth);
   var gw = mm(BN.graphicWidth), gh = mm(BN.graphicHeight);
   var cassH = mm(BN.cassetteHeight), cassD = mm(BN.cassetteDepth);
 
-  /* On the credenza's own axis, standing in front of it. The angle and radius
-     are config, so moving the credenza moves the banner with it. */
-  var p = V.bayPt(BN.angleAtBay, mm(BN.radius), 0);
+  /* In the credenza's own frame: along its length, then out toward the room,
+     and turned to face the way the credenza faces. */
+  var CR = BN.credenza;
+  var o = V.bayPt(CR.angle, mm(CR.radius), 0);
+  var th = -CR.angle * D2R;
+  var along = mm(BN.alongCredenza), out = mm(BN.outFromCredenza);
   var g = new THREE.Group();
-  g.position.copy(p);
-  g.rotation.y = -BN.angleAtBay * D2R;
+  g.position.set(o.x + along * Math.cos(th) + out * Math.sin(th), 0,
+                 o.z - along * Math.sin(th) + out * Math.cos(th));
+  g.rotation.y = th;
   gBooth.add(g);
 
   var metal = new THREE.MeshStandardMaterial({
@@ -3625,8 +3633,8 @@ var VIEWS = [
   { key: 'growth', name: 'Growth sheet + collab box',
     p: growthWorld(0.16, mm(430), 0.92), t: growthWorld(0, mm(150), -0.14), fov: 40 },
   { key: 'banner', name: 'Banner + brochures',
-    p: V.bayPt(CFG.install.banner.angleAtBay - 22, 0.42, 1.62),
-    t: V.bayPt(CFG.install.banner.angleAtBay, 1.58, 0.72), fov: 52 },
+    p: V.bayPt(38, 1.10, 1.62),
+    t: V.bayPt(CFG.install.banner.credenza.angle, 1.70, 0.90), fov: 54 },
   { key: 'logistics', name: 'Packed + fallback support',
     p: new THREE.Vector3(0.15, 2.05, 5.75), t: new THREE.Vector3(0.05, 0.35, 3.30), fov: 56 }
 ];

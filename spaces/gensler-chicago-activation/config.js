@@ -234,10 +234,14 @@ window.PG_CONFIG = {
       /* Past the end of the counter run (which stops at 70 deg) and clear of
          the reset stools, so it screens the credenza's open shelving without
          standing in the staff's way or clashing with the counter. */
-      /* As built: past the credenza's far end, against the window pier. It is
-         not screening the bookshelf in the photograph, and at 457 mm it never
-         could. */
-      angleAtBay: 88, radius: 2050,
+      /* Positioned off the CREDENZA, not off a bay angle. Past its far end,
+         facing into the room the way the credenza does — which is where the
+         photograph puts it. An object set out on the bay at 88 degrees faces
+         the side wall, not the room.
+         credenza values mirror venue.js: bayPt(63, 2.10), 1780 wide. */
+      credenza: { angle: 63, radius: 2100, halfWidth: 890 },
+      alongCredenza: 1270,      // from its centre, toward the far end
+      outFromCredenza: 470,     // toward the room, clear of the 460-deep carcass
       artwork: null
     },
 

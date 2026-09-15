@@ -1112,12 +1112,16 @@ scene.add(gBooth);
   var gw = mm(BN.graphicWidth), gh = mm(BN.graphicHeight);
   var cassH = mm(BN.cassetteHeight), cassD = mm(BN.cassetteDepth);
 
-  /* On the credenza's own axis, standing in front of it. The angle and radius
-     are config, so moving the credenza moves the banner with it. */
-  var p = V.bayPt(BN.angleAtBay, mm(BN.radius), 0);
+  /* In the credenza's own frame: along its length, then out toward the room,
+     and turned to face the way the credenza faces. */
+  var CR = BN.credenza;
+  var o = V.bayPt(CR.angle, mm(CR.radius), 0);
+  var th = -CR.angle * D2R;
+  var along = mm(BN.alongCredenza), out = mm(BN.outFromCredenza);
   var g = new THREE.Group();
-  g.position.copy(p);
-  g.rotation.y = -BN.angleAtBay * D2R;
+  g.position.set(o.x + along * Math.cos(th) + out * Math.sin(th), 0,
+                 o.z - along * Math.sin(th) + out * Math.cos(th));
+  g.rotation.y = th;
   gBooth.add(g);
 
   var metal = new THREE.MeshStandardMaterial({
