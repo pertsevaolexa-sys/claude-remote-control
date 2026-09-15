@@ -71,12 +71,36 @@ window.PG_CONFIG = {
     extraRotation: 0,
     frontEdgeInset: 10,
 
+    /* ── Stand 2, from the gExpo holders spec of 14.09.2026 ────────────────
+       These are SUPPLIED dimensions, not our placeholders — the first in this
+       model that are. Every part is Polygood 19 mm unless noted, cutter d4.
+       Samples are not glued: they drop into their slots from above and lift
+       out the same way. */
+    stand2: {
+      base:  { width: 450, depth: 420, thickness: 19 },
+      panelSlot: { width: 450, kerf: 12.1, depth: 5, fromFront: 274.9 },
+      tile: {
+        width: 180, height: 120, thickness: 12,
+        slotLength: 190, slotKerf: 15.64, slotDepth: 12,
+        fromFront: 60, offsetRight: 90, lean: 15   // leans back toward the panel
+      },
+      gussetFront: { size: 90,  thickness: 19, count: 2 },
+      gussetBack:  { size: 120, thickness: 19, count: 2 },
+      /* the slot kerf is wider than the sample on purpose: 12 / cos15 +
+         12 x tan15 = 15.64, so the tile wedges in it at its lean angle */
+      tileSurface: 'growth-midnight'
+    },
+
     wall: {
-      width: 700, height: 650, thickness: 12, moduleVerified: false,
+      width: 450, height: 450, thickness: 12, moduleVerified: true,
       // the fragment keeps the coarse illustrative grid it was deployed with.
       // The four supplied engravings are shown on the Growth collection, in
       // the palette, not on this panel.
-      engraving: { id: 'wallgrid', name: 'Illustrative grid', shape: 'rect', cellW: 175, cellH: 175 }
+      /* B_PANEL carries a decorative 4 x 4 grid: six grooves, 4 mm wide and
+         3 mm deep. Supplied on the spec sheet, so 112.5 mm cells rather than
+         the 175 mm placeholder this panel used to carry. */
+      engraving: { id: 'wallgrid', name: 'Decorative 4 x 4 grid', shape: 'rect',
+                   cellW: 112.5, cellH: 112.5 }
     },
 
     horizontal: {
@@ -124,9 +148,13 @@ window.PG_CONFIG = {
        Photography, QR codes and certification marks are reserved and named.
        Put a data URI in the stand's `artwork` and the real print file replaces it. */
     a4: {
+      /* A4_PLATE_19_337x250 with one A4_GUSSET_19_90x70 centred at the back.
+         The sheet sits on the plate with a 20 mm border on all four sides;
+         337 x 250 is exactly 297 + 40 by 210 + 40. */
       sheet:  { width: 297, height: 210, thickness: 3 },
-      holder: { footWidth: 250, footDepth: 140, footThickness: 10,
-                lip: 15, finThickness: 8, lean: 22 },   // lean in degrees off vertical
+      plate:  { width: 337, height: 250, thickness: 19, border: 20 },
+      gusset: { width: 90, height: 70, thickness: 19 },
+      lean:   15,   // degrees from vertical
       material: 'nightfleck'
     },
     /* LEFT display — the first thing a visitor meets, at the left edge. */
@@ -152,18 +180,25 @@ window.PG_CONFIG = {
     // The Translucent Collection presentation box, from the supplied
     // photograph. Proportions are read off that photograph — not a product
     // drawing. It is markedly larger than the two standard sample boxes.
+    /* ── the Translucent block, from the gExpo spec sheet 3 ────────────────
+       Replaces the lidded presentation box. A solid bar with ten angled slots;
+       the samples stand in them and lift straight out.
+
+       The slot is 15 mm for a 12 mm sample ON PURPOSE: translucent stock is
+       Polygood group 5, uncalibrated, two-sided tolerance +/-2.0, so a 12 mm
+       slot would reject part of the batch.
+
+       FABRICATION IS NOT SETTLED on the spec: an 80 x 80 section cannot be cut
+       from one 19 mm sheet. Either laminate 4-5 layers of 19 mm or build it as
+       a box from plates. No DXF is supplied for the bar. */
     translucentBox: {
-      width: 360, depth: 95, height: 68,
-      lidHeight: 150, lidThickness: 16, lidLean: 4,   // lid hinged at the back
-      block: { width: 58, depth: 16, height: 95, count: 11, pitch: 30, angle: 30 },
-      brandLine: 'THE GOOD PLASTIC COMPANY',
-      title: 'TRANSLUCENT COLLECTION',
-      mark: null,   // logo removed at the client's direction
-      shell: '#232323', insert: '#d8d8d6',
-      // eleven translucent blocks, colours read off the photograph.
-      // Illustrative: not colour-accurate and not tied to any SKU.
-      blocks: ['#dcdcd8', '#2f9fd8', '#31b9a6', '#a9e02c', '#8f5219', '#ef2a68',
-               '#e4c3ba', '#3d8fd2', '#f07a1e', '#2a86d8', '#b9a887']
+      barWidth: 300, barDepth: 80, barHeight: 80,
+      slot: { length: 15, width: 65, depth: 30, count: 10, pitch: 25, angle: 20 },
+      sample: { width: 60, height: 120, thickness: 12, protrude: 90 },
+      shell: '#232323',
+      blocks: ['#d94f3d', '#e8822e', '#edc93f', '#8ec63f', '#3fb59b',
+               '#3b8fd4', '#5a5ac4', '#9b52b0', '#d1568f', '#9aa0a6'],
+      fabricationSettled: false
     },
 
     /* Three catalogues, 200 x 200 mm — centimetres confirmed by the client.
@@ -255,6 +290,8 @@ window.PG_CONFIG = {
     { id: 'jade',       name: 'Jade',       ref: '03', shape: 'scallop', cellW: 50,   cellH: 150 },
     { id: 'terracotta', name: 'Terracotta', ref: '04', shape: 'rect',    cellW: 18.8, cellH: 75  }
   ],
+  /* SUPPLIED on the gExpo holders spec: the decorative grid is cut 4 mm wide
+     and 3 mm deep. This is no longer our approximation. */
   groove: {
     width: 8, depth: 4,
     profile: 'square-cut, eased lip — approximate; manufacturer profile requested',

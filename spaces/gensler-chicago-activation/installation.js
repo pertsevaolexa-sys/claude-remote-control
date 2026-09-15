@@ -59,18 +59,19 @@ var halfA = mm(I.wall.width) / 2, halfB = mm(I.palette.width) / 2;
 /* thetaB is set below, after the Growth stand takes its place between the
    installation and the palette. */
 
-/* The Growth A4 and its collaboration box sit BETWEEN the installation and
-   the hands-on palette, which is the order the visitor journey asks for:
-   meet it, see the collection it belongs to, then handle the material. */
+/* The A4 sheet and its collaboration box sit NEXT TO the Translucent block,
+   at the client's direction, so the sheet explains the collection standing
+   beside it. Order along the counter: intro, Stand 2, sample boxes, A4 sheet,
+   Translucent block. */
 var halfG = mm(I.growthStand.unit.width) / 2;
-var thetaG = thetaA + ((mm(I.gapBetweenUnits) + halfA + halfG) / rFront) / D2R;
-var thetaB = thetaG + ((mm(I.gapBetweenUnits) + halfG + halfB) / rFront) / D2R;
+var thetaB = thetaA + ((mm(I.gapBetweenUnits) + halfA + halfB) / rFront) / D2R;
+var thetaG = thetaB + ((mm(I.gapBetweenUnits) + halfB + halfG) / rFront) / D2R;
 
 var halfD = mm(I.introStand.unit.width) / 2;
 var thetaD = thetaA - ((mm(I.gapBetweenUnits) + halfA + halfD) / rFront) / D2R;
 
 var halfC = mm(I.translucentUnit.width) / 2;
-var thetaC = thetaB + ((mm(I.gapBetweenUnits) + halfB + halfC) / rFront) / D2R;
+var thetaC = thetaG + ((mm(I.gapBetweenUnits) + halfG + halfC) / rFront) / D2R;
 
 var UNITS = {
   intro:       { theta: thetaD, w: mm(I.introStand.unit.width),  d: mm(I.introStand.unit.depth) },
@@ -275,72 +276,94 @@ function showEngraving(panel, id) {
   Object.keys(L).forEach(function (k) { L[k].visible = (k === id); });
 }
 
-/* ═══════════════ UNIT A — the main fragment ═══════════════ */
-var A = { d: mm(I.activeDepth), w: mm(I.wall.width) };
-var trayT = mm(6), padT = mm(I.base.padThickness);
+/* ═══════════════ UNIT A — Stand 2, from the gExpo holders spec ═══════════
+   Base 450 x 420 x 19, one 450 x 450 x 12 panel standing in a 12.1 slot cut
+   5 deep at 274.9 from the front edge, two 90 x 90 gussets in front and two
+   120 x 120 behind, and a 180 x 120 x 12 tile leaning back 15 degrees in a
+   190 x 15.64 slot, 60 from the front edge and 90 to the right.
 
-[[-0.30, -0.06], [0.30, -0.06], [-0.30, -0.34], [0.30, -0.34]].forEach(function (p) {
-  var pad = new THREE.Mesh(new THREE.BoxGeometry(0.07, padT, 0.07), matPad);
+   Nothing is glued. Both samples drop in from above and lift out the same
+   way, which is what makes the small one a handled piece. */
+var S2 = I.stand2;
+var A = { w: mm(S2.base.width), d: mm(S2.base.depth) };
+var trayT = mm(S2.base.thickness), padT = mm(I.base.padThickness);
+
+[[-0.18, -0.05], [0.18, -0.05], [-0.18, -0.36], [0.18, -0.36]].forEach(function (p) {
+  var pad = new THREE.Mesh(new THREE.BoxGeometry(0.06, padT, 0.06), matPad);
   pad.position.set(p[0], padT / 2, p[1]); gMain.add(pad);
 });
 
+/* the base is a Polygood part, so it carries the surface like every panel */
 var tray = trayMesh(A.w, A.d, 71);
 tray.position.set(0, padT + trayT / 2, -A.d / 2);
-tray.castShadow = true; tray.receiveShadow = true;
 gMain.add(tray);
 var trayTop = padT + trayT;
 
-var wallZ = -A.d + mm(50);
+/* the standing panel, dropped into its slot */
+var wallZ = -mm(S2.panelSlot.fromFront);
+var panelDrop = mm(S2.panelSlot.depth);
 var wallPanel = engravedPanel(I.wall.width, I.wall.height, I.wall.thickness, matWall, [I.wall.engraving]);
 showEngraving(wallPanel, I.wall.engraving.id);
-wallPanel.position.set(0, trayTop + mm(I.wall.height) / 2, wallZ - mm(I.wall.thickness) / 2);
+wallPanel.position.set(0, trayTop - panelDrop + mm(I.wall.height) / 2, wallZ);
 gMain.add(wallPanel);
+var wallTop = trayTop - panelDrop + mm(I.wall.height);
 
-[-1, 1].forEach(function (s) {
-  var fin = new THREE.Mesh(new THREE.BoxGeometry(A.w, mm(26), mm(8)), matRail);
-  fin.position.set(0, trayTop + mm(13), wallZ - mm(I.wall.thickness) - mm(4) + (s > 0 ? mm(I.wall.thickness) + mm(8) : 0));
-  fin.castShadow = true; gMain.add(fin);
-});
-[-1, 1].forEach(function (s) {
+/* the slot itself, so the panel reads as sitting IN the base rather than on it */
+var slotMat = new THREE.MeshStandardMaterial({ color: srgb('#0d0d0f'), roughness: 0.95 });
+var slot = new THREE.Mesh(
+  new THREE.BoxGeometry(mm(S2.panelSlot.width), mm(S2.panelSlot.depth), mm(S2.panelSlot.kerf)), slotMat);
+slot.position.set(0, trayTop - mm(S2.panelSlot.depth) / 2 + mm(0.4), wallZ);
+gMain.add(slot);
+
+/* gussets — flush with the panel edges, front pair small, back pair large */
+function gusset(sizeMm, thickMm, xSign, behind) {
+  var sz = mm(sizeMm), th = mm(thickMm);
   var shp = new THREE.Shape();
-  shp.moveTo(0, 0); shp.lineTo(mm(150), 0); shp.lineTo(0, mm(210)); shp.closePath();
-  var gus = new THREE.Mesh(new THREE.ExtrudeGeometry(shp, { depth: mm(6), bevelEnabled: false }), matRail);
-  gus.position.set(s * (A.w / 2 - mm(20)), trayTop, wallZ - mm(I.wall.thickness));
-  gus.rotation.y = -Math.PI / 2;
-  gus.castShadow = true; gMain.add(gus);
+  shp.moveTo(0, 0); shp.lineTo(behind ? -sz : sz, 0); shp.lineTo(0, sz); shp.closePath();
+  var g = new THREE.Mesh(new THREE.ExtrudeGeometry(shp, { depth: th, bevelEnabled: false }), matWall);
+  g.rotation.y = -Math.PI / 2;
+  g.position.set(xSign * (mm(I.wall.width) / 2 - th / 2) + th / 2,
+                 trayTop,
+                 wallZ + (behind ? -mm(I.wall.thickness) / 2 : mm(I.wall.thickness) / 2));
+  g.castShadow = true; g.receiveShadow = true;
+  gMain.add(g);
+}
+[-1, 1].forEach(function (sgn) {
+  gusset(S2.gussetFront.size, S2.gussetFront.thickness, sgn, false);
+  gusset(S2.gussetBack.size,  S2.gussetBack.thickness,  sgn, true);
 });
 
-var railH = mm(I.horizontal.topAboveCounter - I.horizontal.thickness) - trayTop;
-[-1, 1].forEach(function (s) {
-  var rail = new THREE.Mesh(new THREE.BoxGeometry(mm(40), railH, mm(290)), matRail);
-  rail.position.set(s * mm(260), trayTop + railH / 2, wallZ + mm(20) + mm(290) / 2);
-  rail.castShadow = true; rail.receiveShadow = true;
-  gMain.add(rail);
-});
+/* ── the 180 x 120 tile, leaning back in its slot ────────────────────────
+   This is the handled piece now: it lifts straight out, which is the whole
+   demonstration. The slot is cut 15.64 wide for a 12 mm sample so the tile
+   wedges at its lean angle — 12 / cos15 + 12 x tan15. */
+var TL = S2.tile;
+var tileLean = TL.lean * D2R;
+var tileX = mm(TL.offsetRight), tileZ = -mm(TL.fromFront);
 
-var horiz = new THREE.Mesh(new THREE.BoxGeometry(mm(I.horizontal.width), mm(I.horizontal.thickness), mm(I.horizontal.depth)), matHoriz);
-PG.planarUV(horiz.geometry, mm(I.horizontal.width) / 2, mm(I.horizontal.depth) / 2, mm(TILE), 'xz');
-horiz.position.set(0, mm(I.horizontal.topAboveCounter) - mm(I.horizontal.thickness) / 2, wallZ + mm(I.horizontal.depth) / 2);
-horiz.castShadow = true; horiz.receiveShadow = true;
-gMain.add(horiz);
-var horizTopY = mm(I.horizontal.topAboveCounter);
-var horizFrontZ = wallZ + mm(I.horizontal.depth);
+var tileSlot = new THREE.Mesh(
+  new THREE.BoxGeometry(mm(TL.slotLength), mm(TL.slotDepth), mm(TL.slotKerf)), slotMat);
+tileSlot.position.set(tileX, trayTop - mm(TL.slotDepth) / 2 + mm(0.4), tileZ);
+gMain.add(tileSlot);
 
-/* ── the handled coupon, in its cradle ──────────────────────────────────── */
-var coupon = engravedPanel(I.coupon.width, I.coupon.height, I.wall.thickness, matCoupon, [I.wall.engraving]);
+var coupon = engravedPanel(TL.width, TL.height, TL.thickness, matCoupon, [I.wall.engraving]);
 showEngraving(coupon, I.wall.engraving.id);
 var couponHome = new THREE.Object3D();
-couponHome.position.set(mm(215), horizTopY + mm(I.coupon.height) / 2 + mm(14), wallZ + mm(210));
-couponHome.rotation.x = -0.20;
+couponHome.position.set(tileX,
+  trayTop - mm(TL.slotDepth) + mm(TL.height) / 2 * Math.cos(tileLean),
+  tileZ - mm(TL.height) / 2 * Math.sin(tileLean));
+couponHome.rotation.x = -tileLean;
 var couponPivot = new THREE.Group();
 couponPivot.position.copy(couponHome.position);
 couponPivot.rotation.copy(couponHome.rotation);
 couponPivot.add(coupon);
 gMain.add(couponPivot);
 
-var cradle = new THREE.Mesh(new THREE.BoxGeometry(mm(178), mm(26), mm(44)), matRail);
-cradle.position.set(mm(215), horizTopY + mm(13), wallZ + mm(210));
-cradle.castShadow = true; gMain.add(cradle);
+/* kept for the cards and the annotation leaders, which used to hang off the
+   horizontal shelf this stand no longer has */
+var horizTopY = trayTop + mm(TL.height) * 0.5;
+var horizFrontZ = tileZ + mm(60);
+
 
 /* ── printed cards ────────────────────────────────────────────────────────
    No recycling statistics, no certification badges, no prices, no awards, no
@@ -424,35 +447,11 @@ CFG.references.forEach(function (r, k) {
   chip.castShadow = true; gPal.add(chip);
 });
 
-/* the engraved Growth collection: one 150 mm sample per supplied engraving,
-   lying flat so the machined pattern reads under the daylight. All four carry
-   the selected Growth surface, so the row compares ENGRAVINGS; the colour
-   choice is made on the swatches and applies to all of them.
-   NOTE: this replaces the brief's three plain colour positions with four
-   engraved ones, at the client's direction. */
-var T = I.palette.tile;
-var tileW = mm(T.width), tileH = mm(T.height), tileT = mm(T.thickness);
-var pitchX = tileW + mm(I.palette.gapX), pitchZ = tileH + mm(I.palette.gapZ);
-var gridX = mm(I.palette.gridX || 0);
-var sampleW = tileW;
-var sampleZ = -mm(60) - pitchZ / 2;         // front row sits near the visitor edge
+/* The six engraved tiles are gone: the client dropped them, and the handled
+   sample is now the 180 x 120 tile that lifts out of Stand 2. The palette
+   unit keeps the two general sample boxes. */
+var sampleZ = -mm(120), pitchZ = mm(140), gridX = 0, sampleW = mm(180);
 var samples = [];
-for (var r = 0; r < I.palette.rows; r++) {
-  for (var c = 0; c < I.palette.cols; c++) {
-    var i = r * I.palette.cols + c;
-    var e = CFG.engravings[i % CFG.engravings.length];
-    var sx = gridX + (c - (I.palette.cols - 1) / 2) * pitchX;
-    var sz = sampleZ - (r - (I.palette.rows - 1) / 2) * pitchZ;
-    var panel = engravedPanel(T.width, T.height, T.thickness, sampleMats[i], [e]);
-    showEngraving(panel, e.id);
-    /* laid flat, engraving upward, with the pattern's own "up" pointing away
-       from the visitor so the cell reads the right way round across the desk */
-    panel.rotation.x = -Math.PI / 2;
-    panel.position.set(sx, trayTop + tileT / 2, sz);
-    gPal.add(panel);
-    samples.push({ panel: panel, x: sx, z: sz, engraving: e.id });
-  }
-}
 // the marker shows which engraving the visitor chose
 var marker = new THREE.Mesh(new THREE.CylinderGeometry(mm(7), mm(7), mm(16), 18), matMarker);
 marker.castShadow = true;
@@ -755,10 +754,10 @@ function brochureCanvas(size) {
    so photography, QR codes and certification marks are reserved and named
    rather than redrawn. Set `artwork` on either stand to a data URI and the
    real print file replaces the layout whole. */
-var A4 = I.a4, HOLD = A4.holder;
+var A4 = I.a4, PL = A4.plate, GU = A4.gusset;
 
 function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
-  var lean = HOLD.lean * D2R;
+  var lean = A4.lean * D2R;
   var padXs = [-unitW / 2 + mm(60), unitW / 2 - mm(60)];
   var padZs = [-mm(50), -unitD + mm(50)];
   padXs.forEach(function (px) {
@@ -773,43 +772,40 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
   group.add(tray);
   var top = padT + trayT;
 
-  // the holder, in the same Polygood surface as the base
-  var holdMat = surfaceMaterial(HOLD.footWidth, HOLD.footDepth, seed + 4);
-  applySurface(holdMat, A4.material);
+  /* A4_PLATE_19_337x250, standing 15 degrees off vertical, with one
+     A4_GUSSET_19_90x70 centred behind it. The plate IS the holder — there is
+     no separate foot or lip on the spec. */
+  var pw = mm(PL.width), ph = mm(PL.height), pt = mm(PL.thickness);
+  var plateMat = surfaceMaterial(PL.width, PL.height, seed + 4);
+  applySurface(plateMat, A4.material);
 
-  var footGeo = new THREE.BoxGeometry(mm(HOLD.footWidth), mm(HOLD.footThickness), mm(HOLD.footDepth));
-  PG.planarUV(footGeo, mm(HOLD.footWidth) / 2, mm(HOLD.footDepth) / 2, mm(TILE));
-  var foot = new THREE.Mesh(footGeo, holdMat);
-  foot.position.set(0, top + mm(HOLD.footThickness) / 2, -unitD / 2);
-  foot.castShadow = true; foot.receiveShadow = true; group.add(foot);
-  var footTop = top + mm(HOLD.footThickness);
+  var plate = new THREE.Group();
+  var baseZ = -unitD / 2 + mm(GU.width) / 2;
+  plate.position.set(0, top + ph / 2 * Math.cos(lean), baseZ - ph / 2 * Math.sin(lean));
+  plate.rotation.x = -lean;
+  group.add(plate);
 
-  // the front lip the sheet leans against
-  var lip = new THREE.Mesh(
-    new THREE.BoxGeometry(mm(HOLD.footWidth), mm(HOLD.lip), mm(HOLD.finThickness)), holdMat);
-  var lipZ = -unitD / 2 + mm(HOLD.footDepth) / 2 - mm(HOLD.finThickness) / 2;
-  lip.position.set(0, footTop + mm(HOLD.lip) / 2, lipZ);
-  lip.castShadow = true; group.add(lip);
+  var plateGeo = new THREE.BoxGeometry(pw, ph, pt);
+  PG.planarUV(plateGeo, pw / 2, ph / 2, mm(TILE));
+  var plateMesh = new THREE.Mesh(plateGeo, plateMat);
+  plateMesh.castShadow = true; plateMesh.receiveShadow = true;
+  plate.add(plateMesh);
+  var footTop = top;
 
-  /* one triangular fin, on the centreline. Its hypotenuse is the lean, so the
-     sheet rests on it rather than on a bracket that has to be drawn bigger. */
-  var finH = mm(A4.sheet.height) * 0.52, finD = finH * Math.tan(lean) + mm(HOLD.lip);
+  /* the gusset: 90 deep, 70 high, one piece, centred at the back */
   var shp = new THREE.Shape();
-  shp.moveTo(0, 0); shp.lineTo(finD, 0); shp.lineTo(0, finH); shp.closePath();
+  shp.moveTo(0, 0); shp.lineTo(-mm(GU.width), 0); shp.lineTo(0, mm(GU.height)); shp.closePath();
   var fin = new THREE.Mesh(
-    new THREE.ExtrudeGeometry(shp, { depth: mm(HOLD.finThickness), bevelEnabled: false }), holdMat);
+    new THREE.ExtrudeGeometry(shp, { depth: mm(GU.thickness), bevelEnabled: false }), plateMat);
   fin.rotation.y = -Math.PI / 2;
-  fin.position.set(mm(HOLD.finThickness) / 2, footTop, lipZ - mm(HOLD.finThickness) / 2);
+  fin.position.set(mm(GU.thickness) / 2, top, baseZ - pt / 2);
   fin.castShadow = true; group.add(fin);
 
-  // the sheet: A4 landscape, leaning back on the fin
+  // the sheet sits on the plate face with a 20 mm border all round
   var sw = mm(A4.sheet.width), sh = mm(A4.sheet.height), st = mm(A4.sheet.thickness);
   var sheet = new THREE.Group();
-  sheet.position.set(0,
-    footTop + mm(HOLD.lip) * 0.4 + sh / 2 * Math.cos(lean),
-    lipZ - sh / 2 * Math.sin(lean) - st);
-  sheet.rotation.x = -lean;
-  group.add(sheet);
+  sheet.position.set(0, 0, pt / 2 + st / 2);
+  plate.add(sheet);
 
   var board = new THREE.Mesh(new THREE.BoxGeometry(sw, sh, st),
     new THREE.MeshStandardMaterial({ color: srgb('#f2f0eb'), roughness: 0.9, envMapIntensity: 0.18 }));
@@ -886,9 +882,14 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
 })();
 
 
-/* ── UNIT C — the Translucent Collection box, to the right ────────────────
-   Its own tray, beside the Growth palette rather than behind it. This is
-   what spends the envelope: see the fit check. */
+/* ── UNIT C — the Translucent block, from the gExpo spec ──────────────────
+   A solid 300 x 80 x 80 bar with ten slots cut 15 x 65, 30 deep, at 25 pitch
+   and turned 20 degrees clockwise in plan. The samples are 60 x 120 x 12 and
+   stand 90 proud of the bar.
+
+   The bar's fabrication is NOT settled on the spec — an 80 x 80 section does
+   not come out of one 19 mm sheet — so it is drawn as a solid and labelled
+   as such. No DXF was supplied for it. */
 var TU = I.translucentUnit, TB = I.translucentBox;
 var transTrayTop = padT + trayT;
 [[-0.13, -0.04], [0.13, -0.04], [-0.13, -0.14], [0.13, -0.14]].forEach(function (p) {
@@ -897,67 +898,54 @@ var transTrayTop = padT + trayT;
 });
 var transTray = trayMesh(mm(TU.width), mm(TU.depth), 83);
 transTray.position.set(0, padT + trayT / 2, -mm(TU.depth) / 2);
-transTray.castShadow = true; transTray.receiveShadow = true;
 gTrans.add(transTray);
 
-var transBox = (function () {
-  var g = new THREE.Group();
-  g.position.set(0, transTrayTop, -mm(90));
-  gTrans.add(g);
-  var shell = new THREE.MeshStandardMaterial({ color: srgb(TB.shell), roughness: 0.9, envMapIntensity: 0.18 });
-  var W = mm(TB.width), D = mm(TB.depth), H = mm(TB.height);
+(function () {
+  var bw = mm(TB.barWidth), bd = mm(TB.barDepth), bh = mm(TB.barHeight);
+  var barZ = -mm(TU.depth) / 2;
+  var shellMat = new THREE.MeshStandardMaterial({
+    color: 0xffffff, roughness: 0.74, metalness: 0, envMapIntensity: 0.3 });
+  shellMat.userData = { wMm: TB.barWidth, hMm: TB.barHeight, seed: 61 };
+  applySurface(shellMat, 'nightfleck');
 
-  // the box, and the pale insert the blocks stand on
-  var faceC = PG.cardCanvas(TB.width, TB.height, function (x, w, h, ppm) {
-    x.fillStyle = TB.shell; x.fillRect(0, 0, w, h);
-    if (TB.mark) PG.text(x, TB.mark, 17 * ppm, h * 0.62, { x: 20 * ppm, weight: 700, colour: '#ffffff' });
-    x.textAlign = 'right';
-    PG.text(x, TB.title, 5.2 * ppm, h * 0.60, { x: w - 20 * ppm, align: 'right', weight: 500,
-      colour: 'rgba(255,255,255,0.72)', spacing: 0.8 * ppm });
-    x.textAlign = 'left';
-  });
-  var faceM = new THREE.MeshStandardMaterial({ map: PG.cardTexture(THREE, faceC), roughness: 0.9, envMapIntensity: 0.18 });
-  var body = new THREE.Mesh(new THREE.BoxGeometry(W, H, D), [shell, shell, shell, shell, faceM, shell]);
-  body.position.y = H / 2; body.castShadow = true; body.receiveShadow = true; g.add(body);
-  var insert = new THREE.Mesh(new THREE.BoxGeometry(W - mm(20), mm(4), D - mm(20)),
-    new THREE.MeshStandardMaterial({ color: srgb(TB.insert), roughness: 0.95, envMapIntensity: 0.2 }));
-  insert.position.y = H - mm(2); g.add(insert);
+  var barGeo = new THREE.BoxGeometry(bw, bh, bd);
+  PG.planarUV(barGeo, bw / 2, bh / 2, mm(TILE));
+  var bar = new THREE.Mesh(barGeo, shellMat);
+  bar.position.set(0, transTrayTop + bh / 2, barZ);
+  bar.castShadow = true; bar.receiveShadow = true;
+  gTrans.add(bar);
 
-  // eleven translucent blocks, fanned as they are in the photograph
-  var bk = TB.block, ang = bk.angle * D2R;
-  TB.blocks.forEach(function (col, i) {
-    var c = srgb(col);
+  var SL = TB.slot, SM = TB.sample;
+  var slotMat2 = new THREE.MeshStandardMaterial({ color: srgb('#0b0b0d'), roughness: 0.95 });
+  var sw = mm(SM.width), sh = mm(SM.height), st = mm(SM.thickness);
+  var seated = mm(SL.depth);                     // how far each sample sits in
+  var ang = SL.angle * D2R;
+
+  for (var i = 0; i < SL.count; i++) {
+    var x = (i - (SL.count - 1) / 2) * mm(SL.pitch);
+
+    // the slot mouth, turned 20 degrees in plan
+    var mouth = new THREE.Mesh(
+      new THREE.BoxGeometry(mm(SL.length), mm(2), mm(SL.width)), slotMat2);
+    mouth.position.set(x, transTrayTop + bh - mm(1), barZ);
+    mouth.rotation.y = -ang;
+    gTrans.add(mouth);
+
+    /* translucent stock: a thin slab that lets the daylight through rather
+       than a painted block. Colours are ILLUSTRATIVE — the real range is not
+       in front of us. */
+    var col = TB.blocks[i % TB.blocks.length];
     var m = new THREE.MeshStandardMaterial({
-      color: c, roughness: 0.10, metalness: 0.0,
-      transparent: true, opacity: 0.93, envMapIntensity: 1.1,
-      emissive: c.clone().multiplyScalar(0.14)
-    });
-    var b2 = new THREE.Mesh(new THREE.BoxGeometry(mm(bk.width), mm(bk.height), mm(bk.depth)), m);
-    b2.position.set((i - (bk.count - 1) / 2) * mm(bk.pitch), H - mm(4) + mm(bk.height) / 2 - mm(28), 0);
-    b2.rotation.y = ang;
-    b2.castShadow = true;
-    g.add(b2);
-  });
-
-  // the lid, hinged at the back and standing open
-  var lidC = PG.cardCanvas(TB.width, TB.lidHeight, function (x, w, h, ppm) {
-    x.fillStyle = TB.insert; x.fillRect(0, 0, w, h);
-    x.textAlign = 'center';
-    PG.text(x, TB.brandLine, 5.2 * ppm, h * 0.15, { x: w / 2, align: 'center', weight: 500,
-      colour: '#4a4a48', spacing: 1.1 * ppm });
-    PG.text(x, 'TRANSLUCENT', 14 * ppm, h * 0.31, { x: w / 2, align: 'center', weight: 400, colour: '#26262a' });
-    PG.text(x, 'COLLECTION', 14 * ppm, h * 0.45, { x: w / 2, align: 'center', weight: 400, colour: '#26262a' });
-    x.textAlign = 'left';
-  });
-  var lidM = new THREE.MeshStandardMaterial({ map: PG.cardTexture(THREE, lidC), roughness: 0.92, envMapIntensity: 0.18 });
-  var lean = TB.lidLean * D2R, LH = mm(TB.lidHeight);
-  var lid = new THREE.Mesh(new THREE.BoxGeometry(W, LH, mm(TB.lidThickness)),
-    [shell, shell, shell, shell, lidM, shell]);
-  lid.position.set(0, H + LH / 2 * Math.cos(lean), -D / 2 - LH / 2 * Math.sin(lean));
-  lid.rotation.x = -lean;
-  lid.castShadow = true; g.add(lid);
-  return g;
+      color: srgb(col), roughness: 0.32, metalness: 0.0,
+      transparent: true, opacity: 0.74, envMapIntensity: 0.7 });
+    var s = new THREE.Mesh(new THREE.BoxGeometry(sw, sh, st), m);
+    s.position.set(x, transTrayTop + bh - seated + sh / 2, barZ);
+    s.rotation.y = -ang;
+    s.castShadow = true;
+    gTrans.add(s);
+  }
 })();
+
 
 /* ── selection ────────────────────────────────────────────────────────────
    Wall colour, wall engraving and Growth surface are three INDEPENDENT
@@ -979,7 +967,8 @@ var state = {
 function setWall(id) {
   state.wall = id;
   applySurface(matWall, id);
-  applySurface(matCoupon, id);
+  /* matCoupon is NOT driven by the wall swatch: the 180 x 120 tile is
+     Midnight while the panel above it is Oyster. */
   ctx.invalidate();
 }
 function setEngraving(id) {
@@ -1007,6 +996,7 @@ function setQuestion(id) {
 /* the panel beneath is fixed from CFG.finish.underPanel; the swatch drives
    the tiles and the collaboration chips only */
 applySurface(matHoriz, (CFG.finish && CFG.finish.underPanel) || state.growth);
+applySurface(matCoupon, I.stand2.tileSurface);
 setWall(state.wall); setGrowth(state.growth); setEngraving(state.engraving); setQuestion(state.question);
 
 /* ── inspect: only the coupon moves ───────────────────────────────────── */
@@ -1167,7 +1157,7 @@ return {
   brochureTheta: function () { return brochureTheta; },
   anchors: {
     wallZ: wallZ, trayTop: trayTop, horizTopY: horizTopY, horizFrontZ: horizFrontZ,
-    wallTopY: trayTop + mm(I.wall.height), couponPivot: couponPivot,
+    wallTopY: wallTop, couponPivot: couponPivot,
     samplesZ: sampleZ, boxZ: boxZ, boxX: boxX
   },
   state: state,
