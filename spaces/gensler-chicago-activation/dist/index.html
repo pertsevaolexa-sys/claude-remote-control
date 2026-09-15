@@ -394,18 +394,29 @@ window.PG_CONFIG = {
     introStand:  { unit: { width: 430, depth: 210 }, artwork: null },
     /* INSTALLATION display — the Growth Collection, set back beside the
        installation, with the collaboration box in front of it. */
-    growthStand: { unit: { width: 470, depth: 300 }, artwork: null },
+    /* 425 deep, not 300. The A4 holder needs 100 at the back (90 gusset +
+       plate), the lid rests against the plate face, and the 300 mm tray sits
+       in front of the lid's foot: 100 + 23 + 300 = 423, taken to 425. At 300
+       the box ran straight through the plate. This is measured, not chosen —
+       change the box depth or the lean and it has to be recomputed. It clears
+       the 450 mm counter, and the fit check reports the deepest unit. */
+    growthStand: { unit: { width: 470, depth: 425 }, artwork: null },
 
-    /* The small Growth/Gensler collaboration box. "3 x 3" as stated; UNITS AND
-       HEIGHT UNCONFIRMED — read here as inches (76 x 76 mm), the only reading
-       that is both small and able to hold a sample. Shown open with the lid
-       laid flat behind, thin enough not to stand in front of the A4 above it. */
-    /* The Growth / Gensler box, open in front of the Growth A4, lid standing.
-       EXTERNAL DIMENSIONS UNCONFIRMED — these are read off the concept image
-       against the 297 mm A4 behind it. 300 x 300 is CONFIRMED by the client;
-       the height and the chip grid are not. */
+    /* The Growth / Gensler box, open in front of the Growth A4, the lid leaning
+       back against the plate face at the plate's own 15 degrees.
+       300 x 300 is CONFIRMED by the client. The height, the lid height and the
+       chip grid are NOT — they are read off the planning photograph against the
+       297 mm A4 behind it.
+       lidHeight is 135, not the 190 first assumed. On the photograph the lid's
+       top edge sits about halfway up the A4 sheet, leaving the whole "The
+       Growth Collection" headline clear above it; at 190 it covered the
+       headline, and at 170 it still cut the second line. Leaning at 15 degrees
+       a 135 lid stands 130 above the counter, against a sheet whose headline
+       starts at about 142. It does not affect the depth arithmetic — the lid is
+       coplanar with the plate, so its foot sits in the same place whatever its
+       height. */
     collabBox: {
-      width: 300, depth: 300, height: 30, lidThickness: 8, lidHeight: 190,
+      width: 300, depth: 300, height: 30, lidThickness: 8, lidHeight: 135,
       chip: { width: 66, height: 128, gap: 8, cols: 4, rows: 2 },
       shell: '#5b93a3', felt: '#e9e7e1',
       title: 'GROWTH COLLECTION',
@@ -2804,7 +2815,11 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
   applySurface(plateMat, A4.material);
 
   var plate = new THREE.Group();
-  var baseZ = -unitD / 2 + mm(GU.width) / 2;
+  /* The holder stands at the BACK of its zone, gusset flush with the back
+     edge, rather than centred in it. Centred, it left too little counter in
+     front for anything to sit without running into the plate — which is how
+     the collaboration box came to pass through this one. */
+  var baseZ = -unitD + mm(GU.width) + pt / 2;
   plate.position.set(0, top + ph / 2 * Math.cos(lean), baseZ - ph / 2 * Math.sin(lean));
   plate.rotation.x = -lean;
   group.add(plate);
@@ -2849,7 +2864,7 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
   print.position.z = st / 2 + mm(0.5);
   sheet.add(print);
 
-  return { top: footTop, sheet: sheet, trayTop: top };
+  return { top: footTop, sheet: sheet, trayTop: top, baseZ: baseZ, lean: lean };
 }
 
 /* ── LEFT display: the introduction ─────────────────────────────────────── */
@@ -2875,7 +2890,19 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
   var shellMat = new THREE.MeshStandardMaterial({ color: srgb(CB.shell), roughness: 0.58, envMapIntensity: 0.3 });
   var feltMat  = new THREE.MeshStandardMaterial({ color: srgb(CB.felt), roughness: 0.95, envMapIntensity: 0.15 });
   var bw = mm(CB.width), bd = mm(CB.depth), bh = mm(CB.height), lt = mm(CB.lidThickness);
-  var boxZ = -mm(95);
+  var lidH = mm(CB.lidHeight);
+
+  /* Set out from the A4 plate it stands in front of, not from a typed-in
+     offset. As on the planning photograph the lid leans back at the plate's
+     own angle and rests against its face, and the tray sits immediately in
+     front of the lid's foot. A 300 mm tray puts its own lid 150 mm behind its
+     centre, so an offset guessed against the old 150-deep box drove the whole
+     box straight through the plate. */
+  var lidLean = st.lean;
+  var faceZ = st.baseZ + mm(PL.thickness) / 2 * Math.cos(lidLean);   // plate front face at counter level
+  var lidZ = faceZ + (lt / 2 + mm(4)) * Math.cos(lidLean) - lidH / 2 * Math.sin(lidLean);
+  var lidFootZ = lidZ + lidH / 2 * Math.sin(lidLean) + lt / 2 * Math.cos(lidLean);
+  var boxZ = lidFootZ + mm(2) + bd / 2;
 
   var tray = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bd), shellMat);
   tray.position.set(0, st.trayTop + bh / 2, boxZ);
@@ -2897,13 +2924,11 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
   }, 4);
   var lidMat = new THREE.MeshStandardMaterial({
     map: PG.cardTexture(THREE, lidC), roughness: 0.72, envMapIntensity: 0.22 });
-  var lidLean = 6 * D2R;
   var lid = new THREE.Group();
-  lid.position.set(0, st.trayTop + mm(CB.lidHeight) / 2 * Math.cos(lidLean),
-                   boxZ - bd / 2 - mm(CB.lidHeight) / 2 * Math.sin(lidLean));
+  lid.position.set(0, st.trayTop + lidH / 2 * Math.cos(lidLean), lidZ);
   lid.rotation.x = -lidLean;
   gGrowth.add(lid);
-  var lidBody = new THREE.Mesh(new THREE.BoxGeometry(bw, mm(CB.lidHeight), lt),
+  var lidBody = new THREE.Mesh(new THREE.BoxGeometry(bw, lidH, lt),
     [shellMat, shellMat, shellMat, shellMat, lidMat, shellMat]);
   lidBody.castShadow = true; lid.add(lidBody);
 
@@ -3114,10 +3139,17 @@ function checkFootprint() {
     text: 'Envelope ' + Math.round(arc) + ' mm along the counter ' + (fits ? '(allocated ' : 'EXCEEDS allocated ') +
           I.allocatedLength + ' mm' + (fits ? ')' : '') });
 
-  var depths = Math.max(I.activeDepth, I.palette.depth);
+  /* the deepest unit is read off the set-out, not from a hand-picked pair:
+     picking two by name silently stopped reporting the Growth stand when the
+     300 mm collaboration box pushed it past both of them */
+  var deepest = 0, deepestName = '';
+  Object.keys(UNITS).forEach(function (k) {
+    if (UNITS[k].d > deepest) { deepest = UNITS[k].d; deepestName = k; }
+  });
+  var depths = Math.round(deepest * 1000);
   var depthOK = depths <= CFG.counter.depthAtActiveZone;
   out.push({ level: depthOK ? 'ok' : 'fail',
-    text: 'Deepest unit ' + depths + ' mm ' + (depthOK ? 'within' : 'EXCEEDS') +
+    text: 'Deepest unit ' + depths + ' mm (' + deepestName + ') ' + (depthOK ? 'within' : 'EXCEEDS') +
           ' counter depth ' + CFG.counter.depthAtActiveZone + ' mm' });
 
   var hit = Object.keys(clash);

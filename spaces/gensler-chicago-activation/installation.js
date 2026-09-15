@@ -859,7 +859,11 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
   applySurface(plateMat, A4.material);
 
   var plate = new THREE.Group();
-  var baseZ = -unitD / 2 + mm(GU.width) / 2;
+  /* The holder stands at the BACK of its zone, gusset flush with the back
+     edge, rather than centred in it. Centred, it left too little counter in
+     front for anything to sit without running into the plate — which is how
+     the collaboration box came to pass through this one. */
+  var baseZ = -unitD + mm(GU.width) + pt / 2;
   plate.position.set(0, top + ph / 2 * Math.cos(lean), baseZ - ph / 2 * Math.sin(lean));
   plate.rotation.x = -lean;
   group.add(plate);
@@ -904,7 +908,7 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
   print.position.z = st / 2 + mm(0.5);
   sheet.add(print);
 
-  return { top: footTop, sheet: sheet, trayTop: top };
+  return { top: footTop, sheet: sheet, trayTop: top, baseZ: baseZ, lean: lean };
 }
 
 /* ── LEFT display: the introduction ─────────────────────────────────────── */
@@ -930,7 +934,19 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
   var shellMat = new THREE.MeshStandardMaterial({ color: srgb(CB.shell), roughness: 0.58, envMapIntensity: 0.3 });
   var feltMat  = new THREE.MeshStandardMaterial({ color: srgb(CB.felt), roughness: 0.95, envMapIntensity: 0.15 });
   var bw = mm(CB.width), bd = mm(CB.depth), bh = mm(CB.height), lt = mm(CB.lidThickness);
-  var boxZ = -mm(95);
+  var lidH = mm(CB.lidHeight);
+
+  /* Set out from the A4 plate it stands in front of, not from a typed-in
+     offset. As on the planning photograph the lid leans back at the plate's
+     own angle and rests against its face, and the tray sits immediately in
+     front of the lid's foot. A 300 mm tray puts its own lid 150 mm behind its
+     centre, so an offset guessed against the old 150-deep box drove the whole
+     box straight through the plate. */
+  var lidLean = st.lean;
+  var faceZ = st.baseZ + mm(PL.thickness) / 2 * Math.cos(lidLean);   // plate front face at counter level
+  var lidZ = faceZ + (lt / 2 + mm(4)) * Math.cos(lidLean) - lidH / 2 * Math.sin(lidLean);
+  var lidFootZ = lidZ + lidH / 2 * Math.sin(lidLean) + lt / 2 * Math.cos(lidLean);
+  var boxZ = lidFootZ + mm(2) + bd / 2;
 
   var tray = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bd), shellMat);
   tray.position.set(0, st.trayTop + bh / 2, boxZ);
@@ -952,13 +968,11 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
   }, 4);
   var lidMat = new THREE.MeshStandardMaterial({
     map: PG.cardTexture(THREE, lidC), roughness: 0.72, envMapIntensity: 0.22 });
-  var lidLean = 6 * D2R;
   var lid = new THREE.Group();
-  lid.position.set(0, st.trayTop + mm(CB.lidHeight) / 2 * Math.cos(lidLean),
-                   boxZ - bd / 2 - mm(CB.lidHeight) / 2 * Math.sin(lidLean));
+  lid.position.set(0, st.trayTop + lidH / 2 * Math.cos(lidLean), lidZ);
   lid.rotation.x = -lidLean;
   gGrowth.add(lid);
-  var lidBody = new THREE.Mesh(new THREE.BoxGeometry(bw, mm(CB.lidHeight), lt),
+  var lidBody = new THREE.Mesh(new THREE.BoxGeometry(bw, lidH, lt),
     [shellMat, shellMat, shellMat, shellMat, lidMat, shellMat]);
   lidBody.castShadow = true; lid.add(lidBody);
 
@@ -1169,10 +1183,17 @@ function checkFootprint() {
     text: 'Envelope ' + Math.round(arc) + ' mm along the counter ' + (fits ? '(allocated ' : 'EXCEEDS allocated ') +
           I.allocatedLength + ' mm' + (fits ? ')' : '') });
 
-  var depths = Math.max(I.activeDepth, I.palette.depth);
+  /* the deepest unit is read off the set-out, not from a hand-picked pair:
+     picking two by name silently stopped reporting the Growth stand when the
+     300 mm collaboration box pushed it past both of them */
+  var deepest = 0, deepestName = '';
+  Object.keys(UNITS).forEach(function (k) {
+    if (UNITS[k].d > deepest) { deepest = UNITS[k].d; deepestName = k; }
+  });
+  var depths = Math.round(deepest * 1000);
   var depthOK = depths <= CFG.counter.depthAtActiveZone;
   out.push({ level: depthOK ? 'ok' : 'fail',
-    text: 'Deepest unit ' + depths + ' mm ' + (depthOK ? 'within' : 'EXCEEDS') +
+    text: 'Deepest unit ' + depths + ' mm (' + deepestName + ') ' + (depthOK ? 'within' : 'EXCEEDS') +
           ' counter depth ' + CFG.counter.depthAtActiveZone + ' mm' });
 
   var hit = Object.keys(clash);

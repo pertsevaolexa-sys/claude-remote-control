@@ -508,6 +508,46 @@ Change any dimension in `config.js` and the check re-runs. Overhang, running pas
 the end of the counter run, or colliding with the credenza are reported as
 failures — the counter is never quietly made deeper.
 
+#### The collaboration box needed 425 mm, not 300
+
+The Growth A4 holder sat centred in a 300 mm zone and the collaboration box was
+placed at a typed-in offset scaled against the **old 150 mm-deep** box. At
+300 × 300 the box drove straight through the A4 plate — a hard intersection,
+plainly visible in the render.
+
+The arithmetic says why. A 300 mm tray puts its own lid **150 mm behind its own
+centre**, and that lid then has to clear the plate. Keeping the holder centred,
+the tray front edge would have landed 685 mm back from the unit's front — half a
+metre past the counter.
+
+Three changes, and it fits:
+
+- The A4 holder now stands at the **back** of its zone, gusset flush with the
+  back edge, not centred in it.
+- The lid is set out **from the plate's own face**, leaning at the plate's 15°
+  and resting against it — which is what the planning photograph shows — rather
+  than standing upright at a guessed offset.
+- The tray sits immediately in front of the lid's foot.
+
+Measured: 100 mm holder + 23 mm lid + 300 mm tray = 423, taken to **425**.
+
+| Clearance | |
+| --- | ---: |
+| Lid to plate face | 3.9 mm |
+| Lid foot to tray | 2.0 mm |
+| Tray front to unit front edge | 2.7 mm |
+| Gusset to unit back edge | flush |
+
+425 mm clears the 450 mm counter, so this one passes. It does exceed the 400 mm
+`activeDepth` the rest of the composition works to, which is worth knowing before
+the counter is measured — at the front edge the unit reaches r = 2485 against the
+counter's 2500, so there are **15 mm** in hand and no more.
+
+The depth check used to read `Math.max(activeDepth, palette.depth)` — two units
+picked by name. It silently stopped reporting the deepest unit the moment the
+Growth stand passed both. It now reads the deepest unit off the set-out and names
+it.
+
 #### Where the counter actually ends: the credenza, not an angle
 
 The check used to call the credenza a fail past **52°** of arc. That number was

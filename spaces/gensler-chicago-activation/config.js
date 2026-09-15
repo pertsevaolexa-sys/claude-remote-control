@@ -184,18 +184,29 @@ window.PG_CONFIG = {
     introStand:  { unit: { width: 430, depth: 210 }, artwork: null },
     /* INSTALLATION display — the Growth Collection, set back beside the
        installation, with the collaboration box in front of it. */
-    growthStand: { unit: { width: 470, depth: 300 }, artwork: null },
+    /* 425 deep, not 300. The A4 holder needs 100 at the back (90 gusset +
+       plate), the lid rests against the plate face, and the 300 mm tray sits
+       in front of the lid's foot: 100 + 23 + 300 = 423, taken to 425. At 300
+       the box ran straight through the plate. This is measured, not chosen —
+       change the box depth or the lean and it has to be recomputed. It clears
+       the 450 mm counter, and the fit check reports the deepest unit. */
+    growthStand: { unit: { width: 470, depth: 425 }, artwork: null },
 
-    /* The small Growth/Gensler collaboration box. "3 x 3" as stated; UNITS AND
-       HEIGHT UNCONFIRMED — read here as inches (76 x 76 mm), the only reading
-       that is both small and able to hold a sample. Shown open with the lid
-       laid flat behind, thin enough not to stand in front of the A4 above it. */
-    /* The Growth / Gensler box, open in front of the Growth A4, lid standing.
-       EXTERNAL DIMENSIONS UNCONFIRMED — these are read off the concept image
-       against the 297 mm A4 behind it. 300 x 300 is CONFIRMED by the client;
-       the height and the chip grid are not. */
+    /* The Growth / Gensler box, open in front of the Growth A4, the lid leaning
+       back against the plate face at the plate's own 15 degrees.
+       300 x 300 is CONFIRMED by the client. The height, the lid height and the
+       chip grid are NOT — they are read off the planning photograph against the
+       297 mm A4 behind it.
+       lidHeight is 135, not the 190 first assumed. On the photograph the lid's
+       top edge sits about halfway up the A4 sheet, leaving the whole "The
+       Growth Collection" headline clear above it; at 190 it covered the
+       headline, and at 170 it still cut the second line. Leaning at 15 degrees
+       a 135 lid stands 130 above the counter, against a sheet whose headline
+       starts at about 142. It does not affect the depth arithmetic — the lid is
+       coplanar with the plate, so its foot sits in the same place whatever its
+       height. */
     collabBox: {
-      width: 300, depth: 300, height: 30, lidThickness: 8, lidHeight: 190,
+      width: 300, depth: 300, height: 30, lidThickness: 8, lidHeight: 135,
       chip: { width: 66, height: 128, gap: 8, cols: 4, rows: 2 },
       shell: '#5b93a3', felt: '#e9e7e1',
       title: 'GROWTH COLLECTION',
