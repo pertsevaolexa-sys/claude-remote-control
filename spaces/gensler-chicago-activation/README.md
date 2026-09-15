@@ -455,11 +455,11 @@ Four rigid sub-assemblies now sit along the counter — the orientation stand
 (left), the LOOK CLOSER wall fragment, the Growth palette with its boxes, and
 the Translucent Collection box (right).
 
-The envelope is **2368 mm against the 1400 mm allocated — over by 968 mm**, and
+The envelope is **3334 mm against the 1400 mm allocated — over by 1934 mm**, and
 the fit check reports it as a failure rather than absorbing it. Depth still
 passes: nothing exceeds the 450 mm counter depth.
 
-It got there in three steps, each of them requested:
+It got there a step at a time, each of them requested:
 
 | Step | Envelope |
 | --- | ---: |
@@ -467,19 +467,24 @@ It got there in three steps, each of them requested:
 | \+ four engraved Growth samples (palette 500 → 650 mm) | 1384 mm |
 | \+ Translucent Collection box, right (400 mm tray) | 1826 mm |
 | \+ orientation stand, left (500 mm tray) | **2368 mm** |
+| \+ expo rebuild: Translucent bar, Growth A4, 300 x 300 collab box | 2958 mm |
+| \+ the two sample boxes split onto their own sub-assembly | 3058 mm |
+| \+ three catalogues, now measured with the run instead of exempt | **3334 mm** |
 
 Three ways out, in the order we would recommend:
 
-1. **Raise the allocation.** The counter itself has the length — the run is
-   about 4.4 m and the composition now spans about 30° of arc, still clear of
-   the credenza. The 1400 mm was a concept envelope, not a measured limit. This
-   needs the real counter measured and the host's agreement, nothing more.
+1. **Raise the allocation.** The counter has most of the length — the run is
+   about 4.4 m and the composition now spans about 83° of arc. The 1400 mm was a
+   concept envelope, not a measured limit. This needs the real counter measured
+   and the host's agreement. Note that raising it alone no longer clears
+   everything: the far end is under the credenza from about 37.5°, so the
+   catalogues need the credenza question answered as well (below).
 2. **Drop the two standard sample boxes** and let the Translucent box be the
    only box. That returns roughly 480 mm.
 3. **Crop the exhibition fragment** from 700 mm, which the brief allows once
    the real engraving pattern has been reviewed — which it now has.
 
-Even taken together, 2 and 3 do not recover 968 mm. Realistically the
+Even taken together, 2 and 3 do not recover 1934 mm. Realistically the
 allocation has to move; the model shows the arrangement you asked for and
 states the cost rather than quietly shrinking anything to make it fit.
 
@@ -502,6 +507,33 @@ check row rather than as a quietly deeper counter.
 Change any dimension in `config.js` and the check re-runs. Overhang, running past
 the end of the counter run, or colliding with the credenza are reported as
 failures — the counter is never quietly made deeper.
+
+#### Where the counter actually ends: the credenza, not an angle
+
+The check used to call the credenza a fail past **52°** of arc. That number was
+typed in, and it was wrong. Measuring the credenza's own rectangle — `bayPt(63,
+2.10)`, 1780 wide, 460 deep, the values `venue.js` builds it from — its near
+corner crosses the counter's **front edge at about 37.5°**, some 14° earlier
+than assumed. The check now tests each unit's corners against that rectangle and
+names what overlaps and by how much, instead of comparing one angle.
+
+This has a direct consequence for the catalogues. Asked for "at the very right",
+they were first set out at a fixed 66°, which put them **inside the credenza** —
+and invisible, because the credenza top and the counter top are both at 1000 mm,
+so they sat on the credenza reading as nothing. They are now set out by arc
+length past the sample boxes like every other unit, which is genuinely the right
+hand end of the run. Even there they **overlap the credenza by 96 mm**, reported
+as a failure.
+
+There is no set-out that avoids it. Between the sample boxes' right edge (35.5°)
+and the credenza (37.5°) there is about **72 mm of free counter**, and the three
+catalogues want **235 mm plus a 40 mm gap**. Closing the gap to zero still leaves
+them over the credenza. The run is longer than the free counter — the same
+finding the envelope row has been reporting, arriving from the other end.
+
+What is modelled is physically sound: both tops are at 1000 mm and adjacent, so
+the catalogues bridge them and are supported throughout. What needs a decision is
+whether the credenza top may be used at all. That is the host's call, not ours.
 
 Also modelled honestly:
 

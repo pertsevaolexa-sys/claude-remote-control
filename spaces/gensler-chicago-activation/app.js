@@ -187,6 +187,16 @@ function transWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(IN
 INS.groups.intro.updateMatrixWorld(); INS.groups.growth.updateMatrixWorld();
 function introWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.intro.matrixWorld); }
 function growthWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.growth.matrixWorld); }
+INS.groups.banner.updateMatrixWorld(); INS.groups.brochures.updateMatrixWorld();
+function bannerWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.banner.matrixWorld); }
+function brochWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.brochures.matrixWorld); }
+
+/* The catalogues close the counter run and the roll-up stands on the floor
+   about 2.4 m past them, with the reset stools in between. So this vantage
+   stands well back and a little high: far enough back to hold both pieces,
+   high enough to read the catalogues over the stool backs. */
+var boothAim = bannerWorld(0, 1.05, 0).lerp(brochWorld(0, 0.05, -0.12), 0.50);
+var boothEye = boothAim.clone().add(new THREE.Vector3(-0.04, 1.00, 4.02));
 
 var A = INS.units.main;
 var junction = mainWorld(0, mm(CFG.install.horizontal.topAboveCounter), INS.anchors.wallZ);
@@ -211,9 +221,7 @@ var VIEWS = [
     p: introWorld(0.20, mm(470), 0.98), t: introWorld(0, mm(190), -0.11), fov: 40 },
   { key: 'growth', name: 'Growth sheet + collab box',
     p: growthWorld(0.16, mm(430), 0.92), t: growthWorld(0, mm(150), -0.14), fov: 40 },
-  { key: 'banner', name: 'Banner + brochures',
-    p: V.bayPt(38, 1.10, 1.62),
-    t: V.bayPt(CFG.install.banner.credenza.angle, 1.70, 0.90), fov: 54 },
+  { key: 'banner', name: 'Banner + brochures', p: boothEye, t: boothAim, fov: 52 },
   { key: 'logistics', name: 'Packed + fallback support',
     p: new THREE.Vector3(0.15, 2.05, 5.75), t: new THREE.Vector3(0.05, 0.35, 3.30), fov: 56 }
 ];
@@ -486,6 +494,8 @@ $('savePng').addEventListener('click', exportPNG);
 // the still-capture script writes the same composed image, footer included,
 // so an exported still can never circulate without its status line
 window.__exportPNGDataURL = function () { return composeExport().toDataURL('image/png'); };
+// review hook: lets the headless check read back where things actually landed
+window.__dbg = { THREE: THREE, scene: scene, INS: INS, V: V, CFG: CFG, mm: mm };
 
 /* ── palette record ───────────────────────────────────────────────────────
    A concept-review record. It is not an order, a quotation or a lead form,

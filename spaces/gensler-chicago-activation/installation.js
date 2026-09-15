@@ -74,13 +74,25 @@ var thetaBox = thetaB + ((mm(I.gapBetweenUnits) + halfB + halfBox) / rFront) / D
 var halfD = mm(I.introStand.unit.width) / 2;
 var thetaD = thetaC - ((mm(I.gapBetweenUnits) + halfC + halfD) / rFront) / D2R;
 
+/* The catalogues close the run, immediately past the sample boxes. Set out by
+   arc length like every other unit rather than at a typed-in angle: a fixed
+   angle does not follow the composition, and the one that was here (66 deg)
+   put them inside the existing credenza, which crosses the counter's front
+   edge from about 37.5 deg. Even set out here they still catch its corner —
+   checkFootprint reports by how much. */
+var halfBr = (mm(I.brochure.size) + 2 * mm(I.brochure.step) * 0.62) / 2;
+var thetaBr = thetaBox + ((mm(I.gapBetweenUnits) + halfBox + halfBr) / rFront) / D2R;
+
 var UNITS = {
   intro:       { theta: thetaD, w: mm(I.introStand.unit.width),  d: mm(I.introStand.unit.depth) },
   main:        { theta: thetaA, w: mm(I.wall.width),             d: mm(I.activeDepth) },
   growth:      { theta: thetaG, w: mm(I.growthStand.unit.width), d: mm(I.growthStand.unit.depth) },
   palette:     { theta: thetaB, w: mm(I.palette.width),          d: mm(I.palette.depth) },
   boxes:       { theta: thetaBox, w: mm(I.boxesUnit.width),      d: mm(I.boxesUnit.depth) },
-  translucent: { theta: thetaC, w: mm(I.translucentUnit.width),  d: mm(I.translucentUnit.depth) }
+  translucent: { theta: thetaC, w: mm(I.translucentUnit.width),  d: mm(I.translucentUnit.depth) },
+  /* the catalogues stand on the counter too, so they are measured with the
+     rest of the run rather than exempted from the footprint check */
+  brochures:   { theta: thetaBr, w: halfBr * 2,                  d: mm(I.brochure.size) + mm(40) }
 };
 
 function unitGroup(theta) {
@@ -143,7 +155,7 @@ var matHoriz  = surfaceMaterial(I.horizontal.width, I.horizontal.depth, 23);
 var matCoupon = surfaceMaterial(I.coupon.width, I.coupon.height, 37);
 // one material per engraved Growth sample. They all carry the SELECTED Growth
 // surface, so the row compares engravings rather than colours.
-var bannerTopY = 0, brochureTheta = 0;
+var bannerTopY = 0, brochureTheta = 0, gBanner = null, gBrochures = null;
 /* palette for the printed artwork, declared up here because the cards in
    Unit A are built before the artwork block further down */
 var ART = {
@@ -420,10 +432,8 @@ var B = { w: mm(I.palette.width), d: mm(I.palette.depth) };
   var pad = new THREE.Mesh(new THREE.BoxGeometry(0.06, padT, 0.06), matPad);
   pad.position.set(p[0], padT / 2, p[1]); gPal.add(pad);
 });
-var palTray = trayMesh(B.w, B.d, 73);
-palTray.position.set(0, padT + trayT / 2, -B.d / 2);
-palTray.castShadow = true; palTray.receiveShadow = true;
-gPal.add(palTray);
+/* the six tiles lie straight on the counter — no tray under them */
+var palTop = padT;
 
 /* identity and question, two cards on two rows — as they were. The Translucent
    box no longer needs the depth: it has its own unit to the right. */
@@ -445,20 +455,22 @@ var frontCard = cardMesh(CARD_W, CARD_D, function (x, w, h, ppm) {
     yy += 10.5 * ppm;
   });
 });
-frontCard.position.set(0, trayTop + mm(2), FRONT_Z);
-frontCard.rotation.x = -Math.PI / 2;
-gPal.add(frontCard);
+/* The credit and question card is NOT on the planning photograph, and the
+   Growth credit now reads on the Growth A4 itself. Built but not added, so
+   the copy stays in one place if it is wanted back. */
+frontCard.visible = false;
 
 var qMarker = new THREE.Mesh(new THREE.SphereGeometry(mm(6), 18, 12), matMarker);
-qMarker.castShadow = true; gPal.add(qMarker);
+qMarker.visible = false; gPal.add(qMarker);   // not on the photograph
 function questionY(idx) { return FRONT_Z + mm(CARD_D) / 2 - mm(25) - idx * mm(10.5); }
-function setQuestionMarker(idx) { qMarker.position.set(mm(16), trayTop + mm(8), questionY(idx)); }
+function setQuestionMarker(idx) { qMarker.position.set(mm(16), palTop + mm(8), questionY(idx)); }
 
 CFG.references.forEach(function (r, k) {
   var rm = new THREE.MeshStandardMaterial({ color: srgb(r.colour), roughness: r.rough,
     metalness: r.metal || 0, envMapIntensity: 0.4 });
   var chip = new THREE.Mesh(new THREE.BoxGeometry(mm(56), mm(12), mm(56)), rm);
-  chip.position.set((k ? 1 : -1) * mm(282), trayTop + mm(6), FRONT_Z);
+  chip.position.set((k ? 1 : -1) * mm(282), palTop + mm(6), FRONT_Z);
+  chip.visible = false;   // neutral references are not on the photograph
   chip.castShadow = true; gPal.add(chip);
 });
 
@@ -470,6 +482,7 @@ var PT = I.palette.tile;
 var tileW = mm(PT.width), tileH = mm(PT.height), tileT = mm(PT.thickness);
 var pitchX = tileW + mm(I.palette.gapX), pitchZ = tileH + mm(I.palette.gapZ);
 var blockW = I.palette.cols * tileW + (I.palette.cols - 1) * mm(I.palette.gapX);
+var blockD = I.palette.rows * tileH + (I.palette.rows - 1) * mm(I.palette.gapZ);
 var gridX = 0;
 var sampleZ = -mm(30) - pitchZ / 2;
 var sampleW = tileW;
@@ -488,7 +501,7 @@ var samples = [];
       panel.rotation.x = -Math.PI / 2;      // flat, engraving upward
       var sx = gridX + (c - (I.palette.cols - 1) / 2) * pitchX;
       var sz = sampleZ - (r - (I.palette.rows - 1) / 2) * pitchZ;
-      panel.position.set(sx, trayTop + tileT / 2, sz);
+      panel.position.set(sx, palTop + tileT / 2, sz);
       gPal.add(panel);
       samples.push({ panel: panel, x: sx, z: sz, engraving: e.id });
     }
@@ -497,7 +510,8 @@ var samples = [];
 // the marker shows which engraving the visitor chose
 var marker = new THREE.Mesh(new THREE.CylinderGeometry(mm(7), mm(7), mm(16), 18), matMarker);
 marker.castShadow = true;
-marker.position.set(gridX, trayTop + mm(8), sampleZ + pitchZ / 2 + mm(16));
+marker.visible = false;   // not on the photograph
+marker.position.set(gridX, palTop + mm(8), sampleZ + pitchZ / 2 + mm(16));
 gPal.add(marker);
 
 /* ── the two Polygood sample boxes ────────────────────────────────────────
@@ -510,7 +524,7 @@ var stickPalette = ['#2f5fa8', '#1d3f7a', '#161616', '#0f0f10', '#e8e6df', '#cfd
                     '#8e8e8b', '#5f6260', '#186b52', '#0f4a38', '#efeadc', '#dcd8c8'];
 function sampleBox(spec, x, z, withLid) {
   var g = new THREE.Group();
-  g.position.set(x, padT + trayT, z);
+  g.position.set(x, padT, z);
   gBoxes.add(g);
   var body = new THREE.MeshStandardMaterial({ color: srgb(spec.base), roughness: 0.92, envMapIntensity: 0.18 });
 
@@ -563,9 +577,6 @@ var BX = I.boxesUnit;
   var pad = new THREE.Mesh(new THREE.BoxGeometry(0.05, padT, 0.05), matPad);
   pad.position.set(p[0], padT / 2, p[1]); gBoxes.add(pad);
 });
-var boxTray = trayMesh(mm(BX.width), mm(BX.depth), 89);
-boxTray.position.set(0, padT + trayT / 2, -mm(BX.depth) / 2);
-gBoxes.add(boxTray);
 var boxZ = -mm(BX.depth) / 2;
 var boxX = mm(115);
 var boxes = [
@@ -837,10 +848,8 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
     });
   });
 
-  var tray = trayMesh(unitW, unitD, seed);
-  tray.position.set(0, padT + trayT / 2, -unitD / 2);
-  group.add(tray);
-  var top = padT + trayT;
+  /* No pedestal: the plate stands on the counter, as specified. */
+  var top = padT;
 
   /* A4_PLATE_19_337x250, standing 15 degrees off vertical, with one
      A4_GUSSET_19_90x70 centred behind it. The plate IS the holder — there is
@@ -984,14 +993,12 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
    not come out of one 19 mm sheet — so it is drawn as a solid and labelled
    as such. No DXF was supplied for it. */
 var TU = I.translucentUnit, TB = I.translucentBox;
-var transTrayTop = padT + trayT;
+var transTrayTop = padT;
 [[-0.13, -0.04], [0.13, -0.04], [-0.13, -0.14], [0.13, -0.14]].forEach(function (p) {
   var pad = new THREE.Mesh(new THREE.BoxGeometry(0.055, padT, 0.055), matPad);
   pad.position.set(p[0], padT / 2, p[1]); gTrans.add(pad);
 });
-var transTray = trayMesh(mm(TU.width), mm(TU.depth), 83);
-transTray.position.set(0, padT + trayT / 2, -mm(TU.depth) / 2);
-gTrans.add(transTray);
+/* the block rests on the counter; it is its own base */
 
 (function () {
   var bw = mm(TB.barWidth), bd = mm(TB.barDepth), bh = mm(TB.barHeight);
@@ -1117,16 +1124,36 @@ function unitCorners(u) {
   });
   return c;
 }
+/* How far a point reaches into the existing credenza, measured in its own
+   frame. The credenza stands over the far end of the counter; its near corner
+   crosses the counter's front edge at about 37.5 deg, well short of the 52 deg
+   that used to be assumed here, so anything set out past the sample boxes has
+   to be tested against the real rectangle rather than against an angle. */
+function credenzaReach(p) {
+  var CR = CFG.install.banner.credenza;
+  var o = V.bayPt(CR.angle, mm(CR.radius), 0), th = -CR.angle * D2R;
+  var dx = p.x - o.x, dz = p.y - o.z;
+  var lx = dx * Math.cos(th) - dz * Math.sin(th);
+  var lz = dx * Math.sin(th) + dz * Math.cos(th);
+  var ox = mm(CR.halfWidth) - Math.abs(lx);        // >0 means inside, lengthwise
+  var oz = mm(CR.depth) / 2 - Math.abs(lz);        // >0 means inside, depthwise
+  return (ox > 0 && oz > 0) ? Math.min(ox, oz) : 0;
+}
+
 function checkFootprint() {
   var out = [], rIn = mm(CFG.counter.outerRadius - CFG.counter.depthAtActiveZone), rOut = mm(CFG.counter.outerRadius);
   var worstOut = 0, worstIn = 0, minA = 999, maxA = -999;
-  Object.keys(UNITS).map(function (k) { return UNITS[k]; }).forEach(function (u) {
+  var clash = {}, worstClash = 0;
+  Object.keys(UNITS).forEach(function (k) {
+    var u = UNITS[k];
     unitCorners(u).forEach(function (p) {
       var dx = p.x, dz = p.y - cz, r = Math.sqrt(dx * dx + dz * dz);
       var a = Math.atan2(dx, -dz) / D2R;
       minA = Math.min(minA, a); maxA = Math.max(maxA, a);
       if (r > rOut) worstOut = Math.max(worstOut, r - rOut);
       if (r < rIn)  worstIn  = Math.max(worstIn,  rIn - r);
+      var reach = credenzaReach(p);
+      if (reach > 0) { clash[k] = Math.max(clash[k] || 0, reach); worstClash = Math.max(worstClash, reach); }
     });
   });
   if (worstOut > 0.0005) out.push({ level: 'fail', text: 'Overhangs the glazing side of the counter by ' + Math.round(worstOut * 1000) + ' mm' });
@@ -1148,7 +1175,14 @@ function checkFootprint() {
     text: 'Deepest unit ' + depths + ' mm ' + (depthOK ? 'within' : 'EXCEEDS') +
           ' counter depth ' + CFG.counter.depthAtActiveZone + ' mm' });
 
-  if (maxA > 52) out.push({ level: 'fail', text: 'Runs into the existing credenza at the counter end' });
+  var hit = Object.keys(clash);
+  if (hit.length) {
+    out.push({ level: 'fail',
+      text: 'Runs into the existing credenza at the counter end — ' + hit.join(', ') +
+            ' overlap it by up to ' + Math.round(worstClash * 1000) + ' mm' });
+  } else {
+    out.push({ level: 'ok', text: 'Clear of the existing credenza at the counter end' });
+  }
   return out;
 }
 
@@ -1176,6 +1210,7 @@ scene.add(gBooth);
                  o.z - along * Math.sin(th) + out * Math.cos(th));
   g.rotation.y = th;
   gBooth.add(g);
+  gBanner = g;
 
   var metal = new THREE.MeshStandardMaterial({
     color: srgb('#d9dadb'), roughness: 0.38, metalness: 0.72, envMapIntensity: 0.5 });
@@ -1228,13 +1263,14 @@ scene.add(gBooth);
 
   /* set out on the counter beyond the last unit, on the credenza side, so a
      visitor can pick one up on the way past without reaching over a sample */
-  var theta = BR.angleAtBay;   // fixed, at the banner end of the counter
+  var theta = thetaBr;   // set out above, past the last unit on the run
   var p = place(theta, 0, 0);
   var g = new THREE.Group();
   g.position.set(p.x, V.CT.h, p.y);
   g.rotation.y = -theta * D2R;
   gBooth.add(g);
   brochureTheta = theta;
+  gBrochures = g;
 
   for (var i = 0; i < BR.count; i++) {
     var b = new THREE.Mesh(new THREE.BoxGeometry(sz, th, sz),
@@ -1249,13 +1285,15 @@ scene.add(gBooth);
 
 return {
   groups: { intro: gIntro, main: gMain, growth: gGrowth, palette: gPal,
-            boxes: gBoxes, translucent: gTrans, booth: gBooth },
+            boxes: gBoxes, translucent: gTrans, booth: gBooth,
+            banner: gBanner, brochures: gBrochures },
   units: UNITS, place: place, rFront: rFront,
   thetaA: thetaA, thetaB: thetaB, thetaC: thetaC, thetaD: thetaD, thetaG: thetaG,
   bannerTopY: function () { return bannerTopY; },
   brochureTheta: function () { return brochureTheta; },
   anchors: {
     wallZ: wallZ, trayTop: trayTop, horizTopY: horizTopY, horizFrontZ: horizFrontZ,
+    tileBlockW: blockW, tileBlockD: blockD, tileGridX: gridX,
     wallTopY: wallTop, couponPivot: couponPivot,
     samplesZ: sampleZ, boxZ: boxZ, boxX: boxX
   },

@@ -192,10 +192,11 @@ window.PG_CONFIG = {
        laid flat behind, thin enough not to stand in front of the A4 above it. */
     /* The Growth / Gensler box, open in front of the Growth A4, lid standing.
        EXTERNAL DIMENSIONS UNCONFIRMED — these are read off the concept image
-       against the 297 mm A4 behind it, not measured. */
+       against the 297 mm A4 behind it. 300 x 300 is CONFIRMED by the client;
+       the height and the chip grid are not. */
     collabBox: {
-      width: 290, depth: 150, height: 26, lidThickness: 8, lidHeight: 150,
-      chip: { width: 62, height: 60, gap: 6, cols: 4, rows: 2 },
+      width: 300, depth: 300, height: 30, lidThickness: 8, lidHeight: 190,
+      chip: { width: 66, height: 128, gap: 8, cols: 4, rows: 2 },
       shell: '#5b93a3', felt: '#e9e7e1',
       title: 'GROWTH COLLECTION',
       sub: 'A New Chapter in Sustainable Design',
@@ -236,8 +237,12 @@ window.PG_CONFIG = {
        without disturbing the others. */
     /* Three catalogues, 200 x 200, in a small overlapping fan. The three
        together want roughly 240-260 mm of counter. */
-    brochure: { size: 200, thickness: 6, count: 3, step: 28, fanAngle: 7,
-                angleAtBay: 58 },
+    /* Their angle is NOT set here: they are set out by arc length past the
+       sample boxes, so they stay at the right-hand end of whatever the run
+       turns out to be. A typed-in angle was the wrong instrument — the one
+       that used to be here put them inside the credenza, which crosses the
+       counter's front edge from about 37.5 deg. */
+    brochure: { size: 200, thickness: 6, count: 3, step: 28, fanAngle: 7 },
 
     /* ── roll-up banner, in front of the credenza ──────────────────────────
        Graphic 457 x 1123 mm (18 x 44.2 in) as stated. WHETHER THAT HEIGHT
@@ -268,8 +273,8 @@ window.PG_CONFIG = {
          photograph puts it. An object set out on the bay at 88 degrees faces
          the side wall, not the room.
          credenza values mirror venue.js: bayPt(63, 2.10), 1780 wide. */
-      credenza: { angle: 63, radius: 2100, halfWidth: 890 },
-      alongCredenza: 1270,      // from its centre, toward the far end
+      credenza: { angle: 63, radius: 2100, halfWidth: 890, depth: 460, height: 1000 },
+      alongCredenza: 1560,      // from its centre, past the far end
       outFromCredenza: 470,     // toward the room, clear of the 460-deep carcass
       artwork: null
     },

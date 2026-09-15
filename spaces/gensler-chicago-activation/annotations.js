@@ -152,12 +152,18 @@ dimension(mainPt(-A.w / 2, mm(I.wall.height) + 0.10, -A.d + 0.02), mainPt(A.w / 
 // palette plan depth
 dimension(palPt(-B.w / 2 - 0.08, 0.02, 0), palPt(-B.w / 2 - 0.08, 0.02, -B.d),
   new THREE.Vector3(-0.11, 0, 0), I.palette.depth + ' mm palette depth', dimsPlan);
-dimension(palPt(-(CFG.engravings.length * mm(I.palette.sampleSize + I.palette.sampleGap)) / 2,
-                0.03, INS.anchors.samplesZ),
-          palPt((CFG.engravings.length * mm(I.palette.sampleSize + I.palette.sampleGap)) / 2,
-                0.03, INS.anchors.samplesZ),
+/* The engraved row is now a block of six tiles, not a strip of squares, so it
+   is measured from the block the installation actually builds. It used to read
+   I.palette.sampleSize and sampleGap, which the six-tile rebuild removed \u2014
+   mm(undefined) is NaN, and a NaN dimension line draws nothing while warning
+   on every frame it is visible. */
+var tbW = INS.anchors.tileBlockW, tbX = INS.anchors.tileGridX;
+dimension(palPt(tbX - tbW / 2, 0.03, INS.anchors.samplesZ),
+          palPt(tbX + tbW / 2, 0.03, INS.anchors.samplesZ),
           new THREE.Vector3(0, 0, -0.14),
-          I.palette.sampleSize + ' mm engraved Growth \u00d7 ' + CFG.engravings.length, dimsPlan);
+          Math.round(tbW * 1000) + ' mm engraved Growth, ' +
+          I.palette.cols + ' \u00d7 ' + I.palette.rows +
+          ' at ' + I.palette.tile.width + ' \u00d7 ' + I.palette.tile.height, dimsPlan);
 
 // panel and surface thicknesses, read at the close-up camera
 dimension(mainPt(A.w / 2 + 0.03, mm(I.wall.height) - 0.06, -A.d + mm(50) - mm(I.wall.thickness)),
