@@ -68,6 +68,9 @@ var thetaC = thetaA - ((mm(I.gapBetweenUnits) + halfA + halfC) / rFront) / D2R;
 var thetaG = thetaA + ((mm(I.gapBetweenUnits) + halfA + halfG) / rFront) / D2R;
 var thetaB = thetaG + ((mm(I.gapBetweenUnits) + halfG + halfB) / rFront) / D2R;
 
+var halfBox = mm(I.boxesUnit.width) / 2;
+var thetaBox = thetaB + ((mm(I.gapBetweenUnits) + halfB + halfBox) / rFront) / D2R;
+
 var halfD = mm(I.introStand.unit.width) / 2;
 var thetaD = thetaC - ((mm(I.gapBetweenUnits) + halfC + halfD) / rFront) / D2R;
 
@@ -76,6 +79,7 @@ var UNITS = {
   main:        { theta: thetaA, w: mm(I.wall.width),             d: mm(I.activeDepth) },
   growth:      { theta: thetaG, w: mm(I.growthStand.unit.width), d: mm(I.growthStand.unit.depth) },
   palette:     { theta: thetaB, w: mm(I.palette.width),          d: mm(I.palette.depth) },
+  boxes:       { theta: thetaBox, w: mm(I.boxesUnit.width),      d: mm(I.boxesUnit.depth) },
   translucent: { theta: thetaC, w: mm(I.translucentUnit.width),  d: mm(I.translucentUnit.depth) }
 };
 
@@ -91,6 +95,7 @@ var gIntro  = unitGroup(UNITS.intro.theta);
 var gMain   = unitGroup(UNITS.main.theta);
 var gGrowth = unitGroup(UNITS.growth.theta);
 var gPal    = unitGroup(UNITS.palette.theta);
+var gBoxes  = unitGroup(UNITS.boxes.theta);
 var gTrans  = unitGroup(UNITS.translucent.theta);
 
 /* ── surfaces ─────────────────────────────────────────────────────────────
@@ -139,6 +144,16 @@ var matCoupon = surfaceMaterial(I.coupon.width, I.coupon.height, 37);
 // one material per engraved Growth sample. They all carry the SELECTED Growth
 // surface, so the row compares engravings rather than colours.
 var bannerTopY = 0, brochureTheta = 0;
+/* palette for the printed artwork, declared up here because the cards in
+   Unit A are built before the artwork block further down */
+var ART = {
+  polygoodGreen: '#7d9761',
+  bannerGreen:   '#1d4f4a',
+  growthBlue:    '#ccdaea',
+  ink:           '#16181a',
+  paper:         '#f2f0eb'
+};
+
 var TILECOUNT = I.palette.cols * I.palette.rows;
 var sampleMats = [];
 for (var ti = 0; ti < TILECOUNT; ti++) {
@@ -375,27 +390,29 @@ function cardMesh(wMm, hMm, draw) {
     [edge, edge, edge, edge, face, edge]);
 }
 
-var heading = cardMesh(240, 92, function (x, w, h, ppm) {
-  PG.text(x, CFG.copy.campaign, 21 * ppm, 34 * ppm, { x: 14 * ppm, weight: 700, spacing: 0.6 * ppm });
-  x.strokeStyle = '#b03a2e'; x.lineWidth = 1.6 * ppm;
-  x.beginPath(); x.moveTo(14 * ppm, 43 * ppm); x.lineTo(w - 14 * ppm, 43 * ppm); x.stroke();
-  PG.text(x, CFG.copy.invitation, 11 * ppm, 60 * ppm, { x: 14 * ppm, weight: 500, colour: '#3a3a3e' });
-  PG.text(x, CFG.copy.brand, 7.5 * ppm, 79 * ppm, { x: 14 * ppm, weight: 500, colour: '#6c6a66' });
+/* "Look closer / Polygood Tiles", standing on the base at the front-left.
+   NOT DIMENSIONED in the holder PDF — drawn as landscape A5, 210 x 148. */
+var LC = I.lookCloserCard;
+var heading = cardMesh(LC.width, LC.height, function (x, w, h, ppm) {
+  var hh = artHelpers(x, ppm);
+  hh.wordmark(16, 16, 8, ART.ink);
+  PG.text(x, 'Look closer', 15 * ppm, 58 * ppm, { x: 16 * ppm, weight: 600, colour: ART.ink });
+  PG.text(x, 'Polygood\u00ae Tiles', 15 * ppm, 76 * ppm, { x: 16 * ppm, weight: 600, colour: ART.ink });
+  PG.text(x, 'Lift the loose piece and feel the difference', 5.6 * ppm, 104 * ppm,
+    { x: 16 * ppm, weight: 500, colour: 'rgba(0,0,0,0.62)' });
+  PG.text(x, 'in your hand.', 5.6 * ppm, 114 * ppm,
+    { x: 16 * ppm, weight: 500, colour: 'rgba(0,0,0,0.62)' });
 });
-heading.position.set(-mm(215), horizTopY + mm(46), wallZ + mm(150));
-heading.rotation.x = -0.30;
+var cardLean = 12 * D2R;
+heading.position.set(-mm(105), trayTop + mm(LC.height) / 2 * Math.cos(cardLean),
+                     -mm(115) - mm(LC.height) / 2 * Math.sin(cardLean));
+heading.rotation.x = -cardLean;
 gMain.add(heading);
-var headingProp = new THREE.Mesh(new THREE.BoxGeometry(mm(120), mm(8), mm(52)), matRail);
-headingProp.position.set(-mm(215), horizTopY + mm(4), wallZ + mm(150)); gMain.add(headingProp);
+var headingProp = new THREE.Mesh(new THREE.BoxGeometry(mm(130), mm(10), mm(44)), matRail);
+headingProp.position.set(-mm(105), trayTop + mm(5), -mm(128)); gMain.add(headingProp);
 
-var promptCard = cardMesh(190, 42, function (x, w, h, ppm) {
-  PG.text(x, CFG.copy.detailPrompt, 11.5 * ppm, 18 * ppm, { x: 10 * ppm, weight: 700 });
-  PG.text(x, 'Lift the coupon. The groove is machined into one panel.', 6.6 * ppm, 32 * ppm,
-    { x: 10 * ppm, weight: 500, colour: '#5c5a56' });
-});
-promptCard.position.set(mm(215), horizTopY + mm(3), wallZ + mm(285));
-promptCard.rotation.x = -Math.PI / 2 + 0.12;
-gMain.add(promptCard);
+/* the separate prompt card is gone: the base card carries the instruction, as
+   the concept image shows */
 
 /* ═══════════════ UNIT B — the palette ═══════════════ */
 var B = { w: mm(I.palette.width), d: mm(I.palette.depth) };
@@ -445,26 +462,37 @@ CFG.references.forEach(function (r, k) {
   chip.castShadow = true; gPal.add(chip);
 });
 
-/* The engraved tile grid is gone. What lies on the counter as built is a row
-   of PLAIN colour samples — the engraved demonstration is the tile that lifts
-   out of Stand 2, not this row. */
-var FR = I.palette.flatRow;
-var sampleZ = -mm(110), pitchZ = mm(140), gridX = 0, sampleW = mm(FR.width);
+/* SIX LOOSE ENGRAVED TILES, two rows of three, each turned with its 180 side
+   ALONG the counter: 580 x 260 rather than 400 x 380, which is 120 mm less of
+   a counter depth nobody has measured yet. One surface per tile, so the block
+   compares colour and engraving together. */
+var PT = I.palette.tile;
+var tileW = mm(PT.width), tileH = mm(PT.height), tileT = mm(PT.thickness);
+var pitchX = tileW + mm(I.palette.gapX), pitchZ = tileH + mm(I.palette.gapZ);
+var blockW = I.palette.cols * tileW + (I.palette.cols - 1) * mm(I.palette.gapX);
+var gridX = 0;
+var sampleZ = -mm(30) - pitchZ / 2;
+var sampleW = tileW;
 var samples = [];
 (function () {
-  var fw = mm(FR.width), fh = mm(FR.height), ft = mm(FR.thickness);
-  var pitch = fw + mm(FR.gap);
-  FR.surfaces.forEach(function (id, i) {
-    var m = surfaceMaterial(FR.width, FR.height, 201 + i * 9);
-    applySurface(m, id);
-    var geo = new THREE.BoxGeometry(fw, ft, fh);
-    PG.planarUV(geo, fw / 2, fh / 2, mm(TILE));
-    var t = new THREE.Mesh(geo, m);
-    t.position.set((i - (FR.surfaces.length - 1) / 2) * pitch, trayTop + ft / 2, sampleZ);
-    t.castShadow = true; t.receiveShadow = true;
-    gPal.add(t);
-    samples.push({ panel: t, x: t.position.x, z: sampleZ, engraving: null });
-  });
+  var surf = I.palette.tileSurfaces;
+  for (var r = 0; r < I.palette.rows; r++) {
+    for (var c = 0; c < I.palette.cols; c++) {
+      var i = r * I.palette.cols + c;
+      var e = CFG.engravings[i % CFG.engravings.length];
+      var m = surfaceMaterial(PT.width, PT.height, 201 + i * 11);
+      applySurface(m, surf[i % surf.length]);
+      sampleMats[i] = m;
+      var panel = engravedPanel(PT.width, PT.height, PT.thickness, m, [e]);
+      showEngraving(panel, e.id);
+      panel.rotation.x = -Math.PI / 2;      // flat, engraving upward
+      var sx = gridX + (c - (I.palette.cols - 1) / 2) * pitchX;
+      var sz = sampleZ - (r - (I.palette.rows - 1) / 2) * pitchZ;
+      panel.position.set(sx, trayTop + tileT / 2, sz);
+      gPal.add(panel);
+      samples.push({ panel: panel, x: sx, z: sz, engraving: e.id });
+    }
+  }
 })();
 // the marker shows which engraving the visitor chose
 var marker = new THREE.Mesh(new THREE.CylinderGeometry(mm(7), mm(7), mm(16), 18), matMarker);
@@ -482,8 +510,8 @@ var stickPalette = ['#2f5fa8', '#1d3f7a', '#161616', '#0f0f10', '#e8e6df', '#cfd
                     '#8e8e8b', '#5f6260', '#186b52', '#0f4a38', '#efeadc', '#dcd8c8'];
 function sampleBox(spec, x, z, withLid) {
   var g = new THREE.Group();
-  g.position.set(x, trayTop, z);
-  gPal.add(g);
+  g.position.set(x, padT + trayT, z);
+  gBoxes.add(g);
   var body = new THREE.MeshStandardMaterial({ color: srgb(spec.base), roughness: 0.92, envMapIntensity: 0.18 });
 
   var W = mm(SB.width), D = mm(SB.depth), H = mm(SB.height);
@@ -530,11 +558,19 @@ function sampleBox(spec, x, z, withLid) {
 /* Two general sample boxes — one black, one grey — stacked front-to-back at
    the right of the tile grid rather than behind it, so a visitor can reach a
    box and a tile without leaning across either. */
-var boxZ = -mm(120);
-var boxX = mm(230);
+var BX = I.boxesUnit;
+[[-0.14, -0.05], [0.14, -0.05], [-0.14, -0.19], [0.14, -0.19]].forEach(function (p) {
+  var pad = new THREE.Mesh(new THREE.BoxGeometry(0.05, padT, 0.05), matPad);
+  pad.position.set(p[0], padT / 2, p[1]); gBoxes.add(pad);
+});
+var boxTray = trayMesh(mm(BX.width), mm(BX.depth), 89);
+boxTray.position.set(0, padT + trayT / 2, -mm(BX.depth) / 2);
+gBoxes.add(boxTray);
+var boxZ = -mm(BX.depth) / 2;
+var boxX = mm(115);
 var boxes = [
-  sampleBox(I.sampleBoxes[0], boxX, boxZ, true),
-  sampleBox(I.sampleBoxes[1], boxX, boxZ - mm(112), true)
+  sampleBox(I.sampleBoxes[0], -boxX, boxZ, true),
+  sampleBox(I.sampleBoxes[1],  boxX, boxZ, true)
 ];
 
 /* ── the Translucent Collection box ───────────────────────────────────────
@@ -556,13 +592,6 @@ var boxes = [
    Drop a data URI into the matching `artwork` key and the real file replaces
    the layout whole. */
 
-var ART = {
-  polygoodGreen: '#7d9761',
-  bannerGreen:   '#1d4f4a',
-  growthBlue:    '#ccdaea',
-  ink:           '#16181a',
-  paper:         '#f2f0eb'
-};
 
 function artHelpers(x, ppm) {
   var FAM = '"Helvetica Neue", Helvetica, Arial, sans-serif';
@@ -884,43 +913,66 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
   var st = a4Stand(gGrowth, U.w, U.d, function (x, w, h, ppm) {
     sheetGrowth(x, w, h, ppm);
   }, I.growthStand.artwork, 97);
-
-  /* the small Growth/Gensler collaboration box, open, lid laid back flat.
-     Kept low and forward so it never stands in front of the sheet above it. */
+  /* The Growth / Gensler collaboration box, open in front of the Growth A4,
+     lid standing behind so its cover reads. EXTERNAL DIMENSIONS UNCONFIRMED:
+     these are scaled off the concept image against the 297 mm A4 behind it,
+     not measured. */
   var CB = I.collabBox;
-  var shellMat = new THREE.MeshStandardMaterial({ color: srgb(CB.shell), roughness: 0.62, envMapIntensity: 0.3 });
+  var shellMat = new THREE.MeshStandardMaterial({ color: srgb(CB.shell), roughness: 0.58, envMapIntensity: 0.3 });
   var feltMat  = new THREE.MeshStandardMaterial({ color: srgb(CB.felt), roughness: 0.95, envMapIntensity: 0.15 });
   var bw = mm(CB.width), bd = mm(CB.depth), bh = mm(CB.height), lt = mm(CB.lidThickness);
-  var boxZ = -mm(72);
+  var boxZ = -mm(95);
 
   var tray = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bd), shellMat);
   tray.position.set(0, st.trayTop + bh / 2, boxZ);
   tray.castShadow = true; tray.receiveShadow = true; gGrowth.add(tray);
 
-  var felt = new THREE.Mesh(new THREE.BoxGeometry(bw - mm(6), mm(1.5), bd - mm(6)), feltMat);
+  var felt = new THREE.Mesh(new THREE.BoxGeometry(bw - mm(10), mm(1.5), bd - mm(10)), feltMat);
   felt.position.set(0, st.trayTop + bh - mm(0.5), boxZ); gGrowth.add(felt);
 
-  // the lid, laid flat behind the tray so the samples stay visible
-  var lid = new THREE.Mesh(new THREE.BoxGeometry(bw, lt, bd), shellMat);
-  lid.position.set(0, st.trayTop + lt / 2, boxZ - bd - mm(4));
-  lid.castShadow = true; gGrowth.add(lid);
+  /* the lid, standing up behind the tray, carrying the collection cover */
+  var lidC = PG.cardCanvas(CB.width, CB.lidHeight, function (x, w, h, ppm) {
+    var hh = artHelpers(x, ppm);
+    x.fillStyle = srgb(CB.shell).getStyle ? CB.shell : CB.shell;
+    x.fillStyle = CB.shell; x.fillRect(0, 0, w, h);
+    hh.wordmark(CB.width - 92, 12, 9, '#ffffff');
+    PG.text(x, CB.eyebrow, 4.6 * ppm, 26 * ppm, { x: 16 * ppm, weight: 500, colour: 'rgba(255,255,255,0.72)' });
+    PG.text(x, CB.partner, 7.4 * ppm, 42 * ppm, { x: 16 * ppm, weight: 700, colour: '#ffffff' });
+    PG.text(x, CB.title, 13 * ppm, 82 * ppm, { x: 16 * ppm, weight: 600, colour: '#ffffff' });
+    PG.text(x, CB.sub, 5.4 * ppm, 98 * ppm, { x: 16 * ppm, weight: 500, colour: 'rgba(255,255,255,0.80)' });
+  }, 4);
+  var lidMat = new THREE.MeshStandardMaterial({
+    map: PG.cardTexture(THREE, lidC), roughness: 0.72, envMapIntensity: 0.22 });
+  var lidLean = 6 * D2R;
+  var lid = new THREE.Group();
+  lid.position.set(0, st.trayTop + mm(CB.lidHeight) / 2 * Math.cos(lidLean),
+                   boxZ - bd / 2 - mm(CB.lidHeight) / 2 * Math.sin(lidLean));
+  lid.rotation.x = -lidLean;
+  gGrowth.add(lid);
+  var lidBody = new THREE.Mesh(new THREE.BoxGeometry(bw, mm(CB.lidHeight), lt),
+    [shellMat, shellMat, shellMat, shellMat, lidMat, shellMat]);
+  lidBody.castShadow = true; lid.add(lidBody);
 
-  // Growth chips in the tray, carrying the selected Growth surface
-  var C = CB.chip, cs = mm(C.size), cg = mm(C.gap);
+  /* eight Growth chips in a 4 x 2 tray, all carrying the selected surface so
+     the tray compares the collection rather than eight unrelated colours */
+  var C = CB.chip, cw = mm(C.width), ch = mm(C.height), cg = mm(C.gap);
   collabChipMats = [];
   for (var r = 0; r < C.rows; r++) {
     for (var c = 0; c < C.cols; c++) {
-      var m = surfaceMaterial(C.size, C.size, 131 + r * 7 + c);
+      var m = surfaceMaterial(C.width, C.height, 131 + r * 7 + c);
       applySurface(m, INITIAL_GROWTH);
       collabChipMats.push(m);
-      var chip = new THREE.Mesh(new THREE.BoxGeometry(cs, mm(8), cs), m);
-      chip.position.set((c - (C.cols - 1) / 2) * (cs + cg),
-                        st.trayTop + bh + mm(4),
-                        boxZ + (r - (C.rows - 1) / 2) * (cs + cg));
+      var geo = new THREE.BoxGeometry(cw, mm(7), ch);
+      PG.planarUV(geo, cw / 2, ch / 2, mm(TILE));
+      var chip = new THREE.Mesh(geo, m);
+      chip.position.set((c - (C.cols - 1) / 2) * (cw + cg),
+                        st.trayTop + bh + mm(3.5),
+                        boxZ + (r - (C.rows - 1) / 2) * (ch + cg));
       chip.castShadow = true; gGrowth.add(chip);
     }
   }
 })();
+
 
 
 /* ── UNIT C — the Translucent block, from the gExpo spec ──────────────────
@@ -1023,7 +1075,8 @@ function setGrowth(id) {
   // matHoriz is NOT driven by the swatch any more — see finish.underPanel
   // every engraved sample is Growth material: this IS the Growth collection
   // carrying the four supplied engravings
-  sampleMats.forEach(function (m) { applySurface(m, id); });
+  /* the six tiles each carry their own colour, so the swatch drives only the
+     collaboration chips now */
   collabChipMats.forEach(function (m) { applySurface(m, id); });
   ctx.invalidate();
 }
@@ -1186,8 +1239,9 @@ scene.add(gBooth);
   for (var i = 0; i < BR.count; i++) {
     var b = new THREE.Mesh(new THREE.BoxGeometry(sz, th, sz),
       [edge, edge, coverMat, edge, edge, edge]);
-    b.position.set(i * mm(BR.step) * 0.34, th / 2 + i * th, -sz / 2 - mm(40) + i * mm(BR.step) * 0.5);
-    b.rotation.y = (i - 1) * 0.045;
+    b.position.set((i - 1) * mm(BR.step) * 0.62, th / 2 + i * th,
+                   -sz / 2 - mm(40) + (i - 1) * mm(BR.step) * 0.34);
+    b.rotation.y = (i - 1) * BR.fanAngle * D2R;
     b.castShadow = true; b.receiveShadow = true;
     g.add(b);
   }
@@ -1195,7 +1249,7 @@ scene.add(gBooth);
 
 return {
   groups: { intro: gIntro, main: gMain, growth: gGrowth, palette: gPal,
-            translucent: gTrans, booth: gBooth },
+            boxes: gBoxes, translucent: gTrans, booth: gBooth },
   units: UNITS, place: place, rFront: rFront,
   thetaA: thetaA, thetaB: thetaB, thetaC: thetaC, thetaD: thetaD, thetaG: thetaG,
   bannerTopY: function () { return bannerTopY; },

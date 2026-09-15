@@ -136,6 +136,33 @@ black and the comparison they exist for was impossible. Both readings of the
 brief survive this way: the panel beneath is still black, the tiles are still
 legible.
 
+### The 12 / 19 panel conflict must be resolved before anything is cut
+
+The assembly drawing calls the main panel **12 mm**; the parts list names it
+**19 mm**, as `B_PANEL_19_450x450`. The slot that receives it is cut **12.1 mm**
+wide, which a 19 mm panel cannot enter.
+
+The model uses **12 mm**, because the slot is the part that cannot be argued
+with — a 12.1 kerf is a 12 mm panel plus 0.1 of clearance, and nothing else
+explains that number. But this is an inference, not a decision. Confirm it
+before cutting: if the panel is meant to be 19, the base DXF is wrong too.
+
+### Set-out on a curved counter
+
+Everything rigid is kept short on purpose. A 1060 mm tile-and-box unit swung
+**68 mm** off the 2.06 m front-edge radius and overhung the glazing side by
+16 mm, so the two general sample boxes were split onto their own tray. Six
+sub-assemblies now, each tangent at its own centre.
+
+Tile set-out follows the brief: each tile turned with its **180 mm side along
+the counter**, giving **580 x 260** rather than 400 x 380. That is 120 mm less
+of a counter depth nobody has measured.
+
+The main base is **450 x 420**. With the proposed 20 mm clearance all round it
+wants **490 x 460** — and the assumed counter depth at the active zone is
+**450 mm**. The base fits; the base plus its clearance does not. That gap
+closes or opens the moment someone measures the counter.
+
 ### Seeing it without the room
 
 **Installation only** hides the venue and stands the four sub-assemblies on a

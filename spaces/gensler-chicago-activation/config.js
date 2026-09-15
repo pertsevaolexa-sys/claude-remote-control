@@ -88,7 +88,10 @@ window.PG_CONFIG = {
       gussetBack:  { size: 120, thickness: 19, count: 2 },
       /* the slot kerf is wider than the sample on purpose: 12 / cos15 +
          12 x tan15 = 15.64, so the tile wedges in it at its lean angle */
-      tileSurface: 'growth-midnight'
+      /* PALE in the concept image, against the dark panel above it. This
+         reverses what was said on the call ("midnight horizontal"); the image
+         is the later source, so it wins — flag if that is backwards. */
+      tileSurface: 'growth-mist'
     },
 
     wall: {
@@ -113,22 +116,36 @@ window.PG_CONFIG = {
       // Widened and deepened again to carry SIX engraved tiles in two rows of
       // three, plus the two general sample boxes. This spends envelope: watch
       // the fit check.
-      width: 950, depth: 400,   // 400 is the active-depth cap; this sits on it
+      /* 580 for the six tiles + 60 margin. The two sample boxes are their own
+         sub-assembly: at 1060 wide this unit swung 68 mm off a 2.06 m radius
+         and overhung the glazing side by 16 mm. Rigid things on this counter
+         have to stay short. */
+      width: 640, depth: 320,
       /* Six engraved tiles, two rows of three. 120 x 180 as stated; UNITS AND
          THICKNESS UNCONFIRMED — read here as millimetres, the only reading that
          gives a tile a visitor can pick up. Only four engravings have been
          supplied for six positions, so the set cycles through them; that repeat
          is real and visible, not a modelling shortcut. */
-      tile: { width: 120, height: 180, thickness: 19, unitsConfirmed: false },
-      cols: 3, rows: 2, gapX: 22, gapZ: 26,
-      /* A row of plain flat samples laid on the counter, as built. These are
-         COLOURS, not engravings — the engraved demonstration is the tile that
-         lifts out of Stand 2. */
-      flatRow: { width: 120, height: 90, thickness: 12, gap: 16,
-                 surfaces: ['growth-mist', 'growth-midnight', 'growth-slate',
-                            'growth-clay', 'growth-pebble'] },
+      /* 12 mm matches the sample thickness used elsewhere in the spec;
+         THICKNESS STILL UNCONFIRMED for these six. */
+      tile: { width: 180, height: 120, thickness: 12, unitsConfirmed: false },
+      /* SIX LOOSE ENGRAVED TILES, 180 x 120, two rows of three, each turned
+         with its 180 side ALONG the counter: 3x180 + 2x20 = 580 wide,
+         2x120 + 20 = 260 deep. Turned the other way it would be 400 x 380 and
+         eat 120 mm more of a counter depth we have not measured. */
+      cols: 3, rows: 2, gapX: 20, gapZ: 20,
+      tileAlongCounter: true,
+      /* One surface per tile, so the row compares colour AND engraving the way
+         the concept image does. Illustrative: not colour accurate, no SKU. */
+      tileSurfaces: ['growth-mist', 'growth-slate', 'growth-clay',
+                     'growth-pebble', 'growth-midnight', 'growth-mist'],
       gridX: -140          // tile grid sits left; the two sample boxes take the right
     },
+
+    /* The two general sample boxes, on their own tray beside the tiles.
+       EXTERNAL DIMENSIONS UNCONFIRMED — the concept image does not establish
+       them; these are the proportions read off the earlier photographs. */
+    boxesUnit: { width: 470, depth: 240 },
 
     // The two Polygood sample boxes, from the supplied product photographs.
     // Dimensions are read off those photographs — they are proportions, not a
@@ -173,10 +190,17 @@ window.PG_CONFIG = {
        HEIGHT UNCONFIRMED — read here as inches (76 x 76 mm), the only reading
        that is both small and able to hold a sample. Shown open with the lid
        laid flat behind, thin enough not to stand in front of the A4 above it. */
+    /* The Growth / Gensler box, open in front of the Growth A4, lid standing.
+       EXTERNAL DIMENSIONS UNCONFIRMED — these are read off the concept image
+       against the 297 mm A4 behind it, not measured. */
     collabBox: {
-      width: 76, depth: 76, height: 22, lidThickness: 5,
-      chip: { size: 30, gap: 5, cols: 2, rows: 2 },
-      shell: '#1b1b1d', felt: '#d7d5cf',
+      width: 290, depth: 150, height: 26, lidThickness: 8, lidHeight: 150,
+      chip: { width: 62, height: 60, gap: 6, cols: 4, rows: 2 },
+      shell: '#5b93a3', felt: '#e9e7e1',
+      title: 'GROWTH COLLECTION',
+      sub: 'A New Chapter in Sustainable Design',
+      eyebrow: 'Product Design Collaboration',
+      partner: 'Gensler',
       unitsConfirmed: false
     },
 
@@ -210,8 +234,10 @@ window.PG_CONFIG = {
     /* Three catalogues, 200 x 200 mm — centimetres confirmed by the client.
        Laid as a stepped stack so the cover reads and the top one lifts off
        without disturbing the others. */
-    brochure: { size: 200, thickness: 6, count: 3, step: 30,
-                angleAtBay: 58 },   // on the counter, at the banner end
+    /* Three catalogues, 200 x 200, in a small overlapping fan. The three
+       together want roughly 240-260 mm of counter. */
+    brochure: { size: 200, thickness: 6, count: 3, step: 28, fanAngle: 7,
+                angleAtBay: 58 },
 
     /* ── roll-up banner, in front of the credenza ──────────────────────────
        Graphic 457 x 1123 mm (18 x 44.2 in) as stated. WHETHER THAT HEIGHT
@@ -228,7 +254,10 @@ window.PG_CONFIG = {
          roughly 2.1 m — measured against the 1000 mm counter in the same
          frame. 1123 mm would be a tabletop unit, which is what I flagged
          before the photograph arrived. Width is left at the stated 457. */
-      graphicWidth: 457, graphicHeight: 2000,
+      /* 840 x 2000 is the concept's assumption for the taller stand, not a
+         measured product. The holder PDF said 457 x 1123, which is a tabletop
+         unit. CONFIRM THE ACTUAL STAND AND PRINTABLE AREA before production. */
+      graphicWidth: 840, graphicHeight: 2000,
       cassetteHeight: 62, cassetteDepth: 180, poleDiameter: 22,
       footSpread: 300, heightIncludesBase: false,
       /* Past the end of the counter run (which stops at 70 deg) and clear of
@@ -244,6 +273,10 @@ window.PG_CONFIG = {
       outFromCredenza: 470,     // toward the room, clear of the 460-deep carcass
       artwork: null
     },
+
+    /* The "Look closer / Polygood Tiles" card on the front-left of the base.
+       NOT DIMENSIONED in the holder PDF; drawn as landscape A5. */
+    lookCloserCard: { width: 210, height: 148, dimensioned: false },
 
     coupon: { width: 150, height: 100, liftHeight: 130 },
 
