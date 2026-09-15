@@ -184,8 +184,9 @@ function mainWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS
 function palWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.palette.matrixWorld); }
 INS.groups.translucent.updateMatrixWorld();
 function transWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.translucent.matrixWorld); }
-INS.groups.info.updateMatrixWorld();
-function infoWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.info.matrixWorld); }
+INS.groups.intro.updateMatrixWorld(); INS.groups.growth.updateMatrixWorld();
+function introWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.intro.matrixWorld); }
+function growthWorld(x, y, z) { return new THREE.Vector3(x, y, z).applyMatrix4(INS.groups.growth.matrixWorld); }
 
 var A = INS.units.main;
 var junction = mainWorld(0, mm(CFG.install.horizontal.topAboveCounter), INS.anchors.wallZ);
@@ -206,8 +207,13 @@ var VIEWS = [
     p: palWorld(0.10, mm(470), 0.74), t: palWorld(0, mm(50), -0.16), fov: 42 },
   { key: 'translucent', name: 'Translucent Collection',
     p: transWorld(0.06, mm(400), 0.66), t: transWorld(0, mm(120), -0.10), fov: 42 },
-  { key: 'orientation', name: 'Orientation stand',
-    p: infoWorld(0.24, mm(520), 1.18), t: infoWorld(0, mm(250), -0.10), fov: 40 },
+  { key: 'intro', name: 'Introduction sheet',
+    p: introWorld(0.20, mm(470), 0.98), t: introWorld(0, mm(190), -0.11), fov: 40 },
+  { key: 'growth', name: 'Growth sheet + collab box',
+    p: growthWorld(0.16, mm(430), 0.92), t: growthWorld(0, mm(150), -0.14), fov: 40 },
+  { key: 'banner', name: 'Banner + brochures',
+    p: V.bayPt(CFG.install.banner.angleAtBay - 22, 0.42, 1.62),
+    t: V.bayPt(CFG.install.banner.angleAtBay, 1.58, 0.72), fov: 52 },
   { key: 'logistics', name: 'Packed + fallback support',
     p: new THREE.Vector3(0.15, 2.05, 5.75), t: new THREE.Vector3(0.05, 0.35, 3.30), fov: 56 }
 ];
@@ -408,7 +414,7 @@ $('reset').addEventListener('click', function () { goView(activeView, true); });
 
 document.addEventListener('keydown', function (e) {
   if (/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
-  var i = '12345678'.indexOf(e.key);
+  var i = '1234567890'.indexOf(e.key);
   if (i >= 0 && i < VIEWS.length) { goView(i); e.preventDefault(); }
   if (e.key === '0') { goView(activeView, true); }
 });

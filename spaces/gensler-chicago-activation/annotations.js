@@ -104,10 +104,10 @@ function transPt(lx, ly, lz) {
   INS.groups.translucent.updateMatrixWorld();
   return v.applyMatrix4(INS.groups.translucent.matrixWorld);
 }
-function infoPt(lx, ly, lz) {
+function introPt(lx, ly, lz) {
   var v = new THREE.Vector3(lx, ly, lz);
-  INS.groups.info.updateMatrixWorld();
-  return v.applyMatrix4(INS.groups.info.matrixWorld);
+  INS.groups.intro.updateMatrixWorld();
+  return v.applyMatrix4(INS.groups.intro.matrixWorld);
 }
 
 /* ── plan dimensions ──────────────────────────────────────────────────── */
@@ -227,14 +227,14 @@ leader(new THREE.Vector3(palPt(0.20, 0.06, -0.21).x, palPt(0.20, 0.06, -0.21).y,
 
 /* the orientation stand: the board is a layout placeholder, and the stand
    itself sits beyond the allocation on the other side */
-leader(infoPt(0, mm(CFG.install.infoStand.base.height + 180), -0.08),
-       infoPt(-0.34, 0.66, 0.40),
-       'Orientation board \u2014 LAYOUT PLACEHOLDER',
-       'Figures, certification marks and client logos NOT reproduced; supply print file');
-leader(infoPt(0.16, mm(CFG.install.infoStand.base.height / 2), -0.10),
-       infoPt(0.62, 0.26, 0.42),
-       'Slotted base \u2014 illustrative dark surface',
-       'Surface is a placeholder, not colour accurate and not tied to a SKU');
+leader(introPt(0, mm(240), -0.10),
+       introPt(-0.34, 0.62, 0.38),
+       'A4 introduction \u2014 LAYOUT FROM APPROVED COPY',
+       'Photography, QR and certification marks NOT reproduced; supply the print file');
+leader(introPt(0.15, mm(40), -0.12),
+       introPt(0.58, 0.24, 0.40),
+       'Minimal triangular holder',
+       'One fin, sized to the sheet lean. Concept support \u2014 fabricator review required');
 
 /* the Translucent Collection box, and what adding it costs */
 leader(transPt(0, 0.14, -0.09),

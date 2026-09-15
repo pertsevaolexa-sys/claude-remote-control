@@ -86,16 +86,18 @@ window.PG_CONFIG = {
     },
 
     palette: {
-      // Deepened from 300 to 400 mm to take the two sample boxes (400 mm is the
-      // active-depth cap), and widened to carry FOUR engraved Growth samples
-      // rather than three plain ones. The widening spends envelope: watch the
-      // fit check.
-      width: 650, depth: 400,
-      // 150 mm is the floor here, not a preference: the Pearl and Jade cells
-      // are 150 mm tall, so a smaller sample cannot show one whole cell.
-      sampleSize: 150,
-      sampleGap: 8,
-      sampleCount: 4
+      // Widened and deepened again to carry SIX engraved tiles in two rows of
+      // three, plus the two general sample boxes. This spends envelope: watch
+      // the fit check.
+      width: 700, depth: 400,   // 400 is the active-depth cap; this sits on it
+      /* Six engraved tiles, two rows of three. 120 x 180 as stated; UNITS AND
+         THICKNESS UNCONFIRMED — read here as millimetres, the only reading that
+         gives a tile a visitor can pick up. Only four engravings have been
+         supplied for six positions, so the set cycles through them; that repeat
+         is real and visible, not a modelling shortcut. */
+      tile: { width: 120, height: 180, thickness: 19, unitsConfirmed: false },
+      cols: 3, rows: 2, gapX: 22, gapZ: 26,
+      gridX: -140          // tile grid sits left; the two sample boxes take the right
     },
 
     // The two Polygood sample boxes, from the supplied product photographs.
@@ -111,21 +113,37 @@ window.PG_CONFIG = {
       stick: { width: 14, depth: 58, height: 92, count: 12 }
     },
 
-    /* ── the orientation stand, at the LEFT edge ───────────────────────────
-       A Polygood information board in a slotted base, from the supplied
-       photograph. The BOARD ARTWORK IS NOT REPRODUCED: the real one carries
-       GWP figures, certification marks and third-party client logos, none of
-       which this model may assert or redraw from a photograph. What is drawn
-       is a layout placeholder at the right size, so scale, placement and
-       legibility can still be judged.
-       Supply the real print file as a data URI in `artwork` and it is used
-       instead, untouched. */
-    infoStand: {
-      unit:  { width: 500, depth: 200 },
-      board: { width: 440, height: 300, thickness: 19, printInset: 20 },
-      base:  { width: 480, depth: 140, height: 75, slot: 26, lean: 12, embed: 20 },
-      material: 'nightfleck',
-      artwork: null
+    /* ── the two A4 displays ───────────────────────────────────────────────
+       Both are A4 landscape, 297 x 210, in the same minimal holder: a flat
+       foot, one triangular fin behind, and a low front lip. The fin is sized
+       to hold the sheet at its lean and no more. It should disappear, not
+       read as a fixture.
+
+       ARTWORK: the supplied sheets were shown to us as images but not handed
+       over as files, so what is drawn is a layout built from the approved copy.
+       Photography, QR codes and certification marks are reserved and named.
+       Put a data URI in the stand's `artwork` and the real print file replaces it. */
+    a4: {
+      sheet:  { width: 297, height: 210, thickness: 3 },
+      holder: { footWidth: 250, footDepth: 140, footThickness: 10,
+                lip: 15, finThickness: 8, lean: 22 },   // lean in degrees off vertical
+      material: 'nightfleck'
+    },
+    /* LEFT display — the first thing a visitor meets, at the left edge. */
+    introStand:  { unit: { width: 430, depth: 210 }, artwork: null },
+    /* INSTALLATION display — the Growth Collection, set back beside the
+       installation, with the collaboration box in front of it. */
+    growthStand: { unit: { width: 470, depth: 300 }, artwork: null },
+
+    /* The small Growth/Gensler collaboration box. "3 x 3" as stated; UNITS AND
+       HEIGHT UNCONFIRMED — read here as inches (76 x 76 mm), the only reading
+       that is both small and able to hold a sample. Shown open with the lid
+       laid flat behind, thin enough not to stand in front of the A4 above it. */
+    collabBox: {
+      width: 76, depth: 76, height: 22, lidThickness: 5,
+      chip: { size: 30, gap: 5, cols: 2, rows: 2 },
+      shell: '#1b1b1d', felt: '#d7d5cf',
+      unitsConfirmed: false
     },
 
     // Its own sub-assembly, to the right of the Growth palette.
@@ -140,12 +158,38 @@ window.PG_CONFIG = {
       block: { width: 58, depth: 16, height: 95, count: 11, pitch: 30, angle: 30 },
       brandLine: 'THE GOOD PLASTIC COMPANY',
       title: 'TRANSLUCENT COLLECTION',
-      mark: 'Polygood\u00ae',
+      mark: null,   // logo removed at the client's direction
       shell: '#232323', insert: '#d8d8d6',
       // eleven translucent blocks, colours read off the photograph.
       // Illustrative: not colour-accurate and not tied to any SKU.
       blocks: ['#dcdcd8', '#2f9fd8', '#31b9a6', '#a9e02c', '#8f5219', '#ef2a68',
                '#e4c3ba', '#3d8fd2', '#f07a1e', '#2a86d8', '#b9a887']
+    },
+
+    /* Three catalogues, 200 x 200 mm — centimetres confirmed by the client.
+       Laid as a stepped stack so the cover reads and the top one lifts off
+       without disturbing the others. */
+    brochure: { size: 200, thickness: 6, count: 3, step: 30,
+                angleAtBay: 58 },   // on the counter, at the banner end
+
+    /* ── roll-up banner, in front of the credenza ──────────────────────────
+       Graphic 457 x 1123 mm (18 x 44.2 in) as stated. WHETHER THAT HEIGHT
+       INCLUDES THE CASSETTE IS UNCONFIRMED; drawn here as graphic only,
+       standing on a cassette, which is the taller of the two readings.
+
+       This does NOT screen the credenza. The credenza is 1780 mm wide; the
+       banner is 457. See the README for the arithmetic — the model is drawn
+       at the stated size and the shortfall is left visible rather than
+       quietly widened. */
+    banner: {
+      graphicWidth: 457, graphicHeight: 1123,
+      cassetteHeight: 62, cassetteDepth: 180, poleDiameter: 22,
+      footSpread: 300, heightIncludesBase: false,
+      /* Past the end of the counter run (which stops at 70 deg) and clear of
+         the reset stools, so it screens the credenza's open shelving without
+         standing in the staff's way or clashing with the counter. */
+      angleAtBay: 78, radius: 1820,
+      artwork: null
     },
 
     coupon: { width: 150, height: 100, liftHeight: 130 },
@@ -173,7 +217,7 @@ window.PG_CONFIG = {
      Set any of these to null to fall back to the first entry in its list. */
   defaults: {
     wall:      'white',         // wallColours id — the standing panel
-    growth:    'growth-midnight', // growthSurfaces id — the panel beneath
+    growth:    'growth-pebble', // growthSurfaces id — drives the engraved tiles
     engraving: null,            // engravings id
     question:  null,            // questions id
     view:      'approach'       // vantage key: approach | eye | detail | overhead |
@@ -195,7 +239,13 @@ window.PG_CONFIG = {
     standRough: 0.50,
     standMetal: 0.55,
     pad:        '#4f535a',    // protective contact pads
-    baseTile:   'nightfleck'  // standSurfaces id — the base each unit stands on
+    baseTile:   'nightfleck', // standSurfaces id — the base each unit stands on
+    /* The horizontal panel under the standing panel. Held SEPARATELY from the
+       Growth swatch: the swatch drives the six engraved tiles, whose whole job
+       is to be compared, and an engraving machined 4 mm deep is invisible on a
+       black panel. Both readings of "black beneath" are kept — the panel is
+       Midnight, the tiles are legible. */
+    underPanel: 'growth-midnight'
   },
 
   engravingReferenceSheet: 300,   // assumed sheet size the proportions came from

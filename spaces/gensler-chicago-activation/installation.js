@@ -56,19 +56,28 @@ var halfA = mm(I.wall.width) / 2, halfB = mm(I.palette.width) / 2;
    is V-shaped in thetaB (large, zero where they touch, large again), so
    bisecting on it is not just imprecise: past a certain palette width it
    converges on the wrong branch and stacks both units on the same spot. */
-var thetaB = thetaA + ((mm(I.gapBetweenUnits) + halfA + halfB) / rFront) / D2R;
+/* thetaB is set below, after the Growth stand takes its place between the
+   installation and the palette. */
 
-var halfD = mm(I.infoStand.unit.width) / 2;
+/* The Growth A4 and its collaboration box sit BETWEEN the installation and
+   the hands-on palette, which is the order the visitor journey asks for:
+   meet it, see the collection it belongs to, then handle the material. */
+var halfG = mm(I.growthStand.unit.width) / 2;
+var thetaG = thetaA + ((mm(I.gapBetweenUnits) + halfA + halfG) / rFront) / D2R;
+var thetaB = thetaG + ((mm(I.gapBetweenUnits) + halfG + halfB) / rFront) / D2R;
+
+var halfD = mm(I.introStand.unit.width) / 2;
 var thetaD = thetaA - ((mm(I.gapBetweenUnits) + halfA + halfD) / rFront) / D2R;
 
 var halfC = mm(I.translucentUnit.width) / 2;
 var thetaC = thetaB + ((mm(I.gapBetweenUnits) + halfB + halfC) / rFront) / D2R;
 
 var UNITS = {
-  info:        { theta: thetaD, w: mm(I.infoStand.unit.width),   d: mm(I.infoStand.unit.depth) },
-  main:        { theta: thetaA, w: mm(I.wall.width),            d: mm(I.activeDepth) },
-  palette:     { theta: thetaB, w: mm(I.palette.width),         d: mm(I.palette.depth) },
-  translucent: { theta: thetaC, w: mm(I.translucentUnit.width), d: mm(I.translucentUnit.depth) }
+  intro:       { theta: thetaD, w: mm(I.introStand.unit.width),  d: mm(I.introStand.unit.depth) },
+  main:        { theta: thetaA, w: mm(I.wall.width),             d: mm(I.activeDepth) },
+  growth:      { theta: thetaG, w: mm(I.growthStand.unit.width), d: mm(I.growthStand.unit.depth) },
+  palette:     { theta: thetaB, w: mm(I.palette.width),          d: mm(I.palette.depth) },
+  translucent: { theta: thetaC, w: mm(I.translucentUnit.width),  d: mm(I.translucentUnit.depth) }
 };
 
 function unitGroup(theta) {
@@ -79,10 +88,11 @@ function unitGroup(theta) {
   scene.add(g);
   return g;
 }
-var gInfo  = unitGroup(UNITS.info.theta);
-var gMain  = unitGroup(UNITS.main.theta);
-var gPal   = unitGroup(UNITS.palette.theta);
-var gTrans = unitGroup(UNITS.translucent.theta);
+var gIntro  = unitGroup(UNITS.intro.theta);
+var gMain   = unitGroup(UNITS.main.theta);
+var gGrowth = unitGroup(UNITS.growth.theta);
+var gPal    = unitGroup(UNITS.palette.theta);
+var gTrans  = unitGroup(UNITS.translucent.theta);
 
 /* ── surfaces ─────────────────────────────────────────────────────────────
    Wall Tiles carry the four core colours; Growth is its own range. The two
@@ -125,12 +135,23 @@ function floorMaterial(mat) {
 
 var matWall   = surfaceMaterial(I.wall.width, I.wall.height, 11);
 var matHoriz  = surfaceMaterial(I.horizontal.width, I.horizontal.depth, 23);
+/* applied once, from CFG.finish.underPanel, below the surface tables */
 var matCoupon = surfaceMaterial(I.coupon.width, I.coupon.height, 37);
 // one material per engraved Growth sample. They all carry the SELECTED Growth
 // surface, so the row compares engravings rather than colours.
-var sampleMats = CFG.engravings.map(function (e, i) {
-  return surfaceMaterial(I.palette.sampleSize, I.palette.sampleSize, 51 + i * 13);
-});
+var bannerTopY = 0, brochureTheta = 0;
+var TILECOUNT = I.palette.cols * I.palette.rows;
+var sampleMats = [];
+for (var ti = 0; ti < TILECOUNT; ti++) {
+  sampleMats.push(surfaceMaterial(I.palette.tile.width, I.palette.tile.height, 51 + ti * 13));
+}
+/* the small collaboration box carries Growth too, so it follows the swatch */
+var collabChipMats = [];
+var INITIAL_GROWTH = (function () {
+  var want = (CFG.defaults || {}).growth;
+  var hit = CFG.growthSurfaces.find(function (g) { return g.id === want; });
+  return (hit || CFG.growthSurfaces[0]).id;
+})();
 
 /* The stands are white; the tile they stand on is black. Both come from
    CFG.finish so the production group can move either without touching code.
@@ -409,23 +430,33 @@ CFG.references.forEach(function (r, k) {
    choice is made on the swatches and applies to all of them.
    NOTE: this replaces the brief's three plain colour positions with four
    engraved ones, at the client's direction. */
-var sampleW = mm(I.palette.sampleSize), sampleZ = -mm(200);
-var samplePitch = sampleW + mm(I.palette.sampleGap);
+var T = I.palette.tile;
+var tileW = mm(T.width), tileH = mm(T.height), tileT = mm(T.thickness);
+var pitchX = tileW + mm(I.palette.gapX), pitchZ = tileH + mm(I.palette.gapZ);
+var gridX = mm(I.palette.gridX || 0);
+var sampleW = tileW;
+var sampleZ = -mm(60) - pitchZ / 2;         // front row sits near the visitor edge
 var samples = [];
-CFG.engravings.forEach(function (e, i) {
-  var sx = (i - (CFG.engravings.length - 1) / 2) * samplePitch;
-  var panel = engravedPanel(I.palette.sampleSize, I.palette.sampleSize,
-                            I.horizontal.thickness, sampleMats[i], [e]);
-  showEngraving(panel, e.id);
-  panel.rotation.x = -Math.PI / 2;          // lay it flat, engraving upward
-  panel.position.set(sx, trayTop + mm(I.horizontal.thickness) / 2, sampleZ);
-  gPal.add(panel);
-  samples.push({ panel: panel, x: sx, engraving: e.id });
-});
+for (var r = 0; r < I.palette.rows; r++) {
+  for (var c = 0; c < I.palette.cols; c++) {
+    var i = r * I.palette.cols + c;
+    var e = CFG.engravings[i % CFG.engravings.length];
+    var sx = gridX + (c - (I.palette.cols - 1) / 2) * pitchX;
+    var sz = sampleZ - (r - (I.palette.rows - 1) / 2) * pitchZ;
+    var panel = engravedPanel(T.width, T.height, T.thickness, sampleMats[i], [e]);
+    showEngraving(panel, e.id);
+    /* laid flat, engraving upward, with the pattern's own "up" pointing away
+       from the visitor so the cell reads the right way round across the desk */
+    panel.rotation.x = -Math.PI / 2;
+    panel.position.set(sx, trayTop + tileT / 2, sz);
+    gPal.add(panel);
+    samples.push({ panel: panel, x: sx, z: sz, engraving: e.id });
+  }
+}
 // the marker shows which engraving the visitor chose
 var marker = new THREE.Mesh(new THREE.CylinderGeometry(mm(7), mm(7), mm(16), 18), matMarker);
 marker.castShadow = true;
-marker.position.set(0, trayTop + mm(8), sampleZ + sampleW / 2 + mm(20));
+marker.position.set(gridX, trayTop + mm(8), sampleZ + pitchZ / 2 + mm(16));
 gPal.add(marker);
 
 /* ── the two Polygood sample boxes ────────────────────────────────────────
@@ -483,10 +514,14 @@ function sampleBox(spec, x, z, withLid) {
   lid.castShadow = true; g.add(lid);
   return g;
 }
-var boxZ = -mm(330);
+/* Two general sample boxes — one black, one grey — stacked front-to-back at
+   the right of the tile grid rather than behind it, so a visitor can reach a
+   box and a tile without leaning across either. */
+var boxZ = -mm(120);
+var boxX = mm(230);
 var boxes = [
-  sampleBox(I.sampleBoxes[0], -mm(120), boxZ, true),
-  sampleBox(I.sampleBoxes[1],  mm(120), boxZ, true)
+  sampleBox(I.sampleBoxes[0], boxX, boxZ, true),
+  sampleBox(I.sampleBoxes[1], boxX, boxZ - mm(112), true)
 ];
 
 /* ── the Translucent Collection box ───────────────────────────────────────
@@ -496,224 +531,360 @@ var boxes = [
    The blocks are rendered as high-opacity glossy resin rather than true
    transmission — an approximation, so eleven overlapping panes cannot
    mis-sort, and cheap enough to stay smooth on a laptop. */
-/* ══════════════ the orientation board's layout placeholder ═══════════════
-   The supplied Polygood board carries global-warming-potential figures and
-   a comparative claim, certification and declaration marks, and a row of
-   third-party client logos. A concept model may not assert any of those,
-   and other companies' trademarks are not redrawn from a photograph, so
-   each of those regions is reserved at its true size and NAMED rather than
-   transcribed. Everything else — the wordmark, the structure, the panel
-   specification, the applications and pattern grids — is laid out so the
-   board can be judged for size, position and legibility from the visitor's
-   standing distance. Set install.infoStand.artwork to a data URI and the
-   real print file replaces all of this untouched. */
-function infoBoardCanvas(pw, ph) {
-  return PG.cardCanvas(pw, ph, function (x, W, H, ppm) {
-    var P = function (v) { return v * ppm; };
-    var FAM = '"Helvetica Neue", Helvetica, Arial, sans-serif';
+/* ══════════════ supplied artwork, laid out from the approved copy ═════════
+   The client showed us the printed sheets but did not hand over the files, so
+   these are LAYOUTS: the wordmark, the headline and the body copy are set
+   verbatim from what was supplied, and everything we cannot honestly redraw —
+   the photography, the QR destinations, the certification marks, the
+   global-warming figure — is reserved at true size and named. Nothing here
+   asserts a claim the client has not already put in print, and no third-party
+   mark is traced from a photograph.
 
-    function lines(str, px, maxW, weight) {
-      x.font = (weight || 500) + ' ' + px + 'px ' + FAM;
-      var words = str.split(' '), out = [], cur = '';
-      for (var i = 0; i < words.length; i++) {
-        var t = cur ? cur + ' ' + words[i] : words[i];
-        if (cur && x.measureText(t).width > maxW) { out.push(cur); cur = words[i]; }
-        else cur = t;
-      }
-      if (cur) out.push(cur);
-      return out;
+   Drop a data URI into the matching `artwork` key and the real file replaces
+   the layout whole. */
+
+var ART = {
+  polygoodGreen: '#7d9761',
+  bannerGreen:   '#1d4f4a',
+  growthBlue:    '#ccdaea',
+  ink:           '#16181a',
+  paper:         '#f2f0eb'
+};
+
+function artHelpers(x, ppm) {
+  var FAM = '"Helvetica Neue", Helvetica, Arial, sans-serif';
+  function lines(str, px, maxW, weight) {
+    x.font = (weight || 500) + ' ' + px + 'px ' + FAM;
+    var words = str.split(' '), out = [], cur = '';
+    for (var i = 0; i < words.length; i++) {
+      var t = cur ? cur + ' ' + words[i] : words[i];
+      if (cur && x.measureText(t).width > maxW) { out.push(cur); cur = words[i]; }
+      else cur = t;
     }
-    function para(str, pxMm, X, Y, wMm, o) {
+    if (cur) out.push(cur);
+    return out;
+  }
+  return {
+    lines: lines,
+    para: function (str, pxMm, X, Y, wMm, o) {
       o = o || {};
-      var px = P(pxMm), ls = lines(str, px, P(wMm), o.weight), lead = px * (o.lead || 1.42);
+      var px = pxMm * ppm, ls = lines(str, px, wMm * ppm, o.weight), lead = px * (o.lead || 1.45);
       for (var i = 0; i < ls.length; i++) {
-        PG.text(x, ls[i], px, P(Y) + i * lead,
-          { x: P(X), weight: o.weight || 500, colour: o.colour || '#44433f', align: o.align });
+        PG.text(x, ls[i], px, Y * ppm + i * lead,
+          { x: X * ppm, weight: o.weight || 500, colour: o.colour || ART.ink, align: o.align });
       }
-      return Y + ls.length * (lead / ppm);
-    }
-    function rule(X, Y, wMm, col) {
-      x.fillStyle = col || '#c9c5bc';
-      x.fillRect(P(X), P(Y), P(wMm), Math.max(1, P(0.5)));
-    }
-    function heading(str, X, Y, wMm) {
-      PG.text(x, str.toUpperCase(), P(5.4), P(Y), { x: P(X), weight: 700, colour: '#1b1b1e', spacing: P(0.5) });
-      rule(X, Y + 3.2, wMm, '#c9c5bc');
-      return Y;
-    }
-    /* a region of the real board that this model does not reproduce */
-    function reserved(X, Y, wMm, hMm, caption) {
+      return Y + ls.length * lead / ppm;
+    },
+    /* a region of the real artwork this model does not reproduce */
+    reserved: function (X, Y, wMm, hMm, caption, dark) {
       x.save();
-      x.fillStyle = '#eae7e0';
-      x.fillRect(P(X), P(Y), P(wMm), P(hMm));
-      x.setLineDash([P(2.4), P(2.0)]);
-      x.strokeStyle = '#b6b1a8';
-      x.lineWidth = Math.max(1, P(0.5));
-      x.strokeRect(P(X) + 0.5, P(Y) + 0.5, P(wMm) - 1, P(hMm) - 1);
+      x.fillStyle = dark ? 'rgba(255,255,255,0.09)' : 'rgba(0,0,0,0.05)';
+      x.fillRect(X * ppm, Y * ppm, wMm * ppm, hMm * ppm);
+      x.setLineDash([2.4 * ppm, 2 * ppm]);
+      x.strokeStyle = dark ? 'rgba(255,255,255,0.32)' : 'rgba(0,0,0,0.22)';
+      x.lineWidth = Math.max(1, 0.5 * ppm);
+      x.strokeRect(X * ppm + 0.5, Y * ppm + 0.5, wMm * ppm - 1, hMm * ppm - 1);
       x.restore();
-      var px = P(4.3), ls = lines(caption, px, P(wMm - 9), 500), lead = px * 1.34;
-      var y0 = P(Y + hMm / 2) - (ls.length - 1) * lead / 2 + px * 0.35;
+      var px = 3.4 * ppm, ls = lines(caption, px, (wMm - 8) * ppm, 500), lead = px * 1.32;
+      var y0 = (Y + hMm / 2) * ppm - (ls.length - 1) * lead / 2 + px * 0.34;
       for (var i = 0; i < ls.length; i++) {
         PG.text(x, ls[i], px, y0 + i * lead,
-          { x: P(X + wMm / 2), align: 'center', weight: 500, colour: '#8b877f' });
+          { x: (X + wMm / 2) * ppm, align: 'center', weight: 500,
+            colour: dark ? 'rgba(255,255,255,0.62)' : 'rgba(0,0,0,0.45)' });
       }
+    },
+    /* the Polygood wordmark: the glyph is a simple folded arrow, set as a
+       shape rather than traced from the photograph */
+    wordmark: function (X, Y, sizeMm, colour) {
+      var s = sizeMm * ppm, gx = X * ppm, gy = Y * ppm;
+      x.save();
+      x.strokeStyle = colour; x.lineWidth = s * 0.13; x.lineJoin = 'round'; x.lineCap = 'round';
+      x.beginPath();
+      x.moveTo(gx + s * 0.10, gy + s * 0.72);
+      x.lineTo(gx + s * 0.50, gy + s * 0.10);
+      x.lineTo(gx + s * 0.50, gy + s * 0.78);
+      x.lineTo(gx + s * 0.90, gy + s * 0.78);
+      x.stroke();
+      x.restore();
+      PG.text(x, 'polygood', s * 0.82, gy + s * 0.76,
+        { x: gx + s * 1.12, weight: 700, colour: colour, family: FAM });
+      return X + sizeMm * 1.12;
+    },
+    tag: function (X, Y, wMm, hMm, label, colour, ground) {
+      x.save();
+      x.strokeStyle = colour; x.lineWidth = Math.max(1, 0.45 * ppm);
+      var r = hMm / 2 * ppm;
+      x.beginPath();
+      x.moveTo(X * ppm + r, Y * ppm);
+      x.arcTo((X + wMm) * ppm, Y * ppm, (X + wMm) * ppm, (Y + hMm) * ppm, r);
+      x.arcTo((X + wMm) * ppm, (Y + hMm) * ppm, X * ppm, (Y + hMm) * ppm, r);
+      x.arcTo(X * ppm, (Y + hMm) * ppm, X * ppm, Y * ppm, r);
+      x.arcTo(X * ppm, Y * ppm, (X + wMm) * ppm, Y * ppm, r);
+      x.closePath(); x.stroke();
+      x.fillStyle = colour;
+      x.beginPath(); x.arc((X + hMm * 0.62) * ppm, (Y + hMm / 2) * ppm, hMm * 0.30 * ppm, 0, 6.3); x.fill();
+      PG.text(x, label, 3.6 * ppm, (Y + hMm * 0.63) * ppm,
+        { x: (X + hMm * 1.15) * ppm, weight: 500, colour: ground || ART.ink });
+      x.restore();
     }
-
-    var M = 14, colL = M, wL = 148, colR = 176, wR = 210;
-
-    /* masthead */
-    PG.text(x, 'polygood', P(19), P(28), { x: P(M), weight: 700, colour: '#1b1b1e', spacing: P(-0.25) });
-    PG.text(x, CFG.copy.brand, P(5.4), P(37), { x: P(M), weight: 500, colour: '#6c6a66' });
-    PG.text(x, 'ORIENTATION BOARD', P(4.6), P(28), { x: P(pw - M), align: 'right', weight: 700, colour: '#8b877f' });
-    PG.text(x, CFG.meta.dimensionNote, P(4.2), P(37), { x: P(pw - M), align: 'right', weight: 500, colour: '#8b877f' });
-    rule(M, 44, pw - 2 * M, '#1b1b1e');
-
-    /* left column — about, specification, impact */
-    heading('About', colL, 60, wL);
-    para('Polygood is a solid panel pressed from recycled plastic. It is worked ' +
-      'like a sheet material: cut, edged and machined. A groove is machined into ' +
-      'one continuous panel; a joint is where two panels meet.',
-      4.7, colL, 70, wL);
-
-    heading('Panel specification', colL, 104, wL);
-    var spec = [
-      ['Sheet size', '2800 × 1400 mm'],
-      ['Thickness', '12 · 19 mm'],
-      ['Finish', 'matt · satin · gloss'],
-      ['Material', '100% recycled PS']
-    ];
-    spec.forEach(function (row, i) {
-      var y = 116 + i * 10.5;
-      PG.text(x, row[0], P(4.7), P(y), { x: P(colL), weight: 500, colour: '#8b877f' });
-      PG.text(x, row[1], P(4.7), P(y), { x: P(colL + wL), align: 'right', weight: 600, colour: '#1b1b1e' });
-      rule(colL, y + 3.4, wL, '#dcd8d0');
-    });
-    PG.text(x, 'As printed on the supplied board — not verified against a current datasheet.',
-      P(3.9), P(166), { x: P(colL), weight: 500, colour: '#9a968e' });
-
-    heading('Impact', colL, 182, wL);
-    reserved(colL, 190, wL, 42,
-      'Global warming potential and comparative figures — supplied artwork, not reproduced in this model');
-
-    /* right column — applications, patterns, marks */
-    heading('Applications', colR, 60, wR);
-    ['Wall cladding', 'Furniture', 'Retail interiors', 'Hospitality', 'Workplace', 'Joinery']
-      .forEach(function (labelText, i) {
-        var cw = (wR - 2 * 4) / 3, ch = 28;
-        var X = colR + (i % 3) * (cw + 4), Y = 68 + ((i / 3) | 0) * (ch + 4);
-        x.fillStyle = '#e2ded6';
-        x.fillRect(P(X), P(Y), P(cw), P(ch));
-        PG.text(x, labelText, P(4.5), P(Y + ch - 8), { x: P(X + 5), weight: 600, colour: '#4b4945' });
-      });
-
-    heading('Patterns', colR, 138, wR);
-    var byId = function (id) { for (var k = 0; k < ALL_SURFACES.length; k++) if (ALL_SURFACES[k].id === id) return ALL_SURFACES[k]; };
-    /* two labelled rows rather than one long one: the ranges are separate
-       specifications, and a single row of seven leaves no width for names */
-    function swatchRow(rangeLabel, list, Y, sz) {
-      PG.text(x, rangeLabel, P(3.9), P(Y + sz / 2 + 1.4), { x: P(colR), weight: 700, colour: '#4b4945' });
-      var X0 = colR + 32, names = [];
-      list.forEach(function (s, i) {
-        var X = X0 + i * (sz + 4), src = surfaceCanvas[s.id];
-        if (src) {
-          /* one swatch shows roughly a 250 mm patch, so the chip reads at print size */
-          var crop = Math.round(src.width * 250 / CFG.surfaceTileSize);
-          x.drawImage(src, (i * 37) % (src.width - crop), (i * 61) % (src.height - crop),
-            crop, crop, P(X), P(Y), P(sz), P(sz));
-        }
-        x.strokeStyle = '#c9c5bc'; x.lineWidth = Math.max(1, P(0.4));
-        x.strokeRect(P(X) + 0.5, P(Y) + 0.5, P(sz) - 1, P(sz) - 1);
-        names.push(s.name.split(' — ')[0]);
-      });
-      PG.text(x, names.join(' \u00b7 '), P(3.4), P(Y + sz + 5),
-        { x: P(X0), weight: 600, colour: '#6c6a66' });
-    }
-    swatchRow('Wall Tiles', CFG.wallColours, 144, 16);
-    swatchRow('Growth', CFG.growthSurfaces, 172, 16);
-
-    PG.text(x, 'Illustrative surfaces from this model — not colour accurate, not tied to a SKU.',
-      P(3.9), P(201), { x: P(colR), weight: 500, colour: '#9a968e' });
-
-    reserved(colR, 205, wR * 0.52, 27,
-      'Certification marks and environmental declarations — supplied artwork, not reproduced in this model');
-    reserved(colR + wR * 0.52 + 4, 205, wR * 0.48 - 4, 27,
-      'Client list and logos — supplied artwork, not reproduced in this model');
-
-    /* footer strip */
-    x.fillStyle = '#1b1b1e';
-    x.fillRect(0, P(ph - 20), W, P(20));
-    PG.text(x, 'LAYOUT PLACEHOLDER — final artwork to be supplied by Polygood',
-      P(5.2), P(ph - 7.4), { x: P(M), weight: 700, colour: '#f4f2ed' });
-    PG.text(x, CFG.meta.status, P(4.4), P(ph - 7.6),
-      { x: P(pw - M), align: 'right', weight: 500, colour: 'rgba(244,242,237,0.62)' });
-  });
+  };
 }
 
-/* ══════════════ UNIT D — the orientation stand, at the left edge ══════════
-   A Polygood board in a slotted base of the same material. The board artwork
-   is a LAYOUT PLACEHOLDER: the real board carries global-warming figures,
-   certification marks and third-party client logos. None of those may be
-   asserted by this model or redrawn from a photograph, so the placeholder
-   reproduces the board's structure at the right size and names what is
-   missing. Supply the print file as a data URI in config and it replaces
-   this untouched. */
-var IS = I.infoStand;
-(function () {
-  var infoTrayTop = padT + trayT;
-  [[-0.17, -0.05], [0.17, -0.05], [-0.17, -0.15], [0.17, -0.15]].forEach(function (p) {
-    var pad = new THREE.Mesh(new THREE.BoxGeometry(0.055, padT, 0.055), matPad);
-    pad.position.set(p[0], padT / 2, p[1]); gInfo.add(pad);
+/* ── LEFT A4: the Polygood introduction ─────────────────────────────────── */
+function sheetIntro(x, W, H, ppm) {
+  var h = artHelpers(x, ppm);
+  x.fillStyle = ART.polygoodGreen; x.fillRect(0, 0, W, H);
+  h.wordmark(96, 52, 15, '#ffffff');
+  PG.text(x, 'A design material that’s 100% good', 11.5 * ppm, 96 * ppm,
+    { x: W / 2, align: 'center', weight: 700, colour: '#ffffff' });
+  h.para('A versatile, high-end surface material made from 100% recycled & recyclable ' +
+         'plastic by The Good Plastic Company.',
+         5.6, 58, 112, 180, { colour: 'rgba(255,255,255,0.90)', align: 'left' });
+  PG.text(x, 'TEMPORARY A4 LAYOUT · set from the supplied catalogue cover', 3.4 * ppm,
+    (210 - 12) * ppm, { x: W / 2, align: 'center', weight: 600, colour: 'rgba(255,255,255,0.55)' });
+}
+
+/* ── INSTALLATION A4: the Growth Collection ─────────────────────────────── */
+function sheetGrowth(x, W, H, ppm) {
+  var h = artHelpers(x, ppm);
+  x.fillStyle = ART.growthBlue; x.fillRect(0, 0, W, H);
+  // the supplied sheet runs photography down the right third
+  h.reserved(178, 0, 119, 210, 'Collection photography — supplied artwork, not reproduced in this model');
+
+  h.wordmark(16, 14, 8, ART.ink);
+  PG.text(x, 'by the good plastic company', 3.2 * ppm, 30 * ppm,
+    { x: 16 * ppm, weight: 500, colour: 'rgba(0,0,0,0.55)' });
+
+  PG.text(x, 'The Growth', 20 * ppm, 66 * ppm, { x: 16 * ppm, weight: 700, colour: ART.ink });
+  PG.text(x, 'Collection', 20 * ppm, 88 * ppm, { x: 16 * ppm, weight: 700, colour: ART.ink });
+  PG.text(x, 'Inspired by nature. Made for tomorrow.', 6.4 * ppm, 108 * ppm,
+    { x: 16 * ppm, weight: 500, colour: ART.ink });
+
+  h.para('Created with Gensler as product design consultant, Growth draws on roots, ' +
+         'plant life and natural formations. Recycled appliances and electronics become ' +
+         'richly textured surfaces for furniture and interiors, giving discarded plastic ' +
+         'a new life.',
+         4.8, 16, 124, 146, { colour: 'rgba(0,0,0,0.78)' });
+
+  h.reserved(16, 158, 26, 26, 'QR', false);
+  PG.text(x, 'Explore the collection and order samples', 5.2 * ppm, 194 * ppm,
+    { x: 16 * ppm, weight: 600, colour: ART.ink });
+  PG.text(x, 'polygood.com', 4.2 * ppm, 203 * ppm,
+    { x: 16 * ppm, weight: 500, colour: 'rgba(0,0,0,0.55)' });
+}
+
+/* ── the roll-up banner ─────────────────────────────────────────────────── */
+function bannerCanvas(pw, ph) {
+  return PG.cardCanvas(pw, ph, function (x, W, H, ppm) {
+    var h = artHelpers(x, ppm);
+    x.fillStyle = ART.bannerGreen; x.fillRect(0, 0, W, H);
+    // the supplied banner carries a full-bleed material photograph at the top
+    h.reserved(0, 0, pw, 300, 'Material photography — supplied artwork, not reproduced in this model', true);
+
+    h.wordmark(40, 330, 26, '#ffffff');
+    PG.text(x, 'by the good plastic company', 8 * ppm, 392 * ppm,
+      { x: 40 * ppm, weight: 500, colour: 'rgba(255,255,255,0.72)' });
+    PG.text(x, 'Surface material', 32 * ppm, 448 * ppm, { x: 40 * ppm, weight: 700, colour: '#ffffff' });
+    PG.text(x, 'with a second life', 32 * ppm, 488 * ppm, { x: 40 * ppm, weight: 700, colour: '#ffffff' });
+
+    // lower half: white panel, as on the supplied sheet
+    x.fillStyle = ART.paper; x.fillRect(0, 560 * ppm, W, H - 560 * ppm);
+
+    h.reserved(40, 590, 74, 74, 'QR', false);
+    PG.text(x, 'Polygood®', 20 * ppm, 700 * ppm, { x: 40 * ppm, weight: 700, colour: ART.ink });
+    h.para('The Good Plastic Company produces Polygood®, a surface material made from ' +
+           'recycled and responsibly sourced plastic, and it is recyclable in turn.',
+           7.4, 40, 722, pw - 80, { colour: 'rgba(0,0,0,0.78)' });
+
+    PG.text(x, 'Material origin', 9 * ppm, 790 * ppm, { x: 40 * ppm, weight: 700, colour: ART.ink });
+    h.para('Our panels have already lived a previous life. We source polystyrene from ' +
+           'refrigerators and freezers, CD cases, disposable cups, toys and games, ' +
+           'tableware and cutlery, and kitchen and office components — post-consumer ' +
+           'and post-industrial waste streams.',
+           5.6, 40, 804, 180, { colour: 'rgba(0,0,0,0.70)' });
+
+    PG.text(x, 'Material health', 9 * ppm, 790 * ppm, { x: 240 * ppm, weight: 700, colour: ART.ink });
+    h.para('Polygood® has undergone independent testing for chemical content and ' +
+           'indoor-air emissions. We verify our recycled polystyrene suppliers to support ' +
+           'traceability across the supply chain.',
+           5.6, 240, 804, 180, { colour: 'rgba(0,0,0,0.70)' });
+
+    h.reserved(40, 880, 180, 76,
+      'Global warming potential figure and comparative claim — supplied artwork, not reproduced in this model');
+    h.reserved(240, 880, 180, 76,
+      'Certification and declaration marks — supplied artwork, not reproduced in this model');
+
+    /* product properties: plain descriptive words, so these are set as printed */
+    var props = ['High structural integrity', 'Lightweight', 'Recyclable',
+                 'Thermoformable', 'Strong and durable', 'Consistent',
+                 'Low emissions', 'Waterproof', 'Mouldproof'];
+    var tw = 122, th = 20, gx = 12, gy = 9;
+    props.forEach(function (p, i) {
+      var col = i % 3, row = (i / 3) | 0;
+      h.tag(40 + col * (tw + gx), 984 + row * (th + gy), tw, th, p, 'rgba(0,0,0,0.42)', ART.ink);
+    });
+
+    x.fillStyle = ART.ink; x.fillRect(0, (ph - 26) * ppm, W, 26 * ppm);
+    PG.text(x, 'LAYOUT FROM APPROVED COPY — supply the print file to replace it',
+      6 * ppm, (ph - 9) * ppm, { x: 40 * ppm, weight: 700, colour: 'rgba(255,255,255,0.80)' });
+  }, 2);
+}
+
+/* ── the catalogue cover ────────────────────────────────────────────────── */
+function brochureCanvas(size) {
+  return PG.cardCanvas(size, size, function (x, W, H, ppm) {
+    var h = artHelpers(x, ppm);
+    x.fillStyle = ART.polygoodGreen; x.fillRect(0, 0, W, H);
+    h.wordmark(58, 76, 15, '#ffffff');
+    PG.text(x, 'A design material that’s 100% good', 9.2 * ppm, 114 * ppm,
+      { x: W / 2, align: 'center', weight: 700, colour: '#ffffff' });
+    h.para('A versatile, high-end surface material made from 100% recycled & recyclable ' +
+           'plastic by The Good Plastic Company.',
+           5.0, 38, 128, 124, { colour: 'rgba(255,255,255,0.88)' });
+  }, 3);
+}
+
+
+/* ══════════════ the two A4 displays, and the collaboration box ════════════
+   One holder design, used twice: a flat foot, a single triangular fin behind,
+   and a low front lip. The fin is sized to carry the sheet at its lean and no
+   more — a holder that reads as a fixture competes with what it is holding.
+
+   The sheets themselves are laid out from the APPROVED COPY the client
+   supplied. The artwork files were shown to us as images but not handed over,
+   so photography, QR codes and certification marks are reserved and named
+   rather than redrawn. Set `artwork` on either stand to a data URI and the
+   real print file replaces the layout whole. */
+var A4 = I.a4, HOLD = A4.holder;
+
+function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
+  var lean = HOLD.lean * D2R;
+  var padXs = [-unitW / 2 + mm(60), unitW / 2 - mm(60)];
+  var padZs = [-mm(50), -unitD + mm(50)];
+  padXs.forEach(function (px) {
+    padZs.forEach(function (pz) {
+      var pad = new THREE.Mesh(new THREE.BoxGeometry(0.05, padT, 0.05), matPad);
+      pad.position.set(px, padT / 2, pz); group.add(pad);
+    });
   });
-  var tray = trayMesh(mm(IS.unit.width), mm(IS.unit.depth), 79);
-  tray.position.set(0, padT + trayT / 2, -mm(IS.unit.depth) / 2);
-  tray.castShadow = true; tray.receiveShadow = true; gInfo.add(tray);
 
-  var B = IS.base, BD = IS.board;
-  var standMat = surfaceMaterial(B.width, B.height, 91);
-  applySurface(standMat, IS.material);
-  var boardMat = surfaceMaterial(BD.width, BD.height, 97);
-  applySurface(boardMat, IS.material);
+  var tray = trayMesh(unitW, unitD, seed);
+  tray.position.set(0, padT + trayT / 2, -unitD / 2);
+  group.add(tray);
+  var top = padT + trayT;
 
-  // base: two blocks with the slot between them, so the board really sits in it
-  var half = (mm(B.depth) - mm(B.slot)) / 2;
-  [-1, 1].forEach(function (s) {
-    var geo = new THREE.BoxGeometry(mm(B.width), mm(B.height), half);
-    PG.planarUV(geo, mm(B.width) / 2, mm(B.height) / 2, mm(TILE));
-    var blk = new THREE.Mesh(geo, standMat);
-    blk.position.set(0, infoTrayTop + mm(B.height) / 2,
-      -mm(B.depth) / 2 + (s < 0 ? half / 2 : mm(B.depth) - half / 2));
-    blk.castShadow = true; blk.receiveShadow = true; gInfo.add(blk);
-  });
+  // the holder, in the same Polygood surface as the base
+  var holdMat = surfaceMaterial(HOLD.footWidth, HOLD.footDepth, seed + 4);
+  applySurface(holdMat, A4.material);
 
-  // the board, leaning back in the slot
-  var lean = B.lean * D2R;
-  var bottomY = infoTrayTop + mm(B.height - B.embed);
-  var board = new THREE.Group();
-  board.position.set(0,
-    bottomY + mm(BD.height) / 2 * Math.cos(lean),
-    -mm(B.depth) / 2 + half + mm(B.slot) / 2 - mm(BD.height) / 2 * Math.sin(lean));
-  board.rotation.x = -lean;
-  gInfo.add(board);
+  var footGeo = new THREE.BoxGeometry(mm(HOLD.footWidth), mm(HOLD.footThickness), mm(HOLD.footDepth));
+  PG.planarUV(footGeo, mm(HOLD.footWidth) / 2, mm(HOLD.footDepth) / 2, mm(TILE));
+  var foot = new THREE.Mesh(footGeo, holdMat);
+  foot.position.set(0, top + mm(HOLD.footThickness) / 2, -unitD / 2);
+  foot.castShadow = true; foot.receiveShadow = true; group.add(foot);
+  var footTop = top + mm(HOLD.footThickness);
 
-  var panelGeo = new THREE.BoxGeometry(mm(BD.width), mm(BD.height), mm(BD.thickness));
-  PG.planarUV(panelGeo, mm(BD.width) / 2, mm(BD.height) / 2, mm(TILE));
-  var panel = new THREE.Mesh(panelGeo, boardMat);
-  panel.castShadow = true; panel.receiveShadow = true; board.add(panel);
+  // the front lip the sheet leans against
+  var lip = new THREE.Mesh(
+    new THREE.BoxGeometry(mm(HOLD.footWidth), mm(HOLD.lip), mm(HOLD.finThickness)), holdMat);
+  var lipZ = -unitD / 2 + mm(HOLD.footDepth) / 2 - mm(HOLD.finThickness) / 2;
+  lip.position.set(0, footTop + mm(HOLD.lip) / 2, lipZ);
+  lip.castShadow = true; group.add(lip);
 
-  var pw = BD.width - 2 * BD.printInset, ph = BD.height - 2 * BD.printInset;
-  var printC = IS.artwork ? null : infoBoardCanvas(pw, ph);
+  /* one triangular fin, on the centreline. Its hypotenuse is the lean, so the
+     sheet rests on it rather than on a bracket that has to be drawn bigger. */
+  var finH = mm(A4.sheet.height) * 0.52, finD = finH * Math.tan(lean) + mm(HOLD.lip);
+  var shp = new THREE.Shape();
+  shp.moveTo(0, 0); shp.lineTo(finD, 0); shp.lineTo(0, finH); shp.closePath();
+  var fin = new THREE.Mesh(
+    new THREE.ExtrudeGeometry(shp, { depth: mm(HOLD.finThickness), bevelEnabled: false }), holdMat);
+  fin.rotation.y = -Math.PI / 2;
+  fin.position.set(mm(HOLD.finThickness) / 2, footTop, lipZ - mm(HOLD.finThickness) / 2);
+  fin.castShadow = true; group.add(fin);
+
+  // the sheet: A4 landscape, leaning back on the fin
+  var sw = mm(A4.sheet.width), sh = mm(A4.sheet.height), st = mm(A4.sheet.thickness);
+  var sheet = new THREE.Group();
+  sheet.position.set(0,
+    footTop + mm(HOLD.lip) * 0.4 + sh / 2 * Math.cos(lean),
+    lipZ - sh / 2 * Math.sin(lean) - st);
+  sheet.rotation.x = -lean;
+  group.add(sheet);
+
+  var board = new THREE.Mesh(new THREE.BoxGeometry(sw, sh, st),
+    new THREE.MeshStandardMaterial({ color: srgb('#f2f0eb'), roughness: 0.9, envMapIntensity: 0.18 }));
+  board.castShadow = true; board.receiveShadow = true; sheet.add(board);
+
   var printMat;
-  if (IS.artwork) {
-    var tex = new THREE.TextureLoader().load(IS.artwork);
+  if (artwork) {
+    var tex = new THREE.TextureLoader().load(artwork);
     tex.encoding = THREE.sRGBEncoding; tex.anisotropy = 8;
     printMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.88, envMapIntensity: 0.2 });
   } else {
-    printMat = new THREE.MeshStandardMaterial({ map: PG.cardTexture(THREE, printC), roughness: 0.88, envMapIntensity: 0.2 });
+    printMat = new THREE.MeshStandardMaterial({
+      map: PG.cardTexture(THREE, PG.cardCanvas(A4.sheet.width, A4.sheet.height, drawSheet)),
+      roughness: 0.88, envMapIntensity: 0.2 });
   }
-  var print = new THREE.Mesh(new THREE.PlaneGeometry(mm(pw), mm(ph)), printMat);
-  print.position.z = mm(BD.thickness) / 2 + mm(0.6);
-  board.add(print);
+  var print = new THREE.Mesh(new THREE.PlaneGeometry(sw, sh), printMat);
+  print.position.z = st / 2 + mm(0.5);
+  sheet.add(print);
+
+  return { top: footTop, sheet: sheet, trayTop: top };
+}
+
+/* ── LEFT display: the introduction ─────────────────────────────────────── */
+(function () {
+  var U = UNITS.intro;
+  a4Stand(gIntro, U.w, U.d, function (x, w, h, ppm) {
+    sheetIntro(x, w, h, ppm);
+  }, I.introStand.artwork, 91);
 })();
+
+/* ── INSTALLATION display: the Growth Collection, with the small
+      collaboration box in front of it ───────────────────────────────────── */
+(function () {
+  var U = UNITS.growth;
+  var st = a4Stand(gGrowth, U.w, U.d, function (x, w, h, ppm) {
+    sheetGrowth(x, w, h, ppm);
+  }, I.growthStand.artwork, 97);
+
+  /* the small Growth/Gensler collaboration box, open, lid laid back flat.
+     Kept low and forward so it never stands in front of the sheet above it. */
+  var CB = I.collabBox;
+  var shellMat = new THREE.MeshStandardMaterial({ color: srgb(CB.shell), roughness: 0.62, envMapIntensity: 0.3 });
+  var feltMat  = new THREE.MeshStandardMaterial({ color: srgb(CB.felt), roughness: 0.95, envMapIntensity: 0.15 });
+  var bw = mm(CB.width), bd = mm(CB.depth), bh = mm(CB.height), lt = mm(CB.lidThickness);
+  var boxZ = -mm(72);
+
+  var tray = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bd), shellMat);
+  tray.position.set(0, st.trayTop + bh / 2, boxZ);
+  tray.castShadow = true; tray.receiveShadow = true; gGrowth.add(tray);
+
+  var felt = new THREE.Mesh(new THREE.BoxGeometry(bw - mm(6), mm(1.5), bd - mm(6)), feltMat);
+  felt.position.set(0, st.trayTop + bh - mm(0.5), boxZ); gGrowth.add(felt);
+
+  // the lid, laid flat behind the tray so the samples stay visible
+  var lid = new THREE.Mesh(new THREE.BoxGeometry(bw, lt, bd), shellMat);
+  lid.position.set(0, st.trayTop + lt / 2, boxZ - bd - mm(4));
+  lid.castShadow = true; gGrowth.add(lid);
+
+  // Growth chips in the tray, carrying the selected Growth surface
+  var C = CB.chip, cs = mm(C.size), cg = mm(C.gap);
+  collabChipMats = [];
+  for (var r = 0; r < C.rows; r++) {
+    for (var c = 0; c < C.cols; c++) {
+      var m = surfaceMaterial(C.size, C.size, 131 + r * 7 + c);
+      applySurface(m, INITIAL_GROWTH);
+      collabChipMats.push(m);
+      var chip = new THREE.Mesh(new THREE.BoxGeometry(cs, mm(8), cs), m);
+      chip.position.set((c - (C.cols - 1) / 2) * (cs + cg),
+                        st.trayTop + bh + mm(4),
+                        boxZ + (r - (C.rows - 1) / 2) * (cs + cg));
+      chip.castShadow = true; gGrowth.add(chip);
+    }
+  }
+})();
+
 
 /* ── UNIT C — the Translucent Collection box, to the right ────────────────
    Its own tray, beside the Growth palette rather than behind it. This is
@@ -739,7 +910,7 @@ var transBox = (function () {
   // the box, and the pale insert the blocks stand on
   var faceC = PG.cardCanvas(TB.width, TB.height, function (x, w, h, ppm) {
     x.fillStyle = TB.shell; x.fillRect(0, 0, w, h);
-    PG.text(x, TB.mark, 17 * ppm, h * 0.62, { x: 20 * ppm, weight: 700, colour: '#ffffff' });
+    if (TB.mark) PG.text(x, TB.mark, 17 * ppm, h * 0.62, { x: 20 * ppm, weight: 700, colour: '#ffffff' });
     x.textAlign = 'right';
     PG.text(x, TB.title, 5.2 * ppm, h * 0.60, { x: w - 20 * ppm, align: 'right', weight: 500,
       colour: 'rgba(255,255,255,0.72)', spacing: 0.8 * ppm });
@@ -819,10 +990,11 @@ function setEngraving(id) {
 }
 function setGrowth(id) {
   state.growth = id;
-  applySurface(matHoriz, id);
+  // matHoriz is NOT driven by the swatch any more — see finish.underPanel
   // every engraved sample is Growth material: this IS the Growth collection
   // carrying the four supplied engravings
   sampleMats.forEach(function (m) { applySurface(m, id); });
+  collabChipMats.forEach(function (m) { applySurface(m, id); });
   ctx.invalidate();
 }
 function setQuestion(id) {
@@ -832,6 +1004,9 @@ function setQuestion(id) {
 }
 /* the marker followed index 0 rather than the state, which only matched
    while the opening question was the first one */
+/* the panel beneath is fixed from CFG.finish.underPanel; the swatch drives
+   the tiles and the collaboration chips only */
+applySurface(matHoriz, (CFG.finish && CFG.finish.underPanel) || state.growth);
 setWall(state.wall); setGrowth(state.growth); setEngraving(state.engraving); setQuestion(state.question);
 
 /* ── inspect: only the coupon moves ───────────────────────────────────── */
@@ -893,13 +1068,107 @@ function checkFootprint() {
   return out;
 }
 
+
+/* ══════════════ booth pieces that stand on the floor ══════════════════════
+   The roll-up and the catalogues are not part of the counter installation, so
+   they live in their own group. They are still shown when the room is hidden:
+   they are the display, not the venue. */
+var gBooth = new THREE.Group();
+scene.add(gBooth);
+
+(function () {
+  var BN = I.banner;
+  var gw = mm(BN.graphicWidth), gh = mm(BN.graphicHeight);
+  var cassH = mm(BN.cassetteHeight), cassD = mm(BN.cassetteDepth);
+
+  /* On the credenza's own axis, standing in front of it. The angle and radius
+     are config, so moving the credenza moves the banner with it. */
+  var p = V.bayPt(BN.angleAtBay, mm(BN.radius), 0);
+  var g = new THREE.Group();
+  g.position.copy(p);
+  g.rotation.y = -BN.angleAtBay * D2R;
+  gBooth.add(g);
+
+  var metal = new THREE.MeshStandardMaterial({
+    color: srgb('#d9dadb'), roughness: 0.38, metalness: 0.72, envMapIntensity: 0.5 });
+  var dark = new THREE.MeshStandardMaterial({
+    color: srgb('#4a4d50'), roughness: 0.55, metalness: 0.4, envMapIntensity: 0.4 });
+
+  // cassette
+  var cass = new THREE.Mesh(new THREE.BoxGeometry(gw + mm(40), cassH, cassD), metal);
+  cass.position.set(0, cassH / 2, 0);
+  cass.castShadow = true; cass.receiveShadow = true; g.add(cass);
+
+  // two flip-out feet, so it is not standing on nothing
+  [-1, 1].forEach(function (sgn) {
+    var foot = new THREE.Mesh(new THREE.BoxGeometry(mm(26), mm(14), mm(BN.footSpread)), dark);
+    foot.position.set(sgn * (gw / 2 + mm(6)), mm(7), 0);
+    foot.castShadow = true; g.add(foot);
+  });
+
+  // the support pole, behind the graphic
+  var pole = new THREE.Mesh(
+    new THREE.CylinderGeometry(mm(BN.poleDiameter) / 2, mm(BN.poleDiameter) / 2, gh, 14), metal);
+  pole.position.set(0, cassH + gh / 2, -cassD / 2 + mm(26));
+  pole.castShadow = true; g.add(pole);
+
+  // the graphic itself
+  var artMat;
+  if (BN.artwork) {
+    var tex = new THREE.TextureLoader().load(BN.artwork);
+    tex.encoding = THREE.sRGBEncoding; tex.anisotropy = 8;
+    artMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.9, envMapIntensity: 0.16 });
+  } else {
+    artMat = new THREE.MeshStandardMaterial({
+      map: PG.cardTexture(THREE, bannerCanvas(BN.graphicWidth, BN.graphicHeight)),
+      roughness: 0.9, envMapIntensity: 0.16 });
+  }
+  var back = new THREE.MeshStandardMaterial({ color: srgb('#cfd0cd'), roughness: 0.95 });
+  var panel = new THREE.Mesh(new THREE.BoxGeometry(gw, gh, mm(3)), [back, back, back, back, artMat, back]);
+  panel.position.set(0, cassH + gh / 2, mm(1));
+  panel.castShadow = true; panel.receiveShadow = true; g.add(panel);
+
+  bannerTopY = cassH + gh;
+})();
+
+/* three catalogues, within reach at the banner end of the counter */
+(function () {
+  var BR = I.brochure, sz = mm(BR.size), th = mm(BR.thickness);
+  var coverMat = new THREE.MeshStandardMaterial({
+    map: PG.cardTexture(THREE, brochureCanvas(BR.size)), roughness: 0.86, envMapIntensity: 0.2 });
+  var edge = new THREE.MeshStandardMaterial({ color: srgb('#e8e6df'), roughness: 0.95 });
+
+  /* set out on the counter beyond the last unit, on the credenza side, so a
+     visitor can pick one up on the way past without reaching over a sample */
+  var theta = BR.angleAtBay;   // fixed, at the banner end of the counter
+  var p = place(theta, 0, 0);
+  var g = new THREE.Group();
+  g.position.set(p.x, V.CT.h, p.y);
+  g.rotation.y = -theta * D2R;
+  gBooth.add(g);
+  brochureTheta = theta;
+
+  for (var i = 0; i < BR.count; i++) {
+    var b = new THREE.Mesh(new THREE.BoxGeometry(sz, th, sz),
+      [edge, edge, coverMat, edge, edge, edge]);
+    b.position.set(i * mm(BR.step) * 0.34, th / 2 + i * th, -sz / 2 - mm(40) + i * mm(BR.step) * 0.5);
+    b.rotation.y = (i - 1) * 0.045;
+    b.castShadow = true; b.receiveShadow = true;
+    g.add(b);
+  }
+})();
+
 return {
-  groups: { info: gInfo, main: gMain, palette: gPal, translucent: gTrans },
-  units: UNITS, place: place, rFront: rFront, thetaA: thetaA, thetaB: thetaB, thetaC: thetaC, thetaD: thetaD,
+  groups: { intro: gIntro, main: gMain, growth: gGrowth, palette: gPal,
+            translucent: gTrans, booth: gBooth },
+  units: UNITS, place: place, rFront: rFront,
+  thetaA: thetaA, thetaB: thetaB, thetaC: thetaC, thetaD: thetaD, thetaG: thetaG,
+  bannerTopY: function () { return bannerTopY; },
+  brochureTheta: function () { return brochureTheta; },
   anchors: {
     wallZ: wallZ, trayTop: trayTop, horizTopY: horizTopY, horizFrontZ: horizFrontZ,
     wallTopY: trayTop + mm(I.wall.height), couponPivot: couponPivot,
-    samplesZ: sampleZ, boxZ: boxZ
+    samplesZ: sampleZ, boxZ: boxZ, boxX: boxX
   },
   state: state,
   setWall: setWall, setEngraving: setEngraving, setGrowth: setGrowth, setQuestion: setQuestion,

@@ -94,6 +94,48 @@ black and the engravings are hard to read at 150 mm. The palette exists to
 compare engravings. Either pick a lighter Growth from the swatch row for that
 unit, or the samples need decoupling from the horizontal panel.
 
+### Expo layout — what is on the stand, and the banner arithmetic
+
+The counter now carries five sub-assemblies, left to right: the **A4
+introduction**, the **LOOK CLOSER installation**, the **Growth A4 with the
+collaboration box** in front of it, the **six engraved tiles with the two
+general sample boxes**, and the **Translucent Collection box**. Three
+catalogues sit on the counter at the far end, beside the roll-up.
+
+Counts are structural, not hand-placed: the tile grid is , the
+brochure stack is , and the two general boxes come from the
+ array. Change the config and the count changes with it.
+
+#### The banner does not screen the credenza
+
+Stated banner: **457 x 1123 mm** (18 x 44.2 in). Measured credenza:
+**1780 mm wide x 1026 mm tall**.
+
+| | Banner | Credenza | Result |
+| --- | ---: | ---: | --- |
+| Width | 457 mm | 1780 mm | covers **26%** |
+| Height | 1123 mm + 62 mm cassette | 1026 mm | clears it by ~159 mm |
+
+Height is not the problem — the banner is taller than the shelf. **Width is.**
+One banner hides about a quarter of the credenza; four side by side, or one
+1780 mm wide, would be needed to screen it. The model is drawn at the stated
+size and the shortfall left visible. Nothing was widened and the shelf was not
+shrunk.
+
+Two things follow. 44.2 inches is short for a floor roll-up — most are near
+2000 mm — so this may be a **tabletop** unit, which would change where it
+stands. And whether the 1123 mm includes the cassette is unconfirmed; it is
+drawn as graphic-only on a cassette, the taller reading.
+
+#### Why the tiles stopped sharing the panel’s surface
+
+The six tiles follow the Growth swatch; the horizontal panel under the
+standing panel takes  instead. They shared one material
+until the panel went Midnight, at which point six engraved tiles were black on
+black and the comparison they exist for was impossible. Both readings of the
+brief survive this way: the panel beneath is still black, the tiles are still
+legible.
+
 ### Seeing it without the room
 
 **Installation only** hides the venue and stands the four sub-assemblies on a
