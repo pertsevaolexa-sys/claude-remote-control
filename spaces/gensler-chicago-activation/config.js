@@ -113,7 +113,7 @@ window.PG_CONFIG = {
       // Widened and deepened again to carry SIX engraved tiles in two rows of
       // three, plus the two general sample boxes. This spends envelope: watch
       // the fit check.
-      width: 700, depth: 400,   // 400 is the active-depth cap; this sits on it
+      width: 950, depth: 400,   // 400 is the active-depth cap; this sits on it
       /* Six engraved tiles, two rows of three. 120 x 180 as stated; UNITS AND
          THICKNESS UNCONFIRMED — read here as millimetres, the only reading that
          gives a tile a visitor can pick up. Only four engravings have been
@@ -121,6 +121,12 @@ window.PG_CONFIG = {
          is real and visible, not a modelling shortcut. */
       tile: { width: 120, height: 180, thickness: 19, unitsConfirmed: false },
       cols: 3, rows: 2, gapX: 22, gapZ: 26,
+      /* A row of plain flat samples laid on the counter, as built. These are
+         COLOURS, not engravings — the engraved demonstration is the tile that
+         lifts out of Stand 2. */
+      flatRow: { width: 120, height: 90, thickness: 12, gap: 16,
+                 surfaces: ['growth-mist', 'growth-midnight', 'growth-slate',
+                            'growth-clay', 'growth-pebble'] },
       gridX: -140          // tile grid sits left; the two sample boxes take the right
     },
 
@@ -217,13 +223,21 @@ window.PG_CONFIG = {
        at the stated size and the shortfall is left visible rather than
        quietly widened. */
     banner: {
-      graphicWidth: 457, graphicHeight: 1123,
+      /* HEIGHT CHANGED FROM THE SPEC. The written figure was 1123 mm; the
+         photograph of the built stand shows a normal floor roll-up reaching
+         roughly 2.1 m — measured against the 1000 mm counter in the same
+         frame. 1123 mm would be a tabletop unit, which is what I flagged
+         before the photograph arrived. Width is left at the stated 457. */
+      graphicWidth: 457, graphicHeight: 2000,
       cassetteHeight: 62, cassetteDepth: 180, poleDiameter: 22,
       footSpread: 300, heightIncludesBase: false,
       /* Past the end of the counter run (which stops at 70 deg) and clear of
          the reset stools, so it screens the credenza's open shelving without
          standing in the staff's way or clashing with the counter. */
-      angleAtBay: 78, radius: 1820,
+      /* As built: past the credenza's far end, against the window pier. It is
+         not screening the bookshelf in the photograph, and at 457 mm it never
+         could. */
+      angleAtBay: 88, radius: 2050,
       artwork: null
     },
 
@@ -251,7 +265,7 @@ window.PG_CONFIG = {
      three choices remain independent, and nothing here removes a control.
      Set any of these to null to fall back to the first entry in its list. */
   defaults: {
-    wall:      'white',         // wallColours id — the standing panel
+    wall:      'dark',          // wallColours id — as built, from the photograph
     growth:    'growth-pebble', // growthSurfaces id — drives the engraved tiles
     engraving: null,            // engravings id
     question:  null,            // questions id

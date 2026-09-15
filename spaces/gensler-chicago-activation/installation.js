@@ -59,19 +59,17 @@ var halfA = mm(I.wall.width) / 2, halfB = mm(I.palette.width) / 2;
 /* thetaB is set below, after the Growth stand takes its place between the
    installation and the palette. */
 
-/* The A4 sheet and its collaboration box sit NEXT TO the Translucent block,
-   at the client's direction, so the sheet explains the collection standing
-   beside it. Order along the counter: intro, Stand 2, sample boxes, A4 sheet,
-   Translucent block. */
+/* Set out as built, from the photograph. Left to right along the counter:
+   the Translucent A4, the Translucent bar, Stand 2, the Growth A4 with its
+   sample tray, then the flat colour row with the two sample boxes. */
 var halfG = mm(I.growthStand.unit.width) / 2;
-var thetaB = thetaA + ((mm(I.gapBetweenUnits) + halfA + halfB) / rFront) / D2R;
-var thetaG = thetaB + ((mm(I.gapBetweenUnits) + halfB + halfG) / rFront) / D2R;
+var halfC = mm(I.translucentUnit.width) / 2;
+var thetaC = thetaA - ((mm(I.gapBetweenUnits) + halfA + halfC) / rFront) / D2R;
+var thetaG = thetaA + ((mm(I.gapBetweenUnits) + halfA + halfG) / rFront) / D2R;
+var thetaB = thetaG + ((mm(I.gapBetweenUnits) + halfG + halfB) / rFront) / D2R;
 
 var halfD = mm(I.introStand.unit.width) / 2;
-var thetaD = thetaA - ((mm(I.gapBetweenUnits) + halfA + halfD) / rFront) / D2R;
-
-var halfC = mm(I.translucentUnit.width) / 2;
-var thetaC = thetaG + ((mm(I.gapBetweenUnits) + halfG + halfC) / rFront) / D2R;
+var thetaD = thetaC - ((mm(I.gapBetweenUnits) + halfC + halfD) / rFront) / D2R;
 
 var UNITS = {
   intro:       { theta: thetaD, w: mm(I.introStand.unit.width),  d: mm(I.introStand.unit.depth) },
@@ -447,11 +445,27 @@ CFG.references.forEach(function (r, k) {
   chip.castShadow = true; gPal.add(chip);
 });
 
-/* The six engraved tiles are gone: the client dropped them, and the handled
-   sample is now the 180 x 120 tile that lifts out of Stand 2. The palette
-   unit keeps the two general sample boxes. */
-var sampleZ = -mm(120), pitchZ = mm(140), gridX = 0, sampleW = mm(180);
+/* The engraved tile grid is gone. What lies on the counter as built is a row
+   of PLAIN colour samples — the engraved demonstration is the tile that lifts
+   out of Stand 2, not this row. */
+var FR = I.palette.flatRow;
+var sampleZ = -mm(110), pitchZ = mm(140), gridX = 0, sampleW = mm(FR.width);
 var samples = [];
+(function () {
+  var fw = mm(FR.width), fh = mm(FR.height), ft = mm(FR.thickness);
+  var pitch = fw + mm(FR.gap);
+  FR.surfaces.forEach(function (id, i) {
+    var m = surfaceMaterial(FR.width, FR.height, 201 + i * 9);
+    applySurface(m, id);
+    var geo = new THREE.BoxGeometry(fw, ft, fh);
+    PG.planarUV(geo, fw / 2, fh / 2, mm(TILE));
+    var t = new THREE.Mesh(geo, m);
+    t.position.set((i - (FR.surfaces.length - 1) / 2) * pitch, trayTop + ft / 2, sampleZ);
+    t.castShadow = true; t.receiveShadow = true;
+    gPal.add(t);
+    samples.push({ panel: t, x: t.position.x, z: sampleZ, engraving: null });
+  });
+})();
 // the marker shows which engraving the visitor chose
 var marker = new THREE.Mesh(new THREE.CylinderGeometry(mm(7), mm(7), mm(16), 18), matMarker);
 marker.castShadow = true;
@@ -672,6 +686,33 @@ function sheetGrowth(x, W, H, ppm) {
     { x: 16 * ppm, weight: 500, colour: 'rgba(0,0,0,0.55)' });
 }
 
+/* ── LEFT A4: the Translucent Collection, as built ──────────────────────── */
+function sheetTranslucent(x, W, H, ppm) {
+  var h = artHelpers(x, ppm);
+  x.fillStyle = '#e3d8c9'; x.fillRect(0, 0, W, H);
+  h.reserved(178, 0, 119, 210, 'Collection photography \u2014 supplied artwork, not reproduced in this model');
+
+  h.wordmark(16, 14, 8, ART.ink);
+  PG.text(x, 'by the good plastic company', 3.2 * ppm, 30 * ppm,
+    { x: 16 * ppm, weight: 500, colour: 'rgba(0,0,0,0.55)' });
+
+  PG.text(x, 'The Translucent', 18 * ppm, 64 * ppm, { x: 16 * ppm, weight: 700, colour: ART.ink });
+  PG.text(x, 'Collection', 18 * ppm, 85 * ppm, { x: 16 * ppm, weight: 700, colour: ART.ink });
+  PG.text(x, 'Recycled surfaces that play with light.', 6.2 * ppm, 106 * ppm,
+    { x: 16 * ppm, weight: 500, colour: ART.ink });
+
+  h.para('Made from recycled CD cases, the Translucent Collection brings colour and ' +
+         'depth to architectural surfaces. Its clear base and fine bubbles catch the ' +
+         'light, creating a distinctive glow when backlit.',
+         4.8, 16, 122, 146, { colour: 'rgba(0,0,0,0.78)' });
+
+  h.reserved(16, 156, 26, 26, 'QR', false);
+  PG.text(x, 'Explore the collection and order samples', 5.2 * ppm, 194 * ppm,
+    { x: 16 * ppm, weight: 600, colour: ART.ink });
+  PG.text(x, 'polygood.com', 4.2 * ppm, 203 * ppm,
+    { x: 16 * ppm, weight: 500, colour: 'rgba(0,0,0,0.55)' });
+}
+
 /* ── the roll-up banner ─────────────────────────────────────────────────── */
 function bannerCanvas(pw, ph) {
   return PG.cardCanvas(pw, ph, function (x, W, H, ppm) {
@@ -832,7 +873,7 @@ function a4Stand(group, unitW, unitD, drawSheet, artwork, seed) {
 (function () {
   var U = UNITS.intro;
   a4Stand(gIntro, U.w, U.d, function (x, w, h, ppm) {
-    sheetIntro(x, w, h, ppm);
+    sheetTranslucent(x, w, h, ppm);
   }, I.introStand.artwork, 91);
 })();
 
