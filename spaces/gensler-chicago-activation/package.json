@@ -7,7 +7,8 @@
     "check": "node check.mjs",
     "dev": "node build.mjs --serve",
     "serve": "node build.mjs --serve",
-    "shots": "node shots.mjs"
+    "shots": "node shots.mjs",
+    "bundle": "node bundle.mjs"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "three": "^0.180.0"
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "playwright": "^1.56.0"
   },
   "type": "module",

@@ -28,6 +28,7 @@ There is no bundler and nothing is fetched at run time.
 | `npm run build` | Vendor three.js only (what a static deploy needs) |
 | `npm run check` | Print the fit report — dimensions and clashes read from geometry, not from a screenshot |
 | `npm run shots` | Re-render `screenshots/` and report console errors |
+| `npm run bundle` | Build `dist/index.html` — the whole model as ONE self-contained file |
 
 ### Controls
 
@@ -37,6 +38,43 @@ Five review cameras across the top: **Room overview**, **Whole counter**,
 turns on the measurement overlay (off by default). **Click the plain Oyster
 coupon** on the installation base to lift it — it is removable, not glued —
 and **Reset sample** puts it back.
+
+---
+
+## Deploying to Vercel
+
+`npm run bundle` writes **`dist/index.html`** — a single ~1 MB file with
+three.js, all of `src/`, the stylesheet and the markup inlined. It fetches
+nothing at run time, so it works on any static host and also opens straight from
+disk by double-clicking it. `dist/index.html` is committed, so you can deploy
+without running anything.
+
+Verified with `node verify-dist.mjs`: loads clean over HTTP and over `file://`,
+zero console errors, zero external network requests.
+
+**Quickest — drag and drop.** Upload the `dist` folder at
+[vercel.com/new](https://vercel.com/new), or from this directory:
+
+```bash
+npm run bundle
+cd dist && vercel deploy --prod
+```
+
+**From Git.** Point the Vercel project at this repository and set:
+
+| Setting | Value |
+|---|---|
+| Framework Preset | Other |
+| Root Directory | `spaces/gensler-chicago-activation/dist` |
+| Build Command | *(leave empty)* |
+| Output Directory | `.` |
+
+**Building on Vercel instead of committing `dist/`.** Set Root Directory to
+`spaces/gensler-chicago-activation`, Build Command to `npm run bundle`, and
+Output Directory to `dist`.
+
+Rebuild the file after any change to `src/` — `dist/index.html` is generated,
+never edited by hand.
 
 ---
 
