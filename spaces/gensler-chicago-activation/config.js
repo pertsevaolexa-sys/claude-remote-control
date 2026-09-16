@@ -116,11 +116,18 @@ window.PG_CONFIG = {
       // Widened and deepened again to carry SIX engraved tiles in two rows of
       // three, plus the two general sample boxes. This spends envelope: watch
       // the fit check.
-      /* 580 for the six tiles + 60 margin. The two sample boxes are their own
-         sub-assembly: at 1060 wide this unit swung 68 mm off a 2.06 m radius
-         and overhung the glazing side by 16 mm. Rigid things on this counter
-         have to stay short. */
-      width: 640, depth: 320,
+      /* 580 for the six tiles + 60 margin. Width has to stay short: at 1060 this
+         unit swung 68 mm off a 2.06 m radius and overhung the glazing side by
+         16 mm. Rigid things on this counter have to stay short.
+         410 DEEP, because the two sample boxes now stand BEHIND the tiles in
+         this unit rather than taking a slot of their own on the run — which is
+         where the planning photograph puts them, and which moves the catalogues
+         510 mm back along the counter, clear of the credenza.
+         15 front margin + 260 tile block + 25 gap + 105 box and standing lid.
+         The ceiling is NOT the 450 counter depth. At 640 wide the back corners
+         swing 25 mm out, so the counter's 2500 outer edge binds first and the
+         real limit is 419. At 430 it overhung the glazing side by 10 mm. */
+      width: 640, depth: 410,
       /* Six engraved tiles, two rows of three. 120 x 180 as stated; UNITS AND
          THICKNESS UNCONFIRMED — read here as millimetres, the only reading that
          gives a tile a visitor can pick up. Only four engravings have been
@@ -139,13 +146,8 @@ window.PG_CONFIG = {
          the concept image does. Illustrative: not colour accurate, no SKU. */
       tileSurfaces: ['growth-mist', 'growth-slate', 'growth-clay',
                      'growth-pebble', 'growth-midnight', 'growth-mist'],
-      gridX: -140          // tile grid sits left; the two sample boxes take the right
+      gridX: 0             // the boxes are behind the tiles now, not beside them
     },
-
-    /* The two general sample boxes, on their own tray beside the tiles.
-       EXTERNAL DIMENSIONS UNCONFIRMED — the concept image does not establish
-       them; these are the proportions read off the earlier photographs. */
-    boxesUnit: { width: 470, depth: 240 },
 
     // The two Polygood sample boxes, from the supplied product photographs.
     // Dimensions are read off those photographs — they are proportions, not a

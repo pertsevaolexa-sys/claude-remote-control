@@ -96,11 +96,12 @@ unit, or the samples need decoupling from the horizontal panel.
 
 ### Expo layout — what is on the stand, and the banner arithmetic
 
-The counter now carries five sub-assemblies, left to right: the **A4
-introduction**, the **LOOK CLOSER installation**, the **Growth A4 with the
-collaboration box** in front of it, the **six engraved tiles with the two
-general sample boxes**, and the **Translucent Collection box**. Three
-catalogues sit on the counter at the far end, beside the roll-up.
+The counter carries five sub-assemblies. Left to right as a visitor meets them:
+the **A4 introduction**, the **Translucent Collection box**, the **LOOK CLOSER
+installation**, the **Growth A4 with the collaboration box** in front of it, and
+the **six engraved tiles with the two general sample boxes standing behind
+them**. Three catalogues close the run to the right of the tiles, and the
+roll-up stands on the floor past the counter's end.
 
 Counts are structural, not hand-placed: the tile grid is `cols x rows`, the
 brochure stack is `brochure.count`, and the two general boxes come from the
@@ -151,8 +152,15 @@ before cutting: if the panel is meant to be 19, the base DXF is wrong too.
 
 Everything rigid is kept short on purpose. A 1060 mm tile-and-box unit swung
 **68 mm** off the 2.06 m front-edge radius and overhung the glazing side by
-16 mm, so the two general sample boxes were split onto their own tray. Six
-sub-assemblies now, each tangent at its own centre.
+16 mm. The boxes were first split onto a tray of their own; they now stand
+**behind** the tiles in the same unit, as the planning photograph shows, which
+keeps the unit 640 wide and returns their slot to the run. Five
+sub-assemblies, each tangent at its own centre.
+
+The same arc bites in depth. A unit's back corners sit further out than its
+centre, so **depth and width are not independent**: at 640 wide the palette
+unit's limit is 419 mm against the counter's 2500 mm outer edge, not the
+450 mm nominal depth.
 
 Tile set-out follows the brief: each tile turned with its **180 mm side along
 the counter**, giving **580 x 260** rather than 400 x 380. That is 120 mm less
@@ -455,7 +463,7 @@ Four rigid sub-assemblies now sit along the counter — the orientation stand
 (left), the LOOK CLOSER wall fragment, the Growth palette with its boxes, and
 the Translucent Collection box (right).
 
-The envelope is **3334 mm against the 1400 mm allocated — over by 1934 mm**, and
+The envelope is **2824 mm against the 1400 mm allocated — over by 1424 mm**, and
 the fit check reports it as a failure rather than absorbing it. Depth still
 passes: nothing exceeds the 450 mm counter depth.
 
@@ -469,22 +477,27 @@ It got there a step at a time, each of them requested:
 | \+ orientation stand, left (500 mm tray) | **2368 mm** |
 | \+ expo rebuild: Translucent bar, Growth A4, 300 x 300 collab box | 2958 mm |
 | \+ the two sample boxes split onto their own sub-assembly | 3058 mm |
-| \+ three catalogues, now measured with the run instead of exempt | **3334 mm** |
+| \+ three catalogues, now measured with the run instead of exempt | 3334 mm |
+| − sample boxes moved behind the tiles, off the run | **2824 mm** |
 
 Three ways out, in the order we would recommend:
 
-1. **Raise the allocation.** The counter has most of the length — the run is
-   about 4.4 m and the composition now spans about 83° of arc. The 1400 mm was a
-   concept envelope, not a measured limit. This needs the real counter measured
-   and the host's agreement. Note that raising it alone no longer clears
-   everything: the far end is under the credenza from about 37.5°, so the
-   catalogues need the credenza question answered as well (below).
-2. **Drop the two standard sample boxes** and let the Translucent box be the
-   only box. That returns roughly 480 mm.
-3. **Crop the exhibition fragment** from 700 mm, which the brief allows once
+1. **Raise the allocation.** The counter has the length — the run is about 4.4 m
+   and the composition spans about 70° of arc, now ending clear of the credenza.
+   The 1400 mm was a concept envelope, not a measured limit. This needs the real
+   counter measured and the host's agreement, and nothing more.
+2. **Stack more of it in depth rather than along the run**, as the sample boxes
+   now are. This is the move that actually returned envelope — 510 mm of it —
+   and it cost nothing, because it is what the planning photograph showed all
+   along. Whatever else can go behind something instead of beside it is worth
+   the same again. The limit is the arc: past roughly 419 mm of depth a
+   640 mm-wide unit runs off the glazing side.
+3. **Drop the two standard sample boxes** and let the Translucent box be the
+   only box — now worth much less, since they no longer take a slot.
+4. **Crop the exhibition fragment** from 700 mm, which the brief allows once
    the real engraving pattern has been reviewed — which it now has.
 
-Even taken together, 2 and 3 do not recover 1934 mm. Realistically the
+Even taken together, 3 and 4 do not recover 1424 mm. Realistically the
 allocation has to move; the model shows the arrangement you asked for and
 states the cost rather than quietly shrinking anything to make it fit.
 
@@ -547,6 +560,41 @@ The depth check used to read `Math.max(activeDepth, palette.depth)` — two unit
 picked by name. It silently stopped reporting the deepest unit the moment the
 Growth stand passed both. It now reads the deepest unit off the set-out and names
 it.
+
+#### The sample boxes belong behind the tiles, not beside them
+
+The planning photograph puts the two general sample boxes **behind** the six
+engraved tiles, at the back edge, with the catalogues taking the place to the
+right of the tiles. They had been modelled as their own sub-assembly with its
+own slot on the run, which pushed the catalogues 510 mm further along — onto the
+credenza, where they were invisible and 96 mm inside existing furniture.
+
+Moving them inside the palette unit fixes both at once:
+
+| | Before | After |
+| --- | ---: | ---: |
+| Envelope | 3334 mm | **2824 mm** |
+| Catalogues into credenza | 96 mm | **clear** |
+
+This is the first change in this whole sequence that gave envelope **back**.
+
+It exposed a second thing. The palette unit now has to hold the tile block and
+the boxes, and the first depth tried — 430 mm — **overhung the glazing side by
+10 mm**, even though 430 is comfortably inside the 450 mm counter depth. The
+ceiling is not the nominal depth. At 640 mm wide this unit's back corners sit
+25 mm further out than its centre, so the counter's **2500 mm outer edge** binds
+first:
+
+    sqrt((2060 + D)² + 320²) ≤ 2500   →   D ≤ 419
+
+Set to 410: 15 front margin + 260 tile block + 25 gap + 105 box and standing
+lid. Worth remembering for any future unit — on a curved counter, depth and
+width are not independent.
+
+While measuring it, the tile block turned out to be set out from `pitchZ`
+instead of `blockD`, which had been putting the front row **30 mm proud of the
+unit's front edge**. Harmless while nothing shared the unit; not harmless once
+the depth has to add up.
 
 #### Where the counter actually ends: the credenza, not an angle
 

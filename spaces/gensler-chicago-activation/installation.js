@@ -68,8 +68,11 @@ var thetaC = thetaA - ((mm(I.gapBetweenUnits) + halfA + halfC) / rFront) / D2R;
 var thetaG = thetaA + ((mm(I.gapBetweenUnits) + halfA + halfG) / rFront) / D2R;
 var thetaB = thetaG + ((mm(I.gapBetweenUnits) + halfG + halfB) / rFront) / D2R;
 
-var halfBox = mm(I.boxesUnit.width) / 2;
-var thetaBox = thetaB + ((mm(I.gapBetweenUnits) + halfB + halfBox) / rFront) / D2R;
+/* The two general sample boxes do NOT take a slot of their own on the run.
+   On the planning photograph they stand BEHIND the six engraved tiles, at the
+   back edge, with the catalogues taking the place to the right of the tiles.
+   Given them their own slot, they pushed the catalogues 510 mm further along
+   and onto the credenza. They are now built inside the palette unit. */
 
 var halfD = mm(I.introStand.unit.width) / 2;
 var thetaD = thetaC - ((mm(I.gapBetweenUnits) + halfC + halfD) / rFront) / D2R;
@@ -81,14 +84,13 @@ var thetaD = thetaC - ((mm(I.gapBetweenUnits) + halfC + halfD) / rFront) / D2R;
    edge from about 37.5 deg. Even set out here they still catch its corner —
    checkFootprint reports by how much. */
 var halfBr = (mm(I.brochure.size) + 2 * mm(I.brochure.step) * 0.62) / 2;
-var thetaBr = thetaBox + ((mm(I.gapBetweenUnits) + halfBox + halfBr) / rFront) / D2R;
+var thetaBr = thetaB + ((mm(I.gapBetweenUnits) + halfB + halfBr) / rFront) / D2R;
 
 var UNITS = {
   intro:       { theta: thetaD, w: mm(I.introStand.unit.width),  d: mm(I.introStand.unit.depth) },
   main:        { theta: thetaA, w: mm(I.wall.width),             d: mm(I.activeDepth) },
   growth:      { theta: thetaG, w: mm(I.growthStand.unit.width), d: mm(I.growthStand.unit.depth) },
   palette:     { theta: thetaB, w: mm(I.palette.width),          d: mm(I.palette.depth) },
-  boxes:       { theta: thetaBox, w: mm(I.boxesUnit.width),      d: mm(I.boxesUnit.depth) },
   translucent: { theta: thetaC, w: mm(I.translucentUnit.width),  d: mm(I.translucentUnit.depth) },
   /* the catalogues stand on the counter too, so they are measured with the
      rest of the run rather than exempted from the footprint check */
@@ -107,8 +109,9 @@ var gIntro  = unitGroup(UNITS.intro.theta);
 var gMain   = unitGroup(UNITS.main.theta);
 var gGrowth = unitGroup(UNITS.growth.theta);
 var gPal    = unitGroup(UNITS.palette.theta);
-var gBoxes  = unitGroup(UNITS.boxes.theta);
 var gTrans  = unitGroup(UNITS.translucent.theta);
+// the sample boxes live inside the palette unit, at its back edge
+var gBoxes  = new THREE.Group(); gPal.add(gBoxes);
 
 /* ── surfaces ─────────────────────────────────────────────────────────────
    Wall Tiles carry the four core colours; Growth is its own range. The two
@@ -484,7 +487,15 @@ var pitchX = tileW + mm(I.palette.gapX), pitchZ = tileH + mm(I.palette.gapZ);
 var blockW = I.palette.cols * tileW + (I.palette.cols - 1) * mm(I.palette.gapX);
 var blockD = I.palette.rows * tileH + (I.palette.rows - 1) * mm(I.palette.gapZ);
 var gridX = 0;
-var sampleZ = -mm(30) - pitchZ / 2;
+/* The block starts 15 mm back from the unit's front edge. It used to be set
+   out from pitchZ rather than blockD, which put the front row 30 mm PROUD of
+   the edge — the sample boxes now share this unit, so the depth has to add up,
+   and the margin is tight: this unit is 640 wide, so its back corners swing
+   25 mm further out than its centre and the counter's outer edge is the
+   binding constraint, not its nominal depth. */
+var sampleZ = -mm(15) - blockD / 2;
+var tileBlockFrontZ = sampleZ + blockD / 2;
+var tileBlockBackZ  = sampleZ - blockD / 2;
 var sampleW = tileW;
 var samples = [];
 (function () {
@@ -569,16 +580,22 @@ function sampleBox(spec, x, z, withLid) {
   lid.castShadow = true; g.add(lid);
   return g;
 }
-/* Two general sample boxes — one black, one grey — stacked front-to-back at
-   the right of the tile grid rather than behind it, so a visitor can reach a
-   box and a tile without leaning across either. */
-var BX = I.boxesUnit;
-[[-0.14, -0.05], [0.14, -0.05], [-0.14, -0.19], [0.14, -0.19]].forEach(function (p) {
+/* Two general sample boxes — one black, one grey — standing BEHIND the six
+   engraved tiles at the back of the palette unit, which is where the planning
+   photograph puts them. Set out from the back of the tile block, so moving or
+   resizing the tiles carries the boxes with them.
+   A box reads front-to-back as: body 68, then the lid standing 26 behind it,
+   leaning back about 10 more — call it 116 from the body's front face. */
+var boxFrontZ = tileBlockBackZ - mm(25);   // reach-over gap, tiles to boxes
+var boxZ = boxFrontZ - mm(SB.depth) / 2;
+var boxX = mm(115);
+var boxBackZ = boxZ - mm(SB.depth) / 2 - mm(26) - mm(SB.lidThickness)
+             - mm(SB.lidHeight) * Math.sin(0.10);
+[[-boxX, boxFrontZ - mm(20)], [boxX, boxFrontZ - mm(20)],
+ [-boxX, boxBackZ + mm(20)], [boxX, boxBackZ + mm(20)]].forEach(function (p) {
   var pad = new THREE.Mesh(new THREE.BoxGeometry(0.05, padT, 0.05), matPad);
   pad.position.set(p[0], padT / 2, p[1]); gBoxes.add(pad);
 });
-var boxZ = -mm(BX.depth) / 2;
-var boxX = mm(115);
 var boxes = [
   sampleBox(I.sampleBoxes[0], -boxX, boxZ, true),
   sampleBox(I.sampleBoxes[1],  boxX, boxZ, true)
