@@ -107,7 +107,7 @@ export const CONFIG = {
     legSplayMm: 230,
     tubeDiameterMm: 22,
     standoffFromCounterMm: 480, // seat centre, forward of the counter front edge
-    positionsSMm: [2250, 2750, 3250],
+    positionsSMm: [2450, 2950, 3450],
   },
 
   // -------------------------------------------------------------------------
@@ -120,6 +120,12 @@ export const CONFIG = {
     baseDepthMm: 240,
     baseHeightMm: 55,
     poleDiameterMm: 16,
+    // Height of the BOTTOM edge of the graphic above the floor. The graphic
+    // itself stays exactly 457.2 x 1122.68 mm; this is the stand carrying it.
+    // At 0 (a cassette sitting on the floor) the graphic top would clear the
+    // 1000 mm counter by only 178 mm and read as a low floor sign.
+    graphicBottomHeightMm: 620,
+    railThicknessMm: 16,
     clearanceFromCounterEndMm: 300, // arc gap beyond the counter's left end
     radialOffsetMm: 0,              // 0 = in line with the counter front edge
   },
@@ -300,28 +306,28 @@ export const CONFIG = {
   //     vMm = distance BEHIND the front edge (0 = front edge, 450 = back edge).
   // -------------------------------------------------------------------------
   layout: {
-    brochuresSMm: 265,
+    brochuresSMm: 305,
     brochuresVMm: 250,
 
     // The Growth A4 and its open box share a position: card at the back, box
     // directly in FRONT of it, as in the supplied reference.
-    growthSMm: 780,
+    growthSMm: 683,
     growthCardBackMarginMm: 20,
     growthBoxGapBehindMm: 25,
 
-    installationSMm: 1400,
+    installationSMm: 1166,
     installationFrontMarginMm: 13,  // see FIT REPORT - 20 mm is not achievable
 
-    tilesSMm: 2160,
+    tilesSMm: 1742,
     tilesFrontMarginMm: 20,
 
-    generalBoxesSMm: 2160,
-    generalBoxesVFrontMm: 340,
+    generalBoxesSMm: 2280,
+    generalBoxesVFrontMm: 300,
 
-    translucentCardSMm: 2870,
+    translucentCardSMm: 2740,
     translucentCardBackMarginMm: 20,
 
-    translucentBlockSMm: 2870,
+    translucentBlockSMm: 2740,
     translucentBlockVFrontMm: 200,
   },
 };
@@ -381,8 +387,9 @@ export const PROVENANCE = {
 
   'banner.artworkWidthMm': { status: S, source: BRIEF, note: '18 in = 457.2 mm. Supersedes the "33x81" in the artwork filename.' },
   'banner.artworkHeightMm': { status: S, source: BRIEF, note: '44.2 in = 1122.68 mm.' },
-  ...fill('banner', ['baseWidthMm', 'baseDepthMm', 'baseHeightMm', 'poleDiameterMm'],
-    P, 'Plausible roll-up hardware', 'Cassette/pole are unconfirmed hardware; production hardware may add height.'),
+  ...fill('banner', ['baseWidthMm', 'baseDepthMm', 'baseHeightMm', 'poleDiameterMm', 'railThicknessMm'],
+    P, 'Plausible banner-stand hardware', 'Base, pole and rails are unconfirmed hardware.'),
+  'banner.graphicBottomHeightMm': { status: P, source: 'Plausible banner-stand hardware', note: 'The brief fixes the 457.2 x 1122.68 mm GRAPHIC and says production hardware adding height is a separate unconfirmed measurement. The graphic is carried 620 mm up, so the display stands 1743 mm overall and reads at eye level beside a 1000 mm counter. Standing the graphic on the floor instead would put its top only 178 mm above the counter. Change this one number to switch; the graphic never changes size.' },
   ...fill('banner', ['clearanceFromCounterEndMm', 'radialOffsetMm'],
     P, BRIEF, 'Brief requires "immediately to the LEFT of the counter, outside its footprint"; exact gap is a layout choice.'),
 
@@ -450,7 +457,7 @@ export const PROVENANCE = {
      'growthBoxGapBehindMm', 'installationSMm', 'tilesSMm', 'tilesFrontMarginMm',
      'generalBoxesSMm', 'generalBoxesVFrontMm', 'translucentCardSMm', 'translucentCardBackMarginMm',
      'translucentBlockSMm', 'translucentBlockVFrontMm'],
-    P, BRIEF, 'Left-to-right ORDER is specified; spacing along the counter is a layout choice, respaced so the displays read at the density the venue photograph shows.'),
+    P, BRIEF, 'Left-to-right ORDER is specified; spacing along the counter is a layout choice. Gaps are set from the venue photograph, where consecutive groups sit roughly 45-100 mm apart rather than a quarter of a metre.'),
   'layout.installationFrontMarginMm': { status: C, source: 'Fit check against the provisional counter', note: 'The brief asks for a modest edge margin (20 mm would need 490 x 460 mm of flat top). The provisional 450 mm deep curved top cannot provide it; 13 mm is the best balanced margin. See the fit report.' },
 };
 

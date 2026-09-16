@@ -104,7 +104,7 @@ export function runFitReport(cfg = CONFIG) {
   add(NOTE, 'fit', `Along-counter gaps: ${gaps.join('; ')}.`);
   const tilesFp = byId.tiles;
   const boxesFp = byId['general-boxes'];
-  add(NOTE, 'fit', `Within the comparison zone the two general sample boxes sit BEHIND the six flat samples, not beside them: samples v ${r1(tilesFp.vFront)}..${r1(tilesFp.vBack)} mm, boxes v ${r1(boxesFp.vFront)}..${r1(boxesFp.vBack)} mm, a ${r1(boxesFp.vFront - tilesFp.vBack)} mm gap. The samples stay reachable at the counter front.`);
+  add(NOTE, 'fit', `Comparison zone: six flat samples at the counter front (v ${r1(tilesFp.vFront)}..${r1(tilesFp.vBack)} mm) with the two general sample boxes to their right and set back (v ${r1(boxesFp.vFront)}..${r1(boxesFp.vBack)} mm), ${r1(boxesFp.sMin - tilesFp.sMax)} mm along the counter from them. The samples stay reachable and the taller boxes do not screen them.`);
   const used = sorted[sorted.length - 1].sMax - sorted[0].sMin;
   add(NOTE, 'fit', `Displays occupy ${r1(used)} mm of the ${cfg.counter.topLengthMm} mm counter; ${r1(cfg.counter.topLengthMm - sorted[sorted.length - 1].sMax)} mm is left clear at the right end for the conversation area.`);
 
@@ -239,8 +239,10 @@ export function runFitReport(cfg = CONFIG) {
   if (fromInches[0] !== b.artworkWidthMm || fromInches[1] !== b.artworkHeightMm) {
     add(CONFLICT, 'banner', `Banner size ${b.artworkWidthMm} x ${b.artworkHeightMm} mm does not match 18 x 44.2 in (${fromInches.join(' x ')} mm).`);
   }
-  add(OK, 'banner', `Roll-up ${b.artworkWidthMm} x ${b.artworkHeightMm} mm (18 x 44.2 in), aspect ${r2(b.artworkHeightMm / b.artworkWidthMm)}:1, standing ${r1((b.artworkHeightMm + b.baseHeightMm) / 1000)} m to the top of the artwork including the ${b.baseHeightMm} mm cassette. A narrow ~1.12 m display, not a two-metre banner.`);
-  add(NOTE, 'banner', `Placed on the floor ${b.clearanceFromCounterEndMm} mm beyond the counter's LEFT end, clear of the counter footprint. Cassette and pole are unconfirmed hardware; production hardware may add height.`);
+  add(OK, 'banner', `Roll-up GRAPHIC ${b.artworkWidthMm} x ${b.artworkHeightMm} mm (18 x 44.2 in), aspect ${r2(b.artworkHeightMm / b.artworkWidthMm)}:1, drawn at that aspect and never rescaled. Still the narrow ~1.12 m graphic the brief specifies, not a two-metre banner.`);
+  const standTop = b.graphicBottomHeightMm + b.artworkHeightMm;
+  add(NOTE, 'banner', `The stand carries the graphic from ${b.graphicBottomHeightMm} mm to ${r1(standTop)} mm above the floor, so the display stands ${r1(standTop)} mm overall and its graphic sits ${r1(standTop - cfg.counter.heightMm)} mm above the ${cfg.counter.heightMm} mm counter. Stand height is UNCONFIRMED hardware - the brief calls that a separate measurement. Standing the graphic straight on the floor instead would leave its top just ${r1(b.artworkHeightMm + b.baseHeightMm - cfg.counter.heightMm)} mm above the counter, which reads as a low floor sign.`);
+  add(NOTE, 'banner', `Placed on the floor ${b.clearanceFromCounterEndMm} mm beyond the counter's LEFT end, clear of the counter footprint.`);
 
   // -- 11. Stools -----------------------------------------------------------
   const st = cfg.stools;

@@ -582,39 +582,59 @@ export function buildTranslucentBlock(M) {
 }
 
 // ---------------------------------------------------------------------------
-// 6. Floor-standing roll-up banner, to the LEFT of the counter
+// 6. Floor-standing roll-up banner, to the LEFT of the counter.
+//    The GRAPHIC is the specified 457.2 x 1122.68 mm and is never rescaled.
+//    The stand carries it at eye level; that stand height is unconfirmed
+//    hardware, which the brief flags as a separate measurement.
 // ---------------------------------------------------------------------------
 export function buildBanner(M) {
   const b = cfg.banner;
   const g = group('roll-up-banner');
+  const y0 = b.graphicBottomHeightMm;
+  const y1 = y0 + b.artworkHeightMm;
+  const poleZ = -b.baseDepthMm / 2 + 30;
 
-  const cassette = mesh(box(mm(b.baseWidthMm), mm(b.baseHeightMm), mm(b.baseDepthMm)), M.bannerBase);
-  cassette.position.y = mm(b.baseHeightMm / 2);
-  g.add(cassette);
-  const foot = mesh(box(mm(b.baseWidthMm * 0.5), mm(10), mm(b.baseDepthMm * 1.35)), M.bannerBase);
-  foot.position.y = mm(5);
+  // Weighted foot.
+  const foot = mesh(box(mm(b.baseWidthMm), mm(b.baseHeightMm), mm(b.baseDepthMm)), M.bannerBase);
+  foot.position.set(0, mm(b.baseHeightMm / 2), mm(0));
   g.add(foot);
+  const shoe = mesh(box(mm(b.baseWidthMm * 0.46), mm(12), mm(b.baseDepthMm * 1.3)), M.bannerBase);
+  shoe.position.y = mm(6);
+  g.add(shoe);
 
-  const pole = mesh(tube(mm(b.poleDiameterMm / 2), mm(b.artworkHeightMm + 30), 12), M.pole);
-  pole.position.set(0, mm(b.baseHeightMm + (b.artworkHeightMm + 30) / 2), mm(-b.baseDepthMm / 2 + 24));
-  g.add(pole);
+  // Mast.
+  const mastH = y1 + 26 - b.baseHeightMm;
+  const mast = mesh(tube(mm(b.poleDiameterMm / 2), mm(mastH), 14), M.pole);
+  mast.position.set(0, mm(b.baseHeightMm + mastH / 2), mm(poleZ));
+  g.add(mast);
 
+  // Graphic panel, held between a bottom and a top rail.
   const panel = mesh(
     box(mm(b.artworkWidthMm), mm(b.artworkHeightMm), mm(1.2)),
     M.paper, { name: 'banner-panel' },
   );
-  panel.position.set(0, mm(b.baseHeightMm + b.artworkHeightMm / 2), 0);
+  panel.position.set(0, mm((y0 + y1) / 2), 0);
   g.add(panel);
   const art = mesh(
     new THREE.PlaneGeometry(mm(b.artworkWidthMm), mm(b.artworkHeightMm)),
     M.printed(makeBannerArtwork()),
     { cast: false },
   );
-  art.position.set(0, mm(b.baseHeightMm + b.artworkHeightMm / 2), mm(0.9));
+  art.position.set(0, mm((y0 + y1) / 2), mm(0.9));
   g.add(art);
-  const topRail = mesh(box(mm(b.artworkWidthMm + 18), mm(14), mm(16)), M.pole);
-  topRail.position.y = mm(b.baseHeightMm + b.artworkHeightMm + 6);
-  g.add(topRail);
 
-  return { object: g, footprint: { widthMm: b.baseWidthMm, depthMm: b.baseDepthMm * 1.35 } };
+  for (const y of [y0, y1]) {
+    const rail = mesh(
+      box(mm(b.artworkWidthMm + 20), mm(b.railThicknessMm), mm(b.railThicknessMm + 6)),
+      M.pole,
+    );
+    rail.position.set(0, mm(y), 0);
+    g.add(rail);
+  }
+  // Short stay from the mast back to the bottom rail.
+  const stay = mesh(box(mm(10), mm(10), mm(Math.abs(poleZ))), M.pole);
+  stay.position.set(0, mm(y0), mm(poleZ / 2));
+  g.add(stay);
+
+  return { object: g, footprint: { widthMm: b.baseWidthMm, depthMm: b.baseDepthMm * 1.3 } };
 }

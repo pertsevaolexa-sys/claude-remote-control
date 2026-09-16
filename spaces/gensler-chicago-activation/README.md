@@ -84,7 +84,7 @@ counter and the windows.
 
 | | Display | Purpose |
 |---|---|---|
-| — | **Roll-up banner** on the floor, immediately left of the counter | Starts the presentation. 457.2 × 1122.68 mm (18 × 44.2 in) — a narrow ~1.12 m display, not a two-metre banner. |
+| — | **Roll-up banner** on the floor, immediately left of the counter | Starts the presentation. The graphic is the specified 457.2 × 1122.68 mm (18 × 44.2 in) — still the narrow ~1.12 m graphic, not a two-metre banner. Its stand carries it from 620 mm up, so the display reads at eye level beside a 1 m counter. |
 | 1 | **Three brochures**, 200 × 200 mm | A familiar introduction and something to take away. |
 | 2 | **Growth Collection A4 + open Growth box** | The box sits open directly **in front of** its A4, as the supplied reference shows: printed header panel across the back carrying the Gensler credit, eight samples in two rows of four in front, standing on its own lid. |
 | 3 | **LOOK CLOSER installation** | 450 × 450 mm engraved Oyster panel on a 450 × 420 mm black base; LOOK CLOSER sign front-left; removable **plain, unengraved** portrait Oyster coupon front-right. |
@@ -191,7 +191,9 @@ Run `npm run check` for the full report. The short version:
 ### Measurements and sizes still open
 
 - **Counter**: depth, height, curve radius and top thickness are read off the
-  photograph or inherited as legacy estimates. **Length is now 3300 mm**, derived
+  photograph or inherited as legacy estimates. Group spacing along it is set
+  from the venue photograph, where consecutive groups sit roughly 45–100 mm
+  apart rather than a quarter of a metre. **Length is now 3300 mm**, derived
   by scaling known object sizes in the venue photograph — the 337 mm A4 plate and
   the 450 mm Oyster panel both put it near 3.0–3.3 m. That replaces an earlier
   4600 mm guess which made every display look too small for the counter. A
@@ -210,6 +212,13 @@ Run `npm run check` for the full report. The short version:
   invented and neither box was removed.
 - **LOOK CLOSER sign**: size unconfirmed; 210 × 148 mm landscape used
   provisionally.
+- **Banner stand height**: the *graphic* is fixed at 457.2 × 1122.68 mm and is
+  never rescaled. How high the stand carries it is unconfirmed hardware, which
+  the brief calls a separate measurement. It is set to 620 mm, putting the
+  display 1743 mm overall and the graphic 743 mm above the counter. Standing the
+  graphic straight on the floor instead leaves its top only 178 mm above the
+  counter, which reads as a low floor sign. One number —
+  `banner.graphicBottomHeightMm` — switches between the two.
 - **Stools and furniture clearances**: layout assumptions. They are **not**
   claims about statutory clearances.
 - **Six engraving patterns and ten translucent colours**: provisional
