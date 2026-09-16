@@ -30,17 +30,29 @@ There is no bundler and nothing is fetched at run time.
 | `npm run shots` | Re-render `screenshots/` and report console errors |
 | `npm run bundle` | Build `dist/index.html` — the whole model as ONE self-contained file |
 | `npm run verify` | Check the page actually opens: built file over HTTP and `file://`, dev page from a clean checkout, and the failure path |
+| `npm run docs` | Regenerate `JOURNEY.md`, the representatives' sheet, from the model's own data |
 | `npm run bundle` | Build `dist/index.html` — the whole model as ONE self-contained file |
 | `npm run verify` | Check the page actually opens: built file over HTTP and `file://`, dev page from a clean checkout, and the failure path |
+| `npm run docs` | Regenerate `JOURNEY.md`, the representatives' sheet, from the model's own data |
 
 ### Controls
 
 Orbit with the left mouse button, pan with the right, zoom with the wheel.
-Five review cameras across the top: **Room overview**, **Whole counter**,
-**Installation detail**, **Top layout**, **Conversation area**. **Dimensions**
-turns on the measurement overlay (off by default). **Click the plain Oyster
-coupon** on the installation base to lift it — it is removable, not glued —
-and **Reset sample** puts it back.
+
+**The guided journey** is the main way to use this. Press **▶** (or the arrow
+keys, or a numbered chip) to walk the seven stops in order. Each stop frames its
+part of the counter, rings it on the surface, lights its numbered marker, and
+shows what the representative says there — with that part's dimensions in
+millimetres and inches. **Clicking a numbered marker in the model** jumps
+straight to its stop. `JOURNEY.md` is the same seven stops as a printable sheet.
+
+**Reference** opens the full dimensions tables, the angles, what still needs
+measuring, and every recorded conflict. **Dimensions** turns on the measurement
+overlay in the scene (off by default). **Views** gives three free cameras: room,
+whole counter, top layout.
+
+**Click the plain Oyster coupon** on the installation base to lift it — it is
+removable, not glued — and **Reset sample** puts it back.
 
 ---
 
@@ -254,6 +266,9 @@ with no fabricated QR code, certification mark or body copy. See
 | `src/materials.js` | Shared materials. |
 | `src/room.js` | Venue: room, bay, column, counter, bookcase, stools, surrounding furniture. |
 | `src/displays.js` | The eight display groups. Each returns its own footprint. |
+| `src/journey.js` | The seven journey stops: what is said, what it points at, and camera framings derived from the counter geometry. |
+| `src/dimensions.js` | The representatives' dimension tables. Millimetres in, centimetres and inches computed. |
+| `src/guide.js` | The pointing layer: numbered markers and the frame drawn round the active stop, both built from real bounding boxes. |
 | `src/overlay.js` | The dimension overlay, colour-coded by status. |
 | `src/main.js` | Scene, daylight, cameras, controls, review panel, sample-lift interaction. |
 
@@ -267,6 +282,16 @@ GLB export is **not** included. The brief allows identifying it as a separate
 follow-up where no export workflow already exists, and none did. Everything in
 the scene is standard three.js geometry, so adding `GLTFExporter` later is
 straightforward.
+
+---
+
+## The representatives' sheet
+
+[`JOURNEY.md`](JOURNEY.md) is the walkthrough and the full dimensions reference
+in one printable document. It is **generated** by `npm run docs` from
+`src/journey.js` and `src/dimensions.js` — the same data the model uses — so the
+sheet a representative holds and the model on the screen cannot disagree. Edit
+the source files, not `JOURNEY.md`.
 
 ---
 

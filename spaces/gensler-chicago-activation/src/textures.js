@@ -26,11 +26,16 @@ function mulberry32(seed) {
   };
 }
 
-function canvas2d(w, h) {
+function canvas2d(w, h, logicalW, logicalH) {
   const c = document.createElement('canvas');
-  c.width = w;
-  c.height = h;
-  return { c, g: c.getContext('2d') };
+  c.width = Math.round(w);
+  c.height = Math.round(h);
+  const g = c.getContext('2d');
+  // Artwork below is laid out in absolute pixels against a logical size. Render
+  // it smaller by scaling the context, never by shrinking the canvas underneath
+  // the coordinates - that collapses line spacing and overlaps the text.
+  if (logicalW) g.scale(w / logicalW, h / (logicalH || logicalW));
+  return { c, g };
 }
 
 function toTexture(c, { srgb = true, repeat = null, aniso = 8 } = {}) {
@@ -176,21 +181,28 @@ const fragmentCache = new Map();
  */
 export const FRAGMENT_TILE_MM = 300;
 const FRAGMENT_CELLS = 50;   // 300 / 50 = 6 mm fragments
+const FRAGMENT_PX = 640;
 
-export function fragmentMaterialMaps(paletteName, seed = 3) {
-  const key = `${paletteName}|${seed}`;
-  if (fragmentCache.has(key)) return fragmentCache.get(key);
+/**
+ * ONE sheet per palette. Parts do not need their own texture: physicalUV()
+ * gives each part a different window onto the same sheet, which is the whole
+ * point of it. Keying this cache per part instead uploaded 35 sheets and about
+ * 618 MB of texture memory, which loses the WebGL context on a tablet.
+ * The roughness map doubles as the bump map - same data, one upload.
+ */
+export function fragmentMaterialMaps(paletteName) {
+  if (fragmentCache.has(paletteName)) return fragmentCache.get(paletteName);
   const entry = GROWTH_PALETTES.find((p) => p.name === paletteName) || GROWTH_PALETTES[0];
+  const seed = 1 + GROWTH_PALETTES.indexOf(entry) * 17;
   const { colourCanvas, roughCanvas } = makeFragmentMaps({
-    px: 1024, cells: FRAGMENT_CELLS, seed, palette: entry.base,
+    px: FRAGMENT_PX, cells: FRAGMENT_CELLS, seed, palette: entry.base,
   });
   const wrap = { repeat: [1, 1] };
   const maps = {
     map: toTexture(colourCanvas, wrap),
-    roughnessMap: toTexture(roughCanvas, { srgb: false, ...wrap }),
-    bumpMap: toTexture(roughCanvas, { srgb: false, ...wrap }),
+    roughness: toTexture(roughCanvas, { srgb: false, ...wrap }),
   };
-  fragmentCache.set(key, maps);
+  fragmentCache.set(paletteName, maps);
   return maps;
 }
 
@@ -258,8 +270,8 @@ function placeholderTag(g, x, y, size, label = 'ARTWORK PLACEHOLDER') {
 
 /** Landscape A4 collection card, 297 x 210 mm. */
 export function makeCollectionCard({ title, swatches, credit, seedBase = 40 }) {
-  const W = 1782; const H = 1260; // 6 px/mm
-  const { c, g } = canvas2d(W, H);
+  const W = 1782; const H = 1260;                 // layout grid, 6 px/mm
+  const { c, g } = canvas2d(1188, 840, W, H);    // rendered at 4 px/mm
   g.fillStyle = '#ffffff';
   g.fillRect(0, 0, W, H);
 
@@ -307,8 +319,8 @@ export function makeCollectionCard({ title, swatches, credit, seedBase = 40 }) {
 
 /** LOOK CLOSER sign, provisionally 210 x 148 mm landscape. */
 export function makeLookCloserSign() {
-  const W = 1260; const H = 888; // 6 px/mm
-  const { c, g } = canvas2d(W, H);
+  const W = 1260; const H = 888;                 // layout grid, 6 px/mm
+  const { c, g } = canvas2d(840, 592, W, H);     // rendered at 4 px/mm
   g.fillStyle = '#ffffff';
   g.fillRect(0, 0, W, H);
   const m = 78;
@@ -339,8 +351,8 @@ export function makeLookCloserSign() {
 
 /** Roll-up banner artwork, 457.2 x 1122.68 mm - drawn at the true aspect. */
 export function makeBannerArtwork() {
-  const W = 914; const H = 2245; // 2 px/mm, true 1 : 2.455
-  const { c, g } = canvas2d(W, H);
+  const W = 914; const H = 2245;                 // layout grid, true 1 : 2.455
+  const { c, g } = canvas2d(640, 1572, W, H);    // rendered smaller
   g.fillStyle = '#ffffff';
   g.fillRect(0, 0, W, H);
 
@@ -401,8 +413,8 @@ export function makeBannerArtwork() {
 
 /** 200 x 200 mm brochure cover, olive green. */
 export function makeBrochureCover() {
-  const S = 800;
-  const { c, g } = canvas2d(S, S);
+  const S = 800;                                 // layout grid
+  const { c, g } = canvas2d(512, 512, S, S);
   const grad = g.createLinearGradient(0, 0, S, S);
   grad.addColorStop(0, '#6f7a4c');
   grad.addColorStop(1, '#5c6640');
@@ -423,7 +435,7 @@ export function makeBrochureCover() {
  * photograph of the box open on the counter.
  */
 export function makeGrowthHeader(widthMm, depthMm) {
-  const px = 6;
+  const px = 4;
   const W = Math.round(widthMm * px); const H = Math.round(depthMm * px);
   const { c, g } = canvas2d(W, H);
   const grad = g.createLinearGradient(0, 0, 0, H);
@@ -468,7 +480,7 @@ export function makeGrowthLid(widthMm, depthMm) {
 
 /** Front face of a general sample box: the Polygood mark on a plain field. */
 export function makeSampleBoxFront(widthMm, heightMm, finish) {
-  const px = 8;
+  const px = 5;
   const W = Math.round(widthMm * px); const H = Math.round(heightMm * px);
   const { c, g } = canvas2d(W, H);
   g.fillStyle = finish === 'grey' ? '#8d8a8c' : '#1d1d1f';
@@ -482,7 +494,7 @@ export function makeSampleBoxFront(widthMm, heightMm, finish) {
  * carries the line printed on the supplied reference; the grey one is plain.
  */
 export function makeSampleBoxLid(heightMm, widthMm, finish) {
-  const px = 8;
+  const px = 5;
   const W = Math.round(widthMm * px); const H = Math.round(heightMm * px);
   const { c, g } = canvas2d(W, H);
   g.fillStyle = finish === 'grey' ? '#8d8a8c' : '#1d1d1f';

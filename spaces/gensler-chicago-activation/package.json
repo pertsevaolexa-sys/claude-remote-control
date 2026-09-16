@@ -9,7 +9,8 @@
     "serve": "node build.mjs --serve",
     "bundle": "node bundle.mjs",
     "shots": "node shots.mjs",
-    "verify": "node verify.mjs"
+    "verify": "node verify.mjs",
+    "docs": "node docs.mjs"
   },
   "author": "",
   "license": "ISC",

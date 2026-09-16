@@ -14,13 +14,17 @@ const PORT = 5199;
 const OUT = join(root, 'screenshots');
 
 const SHOTS = [
-  { file: '01-room-overview.png', view: 'overview', dims: false, panel: false, hud: false },
-  { file: '02-whole-counter.png', view: 'counter', dims: false, panel: false, hud: false },
-  { file: '03-installation-detail.png', view: 'installation', dims: false, panel: false, hud: false },
-  { file: '04-top-layout.png', view: 'top', dims: false, panel: false, hud: false },
-  { file: '05-conversation-area.png', view: 'seating', dims: false, panel: false, hud: false },
-  { file: '06-dimensions-overlay.png', view: 'counter', dims: true, panel: false, hud: false },
-  { file: '07-review-interface.png', view: 'overview', dims: false, panel: true, hud: true },
+  { file: '01-room-overview.png', view: 'overview', dims: false, hud: false },
+  { file: '02-whole-counter.png', view: 'counter', dims: false, hud: false },
+  { file: '03-top-layout.png', view: 'top', dims: false, hud: false },
+  { file: '04-dimensions-overlay.png', view: 'counter', dims: true, hud: false },
+  { file: '05-journey-banner.png', stop: 0, hud: true },
+  { file: '06-journey-growth.png', stop: 2, hud: true },
+  { file: '07-journey-look-closer.png', stop: 3, hud: true },
+  { file: '08-journey-samples.png', stop: 4, hud: true },
+  { file: '09-journey-translucent.png', stop: 5, hud: true },
+  { file: '10-journey-representatives.png', stop: 6, hud: true },
+  { file: '11-reference-drawer.png', stop: 3, hud: true, reference: true },
 ];
 
 await mkdir(OUT, { recursive: true });
@@ -44,11 +48,13 @@ await page.waitForFunction(() => window.PG && window.PG.ready, null, { timeout: 
 await page.waitForTimeout(6000);
 
 for (const s of SHOTS) {
-  await page.evaluate(({ view, dims, panel, hud }) => {
-    window.PG.setHud(hud);
-    window.PG.applyView(view);
-    window.PG.setDimensions(dims);
-    window.PG.setPanel(panel);
+  await page.evaluate(({ view, dims, stop, hud, reference }) => {
+    window.PG.setHud(hud !== false);
+    if (typeof stop === 'number') window.PG.setStop(stop, { instant: true });
+    else window.PG.applyView(view, true);
+    window.PG.setDimensions(!!dims);
+    const ref = document.getElementById('reference');
+    ref.classList.toggle('open', !!reference);
   }, s);
   await page.evaluate(() => window.PG.render(3));
   await page.waitForTimeout(6000);

@@ -68,19 +68,22 @@ export function buildMaterials() {
    */
   const fragmentMaterials = new Map();
   M.fragmentTileMm = FRAGMENT_TILE_MM;
-  M.fragment = (paletteName, seed = 3) => {
-    const key = `${paletteName}|${seed}`;
-    if (fragmentMaterials.has(key)) return fragmentMaterials.get(key);
-    const maps = fragmentMaterialMaps(paletteName, seed);
+  // One material per palette. The second argument is kept so call sites read
+  // clearly, but it is deliberately NOT part of the cache key: parts differ by
+  // WHERE they sample the sheet (physicalUV), not by having their own copy of
+  // it. See fragmentMaterialMaps().
+  M.fragment = (paletteName) => {
+    if (fragmentMaterials.has(paletteName)) return fragmentMaterials.get(paletteName);
+    const maps = fragmentMaterialMaps(paletteName);
     const mat = new THREE.MeshStandardMaterial({
       map: maps.map,
-      roughnessMap: maps.roughnessMap,
-      bumpMap: maps.bumpMap,
+      roughnessMap: maps.roughness,
+      bumpMap: maps.roughness,
       bumpScale: 0.07,
       roughness: 1.0,
       metalness: 0,
     });
-    fragmentMaterials.set(key, mat);
+    fragmentMaterials.set(paletteName, mat);
     return mat;
   };
 

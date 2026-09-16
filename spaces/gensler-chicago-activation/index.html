@@ -20,48 +20,104 @@
   #hud { position: fixed; inset: 0; pointer-events: none; display: flex;
          flex-direction: column; justify-content: space-between; }
 
-  .bar { pointer-events: auto; margin: 14px; padding: 10px 14px; background: var(--panel);
-         border: 1px solid var(--line); border-radius: 10px; backdrop-filter: blur(6px);
+  .bar { pointer-events: auto; background: var(--panel); border: 1px solid var(--line);
+         border-radius: 10px; backdrop-filter: blur(6px);
          box-shadow: 0 2px 14px rgba(0,0,0,.07); }
 
-  #topbar { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; align-self: flex-start; max-width: calc(100% - 28px); }
-  #topbar h1 { font-size: 13px; font-weight: 600; margin: 0; letter-spacing: .01em; }
-  #topbar h1 small { display: block; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+  #topbar { margin: 14px; padding: 9px 13px; display: flex; flex-wrap: wrap;
+            align-items: center; gap: 8px 16px; align-self: flex-start;
+            max-width: calc(100% - 28px); }
+  #topbar h1 { font-size: 13px; font-weight: 600; margin: 0 6px 0 0; }
+  #topbar h1 small { display: block; font-weight: 400; color: var(--muted); }
+  .group { display: flex; align-items: center; gap: 6px; }
+  .lbl { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase;
+         color: var(--muted); font-weight: 600; }
+  .pos { font-size: 12px; color: var(--muted); min-width: 40px; text-align: center;
+         font-variant-numeric: tabular-nums; }
+  .chips { display: flex; gap: 3px; }
+  .chips button { padding: 3px 8px; font-size: 11.5px; min-width: 26px; }
 
-  #views { display: flex; gap: 6px; flex-wrap: wrap; }
   button { font: inherit; font-size: 12.5px; padding: 5px 11px; border-radius: 999px;
            border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; }
   button:hover { border-color: #b9b5ad; }
-  button.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+  button.active { background: var(--teal); color: #fff; border-color: var(--teal); }
   button:disabled { opacity: .4; cursor: default; }
+  #views { display: flex; gap: 5px; }
 
   label.check { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; cursor: pointer; }
+  #legend { display: flex; gap: 11px; font-size: 11px; color: var(--muted); }
+  #legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px;
+              margin-right: 5px; vertical-align: -1px; }
 
-  #legend { display: flex; gap: 12px; font-size: 11.5px; color: var(--muted); }
-  #legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  #bottom { display: flex; align-items: flex-end; gap: 12px; margin: 14px;
+            justify-content: space-between; }
+  #stop-card { padding: 14px 16px; max-width: 450px; max-height: calc(100vh - 210px); overflow: auto; }
+  #stop-card .intro { font-size: 12.5px; color: var(--muted); margin: 0 0 8px; }
+  #stop-card .hint { font-size: 12px; color: var(--teal); margin: 0; }
+  .stop-head { display: flex; gap: 11px; align-items: baseline; margin-bottom: 8px; }
+  .stop-head .num { display: inline-flex; align-items: center; justify-content: center;
+                    width: 24px; height: 24px; border-radius: 50%; background: var(--teal);
+                    color: #fff; font-size: 12.5px; font-weight: 600; flex: none; }
+  #stop-card h2 { font-size: 15px; margin: 0; }
+  #stop-card .sub { font-size: 12px; color: var(--muted); margin: 1px 0 0; }
+  #stop-card p { font-size: 12.5px; margin: 0 0 7px; }
+  #stop-card h3 { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em;
+                  color: var(--muted); margin: 11px 0 4px; }
+  #stop-card blockquote { margin: 9px 0; padding: 8px 11px; border-left: 3px solid var(--teal);
+                          background: rgba(15,92,88,.05); font-size: 12.5px; }
+  #stop-card .dont { font-size: 12px; color: #9c3a2f; }
+  table.dims { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+  table.dims th { text-align: left; font-weight: 400; color: var(--muted); padding: 2px 8px 2px 0; }
+  table.dims td { padding: 2px 0 2px 8px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.dims td:last-child { color: var(--muted); }
+  #stop-card ul { margin: 0; padding-left: 16px; font-size: 11.8px; }
+  #stop-card li { margin-bottom: 4px; }
+  .flags li { color: #8a5a20; }
+  .muted { color: var(--muted); }
 
-  #bottom { display: flex; align-items: flex-end; gap: 12px; justify-content: space-between; }
-  #status { font-size: 12px; color: var(--muted); }
-  #view-note { font-size: 12.5px; }
-  #lift-state { font-size: 12.5px; color: var(--teal); }
+  #controls { padding: 9px 13px; font-size: 12.5px; }
+  #controls .row { display: flex; gap: 6px; align-items: center; margin-top: 6px; }
+  #controls #status-counts { font-size: 11.5px; color: var(--muted); margin-right: 4px; }
+  #lift-state { color: var(--teal); }
 
-  #panel { pointer-events: auto; position: fixed; right: 14px; top: 14px; width: 340px;
-           max-height: calc(100vh - 28px); overflow: auto; background: var(--panel);
-           border: 1px solid var(--line); border-radius: 10px; backdrop-filter: blur(6px);
-           box-shadow: 0 2px 14px rgba(0,0,0,.07); }
-  #panel.collapsed > *:not(#panel-toggle) { display: none; }
-  #panel-toggle { width: 100%; border: 0; border-radius: 10px; background: transparent;
-                  text-align: left; padding: 11px 14px; font-weight: 600; font-size: 12.5px; }
-  #panel section { padding: 0 14px 12px; }
-  #panel h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
-              color: var(--muted); margin: 10px 0 6px; font-weight: 600; }
-  #panel ol, #panel ul { margin: 0; padding-left: 17px; font-size: 12.3px; }
-  #panel li { margin-bottom: 6px; }
-  #panel li b { font-weight: 600; }
-  #panel li span { color: var(--muted); }
+  #reference { pointer-events: auto; position: fixed; top: 0; right: 0; bottom: 0;
+               width: 420px; max-width: 94vw; background: #fbfaf8;
+               border-left: 1px solid var(--line); box-shadow: -4px 0 26px rgba(0,0,0,.09);
+               transform: translateX(100%); transition: transform .22s ease; z-index: 20;
+               display: flex; flex-direction: column; }
+  #reference.open { transform: none; }
+  .ref-head { display: flex; align-items: center; justify-content: space-between;
+              padding: 13px 16px; border-bottom: 1px solid var(--line); }
+  .ref-head h2 { font-size: 13px; margin: 0; }
+  #ref-close { border: 0; font-size: 20px; line-height: 1; padding: 0 6px; background: none; }
+  .ref-body { overflow: auto; padding: 14px 16px 30px; }
+  .ref-intro { font-size: 11.8px; color: var(--muted); margin: 0 0 12px; }
+  .ref-body h3 { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em;
+                 color: var(--muted); margin: 16px 0 5px; }
+  .ref-body h4 { font-size: 12.5px; margin: 14px 0 2px; }
+  .ref-body .cap { font-size: 11px; color: var(--muted); margin: 0 0 6px; }
+  .ref-row { padding: 6px 0; border-bottom: 1px solid #eeebe6; }
+  .ref-label { font-size: 11.8px; }
+  .ref-label .muted { font-size: 10.8px; }
+  .ref-vals { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 2px;
+              font-variant-numeric: tabular-nums; }
+  .ref-vals .mmv { font-size: 11.8px; font-weight: 600; }
+  .ref-vals .inv { font-size: 11.3px; color: var(--muted); }
+  .s-conflict .ref-label { color: #9c3a2f; font-weight: 600; }
+  .s-provisional .ref-label { color: #8a5a20; }
+  .s-context .ref-label { color: var(--muted); font-style: italic; }
+  .ref-note { font-size: 10.8px; color: var(--muted); margin-top: 3px; }
+  .ref-body ul { margin: 0; padding-left: 16px; font-size: 11.8px; }
+  .ref-body li { margin-bottom: 5px; }
+  #conflicts li b { display: block; }
   #fit li { color: #9c3a2f; }
-  .warn { font-size: 12px; color: #9c3a2f; border-top: 1px solid var(--line);
-          margin-top: 6px; padding: 10px 14px 12px; }
+  .warn { font-size: 11.5px; color: #9c3a2f; border-top: 1px solid var(--line);
+          margin-top: 14px; padding-top: 10px; }
+
+  @media (max-width: 900px) {
+    #stop-card { max-width: none; max-height: 40vh; }
+    #bottom { flex-direction: column; align-items: stretch; }
+  }
 
   /* Boot state. Visible until the model reports ready, so a page that fails
      explains itself instead of showing an empty canvas. */
@@ -125,7 +181,18 @@
   window.__pgFail = fail;
 
   function generic() {
-    fail('The model did not start', 'The error below stopped it before the scene was built.');
+    // A lost or refused WebGL context surfaces as a shader/context TypeError.
+    // That is a device limit, not a broken page, so say which it is.
+    var graphics = problems.some(function (p) {
+      return /WebGLShader|shaderSource|context lost|CONTEXT_LOST|createProgram|out of memory/i.test(String(p));
+    });
+    if (graphics) {
+      fail('This device ran out of graphics memory',
+        'The browser dropped the 3-D context while the scene was being built. Close other tabs '
+        + 'and reload. On an iPad, the Safari tab limit matters more than free storage.');
+    } else {
+      fail('The model did not start', 'The error below stopped it before the scene was built.');
+    }
   }
 
   function report() {
@@ -191,40 +258,63 @@
 <div id="hud">
   <div id="topbar" class="bar">
     <h1>Polygood · LOOK CLOSER
-      <small>Gensler Chicago office activation — spatial prototype</small></h1>
-    <div id="views"></div>
+      <small>Gensler Chicago activation — a material journey</small></h1>
+
+    <div class="group">
+      <span class="lbl">Journey</span>
+      <button id="stop-prev" title="Previous stop">◀</button>
+      <span id="stop-position" class="pos">— / 7</span>
+      <button id="stop-next" title="Next stop">▶</button>
+      <span id="stop-chips" class="chips"></span>
+    </div>
+
+    <div class="group">
+      <span class="lbl">Views</span>
+      <span id="views"></span>
+    </div>
+
     <label class="check"><input type="checkbox" id="dims"> Dimensions</label>
+    <button id="ref-toggle">Reference ▸</button>
     <div id="legend"></div>
   </div>
 
-  <div id="bottom" class="bar">
-    <div>
+  <div id="bottom">
+    <div id="stop-card" class="bar"></div>
+    <div id="controls" class="bar">
       <div id="view-note"></div>
       <div id="lift-state"></div>
-    </div>
-    <div style="display:flex;gap:6px;align-items:center">
-      <span id="status"><span id="status-counts"></span></span>
-      <button id="reset-lift">Reset sample</button>
-      <button id="reset-view">Reset view</button>
+      <div class="row">
+        <span id="status-counts"></span>
+        <button id="reset-lift">Reset sample</button>
+        <button id="reset-view">Reset view</button>
+      </div>
     </div>
   </div>
 </div>
 
-<div id="panel">
-  <button id="panel-toggle">Review notes ▾</button>
-  <section>
-    <h2>Counter sequence, left to right</h2>
-    <ol id="sequence"></ol>
-    <h2>Conflicts to resolve</h2>
+<aside id="reference">
+  <div class="ref-head">
+    <h2>Reference</h2>
+    <button id="ref-close" aria-label="Close">×</button>
+  </div>
+  <div class="ref-body">
+    <p class="ref-intro">Dimensions are stated in millimetres; centimetres and inches are
+       computed from them (1 in = 25.4 mm). <b>Model from the millimetre values.</b></p>
+    <div id="ref-tables"></div>
+    <h3>Angles</h3>
+    <ul id="ref-angles"></ul>
+    <h3>Still to measure</h3>
+    <ul id="ref-tomeasure"></ul>
+    <h3>Conflicts to resolve</h3>
     <ul id="conflicts"></ul>
-    <h2>Fit issues flagged by the geometry</h2>
+    <h3>Fit issues from the geometry</h3>
     <ul id="fit"></ul>
-    <h2>Assumptions</h2>
+    <h3>Assumptions</h3>
     <ul id="assumptions"></ul>
-  </section>
-  <p class="warn">Not fabrication-ready. Most dimensions here are estimates or
-     placeholders; see the conflict list above and <code>npm run check</code>.</p>
-</div>
+    <p class="warn">Not fabrication-ready. Most dimensions here are estimates or
+       placeholders; see above and <code>npm run check</code>.</p>
+  </div>
+</aside>
 
 <script type="importmap">
 {
