@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Polygood · LOOK CLOSER · Gensler Chicago activation</title>
+<style>
+  :root {
+    --ink: #1b1c1e;
+    --muted: #5d6066;
+    --line: #dcd9d3;
+    --panel: rgba(252, 251, 249, 0.94);
+    --teal: #0f5c58;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #d7dde2;
+    font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; color: var(--ink); }
+  #scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+  #hud { position: fixed; inset: 0; pointer-events: none; display: flex;
+         flex-direction: column; justify-content: space-between; }
+
+  .bar { pointer-events: auto; margin: 14px; padding: 10px 14px; background: var(--panel);
+         border: 1px solid var(--line); border-radius: 10px; backdrop-filter: blur(6px);
+         box-shadow: 0 2px 14px rgba(0,0,0,.07); }
+
+  #topbar { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; align-self: flex-start; max-width: calc(100% - 28px); }
+  #topbar h1 { font-size: 13px; font-weight: 600; margin: 0; letter-spacing: .01em; }
+  #topbar h1 small { display: block; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+
+  #views { display: flex; gap: 6px; flex-wrap: wrap; }
+  button { font: inherit; font-size: 12.5px; padding: 5px 11px; border-radius: 999px;
+           border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; }
+  button:hover { border-color: #b9b5ad; }
+  button.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+  button:disabled { opacity: .4; cursor: default; }
+
+  label.check { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; cursor: pointer; }
+
+  #legend { display: flex; gap: 12px; font-size: 11.5px; color: var(--muted); }
+  #legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+
+  #bottom { display: flex; align-items: flex-end; gap: 12px; justify-content: space-between; }
+  #status { font-size: 12px; color: var(--muted); }
+  #view-note { font-size: 12.5px; }
+  #lift-state { font-size: 12.5px; color: var(--teal); }
+
+  #panel { pointer-events: auto; position: fixed; right: 14px; top: 14px; width: 340px;
+           max-height: calc(100vh - 28px); overflow: auto; background: var(--panel);
+           border: 1px solid var(--line); border-radius: 10px; backdrop-filter: blur(6px);
+           box-shadow: 0 2px 14px rgba(0,0,0,.07); }
+  #panel.collapsed > *:not(#panel-toggle) { display: none; }
+  #panel-toggle { width: 100%; border: 0; border-radius: 10px; background: transparent;
+                  text-align: left; padding: 11px 14px; font-weight: 600; font-size: 12.5px; }
+  #panel section { padding: 0 14px 12px; }
+  #panel h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
+              color: var(--muted); margin: 10px 0 6px; font-weight: 600; }
+  #panel ol, #panel ul { margin: 0; padding-left: 17px; font-size: 12.3px; }
+  #panel li { margin-bottom: 6px; }
+  #panel li b { font-weight: 600; }
+  #panel li span { color: var(--muted); }
+  #fit li { color: #9c3a2f; }
+  .warn { font-size: 12px; color: #9c3a2f; border-top: 1px solid var(--line);
+          margin-top: 6px; padding: 10px 14px 12px; }
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+
+<div id="hud">
+  <div id="topbar" class="bar">
+    <h1>Polygood · LOOK CLOSER
+      <small>Gensler Chicago office activation — spatial prototype</small></h1>
+    <div id="views"></div>
+    <label class="check"><input type="checkbox" id="dims"> Dimensions</label>
+    <div id="legend"></div>
+  </div>
+
+  <div id="bottom" class="bar">
+    <div>
+      <div id="view-note"></div>
+      <div id="lift-state"></div>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <span id="status"><span id="status-counts"></span></span>
+      <button id="reset-lift">Reset sample</button>
+      <button id="reset-view">Reset view</button>
+    </div>
+  </div>
+</div>
+
+<div id="panel">
+  <button id="panel-toggle">Review notes ▾</button>
+  <section>
+    <h2>Counter sequence, left to right</h2>
+    <ol id="sequence"></ol>
+    <h2>Conflicts to resolve</h2>
+    <ul id="conflicts"></ul>
+    <h2>Fit issues flagged by the geometry</h2>
+    <ul id="fit"></ul>
+    <h2>Assumptions</h2>
+    <ul id="assumptions"></ul>
+  </section>
+  <p class="warn">Not fabrication-ready. Most dimensions here are estimates or
+     placeholders; see the conflict list above and <code>npm run check</code>.</p>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three.module.js",
+    "three/addons/": "./vendor/addons/"
+  }
+}
+</script>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
