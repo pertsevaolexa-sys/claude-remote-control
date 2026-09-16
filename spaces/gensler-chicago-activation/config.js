@@ -287,7 +287,13 @@ window.PG_CONFIG = {
          the side wall, not the room.
          credenza values mirror venue.js: bayPt(63, 2.10), 1780 wide. */
       credenza: { angle: 63, radius: 2100, halfWidth: 890, depth: 460, height: 1000 },
-      alongCredenza: 1560,      // from its centre, past the far end
+      /* 1900 from the credenza's centre, not 1560. At 1560 the stand cleared
+         the credenza's end by only 110 mm and one corner of its footprint was
+         still inside the 460-deep band, so from anywhere in the room it stood
+         at the corner and screened the shelving — which is exactly what this
+         block says it does not do. 1900 puts it about 450 mm past the end,
+         standing in the open as the right-most element. */
+      alongCredenza: 1900,      // from its centre, well past the far end
       outFromCredenza: 470,     // toward the room, clear of the 460-deep carcass
       artwork: null
     },

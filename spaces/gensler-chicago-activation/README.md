@@ -128,6 +128,18 @@ Two things follow. 44.2 inches is short for a floor roll-up — most are near
 stands. And whether the 1123 mm includes the cassette is unconfirmed; it is
 drawn as graphic-only on a cassette, the taller reading.
 
+**Where it stands matters as much as how wide it is.** Set 1560 mm along the
+credenza's axis it cleared the shelving's end by only **110 mm**, with one
+corner of its footprint still inside the 460 mm depth band. No intersection —
+but from anywhere in the room it stood at the corner and screened the shelving,
+which is the opposite of what the arithmetic above says it does. It is now at
+**1900 mm**, about 450 mm past the end, standing in the open as the right-most
+element with the credenza reading in full behind it.
+
+The lesson generalises: "does not screen it" is a claim about **width**, and it
+only holds if the stand is not parked in front of the thing. Clearance in plan
+is what decides that, not the graphic's dimensions.
+
 #### Why the tiles stopped sharing the panel’s surface
 
 The six tiles follow the Growth swatch; the horizontal panel under the
