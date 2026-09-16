@@ -84,11 +84,11 @@ counter and the windows.
 
 | | Display | Purpose |
 |---|---|---|
-| — | **Roll-up banner** on the floor, immediately left of the counter | Starts the presentation. The graphic is the specified 457.2 × 1122.68 mm (18 × 44.2 in) — still the narrow ~1.12 m graphic, not a two-metre banner. Its stand carries it from 620 mm up, so the display reads at eye level beside a 1 m counter. |
+| — | **Roll-up banner** on the floor, immediately left of the counter | Starts the presentation. A floor-standing roll-up 1800 mm tall, as the supplied reference render shows, with the specified 457.2 × 1122.68 mm graphic printed across the top and the panel blank below it. See the height conflict below. |
 | 1 | **Three brochures**, 200 × 200 mm | A familiar introduction and something to take away. |
 | 2 | **Growth Collection A4 + open Growth box** | The box sits open directly **in front of** its A4, as the supplied reference shows: printed header panel across the back carrying the Gensler credit, eight samples in two rows of four in front, standing on its own lid. |
 | 3 | **LOOK CLOSER installation** | 450 × 450 mm engraved Oyster panel on a 450 × 420 mm black base; LOOK CLOSER sign front-left; removable **plain, unengraved** portrait Oyster coupon front-right. |
-| 4 | **Six engraved samples + two general sample boxes** | Three across, two rows deep, with the black and grey boxes behind them — slim boxes of upright sample sticks with their sleeve lids standing at one end, as in the supplied product photographs. Comparison zone. |
+| 4 | **Six engraved samples + two general sample boxes** | Three across, two rows deep at the counter front, with the black and grey boxes standing **behind** them and centred on the group — the arrangement in the supplied top view. Slim boxes of upright sample sticks with their sleeve lids at one end. Comparison zone. |
 | 5 | **Translucent block + A4** | Ten upright translucent samples in an unbranded black block, with its card behind. |
 | 6 | **Three stools**, floor, right end, room side | The conversation area. |
 
@@ -168,7 +168,16 @@ Run `npm run check` for the full report. The short version:
    26 mm of total front-to-back slack — a best balanced margin of **13.0 mm**,
    7 mm short per edge. The object has **not** been scaled down and the counter
    has **not** been widened. **The counter depth needs measuring.**
-4. **The counter is not long enough for both the display run and a separate
+4. **Banner height: 1122.68 mm stated, about 1770 mm in the reference render.**
+   The brief gives 457.2 × 1122.68 mm and warns against a two-metre banner. The
+   supplied reference render shows a floor-standing roll-up that scales to about
+   1770 mm tall — and scaling its *width* by the same method gives 453 mm
+   against the specified 457.2 mm, so the method is sound and the height really
+   does disagree. Modelled as a 1800 mm floor-standing roll-up with the
+   specified graphic printed across the top and the panel blank below it. The
+   graphic is never rescaled. `banner.overallHeightMm` returns it to the stated
+   envelope. **Confirm which height is right.**
+5. **The counter is not long enough for both the display run and a separate
    conversation area.** The five display groups need about 3.1 m of counter once
    sensible gaps are allowed; three stools need roughly another 1.3 m of
    frontage. The counter measures about 3.3 m. The stools are kept grouped at
@@ -176,14 +185,14 @@ Run `npm run check` for the full report. The short version:
    Translucent group. In the venue photograph they in fact sit in front of the
    display zone. Lengthen the counter, drop to two stools, or accept the
    photograph's arrangement — that is the team's call, not a modelling one.
-5. **Translucent slot rotation datum is ambiguous.** 20° clockwise is specified
+6. **Translucent slot rotation datum is ambiguous.** 20° clockwise is specified
    but not what from. Measured from the block's width axis, ten 15 mm slots at
    25 mm pitch would overlap by 6.45 mm and merge into a single channel.
    Measured from the depth axis they clear by 23.5 mm. The buildable reading is
    modelled; confirm it against the drawing.
-6. **Counter top thickness.** The legacy model carries 45 mm; the photograph
+7. **Counter top thickness.** The legacy model carries 45 mm; the photograph
    shows a markedly thinner top. Modelled at 20 mm to keep the real appearance.
-7. **The translucent block cannot be one part from 19 mm sheet.** It is
+8. **The translucent block cannot be one part from 19 mm sheet.** It is
    represented visually as specified at 300 × 80 × 80 mm; a laminated or
    constructed body still has to be resolved. This does not hold up the visual
    model.
@@ -212,13 +221,9 @@ Run `npm run check` for the full report. The short version:
   invented and neither box was removed.
 - **LOOK CLOSER sign**: size unconfirmed; 210 × 148 mm landscape used
   provisionally.
-- **Banner stand height**: the *graphic* is fixed at 457.2 × 1122.68 mm and is
-  never rescaled. How high the stand carries it is unconfirmed hardware, which
-  the brief calls a separate measurement. It is set to 620 mm, putting the
-  display 1743 mm overall and the graphic 743 mm above the counter. Standing the
-  graphic straight on the floor instead leaves its top only 178 mm above the
-  counter, which reads as a low floor sign. One number —
-  `banner.graphicBottomHeightMm` — switches between the two.
+- **Banner height** — see the conflict below. The *graphic* is fixed at
+  457.2 × 1122.68 mm and is never rescaled; the overall roll-up height is the
+  open question.
 - **Stools and furniture clearances**: layout assumptions. They are **not**
   claims about statutory clearances.
 - **Six engraving patterns and ten translucent colours**: provisional

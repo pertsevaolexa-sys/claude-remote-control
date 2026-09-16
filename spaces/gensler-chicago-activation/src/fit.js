@@ -37,7 +37,7 @@ export function runFitReport(cfg = CONFIG) {
   else add(OK, 'provenance', `All ${leaves.length} configuration values carry a source and a status.`);
 
   const counts = { specified: 0, provisional: 0, conflict: 0 };
-  for (const l of leaves) counts[PROVENANCE[l].status] += 1;
+  for (const l of leaves) if (PROVENANCE[l]) counts[PROVENANCE[l].status] += 1;
   add(NOTE, 'provenance', `${counts.specified} specified, ${counts.provisional} provisional, ${counts.conflict} in conflict. The model is a spatial prototype, not a fabrication set.`);
 
   // -- 2. Required object counts -------------------------------------------
@@ -104,7 +104,8 @@ export function runFitReport(cfg = CONFIG) {
   add(NOTE, 'fit', `Along-counter gaps: ${gaps.join('; ')}.`);
   const tilesFp = byId.tiles;
   const boxesFp = byId['general-boxes'];
-  add(NOTE, 'fit', `Comparison zone: six flat samples at the counter front (v ${r1(tilesFp.vFront)}..${r1(tilesFp.vBack)} mm) with the two general sample boxes to their right and set back (v ${r1(boxesFp.vFront)}..${r1(boxesFp.vBack)} mm), ${r1(boxesFp.sMin - tilesFp.sMax)} mm along the counter from them. The samples stay reachable and the taller boxes do not screen them.`);
+  const behind = boxesFp.vFront >= tilesFp.vBack;
+  add(behind ? OK : CONFLICT, 'fit', `Comparison zone: six flat samples at the counter front (v ${r1(tilesFp.vFront)}..${r1(tilesFp.vBack)} mm) with the two general sample boxes standing BEHIND them (v ${r1(boxesFp.vFront)}..${r1(boxesFp.vBack)} mm, a ${r1(boxesFp.vFront - tilesFp.vBack)} mm gap), centred on the tile group and spanning ${r1(boxesFp.width)} mm of its ${r1(tilesFp.width)} mm - the arrangement in the supplied top view. The samples stay reachable at the front.`);
   const used = sorted[sorted.length - 1].sMax - sorted[0].sMin;
   add(NOTE, 'fit', `Displays occupy ${r1(used)} mm of the ${cfg.counter.topLengthMm} mm counter; ${r1(cfg.counter.topLengthMm - sorted[sorted.length - 1].sMax)} mm is left clear at the right end for the conversation area.`);
 
@@ -239,10 +240,9 @@ export function runFitReport(cfg = CONFIG) {
   if (fromInches[0] !== b.artworkWidthMm || fromInches[1] !== b.artworkHeightMm) {
     add(CONFLICT, 'banner', `Banner size ${b.artworkWidthMm} x ${b.artworkHeightMm} mm does not match 18 x 44.2 in (${fromInches.join(' x ')} mm).`);
   }
-  add(OK, 'banner', `Roll-up GRAPHIC ${b.artworkWidthMm} x ${b.artworkHeightMm} mm (18 x 44.2 in), aspect ${r2(b.artworkHeightMm / b.artworkWidthMm)}:1, drawn at that aspect and never rescaled. Still the narrow ~1.12 m graphic the brief specifies, not a two-metre banner.`);
-  const standTop = b.graphicBottomHeightMm + b.artworkHeightMm;
-  add(NOTE, 'banner', `The stand carries the graphic from ${b.graphicBottomHeightMm} mm to ${r1(standTop)} mm above the floor, so the display stands ${r1(standTop)} mm overall and its graphic sits ${r1(standTop - cfg.counter.heightMm)} mm above the ${cfg.counter.heightMm} mm counter. Stand height is UNCONFIRMED hardware - the brief calls that a separate measurement. Standing the graphic straight on the floor instead would leave its top just ${r1(b.artworkHeightMm + b.baseHeightMm - cfg.counter.heightMm)} mm above the counter, which reads as a low floor sign.`);
-  add(NOTE, 'banner', `Placed on the floor ${b.clearanceFromCounterEndMm} mm beyond the counter's LEFT end, clear of the counter footprint.`);
+  add(OK, 'banner', `Roll-up GRAPHIC ${b.artworkWidthMm} x ${b.artworkHeightMm} mm (18 x 44.2 in), aspect ${r2(b.artworkHeightMm / b.artworkWidthMm)}:1, drawn at that aspect and never rescaled.`);
+  add(CONFLICT, 'banner', `Modelled as a floor-standing roll-up ${b.overallHeightMm} mm tall - the construction and height of the supplied reference render, which measures about 1770 mm - with the specified graphic printed across the top and the panel blank below. The brief states a ${b.artworkHeightMm} mm envelope and warns against a two-metre banner, so these disagree. Scaling the reference's WIDTH by the same method gives 453 mm against the specified ${b.artworkWidthMm} mm, which says the method is sound and the height is a real disagreement. Confirm which is right; banner.overallHeightMm switches back.`);
+  add(NOTE, 'banner', `As modelled the banner stands ${r1(b.overallHeightMm - cfg.counter.heightMm)} mm above the ${cfg.counter.heightMm} mm counter, and the printed graphic starts ${r1(b.overallHeightMm - b.artworkHeightMm)} mm above the floor. Placed ${b.clearanceFromCounterEndMm} mm beyond the counter's LEFT end, which is where the brief puts it - the reference render shows it at the right-hand end, an arrangement the brief supersedes.`);
 
   // -- 11. Stools -----------------------------------------------------------
   const st = cfg.stools;

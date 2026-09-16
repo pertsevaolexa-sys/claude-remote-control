@@ -590,51 +590,54 @@ export function buildTranslucentBlock(M) {
 export function buildBanner(M) {
   const b = cfg.banner;
   const g = group('roll-up-banner');
-  const y0 = b.graphicBottomHeightMm;
-  const y1 = y0 + b.artworkHeightMm;
+  const panelBottom = b.baseHeightMm;
+  const panelTop = b.overallHeightMm;
+  const graphicBottom = panelTop - b.artworkHeightMm;
   const poleZ = -b.baseDepthMm / 2 + 30;
 
-  // Weighted foot.
-  const foot = mesh(box(mm(b.baseWidthMm), mm(b.baseHeightMm), mm(b.baseDepthMm)), M.bannerBase);
-  foot.position.set(0, mm(b.baseHeightMm / 2), mm(0));
-  g.add(foot);
-  const shoe = mesh(box(mm(b.baseWidthMm * 0.46), mm(12), mm(b.baseDepthMm * 1.3)), M.bannerBase);
-  shoe.position.y = mm(6);
-  g.add(shoe);
+  // Cassette and feet on the floor.
+  const cassette = mesh(box(mm(b.baseWidthMm), mm(b.baseHeightMm), mm(b.baseDepthMm)), M.bannerBase);
+  cassette.position.set(0, mm(b.baseHeightMm / 2), 0);
+  g.add(cassette);
+  for (const sx of [-1, 1]) {
+    const foot = mesh(box(mm(26), mm(14), mm(b.baseDepthMm * 1.45)), M.pole);
+    foot.position.set(mm(sx * (b.baseWidthMm / 2 - 26)), mm(7), 0);
+    g.add(foot);
+  }
 
-  // Mast.
-  const mastH = y1 + 26 - b.baseHeightMm;
-  const mast = mesh(tube(mm(b.poleDiameterMm / 2), mm(mastH), 14), M.pole);
-  mast.position.set(0, mm(b.baseHeightMm + mastH / 2), mm(poleZ));
-  g.add(mast);
-
-  // Graphic panel, held between a bottom and a top rail.
+  // One continuous panel from the cassette to the top, as a roll-up stands.
+  const panelH = panelTop - panelBottom;
   const panel = mesh(
-    box(mm(b.artworkWidthMm), mm(b.artworkHeightMm), mm(1.2)),
+    box(mm(b.artworkWidthMm), mm(panelH), mm(1.4)),
     M.paper, { name: 'banner-panel' },
   );
-  panel.position.set(0, mm((y0 + y1) / 2), 0);
+  panel.position.set(0, mm(panelBottom + panelH / 2), 0);
   g.add(panel);
+
+  // The SPECIFIED graphic printed across the top of that panel; below it the
+  // panel is blank, exactly as the reference render shows.
   const art = mesh(
     new THREE.PlaneGeometry(mm(b.artworkWidthMm), mm(b.artworkHeightMm)),
     M.printed(makeBannerArtwork()),
     { cast: false },
   );
-  art.position.set(0, mm((y0 + y1) / 2), mm(0.9));
+  art.position.set(0, mm(graphicBottom + b.artworkHeightMm / 2), mm(1.0));
   g.add(art);
 
-  for (const y of [y0, y1]) {
-    const rail = mesh(
-      box(mm(b.artworkWidthMm + 20), mm(b.railThicknessMm), mm(b.railThicknessMm + 6)),
-      M.pole,
-    );
-    rail.position.set(0, mm(y), 0);
-    g.add(rail);
-  }
-  // Short stay from the mast back to the bottom rail.
+  // Mast behind the panel, and the top rail it hangs from.
+  const mastH = panelTop - b.baseHeightMm;
+  const mast = mesh(tube(mm(b.poleDiameterMm / 2), mm(mastH), 14), M.pole);
+  mast.position.set(0, mm(b.baseHeightMm + mastH / 2), mm(poleZ));
+  g.add(mast);
+  const topRail = mesh(
+    box(mm(b.artworkWidthMm + 20), mm(b.railThicknessMm), mm(b.railThicknessMm + 8)),
+    M.pole,
+  );
+  topRail.position.set(0, mm(panelTop), 0);
+  g.add(topRail);
   const stay = mesh(box(mm(10), mm(10), mm(Math.abs(poleZ))), M.pole);
-  stay.position.set(0, mm(y0), mm(poleZ / 2));
+  stay.position.set(0, mm(panelTop - 8), mm(poleZ / 2));
   g.add(stay);
 
-  return { object: g, footprint: { widthMm: b.baseWidthMm, depthMm: b.baseDepthMm * 1.3 } };
+  return { object: g, footprint: { widthMm: b.baseWidthMm, depthMm: b.baseDepthMm * 1.45 } };
 }

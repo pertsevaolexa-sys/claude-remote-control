@@ -179,7 +179,7 @@ scene.add(overlay);
 const VIEWS = {
   overview: {
     label: 'Room overview',
-    pos: [-1.78, 1.56, 2.42], target: [0.02, 1.22, -1.00], fov: 55,
+    pos: [-1.86, 1.58, 2.52], target: [-0.02, 1.26, -1.00], fov: 56,
     note: 'Matched to the venue photograph: banner left, counter across the bay, stools right.',
   },
   counter: {

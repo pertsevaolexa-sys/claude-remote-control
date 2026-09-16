@@ -210,14 +210,14 @@ export function buildDimensionOverlay() {
   const bPhi = -(cfg.counter.topLengthMm / 2 + b.clearanceFromCounterEndMm + b.artworkWidthMm / 2) / cfg.counter.curveRadiusMm;
   const bx = cfg.counter.curveRadiusMm * Math.sin(bPhi);
   const bz = centreZMm() - cfg.counter.curveRadiusMm * Math.cos(bPhi);
-  const gy0 = b.graphicBottomHeightMm;
-  const gy1 = gy0 + b.artworkHeightMm;
+  const gy1 = b.overallHeightMm;
+  const gy0 = gy1 - b.artworkHeightMm;
   add(V(bx - b.artworkWidthMm / 2 - 200, gy0, bz), V(bx - b.artworkWidthMm / 2 - 200, gy1, bz),
     `graphic ${b.artworkHeightMm} mm high`, STATUS.SPECIFIED);
   add(V(bx - b.artworkWidthMm / 2, gy1 + 160, bz), V(bx + b.artworkWidthMm / 2, gy1 + 160, bz),
     `${b.artworkWidthMm} mm wide`, STATUS.SPECIFIED);
-  add(V(bx + b.artworkWidthMm / 2 + 220, 0, bz), V(bx + b.artworkWidthMm / 2 + 220, gy0, bz),
-    `stand ${gy0} mm — hardware unconfirmed`, STATUS.PROVISIONAL);
+  add(V(bx + b.artworkWidthMm / 2 + 220, 0, bz), V(bx + b.artworkWidthMm / 2 + 220, b.overallHeightMm, bz),
+    `roll-up ${b.overallHeightMm} mm — brief says ${b.artworkHeightMm}`, STATUS.CONFLICT);
 
   return root;
 }

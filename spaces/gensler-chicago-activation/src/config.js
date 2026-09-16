@@ -107,7 +107,7 @@ export const CONFIG = {
     legSplayMm: 230,
     tubeDiameterMm: 22,
     standoffFromCounterMm: 480, // seat centre, forward of the counter front edge
-    positionsSMm: [2450, 2950, 3450],
+    positionsSMm: [2500, 3000, 3500],
   },
 
   // -------------------------------------------------------------------------
@@ -120,11 +120,12 @@ export const CONFIG = {
     baseDepthMm: 240,
     baseHeightMm: 55,
     poleDiameterMm: 16,
-    // Height of the BOTTOM edge of the graphic above the floor. The graphic
-    // itself stays exactly 457.2 x 1122.68 mm; this is the stand carrying it.
-    // At 0 (a cassette sitting on the floor) the graphic top would clear the
-    // 1000 mm counter by only 178 mm and read as a low floor sign.
-    graphicBottomHeightMm: 620,
+    // Overall height of the roll-up as it stands on the floor. The panel runs
+    // continuously from the cassette to this height; the specified
+    // 457.2 x 1122.68 mm GRAPHIC is printed across its top, with the panel
+    // blank below - the construction and height in the supplied reference
+    // render, where the banner measures about 1770 mm tall and 453 mm wide.
+    overallHeightMm: 1800,
     railThicknessMm: 16,
     clearanceFromCounterEndMm: 300, // arc gap beyond the counter's left end
     radialOffsetMm: 0,              // 0 = in line with the counter front edge
@@ -251,7 +252,7 @@ export const CONFIG = {
     depthMm: 62,
     heightMm: 48,
     wallThicknessMm: 6,
-    gapMm: 30,
+    gapMm: 60,
     chipCount: 10,
     chipThicknessMm: 14,    // across the box: this is the face you see
     chipFaceMm: 48,         // front to back
@@ -306,28 +307,28 @@ export const CONFIG = {
   //     vMm = distance BEHIND the front edge (0 = front edge, 450 = back edge).
   // -------------------------------------------------------------------------
   layout: {
-    brochuresSMm: 305,
+    brochuresSMm: 318,
     brochuresVMm: 250,
 
     // The Growth A4 and its open box share a position: card at the back, box
     // directly in FRONT of it, as in the supplied reference.
-    growthSMm: 683,
+    growthSMm: 725,
     growthCardBackMarginMm: 20,
     growthBoxGapBehindMm: 25,
 
-    installationSMm: 1166,
+    installationSMm: 1238,
     installationFrontMarginMm: 13,  // see FIT REPORT - 20 mm is not achievable
 
-    tilesSMm: 1742,
+    tilesSMm: 1873,
     tilesFrontMarginMm: 20,
 
-    generalBoxesSMm: 2280,
-    generalBoxesVFrontMm: 300,
+    generalBoxesSMm: 1873,
+    generalBoxesVFrontMm: 340,
 
-    translucentCardSMm: 2740,
+    translucentCardSMm: 2452,
     translucentCardBackMarginMm: 20,
 
-    translucentBlockSMm: 2740,
+    translucentBlockSMm: 2452,
     translucentBlockVFrontMm: 200,
   },
 };
@@ -389,7 +390,7 @@ export const PROVENANCE = {
   'banner.artworkHeightMm': { status: S, source: BRIEF, note: '44.2 in = 1122.68 mm.' },
   ...fill('banner', ['baseWidthMm', 'baseDepthMm', 'baseHeightMm', 'poleDiameterMm', 'railThicknessMm'],
     P, 'Plausible banner-stand hardware', 'Base, pole and rails are unconfirmed hardware.'),
-  'banner.graphicBottomHeightMm': { status: P, source: 'Plausible banner-stand hardware', note: 'The brief fixes the 457.2 x 1122.68 mm GRAPHIC and says production hardware adding height is a separate unconfirmed measurement. The graphic is carried 620 mm up, so the display stands 1743 mm overall and reads at eye level beside a 1000 mm counter. Standing the graphic on the floor instead would put its top only 178 mm above the counter. Change this one number to switch; the graphic never changes size.' },
+  'banner.overallHeightMm': { status: C, source: 'Supplied reference render vs the brief', note: 'The brief states a 457.2 x 1122.68 mm envelope and warns against a two-metre banner. The supplied reference render shows a floor-standing roll-up about 1770 mm tall; scaling its WIDTH by the same method gives 453 mm against the specified 457.2 mm, so the method is sound and the height is a real disagreement. Modelled at 1800 mm as the reference shows, with the SPECIFIED graphic printed across the top and the panel blank below. The graphic is never rescaled. Confirm which height is right.' },
   ...fill('banner', ['clearanceFromCounterEndMm', 'radialOffsetMm'],
     P, BRIEF, 'Brief requires "immediately to the LEFT of the counter, outside its footprint"; exact gap is a layout choice.'),
 
@@ -483,6 +484,12 @@ export const CONFLICTS = [
     title: 'Installation footprint vs the provisional counter depth',
     detail: 'The installation base is 450 x 420 mm. A 20 mm margin all round needs 490 x 460 mm of flat top. The provisional counter is 450 mm deep and curved, which leaves about 26 mm of total front-to-back slack once the curve is accounted for. The object has NOT been scaled down and the counter has NOT been widened.',
     decision: 'Placed with about 13 mm margin front and back. Counter depth must be measured.',
+  },
+  {
+    id: 'banner-height',
+    title: 'Banner height: 1122.68 mm stated, about 1770 mm in the reference render',
+    detail: 'The brief gives 457.2 x 1122.68 mm (18 x 44.2 in) and warns against a two-metre banner. The supplied reference render shows a floor-standing roll-up about 1770 mm tall. Scaling its width by the same method gives 453 mm against the specified 457.2 mm, so the method is sound and the height really does disagree.',
+    decision: 'Modelled as a floor-standing roll-up 1800 mm tall, as the reference shows, with the SPECIFIED 457.2 x 1122.68 mm graphic printed across the top and the panel blank below it. The graphic is never rescaled. One number, banner.overallHeightMm, returns it to the stated envelope.',
   },
   {
     id: 'conversation-area-frontage',
