@@ -62,10 +62,131 @@
   #fit li { color: #9c3a2f; }
   .warn { font-size: 12px; color: #9c3a2f; border-top: 1px solid var(--line);
           margin-top: 6px; padding: 10px 14px 12px; }
+
+  /* Boot state. Visible until the model reports ready, so a page that fails
+     explains itself instead of showing an empty canvas. */
+  #boot { position: fixed; inset: 0; z-index: 50; display: flex;
+          align-items: center; justify-content: center; background: #eceae6; }
+  #boot .card { max-width: 560px; padding: 28px 32px; background: #fff;
+                border: 1px solid var(--line); border-radius: 12px;
+                box-shadow: 0 6px 30px rgba(0,0,0,.08); }
+  #boot h2 { margin: 0 0 6px; font-size: 16px; }
+  #boot p { margin: 0 0 4px; color: var(--muted); font-size: 13px; }
+  #boot code { background: #f2f0ec; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+  #boot ul { margin: 8px 0 0; padding-left: 18px; font-size: 12.5px; color: #9c3a2f;
+             word-break: break-word; }
+  #boot.failed .card { border-color: #d8b4ae; }
+  #boot.failed .spinner { display: none; }
+  .spinner { width: 22px; height: 22px; margin-bottom: 14px; border-radius: 50%;
+             border: 2px solid var(--line); border-top-color: var(--teal);
+             animation: spin 0.9s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
 <canvas id="scene"></canvas>
+
+<div id="boot">
+  <div class="card">
+    <div class="spinner"></div>
+    <h2 id="boot-title">Preparing the model…</h2>
+    <p id="boot-text">Generating materials and building the scene. This takes a few seconds.</p>
+    <ul id="boot-detail" hidden></ul>
+  </div>
+</div>
+
+<script>
+// Runs before the module. Turns any boot failure into a readable message,
+// because a silent blank canvas tells a reviewer nothing.
+(function () {
+  var problems = [];
+  var failed = false;
+
+  function note(message) {
+    if (message && problems.indexOf(message) === -1) problems.push(message);
+  }
+
+  function fail(title, text) {
+    if (failed || (window.PG && window.PG.ready)) return;
+    failed = true;
+    var boot = document.getElementById('boot');
+    if (!boot) return;
+    boot.classList.add('failed');
+    document.getElementById('boot-title').textContent = title;
+    document.getElementById('boot-text').innerHTML = text;
+    var list = document.getElementById('boot-detail');
+    if (problems.length) {
+      list.hidden = false;
+      list.innerHTML = problems.map(function (p) {
+        return '<li>' + String(p).replace(/[<>&]/g, '') + '</li>';
+      }).join('');
+    }
+  }
+  window.__pgFail = fail;
+
+  function generic() {
+    fail('The model did not start', 'The error below stopped it before the scene was built.');
+  }
+
+  function report() {
+    if (failed || (window.PG && window.PG.ready)) return;
+    // The dev page loads three.js from vendor/ via an import map; the built
+    // single file has neither. Ask the page which one it is, then go and check
+    // the actual cause rather than guessing from the error text.
+    var isDevPage = !!document.querySelector('script[type="importmap"]');
+    if (!isDevPage) { generic(); return; }
+
+    if (location.protocol === 'file:') {
+      fail('Open this page over a web server — or use the single-file build',
+        'This is the development page. Browsers refuse to load its three.js modules straight '
+        + 'from disk. Run <code>npm run dev</code>, or open <code>dist/index.html</code> instead, '
+        + 'which is self-contained and works from disk.');
+      return;
+    }
+
+    fetch('vendor/three.module.js', { method: 'GET' })
+      .then(function (r) { if (r.ok) generic(); else missingVendor(); })
+      .catch(missingVendor);
+  }
+
+  function missingVendor() {
+    fail('This copy is missing its three.js files',
+      'This is the development page, which loads three.js from <code>vendor/</code>, and that '
+      + 'folder is not here. Run <code>npm install &amp;&amp; npm run build</code> to create it, '
+      + 'or deploy <code>dist/index.html</code>, which has three.js inlined and needs no build.');
+  }
+
+  window.addEventListener('error', function (e) {
+    var t = e.target;
+    if (t && (t.tagName === 'SCRIPT' || t.tagName === 'LINK')) note('Could not load ' + (t.src || t.href));
+    else note(e.message || String(e.error));
+    setTimeout(report, 60);
+  }, true);
+
+  window.addEventListener('unhandledrejection', function (e) {
+    note(String((e.reason && e.reason.message) || e.reason));
+    setTimeout(report, 60);
+  });
+
+  try {
+    var probe = document.createElement('canvas');
+    if (!(probe.getContext('webgl2') || probe.getContext('webgl'))) {
+      fail('This browser cannot run the model',
+        'WebGL is not available. Try a current Chrome, Edge, Firefox or Safari, and check that '
+        + 'hardware acceleration is switched on.');
+    }
+  } catch (err) {
+    note(err && err.message);
+    fail('This browser cannot run the model', 'WebGL could not be initialised.');
+  }
+
+  // Backstop: software renderers are slow, but not this slow.
+  setTimeout(function () {
+    if (window.PG && window.PG.ready) return;
+    report();
+  }, 45000);
+}());
+</script>
 
 <div id="hud">
   <div id="topbar" class="bar">

@@ -29,6 +29,9 @@ There is no bundler and nothing is fetched at run time.
 | `npm run check` | Print the fit report — dimensions and clashes read from geometry, not from a screenshot |
 | `npm run shots` | Re-render `screenshots/` and report console errors |
 | `npm run bundle` | Build `dist/index.html` — the whole model as ONE self-contained file |
+| `npm run verify` | Check the page actually opens: built file over HTTP and `file://`, dev page from a clean checkout, and the failure path |
+| `npm run bundle` | Build `dist/index.html` — the whole model as ONE self-contained file |
+| `npm run verify` | Check the page actually opens: built file over HTTP and `file://`, dev page from a clean checkout, and the failure path |
 
 ### Controls
 
@@ -45,36 +48,32 @@ and **Reset sample** puts it back.
 
 `npm run bundle` writes **`dist/index.html`** — a single ~1 MB file with
 three.js, all of `src/`, the stylesheet and the markup inlined. It fetches
-nothing at run time, so it works on any static host and also opens straight from
-disk by double-clicking it. `dist/index.html` is committed, so you can deploy
-without running anything.
+nothing at run time, works on any static host, and opens straight from disk by
+double-clicking. It is **committed**, and the `vercel.json` here points Vercel
+at it, so deploying needs no build and no toolchain.
 
-Verified with `node verify-dist.mjs`: loads clean over HTTP and over `file://`,
-zero console errors, zero external network requests.
+**From Git.** Point the Vercel project at this repository and set **Root
+Directory** to `spaces/gensler-chicago-activation`. The `vercel.json` in this
+directory does the rest — no framework, no install, no build, output `dist`.
 
-**Quickest — drag and drop.** Upload the `dist` folder at
-[vercel.com/new](https://vercel.com/new), or from this directory:
+**Drag and drop.** Upload the `dist` folder at
+[vercel.com/new](https://vercel.com/new), or run `vercel deploy --prod` from
+inside `dist`.
 
-```bash
-npm run bundle
-cd dist && vercel deploy --prod
-```
+Rebuild after any change to `src/`: `npm run bundle`, then `npm run verify`.
+`dist/index.html` is generated — never edit it by hand.
 
-**From Git.** Point the Vercel project at this repository and set:
+### If a page comes up blank
 
-| Setting | Value |
-|---|---|
-| Framework Preset | Other |
-| Root Directory | `spaces/gensler-chicago-activation/dist` |
-| Build Command | *(leave empty)* |
-| Output Directory | `.` |
+**Don't deploy the `index.html` in this directory.** That is the *development*
+page: it loads three.js from `vendor/` through an import map. `vendor/` is
+committed so a fresh clone works, but `dist/index.html` is still the one to
+deploy — one request instead of sixteen, and it cannot break this way.
 
-**Building on Vercel instead of committing `dist/`.** Set Root Directory to
-`spaces/gensler-chicago-activation`, Build Command to `npm run bundle`, and
-Output Directory to `dist`.
-
-Rebuild the file after any change to `src/` — `dist/index.html` is generated,
-never edited by hand.
+The page no longer fails silently. It shows a boot panel until the scene reports
+ready, then turns that panel into a readable message if anything goes wrong —
+no WebGL, a failed module, or the dev page served without its `vendor/` folder,
+which it detects and explains. `npm run verify` exercises all four cases.
 
 ---
 
@@ -87,9 +86,9 @@ counter and the windows.
 |---|---|---|
 | — | **Roll-up banner** on the floor, immediately left of the counter | Starts the presentation. 457.2 × 1122.68 mm (18 × 44.2 in) — a narrow ~1.12 m display, not a two-metre banner. |
 | 1 | **Three brochures**, 200 × 200 mm | A familiar introduction and something to take away. |
-| 2 | **Growth Collection A4 + open Growth box** | Eight samples in two rows of four make the range tangible. The A4 is offset sideways because the full-size propped cover would hide its heading. |
+| 2 | **Growth Collection A4 + open Growth box** | The box sits open directly **in front of** its A4, as the supplied reference shows: printed header panel across the back carrying the Gensler credit, eight samples in two rows of four in front, standing on its own lid. |
 | 3 | **LOOK CLOSER installation** | 450 × 450 mm engraved Oyster panel on a 450 × 420 mm black base; LOOK CLOSER sign front-left; removable **plain, unengraved** portrait Oyster coupon front-right. |
-| 4 | **Six engraved samples + two general sample boxes** | Three across, two rows deep, with the black and grey boxes behind them. Comparison zone. |
+| 4 | **Six engraved samples + two general sample boxes** | Three across, two rows deep, with the black and grey boxes behind them — slim boxes of upright sample sticks with their sleeve lids standing at one end, as in the supplied product photographs. Comparison zone. |
 | 5 | **Translucent block + A4** | Ten upright translucent samples in an unbranded black block, with its card behind. |
 | 6 | **Three stools**, floor, right end, room side | The conversation area. |
 
@@ -169,32 +168,46 @@ Run `npm run check` for the full report. The short version:
    26 mm of total front-to-back slack — a best balanced margin of **13.0 mm**,
    7 mm short per edge. The object has **not** been scaled down and the counter
    has **not** been widened. **The counter depth needs measuring.**
-4. **Translucent slot rotation datum is ambiguous.** 20° clockwise is specified
+4. **The counter is not long enough for both the display run and a separate
+   conversation area.** The five display groups need about 3.1 m of counter once
+   sensible gaps are allowed; three stools need roughly another 1.3 m of
+   frontage. The counter measures about 3.3 m. The stools are kept grouped at
+   the right as the brief requires, which puts the inner one in front of the
+   Translucent group. In the venue photograph they in fact sit in front of the
+   display zone. Lengthen the counter, drop to two stools, or accept the
+   photograph's arrangement — that is the team's call, not a modelling one.
+5. **Translucent slot rotation datum is ambiguous.** 20° clockwise is specified
    but not what from. Measured from the block's width axis, ten 15 mm slots at
    25 mm pitch would overlap by 6.45 mm and merge into a single channel.
    Measured from the depth axis they clear by 23.5 mm. The buildable reading is
    modelled; confirm it against the drawing.
-5. **Counter top thickness.** The legacy model carries 45 mm; the photograph
+6. **Counter top thickness.** The legacy model carries 45 mm; the photograph
    shows a markedly thinner top. Modelled at 20 mm to keep the real appearance.
-6. **The translucent block cannot be one part from 19 mm sheet.** It is
+7. **The translucent block cannot be one part from 19 mm sheet.** It is
    represented visually as specified at 300 × 80 × 80 mm; a laminated or
    constructed body still has to be resolved. This does not hold up the visual
    model.
 
 ### Measurements and sizes still open
 
-- **Counter**: length, depth, height, curve radius and top thickness are all
-  read off the photograph or inherited as legacy estimates. A photograph is not
-  a survey.
-- **Growth box**: the 330 × 310 × 20 mm envelope is an explicit **modelling
-  assumption**, not a measurement anyone supplied. The `33 × 31` and `3 × 3`
-  notes have unclear units and an unclear subject and were not treated as sizes.
-  The way the box opens could not be established either: a flat-open cover needs
-  about 620 mm of depth, which the counter does not have, so the full-size cover
-  is propped at 78°. Provisional presentation method.
-- **General sample boxes**: placeholder geometry scaled from the venue
-  photograph, because the legacy project geometry the brief points to could not
-  be reached. No production size has been invented and neither box was removed.
+- **Counter**: depth, height, curve radius and top thickness are read off the
+  photograph or inherited as legacy estimates. **Length is now 3300 mm**, derived
+  by scaling known object sizes in the venue photograph — the 337 mm A4 plate and
+  the 450 mm Oyster panel both put it near 3.0–3.3 m. That replaces an earlier
+  4600 mm guess which made every display look too small for the counter. A
+  photograph is still not a survey.
+- **Growth box**: the 320 × 240 × 26 mm tray is an explicit **modelling
+  assumption**, now proportioned from the supplied photograph of the box open on
+  the counter rather than guessed. Nobody has supplied a measurement. The
+  `33 × 31` and `3 × 3` notes have unclear units and an unclear subject and are
+  still not treated as sizes. It is presented open, standing on its own full-size
+  lid, with the printed header panel across the back carrying the Gensler credit —
+  the presentation the reference shows. This supersedes the earlier propped-cover
+  model, which no reference supported.
+- **General sample boxes**: sizes remain placeholders, but the construction is
+  no longer invented — slim boxes of upright sample sticks with a sleeve lid at
+  one end, matching the supplied product photographs. No production size has been
+  invented and neither box was removed.
 - **LOOK CLOSER sign**: size unconfirmed; 210 × 148 mm landscape used
   provisionally.
 - **Stools and furniture clearances**: layout assumptions. They are **not**

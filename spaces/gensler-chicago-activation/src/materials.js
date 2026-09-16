@@ -32,7 +32,7 @@ export function buildMaterials() {
       opacity: 0.22, reflectivity: 0.4, side: THREE.DoubleSide,
     }),
     frame: new THREE.MeshStandardMaterial({ color: 0xf4f0e8, roughness: 0.6, metalness: 0 }),
-    backdrop: new THREE.MeshBasicMaterial({ map: city, color: 0xc4ccd2, toneMapped: true }),
+    backdrop: new THREE.MeshBasicMaterial({ map: city, color: 0xa9b3bb, toneMapped: true }),
 
     // -- existing furniture -------------------------------------------------
     counterTop: new THREE.MeshStandardMaterial({ color: 0x1f2022, roughness: 0.52, metalness: 0.04 }),
@@ -48,7 +48,8 @@ export function buildMaterials() {
     // two read as different objects under the same daylight.
     holderBlack: new THREE.MeshStandardMaterial({ color: 0x1e1f21, roughness: 0.48, metalness: 0.02 }),
     boxBlack: new THREE.MeshStandardMaterial({ color: 0x191a1c, roughness: 0.62, metalness: 0 }),
-    boxGrey: new THREE.MeshStandardMaterial({ color: 0x8e9095, roughness: 0.68, metalness: 0 }),
+    boxGrey: new THREE.MeshStandardMaterial({ color: 0x8d8a8c, roughness: 0.72, metalness: 0 }),
+    boxGrowth: new THREE.MeshStandardMaterial({ color: 0xc3d6dd, roughness: 0.74, metalness: 0 }),
     boxInsert: new THREE.MeshStandardMaterial({ color: 0x141517, roughness: 0.9, metalness: 0 }),
     paper: new THREE.MeshStandardMaterial({ color: 0xf6f5f2, roughness: 0.86, metalness: 0 }),
     bannerBase: new THREE.MeshStandardMaterial({ color: 0x242528, roughness: 0.4, metalness: 0.4 }),

@@ -160,6 +160,8 @@ export const GROWTH_PALETTES = [
   { name: 'Ink', base: [{ c: '#4a4a4c', w: 0.3, rough: 0.38 }, { c: '#2f2f31', w: 0.26, rough: 0.4 }, { c: '#6b6b6e', w: 0.18, rough: 0.38 }, { c: '#9a9a9c', w: 0.14, rough: 0.36 }, { c: '#d8d8da', w: 0.12, rough: 0.34 }] },
   { name: 'Coral', base: [{ c: '#e8b9a8', w: 0.3, rough: 0.36 }, { c: '#d9937c', w: 0.24, rough: 0.38 }, { c: '#f5ded4', w: 0.18, rough: 0.34 }, { c: '#b2624b', w: 0.16, rough: 0.4 }, { c: '#7a3a29', w: 0.12, rough: 0.44 }] },
   { name: 'Moss', base: [{ c: '#c3cbb2', w: 0.3, rough: 0.36 }, { c: '#a3ae8d', w: 0.24, rough: 0.38 }, { c: '#e2e6d9', w: 0.18, rough: 0.34 }, { c: '#6f7d58', w: 0.16, rough: 0.4 }, { c: '#43502f', w: 0.12, rough: 0.44 }] },
+  { name: 'Lapis', base: [{ c: '#2b5aa8', w: 0.28, rough: 0.36 }, { c: '#1c3f7d', w: 0.24, rough: 0.38 }, { c: '#5b86c9', w: 0.18, rough: 0.36 }, { c: '#dfe7f2', w: 0.16, rough: 0.34 }, { c: '#12264a', w: 0.14, rough: 0.42 }] },
+  { name: 'Emerald', base: [{ c: '#1d6b52', w: 0.30, rough: 0.36 }, { c: '#12503c', w: 0.24, rough: 0.38 }, { c: '#4a9b7d', w: 0.18, rough: 0.36 }, { c: '#dcece3', w: 0.16, rough: 0.34 }, { c: '#0a3327', w: 0.12, rough: 0.42 }] },
   { name: 'Chalk', base: [{ c: '#f4f3f1', w: 0.34, rough: 0.34 }, { c: '#e6e4e0', w: 0.26, rough: 0.36 }, { c: '#cfccc7', w: 0.18, rough: 0.38 }, { c: '#aaa7a1', w: 0.12, rough: 0.4 }, { c: '#7c7a75', w: 0.1, rough: 0.42 }] },
 ];
 
@@ -245,8 +247,12 @@ function placeholderTag(g, x, y, size, label = 'ARTWORK PLACEHOLDER') {
   g.save();
   g.fillStyle = 'rgba(0,0,0,0.30)';
   g.font = `600 ${size}px "Helvetica Neue", Arial, sans-serif`;
-  g.letterSpacing = `${size * 0.12}px`;
-  g.fillText(label, x, y);
+  // Drawn character by character: ctx.letterSpacing is not widely supported.
+  let cx = x;
+  for (const ch of label) {
+    g.fillText(ch, cx, y);
+    cx += g.measureText(ch).width + size * 0.12;
+  }
   g.restore();
 }
 
@@ -411,39 +417,89 @@ export function makeBrochureCover() {
   return toTexture(c);
 }
 
-/** Growth Collection box cover - pale blue, with the supplied Gensler credit. */
-export function makeGrowthCover(widthMm, heightMm) {
-  const px = 4;
-  const W = Math.round(widthMm * px); const H = Math.round(heightMm * px);
+/**
+ * Printed header panel across the back of the open Growth box, carrying the
+ * supplied Gensler Product Design Consultant credit. Drawn from the reference
+ * photograph of the box open on the counter.
+ */
+export function makeGrowthHeader(widthMm, depthMm) {
+  const px = 6;
+  const W = Math.round(widthMm * px); const H = Math.round(depthMm * px);
   const { c, g } = canvas2d(W, H);
   const grad = g.createLinearGradient(0, 0, 0, H);
-  grad.addColorStop(0, '#d5e3e8');
-  grad.addColorStop(1, '#c3d6dd');
+  grad.addColorStop(0, '#cfe0e7');
+  grad.addColorStop(1, '#bed4dd');
   g.fillStyle = grad;
   g.fillRect(0, 0, W, H);
 
-  const m = W * 0.09;
-  wordmark(g, m, m, W * 0.038, '#17323a');
+  const m = W * 0.055;
+  g.fillStyle = 'rgba(18,43,51,0.72)';
+  g.font = `400 ${H * 0.085}px "Helvetica Neue", Arial, sans-serif`;
+  g.fillText('Product Design Collections', m, H * 0.22);
 
   g.fillStyle = '#122b33';
-  g.font = `300 ${W * 0.098}px "Helvetica Neue", Arial, sans-serif`;
-  g.fillText('The Growth', m, H * 0.46);
-  g.fillText('Collection', m, H * 0.46 + W * 0.112);
+  g.font = `600 ${H * 0.14}px "Helvetica Neue", Arial, sans-serif`;
+  g.fillText('Gensler', m, H * 0.42);
 
-  g.strokeStyle = 'rgba(18,43,51,0.35)';
-  g.lineWidth = Math.max(1, W * 0.004);
-  g.beginPath();
-  g.moveTo(m, H * 0.72);
-  g.lineTo(W - m, H * 0.72);
-  g.stroke();
+  g.font = `300 ${H * 0.155}px "Helvetica Neue", Arial, sans-serif`;
+  let cx = m;
+  for (const ch of 'GROWTH COLLECTION') {
+    g.fillText(ch, cx, H * 0.66);
+    cx += g.measureText(ch).width + H * 0.022;
+  }
 
-  g.fillStyle = '#284650';
-  g.font = `400 ${W * 0.032}px "Helvetica Neue", Arial, sans-serif`;
-  g.fillText('Gensler — Product Design Consultant', m, H * 0.80);
-  g.font = `400 ${W * 0.026}px "Helvetica Neue", Arial, sans-serif`;
-  g.fillStyle = 'rgba(40,70,80,0.7)';
-  g.fillText('for the Growth Collection', m, H * 0.855);
-  placeholderTag(g, m, H - m * 0.35, W * 0.018);
+  g.fillStyle = 'rgba(18,43,51,0.66)';
+  g.font = `400 ${H * 0.082}px "Helvetica Neue", Arial, sans-serif`;
+  g.fillText('A New Chapter In Sustainable Design', m, H * 0.86);
+
+  wordmark(g, W - W * 0.30, H * 0.13, H * 0.115, '#17323a');
+  placeholderTag(g, W - W * 0.30, H * 0.95, H * 0.055);
+  return toTexture(c);
+}
+
+/** Outside of the Growth box lid, seen as a thin border under the open tray. */
+export function makeGrowthLid(widthMm, depthMm) {
+  const px = 4;
+  const { c, g } = canvas2d(Math.round(widthMm * px), Math.round(depthMm * px));
+  g.fillStyle = '#c3d6dd';
+  g.fillRect(0, 0, c.width, c.height);
+  return toTexture(c);
+}
+
+/** Front face of a general sample box: the Polygood mark on a plain field. */
+export function makeSampleBoxFront(widthMm, heightMm, finish) {
+  const px = 8;
+  const W = Math.round(widthMm * px); const H = Math.round(heightMm * px);
+  const { c, g } = canvas2d(W, H);
+  g.fillStyle = finish === 'grey' ? '#8d8a8c' : '#1d1d1f';
+  g.fillRect(0, 0, W, H);
+  wordmark(g, W * 0.075, H * 0.30, H * 0.30, '#f4f3f1', false);
+  return toTexture(c);
+}
+
+/**
+ * The sleeve lid that stands at one end of a general sample box. The black one
+ * carries the line printed on the supplied reference; the grey one is plain.
+ */
+export function makeSampleBoxLid(heightMm, widthMm, finish) {
+  const px = 8;
+  const W = Math.round(widthMm * px); const H = Math.round(heightMm * px);
+  const { c, g } = canvas2d(W, H);
+  g.fillStyle = finish === 'grey' ? '#8d8a8c' : '#1d1d1f';
+  g.fillRect(0, 0, W, H);
+  if (finish !== 'grey') {
+    g.save();
+    g.translate(W * 0.62, H * 0.06);
+    g.rotate(Math.PI / 2);
+    g.fillStyle = 'rgba(244,243,241,0.82)';
+    g.font = `500 ${W * 0.135}px "Helvetica Neue", Arial, sans-serif`;
+    let cx = 0;
+    for (const ch of 'A VISIBLE COMMITMENT TO SUSTAINABILITY') {
+      g.fillText(ch, cx, 0);
+      cx += g.measureText(ch).width + W * 0.05;
+    }
+    g.restore();
+  }
   return toTexture(c);
 }
 

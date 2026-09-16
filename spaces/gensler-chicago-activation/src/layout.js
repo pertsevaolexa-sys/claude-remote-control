@@ -138,8 +138,6 @@ export function footprints(cfg = CONFIG) {
   const L = cfg.layout;
   const depth = cfg.counter.depthMm;
   const holderDepth = a4HolderPlanDepthMm(cfg);
-  const coverProjection =
-    cfg.growthBox.depthMm * Math.cos((cfg.growthBox.coverOpenAngleDeg * Math.PI) / 180);
 
   const list = [];
   const add = (id, label, sCentre, width, vFront, vDepth, note) => {
@@ -165,29 +163,31 @@ export function footprints(cfg = CONFIG) {
   add('brochures', 'Three brochures', L.brochuresSMm, brochureWidth,
     L.brochuresVMm - brochureDepth / 2, brochureDepth);
 
-  // 2. Growth A4 + open Growth box
-  add('growth-card', 'Growth Collection A4', L.growthCardSMm, cfg.a4Holder.plateWidthMm,
-    depth - L.growthCardBackMarginMm - holderDepth, holderDepth);
-  add('growth-box', 'Growth sample box (open)', L.growthBoxSMm, cfg.growthBox.widthMm,
-    depth - L.growthBoxBackMarginMm - coverProjection - cfg.growthBox.depthMm,
-    coverProjection + cfg.growthBox.depthMm,
-    `includes ${coverProjection.toFixed(1)} mm of propped cover behind the tray`);
+  // 2. Growth A4 at the back, open Growth box directly IN FRONT of it.
+  const cardV = depth - L.growthCardBackMarginMm - holderDepth;
+  add('growth-card', 'Growth Collection A4', L.growthSMm, cfg.a4Holder.plateWidthMm,
+    cardV, holderDepth);
+  const boxW = cfg.growthBox.widthMm + 2 * cfg.growthBox.lidMarginMm;
+  const boxD = cfg.growthBox.depthMm + 2 * cfg.growthBox.lidMarginMm;
+  add('growth-box', 'Growth sample box (open)', L.growthSMm, boxW,
+    cardV - L.growthBoxGapBehindMm - boxD, boxD,
+    'open tray on its own lid, directly in front of its A4');
 
   // 3. LOOK CLOSER installation
   add('installation', 'LOOK CLOSER installation', L.installationSMm, cfg.installation.baseWidthMm,
     L.installationFrontMarginMm, cfg.installation.baseDepthMm);
 
-  // 4. Six engraved tiles + two general boxes
+  // 4. Six engraved tiles at the front, two general boxes behind them
   const tileWidth =
     cfg.tiles.columns * cfg.tiles.faceAcrossMm + (cfg.tiles.columns - 1) * cfg.tiles.gapMm;
   const tileDepth =
     cfg.tiles.rows * cfg.tiles.faceDepthMm + (cfg.tiles.rows - 1) * cfg.tiles.gapMm;
   add('tiles', 'Six engraved samples', L.tilesSMm, tileWidth, L.tilesFrontMarginMm, tileDepth);
-  const boxesWidth =
-    cfg.generalBoxes.count * cfg.generalBoxes.widthMm
-    + (cfg.generalBoxes.count - 1) * cfg.generalBoxes.gapMm;
+  const gb = cfg.generalBoxes;
+  const unitWidth = gb.widthMm + gb.lidGapMm + gb.lidThicknessMm;
+  const boxesWidth = gb.count * unitWidth + (gb.count - 1) * gb.gapMm;
   add('general-boxes', 'Two general sample boxes', L.generalBoxesSMm, boxesWidth,
-    L.generalBoxesVFrontMm, cfg.generalBoxes.depthMm);
+    L.generalBoxesVFrontMm, gb.depthMm);
 
   // 5. Translucent block + A4
   add('translucent-card', 'Translucent Collection A4', L.translucentCardSMm, cfg.a4Holder.plateWidthMm,

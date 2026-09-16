@@ -22,6 +22,12 @@ import {
 const cfg = CONFIG;
 const canvas = document.getElementById('scene');
 
+// Anything thrown while building the scene surfaces in the boot panel rather
+// than leaving an empty canvas behind.
+window.addEventListener('error', (e) => {
+  if (window.__pgFail) window.__pgFail('The model did not start', String(e.message || ''));
+});
+
 // ---------------------------------------------------------------------------
 // Renderer
 // ---------------------------------------------------------------------------
@@ -32,7 +38,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.16;
+renderer.toneMappingExposure = 1.08;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 // The scene is static, so the shadow map is built once instead of every frame.
@@ -128,12 +134,13 @@ const holderDepth = a4HolderPlanDepthMm(cfg);
 const brochures = buildBrochures(M);
 placeOnCounter(brochures, L.brochuresSMm, L.brochuresVMm - brochures.footprint.depthMm / 2, 'Brochures');
 
-// 2. Growth A4 (offset sideways) + open Growth box
+// 2. Growth A4 at the back, open Growth box directly IN FRONT of it
+const growthCardV = depth - L.growthCardBackMarginMm - holderDepth;
 const growthCard = buildA4Holder(M, growthCardTexture(), 'growth-a4');
-placeOnCounter(growthCard, L.growthCardSMm, depth - L.growthCardBackMarginMm - holderDepth, 'Growth A4');
+placeOnCounter(growthCard, L.growthSMm, growthCardV, 'Growth A4');
 const growthBox = buildGrowthBox(M);
-placeOnCounter(growthBox, L.growthBoxSMm,
-  depth - L.growthBoxBackMarginMm - growthBox.footprint.depthMm, 'Growth sample box');
+placeOnCounter(growthBox, L.growthSMm,
+  growthCardV - L.growthBoxGapBehindMm - growthBox.footprint.depthMm, 'Growth sample box');
 
 // 3. LOOK CLOSER installation
 const installation = buildInstallation(M);
@@ -172,27 +179,27 @@ scene.add(overlay);
 const VIEWS = {
   overview: {
     label: 'Room overview',
-    pos: [-2.30, 1.55, 3.05], target: [0.18, 1.20, -1.00], fov: 57,
+    pos: [-1.72, 1.50, 2.30], target: [0.02, 1.18, -1.00], fov: 54,
     note: 'Matched to the venue photograph: banner left, counter across the bay, stools right.',
   },
   counter: {
     label: 'Whole counter',
-    pos: [-0.05, 1.86, 2.55], target: [0.02, 1.10, -1.02], fov: 52,
+    pos: [0.00, 1.62, 1.72], target: [0.00, 1.08, -1.00], fov: 50,
     note: 'All five counter groups in one frame, left to right.',
   },
   installation: {
     label: 'Installation detail',
-    pos: [-0.44, 1.46, -0.03], target: [-0.55, 1.20, -0.98], fov: 38,
+    pos: [-0.20, 1.40, -0.14], target: [-0.25, 1.19, -0.99], fov: 38,
     note: 'Engraved Oyster panel, LOOK CLOSER sign front-left, plain coupon front-right.',
   },
   top: {
     label: 'Top layout',
-    pos: [0.0, 7.9, 0.55], target: [0.0, 1.0, -0.95], fov: 30,
+    pos: [0.0, 6.1, 0.42], target: [0.0, 1.0, -0.98], fov: 30,
     note: 'Plan check: order, footprints and access.',
   },
   seating: {
     label: 'Conversation area',
-    pos: [0.35, 1.72, 2.45], target: [1.95, 0.92, -0.35], fov: 46,
+    pos: [-0.05, 1.64, 1.95], target: [1.12, 0.94, -0.52], fov: 46,
     note: 'Three representatives at the right end, on the room side, facing visitors.',
   },
 };
@@ -363,3 +370,6 @@ window.PG = {
   },
   ready: true,
 };
+
+const boot = document.getElementById('boot');
+if (boot) boot.remove();

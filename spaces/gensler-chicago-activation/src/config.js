@@ -26,8 +26,8 @@ export const CONFIG = {
   // A. Room shell (all provisional - read off IMG_3511(1).jpeg, not surveyed)
   // -------------------------------------------------------------------------
   room: {
-    widthMm: 8400,
-    depthMm: 6800,
+    widthMm: 6800,
+    depthMm: 6400,
     ceilingHeightMm: 3650,
     skirtingHeightMm: 120,
     wainscotHeightMm: 900,
@@ -36,7 +36,7 @@ export const CONFIG = {
 
   bay: {
     wallOffsetBehindCounterMm: 150, // inner wall face behind counter back edge
-    halfAngleDeg: 30,               // bay wall sweeps wider than the counter
+    halfAngleDeg: 24,               // bay wall sweeps wider than the counter
     windowCount: 4,
     windowSillHeightMm: 900,
     windowHeadHeightMm: 3000,
@@ -53,7 +53,7 @@ export const CONFIG = {
   // B. The existing curved counter (provisional - photo + legacy estimates)
   // -------------------------------------------------------------------------
   counter: {
-    topLengthMm: 4600,       // arc length measured along the FRONT edge
+    topLengthMm: 3300,       // arc length measured along the FRONT edge
     depthMm: 450,            // usable top depth (legacy estimate)
     heightMm: 1000,          // top surface above floor (legacy estimate)
     topThicknessMm: 20,      // photo reads as a thin top; see CONFLICTS
@@ -63,12 +63,12 @@ export const CONFIG = {
     legSectionMm: 25,
     legInsetFrontMm: 60,     // leg centre, measured back from the front edge
     legInsetBackMm: 60,      // leg centre, measured forward from the back edge
-    legPositionsSMm: [200, 1150, 2100, 3050],
+    legPositionsSMm: [180, 900, 1620, 2340],
   },
 
   bookcase: {
-    startSMm: 3660,
-    endSMm: 4600,
+    startSMm: 2400,
+    endSMm: 3300,
     depthMm: 400,
     heightMm: 880,
     frontInsetMm: 50,        // set back from the counter front edge
@@ -83,7 +83,7 @@ export const CONFIG = {
   surroundings: {
     tableDiameterMm: 900,
     tableHeightMm: 740,
-    tableXMm: -2900,
+    tableXMm: -2500,
     tableZMm: 2100,
     chairCount: 2,
     chairSeatHeightMm: 430,
@@ -107,7 +107,7 @@ export const CONFIG = {
     legSplayMm: 230,
     tubeDiameterMm: 22,
     standoffFromCounterMm: 480, // seat centre, forward of the counter front edge
-    positionsSMm: [3700, 4250, 4800],
+    positionsSMm: [2250, 2750, 3250],
   },
 
   // -------------------------------------------------------------------------
@@ -213,37 +213,50 @@ export const CONFIG = {
   // H. Growth Collection sample box (external size = explicit ASSUMPTION)
   // -------------------------------------------------------------------------
   growthBox: {
-    widthMm: 330,          // ASSUMED closed-box envelope
-    depthMm: 310,          // ASSUMED closed-box envelope
-    heightMm: 20,          // ASSUMED closed-box envelope
-    wallThicknessMm: 8,
-    coverThicknessMm: 6,
-    coverOpenAngleDeg: 78, // provisional presentation: cover propped, not flat
+    // Presented as an OPEN TRAY: printed header panel across the back, eight
+    // samples in front, sitting on its own lid. This follows the reference
+    // photograph supplied for it, and supersedes the earlier propped-cover
+    // presentation, which no reference supported and which did not fit.
+    widthMm: 320,
+    depthMm: 240,
+    heightMm: 26,
+    wallThicknessMm: 7,
+    headerDepthMm: 78,      // printed panel across the back of the tray
+    lidThicknessMm: 22,     // the tray stands on its own lid
+    lidMarginMm: 5,         // lid is slightly larger, showing a thin border
     sampleCount: 8,
     sampleColumns: 4,
     sampleRows: 2,
-    sampleWidthMm: 68,
-    sampleDepthMm: 130,
+    sampleWidthMm: 66,
+    sampleDepthMm: 62,
     sampleThicknessMm: 6,
-    sampleGapMm: 10,
+    sampleGapMm: 8,
   },
 
   // -------------------------------------------------------------------------
   // I. Two general sample boxes (placeholder geometry - sizes unconfirmed)
   // -------------------------------------------------------------------------
   generalBoxes: {
+    // Slim box holding a row of upright sample sticks, with its sleeve lid
+    // standing at one end - the construction in the two supplied product
+    // photographs. One black, one grey.
     count: 2,
-    widthMm: 140,
-    depthMm: 110,
-    heightMm: 80,
+    widthMm: 180,
+    depthMm: 62,
+    heightMm: 48,
     wallThicknessMm: 6,
     gapMm: 30,
-    chipCount: 5,
-    chipWidthMm: 58,
-    chipHeightMm: 38,
-    chipThicknessMm: 8,
+    chipCount: 10,
+    chipThicknessMm: 14,    // across the box: this is the face you see
+    chipFaceMm: 48,         // front to back
+    chipHeightMm: 100,
+    chipPitchMm: 16,
+    chipProtrusionMm: 55,   // stands proud of the box rim
+    lidThicknessMm: 8,
+    lidHeightMm: 150,
+    lidGapMm: 6,
     finishes: ['black', 'grey'],
-    chipPalettes: ['Slate', 'Moss', 'Chalk', 'Clay', 'Ink'],
+    chipPalettes: ['Lapis', 'Ink', 'Chalk', 'Slate', 'Ink', 'Oyster', 'Chalk', 'Emerald', 'Ink', 'Clay'],
   },
 
   // -------------------------------------------------------------------------
@@ -287,28 +300,28 @@ export const CONFIG = {
   //     vMm = distance BEHIND the front edge (0 = front edge, 450 = back edge).
   // -------------------------------------------------------------------------
   layout: {
-    brochuresSMm: 330,
+    brochuresSMm: 265,
     brochuresVMm: 250,
 
-    growthCardSMm: 760,
+    // The Growth A4 and its open box share a position: card at the back, box
+    // directly in FRONT of it, as in the supplied reference.
+    growthSMm: 780,
     growthCardBackMarginMm: 20,
+    growthBoxGapBehindMm: 25,
 
-    growthBoxSMm: 1120,
-    growthBoxBackMarginMm: 20,
-
-    installationSMm: 1750,
+    installationSMm: 1400,
     installationFrontMarginMm: 13,  // see FIT REPORT - 20 mm is not achievable
 
-    tilesSMm: 2600,
+    tilesSMm: 2160,
     tilesFrontMarginMm: 20,
 
-    generalBoxesSMm: 2600,
-    generalBoxesVFrontMm: 300,
+    generalBoxesSMm: 2160,
+    generalBoxesVFrontMm: 340,
 
-    translucentCardSMm: 3400,
+    translucentCardSMm: 2870,
     translucentCardBackMarginMm: 20,
 
-    translucentBlockSMm: 3400,
+    translucentBlockSMm: 2870,
     translucentBlockVFrontMm: 200,
   },
 };
@@ -324,6 +337,7 @@ const PHOTO = 'IMG_3511(1).jpeg (venue photograph, not a measured survey)';
 const BRIEF = 'Project brief, section 3-5';
 const PDF = 'gExpo_holders_spec (1).pdf (as quoted in the brief; PDF not supplied to this session)';
 const LEGACY = 'Legacy concept model estimate quoted in the brief (source site unreachable)';
+const REFPHOTOS = 'Supplied Polygood product photographs (Growth box open on the counter; black and grey sample boxes)';
 
 function fill(prefix, keys, status, source, note) {
   const out = {};
@@ -343,9 +357,10 @@ export const PROVENANCE = {
     P, PHOTO, 'Bay window proportions read off the photograph.'),
 
   ...fill('counter',
-    ['topLengthMm', 'depthMm', 'curveRadiusMm', 'middleFrontZMm', 'rightEndRadiusMm', 'legSectionMm',
+    ['depthMm', 'curveRadiusMm', 'middleFrontZMm', 'rightEndRadiusMm', 'legSectionMm',
      'legInsetFrontMm', 'legInsetBackMm', 'legPositionsSMm'],
     P, PHOTO, 'Counter plan geometry is NOT confirmed; exposed for adjustment.'),
+  'counter.topLengthMm': { status: P, source: PHOTO, note: 'Derived by scaling known object sizes in the venue photograph against the counter: the 337 mm A4 plate and the 450 mm Oyster panel both put it near 3.0-3.3 m. 3300 mm used. This replaces an earlier 4600 mm guess, which made every display look too small for the counter. Still an estimate from a photograph, not a measurement.' },
   'counter.heightMm': { status: P, source: LEGACY, note: '1000 mm is a starting estimate, not a measurement.' },
   'counter.topThicknessMm': { status: C, source: `${PHOTO} vs ${LEGACY}`, note: 'Legacy model says 45 mm; the photograph reads as a visibly thin top. 20 mm used to preserve the real appearance. Needs measuring.' },
 
@@ -402,18 +417,21 @@ export const PROVENANCE = {
     P, 'Provisional assortment', 'The six real finishes/patterns were not identified. The selection is exposed here so it can be swapped without touching geometry.'),
 
   ...fill('growthBox', ['widthMm', 'depthMm', 'heightMm'],
-    P, 'Explicit modelling assumption', 'ASSUMED 330 x 310 x 20 mm closed envelope. The "33 x 31" / "3 x 3" notes have unclear units and unclear subject; neither is treated as a measurement.'),
-  ...fill('growthBox', ['wallThicknessMm', 'coverThicknessMm', 'sampleWidthMm', 'sampleDepthMm', 'sampleThicknessMm', 'sampleGapMm'],
-    P, 'IMG_3777.jpeg (not supplied to this session)', 'Construction proportions derived from the brief description of the reference photograph.'),
-  'growthBox.coverOpenAngleDeg': { status: P, source: 'Provisional presentation method', note: 'Opening mechanism could not be established. Cover is propped at 78 deg, full size, not shortened or folded. A flat-open cover needs 620 mm of depth, which the 450 mm counter does not have.' },
+    P, REFPHOTOS, 'Still an ASSUMPTION - nobody has supplied a measurement - but now proportioned from the supplied photograph of the open box rather than from the unclear "33 x 31" / "3 x 3" notes, which are still not treated as sizes. The earlier 330 x 310 x 20 guess was deeper than the reference shows.'),
+  ...fill('growthBox', ['wallThicknessMm', 'headerDepthMm', 'lidThicknessMm', 'lidMarginMm',
+                        'sampleWidthMm', 'sampleDepthMm', 'sampleThicknessMm', 'sampleGapMm'],
+    P, REFPHOTOS, 'Construction proportions read off the supplied photograph of the open box.'),
   ...fill('growthBox', ['sampleCount', 'sampleColumns', 'sampleRows'],
     S, BRIEF, 'Eight rectangular samples in two rows of four.'),
 
   'generalBoxes.count': { status: S, source: BRIEF, note: 'Exactly two: one black, one grey.' },
   ...fill('generalBoxes', ['finishes'], S, BRIEF, 'One black and one grey.'),
-  ...fill('generalBoxes', ['chipPalettes'], P, 'Provisional assortment', 'Existing sample contents retained in style; exact chips unconfirmed.'),
-  ...fill('generalBoxes', ['widthMm', 'depthMm', 'heightMm', 'wallThicknessMm', 'gapMm', 'chipCount', 'chipWidthMm', 'chipHeightMm', 'chipThicknessMm'],
-    P, PHOTO, 'PLACEHOLDER geometry. Legacy project geometry was unreachable, so the placeholder is scaled from the venue photograph instead. Editable; no production size invented.'),
+  ...fill('generalBoxes',
+    ['widthMm', 'depthMm', 'heightMm', 'wallThicknessMm', 'gapMm', 'chipCount', 'chipThicknessMm',
+     'chipFaceMm', 'chipHeightMm', 'chipPitchMm', 'chipProtrusionMm', 'lidThicknessMm',
+     'lidHeightMm', 'lidGapMm'],
+    P, REFPHOTOS, 'Rebuilt to the construction in the supplied product photographs - a slim box of upright sample sticks with a sleeve lid standing at one end. Sizes are still PLACEHOLDERS scaled from those photographs and the venue photograph; no production size has been invented.'),
+  ...fill('generalBoxes', ['chipPalettes'], P, REFPHOTOS, 'Ten finishes matched by eye to the supplied photographs. Provisional assortment.'),
 
   ...fill('translucent',
     ['blockWidthMm', 'blockDepthMm', 'blockHeightMm', 'slotCount', 'slotWidthMm', 'slotLengthMm',
@@ -428,11 +446,11 @@ export const PROVENANCE = {
     P, 'Visual assumption', 'Paper thickness and fan offsets are visual assumptions.'),
 
   ...fill('layout',
-    ['brochuresSMm', 'brochuresVMm', 'growthCardSMm', 'growthCardBackMarginMm', 'growthBoxSMm',
-     'growthBoxBackMarginMm', 'installationSMm', 'tilesSMm', 'tilesFrontMarginMm',
+    ['brochuresSMm', 'brochuresVMm', 'growthSMm', 'growthCardBackMarginMm',
+     'growthBoxGapBehindMm', 'installationSMm', 'tilesSMm', 'tilesFrontMarginMm',
      'generalBoxesSMm', 'generalBoxesVFrontMm', 'translucentCardSMm', 'translucentCardBackMarginMm',
      'translucentBlockSMm', 'translucentBlockVFrontMm'],
-    P, BRIEF, 'Left-to-right ORDER is specified; exact spacing along the counter is a layout choice.'),
+    P, BRIEF, 'Left-to-right ORDER is specified; spacing along the counter is a layout choice, respaced so the displays read at the density the venue photograph shows.'),
   'layout.installationFrontMarginMm': { status: C, source: 'Fit check against the provisional counter', note: 'The brief asks for a modest edge margin (20 mm would need 490 x 460 mm of flat top). The provisional 450 mm deep curved top cannot provide it; 13 mm is the best balanced margin. See the fit report.' },
 };
 
@@ -460,6 +478,12 @@ export const CONFLICTS = [
     decision: 'Placed with about 13 mm margin front and back. Counter depth must be measured.',
   },
   {
+    id: 'conversation-area-frontage',
+    title: 'The counter is not long enough for both the full display run and a separate conversation area',
+    detail: 'Five display groups need about 3.1 m of the counter once sensible gaps are allowed. Three stools at the right need roughly another 1.3 m of frontage. The counter measures about 3.3 m, so the two cannot both have their own stretch. In the venue photograph the stools in fact sit IN FRONT of the display zone rather than beyond it.',
+    decision: 'Stools kept grouped at the right as the brief requires, which puts the outer one just past the rounded end and the inner one in front of the Translucent group. Either lengthen the counter, drop to two stools, or accept the photograph\'s arrangement - that is a decision for the team, not a modelling choice.',
+  },
+  {
     id: 'translucent-slot-datum',
     title: 'Translucent slot rotation datum is ambiguous',
     detail: 'The 20 deg clockwise plan rotation is specified without a datum. Measured from the block width axis, ten 15 mm slots at 25 mm pitch would overlap by 6.45 mm and merge into one channel. Measured from the block depth axis they clear by 23.5 mm.',
@@ -482,9 +506,10 @@ export const CONFLICTS = [
 export const ASSUMPTIONS = [
   'Sources not available to this session: the legacy concept model at polygood-1.vercel.app (blocked by this environment\'s egress policy), gExpo_holders_spec (1).pdf, the A5 exhibition cards PDF, and every supplied photograph except the venue room photograph. Dimensions quoted from those sources come from the brief text; their artwork is represented by clearly-labelled procedural placeholders. See assets/README.md.',
   'Room, counter, bookcase and stool dimensions are read off the venue photograph. A photograph is not a survey; every one of these is exposed in CONFIG for correction.',
-  'Growth box external size is an explicit modelling assumption of 330 x 310 x 20 mm, not a measurement supplied by anyone.',
-  'The Growth box cover is modelled at full size, propped at 78 deg. A flat-open cover would need about 620 mm of counter depth. The opening mechanism could not be established from the reference.',
-  'The Growth A4 is offset sideways rather than directly behind the box, because the full-size propped cover stands about 303 mm tall and would hide the card heading.',
+  'Growth box external size (320 x 240 x 26 mm) is still an explicit modelling assumption proportioned from a photograph, not a measurement supplied by anyone.',
+'The Growth box is presented as an open tray - printed header panel across the back, eight samples in front, standing on its own full-size lid - following the supplied reference photograph. This supersedes the earlier propped-cover model, which no reference supported. Its box sits directly IN FRONT of its A4, not offset sideways, because nothing now stands tall enough to hide the card.',
+  'General sample box sizes remain placeholders, but their construction is no longer invented: they are slim boxes of upright sample sticks with a sleeve lid at one end, as in the supplied product photographs.',
+  'Counter length is now 4200 mm rather than 4600 mm, re-estimated from the venue photograph so the displays sit at the density the real presentation shows. Still not a measurement.',
   'General sample box geometry is a placeholder scaled from the venue photograph, because the legacy project geometry the brief points to could not be reached.',
   'Artwork placeholders deliberately use grey text bars instead of invented body copy, and a labelled grey block instead of a QR code. No technical approval, performance, price or sustainability claim is stated anywhere in the model.',
   'Stool spacing is a layout assumption. It is not a claim about statutory clearances.',

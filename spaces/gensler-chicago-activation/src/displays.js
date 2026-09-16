@@ -13,8 +13,8 @@ import { CONFIG } from './config.js';
 import { a4HolderPlanDepthMm } from './layout.js';
 import { box, slabWithHoles, tube, mesh, group, physicalUV } from './geom.js';
 import {
-  makeCollectionCard, makeLookCloserSign, makeBannerArtwork,
-  makeBrochureCover, makeGrowthCover,
+  makeCollectionCard, makeLookCloserSign, makeBannerArtwork, makeBrochureCover,
+  makeGrowthHeader, makeGrowthLid, makeSampleBoxFront, makeSampleBoxLid,
 } from './textures.js';
 
 const cfg = CONFIG;
@@ -135,43 +135,66 @@ export function translucentCardTexture() {
 }
 
 // ---------------------------------------------------------------------------
-// 2b. Growth Collection sample box - open, cover propped, eight samples
+// 2b. Growth Collection sample box - open tray, eight samples, on its own lid
 // ---------------------------------------------------------------------------
 export function buildGrowthBox(M) {
   const b = cfg.growthBox;
   const g = group('growth-box');
-  const coverLean = deg(90 - b.coverOpenAngleDeg);
-  const coverProjection = b.depthMm * Math.cos(deg(b.coverOpenAngleDeg));
-  const depthMm = b.depthMm + coverProjection;
+  const halfD = b.depthMm / 2;
 
-  // Tray sits forward inside the footprint; the propped cover takes the rest.
-  const trayZ = coverProjection / 2;
-  const tray = group('growth-tray');
-  tray.position.z = mm(trayZ);
+  // The tray stands on its full-size lid, which shows as a thin border.
+  const lidW = b.widthMm + 2 * b.lidMarginMm;
+  const lidD = b.depthMm + 2 * b.lidMarginMm;
+  const lid = mesh(box(mm(lidW), mm(b.lidThicknessMm), mm(lidD)), M.boxGrowth);
+  lid.position.y = mm(b.lidThicknessMm / 2);
+  g.add(lid);
+  const lidTop = mesh(
+    new THREE.PlaneGeometry(mm(lidW), mm(lidD)),
+    M.printed(makeGrowthLid(lidW, lidD)), { cast: false },
+  );
+  lidTop.rotation.x = -Math.PI / 2;
+  lidTop.position.y = mm(b.lidThicknessMm + 0.3);
+  g.add(lidTop);
 
-  const bottom = mesh(box(mm(b.widthMm), mm(4), mm(b.depthMm)), M.boxGrey);
-  bottom.position.y = mm(2);
-  tray.add(bottom);
+  const base = b.lidThicknessMm;
+
+  const bottom = mesh(box(mm(b.widthMm), mm(5), mm(b.depthMm)), M.boxGrowth);
+  bottom.position.y = mm(base + 2.5);
+  g.add(bottom);
 
   const innerW = b.widthMm - 2 * b.wallThicknessMm;
   const innerD = b.depthMm - 2 * b.wallThicknessMm;
   const rim = mesh(
-    slabWithHoles(mm(b.widthMm), mm(b.depthMm), mm(b.heightMm - 4), [
+    slabWithHoles(mm(b.widthMm), mm(b.depthMm), mm(b.heightMm - 5), [
       { cx: 0, cy: 0, w: mm(innerW), d: mm(innerD) },
     ]),
-    M.boxGrey,
+    M.boxGrowth,
   );
-  rim.position.y = mm(4);
-  tray.add(rim);
+  rim.position.y = mm(base + 5);
+  g.add(rim);
 
-  const insert = mesh(box(mm(innerW), mm(2), mm(innerD)), M.boxInsert);
-  insert.position.y = mm(5);
-  tray.add(insert);
+  // Printed header panel across the BACK of the tray: this is what carries the
+  // supplied Gensler Product Design Consultant credit.
+  const headerZ = -halfD + b.wallThicknessMm + b.headerDepthMm / 2;
+  const header = mesh(
+    new THREE.PlaneGeometry(mm(innerW), mm(b.headerDepthMm)),
+    M.printed(makeGrowthHeader(innerW, b.headerDepthMm)), { cast: false },
+  );
+  header.rotation.x = -Math.PI / 2;
+  header.position.set(0, mm(base + 5.4), mm(headerZ));
+  g.add(header);
 
-  // Eight rectangular samples, two rows of four.
+  // Dark insert holding the samples, in FRONT of the header.
+  const insertD = innerD - b.headerDepthMm;
+  const insertZ = halfD - b.wallThicknessMm - insertD / 2;
+  const insert = mesh(box(mm(innerW), mm(2), mm(insertD)), M.boxInsert);
+  insert.position.set(0, mm(base + 6), mm(insertZ));
+  g.add(insert);
+
+  // Eight samples, two rows of four.
   const totalW = b.sampleColumns * b.sampleWidthMm + (b.sampleColumns - 1) * b.sampleGapMm;
   const totalD = b.sampleRows * b.sampleDepthMm + (b.sampleRows - 1) * b.sampleGapMm;
-  const palettes = ['Oyster', 'Sage', 'Clay', 'Slate', 'Moss', 'Chalk', 'Coral', 'Ink'];
+  const palettes = ['Oyster', 'Chalk', 'Slate', 'Ink', 'Sage', 'Clay', 'Moss', 'Coral'];
   let k = 0;
   for (let row = 0; row < b.sampleRows; row += 1) {
     for (let col = 0; col < b.sampleColumns; col += 1) {
@@ -182,28 +205,15 @@ export function buildGrowthBox(M) {
       );
       sample.position.set(
         mm(-totalW / 2 + b.sampleWidthMm / 2 + col * (b.sampleWidthMm + b.sampleGapMm)),
-        mm(6 + b.sampleThicknessMm / 2),
-        mm(totalD / 2 - b.sampleDepthMm / 2 - row * (b.sampleDepthMm + b.sampleGapMm)),
+        mm(base + 7 + b.sampleThicknessMm / 2),
+        mm(insertZ + totalD / 2 - b.sampleDepthMm / 2 - row * (b.sampleDepthMm + b.sampleGapMm)),
       );
-      tray.add(sample);
+      g.add(sample);
       k += 1;
     }
   }
-  g.add(tray);
 
-  // Cover, full size, hinged at the tray's back top edge and propped upright.
-  const hinge = group('growth-cover');
-  hinge.position.set(0, mm(b.heightMm), mm(trayZ - b.depthMm / 2));
-  hinge.rotation.x = -coverLean;
-  const cover = mesh(box(mm(b.widthMm), mm(b.depthMm), mm(b.coverThicknessMm)), M.boxGrey);
-  cover.position.set(0, mm(b.depthMm / 2), mm(-b.coverThicknessMm / 2));
-  hinge.add(cover);
-  const coverArt = artworkPlane(b.widthMm, b.depthMm, makeGrowthCover(b.widthMm, b.depthMm), M);
-  coverArt.position.set(0, mm(b.depthMm / 2), mm(0.4));
-  hinge.add(coverArt);
-  g.add(hinge);
-
-  return { object: g, footprint: { widthMm: b.widthMm, depthMm } };
+  return { object: g, footprint: { widthMm: lidW, depthMm: lidD } };
 }
 
 // ---------------------------------------------------------------------------
@@ -447,16 +457,19 @@ export function buildTiles(M) {
 }
 
 // ---------------------------------------------------------------------------
-// 4b. Two general sample boxes - one black, one grey
+// 4b. Two general sample boxes - slim boxes of upright sample sticks, one
+//     black and one grey, each with its sleeve lid standing at one end.
 // ---------------------------------------------------------------------------
 export function buildGeneralBoxes(M) {
   const b = cfg.generalBoxes;
   const g = group('general-sample-boxes');
-  const widthMm = b.count * b.widthMm + (b.count - 1) * b.gapMm;
+  const unitWidth = b.widthMm + b.lidGapMm + b.lidThicknessMm;
+  const widthMm = b.count * unitWidth + (b.count - 1) * b.gapMm;
 
   for (let i = 0; i < b.count; i += 1) {
-    const shell = b.finishes[i] === 'grey' ? M.boxGrey : M.boxBlack;
-    const one = group(`general-box-${b.finishes[i]}`);
+    const finish = b.finishes[i];
+    const shell = finish === 'grey' ? M.boxGrey : M.boxBlack;
+    const one = group(`general-box-${finish}`);
     const innerW = b.widthMm - 2 * b.wallThicknessMm;
     const innerD = b.depthMm - 2 * b.wallThicknessMm;
 
@@ -472,23 +485,54 @@ export function buildGeneralBoxes(M) {
     rim.position.y = mm(6);
     one.add(rim);
 
-    // Sample chips standing at a slight angle inside, as in the photograph.
+    // Polygood mark on the front face.
+    const front = mesh(
+      new THREE.PlaneGeometry(mm(b.widthMm), mm(b.heightMm)),
+      M.printed(makeSampleBoxFront(b.widthMm, b.heightMm, finish)), { cast: false },
+    );
+    front.position.set(0, mm(b.heightMm / 2), mm(b.depthMm / 2 + 0.4));
+    one.add(front);
+
+    // A row of upright sample sticks, standing proud of the rim.
+    const rowWidth = (b.chipCount - 1) * b.chipPitchMm;
     for (let k = 0; k < b.chipCount; k += 1) {
       const chip = mesh(
-        sheetBox(b.chipWidthMm, b.chipHeightMm, b.chipThicknessMm, M.fragmentTileMm,
+        sheetBox(b.chipThicknessMm, b.chipHeightMm, b.chipFaceMm, M.fragmentTileMm,
           [0, 0, 0], [k * 53 + i * 29, k * 41, 0]),
         M.fragment(b.chipPalettes[k % b.chipPalettes.length], 120 + i * 7 + k),
       );
       chip.position.set(
+        mm(-rowWidth / 2 + k * b.chipPitchMm),
+        mm(b.heightMm + b.chipProtrusionMm - b.chipHeightMm / 2),
         0,
-        mm(b.heightMm - 4),
-        mm(innerD / 2 - 10 - k * ((innerD - 20) / b.chipCount)),
       );
-      chip.rotation.x = deg(-16);
       one.add(chip);
     }
 
-    one.position.x = mm(-widthMm / 2 + b.widthMm / 2 + i * (b.widthMm + b.gapMm));
+    // Sleeve lid standing upright at the right-hand end.
+    const lid = mesh(
+      box(mm(b.lidThicknessMm), mm(b.lidHeightMm), mm(b.depthMm)),
+      shell,
+    );
+    lid.position.set(
+      mm(b.widthMm / 2 + b.lidGapMm + b.lidThicknessMm / 2),
+      mm(b.lidHeightMm / 2),
+      0,
+    );
+    one.add(lid);
+    const lidFace = mesh(
+      new THREE.PlaneGeometry(mm(b.depthMm), mm(b.lidHeightMm)),
+      M.printed(makeSampleBoxLid(b.lidHeightMm, b.depthMm, finish)), { cast: false },
+    );
+    lidFace.rotation.y = Math.PI / 2;
+    lidFace.position.set(
+      mm(b.widthMm / 2 + b.lidGapMm + b.lidThicknessMm + 0.4),
+      mm(b.lidHeightMm / 2),
+      0,
+    );
+    one.add(lidFace);
+
+    one.position.x = mm(-widthMm / 2 + unitWidth / 2 + i * (unitWidth + b.gapMm));
     g.add(one);
   }
   return { object: g, footprint: { widthMm, depthMm: b.depthMm } };

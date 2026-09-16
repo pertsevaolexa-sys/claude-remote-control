@@ -36,8 +36,19 @@ function labelSprite(text, status) {
   g.fillStyle = 'rgba(255,255,255,0.94)';
   g.strokeStyle = `#${COLOUR[status].toString(16).padStart(6, '0')}`;
   g.lineWidth = 3;
+  // Hand-rolled rounded rectangle: ctx.roundRect() is too new to rely on.
+  const r = 7; const x0 = 1.5; const y0 = 1.5; const x1 = w - 1.5; const y1 = h - 1.5;
   g.beginPath();
-  g.roundRect(1.5, 1.5, w - 3, h - 3, 7);
+  g.moveTo(x0 + r, y0);
+  g.lineTo(x1 - r, y0);
+  g.quadraticCurveTo(x1, y0, x1, y0 + r);
+  g.lineTo(x1, y1 - r);
+  g.quadraticCurveTo(x1, y1, x1 - r, y1);
+  g.lineTo(x0 + r, y1);
+  g.quadraticCurveTo(x0, y1, x0, y1 - r);
+  g.lineTo(x0, y0 + r);
+  g.quadraticCurveTo(x0, y0, x0 + r, y0);
+  g.closePath();
   g.fill();
   g.stroke();
   g.fillStyle = '#1a1a1a';
@@ -181,7 +192,7 @@ export function buildDimensionOverlay() {
 
   // -- Growth box -----------------------------------------------------------
   const gb = cfg.growthBox;
-  const gS = cfg.layout.growthBoxSMm;
+  const gS = cfg.layout.growthSMm;
   const g1 = pointAtMm(gS - gb.widthMm / 2, 200);
   const g2 = pointAtMm(gS + gb.widthMm / 2, 200);
   add(V(g1.x, topY, g1.z), V(g2.x, topY, g2.z),

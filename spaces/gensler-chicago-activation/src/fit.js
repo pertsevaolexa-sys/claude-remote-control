@@ -178,19 +178,26 @@ export function runFitReport(cfg = CONFIG) {
 
   // -- 8. Growth box --------------------------------------------------------
   const g = cfg.growthBox;
-  const flatOpen = g.depthMm * 2;
-  const propped = g.depthMm * Math.cos((g.coverOpenAngleDeg * Math.PI) / 180);
-  const coverHeight = g.depthMm * Math.sin((g.coverOpenAngleDeg * Math.PI) / 180);
-  add(NOTE, 'growth', `Box modelled at the ASSUMED ${g.widthMm} x ${g.depthMm} x ${g.heightMm} mm envelope. A flat-open cover would need ${flatOpen} mm of depth, which the ${cfg.counter.depthMm} mm counter does not have. The full-size cover is propped at ${g.coverOpenAngleDeg} deg instead: ${r1(propped)} mm of plan depth, standing ${r1(coverHeight)} mm tall. Not shortened, not folded. Presentation method provisional.`);
+  const gBoxW = g.widthMm + 2 * g.lidMarginMm;
+  const gBoxD = g.depthMm + 2 * g.lidMarginMm;
+  add(NOTE, 'growth', `Box modelled at an ASSUMED ${g.widthMm} x ${g.depthMm} x ${g.heightMm} mm tray, proportioned from the supplied reference photograph rather than measured. It is presented OPEN - printed header panel across the back carrying the Gensler credit, eight samples in front - standing on its own full-size ${g.lidThicknessMm} mm lid. Nothing is shortened or folded.`);
+  const cardV = cfg.counter.depthMm - cfg.layout.growthCardBackMarginMm - a4HolderPlanDepthMm(cfg);
+  const boxFront = cardV - cfg.layout.growthBoxGapBehindMm - gBoxD;
+  if (boxFront < 0) {
+    add(CONFLICT, 'growth', `Open box (${r1(gBoxD)} mm deep) does not fit in front of its A4 on a ${cfg.counter.depthMm} mm counter.`);
+  } else {
+    add(OK, 'growth', `Open box sits directly IN FRONT of its A4, as the reference shows: box v ${r1(boxFront)}..${r1(boxFront + gBoxD)} mm, card v ${r1(cardV)}..${r1(cfg.counter.depthMm - cfg.layout.growthCardBackMarginMm)} mm, ${cfg.layout.growthBoxGapBehindMm} mm between them and ${r1(boxFront)} mm of counter in front of the box. No sideways offset needed.`);
+  }
   const cardHeight = leaningHeightMm(cfg.a4Holder.plateHeightMm, cfg.a4Holder.leanDeg);
-  const sideOffset = Math.abs(cfg.layout.growthBoxSMm - cfg.layout.growthCardSMm);
-  add(NOTE, 'growth', `Propped cover (${r1(coverHeight)} mm) stands taller than the A4 plate (${r1(cardHeight)} mm), so the A4 is offset ${sideOffset} mm sideways rather than directly behind, keeping its heading visible - as the brief allows.`);
+  const boxHeight = g.lidThicknessMm + g.heightMm;
+  if (boxHeight >= cardHeight) add(CONFLICT, 'growth', `Open box stands ${r1(boxHeight)} mm and would hide the ${r1(cardHeight)} mm A4 behind it.`);
+  else add(OK, 'growth', `Open box stands ${r1(boxHeight)} mm against the ${r1(cardHeight)} mm A4 plate behind it, so the card heading stays visible over it.`);
   const gsW = g.sampleColumns * g.sampleWidthMm + (g.sampleColumns - 1) * g.sampleGapMm;
   const gsD = g.sampleRows * g.sampleDepthMm + (g.sampleRows - 1) * g.sampleGapMm;
   const innerW = g.widthMm - 2 * g.wallThicknessMm;
-  const innerD = g.depthMm - 2 * g.wallThicknessMm;
-  if (gsW > innerW || gsD > innerD) add(CONFLICT, 'growth', `${g.sampleCount} samples (${r1(gsW)} x ${r1(gsD)} mm) do not fit the tray interior (${innerW} x ${innerD} mm).`);
-  else add(OK, 'growth', `${g.sampleCount} samples in ${g.sampleRows} rows of ${g.sampleColumns} occupy ${gsW} x ${gsD} mm inside a ${innerW} x ${innerD} mm tray.`);
+  const innerD = g.depthMm - 2 * g.wallThicknessMm - g.headerDepthMm;
+  if (gsW > innerW || gsD > innerD) add(CONFLICT, 'growth', `${g.sampleCount} samples (${r1(gsW)} x ${r1(gsD)} mm) do not fit the ${innerW} x ${innerD} mm sample area in front of the header panel.`);
+  else add(OK, 'growth', `${g.sampleCount} samples in ${g.sampleRows} rows of ${g.sampleColumns} occupy ${gsW} x ${gsD} mm of the ${innerW} x ${innerD} mm area in front of the ${g.headerDepthMm} mm header panel.`);
 
   // -- 9. Translucent block -------------------------------------------------
   const tr = cfg.translucent;
@@ -212,6 +219,19 @@ export function runFitReport(cfg = CONFIG) {
   if (inserted !== tr.slotDepthMm) add(NOTE, 'translucent', `Sample insertion ${inserted} mm vs slot depth ${tr.slotDepthMm} mm.`);
   add(OK, 'translucent', `Samples ${tr.sampleWidthMm} x ${tr.sampleHeightMm} x ${tr.sampleThicknessMm} mm, inserted ${inserted} mm, ${tr.visibleHeightMm} mm visible, ${assembled} mm assembled above the counter. Block carries no branding.`);
   add(NOTE, 'translucent', `Fabrication unresolved: an ${tr.blockHeightMm} mm block is not one part from 19 mm sheet. Laminated or constructed body to be resolved; it does not hold up the visual model.`);
+
+  // -- 9b. General sample boxes ---------------------------------------------
+  const gb = cfg.generalBoxes;
+  const chipRow = (gb.chipCount - 1) * gb.chipPitchMm + gb.chipThicknessMm;
+  const chipInterior = gb.widthMm - 2 * gb.wallThicknessMm;
+  if (chipRow > chipInterior) {
+    add(CONFLICT, 'boxes', `${gb.chipCount} sticks at ${gb.chipPitchMm} mm pitch span ${r1(chipRow)} mm inside a ${chipInterior} mm box.`);
+  } else {
+    add(OK, 'boxes', `Two slim boxes, one ${gb.finishes[0]} and one ${gb.finishes[1]}: ${gb.widthMm} x ${gb.depthMm} x ${gb.heightMm} mm, ${gb.chipCount} upright sticks at ${gb.chipPitchMm} mm pitch spanning ${r1(chipRow)} mm of a ${chipInterior} mm interior, standing ${gb.chipProtrusionMm} mm proud, with the sleeve lid at one end. Assembled height ${gb.heightMm + gb.chipProtrusionMm} mm; lid ${gb.lidHeightMm} mm. Sizes remain PLACEHOLDERS scaled from the supplied photographs.`);
+  }
+  if (gb.chipFaceMm > gb.depthMm - 2 * gb.wallThicknessMm) {
+    add(CONFLICT, 'boxes', `Sticks are ${gb.chipFaceMm} mm front to back but the box interior is only ${gb.depthMm - 2 * gb.wallThicknessMm} mm.`);
+  }
 
   // -- 10. Banner -----------------------------------------------------------
   const b = cfg.banner;
@@ -235,7 +255,7 @@ export function runFitReport(cfg = CONFIG) {
   else add(OK, 'stools', `Three stools at ${spacings.join(' and ')} mm centres, ${st.seatWidthMm} mm seats, so ${r1(minSpacing - st.seatWidthMm)} mm between seats. Grouped at the right end on the room side, facing the visitor area.`);
   const bookcaseFaceR = cfg.counter.curveRadiusMm - 0 + cfg.bookcase.frontInsetMm;
   const outerLegR = stoolRadius + st.legSplayMm;
-  add(NOTE, 'stools', `Nearest stool leg sits ${r1(bookcaseFaceR - outerLegR)} mm clear of the bookcase face and ${r1(cfg.counter.curveRadiusMm - outerLegR)} mm clear of the counter front edge. Leftmost stool starts at s ${r1(st.positionsSMm[0])} mm, clear of the ${r1(byId['translucent-card'].sMax)} mm right edge of the Translucent group, so the material sequence is not blocked. Layout assumption, not a statutory clearance.`);
+  add(NOTE, 'stools', `Nearest stool leg sits ${r1(bookcaseFaceR - outerLegR)} mm clear of the bookcase face and ${r1(cfg.counter.curveRadiusMm - outerLegR)} mm clear of the counter front edge. Leftmost stool is at s ${r1(st.positionsSMm[0])} mm against the Translucent group's ${r1(byId['translucent-card'].sMax)} mm right edge, and the central installation ends at s ${r1(byId.installation.sMax)} mm, so nothing blocks the material sequence. Layout assumption, not a statutory clearance.`);
   const lastLeg = Math.max(...cfg.counter.legPositionsSMm);
   add(NOTE, 'stools', `Counter legs stop at s ${lastLeg} mm; the stools start at s ${st.positionsSMm[0]} mm, so no stool fouls a leg.`);
 

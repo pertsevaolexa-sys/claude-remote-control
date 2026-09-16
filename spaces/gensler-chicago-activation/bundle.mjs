@@ -39,17 +39,17 @@ const result = await build({
 });
 const code = result.outputFiles[0].text;
 
-let html = await readFile(join(root, 'index.html'), 'utf8');
+const source = await readFile(join(root, 'index.html'), 'utf8');
 
-// Replace the import map + external module script with the inlined bundle.
-html = html.replace(
-  /<script type="importmap">[\s\S]*?<\/script>\s*<script type="module" src="\.\/src\/main\.js"><\/script>/,
-  () => `<script type="module">\n${code}\n</script>`,
-);
-if (html.includes('importmap')) {
+// Swap the import map + external module script for the inlined bundle. The
+// boot script mentions "importmap" by name, so verify the replacement happened
+// rather than checking whether the word survived.
+const LOADER = /<script type="importmap">[\s\S]*?<\/script>\s*<script type="module" src="\.\/src\/main\.js"><\/script>/;
+if (!LOADER.test(source)) {
   console.error('bundle: could not find the import map / module script to replace');
   process.exit(1);
 }
+let html = source.replace(LOADER, () => `<script type="module">\n${code}\n</script>`);
 
 // A note for anyone who opens the file and wonders what it is.
 html = html.replace('<head>', `<head>

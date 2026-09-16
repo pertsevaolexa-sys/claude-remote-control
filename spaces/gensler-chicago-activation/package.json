@@ -7,8 +7,9 @@
     "check": "node check.mjs",
     "dev": "node build.mjs --serve",
     "serve": "node build.mjs --serve",
+    "bundle": "node bundle.mjs",
     "shots": "node shots.mjs",
-    "bundle": "node bundle.mjs"
+    "verify": "node verify.mjs"
   },
   "author": "",
   "license": "ISC",
