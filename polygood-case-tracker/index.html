@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Polygood Case Tracker</title>
+<meta name="description" content="Search Polygood's Notion projects, see which are already case studies on polygood.com, and track the missing ones.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23E8EBE6'/%3E%3Cpath d='M6 9l5-2 1 5-5 1z' fill='%232E4B8C'/%3E%3Cpath d='M18 6l6 2-2 4-5-1z' fill='%231A201E'/%3E%3Cpath d='M9 19l6-1 1 5-6 2z' fill='%23B98A4E'/%3E%3Cpath d='M20 17l6 3-3 5-4-3z' fill='%238FA39A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div>
+        <h1>Polygood Case Tracker</h1>
+        <p class="sub">Search any project to see whether it’s in Notion and whether it’s already a case study on polygood.com. Cases already on the website come first, oldest first, as your reference. Every mark and note is saved as you go.</p>
+      </div>
+      <div class="sync" aria-live="polite">
+        <span class="syncpill" id="syncPill"><i></i><span id="syncText">Connecting…</span></span>
+        <span class="syncsub" id="syncSub"></span>
+        <div class="syncactions">
+          <button class="btn small" type="button" id="exportBtn">Download backup</button>
+          <label class="btn small" for="importFile">Restore backup</label>
+          <input type="file" id="importFile" accept="application/json,.json" hidden>
+        </div>
+      </div>
+    </div>
+    <div id="banner"></div>
+    <canvas id="terrazzo" aria-hidden="true"></canvas>
+    <section class="summary" aria-label="Status of all Notion projects">
+      <div class="bar" id="bar"></div>
+      <div class="legend" id="legend"></div>
+    </section>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <button role="tab" type="button" aria-selected="true" data-tab="notion">Notion projects</button>
+    <button role="tab" type="button" aria-selected="false" data-tab="site">Website cases</button>
+    <button role="tab" type="button" aria-selected="false" data-tab="history">Saved changes</button>
+  </nav>
+
+  <div class="toolbar" id="toolbar">
+    <div class="searchrow">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search a project, brand, city, designer or pattern…" autocomplete="off" aria-label="Search projects">
+      </div>
+      <button class="btn" id="copyBtn" type="button">Copy list</button>
+    </div>
+    <div class="filters" id="projectFilters">
+      <div class="seg" role="group" aria-label="Website status" id="statusSeg">
+        <button type="button" data-status="public" aria-pressed="true">All (no NDA)</button>
+        <button type="button" data-status="live" aria-pressed="false">On website</button>
+        <button type="button" data-status="missing" aria-pressed="false">Not on website</button>
+        <button type="button" data-status="restricted" aria-pressed="false">Needs rights</button>
+        <button type="button" data-status="nda" aria-pressed="false">NDA</button>
+      </div>
+      <select id="sort" aria-label="Sort">
+        <option value="site-first">Website cases first, oldest first</option>
+        <option value="oldest">Oldest first</option>
+        <option value="newest">Newest first</option>
+        <option value="az">A–Z</option>
+        <option value="country">Country</option>
+      </select>
+      <select id="cat" aria-label="Category"><option value="">All categories</option></select>
+      <select id="country" aria-label="Country"><option value="">All countries</option></select>
+      <select id="wf" aria-label="Your progress">
+        <option value="">Any progress</option>
+        <option value="todo">To do</option>
+        <option value="drafting">Drafting</option>
+        <option value="ready">Ready to publish</option>
+        <option value="published">Published</option>
+        <option value="skip">Skip</option>
+      </select>
+      <label class="chk"><input type="checkbox" id="starred"> Starred</label>
+      <label class="chk"><input type="checkbox" id="pro"> Pro photos</label>
+      <label class="chk"><input type="checkbox" id="free"> Free to publish</label>
+    </div>
+    <div class="filters" id="siteFilters" hidden>
+      <select id="siteSort" aria-label="Sort website cases">
+        <option value="oldest">Oldest first</option>
+        <option value="newest">Newest first</option>
+        <option value="site">Order on polygood.com</option>
+      </select>
+      <label class="chk"><input type="checkbox" id="siteGaps"> Only cases with gaps</label>
+    </div>
+    <div class="answer" id="answer" aria-live="polite"></div>
+  </div>
+
+  <main id="list" class="list">
+    <div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>
