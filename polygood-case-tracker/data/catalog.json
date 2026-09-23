@@ -1,0 +1,6894 @@
+{
+ "updated": "2026-09-23",
+ "source": "Notion › Marketing team space › Project images; polygood.com/projects (list of 48 cases supplied on 23 Sep 2026)",
+ "catalogUrl": "https://polygood.com/projects/",
+ "bulkImportDate": "2022-11-11",
+ "projects": [
+  {
+   "id": "3cd82e7c7c8680338b1fd2dad4021b34",
+   "name": "Nike - Licensed Photos",
+   "notion": "https://app.notion.com/p/3cd82e7c7c8680338b1fd2dad4021b34",
+   "country": "Europe",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Floor",
+    "Retail fixtures",
+    "Cashdesk counter",
+    "Shelves",
+    "Benches"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "Photography: Tom D. Morgan TDM Space",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Licensed for use until 03.08.2027",
+   "agreement": true,
+   "ig": false,
+   "status": "live",
+   "siteCase": "NIKE",
+   "siteUrl": "https://polygood.com/projects/nike/",
+   "note": "",
+   "added": "2026-08-31T22:59:11.000Z"
+  },
+  {
+   "id": "3a082e7c7c86807d89b5f9b140dde44e",
+   "name": "Nike Manchester Rise",
+   "notion": "https://app.notion.com/p/3a082e7c7c86807d89b5f9b140dde44e",
+   "country": "UK",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures",
+    "Floor"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "Photos: Tom Morgan TDM Space",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "License expired 17 July, 2026, to be re-purchased",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Photo licence expired 17 Jul 2026: re-purchase before use.",
+   "added": "2026-07-17T09:56:26.911Z"
+  },
+  {
+   "id": "37d82e7c7c868006a6f4d95174a8957e",
+   "name": "Henriette Stadthotel - Vienna (P. Johannsen)",
+   "notion": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+   "country": "Austria",
+   "cat": "Hospitality",
+   "types": [
+    "Hotel"
+   ],
+   "uses": [
+    "Bathroom countertop"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo",
+    "Emerald ghost"
+   ],
+   "credits": "Copyright: Stadthotel Henriette_Patrick Johannsen Fotografie, @hotel.henriette",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-06-12T10:38:23.762Z"
+  },
+  {
+   "id": "37d82e7c7c8680628e92ef18e4219540",
+   "name": "Henriette Stadthotel - Vienna (superzusi.com)",
+   "notion": "https://app.notion.com/p/37d82e7c7c8680628e92ef18e4219540",
+   "country": "Austria",
+   "cat": "Hospitality",
+   "types": [
+    "Hotel"
+   ],
+   "uses": [
+    "Bathroom countertop"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo",
+    "White Terazzo"
+   ],
+   "credits": "Copyright: Henriette Stadthotel Vienna/supersusi.com (Photography), @hotel.henriette",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-06-12T09:56:35.581Z"
+  },
+  {
+   "id": "37382e7c7c8680948654cdc9090f06de",
+   "name": "The Score Academy",
+   "notion": "https://app.notion.com/p/37382e7c7c8680948654cdc9090f06de",
+   "country": "USA",
+   "cat": "Little data",
+   "types": [],
+   "uses": [
+    "Kitchen worktop"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo",
+    "Timeless Duo Blue",
+    "Victorious"
+   ],
+   "credits": "Design: AI Spaces Florida",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "THE SCORE ACADEMY, MIAMI",
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-06-02T07:52:51.626Z"
+  },
+  {
+   "id": "35982e7c7c868047b376d8b16e96df81",
+   "name": "Transmissions - Joe Doucet",
+   "notion": "https://app.notion.com/p/35982e7c7c868047b376d8b16e96df81",
+   "country": "USA",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Exhibition",
+    "Art installation"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Pattern №5",
+    "Dark Knight",
+    "Milky Way"
+   ],
+   "credits": "Design: Joe Doucet",
+   "partner": "",
+   "pro": false,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Joe Doucet, the designer of the OLO Table case.",
+   "added": "2026-05-07T15:52:30.254Z"
+  },
+  {
+   "id": "35982e7c7c86803f8361ce1d37a9eab5",
+   "name": "MDW 2026 - Spinzi - The Lived-in Wardrobe",
+   "notion": "https://app.notion.com/p/35982e7c7c86803f8361ce1d37a9eab5",
+   "country": "Italy",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition",
+    "Residential furniture"
+   ],
+   "uses": [
+    "Exhibition booth",
+    "Chair",
+    "Tables"
+   ],
+   "patterns": [],
+   "credits": "Spinzi Studio www.spinzi.com",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-05-07T14:42:59.557Z"
+  },
+  {
+   "id": "35882e7c7c86804ab9add0f3ed46098c",
+   "name": "Philip Morris Ukraine - IQOS store",
+   "notion": "https://app.notion.com/p/35882e7c7c86804ab9add0f3ed46098c",
+   "country": "Ukraine",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Recycling bin",
+    "Retail fixtures",
+    "Retail popup",
+    "Reception counter"
+   ],
+   "patterns": [
+    "Milky Way",
+    "Maldives",
+    "White Lollipop"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-05-06T14:22:55.912Z"
+  },
+  {
+   "id": "34c82e7c7c8680858d0dca133c9dce86",
+   "name": "MDW 2026",
+   "notion": "https://app.notion.com/p/34c82e7c7c8680858d0dca133c9dce86",
+   "country": "Italy",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition",
+    "Residential furniture"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-04-24T08:19:34.132Z"
+  },
+  {
+   "id": "3d882e7c7c8680a39881cf8eed7a5ca0",
+   "name": "De Bijenkorf",
+   "notion": "https://app.notion.com/p/3d882e7c7c8680a39881cf8eed7a5ca0",
+   "country": "Netherlands",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Floor",
+    "Counter",
+    "Stand",
+    "Decoration element"
+   ],
+   "patterns": [],
+   "credits": "Milenka Backx for the photography (@milenq.work on social, milenq.com elsewhere), Random Studio for the design, and Fiction Factory.",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-09-11T07:49:05.475Z"
+  },
+  {
+   "id": "34a82e7c7c8680bea300fd67a09266b0",
+   "name": "Office Kitchen LAVA (Internal Use Only)",
+   "notion": "https://app.notion.com/p/34a82e7c7c8680bea300fd67a09266b0",
+   "country": "",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Kitchen",
+    "Office"
+   ],
+   "uses": [
+    "Kitchen worktop",
+    "Indoor façade",
+    "Cabinet"
+   ],
+   "patterns": [
+    "Translucent Green",
+    "Translucent Pink",
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Design and photos: LAVA https://l-a-v-a.com",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "No permission to publish until the project is finished (wait for the updated images).",
+   "agreement": false,
+   "ig": false,
+   "status": "nda",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Internal use only (named in the entry).",
+   "added": "2026-04-22T13:06:46.328Z"
+  },
+  {
+   "id": "33082e7c7c868028ad11c7c6f6d23288",
+   "name": "Mimo Tables by Noteworthy Studio",
+   "notion": "https://app.notion.com/p/33082e7c7c868028ad11c7c6f6d23288",
+   "country": "USA",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Tables",
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Translucent Clear"
+   ],
+   "credits": "Design by: Heather Deitch, Noteworthy Studio @noteworthylstudio",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-03-27T16:34:51.460Z"
+  },
+  {
+   "id": "32182e7c7c868090b884e2efc856bbc0",
+   "name": "Station Road - Kitchen project",
+   "notion": "https://app.notion.com/p/32182e7c7c868090b884e2efc856bbc0",
+   "country": "UK",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Kitchen worktop"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "WUNSCH - Сabinetmakers: https://www.wunsch.co.uk/ @wunsch_makers",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-03-12T16:50:27.423Z"
+  },
+  {
+   "id": "32082e7c7c8680a3baf8c443b93ea36c",
+   "name": "Commerzbank AG - Zuidas (NL)",
+   "notion": "https://app.notion.com/p/32082e7c7c8680a3baf8c443b93ea36c",
+   "country": "Netherlands",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office",
+    "Kitchen"
+   ],
+   "uses": [
+    "Countertop",
+    "Bar front"
+   ],
+   "patterns": [
+    "Timeless Duo Blue"
+   ],
+   "credits": "Design: CBRE Design Collective (website: CBRE.nl Instagram LinkedIn) Mention: Commerzbank AG",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "We would like to see our name (CBRE Design Collective) and the name of Commerzbank under the pictures.",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-03-11T16:02:20.295Z"
+  },
+  {
+   "id": "31282e7c7c86806d8ca1c729b61d7154",
+   "name": "Verloskundigenpraktijk Oost",
+   "notion": "https://app.notion.com/p/31282e7c7c86806d8ca1c729b61d7154",
+   "country": "Netherlands",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Healthcare",
+    "Office"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Espresso Noir"
+   ],
+   "credits": "Design: Studio Anne Witten @studio_anne_witten & Maaike Veenstra Interieur @maaike.veenstra.interieur Photography: @by.luna.photography https://www.bylunaconcepts.com",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Use with the appropriate credits",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-02-25T11:05:15.591Z"
+  },
+  {
+   "id": "30a82e7c7c8680ec9ff4ca53f65803d5",
+   "name": "Renders",
+   "notion": "https://app.notion.com/p/30a82e7c7c8680ec9ff4ca53f65803d5",
+   "country": "",
+   "cat": "Little data",
+   "types": [],
+   "uses": [],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "not_project",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Renders, not a built project.",
+   "added": "2026-02-17T14:22:43.850Z"
+  },
+  {
+   "id": "30682e7c7c8680de92b5ff3c50e5b403",
+   "name": "Grounded RVs",
+   "notion": "https://app.notion.com/p/30682e7c7c8680de92b5ff3c50e5b403",
+   "country": "USA",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Interior",
+    "EV Interior"
+   ],
+   "uses": [
+    "Indoor façade",
+    "Cabinet",
+    "Kitchen worktop",
+    "Countertop"
+   ],
+   "patterns": [
+    "Salt Dune",
+    "Fleur de Sel",
+    "Glaze Sprinkes",
+    "Emerald ghost",
+    "Milky Way"
+   ],
+   "credits": "Grounded RV https://groundedevs.com/",
+   "partner": "",
+   "pro": false,
+   "social": "yes",
+   "rights": "Permission to use provided hi-res photos w/o time limit",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-02-13T00:30:56.861Z"
+  },
+  {
+   "id": "30682e7c7c8680199200f684c64c35bf",
+   "name": "Lightship RVs (Internal Use Only)",
+   "notion": "https://app.notion.com/p/30682e7c7c8680199200f684c64c35bf",
+   "country": "USA",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Bathroom",
+    "Interior",
+    "EV Interior"
+   ],
+   "uses": [
+    "Countertop",
+    "Vanity sinks"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "These images are intended only for INTERNAL USE within the company. NO external sharing, distribution, reproduction, or publication until approval from the client.",
+   "agreement": false,
+   "ig": false,
+   "status": "nda",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Internal use only until the client approves.",
+   "added": "2026-02-13T00:04:45.313Z"
+  },
+  {
+   "id": "30482e7c7c86807f9eace047447df208",
+   "name": "Bloomberg - NJ (Internal Use Only)",
+   "notion": "https://app.notion.com/p/30482e7c7c86807f9eace047447df208",
+   "country": "USA",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Reception counter",
+    "Signage elements"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo",
+    "Dark Knight"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "DO NOT SHARE with any promotional opps Internal use ONLY until client’s permission",
+   "agreement": false,
+   "ig": false,
+   "status": "nda",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Internal use only until the client gives permission.",
+   "added": "2026-02-11T16:24:53.709Z"
+  },
+  {
+   "id": "30382e7c7c8680388bb1e47bade85210",
+   "name": "Kitchen RAPP - Paris",
+   "notion": "https://app.notion.com/p/30382e7c7c8680388bb1e47bade85210",
+   "country": "France",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Kitchen worktop"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Credit requirements: Please ensure that SAMJI is credited on the first credit line, with a link to our website (https://www.ateliersamji.com/) or social media account. We kindly ask you to follow the credits listed on our website for each project, including at least the manufacturer, the client, and the photographer. Fabrication & Design: Samji Studio Design : Kyka Client : Maison Kyka",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Free to use the photos with the appropriate credits above.",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-02-10T16:20:00.015Z"
+  },
+  {
+   "id": "30382e7c7c8680618de9da31a85f5b16",
+   "name": "Kitchen worktop - Saint-Germain",
+   "notion": "https://app.notion.com/p/30382e7c7c8680618de9da31a85f5b16",
+   "country": "France",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Kitchen worktop"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Credit requirements: Please ensure that SAMJI is credited on the first credit line, with a link to our website (https://www.ateliersamji.com/) or social media account. We kindly ask you to follow the credits listed on our website for each project, including at least the manufacturer, the client, and the photographer. Fabrication & Design: Samji Studio Design : Kyka Client : Maison Kyka",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Free to use the photos with the appropriate credits above.",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-02-10T16:12:36.790Z"
+  },
+  {
+   "id": "30382e7c7c86801591ffd240e47539ce",
+   "name": "Fresh Bar - Paris",
+   "notion": "https://app.notion.com/p/30382e7c7c86801591ffd240e47539ce",
+   "country": "France",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Countertop"
+   ],
+   "patterns": [
+    "Timeless Duo"
+   ],
+   "credits": "Credit requirements: Please ensure that SAMJI is credited on the first credit line, with a link to our website (https://www.ateliersamji.com/) or social media account. We kindly ask you to follow the credits listed on our website for each project, including at least the manufacturer, the client, and the photographer. Fabrication: Samji Studio Design : Conception'bois Client : Publicis",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Free to use the photos with the appropriate credits above.",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-02-10T16:02:56.776Z"
+  },
+  {
+   "id": "30382e7c7c868060a65ee80b92808d5e",
+   "name": "Pristine",
+   "notion": "https://app.notion.com/p/30382e7c7c868060a65ee80b92808d5e",
+   "country": "France",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Countertop"
+   ],
+   "patterns": [
+    "Marbellous"
+   ],
+   "credits": "Credit requirements: Please ensure that SAMJI is credited on the first credit line, with a link to our website (https://www.ateliersamji.com/) or social media account. We kindly ask you to follow the credits listed on our website for each project, including at least the manufacturer, the client, and the photographer. Fabrication: Samji Studio Design / Client: Pristine Paris",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Free to use the photos with the appropriate credits above.",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-02-10T15:56:29.388Z"
+  },
+  {
+   "id": "30382e7c7c8680d8b1a5e87ede2a9d70",
+   "name": "Kitchen worktop - Paris",
+   "notion": "https://app.notion.com/p/30382e7c7c8680d8b1a5e87ede2a9d70",
+   "country": "France",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Kitchen worktop",
+    "Tables"
+   ],
+   "patterns": [
+    "Emerald ghost"
+   ],
+   "credits": "Credit requirements: Please ensure that SAMJI is credited on the first credit line, with a link to our website (https://www.ateliersamji.com/) or social media account. We kindly ask you to follow the credits listed on our website for each project, including at least the manufacturer, the client, and the photographer. Fabrication: Samji Studio Client : Privé",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Free to use the photos with the appropriate credits above.",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-02-10T15:35:51.750Z"
+  },
+  {
+   "id": "30382e7c7c868078ab01ea13f6e98e2b",
+   "name": "Orion office kitchenette - Paris",
+   "notion": "https://app.notion.com/p/30382e7c7c868078ab01ea13f6e98e2b",
+   "country": "France",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Kitchen",
+    "Office"
+   ],
+   "uses": [
+    "Kitchen worktop"
+   ],
+   "patterns": [
+    "Emerald ghost"
+   ],
+   "credits": "Credit requirements: Please ensure that SAMJI is credited on the first credit line, with a link to our website (https://www.ateliersamji.com/) or social media account. We kindly ask you to follow the credits listed on our website for each project, including at least the manufacturer, the client, and the photographer. Fabrication : Samji Studio, Design : Aura Paris",
+   "partner": "",
+   "pro": false,
+   "social": "yes",
+   "rights": "Free to use the photos with the appropriate credits above.",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-02-10T15:19:58.689Z"
+  },
+  {
+   "id": "30382e7c7c8680ee9fa6dd2c1e6b74dd",
+   "name": "Noothing Eye Concept",
+   "notion": "https://app.notion.com/p/30382e7c7c8680ee9fa6dd2c1e6b74dd",
+   "country": "France",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Counter",
+    "Cashdesk counter",
+    "Cabinet",
+    "Shelves",
+    "Tables"
+   ],
+   "patterns": [
+    "Fleur de Sel"
+   ],
+   "credits": "Credit requirements: Please ensure that SAMJI is credited on the first credit line, with a link to our website (https://www.ateliersamji.com/) or social media account. We kindly ask you to follow the credits listed on our website for each project, including at least the manufacturer, the client, and the photographer. Fabrication : Samji Studio, Client : Noothing eye concept, Design : Maison Tournesol.",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Free to use the photos with the appropriate credits above.",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-02-10T14:53:05.990Z"
+  },
+  {
+   "id": "2ea82e7c7c86802c967df43ae0237e85",
+   "name": "KFC Dublin",
+   "notion": "https://app.notion.com/p/2ea82e7c7c86802c967df43ae0237e85",
+   "country": "",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Cashdesk counter",
+    "Tables"
+   ],
+   "patterns": [
+    "Bespoke"
+   ],
+   "credits": "Custom furniture fabrication: Table Place Chairs (UK)",
+   "partner": "CDUK",
+   "pro": false,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2026-01-16T06:15:22.989Z"
+  },
+  {
+   "id": "2e882e7c7c868034955bd1922f4d8b55",
+   "name": "Polygood Cart - Growth Collection Demo, NYC 2025",
+   "notion": "https://app.notion.com/p/2e882e7c7c868034955bd1922f4d8b55",
+   "country": "USA",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Interior"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Cliff"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-01-14T18:55:21.763Z"
+  },
+  {
+   "id": "2e882e7c7c868092bd2deaadddce2af2",
+   "name": "FOAID India 2025 Delhi - Future of Surfaces",
+   "notion": "https://app.notion.com/p/2e882e7c7c868092bd2deaadddce2af2",
+   "country": "India",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Coral reef",
+    "Ice Lollypop"
+   ],
+   "credits": "",
+   "partner": "Future of Surfaces",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-01-14T18:50:11.630Z"
+  },
+  {
+   "id": "2e882e7c7c86806d9c7cd20f2765f90a",
+   "name": "Polygood France Showroom - Paris",
+   "notion": "https://app.notion.com/p/2e882e7c7c86806d9c7cd20f2765f90a",
+   "country": "France",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen",
+    "Interior",
+    "Bathroom"
+   ],
+   "uses": [
+    "Shelves",
+    "Tables",
+    "Countertop",
+    "Kitchen worktop",
+    "Cabinet",
+    "Coffee table",
+    "Chair"
+   ],
+   "patterns": [
+    "Oyster",
+    "Midnight",
+    "Pumice",
+    "Cliff",
+    "Reverse Timeless Duo",
+    "Terrazzo Nuovo",
+    "Pebble",
+    "Gossamer",
+    "Timeless Duo",
+    "Maldives"
+   ],
+   "credits": "Design and fabrication: @place.tic; Machining and shaping: studiotrigone; Installation and fit-out: @pclssologne; Photography: TLMALP; Material: Polygood® A statement table by @Louise_Rue_Design",
+   "partner": "Module Carre (France)",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-01-14T18:07:08.733Z"
+  },
+  {
+   "id": "2df82e7c7c86803580eef5ece6024d14",
+   "name": "Crocs store façade - Malta",
+   "notion": "https://app.notion.com/p/2df82e7c7c86803580eef5ece6024d14",
+   "country": "Malta",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Walls",
+    "Indoor façade"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "Aidan Bonnici, Sean Arrigo Group / DPM Malta",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-01-05T16:18:41.169Z"
+  },
+  {
+   "id": "2c582e7c7c868055b725c2ba3a8a1fb8",
+   "name": "McDonald’s_CA, USA",
+   "notion": "https://app.notion.com/p/2c582e7c7c868055b725c2ba3a8a1fb8",
+   "country": "USA",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Sea Foam Dark",
+    "Vintage Pearl"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2025-12-10T03:47:29.428Z"
+  },
+  {
+   "id": "2c382e7c7c868067a012dcbfab674ba3",
+   "name": "Pinch Food Design",
+   "notion": "https://app.notion.com/p/2c382e7c7c868067a012dcbfab674ba3",
+   "country": "USA",
+   "cat": "Hospitality",
+   "types": [
+    "Catering company"
+   ],
+   "uses": [
+    "Tables",
+    "Kitchen worktop",
+    "Trays"
+   ],
+   "patterns": [
+    "Timeless Duo",
+    "Pattern №5",
+    "Marble Desert"
+   ],
+   "credits": "Pieces, design and food: @pinchfooddesign Photographs: @kelseycherry and @afrikarmando",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Ariela Trepman ariela@pinchfooddesign.com",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-12-08T07:56:42.254Z"
+  },
+  {
+   "id": "2aa82e7c7c8680848765f627a8ecde56",
+   "name": "FootballMania Zagreb",
+   "notion": "https://app.notion.com/p/2aa82e7c7c8680848765f627a8ecde56",
+   "country": "Croatia",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures",
+    "Cashdesk counter",
+    "Shelves"
+   ],
+   "patterns": [
+    "Greycious"
+   ],
+   "credits": "@swooda.eu for design",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-11-13T07:51:36.689Z"
+  },
+  {
+   "id": "2a182e7c7c86804d9f83d85c7d22f034",
+   "name": "Pop-Up Material Library - by Matterialista",
+   "notion": "https://app.notion.com/p/2a182e7c7c86804d9f83d85c7d22f034",
+   "country": "Germany",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Popup"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Salmon Terra"
+   ],
+   "credits": "Photography: Jeb Inge , design: Kasia Mijas-Galloway/ MATTERIALISTA",
+   "partner": "",
+   "pro": false,
+   "social": "yes",
+   "rights": "Permission from Kasia Mijas-Galloway (Matterialista)",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-11-04T15:31:10.929Z"
+  },
+  {
+   "id": "29b82e7c7c868031964cc3f404aadea1",
+   "name": "Maxwood Washroom Studio",
+   "notion": "https://app.notion.com/p/29b82e7c7c868031964cc3f404aadea1",
+   "country": "UK",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Bathroom"
+   ],
+   "uses": [
+    "Vanity sinks"
+   ],
+   "patterns": [
+    "Marbellous"
+   ],
+   "credits": "Maxwood Washrooms",
+   "partner": "CDUK",
+   "pro": false,
+   "social": "yes",
+   "rights": "Credits are to Maxwood Washrooms and you can find LinkedIn here for social tags https://www.linkedin.com/company/maxwood-washrooms-limited/",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-10-29T21:51:00.187Z"
+  },
+  {
+   "id": "29b82e7c7c8680e6a22ff7ef4476d402",
+   "name": "Tinca Cabins",
+   "notion": "https://app.notion.com/p/29b82e7c7c8680e6a22ff7ef4476d402",
+   "country": "Germany",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Bathroom",
+    "Kitchen"
+   ],
+   "uses": [
+    "Walls",
+    "Kitchen worktop",
+    "Countertop"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Copyright Tinca Cabins GmbH and Nuka-Studio (photocredit)",
+   "partner": "",
+   "pro": false,
+   "social": "yes",
+   "rights": "You may use the photos for publication but please mention Copyright Tinca Cabins GmbH and Nuka-Studio (photocredit)",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-10-29T21:37:58.049Z"
+  },
+  {
+   "id": "29b82e7c7c868032a6ece7e282cf670b",
+   "name": "Spazio Lenovo",
+   "notion": "https://app.notion.com/p/29b82e7c7c868032a6ece7e282cf670b",
+   "country": "Italy",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "White Lollipop",
+    "Black lolipop"
+   ],
+   "credits": "For design and pictures: Sketchin",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "ON HOLD waiting for permissions",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "On hold: waiting for permission.",
+   "added": "2025-10-29T13:32:51.345Z"
+  },
+  {
+   "id": "29b82e7c7c86806ba306d8aac80ed3c2",
+   "name": "ONE DUST Studio",
+   "notion": "https://app.notion.com/p/29b82e7c7c86806ba306d8aac80ed3c2",
+   "country": "Taiwan",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Museum / Gallery",
+    "Art installation"
+   ],
+   "uses": [
+    "Decoration element",
+    "Chair",
+    "Tables",
+    "Shelves",
+    "Benches"
+   ],
+   "patterns": [
+    "Maldives",
+    "Black lolipop",
+    "Emerald ghost",
+    "Sapphire Terrazzo",
+    "Translucent Glitter Gold"
+   ],
+   "credits": "Design & photography: ONE DUST Studio",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-10-29T12:24:08.473Z"
+  },
+  {
+   "id": "29b82e7c7c868056b494f54158372f43",
+   "name": "Gartencafé Kremer - Siegen",
+   "notion": "https://app.notion.com/p/29b82e7c7c868056b494f54158372f43",
+   "country": "Germany",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant",
+    "Cafe"
+   ],
+   "uses": [
+    "Tables",
+    "Cashdesk counter",
+    "Countertop",
+    "Flower box"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Architect Nexd",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-10-29T11:56:58.994Z"
+  },
+  {
+   "id": "27282e7c7c868083bdabd72b208c725f",
+   "name": "Cálido Madrid",
+   "notion": "https://app.notion.com/p/27282e7c7c868083bdabd72b208c725f",
+   "country": "Spain",
+   "cat": "Hospitality",
+   "types": [
+    "Cafe"
+   ],
+   "uses": [
+    "Bar front",
+    "Shelves"
+   ],
+   "patterns": [
+    "Salmon Terra",
+    "Espresso Noir"
+   ],
+   "credits": "Photos: David Zarzoso @david_zarzoso Design: Carlota Gallo @carlotagallo_ Client: Mariale Briceño @marialebricenos @revolucionlimo",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-09-18T16:01:35.857Z"
+  },
+  {
+   "id": "26c82e7c7c8680c48603efa5408c665e",
+   "name": "Office - Paris City Centre",
+   "notion": "https://app.notion.com/p/26c82e7c7c8680c48603efa5408c665e",
+   "country": "France",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Fleur de Sel"
+   ],
+   "credits": "Module Carre, the required credits are still to be confirmed",
+   "partner": "Module Carre (France)",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-09-12T12:47:13.922Z"
+  },
+  {
+   "id": "24f82e7c7c86800cb53cc45278b8c7ba",
+   "name": "Galvanise Bethnal Green",
+   "notion": "https://app.notion.com/p/24f82e7c7c86800cb53cc45278b8c7ba",
+   "country": "UK",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Reception counter"
+   ],
+   "patterns": [
+    "Emerald ghost"
+   ],
+   "credits": "Design: Solilux, Photography: Unity Real Estate and Solidlux",
+   "partner": "CDUK",
+   "pro": true,
+   "social": "",
+   "rights": "Free to use",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-08-14T15:28:50.394Z"
+  },
+  {
+   "id": "24c82e7c7c8680c8962eca43e37cd8ef",
+   "name": "Knalle Popcorn Store - Berlin",
+   "notion": "https://app.notion.com/p/24c82e7c7c8680c8962eca43e37cd8ef",
+   "country": "Germany",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Tables",
+    "Shelves"
+   ],
+   "patterns": [
+    "Marbellous"
+   ],
+   "credits": "For design: Kasia Mijas-Galloway/ MATTERIALISTA, For photos: Jeb Inge (https://www.jeb-inge.com/)",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-08-11T10:23:23.130Z"
+  },
+  {
+   "id": "24782e7c7c868043a5d1ed498084f906",
+   "name": "Nando’s Restaurant Houston",
+   "notion": "https://app.notion.com/p/24782e7c7c868043a5d1ed498084f906",
+   "country": "USA",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Countertop"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Michael Hsu office of Architecture (Houston, TX) for design, Phoenix Millwork for fabrication",
+   "partner": "",
+   "pro": false,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-08-06T14:12:57.677Z"
+  },
+  {
+   "id": "23082e7c7c8680f888b9f100062caa23",
+   "name": "Best of NeoCon 2025",
+   "notion": "https://app.notion.com/p/23082e7c7c8680f888b9f100062caa23",
+   "country": "",
+   "cat": "Exhibitions & events",
+   "types": [],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-07-14T11:56:09.476Z"
+  },
+  {
+   "id": "22782e7c7c86803bac12d14a83c617ea",
+   "name": "The Heft Gallery",
+   "notion": "https://app.notion.com/p/22782e7c7c86803bac12d14a83c617ea",
+   "country": "USA",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Museum / Gallery"
+   ],
+   "uses": [
+    "Countertop",
+    "Reception counter"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "Design: Joe Doucet",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Joe Doucet, the designer of the OLO Table case.",
+   "added": "2025-07-05T19:09:45.943Z"
+  },
+  {
+   "id": "21882e7c7c86809eb5caefb68d9fe4ce",
+   "name": "TOMORE Shinagawa Nakanobu",
+   "notion": "https://app.notion.com/p/21882e7c7c86809eb5caefb68d9fe4ce",
+   "country": "Japan",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Counter"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Fabrication and installation: SU+ @suplus_uds Pictures: SU+",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "TOMORE SHINAGAWA NAKANOBU",
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-06-20T20:12:35.247Z"
+  },
+  {
+   "id": "1fd82e7c7c868059a8afef1354cbc4e3",
+   "name": "Semiprecious",
+   "notion": "https://app.notion.com/p/1fd82e7c7c868059a8afef1354cbc4e3",
+   "country": "USA",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Counter",
+    "Tables"
+   ],
+   "patterns": [
+    "Potpourri"
+   ],
+   "credits": "Photos: Jeff Fierberg Design: @wunder_werkz Fabrication: @workshopcolorado",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Hi Ksenia, yes you can use them for web or print. Please credit Jeff Fierberg as photographer. Mike Capoferri",
+   "agreement": true,
+   "ig": true,
+   "status": "live",
+   "siteCase": "SEMIPRECIOUS",
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-05-24T05:31:23.960Z"
+  },
+  {
+   "id": "1e582e7c7c868002a600d66f28b836b6",
+   "name": "Shelter | OLO Table by Joe Doucet",
+   "notion": "https://app.notion.com/p/1e582e7c7c868002a600d66f28b836b6",
+   "country": "USA",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Art installation"
+   ],
+   "uses": [
+    "Exhibition booth",
+    "Tables"
+   ],
+   "patterns": [
+    "Oyster"
+   ],
+   "credits": "Design by: Joe Doucet, Photos: Simon Leung Photography",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "OLO TABLE",
+   "siteUrl": "https://polygood.com/projects/olo-table/",
+   "note": "",
+   "added": "2025-04-30T20:28:22.527Z"
+  },
+  {
+   "id": "1e582e7c7c86809c8fadc35256e86354",
+   "name": "Mark Brunner - workshop kitchen",
+   "notion": "https://app.notion.com/p/1e582e7c7c86809c8fadc35256e86354",
+   "country": "Netherlands",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Kitchen worktop",
+    "Tables"
+   ],
+   "patterns": [
+    "Bespoke"
+   ],
+   "credits": "Mark Brunner",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "Feel free to use the photos for your portfolio/website (c).",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-04-30T14:23:35.481Z"
+  },
+  {
+   "id": "1d182e7c7c8680549d38c4425d3e23e4",
+   "name": "MDW25 | Triennale di Milano | Wallpaper exhibition (collaboration)",
+   "notion": "https://app.notion.com/p/1d182e7c7c8680549d38c4425d3e23e4",
+   "country": "Italy",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition",
+    "Art installation"
+   ],
+   "uses": [
+    "Exhibition booth",
+    "Plinth"
+   ],
+   "patterns": [
+    "Fleur de Sel"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "MATERIAL ALCHEMISTS",
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-04-10T09:21:05.768Z"
+  },
+  {
+   "id": "1cb82e7c7c868067911cdd5f8e795143",
+   "name": "Printemps New York",
+   "notion": "https://app.notion.com/p/1cb82e7c7c868067911cdd5f8e795143",
+   "country": "USA",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Fleur de Sel",
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Project executed with Module Carré: @polygoodfrance Playroom design: @lauragonzalezofficiel",
+   "partner": "Module Carre (France)",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-04-04T00:21:27.109Z"
+  },
+  {
+   "id": "1a182e7c7c86807ea85de1626c0b3d70",
+   "name": "Flower Box",
+   "notion": "https://app.notion.com/p/1a182e7c7c86807ea85de1626c0b3d70",
+   "country": "Spain",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Exterior"
+   ],
+   "uses": [
+    "Plant Pot",
+    "Flower box"
+   ],
+   "patterns": [
+    "Marbellous"
+   ],
+   "credits": "Photos: Marta Foncillas (Revolucion Limo)",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-02-21T09:27:58.640Z"
+  },
+  {
+   "id": "1a182e7c7c868082a633cf2f539bfe90",
+   "name": "Regenesis | MIDO Eyewear Show 2025",
+   "notion": "https://app.notion.com/p/1a182e7c7c868082a633cf2f539bfe90",
+   "country": "Italy",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Exhibition booth",
+    "Tables",
+    "Countertop",
+    "Stand"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo",
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Tobia Zambotti for design; Luca Ranghetti for the photographs",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "Feel free to share them as you please, just remember to mention me as the designer and Luca Ranghetti the photographer.",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-02-21T07:52:11.296Z"
+  },
+  {
+   "id": "1a182e7c7c8680eb8d19d7bb2126aab1",
+   "name": "Rootz",
+   "notion": "https://app.notion.com/p/1a182e7c7c8680eb8d19d7bb2126aab1",
+   "country": "Netherlands",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Tables",
+    "Chair",
+    "Lampshade",
+    "Chandelier"
+   ],
+   "patterns": [
+    "Aqua Drift",
+    "Terrazzo Nuovo",
+    "Sapphire Terrazzo"
+   ],
+   "credits": "I would kindly ask you to mention the photographer, jesperproductions.nl, when sharing these photos, and also mention and tag All Art Design in all expressions on social media/websites/etc.",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-02-21T07:31:43.287Z"
+  },
+  {
+   "id": "19e82e7c7c8680daa988f6af96dccc06",
+   "name": "Crown Paints UK Head Office",
+   "notion": "https://app.notion.com/p/19e82e7c7c8680daa988f6af96dccc06",
+   "country": "UK",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Countertop",
+    "Counter",
+    "Bar front"
+   ],
+   "patterns": [
+    "Potpourri"
+   ],
+   "credits": "@solidlux for design photos: @harleybainbridge",
+   "partner": "CDUK",
+   "pro": false,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": true,
+   "status": "live",
+   "siteCase": "LIZ HICKSON ACADEMY",
+   "siteUrl": "https://polygood.com/projects/liz-hickson-academy/",
+   "note": "",
+   "added": "2025-02-18T16:13:25.427Z"
+  },
+  {
+   "id": "19182e7c7c8680e08441d93abf7eb10a",
+   "name": "CityHub Reykjavik",
+   "notion": "https://app.notion.com/p/19182e7c7c8680e08441d93abf7eb10a",
+   "country": "Iceland",
+   "cat": "Hospitality",
+   "types": [
+    "Hotel"
+   ],
+   "uses": [
+    "Signage elements"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "CityHub - for the photography, Uberdutch - for the Hub design and project management",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-02-05T04:08:33.110Z"
+  },
+  {
+   "id": "18382e7c7c868056a41ac0b10d3ec0ec",
+   "name": "Le Panoramique Mer de Glace",
+   "notion": "https://app.notion.com/p/18382e7c7c868056a41ac0b10d3ec0ec",
+   "country": "France",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Tables",
+    "Countertop"
+   ],
+   "patterns": [
+    "Marbellous"
+   ],
+   "credits": "@place.tic for the transformation @josephine.balayn for the project architecture @montevers_merdeglace for the restaurant / end consumer @polygoodfrance for sales support",
+   "partner": "Module Carre (France)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "LE PANORAMIQUE MER DE GLACE",
+   "siteUrl": null,
+   "note": "",
+   "added": "2025-01-22T16:32:39.426Z"
+  },
+  {
+   "id": "15b82e7c7c86800a8b82d500645f86bd",
+   "name": "The Ordinary - Selfridges",
+   "notion": "https://app.notion.com/p/15b82e7c7c86800a8b82d500645f86bd",
+   "country": "UK",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures",
+    "Retail popup"
+   ],
+   "patterns": [
+    "Victorious"
+   ],
+   "credits": "Studio: Brinkworth Design Selfridges, photos: John MacLean",
+   "partner": "CDUK",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "THE ORDINARY",
+   "siteUrl": "https://polygood.com/projects/ordinary/",
+   "note": "",
+   "added": "2024-12-13T17:26:54.907Z"
+  },
+  {
+   "id": "15282e7c7c868018bab9cc932c21044e",
+   "name": "Count Energy Trading - Rotterdam Office",
+   "notion": "https://app.notion.com/p/15282e7c7c868018bab9cc932c21044e",
+   "country": "Netherlands",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Tables",
+    "Reception counter"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo",
+    "Sea Foam Dark"
+   ],
+   "credits": "Photography: Robin Smith, Design: studio Biek",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "COUNT ENERGY TRADING HEADQUARTERS",
+   "siteUrl": "https://polygood.com/projects/count/",
+   "note": "",
+   "added": "2024-12-04T09:29:59.192Z"
+  },
+  {
+   "id": "14682e7c7c86801e9892cbd5029ced96",
+   "name": "Dubai Design Week 2024 - From the Fridge",
+   "notion": "https://app.notion.com/p/14682e7c7c86801e9892cbd5029ced96",
+   "country": "UAE",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Sea Foam Dark",
+    "Sea Foam White"
+   ],
+   "credits": "Max Kieffer @maxkiefferone",
+   "partner": "Danube",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-11-22T03:02:21.487Z"
+  },
+  {
+   "id": "12982e7c7c86806292f4e52b91ba03a0",
+   "name": "Dutch Design Week - SBYD",
+   "notion": "https://app.notion.com/p/12982e7c7c86806292f4e52b91ba03a0",
+   "country": "Netherlands",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Stand",
+    "Tables",
+    "Exhibition booth"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-10-24T07:54:42.219Z"
+  },
+  {
+   "id": "12282e7c7c8680a69401ccadcd60b9a8",
+   "name": "Ilunion",
+   "notion": "https://app.notion.com/p/12282e7c7c8680a69401ccadcd60b9a8",
+   "country": "Spain",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Kitchen worktop",
+    "Shelves",
+    "Countertop",
+    "Tables"
+   ],
+   "patterns": [
+    "Timeless Duo"
+   ],
+   "credits": "Project: Revolucion Limo @revolucionlimo Photos: @patriciasire",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "ILUNION",
+   "siteUrl": "https://polygood.com/projects/ilunion/",
+   "note": "",
+   "added": "2024-10-17T20:50:14.803Z"
+  },
+  {
+   "id": "12282e7c7c868043af83f14ffb6f599b",
+   "name": "Sepiia Barcelona",
+   "notion": "https://app.notion.com/p/12282e7c7c868043af83f14ffb6f599b",
+   "country": "Spain",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Tables",
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo"
+   ],
+   "credits": "Revolucion Limo",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "SEPIIA",
+   "siteUrl": "https://polygood.com/projects/sepiia/",
+   "note": "",
+   "added": "2024-10-17T20:32:03.817Z"
+  },
+  {
+   "id": "11282e7c7c8680668034fa8a72b5929c",
+   "name": "Casa Paloma",
+   "notion": "https://app.notion.com/p/11282e7c7c8680668034fa8a72b5929c",
+   "country": "Spain",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Interior",
+    "Residential furniture"
+   ],
+   "uses": [
+    "Tables",
+    "Shelves",
+    "Kitchen worktop",
+    "Side table"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "Yeyé Estudio @yeye.estudio",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "CASA PALOMA",
+   "siteUrl": "https://polygood.com/projects/paloma/",
+   "note": "",
+   "added": "2024-10-01T22:26:09.141Z"
+  },
+  {
+   "id": "10682e7c7c86800991dfdc47563f0d3f",
+   "name": "Bailey’s Endeavour EV campervan",
+   "notion": "https://app.notion.com/p/10682e7c7c86800991dfdc47563f0d3f",
+   "country": "UK",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "EV Interior"
+   ],
+   "uses": [
+    "Kitchen worktop",
+    "Vanity sinks"
+   ],
+   "patterns": [
+    "Timeless Duo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-09-19T11:33:41.789Z"
+  },
+  {
+   "id": "10682e7c7c8680d79e09ff1c9220387c",
+   "name": "Kitchen makeover in Oslo",
+   "notion": "https://app.notion.com/p/10682e7c7c8680d79e09ff1c9220387c",
+   "country": "Norway",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Kitchen worktop",
+    "Retail popup"
+   ],
+   "patterns": [
+    "Marbellous"
+   ],
+   "credits": "@kevinfauske.no",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-09-19T10:45:16.953Z"
+  },
+  {
+   "id": "10582e7c7c868049b7b6edb3bec954e9",
+   "name": "Student residence",
+   "notion": "https://app.notion.com/p/10582e7c7c868049b7b6edb3bec954e9",
+   "country": "France",
+   "cat": "Hospitality",
+   "types": [
+    "Exterior",
+    "Hotel"
+   ],
+   "uses": [
+    "Walls"
+   ],
+   "patterns": [
+    "Translucent Orange"
+   ],
+   "credits": "",
+   "partner": "Module Carre (France)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-09-18T13:07:08.931Z"
+  },
+  {
+   "id": "4e2205f219114b28854120eaf0ddc87f",
+   "name": "Restaurant Monte Mente",
+   "notion": "https://app.notion.com/p/4e2205f219114b28854120eaf0ddc87f",
+   "country": "Germany",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Marbellous"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-09-09T11:37:42.620Z"
+  },
+  {
+   "id": "2935e225b2324e8eb836fae2ea644f88",
+   "name": "Paris Design Week 2024",
+   "notion": "https://app.notion.com/p/2935e225b2324e8eb836fae2ea644f88",
+   "country": "France",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Art installation"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo"
+   ],
+   "credits": "Lucas Huillet",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-09-09T07:46:07.657Z"
+  },
+  {
+   "id": "cb73cfb980f74067b68d7a51a7260694",
+   "name": "Paris Design Week 2024 - Eau Fraîche Fountain",
+   "notion": "https://app.notion.com/p/cb73cfb980f74067b68d7a51a7260694",
+   "country": "France",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition",
+    "Art installation"
+   ],
+   "uses": [
+    "Exhibition booth",
+    "Fountain"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo"
+   ],
+   "credits": "Design: Lucas Huillet @lucashuillet",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-09-06T19:43:16.720Z"
+  },
+  {
+   "id": "6c620addb3e24d86a28fddc48b525282",
+   "name": "Furniture Expoflora",
+   "notion": "https://app.notion.com/p/6c620addb3e24d86a28fddc48b525282",
+   "country": "",
+   "cat": "Exhibitions & events",
+   "types": [],
+   "uses": [
+    "Tables",
+    "Side table",
+    "Countertop",
+    "Chair"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-09-05T09:23:36.899Z"
+  },
+  {
+   "id": "9f727ca4a4114b03bc661233de52252c",
+   "name": "Kaleidos Madrid office",
+   "notion": "https://app.notion.com/p/9f727ca4a4114b03bc661233de52252c",
+   "country": "Spain",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office",
+    "Interior",
+    "Offices & public spaces"
+   ],
+   "uses": [
+    "Tables",
+    "Side table"
+   ],
+   "patterns": [
+    "White Lollipop",
+    "Emerald ghost",
+    "Greycious",
+    "Reverse Timeless Duo"
+   ],
+   "credits": "Photographer: Víctor de la Fuente. Design: 2BOLD. Revolucion Limo.",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "KALEIDOS OFFICE HEADQUARTERS",
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-08-22T07:10:22.800Z"
+  },
+  {
+   "id": "81cc86024c7442a6ae44866ae0fe163b",
+   "name": "McDonald’s_Brussels",
+   "notion": "https://app.notion.com/p/81cc86024c7442a6ae44866ae0fe163b",
+   "country": "Belgium",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Sea Foam Dark",
+    "Vintage Pearl"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2024-07-30T08:09:08.253Z"
+  },
+  {
+   "id": "1355bc8ff24e4db1a7c929ca2f3a3408",
+   "name": "Bathroom sinks",
+   "notion": "https://app.notion.com/p/1355bc8ff24e4db1a7c929ca2f3a3408",
+   "country": "",
+   "cat": "Little data",
+   "types": [
+    "Bathroom"
+   ],
+   "uses": [
+    "Vanity sinks"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo",
+    "Salt Dune",
+    "Marbellous",
+    "Potpourri"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-07-29T09:58:12.774Z"
+  },
+  {
+   "id": "b148a8860eea47769592e38e22383b51",
+   "name": "Jeudi Studio Furniture",
+   "notion": "https://app.notion.com/p/b148a8860eea47769592e38e22383b51",
+   "country": "France",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Residential furniture",
+    "Interior"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Timeless Duo"
+   ],
+   "credits": "@jeudistudio.architecture Julia Lallement, Édouard Vessière",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "JEUDI STUDIO FURNITURE",
+   "siteUrl": "https://polygood.com/projects/jeudi-studio-furniture/",
+   "note": "",
+   "added": "2024-07-23T03:17:48.898Z"
+  },
+  {
+   "id": "c3ba79c42abe484ea2272b3506a65370",
+   "name": "Peace Campus",
+   "notion": "https://app.notion.com/p/c3ba79c42abe484ea2272b3506a65370",
+   "country": "Ireland",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Exterior",
+    "Offices & public spaces"
+   ],
+   "uses": [
+    "Outdoor walls"
+   ],
+   "patterns": [
+    "Milky Way"
+   ],
+   "credits": "Sculp.ie",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "PEACE CAMPUS",
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-07-23T02:56:39.679Z"
+  },
+  {
+   "id": "3b31a4e50aa84c01b4e8d9313a598b8d",
+   "name": "Klaptyk",
+   "notion": "https://app.notion.com/p/3b31a4e50aa84c01b4e8d9313a598b8d",
+   "country": "",
+   "cat": "Little data",
+   "types": [],
+   "uses": [],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-07-16T08:40:47.467Z"
+  },
+  {
+   "id": "181cd8c7ada541fa83df9d78d7499b9c",
+   "name": "SF Design Week 2024",
+   "notion": "https://app.notion.com/p/181cd8c7ada541fa83df9d78d7499b9c",
+   "country": "USA",
+   "cat": "Exhibitions & events",
+   "types": [],
+   "uses": [
+    "Exhibition booth",
+    "Decoration element"
+   ],
+   "patterns": [
+    "Coral reef",
+    "Reverse Timeless Duo",
+    "Translucent Clear"
+   ],
+   "credits": "Kimberly Clauss",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-06-24T11:00:56.660Z"
+  },
+  {
+   "id": "e14094d7cdb74a28a03ed779cec68078",
+   "name": "Metropolis Sustainability Lab - NeoCon 2024",
+   "notion": "https://app.notion.com/p/e14094d7cdb74a28a03ed779cec68078",
+   "country": "USA",
+   "cat": "Exhibitions & events",
+   "types": [],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Glaze Sprinkes"
+   ],
+   "credits": "Kevin Sarna",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-06-24T09:37:11.088Z"
+  },
+  {
+   "id": "deb0abc72bfb498a8cf7043b82d90e69",
+   "name": "BEAUREPAIRE kitchen - Pantin",
+   "notion": "https://app.notion.com/p/deb0abc72bfb498a8cf7043b82d90e69",
+   "country": "France",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Kitchen worktop"
+   ],
+   "patterns": [
+    "Fleur de Sel"
+   ],
+   "credits": "Fabrication: Samji Studio Photography: Philippe Billard Client : Atelier Variable Design : APARA architecte",
+   "partner": "",
+   "pro": true,
+   "social": "no",
+   "rights": "This project requires the purchase of publication rights from the photographer: Philippe Billard philippebillard.eu @phpbillard 06 95 67 11 86",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "BEAUREPAIRE FLAT, PANTIN",
+   "siteUrl": null,
+   "note": "Publication rights must be bought from photographer Philippe Billard.",
+   "added": "2024-06-17T08:54:05.500Z"
+  },
+  {
+   "id": "d48e2b5652ef48358aeaf13630b77360",
+   "name": "Waves - Dubai",
+   "notion": "https://app.notion.com/p/d48e2b5652ef48358aeaf13630b77360",
+   "country": "UAE",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Art installation"
+   ],
+   "uses": [],
+   "patterns": [
+    "Aqua Drift"
+   ],
+   "credits": "",
+   "partner": "Danube",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-04-30T08:20:15.087Z"
+  },
+  {
+   "id": "8a28719d5a14430ea951c3baf2080c90",
+   "name": "Milan Design Week Hello Earth Speaking MDW24 Part 1-2",
+   "notion": "https://app.notion.com/p/8a28719d5a14430ea951c3baf2080c90",
+   "country": "Italy",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Exhibition booth",
+    "Cabinet",
+    "Stand"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-04-19T16:05:22.107Z"
+  },
+  {
+   "id": "3229468263984780a81a8c9f513bb542",
+   "name": "Bag",
+   "notion": "https://app.notion.com/p/3229468263984780a81a8c9f513bb542",
+   "country": "",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Art installation"
+   ],
+   "uses": [
+    "Bag",
+    "Decoration element"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-04-04T15:44:53.618Z"
+  },
+  {
+   "id": "b3369eeae7c04c2885ccc3a6219efb6a",
+   "name": "SADesign - school Sancta Maria",
+   "notion": "https://app.notion.com/p/b3369eeae7c04c2885ccc3a6219efb6a",
+   "country": "Netherlands",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Offices & public spaces",
+    "Office",
+    "School"
+   ],
+   "uses": [
+    "Tables",
+    "Reception counter"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-03-14T14:14:52.569Z"
+  },
+  {
+   "id": "19daf161523e45bca046edf16312a9b1",
+   "name": "Next Media kitchens, by Besau Marguerre",
+   "notion": "https://app.notion.com/p/19daf161523e45bca046edf16312a9b1",
+   "country": "Germany",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Vanity sinks"
+   ],
+   "patterns": [
+    "Reverse Timeless Duo",
+    "Timeless Duo"
+   ],
+   "credits": "Project: Studio Besau-Marguerre, Photos: Brita Soennichsen",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "NEXT MEDIA KITCHENS",
+   "siteUrl": "https://polygood.com/projects/next-media-kitchens/",
+   "note": "",
+   "added": "2024-03-14T14:08:39.053Z"
+  },
+  {
+   "id": "c8ebd2cca0224b2cb82fc78bef5337f1",
+   "name": "La Tita Rivera Restaurant",
+   "notion": "https://app.notion.com/p/c8ebd2cca0224b2cb82fc78bef5337f1",
+   "country": "Spain",
+   "cat": "Hospitality",
+   "types": [
+    "Cafe",
+    "Restaurant"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-03-05T16:51:00.972Z"
+  },
+  {
+   "id": "dd6be0d355cc4985944d227c5aafc957",
+   "name": "VAZVA Coffee",
+   "notion": "https://app.notion.com/p/dd6be0d355cc4985944d227c5aafc957",
+   "country": "Spain",
+   "cat": "Hospitality",
+   "types": [
+    "Cafe",
+    "Restaurant"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "White Lollipop",
+    "Reverse Timeless Duo"
+   ],
+   "credits": "",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-03-05T16:49:05.434Z"
+  },
+  {
+   "id": "4e697d5983fd4e70b2edf2ca8985d193",
+   "name": "Iberostar Hotel Las Letras Gran Via",
+   "notion": "https://app.notion.com/p/4e697d5983fd4e70b2edf2ca8985d193",
+   "country": "Spain",
+   "cat": "Hospitality",
+   "types": [
+    "Hotel"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-03-05T16:46:13.671Z"
+  },
+  {
+   "id": "25bc766c9ccb4358a5f9e216f05280de",
+   "name": "Ester Cruz Design",
+   "notion": "https://app.notion.com/p/25bc766c9ccb4358a5f9e216f05280de",
+   "country": "Spain",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Interior"
+   ],
+   "uses": [
+    "Light installation",
+    "Chandelier"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "Ester Cruz",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-03-05T16:44:26.321Z"
+  },
+  {
+   "id": "3525f65ebcb94bc1a1e94f732714a322",
+   "name": "Museo Gran Vía 15",
+   "notion": "https://app.notion.com/p/3525f65ebcb94bc1a1e94f732714a322",
+   "country": "Spain",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Museum / Gallery"
+   ],
+   "uses": [
+    "Decoration element"
+   ],
+   "patterns": [
+    "Timeless Duo Blue"
+   ],
+   "credits": "",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-03-05T16:42:44.756Z"
+  },
+  {
+   "id": "f8c1ebd795c74f058c6a372545edea6f",
+   "name": "Sanitas",
+   "notion": "https://app.notion.com/p/f8c1ebd795c74f058c6a372545edea6f",
+   "country": "Spain",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office",
+    "Healthcare"
+   ],
+   "uses": [
+    "Reception counter"
+   ],
+   "patterns": [
+    "White Terazzo"
+   ],
+   "credits": "",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-03-05T16:37:49.693Z"
+  },
+  {
+   "id": "4c419de9b7184acebb1c24638208be62",
+   "name": "Karl Lagerfeld",
+   "notion": "https://app.notion.com/p/4c419de9b7184acebb1c24638208be62",
+   "country": "",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo"
+   ],
+   "credits": "Kimak",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "KARL LAGERFELD",
+   "siteUrl": "https://polygood.com/projects/a-unique-custom-pattern-for-a-legendary-fashion-brand/",
+   "note": "",
+   "added": "2024-03-05T16:35:33.827Z"
+  },
+  {
+   "id": "a777f15816fb4959bd4bac85b04a293e",
+   "name": "Bargo Studio",
+   "notion": "https://app.notion.com/p/a777f15816fb4959bd4bac85b04a293e",
+   "country": "Spain",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Residential furniture",
+    "Bathroom"
+   ],
+   "uses": [
+    "Vanity sinks",
+    "Tables"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "CANARY ISLANDS BATHROOM",
+   "siteUrl": "https://polygood.com/projects/canary-islands-bathroom/",
+   "note": "",
+   "added": "2024-03-05T16:27:21.660Z"
+  },
+  {
+   "id": "0502a2e2cd7941338d0a11bb2b3ce908",
+   "name": "Coach US",
+   "notion": "https://app.notion.com/p/0502a2e2cd7941338d0a11bb2b3ce908",
+   "country": "USA",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures",
+    "Tables",
+    "Retail popup"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "Diego Texera <span underline=\"true\">Diego Texera Photography</span> call/text: 305-799-3274 www.diegotexera.com diego@diegotexera.com",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Unlimited usage, 10 years, from Feb 2024",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "COACH",
+   "siteUrl": "https://polygood.com/projects/coach/",
+   "note": "",
+   "added": "2024-02-27T07:40:43.630Z"
+  },
+  {
+   "id": "6fa26acefb5d484288446edaa92e5cde",
+   "name": "Karl Lagerfeld Jeans",
+   "notion": "https://app.notion.com/p/6fa26acefb5d484288446edaa92e5cde",
+   "country": "Netherlands",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Karl Bespoke"
+   ],
+   "credits": "Diana Zuican",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "KARL LAGERFELD",
+   "siteUrl": "https://polygood.com/projects/a-unique-custom-pattern-for-a-legendary-fashion-brand/",
+   "note": "",
+   "added": "2024-02-26T13:34:34.658Z"
+  },
+  {
+   "id": "e305bf2d42474ac18cb3629903b589bc",
+   "name": "Karl Lagerfeld",
+   "notion": "https://app.notion.com/p/e305bf2d42474ac18cb3629903b589bc",
+   "country": "Spain",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures",
+    "Decoration element"
+   ],
+   "patterns": [
+    "Karl Bespoke"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "KARL LAGERFELD",
+   "siteUrl": "https://polygood.com/projects/a-unique-custom-pattern-for-a-legendary-fashion-brand/",
+   "note": "",
+   "added": "2024-02-23T10:05:52.733Z"
+  },
+  {
+   "id": "c7ff16036ac9415282b119c3ae64391f",
+   "name": "Surface Design Show London",
+   "notion": "https://app.notion.com/p/c7ff16036ac9415282b119c3ae64391f",
+   "country": "UK",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Art installation",
+    "Exhibition"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-02-15T07:55:52.004Z"
+  },
+  {
+   "id": "a37e2b8c5cec4e0eb9bd9d932e3acb3a",
+   "name": "SFF2024",
+   "notion": "https://app.notion.com/p/a37e2b8c5cec4e0eb9bd9d932e3acb3a",
+   "country": "Sweden",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Decoration element",
+    "Exhibition booth"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "GOP",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-02-14T10:19:45.944Z"
+  },
+  {
+   "id": "f9dffe359b2944648ac0343a45472f81",
+   "name": "McDonald`s_Carbonne",
+   "notion": "https://app.notion.com/p/f9dffe359b2944648ac0343a45472f81",
+   "country": "France",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Sea Foam Dark",
+    "Vintage Pearl"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2024-02-13T13:12:57.914Z"
+  },
+  {
+   "id": "96552a4f5c1c493a8e8dbecaec20bf5d",
+   "name": "McDonald’s_La Guerche",
+   "notion": "https://app.notion.com/p/96552a4f5c1c493a8e8dbecaec20bf5d",
+   "country": "France",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Sea Foam Dark",
+    "Vintage Pearl"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2024-02-13T13:12:20.217Z"
+  },
+  {
+   "id": "949fdd69f91448daaaf9648a5bea301e",
+   "name": "Stamuli for Stockholm Furniture Fair",
+   "notion": "https://app.notion.com/p/949fdd69f91448daaaf9648a5bea301e",
+   "country": "Sweden",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Tables",
+    "Side table",
+    "Vanity sinks",
+    "Benches",
+    "Kitchen worktop",
+    "Chair"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-02-08T09:32:54.539Z"
+  },
+  {
+   "id": "b7884eb10aea43458715864c4840f603",
+   "name": "Adidas Beach Mall",
+   "notion": "https://app.notion.com/p/b7884eb10aea43458715864c4840f603",
+   "country": "UAE",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures",
+    "Retail popup"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "ADIDAS",
+   "siteUrl": "https://polygood.com/projects/adidas/",
+   "note": "",
+   "added": "2024-02-07T14:08:02.389Z"
+  },
+  {
+   "id": "7bc8a4e85b264e80af40ea04bbf29120",
+   "name": "Adidas Forsan Central Mall - Abu Dhabi",
+   "notion": "https://app.notion.com/p/7bc8a4e85b264e80af40ea04bbf29120",
+   "country": "UAE",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "ADIDAS",
+   "siteUrl": "https://polygood.com/projects/adidas/",
+   "note": "",
+   "added": "2024-02-07T14:05:13.008Z"
+  },
+  {
+   "id": "7e37342aaf8646ffb41fc46b15ad6a75",
+   "name": "Adidas City Walk Dubai",
+   "notion": "https://app.notion.com/p/7e37342aaf8646ffb41fc46b15ad6a75",
+   "country": "UAE",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "ADIDAS",
+   "siteUrl": "https://polygood.com/projects/adidas/",
+   "note": "",
+   "added": "2024-02-07T13:51:35.970Z"
+  },
+  {
+   "id": "c9386ecbf7ec431f8538b35b77ccf015",
+   "name": "Urselmann Interior",
+   "notion": "https://app.notion.com/p/c9386ecbf7ec431f8538b35b77ccf015",
+   "country": "Germany",
+   "cat": "Hospitality",
+   "types": [
+    "Cafe"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Emerald ghost"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-02-06T09:40:48.997Z"
+  },
+  {
+   "id": "165ed9b2886c4307a38f4f7b90349868",
+   "name": "Retail Monkey’s minibar",
+   "notion": "https://app.notion.com/p/165ed9b2886c4307a38f4f7b90349868",
+   "country": "Czech",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Tables",
+    "Retail popup"
+   ],
+   "patterns": [
+    "Marble Desert"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-02-06T09:39:43.748Z"
+  },
+  {
+   "id": "d1ef581ea17745109e94f33a0328d851",
+   "name": "Mossel & Gin",
+   "notion": "https://app.notion.com/p/d1ef581ea17745109e94f33a0328d851",
+   "country": "Netherlands",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-01-31T13:56:01.495Z"
+  },
+  {
+   "id": "f427e6881aab43fe93ac30c1181bd873",
+   "name": "Adidas Marina Mall",
+   "notion": "https://app.notion.com/p/f427e6881aab43fe93ac30c1181bd873",
+   "country": "UAE",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "ADIDAS",
+   "siteUrl": "https://polygood.com/projects/adidas/",
+   "note": "",
+   "added": "2024-01-30T10:16:51.638Z"
+  },
+  {
+   "id": "438e783bc1fd4c18a2e9d1387700c976",
+   "name": "Adidas Store Istanbul",
+   "notion": "https://app.notion.com/p/438e783bc1fd4c18a2e9d1387700c976",
+   "country": "Turkey",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "ADIDAS",
+   "siteUrl": "https://polygood.com/projects/adidas/",
+   "note": "",
+   "added": "2024-01-30T10:04:53.641Z"
+  },
+  {
+   "id": "3fc437d8ae304661a1a0bd33edc29e9c",
+   "name": "Kitchen worktop",
+   "notion": "https://app.notion.com/p/3fc437d8ae304661a1a0bd33edc29e9c",
+   "country": "",
+   "cat": "Little data",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Kitchen worktop"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-01-30T09:59:38.085Z"
+  },
+  {
+   "id": "fc7d515286524f5cb2e061b5614de354",
+   "name": "CDUK - Material Source Studio",
+   "notion": "https://app.notion.com/p/fc7d515286524f5cb2e061b5614de354",
+   "country": "UK",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office",
+    "Offices & public spaces"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Dark Knight",
+    "Marbellous"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2024-01-30T09:36:57.810Z"
+  },
+  {
+   "id": "eed6c8d8989a472395910ff5345a0d6b",
+   "name": "Selfridges Birmingham",
+   "notion": "https://app.notion.com/p/eed6c8d8989a472395910ff5345a0d6b",
+   "country": "UK",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Decoration element",
+    "Walls",
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Translucent Clear",
+    "Potpourri"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Related to The Ordinary case (Selfridges).",
+   "added": "2024-01-30T09:28:20.593Z"
+  },
+  {
+   "id": "2fb69c5948de4d539a22953a88f45dab",
+   "name": "Yemanja - Aménagement de bureaux (Coworking)",
+   "notion": "https://app.notion.com/p/2fb69c5948de4d539a22953a88f45dab",
+   "country": "France",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Offices & public spaces",
+    "Office"
+   ],
+   "uses": [
+    "Cabinet",
+    "Tables"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-12-22T13:52:35.464Z"
+  },
+  {
+   "id": "ffb35bf63ee247029f5e7df2400c8ee7",
+   "name": "#Whatcanwedonow? by Tobia Zambotti",
+   "notion": "https://app.notion.com/p/ffb35bf63ee247029f5e7df2400c8ee7",
+   "country": "Ireland",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Art installation"
+   ],
+   "uses": [
+    "Floor"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo"
+   ],
+   "credits": "Tobia Zambotti. Patrik Ontkovic",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-12-15T12:23:41.602Z"
+  },
+  {
+   "id": "248a15f3bfd6428daf8d7865bb50542e",
+   "name": "EuroShop",
+   "notion": "https://app.notion.com/p/248a15f3bfd6428daf8d7865bb50542e",
+   "country": "",
+   "cat": "Exhibitions & events",
+   "types": [],
+   "uses": [],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-11-22T15:11:19.201Z"
+  },
+  {
+   "id": "c735c8ab71e24813990adc5200c3a3e5",
+   "name": "An Iceberg in the Desert, Dubai Design Week 2023",
+   "notion": "https://app.notion.com/p/c735c8ab71e24813990adc5200c3a3e5",
+   "country": "UAE",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition",
+    "Art installation"
+   ],
+   "uses": [
+    "Decoration element"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "Danube",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-11-20T14:32:25.252Z"
+  },
+  {
+   "id": "8335f3bc4bd842ada47ff18438b70559",
+   "name": "Nothing happens if nothing happens",
+   "notion": "https://app.notion.com/p/8335f3bc4bd842ada47ff18438b70559",
+   "country": "UAE",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Tables",
+    "Retail fixtures",
+    "Reception counter"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo",
+    "Sea Foam Grey",
+    "White Lollipop",
+    "Black lolipop",
+    "Maldives"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-11-20T13:45:39.156Z"
+  },
+  {
+   "id": "904760ca9395498e98ee933739b31e29",
+   "name": "Broeinest ADAM",
+   "notion": "https://app.notion.com/p/904760ca9395498e98ee933739b31e29",
+   "country": "Netherlands",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Exhibition booth",
+    "Tables",
+    "Steps"
+   ],
+   "patterns": [
+    "Emerald ghost",
+    "Sapphire Terrazzo",
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Project & Photos: Broeinest",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "BROEINEST MATERIALS LIBRARY",
+   "siteUrl": "https://polygood.com/projects/broeinest-2/",
+   "note": "",
+   "added": "2023-11-17T10:02:38.725Z"
+  },
+  {
+   "id": "212f561851fd4f559ef6af779fc3b3af",
+   "name": "Danube evening",
+   "notion": "https://app.notion.com/p/212f561851fd4f559ef6af779fc3b3af",
+   "country": "UAE",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Art installation",
+    "Exhibition"
+   ],
+   "uses": [
+    "Light installation",
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Maldives",
+    "White Lollipop",
+    "Black lolipop"
+   ],
+   "credits": "",
+   "partner": "Danube",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-11-16T10:54:31.926Z"
+  },
+  {
+   "id": "0af6c913caaa4306a53cb9f2c3cdfe2d",
+   "name": "Showroom in Japan (no name",
+   "notion": "https://app.notion.com/p/0af6c913caaa4306a53cb9f2c3cdfe2d",
+   "country": "Japan",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Educational institution"
+   ],
+   "uses": [
+    "Countertop",
+    "Tables",
+    "Cabinet"
+   ],
+   "patterns": [
+    "Timeless Duo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "JAPANESE OFFICE CANTEEN",
+   "siteUrl": "https://polygood.com/projects/japanese-office-canteen/",
+   "note": "",
+   "added": "2023-11-09T10:05:18.716Z"
+  },
+  {
+   "id": "bdaca508adf14db695ec7b454197c248",
+   "name": "Makus Kitchen",
+   "notion": "https://app.notion.com/p/bdaca508adf14db695ec7b454197c248",
+   "country": "Netherlands",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Kitchen worktop"
+   ],
+   "patterns": [
+    "Sea Foam Grey"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-10-31T13:32:21.880Z"
+  },
+  {
+   "id": "491136a93d4e446fb8bdf256043f539a",
+   "name": "Dutch Design Week",
+   "notion": "https://app.notion.com/p/491136a93d4e446fb8bdf256043f539a",
+   "country": "Netherlands",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Art installation"
+   ],
+   "uses": [
+    "Steps",
+    "Floor"
+   ],
+   "patterns": [
+    "Marbellous"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-10-25T12:11:35.149Z"
+  },
+  {
+   "id": "4734214556654497b89f0cd4bde30c8d",
+   "name": "Architizer",
+   "notion": "https://app.notion.com/p/4734214556654497b89f0cd4bde30c8d",
+   "country": "France",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Salt Dune",
+    "Flecked White"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-10-25T09:38:23.114Z"
+  },
+  {
+   "id": "c42c3af3e39647389ea83c2edb5cb154",
+   "name": "DDW 23 - Isola",
+   "notion": "https://app.notion.com/p/c42c3af3e39647389ea83c2edb5cb154",
+   "country": "Netherlands",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Art installation",
+    "Exhibition"
+   ],
+   "uses": [
+    "Exhibition booth",
+    "Light installation"
+   ],
+   "patterns": [
+    "White Lollipop",
+    "Salt Dune"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-10-25T09:36:20.902Z"
+  },
+  {
+   "id": "6843a98caca34111852ba136e57330a6",
+   "name": "Satelliet showroom (Ice Maldives)",
+   "notion": "https://app.notion.com/p/6843a98caca34111852ba136e57330a6",
+   "country": "",
+   "cat": "Exhibitions & events",
+   "types": [],
+   "uses": [
+    "Exhibition booth",
+    "Decoration element"
+   ],
+   "patterns": [
+    "Maldives"
+   ],
+   "credits": "Open days Satelliet Meubelen",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-10-25T08:12:26.231Z"
+  },
+  {
+   "id": "b1772a12a35c402cae7ec6f9765bd93f",
+   "name": "ELEMENTE, Berlin, exhibition on sustainability",
+   "notion": "https://app.notion.com/p/b1772a12a35c402cae7ec6f9765bd93f",
+   "country": "Germany",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-10-16T09:20:04.232Z"
+  },
+  {
+   "id": "800626de567e4554a844bea43941853e",
+   "name": "Les Rendez-vous de la Matière",
+   "notion": "https://app.notion.com/p/800626de567e4554a844bea43941853e",
+   "country": "France",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition",
+    "Art installation"
+   ],
+   "uses": [],
+   "patterns": [
+    "Timeless Duo",
+    "Terrazzo Nuovo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "LES RENDEZ-VOUS DE LA MATIÈRE",
+   "siteUrl": "https://polygood.com/projects/les-rendez-vous-de-la-matiere/",
+   "note": "",
+   "added": "2023-10-12T11:11:34.011Z"
+  },
+  {
+   "id": "2de3ec27680240b6a6c1e7e4ec7f4d5e",
+   "name": "Perkins & Will",
+   "notion": "https://app.notion.com/p/2de3ec27680240b6a6c1e7e4ec7f4d5e",
+   "country": "",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Art installation",
+    "Exhibition"
+   ],
+   "uses": [],
+   "patterns": [
+    "Salt Dune",
+    "Potpourri",
+    "Terrazzo Nuovo",
+    "Maldives"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-10-09T14:56:41.410Z"
+  },
+  {
+   "id": "6229bcd613c94c20a29e7667903a44a4",
+   "name": "Harvey Nichols",
+   "notion": "https://app.notion.com/p/6229bcd613c94c20a29e7667903a44a4",
+   "country": "UK",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Sea Foam Dark",
+    "Sea Foam Grey",
+    "Terrazzo Nuovo",
+    "Timeless Duo",
+    "Pattern №5"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "HARVEY NICHOLS",
+   "siteUrl": "https://polygood.com/projects/harvey-nichols-2/",
+   "note": "",
+   "added": "2023-10-05T10:50:01.659Z"
+  },
+  {
+   "id": "523c542625734115958eb06e3c09e58f",
+   "name": "Paris Design Week 2023 - Maison&Objet",
+   "notion": "https://app.notion.com/p/523c542625734115958eb06e3c09e58f",
+   "country": "France",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition",
+    "Art installation"
+   ],
+   "uses": [
+    "Decoration element",
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo",
+    "Translucent Purple",
+    "Translucent Neon Green",
+    "Translucent Red",
+    "Translucent Pink",
+    "Timeless Duo"
+   ],
+   "credits": "Photography: @juanjerez",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-09-22T09:59:28.243Z"
+  },
+  {
+   "id": "6d5bdd4baaae471d8b3c55e8b588ba27",
+   "name": "Paris Design Week 2023 - Materials & Lights",
+   "notion": "https://app.notion.com/p/6d5bdd4baaae471d8b3c55e8b588ba27",
+   "country": "France",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition",
+    "Art installation"
+   ],
+   "uses": [
+    "Decoration element",
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Salt Dune",
+    "Terrazzo Nuovo",
+    "White Lollipop"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-09-21T12:52:52.380Z"
+  },
+  {
+   "id": "0a3a325c5dcf423c9278f2e1f5f03ba1",
+   "name": "London Design Festival",
+   "notion": "https://app.notion.com/p/0a3a325c5dcf423c9278f2e1f5f03ba1",
+   "country": "France",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition",
+    "Art installation"
+   ],
+   "uses": [
+    "Reception counter"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo",
+    "Pattern №5",
+    "Salt Dune",
+    "Aqua Drift"
+   ],
+   "credits": "Isola",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-09-21T11:55:09.645Z"
+  },
+  {
+   "id": "9526741bc1224308a7d42c195eeaf4b8",
+   "name": "LUSH in Glatt",
+   "notion": "https://app.notion.com/p/9526741bc1224308a7d42c195eeaf4b8",
+   "country": "Switzerland",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Vintage Pearl",
+    "Dark Knight"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Yes",
+   "agreement": true,
+   "ig": false,
+   "status": "live",
+   "siteCase": "LUSH",
+   "siteUrl": "https://polygood.com/projects/lush/",
+   "note": "",
+   "added": "2023-08-31T11:35:12.288Z"
+  },
+  {
+   "id": "ba819ef9b2bd4d3a8355e613755b5274",
+   "name": "De Bijenkorf mall 2 project",
+   "notion": "https://app.notion.com/p/ba819ef9b2bd4d3a8355e613755b5274",
+   "country": "Netherlands",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Timeless Duo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-08-29T12:31:41.531Z"
+  },
+  {
+   "id": "2b508df35378497abb276fd05dccdba0",
+   "name": "Broeinest green office concept, Eindhoven",
+   "notion": "https://app.notion.com/p/2b508df35378497abb276fd05dccdba0",
+   "country": "Netherlands",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office",
+    "Offices & public spaces"
+   ],
+   "uses": [
+    "Tables",
+    "Decoration element",
+    "Shelves",
+    "Plant Pot"
+   ],
+   "patterns": [
+    "White Lollipop",
+    "Reverse Timeless Duo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "BROEINEST MATERIALS LIBRARY",
+   "siteUrl": "https://polygood.com/projects/broeinest-2/",
+   "note": "",
+   "added": "2023-08-04T12:05:45.040Z"
+  },
+  {
+   "id": "211385a3e55f429582d1b07c2487bfaa",
+   "name": "Broeinest, bathroom from water-proof sustainable materials, Utrecht",
+   "notion": "https://app.notion.com/p/211385a3e55f429582d1b07c2487bfaa",
+   "country": "Netherlands",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Bathroom"
+   ],
+   "uses": [
+    "Decoration element",
+    "Vanity sinks",
+    "Shelves",
+    "Light installation",
+    "Stand"
+   ],
+   "patterns": [
+    "Marble Desert",
+    "Timeless Duo",
+    "Victorious"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "BROEINEST MATERIALS LIBRARY",
+   "siteUrl": "https://polygood.com/projects/broeinest-2/",
+   "note": "",
+   "added": "2023-08-04T11:47:21.912Z"
+  },
+  {
+   "id": "e6f7dbe4189847cdbf7c5f0c43353499",
+   "name": "Broeinest, eco-conscious retail store, Rotterdam",
+   "notion": "https://app.notion.com/p/e6f7dbe4189847cdbf7c5f0c43353499",
+   "country": "Netherlands",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [],
+   "patterns": [
+    "Terrazzo Nuovo",
+    "Sea Foam Dark",
+    "Salt Dune"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "BROEINEST MATERIALS LIBRARY",
+   "siteUrl": "https://polygood.com/projects/broeinest-2/",
+   "note": "",
+   "added": "2023-08-04T11:46:01.904Z"
+  },
+  {
+   "id": "8425c816fc51454e999705d2f8e1ad07",
+   "name": "Broeinest, environmentally responsible cafeteria, Amsterdam",
+   "notion": "https://app.notion.com/p/8425c816fc51454e999705d2f8e1ad07",
+   "country": "Netherlands",
+   "cat": "Hospitality",
+   "types": [
+    "Cafe"
+   ],
+   "uses": [
+    "Stand"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "BROEINEST MATERIALS LIBRARY",
+   "siteUrl": "https://polygood.com/projects/broeinest-2/",
+   "note": "",
+   "added": "2023-08-04T07:50:03.690Z"
+  },
+  {
+   "id": "c8a2ce911b374cdea70709f066ea7868",
+   "name": "Soho Boutique Turia Hotel",
+   "notion": "https://app.notion.com/p/c8a2ce911b374cdea70709f066ea7868",
+   "country": "Spain",
+   "cat": "Hospitality",
+   "types": [
+    "Hotel"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Project and photos: Revolucion Limo",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "SOHO BOUTIQUE TURIA HOTEL",
+   "siteUrl": "https://polygood.com/projects/soho-boutique-turia-hotel/",
+   "note": "",
+   "added": "2023-07-21T11:33:22.480Z"
+  },
+  {
+   "id": "537c0368cd5143a288b05d28305c37d7",
+   "name": "Nike Seoul",
+   "notion": "https://app.notion.com/p/537c0368cd5143a288b05d28305c37d7",
+   "country": "South Korea",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "No permission recorded; use the licensed Nike set instead.",
+   "added": "2023-07-18T09:01:23.862Z"
+  },
+  {
+   "id": "51871e10d28746fe90848a68eb79a935",
+   "name": "The Bar by Gris Bois",
+   "notion": "https://app.notion.com/p/51871e10d28746fe90848a68eb79a935",
+   "country": "France",
+   "cat": "Hospitality",
+   "types": [
+    "Cafe"
+   ],
+   "uses": [
+    "Reception counter"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "Gris Boris",
+   "partner": "Module Carre (France)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "GRIS BOIS KITCHEN AND BAR",
+   "siteUrl": "https://polygood.com/projects/gris-bois-kitchen/",
+   "note": "",
+   "added": "2023-07-11T17:26:00.013Z"
+  },
+  {
+   "id": "86210c4de4db43ada3d176fd7e7cf57a",
+   "name": "Eydenberg (not for publication, for internal use only)",
+   "notion": "https://app.notion.com/p/86210c4de4db43ada3d176fd7e7cf57a",
+   "country": "",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Walls"
+   ],
+   "patterns": [
+    "Mermaid"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "nda",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Not for publication, internal use only.",
+   "added": "2023-07-11T14:09:52.304Z"
+  },
+  {
+   "id": "339b1ae2ded14d97bcecbcbf4e6ea3b2",
+   "name": "Nike Unit Munich Store",
+   "notion": "https://app.notion.com/p/339b1ae2ded14d97bcecbcbf4e6ea3b2",
+   "country": "Germany",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Recycling bin",
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2023-07-11T12:56:34.330Z"
+  },
+  {
+   "id": "6f544772df2a492cb084fce301d0c144",
+   "name": "Nike Paris House of Innovation",
+   "notion": "https://app.notion.com/p/6f544772df2a492cb084fce301d0c144",
+   "country": "France",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2023-07-11T12:25:52.089Z"
+  },
+  {
+   "id": "ff16e79a0a27442c9df76daf68b4f9c5",
+   "name": "Nike Copenhagen",
+   "notion": "https://app.notion.com/p/ff16e79a0a27442c9df76daf68b4f9c5",
+   "country": "Denmark",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "No permission recorded; use the licensed Nike set instead.",
+   "added": "2023-07-10T15:50:45.503Z"
+  },
+  {
+   "id": "01d3f74accfc4f59b2e936966a21a7f2",
+   "name": "Confetti table Boris Steiner",
+   "notion": "https://app.notion.com/p/01d3f74accfc4f59b2e936966a21a7f2",
+   "country": "Belgium",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Residential furniture",
+    "Kitchen"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "Boris Steiner",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-07-10T13:49:08.237Z"
+  },
+  {
+   "id": "9170d311f0fd41778f9c7d14e980868e",
+   "name": "Nike Live Arese – Milan",
+   "notion": "https://app.notion.com/p/9170d311f0fd41778f9c7d14e980868e",
+   "country": "Italy",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Decoration element",
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2023-07-10T13:07:43.263Z"
+  },
+  {
+   "id": "7552bc1b77f24695bf3e2b027bd1706c",
+   "name": "Daily Paper flagship store",
+   "notion": "https://app.notion.com/p/7552bc1b77f24695bf3e2b027bd1706c",
+   "country": "UK",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Reception counter",
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-07-10T12:57:25.776Z"
+  },
+  {
+   "id": "ab7b2735d8ae4b25a1604cea844feac1",
+   "name": "Nike - Rise Sandton Johannesburg",
+   "notion": "https://app.notion.com/p/ab7b2735d8ae4b25a1604cea844feac1",
+   "country": "South Africa",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Decoration element",
+    "Retail fixtures",
+    "Reception counter",
+    "Cashdesk counter"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2023-07-10T12:24:21.729Z"
+  },
+  {
+   "id": "e18939b6625f4365844f02cb9699fd9f",
+   "name": "TANSU Shelving System by Studio Alexander Hinnerskov",
+   "notion": "https://app.notion.com/p/e18939b6625f4365844f02cb9699fd9f",
+   "country": "",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Residential furniture"
+   ],
+   "uses": [
+    "Shelves"
+   ],
+   "patterns": [
+    "Reverse Timeless Duo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-06-27T09:17:16.172Z"
+  },
+  {
+   "id": "51a65d40fe6d43b3bae8a758e07509f1",
+   "name": "Table collection by Hello Again Design",
+   "notion": "https://app.notion.com/p/51a65d40fe6d43b3bae8a758e07509f1",
+   "country": "Switzerland",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Residential furniture",
+    "Hotel"
+   ],
+   "uses": [
+    "Coffee table",
+    "Tables"
+   ],
+   "patterns": [
+    "Timeless Duo"
+   ],
+   "credits": "Hello Again Design",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-06-26T14:42:43.847Z"
+  },
+  {
+   "id": "f286760000674867bea7f9b4bb527eed",
+   "name": "Kitchen by Gris Bois",
+   "notion": "https://app.notion.com/p/f286760000674867bea7f9b4bb527eed",
+   "country": "France",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Tables",
+    "Kitchen worktop"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "Gris Bois + @tobiascanales",
+   "partner": "Module Carre (France)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "GRIS BOIS KITCHEN AND BAR",
+   "siteUrl": "https://polygood.com/projects/gris-bois-kitchen/",
+   "note": "",
+   "added": "2023-06-26T14:42:24.048Z"
+  },
+  {
+   "id": "3dc3a6d5074a4be6945aa116b92f0978",
+   "name": "Selfridges London",
+   "notion": "https://app.notion.com/p/3dc3a6d5074a4be6945aa116b92f0978",
+   "country": "UK",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Tables",
+    "Side table",
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Orange Patches",
+    "Flecked White"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Related to The Ordinary case (Selfridges).",
+   "added": "2023-06-26T07:32:38.426Z"
+  },
+  {
+   "id": "4893ed83e560473f929c2a7a36be6d0f",
+   "name": "Bord Bia Bloom",
+   "notion": "https://app.notion.com/p/4893ed83e560473f929c2a7a36be6d0f",
+   "country": "",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition",
+    "Art installation"
+   ],
+   "uses": [
+    "Exhibition booth",
+    "Decoration element"
+   ],
+   "patterns": [
+    "Translucent Green",
+    "Translucent Clear",
+    "Salt Dune"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-06-20T12:50:22.049Z"
+  },
+  {
+   "id": "77a1b204f5024f18be1b03be4c5e2db3",
+   "name": "LUSH in Bern",
+   "notion": "https://app.notion.com/p/77a1b204f5024f18be1b03be4c5e2db3",
+   "country": "Switzerland",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Stand",
+    "Shelves",
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo",
+    "Vintage Pearl",
+    "Dark Knight"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": true,
+   "ig": true,
+   "status": "live",
+   "siteCase": "LUSH",
+   "siteUrl": "https://polygood.com/projects/lush/",
+   "note": "",
+   "added": "2023-06-14T14:02:08.321Z"
+  },
+  {
+   "id": "2eef259b36cc49de883441c3f23683c0",
+   "name": "No waste station",
+   "notion": "https://app.notion.com/p/2eef259b36cc49de883441c3f23683c0",
+   "country": "Ukraine",
+   "cat": "Offices & public spaces",
+   "types": [],
+   "uses": [
+    "Ceiling"
+   ],
+   "patterns": [
+    "Translucent White"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-06-12T06:23:10.130Z"
+  },
+  {
+   "id": "ce96d1c9e0514712b1ce431f68693ddd",
+   "name": "Corner Street Store",
+   "notion": "https://app.notion.com/p/ce96d1c9e0514712b1ce431f68693ddd",
+   "country": "France",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Tables",
+    "Chair",
+    "Reception counter",
+    "Retail fixtures",
+    "Retail popup"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo",
+    "Salt Dune"
+   ],
+   "credits": "Samji Studio, Benjamin Alezra Architecte⁠",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "CORNER STREET SHOP",
+   "siteUrl": "https://polygood.com/projects/corner-street-shop/",
+   "note": "",
+   "added": "2023-06-09T10:18:23.419Z"
+  },
+  {
+   "id": "8a5e8aa5ff8f49de8baa913ac6d49246",
+   "name": "Regina collection lamps",
+   "notion": "https://app.notion.com/p/8a5e8aa5ff8f49de8baa913ac6d49246",
+   "country": "",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Interior"
+   ],
+   "uses": [
+    "Light installation",
+    "Decoration element",
+    "Chandelier"
+   ],
+   "patterns": [
+    "Reverse Timeless Duo",
+    "Greycious",
+    "Timeless Duo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "REGINA LAMP COLLECTION",
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-06-09T09:03:16.996Z"
+  },
+  {
+   "id": "80bc6127dc394406b8091948288f30f6",
+   "name": "Reception desk - Schjodt law firm",
+   "notion": "https://app.notion.com/p/80bc6127dc394406b8091948288f30f6",
+   "country": "Norway",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Reception counter",
+    "Light installation"
+   ],
+   "patterns": [
+    "Translucent White"
+   ],
+   "credits": "Ledsten Arkitektur",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "SCHJODT LAW FIRM",
+   "siteUrl": "https://polygood.com/projects/schjodt/",
+   "note": "",
+   "added": "2023-06-08T12:57:32.822Z"
+  },
+  {
+   "id": "49e115ff2e60448cb6f58462506f72f9",
+   "name": "Taburet 98 by ROLIGHED HUMANIA",
+   "notion": "https://app.notion.com/p/49e115ff2e60448cb6f58462506f72f9",
+   "country": "Denmark",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Office",
+    "Library",
+    "Hotel",
+    "Exhibition",
+    "Residential furniture",
+    "Kitchen",
+    "Cafe",
+    "Offices & public spaces"
+   ],
+   "uses": [
+    "Chair"
+   ],
+   "patterns": [
+    "White Terazzo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-06-08T12:19:08.728Z"
+  },
+  {
+   "id": "30379e276e374881abebdd0e9732ff10",
+   "name": "Coffee bar Wakuli",
+   "notion": "https://app.notion.com/p/30379e276e374881abebdd0e9732ff10",
+   "country": "Netherlands",
+   "cat": "Hospitality",
+   "types": [
+    "Cafe"
+   ],
+   "uses": [
+    "Shelves",
+    "Tables",
+    "Vanity sinks"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-06-08T11:19:07.577Z"
+  },
+  {
+   "id": "847b6a660a734562a80c34edc8698656",
+   "name": "Restaurante Azul Mediterraneo by Revolucion Limo",
+   "notion": "https://app.notion.com/p/847b6a660a734562a80c34edc8698656",
+   "country": "Spain",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "Revolucion Limo",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "AZUL MEDITERRANEO",
+   "siteUrl": "https://polygood.com/projects/azul-mediterraneo-2/",
+   "note": "",
+   "added": "2023-05-08T13:14:43.415Z"
+  },
+  {
+   "id": "4338bc7598a444789fda4915fe5682f1",
+   "name": "Felix Angermeyer Design Studio",
+   "notion": "https://app.notion.com/p/4338bc7598a444789fda4915fe5682f1",
+   "country": "Germany",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Art installation",
+    "Interior"
+   ],
+   "uses": [
+    "Decoration element",
+    "Light installation"
+   ],
+   "patterns": [
+    "White Terazzo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-05-08T13:10:10.378Z"
+  },
+  {
+   "id": "0e9b7a2d1b394c0ab1be42d4496288ae",
+   "name": "Nike Antwerpen",
+   "notion": "https://app.notion.com/p/0e9b7a2d1b394c0ab1be42d4496288ae",
+   "country": "Belgium",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "Photo: Tom Morgan",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2023-05-05T15:26:47.990Z"
+  },
+  {
+   "id": "3bfe7a53d5904351a15741a4c024d6ed",
+   "name": "Reel by Tobia Zambotti",
+   "notion": "https://app.notion.com/p/3bfe7a53d5904351a15741a4c024d6ed",
+   "country": "",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Interior"
+   ],
+   "uses": [
+    "Decoration element"
+   ],
+   "patterns": [
+    "Reverse Timeless Duo",
+    "Greycious",
+    "Timeless Duo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-04-26T13:35:45.984Z"
+  },
+  {
+   "id": "fbb72ae4d86545a9a338ba261c01e1b1",
+   "name": "Wonder Matter(s) (MDW23)",
+   "notion": "https://app.notion.com/p/fbb72ae4d86545a9a338ba261c01e1b1",
+   "country": "Italy",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Office",
+    "Kitchen",
+    "Cafe",
+    "Offices & public spaces"
+   ],
+   "uses": [
+    "Tables",
+    "Chair"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-04-26T13:35:34.288Z"
+  },
+  {
+   "id": "4f17368ca8cc477199040adc52ab84f7",
+   "name": "The Circular Village - by Isola Design (MDW23)",
+   "notion": "https://app.notion.com/p/4f17368ca8cc477199040adc52ab84f7",
+   "country": "Italy",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition",
+    "Art installation"
+   ],
+   "uses": [
+    "Benches"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-04-26T13:34:47.364Z"
+  },
+  {
+   "id": "4d1a9761acf743cb8b8ac2a175fae843",
+   "name": "Jimmy Fairly, Orlean, France",
+   "notion": "https://app.notion.com/p/4d1a9761acf743cb8b8ac2a175fae843",
+   "country": "France",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Stand",
+    "Decoration element",
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Mix"
+   ],
+   "credits": "Jimmy Fairly and Module Carre",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "POLYGOOD FOR EYEWEAR BRAND JIMMY FAIRLY",
+   "siteUrl": "https://polygood.com/projects/jimmy-fairly/",
+   "note": "",
+   "added": "2023-03-27T10:35:53.903Z"
+  },
+  {
+   "id": "3d9ff0e272834d5a90554334ca5e243e",
+   "name": "Co-working Morning, Paris",
+   "notion": "https://app.notion.com/p/3d9ff0e272834d5a90554334ca5e243e",
+   "country": "France",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office",
+    "Offices & public spaces"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Emerald ghost",
+    "Reverse Timeless Duo",
+    "Salt Dune"
+   ],
+   "credits": "",
+   "partner": "Module Carre (France)",
+   "pro": true,
+   "social": "no",
+   "rights": "No permission",
+   "agreement": false,
+   "ig": false,
+   "status": "nda",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "No permission to publish.",
+   "added": "2023-03-27T10:29:42.320Z"
+  },
+  {
+   "id": "67e8b1a5514e447297459473f461f421",
+   "name": "Samsung pop-up stores",
+   "notion": "https://app.notion.com/p/67e8b1a5514e447297459473f461f421",
+   "country": "Europe",
+   "cat": "Retail",
+   "types": [
+    "Popup"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Vintage Pearl"
+   ],
+   "credits": "Cheil, Samsung",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "SAMSUNG POPUP STORES",
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-03-09T17:19:56.747Z"
+  },
+  {
+   "id": "eb03708daaca4f1aaba6c180dea701a4",
+   "name": "De Bijenkorf mall",
+   "notion": "https://app.notion.com/p/eb03708daaca4f1aaba6c180dea701a4",
+   "country": "Netherlands",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Alina Danilchenko",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-03-09T17:12:07.179Z"
+  },
+  {
+   "id": "060ffe9a88054db287276be185afa39e",
+   "name": "Amsterdamse Poort",
+   "notion": "https://app.notion.com/p/060ffe9a88054db287276be185afa39e",
+   "country": "Netherlands",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Offices & public spaces"
+   ],
+   "uses": [
+    "Decoration element"
+   ],
+   "patterns": [
+    "Reverse Timeless Duo"
+   ],
+   "credits": "Buro Mos",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-03-09T17:10:19.179Z"
+  },
+  {
+   "id": "5b26b748017f4a0a8f2242c99a3c3e59",
+   "name": "Mercedes x Revolution Limo",
+   "notion": "https://app.notion.com/p/5b26b748017f4a0a8f2242c99a3c3e59",
+   "country": "Spain",
+   "cat": "Retail",
+   "types": [
+    "Popup"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo",
+    "Timeless Duo"
+   ],
+   "credits": "Mercedes Benz Fashion Week Spain, Partner: Revolucion Limo",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Pop-up at Mercedes-Benz Fashion Week Madrid.",
+   "added": "2023-02-17T14:18:18.314Z"
+  },
+  {
+   "id": "9b63709f6c554dc4bca955cc0565dd1b",
+   "name": "Nike Budapest",
+   "notion": "https://app.notion.com/p/9b63709f6c554dc4bca955cc0565dd1b",
+   "country": "Hungary",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "Nike concept store, Budapest",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2023-02-16T11:07:01.535Z"
+  },
+  {
+   "id": "1f8c3c9b19a9405a99c4ad7adbbe2ca1",
+   "name": "Сafé La Torref de Fersen",
+   "notion": "https://app.notion.com/p/1f8c3c9b19a9405a99c4ad7adbbe2ca1",
+   "country": "France",
+   "cat": "Hospitality",
+   "types": [
+    "Cafe"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo"
+   ],
+   "credits": "Сafé La Torref de Fersen",
+   "partner": "Module Carre (France)",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2023-02-16T10:46:04.752Z"
+  },
+  {
+   "id": "3f03635cf2794a248268afdc465b9721",
+   "name": "Residential Kitchen",
+   "notion": "https://app.notion.com/p/3f03635cf2794a248268afdc465b9721",
+   "country": "",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Kitchen worktop"
+   ],
+   "patterns": [],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "RESIDENTIAL KITCHEN",
+   "siteUrl": "https://polygood.com/projects/residential-kitchen/",
+   "note": "",
+   "added": "2023-02-16T10:44:05.034Z"
+  },
+  {
+   "id": "26c9f0774fc9462c8ece085cc3d8c707",
+   "name": "Madrid Content City",
+   "notion": "https://app.notion.com/p/26c9f0774fc9462c8ece085cc3d8c707",
+   "country": "Spain",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Offices & public spaces"
+   ],
+   "uses": [
+    "Tables",
+    "Benches",
+    "Steps"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "Planeta Agostini group, deardesign.studio, Photos: Aitor Estévez",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "A page polygood.com/projects/science-campus/ exists in search results but is not in the website's case list: check whether it is hidden.",
+   "added": "2022-12-13T12:28:00.000Z"
+  },
+  {
+   "id": "f0b087c905354a318ea373b9038b624a",
+   "name": "200+ Recycling bins for Nike",
+   "notion": "https://app.notion.com/p/f0b087c905354a318ea373b9038b624a",
+   "country": "Europe",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Recycling bin"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "Nike Move To Zero collection boxes",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Nike Move To Zero bins; check Nike rights first.",
+   "added": "2022-12-09T14:34:00.000Z"
+  },
+  {
+   "id": "94ff50403f934f1dae5b5ce2069c81ad",
+   "name": "Kitchen by Aurel Studio",
+   "notion": "https://app.notion.com/p/94ff50403f934f1dae5b5ce2069c81ad",
+   "country": "Belgium",
+   "cat": "Kitchens, bathrooms & homes",
+   "types": [
+    "Kitchen"
+   ],
+   "uses": [
+    "Cabinet"
+   ],
+   "patterns": [
+    "Greycious"
+   ],
+   "credits": "Valentina Antinucci",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-12-01T22:57:00.000Z"
+  },
+  {
+   "id": "5214f4f3691d4e8a8458314d54c397a9",
+   "name": "STAK Dubai",
+   "notion": "https://app.notion.com/p/5214f4f3691d4e8a8458314d54c397a9",
+   "country": "UAE",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Residential furniture"
+   ],
+   "uses": [
+    "Countertop",
+    "Tables"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "Colab.ae, Kvadrat Really, Kvadrat Textiles",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-18T10:32:00.000Z"
+  },
+  {
+   "id": "0d62f6860fe3464a878239f63b86f758",
+   "name": "Longevity Hub Prague",
+   "notion": "https://app.notion.com/p/0d62f6860fe3464a878239f63b86f758",
+   "country": "Czech",
+   "cat": "Hospitality",
+   "types": [
+    "Cafe",
+    "Office"
+   ],
+   "uses": [
+    "Decoration element",
+    "Stand",
+    "Tables",
+    "Side table"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "CAPEXUS, Photo: Alex Shoots Buildings",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "HEALTHY LONGEVITY CAFE",
+   "siteUrl": "https://polygood.com/projects/healthy-longevity-cafe/",
+   "note": "",
+   "added": "2022-11-17T09:47:00.000Z"
+  },
+  {
+   "id": "45f3c402270e4dab8a2a34e0b57b9942",
+   "name": "Blacks Visual",
+   "notion": "https://app.notion.com/p/45f3c402270e4dab8a2a34e0b57b9942",
+   "country": "",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Interior"
+   ],
+   "uses": [
+    "Tables",
+    "Benches"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo",
+    "White Terazzo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-14T13:30:00.000Z"
+  },
+  {
+   "id": "cf831977e62f48eea60e73d48e7fa569",
+   "name": "McDonald’s_UK",
+   "notion": "https://app.notion.com/p/cf831977e62f48eea60e73d48e7fa569",
+   "country": "UK",
+   "cat": "Hospitality",
+   "types": [
+    "Restaurant"
+   ],
+   "uses": [
+    "Walls"
+   ],
+   "patterns": [
+    "Pure Grey",
+    "Dark Knight"
+   ],
+   "credits": "Scurr Architects",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "EXTERIOR CLADDING FOR THE WORLD’S LARGEST FAST FOOD BUSINESS",
+   "siteUrl": "https://polygood.com/projects/worlds-largest-fast-food-business-exterior-cladding/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.677Z"
+  },
+  {
+   "id": "03329f79087d48b498cc5c7d3e04e63d",
+   "name": "Folding table",
+   "notion": "https://app.notion.com/p/03329f79087d48b498cc5c7d3e04e63d",
+   "country": "Netherlands",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Residential furniture"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Bespoke",
+    "Timeless Duo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.677Z"
+  },
+  {
+   "id": "199e0798350d4a8caadeecd5eb991e1b",
+   "name": "Monaco Ocean Week",
+   "notion": "https://app.notion.com/p/199e0798350d4a8caadeecd5eb991e1b",
+   "country": "Monaco",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Maldives"
+   ],
+   "credits": "Repossi",
+   "partner": "Module Carre (France)",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "RECYCLED PLASTIC OCEAN WAVES AT MONACO OCEAN WEEK",
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.677Z"
+  },
+  {
+   "id": "5d29288172a04df98d6a12ed7382c2fd",
+   "name": "“Timeline”",
+   "notion": "https://app.notion.com/p/5d29288172a04df98d6a12ed7382c2fd",
+   "country": "Netherlands",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Exterior"
+   ],
+   "uses": [
+    "Light installation"
+   ],
+   "patterns": [],
+   "credits": "Better Future Factory",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.676Z"
+  },
+  {
+   "id": "41c0da6ac2c043e98116e5565f7c4ed9",
+   "name": "Orbit table",
+   "notion": "https://app.notion.com/p/41c0da6ac2c043e98116e5565f7c4ed9",
+   "country": "",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Office",
+    "Hotel",
+    "Interior",
+    "Offices & public spaces"
+   ],
+   "uses": [
+    "Side table"
+   ],
+   "patterns": [
+    "Timeless Duo Blue"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.676Z"
+  },
+  {
+   "id": "a426a00c7d824ade84d7f568994cc9b8",
+   "name": "Nike, West London",
+   "notion": "https://app.notion.com/p/a426a00c7d824ade84d7f568994cc9b8",
+   "country": "UK",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures",
+    "Tables",
+    "Shelves",
+    "Cashdesk counter",
+    "Stand"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "Tom D. Morgan TDM Space Project Name: Nike Rise concept store, West London",
+   "partner": "",
+   "pro": true,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "NIKE",
+   "siteUrl": "https://polygood.com/projects/nike/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.676Z"
+  },
+  {
+   "id": "2395ae3127db4502998755c8e2470935",
+   "name": "Samji_Librairie Emile Manga",
+   "notion": "https://app.notion.com/p/2395ae3127db4502998755c8e2470935",
+   "country": "France",
+   "cat": "Retail",
+   "types": [
+    "Library"
+   ],
+   "uses": [
+    "Shelves",
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "Module Carre, Samji",
+   "partner": "Module Carre (France)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.675Z"
+  },
+  {
+   "id": "f8ba8bfdfb8c41c183568b745b86de46",
+   "name": "Adidas_H&Q_Germany",
+   "notion": "https://app.notion.com/p/f8ba8bfdfb8c41c183568b745b86de46",
+   "country": "Germany",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Timeless Duo"
+   ],
+   "credits": "Adidas HQ concept store, Germany",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "ADIDAS",
+   "siteUrl": "https://polygood.com/projects/adidas/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.675Z"
+  },
+  {
+   "id": "606df81597d549fa8affd621987ef5a7",
+   "name": "Adidas Stan Smith",
+   "notion": "https://app.notion.com/p/606df81597d549fa8affd621987ef5a7",
+   "country": "France",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail popup"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "Hall Haus, Samji Atelier, Revolucion Limo",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": true,
+   "ig": true,
+   "status": "live",
+   "siteCase": "ADIDAS",
+   "siteUrl": "https://polygood.com/projects/adidas/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.675Z"
+  },
+  {
+   "id": "0cf27a6ea23546a99af4c2d9c84e9ee6",
+   "name": "Samji_Adidas_Floor",
+   "notion": "https://app.notion.com/p/0cf27a6ea23546a99af4c2d9c84e9ee6",
+   "country": "France",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Floor"
+   ],
+   "patterns": [
+    "Reverse Timeless Duo"
+   ],
+   "credits": "Module Carre, Samji for Adidas Paris",
+   "partner": "Module Carre (France)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": true,
+   "ig": true,
+   "status": "live",
+   "siteCase": "ADIDAS",
+   "siteUrl": "https://polygood.com/projects/adidas/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.674Z"
+  },
+  {
+   "id": "56e63e8f336840589a98232ae2cae497",
+   "name": "Coach bags",
+   "notion": "https://app.notion.com/p/56e63e8f336840589a98232ae2cae497",
+   "country": "",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Decoration element"
+   ],
+   "patterns": [],
+   "credits": "Alina Danilchenko",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "COACH",
+   "siteUrl": "https://polygood.com/projects/coach/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.672Z"
+  },
+  {
+   "id": "9a827d25f7364f38941fc21354c263c0",
+   "name": "Hotel Rosalie",
+   "notion": "https://app.notion.com/p/9a827d25f7364f38941fc21354c263c0",
+   "country": "France",
+   "cat": "Hospitality",
+   "types": [
+    "Hotel"
+   ],
+   "uses": [
+    "Vanity sinks"
+   ],
+   "patterns": [
+    "Timeless Duo"
+   ],
+   "credits": "@Christophe Coenon & Hervé Goluza",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "HOTEL ROSALIE",
+   "siteUrl": "https://polygood.com/projects/hotel-rosalie/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.672Z"
+  },
+  {
+   "id": "3d2b4ed9259d49a5a7583d72c19c5538",
+   "name": "Ocean Rise",
+   "notion": "https://app.notion.com/p/3d2b4ed9259d49a5a7583d72c19c5538",
+   "country": "UK",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Art installation"
+   ],
+   "uses": [
+    "Decoration element"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "Canary Wharf London and Aphra Shemza",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "A MIXED REALITY SCULPTURE THAT TELLS A STORY WITH OUR MATERIAL",
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.672Z"
+  },
+  {
+   "id": "1a1e5fc6eb6043a788776c72aac9941d",
+   "name": "Reception for THBX store",
+   "notion": "https://app.notion.com/p/1a1e5fc6eb6043a788776c72aac9941d",
+   "country": "Netherlands",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Reception counter",
+    "Cashdesk counter"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "THBX.nl",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "live",
+   "siteCase": "A RECEPTION MADE FROM 100% RECYCLED MARBLE-EFFECT PLASTIC",
+   "siteUrl": "https://polygood.com/projects/a-reception-made-from-100-recycled-marble-effect-plastic/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.672Z"
+  },
+  {
+   "id": "94c833830d7b4a9cb653f0b30752db2d",
+   "name": "TU Eindhoven Green Office",
+   "notion": "https://app.notion.com/p/94c833830d7b4a9cb653f0b30752db2d",
+   "country": "Netherlands",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Walls"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo"
+   ],
+   "credits": "Go green office",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.672Z"
+  },
+  {
+   "id": "a3e9795e3d0a44a9a84c5fa5bfa98c3c",
+   "name": "ARCO exhibition by Revolucion Limo",
+   "notion": "https://app.notion.com/p/a3e9795e3d0a44a9a84c5fa5bfa98c3c",
+   "country": "Spain",
+   "cat": "Furniture, objects & art",
+   "types": [
+    "Residential furniture"
+   ],
+   "uses": [
+    "Tables",
+    "Side table"
+   ],
+   "patterns": [
+    "Juicy Lollipop"
+   ],
+   "credits": "Revolucion Limo and Estudio del Pino del Valle",
+   "partner": "Revolucion Limo (Spain)",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": true,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.671Z"
+  },
+  {
+   "id": "89d87e94a8324a9bbba8cb0aef518392",
+   "name": "Footlocker",
+   "notion": "https://app.notion.com/p/89d87e94a8324a9bbba8cb0aef518392",
+   "country": "France",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Bespoke for Footlocker"
+   ],
+   "credits": "Polygood for Footlocker",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "EARTH-FRIENDLY STYLE: FOOT LOCKER STORE ON THE CHAMPS-ELYSÉES, PARIS",
+   "siteUrl": "https://polygood.com/projects/foot-locker/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.671Z"
+  },
+  {
+   "id": "aee5dad2b9404f968fb4b9be56728525",
+   "name": "MAD Dubai",
+   "notion": "https://app.notion.com/p/aee5dad2b9404f968fb4b9be56728525",
+   "country": "UAE",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Timeless Duo",
+    "Juicy Lollipop",
+    "Maldives"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "MAKING A DIFFERENCE IN RETAIL DESIGN",
+   "siteUrl": "https://polygood.com/projects/dubai-mall-sustainable-sportswear-store-shop-fittings/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.671Z"
+  },
+  {
+   "id": "308a7a4271c74e36a2611a6428372e75",
+   "name": "COP27 x United24",
+   "notion": "https://app.notion.com/p/308a7a4271c74e36a2611a6428372e75",
+   "country": "Egypt",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Translucent Clear"
+   ],
+   "credits": "The pavilion was organized by the Ministry of Environmental Protection and Natural Resources of Ukraine with the support of the European Union, the Government of Germany, UNDP, UN Global Compact, DTEK, Epam and UNITED24",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.670Z"
+  },
+  {
+   "id": "6f3b872232cd456fa6396e11826a9fb6",
+   "name": "Jimmy Fairly Orlean",
+   "notion": "https://app.notion.com/p/6f3b872232cd456fa6396e11826a9fb6",
+   "country": "France",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures",
+    "Shelves",
+    "Countertop"
+   ],
+   "patterns": [],
+   "credits": "Jimmy Fairly and Module Carre",
+   "partner": "Module Carre (France)",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "POLYGOOD FOR EYEWEAR BRAND JIMMY FAIRLY",
+   "siteUrl": "https://polygood.com/projects/jimmy-fairly/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.669Z"
+  },
+  {
+   "id": "9e31ee1d193749aaa1892396653d5492",
+   "name": "Karl Lagerfeld (NL)",
+   "notion": "https://app.notion.com/p/9e31ee1d193749aaa1892396653d5492",
+   "country": "Netherlands",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Karl Bespoke"
+   ],
+   "credits": "Karl Lagerfeld",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "KARL LAGERFELD",
+   "siteUrl": "https://polygood.com/projects/a-unique-custom-pattern-for-a-legendary-fashion-brand/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.669Z"
+  },
+  {
+   "id": "86034246f967424895b8ec481c1ba934",
+   "name": "Studio THO",
+   "notion": "https://app.notion.com/p/86034246f967424895b8ec481c1ba934",
+   "country": "Netherlands",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Countertop"
+   ],
+   "patterns": [
+    "Timeless Duo Blue"
+   ],
+   "credits": "Solved Nederland B.V., StudioTHO, KOERS, Photos: Roza Schous",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.669Z"
+  },
+  {
+   "id": "f586d76207104a15bb82023db02e7601",
+   "name": "The Student Hotel (The Social Hub Delft)",
+   "notion": "https://app.notion.com/p/f586d76207104a15bb82023db02e7601",
+   "country": "Netherlands",
+   "cat": "Hospitality",
+   "types": [
+    "Hotel"
+   ],
+   "uses": [
+    "Walls"
+   ],
+   "patterns": [],
+   "credits": "Design: The Invisible Party, Fiction Factory, Photo: Steve Herud",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "THE STUDENT HOTEL",
+   "siteUrl": "https://polygood.com/projects/the-student-hotel/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.668Z"
+  },
+  {
+   "id": "71d1937a6245475382b480e5214e657e",
+   "name": "Nike by Haussmann",
+   "notion": "https://app.notion.com/p/71d1937a6245475382b480e5214e657e",
+   "country": "France",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Nike Bespoke"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "no",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "restricted",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Social media use: No.",
+   "added": "2022-11-11T09:37:07.667Z"
+  },
+  {
+   "id": "3e1aadb8e0a546c29b6064486d8befeb",
+   "name": "Les Rendez-vous de la Matière + fair(e)",
+   "notion": "https://app.notion.com/p/3e1aadb8e0a546c29b6064486d8befeb",
+   "country": "France",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Les Rendez-vous de la Matière + fair(e), Module Carre",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "LES RENDEZ-VOUS DE LA MATIÈRE",
+   "siteUrl": "https://polygood.com/projects/les-rendez-vous-de-la-matiere/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.666Z"
+  },
+  {
+   "id": "702bb6cce8794b41a269ef8046389f13",
+   "name": "Adidas - Battersea Power Station",
+   "notion": "https://app.notion.com/p/702bb6cce8794b41a269ef8046389f13",
+   "country": "UK",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Stand",
+    "Tables",
+    "Shelves"
+   ],
+   "patterns": [
+    "Timeless Duo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "ADIDAS",
+   "siteUrl": "https://polygood.com/projects/adidas/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.665Z"
+  },
+  {
+   "id": "b37f1cacd1cf4ad3aefa6a4c7eb429db",
+   "name": "Adidas_ Samji",
+   "notion": "https://app.notion.com/p/b37f1cacd1cf4ad3aefa6a4c7eb429db",
+   "country": "France",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Stand",
+    "Retail fixtures"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "Adidas Originals Store Le Marais (Paris); Design: Samji Atelier, Hall Haus",
+   "partner": "",
+   "pro": false,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": false,
+   "status": "live",
+   "siteCase": "ADIDAS",
+   "siteUrl": "https://polygood.com/projects/adidas/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.665Z"
+  },
+  {
+   "id": "ebbffd9c954746c3a78937f17e0f8ca2",
+   "name": "Bathroom designs",
+   "notion": "https://app.notion.com/p/ebbffd9c954746c3a78937f17e0f8ca2",
+   "country": "Netherlands",
+   "cat": "Little data",
+   "types": [
+    "Bathroom"
+   ],
+   "uses": [
+    "Walls"
+   ],
+   "patterns": [
+    "Timeless Duo"
+   ],
+   "credits": "",
+   "partner": "",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.665Z"
+  },
+  {
+   "id": "c78e5fd9e3044b8089b9765560942a55",
+   "name": "Silicon Labs — Kitchen",
+   "notion": "https://app.notion.com/p/c78e5fd9e3044b8089b9765560942a55",
+   "country": "Norway",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office",
+    "Kitchen"
+   ],
+   "uses": [
+    "Countertop",
+    "Kitchen worktop"
+   ],
+   "patterns": [
+    "White Lollipop"
+   ],
+   "credits": "Design: Kubik interior, Photos: ProsjektGulv AS",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2022-11-11T09:37:07.665Z"
+  },
+  {
+   "id": "fab419f645af4edcb44ee6b2d34b3a60",
+   "name": "Ledsten Arkitektur, office solution",
+   "notion": "https://app.notion.com/p/fab419f645af4edcb44ee6b2d34b3a60",
+   "country": "Norway",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Chandelier",
+    "Light installation",
+    "Lampshade"
+   ],
+   "patterns": [
+    "Bespoke"
+   ],
+   "credits": "Ledsten Arkitektur, Photos: Dag Sandven",
+   "partner": "Norwegian Trash",
+   "pro": false,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "live",
+   "siteCase": "A SUSTAINABLE OFFICE SOLUTION: LIGHT FITTINGS MADE FROM RECYCLED PLASTIC",
+   "siteUrl": "https://polygood.com/projects/a-sustainable-office-solution-light-fittings-made-from-recycled-plastic/",
+   "note": "",
+   "added": "2022-11-11T09:37:07.665Z"
+  },
+  {
+   "id": "da9849336e0b4be9bf03e6ffc6ae671f",
+   "name": "Oslo coworking centre Spaces",
+   "notion": "https://app.notion.com/p/da9849336e0b4be9bf03e6ffc6ae671f",
+   "country": "Norway",
+   "cat": "Offices & public spaces",
+   "types": [
+    "Office"
+   ],
+   "uses": [
+    "Tables"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "Cutfab, Project & Pictures: Norwegian Trash",
+   "partner": "Norwegian Trash",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Same partner (Norwegian Trash) as the Ledsten light fittings case.",
+   "added": "2022-11-11T09:37:07.664Z"
+  },
+  {
+   "id": "de64b268a84c430e8d697f0feda7a0dd",
+   "name": "Oslo Design Fair",
+   "notion": "https://app.notion.com/p/de64b268a84c430e8d697f0feda7a0dd",
+   "country": "Norway",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Exhibition"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Sapphire Terrazzo"
+   ],
+   "credits": "Kirsten Visdal",
+   "partner": "Norwegian Trash",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "Same partner (Norwegian Trash) as the Ledsten light fittings case.",
+   "added": "2022-11-11T09:37:07.663Z"
+  },
+  {
+   "id": "3e282e7c7c868076b96fd6ff222c2484",
+   "name": "De Bijenkorf (Amsterdam, 2026)",
+   "notion": "https://app.notion.com/p/3e282e7c7c868076b96fd6ff222c2484",
+   "country": "Netherlands",
+   "cat": "Retail",
+   "types": [
+    "Retail",
+    "Interior"
+   ],
+   "uses": [
+    "Stand"
+   ],
+   "patterns": [],
+   "credits": "Fiction Factory",
+   "partner": "",
+   "pro": false,
+   "social": "yes",
+   "rights": "",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-09-21T16:40:21.440Z"
+  },
+  {
+   "id": "3cf82e7c7c8680c0912cce8a2674553b",
+   "name": "MDW 2026 - STRINGS - Press Kit",
+   "notion": "https://app.notion.com/p/3cf82e7c7c8680c0912cce8a2674553b",
+   "country": "Italy",
+   "cat": "Exhibitions & events",
+   "types": [
+    "Art installation",
+    "Museum / Gallery",
+    "Popup",
+    "Exhibition"
+   ],
+   "uses": [
+    "Exhibition booth"
+   ],
+   "patterns": [
+    "Salt Dune"
+   ],
+   "credits": "Photo: Ronald Smits (1-9), Thomas Schoger (10-23). STRINGS @ Salone del Mobile 2026",
+   "partner": "",
+   "pro": true,
+   "social": "yes",
+   "rights": "Yes (with Credits)",
+   "agreement": true,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-09-02T14:33:14.007Z"
+  },
+  {
+   "id": "3ce82e7c7c86802594d5c28540c150fe",
+   "name": "Trainer Court Flagship NYC",
+   "notion": "https://app.notion.com/p/3ce82e7c7c86802594d5c28540c150fe",
+   "country": "USA",
+   "cat": "Retail",
+   "types": [
+    "Retail"
+   ],
+   "uses": [
+    "Countertop"
+   ],
+   "patterns": [
+    "Terrazzo Nuovo"
+   ],
+   "credits": "Design: GAMPworks @gampworks Photos: Erik Bernstein @erikesque",
+   "partner": "",
+   "pro": true,
+   "social": "",
+   "rights": "",
+   "agreement": false,
+   "ig": false,
+   "status": "missing",
+   "siteCase": null,
+   "siteUrl": null,
+   "note": "",
+   "added": "2026-09-01T09:27:06.877Z"
+  }
+ ],
+ "siteCases": [
+  {
+   "title": "THE SCORE ACADEMY, MIAMI",
+   "url": null,
+   "notion": [
+    "37382e7c7c8680948654cdc9090f06de"
+   ],
+   "note": "Kitchen worktops (Terrazzo Nuovo, Timeless Duo Blue, Victorious), design by AI Spaces Florida.",
+   "siteOrder": 1,
+   "date": "2026-06-02T07:52:51.626Z"
+  },
+  {
+   "title": "MATERIAL ALCHEMISTS",
+   "url": null,
+   "notion": [
+    "1d182e7c7c8680549d38c4425d3e23e4"
+   ],
+   "note": "Wallpaper* 'Material Alchemists: Class of '25' at Triennale di Milano, 7–13 Apr 2025: plinths in Fleur de Sel, 3+ tonnes taken back after the show. Notion calls it 'MDW25 | Triennale di Milano | Wallpaper exhibition' — rename to match.",
+   "siteOrder": 2,
+   "date": "2025-04-10T09:21:05.768Z"
+  },
+  {
+   "title": "FLOAT MICRO TABLE",
+   "url": null,
+   "notion": [],
+   "note": "Humanscale Float Micro with an Oyster Polygood top. No Notion entry — maybe 'Best of NeoCon 2025'. Create an entry with photos and rights.",
+   "siteOrder": 3,
+   "date": null
+  },
+  {
+   "title": "TOMORE SHINAGAWA NAKANOBU",
+   "url": null,
+   "notion": [
+    "21882e7c7c86809eb5caefb68d9fe4ce"
+   ],
+   "note": "Tokyo office counter in Terrazzo Nuovo. Fabrication, install and photos by SU+ (@suplus_uds). 5 pro photos.",
+   "siteOrder": 4,
+   "date": "2025-06-20T20:12:35.247Z"
+  },
+  {
+   "title": "ILUNION",
+   "url": "https://polygood.com/projects/ilunion/",
+   "notion": [
+    "12282e7c7c8680a69401ccadcd60b9a8"
+   ],
+   "note": "",
+   "siteOrder": 5,
+   "date": "2024-10-17T20:50:14.803Z"
+  },
+  {
+   "title": "LIZ HICKSON ACADEMY",
+   "url": "https://polygood.com/projects/liz-hickson-academy/",
+   "notion": [
+    "19e82e7c7c8680daa988f6af96dccc06"
+   ],
+   "note": "Notion entry is 'Crown Paints UK Head Office'.",
+   "siteOrder": 6,
+   "date": "2025-02-18T16:13:25.427Z"
+  },
+  {
+   "title": "OLO TABLE",
+   "url": "https://polygood.com/projects/olo-table/",
+   "notion": [
+    "1e582e7c7c868002a600d66f28b836b6"
+   ],
+   "note": "Joe Doucet also has 'Transmissions' and 'The Heft Gallery' in Notion — link them.",
+   "siteOrder": 7,
+   "date": "2025-04-30T20:28:22.527Z"
+  },
+  {
+   "title": "SEMIPRECIOUS",
+   "url": null,
+   "notion": [
+    "1fd82e7c7c868059a8afef1354cbc4e3"
+   ],
+   "note": "Denver bar: counter and tables in Potpourri. Design Wunder Werkz, fabrication Workshop Colorado, photos Jeff Fierberg (credit required; web and print approved). 16 pro photos. Featured on Dezeen, 26 Oct 2025.",
+   "siteOrder": 8,
+   "date": "2025-05-24T05:31:23.960Z"
+  },
+  {
+   "title": "THE ORDINARY",
+   "url": "https://polygood.com/projects/ordinary/",
+   "notion": [
+    "15b82e7c7c86800a8b82d500645f86bd"
+   ],
+   "note": "Notion also has Selfridges London and Selfridges Birmingham (not on the site).",
+   "siteOrder": 9,
+   "date": "2024-12-13T17:26:54.907Z"
+  },
+  {
+   "title": "LE PANORAMIQUE MER DE GLACE",
+   "url": null,
+   "notion": [
+    "18382e7c7c868056a41ac0b10d3ec0ec"
+   ],
+   "note": "Chamonix restaurant: tables and counters in Marbellous. Place Tic, architect Joséphine Balayn, Module Carré. Photo rights not recorded.",
+   "siteOrder": 10,
+   "date": "2025-01-22T16:32:39.426Z"
+  },
+  {
+   "title": "COUNT ENERGY TRADING HEADQUARTERS",
+   "url": "https://polygood.com/projects/count/",
+   "notion": [
+    "15282e7c7c868018bab9cc932c21044e"
+   ],
+   "note": "",
+   "siteOrder": 11,
+   "date": "2024-12-04T09:29:59.192Z"
+  },
+  {
+   "title": "SEPIIA",
+   "url": "https://polygood.com/projects/sepiia/",
+   "notion": [
+    "12282e7c7c868043af83f14ffb6f599b"
+   ],
+   "note": "",
+   "siteOrder": 12,
+   "date": "2024-10-17T20:32:03.817Z"
+  },
+  {
+   "title": "CASA PALOMA",
+   "url": "https://polygood.com/projects/paloma/",
+   "notion": [
+    "11282e7c7c8680668034fa8a72b5929c"
+   ],
+   "note": "",
+   "siteOrder": 13,
+   "date": "2024-10-01T22:26:09.141Z"
+  },
+  {
+   "title": "THE STUDENT HOTEL",
+   "url": "https://polygood.com/projects/the-student-hotel/",
+   "notion": [
+    "f586d76207104a15bb82023db02e7601"
+   ],
+   "note": "",
+   "siteOrder": 14,
+   "date": "2022-11-11T09:37:07.668Z"
+  },
+  {
+   "title": "A RECEPTION MADE FROM 100% RECYCLED MARBLE-EFFECT PLASTIC",
+   "url": "https://polygood.com/projects/a-reception-made-from-100-recycled-marble-effect-plastic/",
+   "notion": [
+    "1a1e5fc6eb6043a788776c72aac9941d"
+   ],
+   "note": "Notion entry: 'Reception for THBX store' (Roermond).",
+   "siteOrder": 15,
+   "date": "2022-11-11T09:37:07.672Z"
+  },
+  {
+   "title": "RECYCLED PLASTIC OCEAN WAVES AT MONACO OCEAN WEEK",
+   "url": null,
+   "notion": [
+    "199e0798350d4a8caadeecd5eb991e1b"
+   ],
+   "note": "Booth for Repossi, Maldives pattern. Only one non-pro photo; rights not recorded.",
+   "siteOrder": 16,
+   "date": "2022-11-11T09:37:07.677Z"
+  },
+  {
+   "title": "JAPANESE OFFICE CANTEEN",
+   "url": "https://polygood.com/projects/japanese-office-canteen/",
+   "notion": [
+    "0af6c913caaa4306a53cb9f2c3cdfe2d"
+   ],
+   "note": "Notion entry: 'Showroom in Japan (no name)' — rename to match.",
+   "siteOrder": 17,
+   "date": "2023-11-09T10:05:18.716Z"
+  },
+  {
+   "title": "EXTERIOR CLADDING FOR THE WORLD’S LARGEST FAST FOOD BUSINESS",
+   "url": "https://polygood.com/projects/worlds-largest-fast-food-business-exterior-cladding/",
+   "notion": [
+    "cf831977e62f48eea60e73d48e7fa569"
+   ],
+   "note": "McDonald's UK. Other McDonald's entries are marked 'social media: No'.",
+   "siteOrder": 18,
+   "date": "2022-11-11T09:37:07.677Z"
+  },
+  {
+   "title": "MAKING A DIFFERENCE IN RETAIL DESIGN",
+   "url": "https://polygood.com/projects/dubai-mall-sustainable-sportswear-store-shop-fittings/",
+   "notion": [
+    "aee5dad2b9404f968fb4b9be56728525"
+   ],
+   "note": "Notion entry: 'MAD Dubai'.",
+   "siteOrder": 19,
+   "date": "2022-11-11T09:37:07.671Z"
+  },
+  {
+   "title": "A SUSTAINABLE OFFICE SOLUTION: LIGHT FITTINGS MADE FROM RECYCLED PLASTIC",
+   "url": "https://polygood.com/projects/a-sustainable-office-solution-light-fittings-made-from-recycled-plastic/",
+   "notion": [
+    "fab419f645af4edcb44ee6b2d34b3a60"
+   ],
+   "note": "Ledsten Arkitektur / ABG SC, Oslo. Same partner did Spaces Oslo and Oslo Design Fair (not on the site).",
+   "siteOrder": 20,
+   "date": "2022-11-11T09:37:07.665Z"
+  },
+  {
+   "title": "A MIXED REALITY SCULPTURE THAT TELLS A STORY WITH OUR MATERIAL",
+   "url": null,
+   "notion": [
+    "3d2b4ed9259d49a5a7583d72c19c5538"
+   ],
+   "note": "Ocean Rise by Aphra Shemza, Canary Wharf 2021.",
+   "siteOrder": 21,
+   "date": "2022-11-11T09:37:07.672Z"
+  },
+  {
+   "title": "POLYGOOD FOR EYEWEAR BRAND JIMMY FAIRLY",
+   "url": "https://polygood.com/projects/jimmy-fairly/",
+   "notion": [
+    "4d1a9761acf743cb8b8ac2a175fae843",
+    "6f3b872232cd456fa6396e11826a9fb6"
+   ],
+   "note": "",
+   "siteOrder": 22,
+   "date": "2022-11-11T09:37:07.669Z"
+  },
+  {
+   "title": "EARTH-FRIENDLY STYLE: FOOT LOCKER STORE ON THE CHAMPS-ELYSÉES, PARIS",
+   "url": "https://polygood.com/projects/foot-locker/",
+   "notion": [
+    "89d87e94a8324a9bbba8cb0aef518392"
+   ],
+   "note": "",
+   "siteOrder": 23,
+   "date": "2022-11-11T09:37:07.671Z"
+  },
+  {
+   "title": "HEALTHY LONGEVITY CAFE",
+   "url": "https://polygood.com/projects/healthy-longevity-cafe/",
+   "notion": [
+    "0d62f6860fe3464a878239f63b86f758"
+   ],
+   "note": "Notion entry: 'Longevity Hub Prague'.",
+   "siteOrder": 24,
+   "date": "2022-11-17T09:47:00.000Z"
+  },
+  {
+   "title": "LES RENDEZ-VOUS DE LA MATIÈRE",
+   "url": "https://polygood.com/projects/les-rendez-vous-de-la-matiere/",
+   "notion": [
+    "3e1aadb8e0a546c29b6064486d8befeb",
+    "800626de567e4554a844bea43941853e"
+   ],
+   "note": "",
+   "siteOrder": 25,
+   "date": "2022-11-11T09:37:07.666Z"
+  },
+  {
+   "title": "CORNER STREET SHOP",
+   "url": "https://polygood.com/projects/corner-street-shop/",
+   "notion": [
+    "ce96d1c9e0514712b1ce431f68693ddd"
+   ],
+   "note": "",
+   "siteOrder": 26,
+   "date": "2023-06-09T10:18:23.419Z"
+  },
+  {
+   "title": "NEXT MEDIA KITCHENS",
+   "url": "https://polygood.com/projects/next-media-kitchens/",
+   "notion": [
+    "19daf161523e45bca046edf16312a9b1"
+   ],
+   "note": "",
+   "siteOrder": 27,
+   "date": "2024-03-14T14:08:39.053Z"
+  },
+  {
+   "title": "ABFALLWIRTSCHAFTSBETRIEBE MÜNSTER",
+   "url": null,
+   "notion": [],
+   "note": "No Notion entry — create one with photos, credits and rights.",
+   "siteOrder": 28,
+   "date": null
+  },
+  {
+   "title": "AZUL MEDITERRANEO",
+   "url": "https://polygood.com/projects/azul-mediterraneo-2/",
+   "notion": [
+    "847b6a660a734562a80c34edc8698656"
+   ],
+   "note": "",
+   "siteOrder": 29,
+   "date": "2023-05-08T13:14:43.415Z"
+  },
+  {
+   "title": "BROEINEST MATERIALS LIBRARY",
+   "url": "https://polygood.com/projects/broeinest-2/",
+   "notion": [
+    "904760ca9395498e98ee933739b31e29",
+    "2b508df35378497abb276fd05dccdba0",
+    "211385a3e55f429582d1b07c2487bfaa",
+    "e6f7dbe4189847cdbf7c5f0c43353499",
+    "8425c816fc51454e999705d2f8e1ad07"
+   ],
+   "note": "5 locations in Notion: Amsterdam (2), Eindhoven, Utrecht, Rotterdam.",
+   "siteOrder": 30,
+   "date": "2023-08-04T07:50:03.690Z"
+  },
+  {
+   "title": "KARL LAGERFELD",
+   "url": "https://polygood.com/projects/a-unique-custom-pattern-for-a-legendary-fashion-brand/",
+   "notion": [
+    "4c419de9b7184acebb1c24638208be62",
+    "6fa26acefb5d484288446edaa92e5cde",
+    "e305bf2d42474ac18cb3629903b589bc",
+    "9e31ee1d193749aaa1892396653d5492"
+   ],
+   "note": "4 Notion entries: Madrid, Karl Lagerfeld Jeans, Spain, Netherlands.",
+   "siteOrder": 31,
+   "date": "2022-11-11T09:37:07.669Z"
+  },
+  {
+   "title": "REGINA LAMP COLLECTION",
+   "url": null,
+   "notion": [
+    "8a5e8aa5ff8f49de8baa913ac6d49246"
+   ],
+   "note": "Notion entry: 'Regina collection lamps'. Credits missing.",
+   "siteOrder": 32,
+   "date": "2023-06-09T09:03:16.996Z"
+  },
+  {
+   "title": "COACH",
+   "url": "https://polygood.com/projects/coach/",
+   "notion": [
+    "0502a2e2cd7941338d0a11bb2b3ce908",
+    "56e63e8f336840589a98232ae2cae497"
+   ],
+   "note": "Rights: unlimited, 10 years from Feb 2024. 'Coach bags' photo set can extend the gallery.",
+   "siteOrder": 33,
+   "date": "2022-11-11T09:37:07.672Z"
+  },
+  {
+   "title": "GRIS BOIS KITCHEN AND BAR",
+   "url": "https://polygood.com/projects/gris-bois-kitchen/",
+   "notion": [
+    "51871e10d28746fe90848a68eb79a935",
+    "f286760000674867bea7f9b4bb527eed"
+   ],
+   "note": "",
+   "siteOrder": 34,
+   "date": "2023-06-26T14:42:24.048Z"
+  },
+  {
+   "title": "HARVEY NICHOLS",
+   "url": "https://polygood.com/projects/harvey-nichols-2/",
+   "notion": [
+    "6229bcd613c94c20a29e7667903a44a4"
+   ],
+   "note": "",
+   "siteOrder": 35,
+   "date": "2023-10-05T10:50:01.659Z"
+  },
+  {
+   "title": "HOTEL ROSALIE",
+   "url": "https://polygood.com/projects/hotel-rosalie/",
+   "notion": [
+    "9a827d25f7364f38941fc21354c263c0"
+   ],
+   "note": "",
+   "siteOrder": 36,
+   "date": "2022-11-11T09:37:07.672Z"
+  },
+  {
+   "title": "RESIDENTIAL KITCHEN",
+   "url": "https://polygood.com/projects/residential-kitchen/",
+   "notion": [
+    "3f03635cf2794a248268afdc465b9721"
+   ],
+   "note": "",
+   "siteOrder": 37,
+   "date": "2023-02-16T10:44:05.034Z"
+  },
+  {
+   "title": "SCHJODT LAW FIRM",
+   "url": "https://polygood.com/projects/schjodt/",
+   "notion": [
+    "80bc6127dc394406b8091948288f30f6"
+   ],
+   "note": "",
+   "siteOrder": 38,
+   "date": "2023-06-08T12:57:32.822Z"
+  },
+  {
+   "title": "SOHO BOUTIQUE TURIA HOTEL",
+   "url": "https://polygood.com/projects/soho-boutique-turia-hotel/",
+   "notion": [
+    "c8a2ce911b374cdea70709f066ea7868"
+   ],
+   "note": "",
+   "siteOrder": 39,
+   "date": "2023-07-21T11:33:22.480Z"
+  },
+  {
+   "title": "LUSH",
+   "url": "https://polygood.com/projects/lush/",
+   "notion": [
+    "9526741bc1224308a7d42c195eeaf4b8",
+    "77a1b204f5024f18be1b03be4c5e2db3"
+   ],
+   "note": "Glatt and Bern (Switzerland) in Notion, both with agreements attached.",
+   "siteOrder": 40,
+   "date": "2023-06-14T14:02:08.321Z"
+  },
+  {
+   "title": "BEAUREPAIRE FLAT, PANTIN",
+   "url": null,
+   "notion": [
+    "deb0abc72bfb498a8cf7043b82d90e69"
+   ],
+   "note": "Check rights: Notion says publication rights must be bought from photographer Philippe Billard, social media: No.",
+   "siteOrder": 41,
+   "date": "2024-06-17T08:54:05.500Z"
+  },
+  {
+   "title": "SAMSUNG POPUP STORES",
+   "url": null,
+   "notion": [
+    "67e8b1a5514e447297459473f461f421"
+   ],
+   "note": "Notion entry: 'Samsung pop-up stores' (Cheil, Vintage Pearl).",
+   "siteOrder": 42,
+   "date": "2023-03-09T17:19:56.747Z"
+  },
+  {
+   "title": "CANARY ISLANDS BATHROOM",
+   "url": "https://polygood.com/projects/canary-islands-bathroom/",
+   "notion": [
+    "a777f15816fb4959bd4bac85b04a293e"
+   ],
+   "note": "Notion entry: 'Bargo Studio' (Las Palmas, Revolución Limo).",
+   "siteOrder": 43,
+   "date": "2024-03-05T16:27:21.660Z"
+  },
+  {
+   "title": "JEUDI STUDIO FURNITURE",
+   "url": "https://polygood.com/projects/jeudi-studio-furniture/",
+   "notion": [
+    "b148a8860eea47769592e38e22383b51"
+   ],
+   "note": "",
+   "siteOrder": 44,
+   "date": "2024-07-23T03:17:48.898Z"
+  },
+  {
+   "title": "ADIDAS",
+   "url": "https://polygood.com/projects/adidas/",
+   "notion": [
+    "702bb6cce8794b41a269ef8046389f13",
+    "b37f1cacd1cf4ad3aefa6a4c7eb429db",
+    "0cf27a6ea23546a99af4c2d9c84e9ee6",
+    "606df81597d549fa8affd621987ef5a7",
+    "f8ba8bfdfb8c41c183568b745b86de46",
+    "b7884eb10aea43458715864c4840f603",
+    "7bc8a4e85b264e80af40ea04bbf29120",
+    "7e37342aaf8646ffb41fc46b15ad6a75",
+    "f427e6881aab43fe93ac30c1181bd873",
+    "438e783bc1fd4c18a2e9d1387700c976"
+   ],
+   "note": "10 locations in Notion: London, Paris (3), Herzogenaurach, UAE (4), Istanbul.",
+   "siteOrder": 45,
+   "date": "2022-11-11T09:37:07.665Z"
+  },
+  {
+   "title": "NIKE",
+   "url": "https://polygood.com/projects/nike/",
+   "notion": [
+    "a426a00c7d824ade84d7f568994cc9b8",
+    "3cd82e7c7c8680338b1fd2dad4021b34"
+   ],
+   "note": "Licensed photo set valid until 3 Aug 2027. Other Nike stores in Notion are mostly 'social media: No'.",
+   "siteOrder": 46,
+   "date": "2022-11-11T09:37:07.676Z"
+  },
+  {
+   "title": "KALEIDOS OFFICE HEADQUARTERS",
+   "url": null,
+   "notion": [
+    "9f727ca4a4114b03bc661233de52252c"
+   ],
+   "note": "Notion entry: 'Kaleidos Madrid office' (2BOLD, Revolución Limo).",
+   "siteOrder": 47,
+   "date": "2024-08-22T07:10:22.800Z"
+  },
+  {
+   "title": "PEACE CAMPUS",
+   "url": null,
+   "notion": [
+    "c3ba79c42abe484ea2272b3506a65370"
+   ],
+   "note": "",
+   "siteOrder": 48,
+   "date": "2024-07-23T02:56:39.679Z"
+  }
+ ]
+}

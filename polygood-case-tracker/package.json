@@ -1,0 +1,14 @@
+{
+  "name": "polygood-case-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Search Polygood's Notion projects, see which are already case studies on polygood.com, and track the missing ones with saved progress.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "test": "node scripts/test.mjs"
+  }
+}
