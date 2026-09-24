@@ -4,6 +4,7 @@ import { mkdtemp, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import zlib from "node:zlib";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -72,6 +73,21 @@ delete process.env.TRACKER_PASSWORD;
 const onDisk = JSON.parse(await readFile(process.env.TRACKER_FILE_STORE, "utf8"));
 assert.equal(Object.keys(onDisk.records).length, 2);
 
+// Case study drafts: only the outline's fields are kept, each within its limit.
+r = await call(progress, { method: "PUT", body: { records: { "p:draft1": { status: "drafting", draft: {
+  title: "Jimmy Fairly", body: "x".repeat(7000), pattern: "Mix (bespoke)", credits: 42, extra: "dropped",
+} } } } });
+assert.equal(r.status, 200);
+const savedDraft = r.body.saved["p:draft1"].draft;
+assert.equal(savedDraft.title, "Jimmy Fairly");
+assert.equal(savedDraft.body.length, 6000, "body is capped");
+assert.equal(savedDraft.pattern, "Mix (bespoke)");
+assert.equal(savedDraft.credits, undefined, "non-text field is dropped");
+assert.equal(savedDraft.extra, undefined, "unknown field is dropped");
+r = await call(progress);
+assert.equal(r.body.records["p:draft1"].draft.title, "Jimmy Fairly");
+assert.equal(r.body.records["p:draft1"].status, "drafting");
+
 // With no storage configured the API must refuse clearly instead of pretending to save.
 const out = execFileSync(process.execPath, ["--input-type=module", "-e", `
   const h = (await import(${JSON.stringify(path.join(root, "api", "progress.js"))})).default;
@@ -81,6 +97,32 @@ const out = execFileSync(process.execPath, ["--input-type=module", "-e", `
 const none = JSON.parse(out.trim());
 assert.equal(none.s, 503);
 assert.equal(none.b.error, "storage_not_configured");
+
+// Word export: a valid zip whose parts match their checksums and hold the escaped text.
+await import("../assets/docx.js");
+const docx = Buffer.from(globalThis.PCTDocx.build([
+  { type: "h1", text: "Jimmy Fairly" },
+  { type: "p", runs: [{ text: "Pattern: ", bold: true }, { text: "Mix & <bespoke>" }] },
+  { type: "meta", runs: [{ text: "Notion", link: "https://app.notion.com/p/abc?x=1&y=2" }] },
+  { type: "h1", text: "Second case", pageBreak: true },
+], { title: "Test" }));
+const eocd = docx.length - 22;
+assert.equal(docx.readUInt32LE(eocd), 0x06054b50, "zip ends with its central directory");
+const parts = {};
+for (let i = 0, at = docx.readUInt32LE(eocd + 16); i < docx.readUInt16LE(eocd + 10); i++) {
+  assert.equal(docx.readUInt32LE(at), 0x02014b50);
+  const crc = docx.readUInt32LE(at + 16), size = docx.readUInt32LE(at + 20), nameLen = docx.readUInt16LE(at + 28), local = docx.readUInt32LE(at + 42);
+  const name = docx.toString("utf8", at + 46, at + 46 + nameLen);
+  const start = local + 30 + docx.readUInt16LE(local + 26) + docx.readUInt16LE(local + 28);
+  const data = docx.subarray(start, start + size);
+  if (typeof zlib.crc32 === "function") assert.equal(zlib.crc32(data), crc, `${name} checksum`);
+  parts[name] = data.toString("utf8");
+  at += 46 + nameLen;
+}
+assert.deepEqual(Object.keys(parts).sort(), ["[Content_Types].xml", "_rels/.rels", "docProps/core.xml", "word/_rels/document.xml.rels", "word/document.xml", "word/styles.xml"]);
+assert.ok(parts["word/document.xml"].includes("Mix &amp; &lt;bespoke&gt;"), "text is escaped");
+assert.ok(parts["word/document.xml"].includes("<w:pageBreakBefore/>"), "page break kept");
+assert.ok(parts["word/_rels/document.xml.rels"].includes('Target="https://app.notion.com/p/abc?x=1&amp;y=2"'), "link kept");
 
 // Catalog sanity
 const catalog = JSON.parse(await readFile(path.join(root, "data", "catalog.json"), "utf8"));

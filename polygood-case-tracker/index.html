@@ -18,12 +18,13 @@
     <div class="brand">
       <div>
         <h1>Polygood Case Tracker</h1>
-        <p class="sub">Search any project to see whether it’s in Notion and whether it’s already a case study on polygood.com. Cases already on the website come first, oldest first, as your reference. Every mark and note is saved as you go.</p>
+        <p class="sub">Search any project to see whether it’s in Notion and whether it’s already a case study on polygood.com. Cases already on the website come first, oldest first, as your reference. Open a project and choose <em>Write case study</em> to draft it, then copy it into Google Docs or download it as a Word file. Every mark, note and draft is saved as you go.</p>
       </div>
       <div class="sync" aria-live="polite">
         <span class="syncpill" id="syncPill"><i></i><span id="syncText">Connecting…</span></span>
         <span class="syncsub" id="syncSub"></span>
         <div class="syncactions">
+          <button class="btn small" type="button" id="draftsBtn">Download drafts (.docx)</button>
           <button class="btn small" type="button" id="exportBtn">Download backup</button>
           <label class="btn small" for="importFile">Restore backup</label>
           <input type="file" id="importFile" accept="application/json,.json" hidden>
@@ -96,7 +97,9 @@
     <div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div>
   </main>
 </div>
+<dialog id="editor" class="editor" aria-labelledby="edTitle"><div class="ed" id="edRoot"></div></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
+<script src="/assets/docx.js" defer></script>
 <script src="/assets/app.js" defer></script>
 </body>
 </html>
