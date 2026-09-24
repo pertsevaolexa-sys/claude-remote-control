@@ -5,17 +5,28 @@ A small web app for working on the **case study section of polygood.com**.
 - Search any project to see whether it's in Notion, and whether it's already a case study on the website.
 - Website cases come first, **oldest first**, as the reference for writing new ones.
 - Mark each missing project (To do → Drafting → Ready to publish → Published / Skip), star references, write notes, and fill in missing case URLs.
+- **Write each case study in the tracker**, laid out like the website's case pages, then copy it into Google Docs or download it as a Word file.
 - **Every change is saved as you go** and is still there next time you open the link, on any device.
 
 Data: 219 entries from Notion › Marketing team space › **Project images** and the 48 cases listed on polygood.com/projects (as of 23 Sep 2026). NDA / internal-only projects are hidden by default.
 
 ## How saving works
 
-Three layers, so no mark or note is lost:
+Three layers, so no mark, note or draft is lost:
 
 1. **Your browser.** Every change is stored on your device instantly.
 2. **The server (Upstash Redis on Vercel).** The change is sent to the server and retried until the server confirms. If you're offline or the server is unreachable, changes wait on your device and upload by themselves later, even after closing the tab. The pill in the top-right corner always tells you the state: *All changes saved*, *Saving…*, *N changes waiting to sync*.
 3. **History and backups.** The *Saved changes* tab lists the last 150 changes stored on the server (the server keeps 1,000). *Download backup* saves everything to a JSON file; *Restore backup* loads it back.
+
+## Writing case studies
+
+1. Open a project (the arrow at the end of its row) and choose **Write case study**. For a case already on the website the button says **Rewrite case study**.
+2. The editor follows `docs/case-study-outline.md`: title, subtitle and body, then the details under the text (pattern, application, location, credits), images, similar projects and the web address. Pattern, application, country, credits and three similar cases are filled in from Notion. The checks next to the preview flag anything that doesn't match the outline.
+3. The draft is saved like a note: on a pause in typing, when you leave a field and when you close the editor. The first edit moves the project from *To do* to *Drafting*.
+4. To move a draft into a document:
+   - **Copy for Google Docs**, then paste into a Google Doc (**New Google Doc** opens a blank one), Word or Notion. Headings and bold labels come with it.
+   - **Download .docx** saves a Word file. To open it in Google Docs, upload it to Google Drive and choose *Open with → Google Docs*.
+   - **Download drafts (.docx)** at the top of the page puts every draft in one Word file, one case per page, *Ready to publish* first.
 
 ## Deploy on Vercel (about 5 minutes)
 
@@ -24,7 +35,7 @@ Three layers, so no mark or note is lost:
    - **Root Directory:** click *Edit* and choose `polygood-case-tracker`.
    - **Framework Preset:** *Other*. Leave Build Command and Output Directory empty.
    - Click **Deploy**.
-   - Vercel builds production from the repository's default branch. The tracker currently lives on the branch `claude/amazing-allen-pxgqrq`. Merge it into the default branch, or change *Settings → Git → Production Branch* to that branch.
+   - Vercel builds production from the repository's default branch, `claude/setup-project-folders-4qFMs`. Merge new work into that branch to publish it; every other branch you push gets its own preview link.
 
 2. **Connect the database** (this is what makes progress permanent)
    - In the Vercel project, open the **Storage** tab → **Create Database** → **Upstash for Redis** (from the Marketplace) → free plan.
@@ -35,13 +46,13 @@ Three layers, so no mark or note is lost:
    - Open `https://<your-project>.vercel.app/api/health`. It should show `"storage":"redis"`.
    - Open the app, mark any project, reload the page, and check that the mark is still there. The top-right pill should say **All changes saved**.
 
-4. **Optional: add a password.** Anyone with the link can otherwise change the progress. In *Settings → Environment Variables*, add `TRACKER_PASSWORD`, then redeploy. The app asks for it once per browser.
+4. **Add a password (recommended).** Anyone with the link can otherwise change progress, notes and drafts. In *Settings → Environment Variables*, add `TRACKER_PASSWORD`, then redeploy. The app asks for it once per browser.
 
 Until step 2 is done, the app works and keeps everything in your browser, and shows a notice. As soon as the database is connected, everything saved in the browser uploads automatically.
 
 ## Updating the project list
 
-The project list is `data/catalog.json`. When new projects are added to Notion or new cases go live on the website, update that file (Claude can regenerate it from Notion) and push. Your progress is stored separately under each project's Notion ID, so updating the list never erases your marks or notes.
+The project list is `data/catalog.json`. When new projects are added to Notion or new cases go live on the website, update that file (Claude can regenerate it from Notion) and push. Your progress is stored separately under each project's Notion ID, so updating the list never erases your marks, notes or drafts.
 
 ## Run it locally
 
@@ -58,6 +69,7 @@ npm test         # checks the API and the catalog
 | Path | What it is |
 |---|---|
 | `index.html`, `assets/` | The app (plain HTML, CSS and JavaScript, no build step) |
+| `assets/docx.js` | Word (.docx) export for case study drafts, no dependencies |
 | `data/catalog.json` | Notion projects and website cases |
 | `docs/case-study-outline.md` | Typography notes on the Jimmy Fairly case and the outline for writing new cases (not deployed) |
 | `api/progress.js` | Load and save progress |

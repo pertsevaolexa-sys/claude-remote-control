@@ -76,6 +76,10 @@ export const isValidKey = (k) => typeof k === "string" && KEY_RE.test(k);
 
 const STATUSES = new Set(["todo", "drafting", "ready", "published", "skip"]);
 
+// Case study drafts written in the tracker, one field per slot of the outline
+// (docs/case-study-outline.md). assets/app.js uses the same limits.
+export const DRAFT_LIMITS = { slug: 200, title: 200, subtitle: 300, body: 6000, pattern: 500, application: 500, location: 300, credits: 1500, images: 3000, similar: 500 };
+
 // Keep only the fields the app writes, with sane sizes.
 export function sanitizeRecord(input) {
   const r = {};
@@ -85,6 +89,13 @@ export function sanitizeRecord(input) {
   if (typeof input.starred === "boolean") r.starred = input.starred;
   if (typeof input.url === "string") r.url = input.url.trim().slice(0, 500);
   if (typeof input.publishedUrl === "string") r.publishedUrl = input.publishedUrl.trim().slice(0, 500);
+  if (input.draft && typeof input.draft === "object") {
+    const d = {};
+    for (const [field, max] of Object.entries(DRAFT_LIMITS)) {
+      if (typeof input.draft[field] === "string") d[field] = input.draft[field].slice(0, max);
+    }
+    if (Object.keys(d).length) r.draft = d;
+  }
   if (typeof input.clientUpdatedAt === "string") r.clientUpdatedAt = input.clientUpdatedAt.slice(0, 40);
   return r;
 }
