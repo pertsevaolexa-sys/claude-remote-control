@@ -59,6 +59,7 @@ npm test         # checks the API and the catalog
 |---|---|
 | `index.html`, `assets/` | The app (plain HTML, CSS and JavaScript, no build step) |
 | `data/catalog.json` | Notion projects and website cases |
+| `docs/case-study-outline.md` | Typography notes on the Jimmy Fairly case and the outline for writing new cases (not deployed) |
 | `api/progress.js` | Load and save progress |
 | `api/history.js` | Recent saved changes |
 | `api/health.js` | Shows whether storage and the password are set up |
