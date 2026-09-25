@@ -70,5 +70,6 @@ if __name__ == "__main__":
         s = LONG_EDGE / max(img.size)
         final = faithful4(model, img).resize((round(img.width * s), round(img.height * s)), Image.LANCZOS)
         dst = HERE / f"{Path(src).stem}-16k.jpg"
-        final.save(dst, quality=95, subsampling=0, optimize=True, dpi=(300, 300))
+        final.save(dst, quality=95, subsampling=0, optimize=True, dpi=(300, 300),
+                   icc_profile=Image.open(src).info.get("icc_profile"))
         print(dst, final.size)
