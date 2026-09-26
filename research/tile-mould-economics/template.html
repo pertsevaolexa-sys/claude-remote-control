@@ -1,0 +1,1449 @@
+<title>The Grout Bill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+  :root {
+    --paper: #f3f5f4;
+    --surface: #fcfcfb;
+    --tile: #ffffff;
+    --ink: #15232a;
+    --ink-2: #44545b;
+    --muted: #5f6d73;
+    --rule: #d9e0df;
+    --grout: #c9d1cf;
+    --grout-line: #a7b1af;
+    --mould: #26302a;
+    --axis: #b3bdbb;
+    --accent: #1d4f9f;
+    --accent-ink: #ffffff;
+    --accent-wash: #e3ebf7;
+    --caution: #8a5200;
+    --caution-wash: #fbf0dc;
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+    --l1: #e87ba4; --l2: #008300; --l3: #4a3aa7;
+    --heat: #1c5cab;
+    --heat-cap: 0.62;
+    --shadow: 0 1px 2px rgba(21, 35, 42, 0.06), 0 6px 20px rgba(21, 35, 42, 0.07);
+    --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --f-body: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
+    --f-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper: #0e1316; --surface: #161c20; --tile: #1b2327;
+      --ink: #e9eff0; --ink-2: #b4c1c5; --muted: #8d9a9f;
+      --rule: #28333a; --grout: #34414a; --grout-line: #56656d; --mould: #040706; --axis: #3d4a52;
+      --accent: #8fb2f4; --accent-ink: #0e1316; --accent-wash: #1a2740;
+      --caution: #f0b75a; --caution-wash: #2a2114;
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+      --l1: #d55181; --l2: #008300; --l3: #9085e9;
+      --heat: #86b6ef; --heat-cap: 0.5;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0e1316; --surface: #161c20; --tile: #1b2327;
+    --ink: #e9eff0; --ink-2: #b4c1c5; --muted: #8d9a9f;
+    --rule: #28333a; --grout: #34414a; --grout-line: #56656d; --mould: #040706; --axis: #3d4a52;
+    --accent: #8fb2f4; --accent-ink: #0e1316; --accent-wash: #1a2740;
+    --caution: #f0b75a; --caution-wash: #2a2114;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --l1: #d55181; --l2: #008300; --l3: #9085e9;
+    --heat: #86b6ef; --heat-cap: 0.5;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 17.5px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-underline-offset: 2px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+  strong { font-weight: 600; }
+
+  /* Decorative tile band: grout joints darken where the steam lingers. */
+  .tileband {
+    height: 104px;
+    position: relative;
+    background-color: var(--tile);
+    background-image:
+      linear-gradient(90deg, var(--grout) 2px, transparent 2px),
+      linear-gradient(180deg, var(--grout) 2px, transparent 2px);
+    background-size: 52px 52px;
+    background-position: -1px -1px;
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .tileband::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg, var(--mould) 2px, transparent 2px),
+      linear-gradient(180deg, var(--mould) 2px, transparent 2px);
+    background-size: 52px 52px;
+    background-position: -1px -1px;
+    -webkit-mask-image: linear-gradient(100deg, transparent 38%, rgba(0, 0, 0, 0.35) 70%, #000 100%);
+    mask-image: linear-gradient(100deg, transparent 38%, rgba(0, 0, 0, 0.35) 70%, #000 100%);
+  }
+
+  .page { max-width: 1120px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 0 72px; }
+  .prose { max-width: 66ch; }
+  .prose p, .prose ul, .prose ol { margin: 0 0 1em; }
+
+  .kicker, .label {
+    font-family: var(--f-ui);
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+  h1, h2 { font-family: var(--f-display); font-weight: 800; letter-spacing: -0.015em; text-wrap: balance; color: var(--ink); }
+  h1 { font-size: clamp(46px, 8vw, 84px); line-height: 0.98; margin: 10px 0 14px; }
+  h2 { font-size: clamp(28px, 4vw, 38px); line-height: 1.08; margin: 0 0 18px; }
+  h3 { font-family: var(--f-ui); font-weight: 600; font-size: 17px; line-height: 1.3; margin: 0 0 8px; text-wrap: balance; }
+  .dek { font-size: clamp(19px, 2.2vw, 22px); line-height: 1.45; color: var(--ink-2); max-width: 44ch; margin: 0; }
+  .masthead { padding-block: 36px 8px; }
+
+  section { margin-top: 76px; scroll-margin-top: 16px; }
+  .ref {
+    font-family: var(--f-ui);
+    font-size: 0.68em;
+    vertical-align: 0.45em;
+    line-height: 0;
+    text-decoration: none;
+    padding: 0 1px;
+  }
+  .ref:hover { text-decoration: underline; }
+  .note { font-family: var(--f-ui); font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+
+  /* Short answer */
+  .answer {
+    margin-top: 40px;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: clamp(20px, 3.5vw, 40px);
+    display: grid;
+    gap: 28px 48px;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  }
+  .answer h2 { margin-bottom: 14px; }
+  .answer .lead { font-size: 20px; line-height: 1.5; }
+  .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; margin: 0; align-content: start; }
+  .stat { border-top: 1px solid var(--rule); padding: 16px 0 20px; display: grid; gap: 4px; align-content: start; }
+  .stat dt { font-family: var(--f-display); font-weight: 800; font-size: clamp(34px, 4vw, 44px); line-height: 1; color: var(--accent); }
+  .stat dd { margin: 0; font-family: var(--f-ui); font-size: 15px; line-height: 1.35; color: var(--ink); }
+  .stat dd.sub { font-size: 13px; color: var(--muted); }
+  .answer .note { grid-column: 1 / -1; margin: 0; }
+
+  /* Europe vs US */
+  .regions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 48px; margin-top: 28px; }
+  .regions h3 { font-family: var(--f-display); font-weight: 800; font-size: 22px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); margin-bottom: 4px; }
+  .facts { margin: 0; }
+  .fact { display: grid; grid-template-columns: 7.2em minmax(0, 1fr); gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+  .fact dt { font-family: var(--f-display); font-weight: 800; font-size: 25px; line-height: 1.1; color: var(--ink); }
+  .fact dd { margin: 0; font-size: 16px; line-height: 1.5; color: var(--ink-2); }
+  .aside {
+    font-family: var(--f-ui);
+    font-size: 15px;
+    line-height: 1.55;
+    background: var(--accent-wash);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 28px;
+    max-width: 78ch;
+  }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; margin: 20px 0 8px; -webkit-overflow-scrolling: touch; }
+  table { border-collapse: collapse; font-family: var(--f-ui); font-size: 14.5px; line-height: 1.45; width: 100%; }
+  caption { text-align: left; font-family: var(--f-ui); font-size: 13.5px; color: var(--muted); padding-bottom: 8px; caption-side: top; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); }
+  thead th { font-weight: 600; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--axis); white-space: nowrap; }
+  tbody th { font-weight: 600; color: var(--ink); }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 12px; }
+  .materials td, .materials th { min-width: 150px; }
+  .materials td:first-child, .materials th:first-child { min-width: 170px; }
+
+  .thresholds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 32px; margin: 26px 0 8px; }
+  .threshold { border-top: 2px solid var(--ink); padding-top: 12px; }
+  .threshold .v { font-family: var(--f-display); font-weight: 800; font-size: 30px; line-height: 1.05; margin: 0 0 6px; }
+  .threshold p { margin: 0; font-family: var(--f-ui); font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+
+  /* Tile swatches */
+  .swatches { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 22px 18px; margin: 26px 0 10px; }
+  .swatch { margin: 0; display: grid; gap: 8px; align-content: start; }
+  .swatch svg { display: block; width: 100%; max-width: 160px; aspect-ratio: 1; height: auto; border: 1px solid var(--grout-line); border-radius: 2px; }
+  .sw-tile { fill: var(--tile); }
+  .sw-joint { stroke: var(--grout-line); stroke-width: 1.2; fill: none; }
+  .swatch figcaption { font-family: var(--f-ui); font-size: 13.5px; line-height: 1.35; color: var(--ink-2); }
+  .swatch figcaption b { display: block; color: var(--ink); font-weight: 600; font-size: 14px; }
+  .swatch .big { font-family: var(--f-display); font-weight: 800; font-size: 24px; line-height: 1.05; color: var(--ink); display: block; margin: 2px 0; }
+
+  /* Timeline */
+  .timeline { margin: 22px 0 0; padding: 0; max-width: 78ch; }
+  .tl-row { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .tl-row dt { font-family: var(--f-ui); font-weight: 600; font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .tl-row dd { margin: 0; font-size: 16.5px; line-height: 1.5; color: var(--ink-2); }
+
+  .inventory { font-family: var(--f-ui); font-size: 15.5px; line-height: 1.5; padding-left: 1.1em; margin: 10px 0 0; }
+  .inventory li { margin-bottom: 6px; }
+  .caution {
+    font-family: var(--f-ui);
+    font-size: 15px;
+    line-height: 1.55;
+    background: var(--caution-wash);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 24px;
+    max-width: 78ch;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+  }
+  .caution svg { width: 22px; height: 22px; color: var(--caution); margin-top: 1px; }
+  .caution strong { color: var(--caution); }
+
+  /* Calculator */
+  .calc { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 28px 40px; margin-top: 26px; align-items: start; }
+  .controls {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 20px;
+    display: grid;
+    gap: 18px;
+    font-family: var(--f-ui);
+    font-size: 14.5px;
+  }
+  .controls fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .controls legend, .controls .field-label { font-weight: 600; font-size: 13px; color: var(--ink); margin-bottom: 7px; padding: 0; display: block; }
+  .seg { display: flex; flex-wrap: wrap; gap: 0; border: 1px solid var(--axis); border-radius: 9px; overflow: hidden; }
+  .seg label { flex: 1 1 auto; position: relative; }
+  .seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .seg span {
+    display: block;
+    text-align: center;
+    padding: 8px 8px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    border-left: 1px solid var(--axis);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .seg label:first-child span { border-left: 0; }
+  .seg input:checked + span { background: var(--ink); color: var(--paper); font-weight: 600; }
+  .seg input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: -3px; }
+  .seg span:hover { background: var(--accent-wash); }
+  .seg input:checked + span:hover { background: var(--ink); }
+  select, input[type="number"] {
+    font: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--axis);
+    border-radius: 8px;
+    padding: 8px 10px;
+    width: 100%;
+    font-variant-numeric: tabular-nums;
+  }
+  .inline { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+  .unit { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .hint { color: var(--muted); font-size: 12.5px; margin-top: 5px; display: block; }
+  .check { display: flex; gap: 10px; align-items: center; font-weight: 600; font-size: 13.5px; }
+  .check input { width: 18px; height: 18px; accent-color: var(--accent); margin: 0; }
+  details.advanced { border-top: 1px solid var(--rule); padding-top: 14px; }
+  details.advanced summary { cursor: pointer; font-weight: 600; font-size: 13.5px; color: var(--accent); }
+  .adv-grid { display: grid; gap: 12px; margin-top: 14px; }
+  .adv-grid label { display: grid; gap: 5px; font-size: 13px; color: var(--ink-2); }
+  button.reset {
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--axis);
+    border-radius: 8px;
+    padding: 7px 12px;
+    cursor: pointer;
+    justify-self: start;
+  }
+  button.reset:hover { background: var(--accent-wash); }
+
+  .results { display: grid; gap: 30px; min-width: 0; }
+  .summary {
+    font-family: var(--f-ui);
+    font-size: 15.5px;
+    line-height: 1.55;
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 16px;
+    display: grid;
+    gap: 6px;
+  }
+  .summary p { margin: 0; }
+  .summary .headline { font-size: 18px; font-weight: 600; color: var(--ink); line-height: 1.45; }
+  .figure h3 { margin-bottom: 4px; }
+  .figure .note { margin: 0 0 12px; }
+
+  /* Charts */
+  .chart { position: relative; }
+  .chart .plot { width: 100%; }
+  .chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .grid { stroke: var(--rule); stroke-width: 1; shape-rendering: crispEdges; }
+  .axis { stroke: var(--axis); stroke-width: 1; shape-rendering: crispEdges; }
+  .tick { fill: var(--muted); font-family: var(--f-ui); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .row-label { fill: var(--ink); font-family: var(--f-ui); font-size: 13.5px; font-weight: 500; }
+  .value { fill: var(--ink-2); font-family: var(--f-ui); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .end-name { fill: var(--ink-2); font-family: var(--f-ui); font-size: 12.5px; }
+  .end-value { fill: var(--ink); font-family: var(--f-ui); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .row-label, .value, .end-name, .end-value { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+  .c1 { fill: var(--s1); } .c2 { fill: var(--s2); } .c3 { fill: var(--s3); } .c4 { fill: var(--s4); }
+  .seg-mark { outline: none; cursor: default; }
+  .seg-mark:hover, .seg-mark:focus-visible { filter: brightness(1.1) saturate(1.05); }
+  .seg-mark:focus-visible { stroke: var(--ink); stroke-width: 2; }
+  .line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .line.l1 { stroke: var(--l1); } .line.l2 { stroke: var(--l2); } .line.l3 { stroke: var(--l3); }
+  .dot { stroke: var(--surface); stroke-width: 2; }
+  .dot.l1 { fill: var(--l1); } .dot.l2 { fill: var(--l2); } .dot.l3 { fill: var(--l3); }
+  .crosshair { stroke: var(--ink-2); stroke-width: 1; shape-rendering: crispEdges; }
+  .hit { fill: transparent; outline: none; cursor: crosshair; }
+  .chart-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 16px 16px 10px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--f-ui); font-size: 13px; color: var(--ink-2); margin: 0 0 12px; padding: 0; list-style: none; }
+  .legend li { display: inline-flex; align-items: center; gap: 7px; }
+  .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; flex: none; }
+  .sw.c1 { background: var(--s1); } .sw.c2 { background: var(--s2); } .sw.c3 { background: var(--s3); } .sw.c4 { background: var(--s4); }
+  .lk { display: inline-block; width: 16px; height: 2px; border-radius: 1px; flex: none; }
+  .lk.l1 { background: var(--l1); } .lk.l2 { background: var(--l2); } .lk.l3 { background: var(--l3); }
+  .tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-family: var(--f-ui);
+    font-size: 13px;
+    color: var(--ink);
+    z-index: 5;
+    min-width: 150px;
+    max-width: 260px;
+  }
+  .tt-title { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+  .tt-row { display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 8px; align-items: center; }
+  .tt-row .tv { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .tt-row .tl { color: var(--ink-2); }
+
+  .results-table td.num, .results-table th.num { min-width: 72px; }
+  .results-table thead th { white-space: normal; }
+  .results-table tbody tr:last-child th, .results-table tbody tr:last-child td { border-bottom: 1px solid var(--axis); }
+
+  /* Heat table */
+  .heat td { position: relative; text-align: right; font-variant-numeric: tabular-nums; padding: 12px 14px; min-width: 110px; }
+  .heat td::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: 6px;
+    background: var(--heat);
+    opacity: calc(var(--t, 0) * var(--heat-cap));
+  }
+  .heat td span { position: relative; font-weight: 600; }
+  .heat thead th.num { text-align: right; padding-right: 14px; }
+  .heat tbody th { padding-top: 12px; }
+
+  .findings { margin: 24px 0 0; padding-left: 1.3em; max-width: 72ch; }
+  .findings li { margin-bottom: 14px; padding-left: 4px; }
+  .findings li::marker { font-family: var(--f-ui); font-weight: 600; color: var(--accent); }
+  .steps { margin: 20px 0 0; padding-left: 1.3em; max-width: 72ch; }
+  .steps li { margin-bottom: 16px; padding-left: 4px; }
+  .steps li::marker { font-family: var(--f-display); font-weight: 800; color: var(--accent); }
+
+  .sources { font-family: var(--f-ui); font-size: 13.5px; line-height: 1.5; color: var(--ink-2); columns: 2 360px; column-gap: 40px; padding-left: 2.2em; margin: 18px 0 0; }
+  .sources li { margin-bottom: 8px; break-inside: avoid; padding-left: 2px; }
+  .sources li:target { background: var(--accent-wash); border-radius: 4px; }
+  .sources h3 { column-span: all; }
+  .source-group { font-family: var(--f-ui); font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 26px 0 0; }
+
+  footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--rule); }
+
+  @media (max-width: 900px) {
+    .answer { grid-template-columns: minmax(0, 1fr); }
+    .calc { grid-template-columns: minmax(0, 1fr); }
+    .swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 680px) {
+    body { font-size: 17px; }
+    .regions { grid-template-columns: minmax(0, 1fr); }
+    .thresholds { grid-template-columns: minmax(0, 1fr); }
+    .fact { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+    .tl-row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+    .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stats { grid-template-columns: minmax(0, 1fr); }
+    .tileband { height: 72px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; transition: none !important; }
+  }
+</style>
+
+<div class="tileband" aria-hidden="true"></div>
+
+<main class="page">
+  <header class="masthead">
+    <p class="kicker">Research note · Europe and the United States · September 2026</p>
+    <h1>The Grout Bill</h1>
+    <p class="dek">Mould in steamy bathrooms and kitchens: how common it is, how much cleaning chemistry a household uses to keep it down, and whether ceramic tiles still pay off over twenty years.</p>
+  </header>
+
+  <section class="answer" aria-labelledby="answer-h">
+    <div class="prose">
+      <h2 id="answer-h">The short answer</h2>
+      <p class="lead"><strong>The idea is partly right.</strong> Glazed tiles barely absorb water, so mould does not grow in the tile itself. It grows in the cement grout and silicone joints, and it keeps coming back while the room stays humid.</p>
+      <p>In the shower zone that upkeep adds up. Over 20 years, a wall of classic 20×25 cm tiles with cement grout costs about twice as much as grout-free wall panels: 1.9–2.1 times as much in cash, and 2.3–2.5 times if your scrubbing time counts. The result holds with German, British and American prices.</p>
+      <p>The chemicals themselves are a small part of it. A typical tiled shower gets through about 3 litres of chlorine mould spray a year, roughly €24, £18 or $17. The real money goes on regrouting, silicone renewals and hours of scrubbing.</p>
+      <p>Two changes close most of the gap: a working extractor fan, and epoxy grout or large tiles when you renovate. Kitchen splashbacks stay dry most of the day, so there tiles remain a cheap and durable choice.</p>
+    </div>
+    <dl class="stats">
+      <div class="stat">
+        <dt>3 L</dt>
+        <dd>of chlorine mould spray a year for one tiled shower</dd>
+        <dd class="sub">About 4 bottles and 80 g of sodium hypochlorite. €24, £18 or $17.</dd>
+      </div>
+      <div class="stat">
+        <dt>≈2×</dt>
+        <dd>the 20-year cost of wall panels, for small tiles with cement grout</dd>
+        <dd class="sub">1.9–2.1× in cash. 2.3–2.5× counting your time.</dd>
+      </div>
+      <div class="stat">
+        <dt>4–12%</dt>
+        <dd>of that tiled-shower bill goes on chemicals</dd>
+        <dd class="sub">Around half is your own time spent scrubbing and sealing.</dd>
+      </div>
+      <div class="stat">
+        <dt>€5,000</dt>
+        <dd>saved over 20 years by fixing bad ventilation</dd>
+        <dd class="sub">Per tiled shower, after paying for the fan. US: $9,300.</dd>
+      </div>
+    </dl>
+    <p class="note">Default case: 6 m² of shower wall, classic 20×25 cm tiles, average ventilation, 20 years. Change any of it in the <a href="#calculator">calculator</a>.</p>
+  </section>
+
+  <section id="scale" aria-labelledby="scale-h">
+    <div class="prose">
+      <h2 id="scale-h">How big the mould problem is</h2>
+      <p>Damp and mould are common on both sides of the Atlantic. The World Health Organization estimates that 10–50% of indoor environments in Europe, North America, Australia, India and Japan are affected.<a class="ref" href="#src-2">[2]</a> The surveys below measure dampness in general: leaks, condensation and rising damp. None of them counts mould on shower grout separately, so no official figure for mouldy bathrooms exists.</p>
+    </div>
+    <div class="regions">
+      <div>
+        <h3>Europe</h3>
+        <dl class="facts">
+          <div class="fact"><dt>15.5%</dt><dd>of EU residents lived in a home with a leaking roof, damp walls, floors or foundations, or rot in 2023. The highest shares were in Cyprus (31.6%), Portugal (29.0%) and Spain (23.0%).<a class="ref" href="#src-1">[1]</a></dd></div>
+          <div class="fact"><dt>1 in 6</dt><dd>Europeans live in a damp or mouldy home, and they are 40% more likely to have asthma. Asthma and COPD, two diseases linked to damp homes, cost European societies about €82 billion a year.<a class="ref" href="#src-3">[3]</a></dd></div>
+          <div class="fact"><dt>5%</dt><dd>of homes in England had a damp problem in 2023, about 1.3 million, the highest rate in five years. Among private rentals it was 9%.<a class="ref" href="#src-5">[5]</a></dd></div>
+          <div class="fact"><dt>€194 bn</dt><dd>is the yearly cost of inadequate housing to EU economies, counting health care, social services and lost productivity.<a class="ref" href="#src-4">[4]</a></dd></div>
+        </dl>
+      </div>
+      <div>
+        <h3>United States</h3>
+        <dl class="facts">
+          <div class="fact"><dt>≈50%</dt><dd>of US homes have dampness or mould, according to the most widely cited national estimate.<a class="ref" href="#src-7">[7]</a></dd></div>
+          <div class="fact"><dt>21%</dt><dd>of current US asthma cases, about 4.6 million, are attributable to dampness and mould at home.<a class="ref" href="#src-7">[7]</a></dd></div>
+          <div class="fact"><dt>$22.4 bn</dt><dd>a year: the US cost of allergic rhinitis ($3.7 bn), acute bronchitis ($1.9 bn), asthma illness ($15.1 bn) and asthma deaths ($1.7 bn) caused by dampness and mould, in 2014 dollars.<a class="ref" href="#src-8">[8]</a></dd></div>
+          <div class="fact"><dt>3.9 million</dt><dd>homes reported mould in the previous 12 months in the 2023 American Housing Survey.<a class="ref" href="#src-9">[9]</a></dd></div>
+        </dl>
+      </div>
+    </div>
+    <p class="aside">In England, <strong>Awaab’s Law</strong> has applied to social housing since 27 October 2025. Landlords must investigate a significant damp or mould hazard within 10 working days and carry out safety work within 5 working days of finding one.<a class="ref" href="#src-6">[6]</a></p>
+  </section>
+
+  <section id="steam" aria-labelledby="steam-h">
+    <div class="prose">
+      <h2 id="steam-h">Why the steam zone</h2>
+      <p>Every bath or shower puts about a litre of water into the air. UK housing guidance gives these rough figures:<a class="ref" href="#src-10">[10]</a></p>
+    </div>
+    <div class="table-wrap" style="max-width: 620px">
+      <table>
+        <thead><tr><th scope="col">Activity</th><th scope="col" class="num">Water released into the air</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">A bath or shower</th><td class="num">≈1.1 L (2 pints)</td></tr>
+          <tr><th scope="row">Cooking and the kettle, per day</th><td class="num">≈3.4 L (6 pints)</td></tr>
+          <tr><th scope="row">Drying a load of washing indoors</th><td class="num">≈5.1 L (9 pints)</td></tr>
+          <tr><th scope="row">Two people at home for 16 hours</th><td class="num">≈1.7 L (3 pints)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>That water condenses on the coldest surfaces first: outside walls, window reveals, the ceiling above the shower and the joints between tiles. Three numbers decide whether it turns into mould.</p>
+    </div>
+    <div class="thresholds">
+      <div class="threshold">
+        <p class="v">80%</p>
+        <p>relative humidity at a surface. Held above this for days, mould can grow. European and international standards use it as the design limit for walls.<a class="ref" href="#src-11">[11]</a></p>
+      </div>
+      <div class="threshold">
+        <p class="v">24–48 h</p>
+        <p>Damp materials dried within this window usually stay free of mould.<a class="ref" href="#src-12">[12]</a></p>
+      </div>
+      <div class="threshold">
+        <p class="v">15 l/s</p>
+        <p>England’s minimum bathroom fan rate. Kitchens need 30 l/s with a cooker hood, 60 without. The US asks for 50 cfm on demand or 20 cfm continuous, and 100 cfm for a range hood.<a class="ref" href="#src-13">[13]</a><a class="ref" href="#src-14">[14]</a></p>
+      </div>
+    </div>
+    <div class="prose">
+      <p>The standard behind the 80% limit accepts brief condensation on surfaces that don’t absorb water, and names bathroom tiles as the example, provided the water can’t reach the materials behind.<a class="ref" href="#src-11">[11]</a> Tiles are made for steam. The joints between them are the weak point.</p>
+    </div>
+  </section>
+
+  <section id="joints" aria-labelledby="joints-h">
+    <div class="prose">
+      <h2 id="joints-h">Where the mould actually lives</h2>
+      <p>A tiled wall is four materials, and they behave very differently in a steamy room.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="materials">
+        <thead><tr><th scope="col">Material</th><th scope="col">Takes up water?</th><th scope="col">What mould does</th><th scope="col">Upkeep</th></tr></thead>
+        <tbody>
+          <tr>
+            <th scope="row">Glazed ceramic or porcelain tile</th>
+            <td>Barely. Porcelain absorbs 0.5% of its weight or less, and a glaze seals the face.<a class="ref" href="#src-15">[15]</a></td>
+            <td>Only a film on soap scum at the surface, which wipes off.</td>
+            <td>Normal cleaning. A tiled floor lasts 75–100 years.<a class="ref" href="#src-39">[39]</a></td>
+          </tr>
+          <tr>
+            <th scope="row">Cement grout (EN 13888 class CG1 or CG2)</th>
+            <td>Yes. The test allows standard CG1 grout to take up 5 g of water in 30 minutes and 10 g in 4 hours; water-repellent CG2 W grout 2 g and 5 g.<a class="ref" href="#src-16">[16]</a></td>
+            <td>Grows into the pores, feeds on soap and skin oils, and stains the joint grey to black.</td>
+            <td>Seal every 1–2 years.<a class="ref" href="#src-27">[27]</a> Regrout every 8–15 years.<a class="ref" href="#src-51">[51]</a></td>
+          </tr>
+          <tr>
+            <th scope="row">Epoxy grout (class RG)</th>
+            <td>Practically none.</td>
+            <td>Stays on the surface and cleans off.<a class="ref" href="#src-38">[38]</a></td>
+            <td>No sealing. Outlasts the bathroom.</td>
+          </tr>
+          <tr>
+            <th scope="row">Sanitary silicone</th>
+            <td>At the surface, and horizontal joints stay wet after every shower.</td>
+            <td>Black yeasts such as <i>Aureobasidium</i> and <i>Exophiala</i> push dark pigment into the silicone, and the stain can’t be cleaned out.<a class="ref" href="#src-17">[17]</a><a class="ref" href="#src-18">[18]</a></td>
+            <td>Replace every 1–2 years in a steamy room, 5–10 years with anti-fungal silicone and good ventilation.<a class="ref" href="#src-18">[18]</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose" style="margin-top: 28px">
+      <h3>The tile size decides how much grout there is</h3>
+      <p>Each square below is one square metre of wall, drawn to scale. Small tiles carry many times more joint, and every metre of joint is a metre that needs spraying, scrubbing, sealing and eventually regrouting.</p>
+    </div>
+    <div class="swatches" id="swatches"></div>
+    <p class="note">Joint length per m² = 1 ÷ (tile width + joint) + 1 ÷ (tile height + joint). Joints are 2 mm wide, 3 mm for 30×60 cm. Metro tiles are drawn in the usual brick bond.</p>
+  </section>
+
+  <section id="speed" aria-labelledby="speed-h">
+    <div class="prose">
+      <h2 id="speed-h">How fast it comes back</h2>
+      <p>Mould on grout is a cycle. Cleaning removes what you can see, the joint stays damp, and growth starts again.</p>
+    </div>
+    <dl class="timeline">
+      <div class="tl-row"><dt>24–48 hours</dt><dd>Spores germinate on a surface that stays wet.<a class="ref" href="#src-12">[12]</a></dd></div>
+      <div class="tl-row"><dt>1–4 weeks</dt><dd>Visible regrowth on grout and silicone in a shower with no working ventilation, according to bathroom trade guides.<a class="ref" href="#src-19">[19]</a> The model’s poor-ventilation case assumes a treatment every two weeks.</dd></div>
+      <div class="tl-row"><dt>1–2 years</dt><dd>Grout sealer stops beading water in a shower.<a class="ref" href="#src-27">[27]</a> Silicone that was badly applied, or sits in a room that never dries, can already need replacing.<a class="ref" href="#src-18">[18]</a><a class="ref" href="#src-51">[51]</a></dd></div>
+      <div class="tl-row"><dt>5–10 years</dt><dd>Anti-fungal silicone lasts this long when the room dries out between showers.<a class="ref" href="#src-18">[18]</a></dd></div>
+      <div class="tl-row"><dt>8–15 years</dt><dd>Cement grout has to be raked out and replaced.<a class="ref" href="#src-51">[51]</a></dd></div>
+      <div class="tl-row"><dt>16–20 years</dt><dd>A typical bathroom gets renovated. German bathrooms that were never renovated average 19.5 years old, and across Europe at least 16 years pass between renovations.<a class="ref" href="#src-41">[41]</a><a class="ref" href="#src-42">[42]</a></dd></div>
+      <div class="tl-row"><dt>50+ years</dt><dd>Glazed tile would still be fine.<a class="ref" href="#src-39">[39]</a> In practice it is torn out for style long before it wears out, so its long life rarely pays off.</dd></div>
+    </dl>
+  </section>
+
+  <section id="chemicals" aria-labelledby="chem-h">
+    <div class="prose">
+      <h2 id="chem-h">The chemical bill</h2>
+      <p>Most bathroom mould sprays are chlorine bleach: sodium hypochlorite at 1–5% in Tilex in the US, and about 2.2–2.6% in Cillit Bang Black Mould in the UK.<a class="ref" href="#src-20">[20]</a><a class="ref" href="#src-22">[22]</a> A 946 ml bottle of Tilex costs $5.48<a class="ref" href="#src-21">[21]</a>, 750 ml of Cillit Bang £4.50<a class="ref" href="#src-22">[22]</a>, and German drugstores sell 500–750 ml for €2.95–11.99.<a class="ref" href="#src-23">[23]</a> That is roughly €4–24 per litre.</p>
+      <p>How much a household uses depends on how much grout there is and how often the mould returns. Product labels assume heavy use: 100–200 ml per m².<a class="ref" href="#src-24">[24]</a><a class="ref" href="#src-25">[25]</a> A trigger sprayer delivers 0.7–1.5 ml per squeeze<a class="ref" href="#src-26">[26]</a>, so misting a 10 cm band along each joint takes about 40 ml per m² of that band. The model uses this lighter figure, applied to the joints and silicone of a 6 m² shower wall.</p>
+    </div>
+    <div class="table-wrap">
+      <table id="chem-table">
+        <caption>Chlorine mould spray per year for a 6 m² shower wall, by tile format and ventilation</caption>
+        <thead>
+          <tr>
+            <th scope="col">Wall</th>
+            <th scope="col" class="num">Poor ventilation<br><span class="unit">26 treatments</span></th>
+            <th scope="col" class="num">Average<br><span class="unit">12 treatments</span></th>
+            <th scope="col" class="num">Good<br><span class="unit">4 treatments</span></th>
+            <th scope="col" class="num">Minutes per treatment</th>
+          </tr>
+        </thead>
+        <tbody id="chem-body"></tbody>
+      </table>
+    </div>
+    <p class="note">1 litre ≈ 1.3 bottles of 750 ml ≈ 26 g of sodium hypochlorite ≈ €8, £6 or $5.80. At label rates the volumes would be 2.5–5 times higher.</p>
+    <div class="prose" style="margin-top: 22px">
+      <p>Over 20 years, one tiled shower with classic tiles and average ventilation gets through:</p>
+      <ul class="inventory">
+        <li>60 litres of chlorine spray, about 80 bottles, containing 1.6 kg of sodium hypochlorite</li>
+        <li>19 coats of grout sealer, about 4.75 litres</li>
+        <li>3 silicone renewals and 1 full regrout</li>
+        <li>109 hours of spraying, scrubbing and sealing</li>
+      </ul>
+    </div>
+    <div class="caution" role="note">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 2.5 20h19L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1.2" fill="currentColor"/></svg>
+      <p style="margin:0"><strong>Never combine chlorine spray with acidic cleaners</strong> such as limescale removers, many toilet cleaners or vinegar. The mix releases chlorine gas. US poison centres recorded 4,800 exposures from exactly this mix in 2021.<a class="ref" href="#src-46">[46]</a></p>
+    </div>
+  </section>
+
+  <section id="calculator" aria-labelledby="calc-h">
+    <div class="prose">
+      <h2 id="calc-h">Run your own numbers</h2>
+      <p>Every figure on this page comes from one cost model. Pick your country and bathroom, and the charts, table and ventilation comparison update together. Prices are September 2026 snapshots from the sources listed.</p>
+    </div>
+    <div class="calc">
+      <form class="controls" id="controls" autocomplete="off">
+        <fieldset>
+          <legend>Country and prices</legend>
+          <div class="seg">
+            <label><input type="radio" name="region" id="region-eu" value="eu" checked><span>Germany / EU €</span></label>
+            <label><input type="radio" name="region" id="region-uk" value="uk"><span>UK £</span></label>
+            <label><input type="radio" name="region" id="region-us" value="us"><span>US $</span></label>
+          </div>
+        </fieldset>
+        <div>
+          <label class="field-label" for="format">Your tiles</label>
+          <select id="format">
+            <option value="mosaic">Mosaic 5×5 cm</option>
+            <option value="metro">Metro 7.5×15 cm</option>
+            <option value="classic" selected>Classic 20×25 cm</option>
+            <option value="medium">30×60 cm</option>
+            <option value="large">60×120 cm</option>
+            <option value="slab">Slab 120×260 cm</option>
+          </select>
+        </div>
+        <fieldset>
+          <legend>Ventilation</legend>
+          <div class="seg">
+            <label><input type="radio" name="ventilation" id="vent-poor" value="poor"><span>Poor</span></label>
+            <label><input type="radio" name="ventilation" id="vent-average" value="average" checked><span>Average</span></label>
+            <label><input type="radio" name="ventilation" id="vent-good" value="good"><span>Good</span></label>
+          </div>
+          <span class="hint" id="vent-hint"></span>
+        </fieldset>
+        <div>
+          <label class="field-label" for="area">Tiled shower wall</label>
+          <div class="inline"><input type="number" id="area" min="1" max="60" step="0.5" value="6" inputmode="decimal"><span class="unit">m²</span></div>
+          <span class="hint" id="area-hint">About 65 sq ft. A 90×90 cm shower tiled to 2.2 m is about 6 m².</span>
+        </div>
+        <fieldset>
+          <legend>Years to count</legend>
+          <div class="seg">
+            <label><input type="radio" name="horizon" id="years-10" value="10"><span>10</span></label>
+            <label><input type="radio" name="horizon" id="years-20" value="20" checked><span>20</span></label>
+            <label><input type="radio" name="horizon" id="years-30" value="30"><span>30</span></label>
+          </div>
+        </fieldset>
+        <div>
+          <label class="check" for="count-time"><input type="checkbox" id="count-time" checked> Count my time as money</label>
+          <div class="inline" style="margin-top: 8px"><input type="number" id="time-rate" min="0" max="500" step="1" inputmode="decimal" aria-label="Value of one hour"><span class="unit" id="time-unit">€ per hour</span></div>
+          <span class="hint">Default is what a cleaner is paid per hour.</span>
+        </div>
+        <fieldset>
+          <legend>Silicone renewals</legend>
+          <div class="seg">
+            <label><input type="radio" name="silicone" id="sil-pro" value="pro" checked><span>Hire a pro</span></label>
+            <label><input type="radio" name="silicone" id="sil-diy" value="diy"><span>Do it myself</span></label>
+          </div>
+        </fieldset>
+        <details class="advanced">
+          <summary>Adjust prices and assumptions</summary>
+          <div class="adv-grid">
+            <label for="adv-treatments">Mould treatments per year<input type="number" id="adv-treatments" data-key="treatmentsPerYear" min="0" max="104" step="1"></label>
+            <label for="adv-dose">Spray per m² of joint band (ml)<input type="number" id="adv-dose" data-key="sprayDoseMlPerM2" min="0" max="400" step="5"></label>
+            <label for="adv-spray-price">Mould spray, price per litre<input type="number" id="adv-spray-price" data-key="sprayPricePerL" min="0" max="100" step="0.1"></label>
+            <label for="adv-tile-price">Your tiles, installed, per m²<input type="number" id="adv-tile-price" data-key="tileInstallPerM2" min="0" max="3000" step="1"></label>
+            <label for="adv-panel-price">Wall panels, installed, per m²<input type="number" id="adv-panel-price" data-key="panelPerM2" min="0" max="3000" step="1"></label>
+            <label for="adv-regrout-price">Regrouting, per m²<input type="number" id="adv-regrout-price" data-key="regroutPerM2" min="0" max="1000" step="1"></label>
+            <label for="adv-silicone-price">Silicone renewal by a pro, per job<input type="number" id="adv-silicone-price" data-key="siliconeJob" min="0" max="2000" step="1"></label>
+            <button type="button" class="reset" id="reset">Reset to defaults</button>
+          </div>
+        </details>
+      </form>
+
+      <div class="results" aria-live="polite">
+        <div class="summary" id="summary">
+          <p class="headline" id="sum-main"></p>
+          <p id="sum-cash"></p>
+          <p id="sum-chem"></p>
+          <p id="sum-time"></p>
+        </div>
+
+        <div class="figure">
+          <h3>Twenty-year cost by wall option</h3>
+          <p class="note" id="stacked-note">What each option costs from installation onwards, split by where the money goes. Hover or tab onto a segment for its value.</p>
+          <div class="chart-card">
+            <ul class="legend" aria-label="Legend">
+              <li><span class="sw c1"></span>Installation</li>
+              <li><span class="sw c2"></span>Chemicals and sealer</li>
+              <li><span class="sw c3"></span>Joint repairs</li>
+              <li><span class="sw c4"></span>Your time</li>
+            </ul>
+            <div class="chart" id="chart-stacked"><div class="plot"></div></div>
+          </div>
+        </div>
+
+        <div class="figure">
+          <h3>How the cost builds up</h3>
+          <p class="note">Running total from the day the wall goes in. The jumps are regrouting and silicone jobs. Use the arrow keys on the chart to step through the years.</p>
+          <div class="chart-card">
+            <ul class="legend" aria-label="Legend">
+              <li><span class="lk l1"></span><span id="lg-l1">Your tiles, cement grout</span></li>
+              <li><span class="lk l2"></span><span id="lg-l2">Your tiles, epoxy grout</span></li>
+              <li><span class="lk l3"></span>Waterproof wall panels</li>
+            </ul>
+            <div class="chart" id="chart-lines"><div class="plot"></div></div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="results-table">
+            <caption id="results-caption">The numbers behind the charts</caption>
+            <thead>
+              <tr>
+                <th scope="col">Option</th>
+                <th scope="col" class="num">Install</th>
+                <th scope="col" class="num">Chemicals</th>
+                <th scope="col" class="num">Repairs</th>
+                <th scope="col" class="num">Your time</th>
+                <th scope="col" class="num">Total</th>
+                <th scope="col" class="num">Hours</th>
+              </tr>
+            </thead>
+            <tbody id="results-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="levers" aria-labelledby="levers-h">
+    <div class="prose">
+      <h2 id="levers-h">What changes the answer</h2>
+      <p>The table uses your calculator settings and varies only the ventilation. Darker cells cost more.</p>
+    </div>
+    <div class="table-wrap" style="max-width: 760px">
+      <table class="heat">
+        <caption id="heat-caption"></caption>
+        <thead><tr><th scope="col">Wall option</th><th scope="col" class="num">Poor ventilation</th><th scope="col" class="num">Average</th><th scope="col" class="num">Good</th></tr></thead>
+        <tbody id="heat-body"></tbody>
+      </table>
+    </div>
+    <ol class="findings">
+      <li><strong>Ventilation matters more than the wall material.</strong> With EU prices and your time counted, small tiles with cement grout cost €7,941 over 20 years in a badly ventilated room and €2,336 in a well ventilated one. The well-ventilated tiled shower beats wall panels in a badly ventilated room (€3,470).</li>
+      <li><strong>Epoxy grout pays for itself quickly.</strong> It adds about €90 to a 6 m² shower wall and earns that back within 2 years with your time counted, or 5 years in cash alone, at average ventilation.</li>
+      <li><strong>Panels stay cheaper in cash unless they are expensive.</strong> At average ventilation, tiles only win on cash if panels cost more than about €290 per m² fitted in Germany, £235 in the UK or $527 in the US ($49 per sq ft).</li>
+      <li><strong>Over 30 years the ranking shifts.</strong> Panels need replacing once, and tiles with epoxy grout become the cheapest option in cash: €2,104 against €2,197 for panels in the EU and $3,137 against $3,520 in the US. In the UK the two are level (£1,821 and £1,805).</li>
+      <li><strong>Chemicals never decide it.</strong> Across all three countries and ventilation levels, mould spray is about 3–13% of the tiled shower’s 20-year cost with time counted, and 4–26% of the cash spent.</li>
+    </ol>
+  </section>
+
+  <section id="kitchens" aria-labelledby="kitchens-h">
+    <div class="prose">
+      <h2 id="kitchens-h">Kitchens are a different case</h2>
+      <p>A kitchen splashback gets steam in short bursts while you cook, then dries out. Grease is the main soiling, and mould on splashback grout is uncommon. Running the same model for a 2.5 m² tiled splashback with a cooker hood and two mould treatments a year gives about 0.2 litres of spray a year, under €2. Upkeep including time comes to about €19 a year, against €11 for a panel splashback. Over 20 years the difference between materials is mostly what they cost to fit.</p>
+      <p>Mould problems in kitchens usually start with leaks. In Sweden, appliances such as fridges, freezers and dishwashers cause about a quarter of reported water damage.<a class="ref" href="#src-45">[45]</a> One study found the black yeast <i>Exophiala dermatitidis</i> on the rubber seals of 47% of dishwashers tested.<a class="ref" href="#src-17">[17]</a> The places to watch are the silicone along the sink and worktop, the cabinet under the sink and the space behind the dishwasher.</p>
+    </div>
+  </section>
+
+  <section id="actions" aria-labelledby="actions-h">
+    <div class="prose">
+      <h2 id="actions-h">What to do, best payback first</h2>
+    </div>
+    <ol class="steps">
+      <li><strong>Fix the ventilation.</strong> Run the fan during the shower and for 20 minutes after, or fit one with a humidity sensor, and squeegee the walls and glass, which takes about a minute. We assume a fitted fan costs €300, £250 or $400, plus €10–15 a year to run. Compared with a badly ventilated room it saves about €5,000, £5,000 or $9,300 on a tiled shower over 20 years. The running cost is a 15 W fan for an hour a day (about 5.5 kWh a year) plus the warm air it removes (about 50 kWh of heat a season), at the EU average of €0.29 per kWh.<a class="ref" href="#src-50">[50]</a></li>
+      <li><strong>Use epoxy grout in the shower when you renovate.</strong> It costs about €15 per m² more in Germany and $4–8 per sq ft more in the US.<a class="ref" href="#src-31">[31]</a><a class="ref" href="#src-38">[38]</a> Choose large tiles: 60×120 cm tiles have about a quarter of the joint length of 20×25 cm tiles.</li>
+      <li><strong>Or put grout-free panels in the shower zone only</strong> and keep tiles everywhere else. In the UK, the main panel makers now give 30-year warranties.<a class="ref" href="#src-36">[36]</a></li>
+      <li><strong>Use chlorine spray for spot treatment, not as a routine.</strong> Replace silicone once it is stained black instead of bleaching it every month.</li>
+      <li><strong>Treat mould that returns within weeks as a warning.</strong> It points to a ventilation or leak problem. Tenants in English social housing can hold landlords to the Awaab’s Law deadlines.<a class="ref" href="#src-6">[6]</a></li>
+    </ol>
+  </section>
+
+  <section id="method" aria-labelledby="method-h">
+    <div class="prose">
+      <h2 id="method-h">Method and limits</h2>
+      <p>The model covers the wet zone of one bathroom: 6 m² of wall, which is a 90×90 cm shower tiled to 2.2 m on three sides, or a US five-foot tub surround of about 60 sq ft. It adds up the installation (materials, labour, and the waterproofing membrane that tiles need), mould spray, grout sealer, silicone renewals, regrouting, replacement of panels that wear out, and the hours spent. Hours are valued at a cleaner’s hourly pay: €17 in Germany, £18 in the UK and $35 in the US.<a class="ref" href="#src-47">[47]</a><a class="ref" href="#src-48">[48]</a><a class="ref" href="#src-49">[49]</a></p>
+      <p>Assumptions you can change in the calculator: 26, 12 or 4 mould treatments a year for poor, average and good ventilation; silicone lasting 2, 5 or 8 years; cement grout lasting 8, 12 or 16 years and resealed every 1, 1 or 2 years; 40 ml of spray per m² over a 10 cm band along each joint; scrubbing at 3 metres of joint a minute plus 5 minutes to set up. Epoxy joints need spraying half as often and scrub twice as fast. Panels have 11 m of silicone seams against 9 m for tiles.</p>
+      <p>Left out: weekly cleaning, which any surface needs; the energy cost of ventilation, except in the fan payback; health costs; resale value; and looks.</p>
+      <p>Water damage is also left out, because it depends on the waterproofing behind the wall rather than on the surface. It is still the biggest financial risk in a wet room. A US water damage claim averages about $15,400.<a class="ref" href="#src-43">[43]</a> German insurers paid €4.9 billion for more than a million burst-pipe and leak claims in 2024.<a class="ref" href="#src-44">[44]</a> In Sweden, 24% of water damage happens in bathrooms, and 12% is traced to failed waterproofing in wet rooms.<a class="ref" href="#src-45">[45]</a> Grout is not waterproof, so a tiled shower is only as sound as the membrane behind it.</p>
+      <p>Industry life-cycle studies rank ceramic tile as the cheapest floor covering over 50 years, at about $0.33 per sq ft per year.<a class="ref" href="#src-40">[40]</a> Those studies cover floors, not shower walls, and leave out mould upkeep.</p>
+      <p>Figures were gathered in September 2026, several of them from search-engine extracts of the pages cited. Prices move, so check them against local quotes.</p>
+    </div>
+  </section>
+
+  <section id="sources" aria-labelledby="sources-h">
+    <h2 id="sources-h">Sources</h2>
+    <ol class="sources">
+      <li id="src-1">Eurostat. <a href="https://ec.europa.eu/eurostat/web/interactive-publications/housing-2024">Housing in Europe, 2024 edition</a> (dwellings with a leaking roof, damp or rot, 2023).</li>
+      <li id="src-2">World Health Organization (2009). <a href="https://www.who.int/publications/i/item/9789289041683">WHO guidelines for indoor air quality: dampness and mould</a>.</li>
+      <li id="src-3">VELUX with Fraunhofer IBP, Ecofys and Copenhagen Economics (2017). <a href="https://press.velux.com/new-study-startling-correlation-between-poor-housing-and-ill-health/">Healthy Homes Barometer 2017</a>.</li>
+      <li id="src-4">Eurofound (2016). <a href="https://www.eurofound.europa.eu/en/publications/all/inadequate-housing-europe-costs-and-consequences">Inadequate housing in Europe: costs and consequences</a>.</li>
+      <li id="src-5">Ministry of Housing, Communities and Local Government. <a href="https://doc.ukdataservice.ac.uk/doc/9441/mrdoc/pdf/9441_2023-24_ehs_headline_report_on_housing_quality_and_energy_efficiency.pdf">English Housing Survey 2023–24: housing quality and energy efficiency</a>.</li>
+      <li id="src-6">Shelter England. <a href="https://england.shelter.org.uk/professional_resources/news_and_updates/how_awaabs_law_changes_the_rules_on_hazards_in_social_housing">How Awaab’s Law changes the rules on hazards in social housing</a>.</li>
+      <li id="src-7">Mudarri D, Fisk WJ (2007). <a href="https://pubmed.ncbi.nlm.nih.gov/17542835/">Public health and economic impact of dampness and mold</a>. Indoor Air 17(3).</li>
+      <li id="src-8">Mudarri DH (2016). <a href="https://pubmed.ncbi.nlm.nih.gov/27313630/">Valuing the economic costs of allergic rhinitis, acute bronchitis, and asthma from exposure to indoor dampness and mold in the US</a>. J Environ Public Health.</li>
+      <li id="src-9">US Census Bureau. <a href="https://www.census.gov/programs-surveys/ahs.html">American Housing Survey 2023</a>, housing quality tables.</li>
+      <li id="src-10">South Tyneside Council. <a href="https://www.southtyneside.gov.uk/article/16859/Common-activities-that-create-moisture">Common activities that create moisture</a>.</li>
+      <li id="src-11">ISO 13788:2012. <a href="https://www.iso.org/standard/51615.html">Hygrothermal performance of building components: internal surface temperature to avoid critical surface humidity</a>.</li>
+      <li id="src-12">US EPA. <a href="https://www.epa.gov/mold/brief-guide-mold-moisture-and-your-home">A brief guide to mold, moisture and your home</a>.</li>
+      <li id="src-13">HM Government (2021). <a href="https://assets.publishing.service.gov.uk/media/61deba42d3bf7f054fcc243d/ADF1.pdf">Approved Document F: Ventilation, volume 1</a>, table 1.1.</li>
+      <li id="src-14">Efficiency Maine. <a href="https://www.efficiencymaine.com/docs/ASHRAE-62-2-Presentation.pdf">ASHRAE 62.2-2016 residential ventilation</a>, local exhaust requirements.</li>
+      <li id="src-15">Robbins. <a href="https://www.robbins.com/en-us/resources/porcelain-tile-for-showers-a-complete-guide-for-homeowners.html">Porcelain tile for showers</a> (ASTM C373 absorption of 0.5% or less).</li>
+      <li id="src-16">Laticrete. <a href="https://cdn-global.laticrete.com/-/media/project/laticrete-international/shared/files/support-and-downloads/technical-datasheets/tds137en.ashx">TDS 137: EN 12004 and EN 13888 classifications</a>.</li>
+      <li id="src-17">Zupančič J et al. (2016). <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4750988/">The black yeast Exophiala dermatitidis and other opportunistic fungal pathogens spread from dishwashers to kitchens</a>. PLoS ONE.</li>
+      <li id="src-18">ROSEAL. <a href="https://www.roseal.co.uk/how-long-does-silicone-sealant-last-in-a-bathroom/">How long does silicone sealant last in a bathroom?</a></li>
+      <li id="src-19">Biology Insights. <a href="https://biologyinsights.com/how-long-does-it-take-for-mildew-to-form-timeline-signs/">How long does it take for mildew to form</a>; see also <a href="https://blackmould.me.uk/removal/bathroom">blackmould.me.uk bathroom guide</a>.</li>
+      <li id="src-20">The Clorox Company. <a href="https://www.thecloroxcompany.com/sds/tilex-mold-mildew-remover/">Tilex Mold &amp; Mildew Remover safety data sheet</a>.</li>
+      <li id="src-21">Walmart. <a href="https://www.walmart.com/ip/clorox-plus-tilex-mold-and-mildew-remover-spray-bottle-32-oz/14898381">Clorox Plus Tilex Mold and Mildew Remover, 32 oz</a>.</li>
+      <li id="src-22">Tesco. <a href="https://www.tesco.com/groceries/en-GB/products/281815758">Cillit Bang Black Mould Remover Spray 750 ml</a>.</li>
+      <li id="src-23">dm. <a href="https://www.dm.de/haushalt/putzen-und-reinigen/spezialreiniger/schimmelentferner-2679516">Schimmelentferner</a> (Sagrotan, Mellerud); HG Schimmelvernichter 500 ml at €11.99.</li>
+      <li id="src-24">Concrobium. <a href="https://www.amazon.com/Siamons-International-025-326-Concrobium/dp/B000UVGHQK">Mold Control Spray, 32 oz</a> (covers up to 100 sq ft).</li>
+      <li id="src-25">ShuBee. <a href="https://www.shubee.com/product/rmr-mold-mildew-stain-remover/">RMR-86 Pro Instant Mold &amp; Mildew Stain Remover</a> (200–300 sq ft per gallon).</li>
+      <li id="src-26">The Cary Company. <a href="https://www.thecarycompany.com/insights/guides/guide-to-trigger-sprayers">Guide to trigger sprayers</a>.</li>
+      <li id="src-27">Angi. <a href="https://www.angi.com/articles/who-s-responsible-sealing-grout-new-tile.htm">How much does it cost to seal grout?</a></li>
+      <li id="src-28">HomeGuide. <a href="https://homeguide.com/costs/cost-to-regrout-a-shower-or-bathroom">Cost to regrout a shower or bathroom</a> ($7–28 per sq ft).</li>
+      <li id="src-29">Angi. <a href="https://www.angi.com/articles/how-much-does-it-cost-regrout-standard-shower-take-out-old-grout-put-new-grout-seal-tub.htm">How much does it cost to regrout a shower?</a> ($600–2,500).</li>
+      <li id="src-30">Angi. <a href="https://www.angi.com/articles/cost-to-caulk.htm">Cost of caulking</a> ($105–290 for a tub or shower).</li>
+      <li id="src-31">MyHammer. <a href="https://www.my-hammer.de/bauen-renovieren/preisradar/was-kostet-fliesen-verfugen">Fliesen verfugen: Kosten</a> and <a href="https://www.my-hammer.de/bauen-renovieren/preisradar/was-kostet-silikonfugen-erneuern">Silikonfugen erneuern: Kosten</a>; fliesenleger.net, <a href="https://www.fliesenleger.net/magazin/fliesenfugen-erneuern-202412935">Fugen erneuern lassen</a> (cement €15–30 and epoxy €25–40 per m²).</li>
+      <li id="src-32">Checkatrade. <a href="https://www.checkatrade.com/blog/cost-guides/regrouting-cost/">How much does regrouting cost?</a>; MyJobQuote, <a href="https://www.myjobquote.co.uk/costs/re-grouting-bathroom">regrouting cost guide</a>.</li>
+      <li id="src-33">Angi. <a href="https://www.angi.com/articles/cost-to-tile-a-shower.htm">How much does it cost to tile a shower?</a></li>
+      <li id="src-34">Meister-Job. <a href="https://meister-job.de/was-kosten-wand-fliesen/">Wand fliesen: Kosten pro m²</a> (labour and DIN 18534 waterproofing).</li>
+      <li id="src-35">Homebuilding &amp; Renovating. <a href="https://www.homebuilding.co.uk/advice/shower-panels-vs-tiles">Shower panels vs tiles</a>.</li>
+      <li id="src-36">Multipanel. <a href="https://www.multipanel.co.uk/about-multipanel/30-year-warranty/">30-year warranty</a>.</li>
+      <li id="src-37">Boise Bath. <a href="https://boisebath.com/guides/best-shower-wall-materials">Best shower wall materials</a> (life spans of acrylic, solid surface, PVC and tile).</li>
+      <li id="src-38">Flooring Clarity. <a href="https://www.flooringclarity.com/tile-grout-cost-per-square-foot-pricing-factors/">Tile grout cost per square foot</a>; RUBI, <a href="https://www.rubi.com/us/blog/epoxy-grout/">Epoxy grout vs cement grout</a>.</li>
+      <li id="src-39">NAHB and Bank of America (2007). <a href="https://sghac.com/site/wp-content/uploads/NAHB-Lifetimes.pdf">Study of life expectancy of home components</a>.</li>
+      <li id="src-40">Tile Council of North America. <a href="https://tcnatile.com/research-reports/life-cycle-cost-analysis-floor-coverings-comparison-report/">Life cycle cost analysis: floor coverings</a>; <a href="https://www.floordaily.net/flooring-news/tcna-ceramic-is-lowest-lifecycle-cost-flooring">FloorDaily summary</a>.</li>
+      <li id="src-41">Vereinigung Deutsche Sanitärwirtschaft. <a href="https://pop-up-my-bathroom.de/en/blog/2021/03/die-renovierungswelle-ist-da.php">The modernisation trend gathers pace</a>.</li>
+      <li id="src-42">ceramica.info. <a href="https://www.ceramica.info/en/articoli/bathroom-renovation/">How global bathroom renovation is changing, according to Houzz</a>.</li>
+      <li id="src-43">Insurance Information Institute. <a href="https://www.iii.org/fact-statistic/facts-statistics-homeowners-and-renters-insurance">Facts and statistics: homeowners and renters insurance</a> (water damage and freezing, 2019–2023).</li>
+      <li id="src-44">Finanztip. <a href="https://www.finanztip.de/presse/leitungswasserschaeden-steigen-stark-und-verteuern-die-wohngebaeudeversicherung-massiv/">Leitungswasserschäden steigen stark</a> (GDV figures).</li>
+      <li id="src-45">Byggahus.se. <a href="https://www.byggahus.se/vattenskador-i-badrum-risk-var-de-finns-och-ersattning-fran-forsakringsbolaget">Vattenskador i badrum</a> (Vattenskadecentrum data); Mattsson C et al. (2024), <a href="https://doi.org/10.1177/1420326X241248331">review of water damage in buildings</a>.</li>
+      <li id="src-46">Poison Control. <a href="https://www.poison.org/articles/chlorine-gas">Chlorine gas: get the facts</a>.</li>
+      <li id="src-47">Wecasa. <a href="https://www.wecasa.de/haushaltshilfe/articles/putzfrau-stundenlohn">Stundenlohn Putzfrau 2026</a>.</li>
+      <li id="src-48">TidySpaces. <a href="https://tidyspaces.uk/cleaner-cost-per-hour-uk">UK cleaner cost per hour, 2026</a>.</li>
+      <li id="src-49">Housecall Pro. <a href="https://www.housecallpro.com/resources/house-cleaning-prices/">House cleaning prices, 2026</a>.</li>
+      <li id="src-50">Eurostat. <a href="https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260505-1">EU household electricity prices stable in 2025</a> (€0.2896 per kWh, second half of 2025).</li>
+      <li id="src-51">How to Look at a House (home inspector). <a href="https://www.howtolookatahouse.com/Blog/Entries/2020/6/what-is-the-average-life-expectancy-of-a-tile-countertop.html">What is the average life expectancy of a tile countertop?</a> (grout 8–15 years, caulk 1–3 years).</li>
+    </ol>
+  </section>
+
+  <footer>
+    <p class="note">Prices for tiles, panels, regrouting and silicone work come from sources 28–38; they are typical installed prices, so a local quote will differ. The calculator runs entirely in this page.</p>
+  </footer>
+</main>
+
+<script>
+/*__MODEL__*/
+</script>
+<script>
+(function () {
+  'use strict';
+  var M = window.TileMouldModel;
+  var NS = 'http://www.w3.org/2000/svg';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var COMPONENTS = [
+    { label: 'Installation', cls: 'c1', of: function (o) { return o.costs.install + o.costs.replacement; } },
+    { label: 'Chemicals and sealer', cls: 'c2', of: function (o) { return o.costs.chemicals + o.costs.sealing; } },
+    { label: 'Joint repairs', cls: 'c3', of: function (o) { return o.costs.silicone + o.costs.regrouting; } },
+    { label: 'Your time', cls: 'c4', of: function (o) { return o.costs.time; } },
+  ];
+  var SHORT = { tile_cement: 'Tiles, cement grout', tile_epoxy: 'Tiles, epoxy grout', panels: 'Wall panels' };
+
+  var state = {
+    region: 'eu', format: 'classic', ventilation: 'average', wetZoneM2: 6, horizonYears: 20,
+    countTime: true, diySilicone: false,
+    timeRate: null, treatmentsPerYear: null, sprayDoseMlPerM2: null, sprayPricePerL: null,
+    tileInstallPerM2: null, panelPerM2: null, regroutPerM2: null, siliconeJob: null,
+  };
+  var PRICE_KEYS = ['timeRate', 'sprayPricePerL', 'tileInstallPerM2', 'panelPerM2', 'regroutPerM2', 'siliconeJob'];
+
+  function presets() {
+    var r = M.REGIONS[state.region];
+    var v = M.VENTILATION[state.ventilation];
+    return {
+      timeRate: r.timeRate,
+      treatmentsPerYear: v.treatmentsPerYear,
+      sprayDoseMlPerM2: M.DEFAULTS.sprayDoseMlPerM2,
+      sprayPricePerL: r.sprayPricePerL,
+      tileInstallPerM2: r.installPerM2[state.format],
+      panelPerM2: r.panelPerM2,
+      regroutPerM2: r.regroutPerM2,
+      siliconeJob: Math.max(r.siliconeMinJob, r.siliconePerM * M.DEFAULTS.siliconeLenTileM),
+    };
+  }
+
+  function modelInput(extra) {
+    var s = state, ro = {}, vo = {};
+    if (s.timeRate != null) ro.timeRate = s.timeRate;
+    if (s.sprayPricePerL != null) ro.sprayPricePerL = s.sprayPricePerL;
+    if (s.tileInstallPerM2 != null) { ro.installPerM2 = {}; ro.installPerM2[s.format] = s.tileInstallPerM2; }
+    if (s.panelPerM2 != null) ro.panelPerM2 = s.panelPerM2;
+    if (s.regroutPerM2 != null) ro.regroutPerM2 = s.regroutPerM2;
+    if (s.siliconeJob != null) { ro.siliconeMinJob = s.siliconeJob; ro.siliconePerM = 0; }
+    if (s.treatmentsPerYear != null) vo.treatmentsPerYear = s.treatmentsPerYear;
+    var input = {
+      region: s.region, format: s.format, ventilation: s.ventilation, wetZoneM2: s.wetZoneM2,
+      horizonYears: s.horizonYears, countTime: s.countTime, diySilicone: s.diySilicone,
+      sprayDoseMlPerM2: s.sprayDoseMlPerM2 != null ? s.sprayDoseMlPerM2 : M.DEFAULTS.sprayDoseMlPerM2,
+      regionOverrides: ro, ventilationOverrides: vo,
+    };
+    return Object.assign(input, extra || {});
+  }
+
+  // ---------- formatting ----------
+  function money(x, sym) { return sym + Math.round(x).toLocaleString('en-US'); }
+  function shortMoney(x, sym) {
+    if (x >= 1000) {
+      var k = x / 1000;
+      return sym + (k % 1 === 0 ? k.toFixed(0) : k.toFixed(1)) + 'k';
+    }
+    return sym + Math.round(x);
+  }
+  function num(x, d) { return Number(x).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function niceStep(max, count) {
+    var raw = max / Math.max(1, count);
+    var pow = Math.pow(10, Math.floor(Math.log10(raw)));
+    var n = raw / pow;
+    var step = n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10;
+    return step * pow;
+  }
+  function svgEl(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function roundedRight(x, y, w, h, r) {
+    r = Math.max(0, Math.min(r, w, h / 2));
+    return 'M' + x + ',' + y + 'H' + (x + w - r) + 'A' + r + ',' + r + ' 0 0 1 ' + (x + w) + ',' + (y + r) +
+      'V' + (y + h - r) + 'A' + r + ',' + r + ' 0 0 1 ' + (x + w - r) + ',' + (y + h) + 'H' + x + 'Z';
+  }
+
+  // ---------- tooltips ----------
+  function tooltipFor(host) {
+    var tip = host.querySelector('.tooltip');
+    if (!tip) {
+      tip = document.createElement('div');
+      tip.className = 'tooltip';
+      tip.hidden = true;
+      host.appendChild(tip);
+    }
+    return tip;
+  }
+  function showTip(host, title, rows, px, py) {
+    var tip = tooltipFor(host);
+    clear(tip);
+    if (title) {
+      var h = document.createElement('div');
+      h.className = 'tt-title';
+      h.textContent = title;
+      tip.appendChild(h);
+    }
+    rows.forEach(function (r) {
+      var row = document.createElement('div');
+      row.className = 'tt-row';
+      var key = document.createElement('span');
+      key.className = r.key;
+      var v = document.createElement('span');
+      v.className = 'tv';
+      v.textContent = r.value;
+      var l = document.createElement('span');
+      l.className = 'tl';
+      l.textContent = r.label;
+      row.appendChild(key); row.appendChild(v); row.appendChild(l);
+      tip.appendChild(row);
+    });
+    tip.hidden = false;
+    var hw = host.clientWidth, tw = tip.offsetWidth, th = tip.offsetHeight;
+    var x = px + 14, y = py - th - 12;
+    if (x + tw > hw) x = px - tw - 14;
+    if (x < 0) x = 0;
+    if (y < 0) y = py + 18;
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+  }
+  function hideTip(host) { var t = host.querySelector('.tooltip'); if (t) t.hidden = true; }
+  function localPoint(host, clientX, clientY) {
+    var r = host.getBoundingClientRect();
+    return { x: clientX - r.left, y: clientY - r.top };
+  }
+
+  // ---------- stacked bars ----------
+  function renderStacked(res, opts) {
+    var host = $('chart-stacked');
+    var plot = host.querySelector('.plot');
+    clear(plot);
+    var sym = res.region.symbol;
+    var W = Math.max(280, Math.round(plot.clientWidth || 640));
+    var padR = 78, rowH = 58, barH = 20, top = 2, axisH = 26;
+    var H = top + opts.length * rowH + axisH;
+    var max = Math.max.apply(null, opts.map(function (o) { return o.total; }).concat([1]));
+    var step = niceStep(max, W < 480 ? 3 : 5);
+    var xMax = Math.ceil(max / step) * step;
+    var plotW = W - padR;
+    var x = function (v) { return (v / xMax) * plotW; };
+    var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'group', 'aria-label': 'Stacked bar chart of cost by wall option' }, plot);
+
+    for (var v = 0; v <= xMax + 1e-9; v += step) {
+      var gx = Math.round(x(v)) + 0.5;
+      svgEl('line', { x1: gx, x2: gx, y1: top, y2: H - axisH + 4, class: v === 0 ? 'axis' : 'grid' }, svg);
+      var t = svgEl('text', { x: gx, y: H - 7, class: 'tick', 'text-anchor': v === 0 ? 'start' : 'middle' }, svg);
+      t.textContent = shortMoney(v, sym);
+    }
+
+    opts.forEach(function (o, i) {
+      var y0 = top + i * rowH;
+      var lab = svgEl('text', { x: 0, y: y0 + 15, class: 'row-label' }, svg);
+      lab.textContent = o.label;
+      var by = y0 + 23;
+      var parts = COMPONENTS.map(function (c) { return { c: c, v: c.of(o) }; }).filter(function (p) { return p.v >= 0.5; });
+      var acc = 0;
+      parts.forEach(function (p, j) {
+        var x0 = x(acc), x1 = x(acc + p.v);
+        acc += p.v;
+        var last = j === parts.length - 1;
+        var w = Math.max(0, x1 - x0 - (last ? 0 : 2));
+        if (w < 0.75) return;
+        var node = last
+          ? svgEl('path', { d: roundedRight(x0, by, w, barH, 4), class: 'seg-mark ' + p.c.cls }, svg)
+          : svgEl('rect', { x: x0, y: by, width: w, height: barH, class: 'seg-mark ' + p.c.cls }, svg);
+        node.setAttribute('tabindex', '0');
+        node.setAttribute('aria-label', o.label + ', ' + p.c.label + ': ' + money(p.v, sym));
+        var share = Math.round((p.v / o.total) * 100);
+        var rows = [{ key: 'sw ' + p.c.cls, value: money(p.v, sym), label: p.c.label + ' (' + share + '%)' }];
+        node.addEventListener('pointermove', function (e) {
+          var pt = localPoint(host, e.clientX, e.clientY);
+          showTip(host, o.label, rows, pt.x, pt.y);
+        });
+        node.addEventListener('pointerleave', function () { hideTip(host); });
+        node.addEventListener('focus', function () {
+          var b = node.getBoundingClientRect();
+          var pt = localPoint(host, b.left + b.width / 2, b.top);
+          showTip(host, o.label, rows, pt.x, pt.y);
+        });
+        node.addEventListener('blur', function () { hideTip(host); });
+      });
+      var tv = svgEl('text', { x: x(o.total) + 8, y: by + barH / 2 + 4.5, class: 'value' }, svg);
+      tv.textContent = money(o.total, sym);
+    });
+  }
+
+  // ---------- cumulative lines ----------
+  var lineYear = null;
+  function renderLines(res) {
+    var host = $('chart-lines');
+    var plot = host.querySelector('.plot');
+    clear(plot);
+    hideTip(host);
+    var sym = res.region.symbol;
+    var years = res.params.horizonYears;
+    var series = [['tile_cement', 'l1'], ['tile_epoxy', 'l2'], ['panels', 'l3']].map(function (pair) {
+      var o = res.options.filter(function (q) { return q.id === pair[0]; })[0];
+      return { id: pair[0], cls: pair[1], label: o.label, values: o.cumulative };
+    });
+    var W = Math.max(280, Math.round(plot.clientWidth || 640));
+    var narrow = W < 560;
+    var padL = 50, padR = narrow ? 14 : 150, padT = 12, padB = 30, H = narrow ? 240 : 280;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var all = [];
+    series.forEach(function (s) { all = all.concat(s.values); });
+    var max = Math.max.apply(null, all.concat([1]));
+    var step = niceStep(max, 5);
+    var yMax = Math.ceil(max / step) * step;
+    var x = function (t) { return padL + (t / years) * plotW; };
+    var y = function (v) { return padT + plotH - (v / yMax) * plotH; };
+    var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'group', 'aria-label': 'Line chart of cumulative cost by year' }, plot);
+
+    for (var v = 0; v <= yMax + 1e-9; v += step) {
+      var gy = Math.round(y(v)) + 0.5;
+      svgEl('line', { x1: padL, x2: padL + plotW, y1: gy, y2: gy, class: v === 0 ? 'axis' : 'grid' }, svg);
+      var tl = svgEl('text', { x: padL - 8, y: gy + 4, class: 'tick', 'text-anchor': 'end' }, svg);
+      tl.textContent = shortMoney(v, sym);
+    }
+    var xStep = years <= 10 ? 2 : 5;
+    for (var t = 0; t <= years; t += xStep) {
+      var tx = svgEl('text', { x: x(t), y: H - 8, class: 'tick', 'text-anchor': t === 0 ? 'start' : t === years ? 'end' : 'middle' }, svg);
+      tx.textContent = t === 0 ? 'Year 0' : String(t);
+    }
+
+    series.forEach(function (s) {
+      var d = s.values.map(function (val, i) { return (i ? 'L' : 'M') + x(i).toFixed(1) + ',' + y(val).toFixed(1); }).join('');
+      svgEl('path', { d: d, class: 'line ' + s.cls }, svg);
+    });
+    series.forEach(function (s) {
+      svgEl('circle', { cx: x(years), cy: y(s.values[years]), r: 4, class: 'dot ' + s.cls }, svg);
+    });
+
+    if (!narrow) {
+      var ends = series.map(function (s) { return { s: s, yy: y(s.values[years]) }; }).sort(function (a, b) { return a.yy - b.yy; });
+      var fits = true;
+      for (var i = 1; i < ends.length; i++) if (ends[i].yy - ends[i - 1].yy < 32) fits = false;
+      if (fits) {
+        ends.forEach(function (e) {
+          var val = svgEl('text', { x: x(years) + 12, y: e.yy - 2, class: 'end-value' }, svg);
+          val.textContent = money(e.s.values[years], sym);
+          var nm = svgEl('text', { x: x(years) + 12, y: e.yy + 13, class: 'end-name' }, svg);
+          nm.textContent = SHORT[e.s.id];
+        });
+      } else {
+        ends.forEach(function (e) {
+          var val = svgEl('text', { x: x(years) + 12, y: e.yy + 4, class: 'end-value' }, svg);
+          val.textContent = money(e.s.values[years], sym);
+        });
+        var ok = true;
+        for (var j = 1; j < ends.length; j++) if (ends[j].yy - ends[j - 1].yy < 15) ok = false;
+        if (!ok) Array.prototype.slice.call(svg.querySelectorAll('.end-value')).forEach(function (n) { n.remove(); });
+      }
+    }
+
+    var cross = svgEl('line', { y1: padT, y2: padT + plotH, class: 'crosshair', visibility: 'hidden' }, svg);
+    var hit = svgEl('rect', { x: padL, y: padT, width: plotW, height: plotH, class: 'hit', tabindex: '0', 'aria-label': 'Cumulative cost chart. Use the left and right arrow keys to step through the years.' }, svg);
+    if (lineYear == null || lineYear > years) lineYear = years;
+
+    function showAt(tYear, clientY) {
+      var cx = x(tYear);
+      cross.setAttribute('x1', cx); cross.setAttribute('x2', cx);
+      cross.setAttribute('visibility', 'visible');
+      var rows = series.map(function (s) { return { key: 'lk ' + s.cls, value: money(s.values[tYear], sym), label: s.label, v: s.values[tYear] }; })
+        .sort(function (a, b) { return b.v - a.v; });
+      var svgBox = svg.getBoundingClientRect();
+      var scale = svgBox.width / W;
+      var hostBox = host.getBoundingClientRect();
+      var px = svgBox.left - hostBox.left + cx * scale;
+      var py = clientY != null ? clientY - hostBox.top : svgBox.top - hostBox.top + y(Math.max.apply(null, rows.map(function (r) { return r.v; }))) * scale;
+      showTip(host, tYear === 0 ? 'Installation day' : 'After ' + tYear + (tYear === 1 ? ' year' : ' years'), rows, px, py);
+    }
+    function yearFromPointer(e) {
+      var box = svg.getBoundingClientRect();
+      var mx = (e.clientX - box.left) * (W / box.width);
+      return Math.round(Math.min(years, Math.max(0, ((mx - padL) / plotW) * years)));
+    }
+    hit.addEventListener('pointermove', function (e) { lineYear = yearFromPointer(e); showAt(lineYear, e.clientY); });
+    hit.addEventListener('pointerleave', function () { cross.setAttribute('visibility', 'hidden'); hideTip(host); });
+    hit.addEventListener('focus', function () { showAt(lineYear); });
+    hit.addEventListener('blur', function () { cross.setAttribute('visibility', 'hidden'); hideTip(host); });
+    hit.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') lineYear = Math.max(0, lineYear - 1);
+      else if (e.key === 'ArrowRight') lineYear = Math.min(years, lineYear + 1);
+      else if (e.key === 'Home') lineYear = 0;
+      else if (e.key === 'End') lineYear = years;
+      else return;
+      e.preventDefault();
+      showAt(lineYear);
+    });
+  }
+
+  // ---------- tables ----------
+  function cell(tr, text, cls, tag) {
+    var c = document.createElement(tag || 'td');
+    if (cls) c.className = cls;
+    if (tag === 'th') c.scope = 'row';
+    c.textContent = text;
+    tr.appendChild(c);
+    return c;
+  }
+
+  function renderResultsTable(res, opts) {
+    var body = $('results-body');
+    clear(body);
+    var sym = res.region.symbol;
+    opts.forEach(function (o) {
+      var tr = document.createElement('tr');
+      cell(tr, o.label, '', 'th');
+      cell(tr, money(COMPONENTS[0].of(o), sym), 'num');
+      cell(tr, money(COMPONENTS[1].of(o), sym), 'num');
+      cell(tr, money(COMPONENTS[2].of(o), sym), 'num');
+      cell(tr, state.countTime ? money(o.costs.time, sym) : 'not counted', 'num');
+      cell(tr, money(o.total, sym), 'num');
+      cell(tr, num(o.physical.hoursTotal, 0), 'num');
+      body.appendChild(tr);
+    });
+    $('results-caption').textContent = 'The numbers behind the charts: ' + res.params.horizonYears + ' years, ' +
+      num(res.params.wetZoneM2, res.params.wetZoneM2 % 1 ? 1 : 0) + ' m² of wall, ' + res.region.label +
+      ' prices. Installation includes any replacement; joint repairs are silicone and regrouting.';
+  }
+
+  function renderHeat() {
+    var vents = ['poor', 'average', 'good'];
+    var results = vents.map(function (v) { return M.compute(modelInput({ ventilation: v, ventilationOverrides: {} })); });
+    var sym = results[0].region.symbol;
+    var ids = results[0].options.map(function (o) { return o.id; })
+      .filter(function (id) { return !(id === 'large_cement' && state.format === 'large'); });
+    var grid = ids.map(function (id) {
+      return results.map(function (r) { return r.options.filter(function (o) { return o.id === id; })[0]; });
+    });
+    var vals = [];
+    grid.forEach(function (row) { row.forEach(function (o) { vals.push(o.total); }); });
+    var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
+    var body = $('heat-body');
+    clear(body);
+    grid.forEach(function (row) {
+      var tr = document.createElement('tr');
+      cell(tr, row[0].label, '', 'th');
+      row.forEach(function (o) {
+        var td = document.createElement('td');
+        td.style.setProperty('--t', ((o.total - min) / (max - min || 1)).toFixed(3));
+        var span = document.createElement('span');
+        span.textContent = money(o.total, sym);
+        td.appendChild(span);
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+    $('heat-caption').textContent = results[0].params.horizonYears + '-year cost' + (state.countTime ? ' including your time' : ', cash only') +
+      ', ' + res0Label() + '. Each column uses its own default treatment count.';
+  }
+  function res0Label() {
+    var f = M.FORMATS[state.format].label;
+    return M.REGIONS[state.region].label + ' prices, ' + f + ' tiles as “your tiles”, ' + num(state.wetZoneM2, state.wetZoneM2 % 1 ? 1 : 0) + ' m²';
+  }
+
+  function renderChemTable() {
+    var body = $('chem-body');
+    clear(body);
+    var rows = ['mosaic', 'metro', 'classic', 'medium', 'large', 'slab'];
+    var vents = ['poor', 'average', 'good'];
+    rows.forEach(function (fmt) {
+      var tr = document.createElement('tr');
+      cell(tr, M.FORMATS[fmt].label + ' tiles, cement grout', '', 'th');
+      var mins = 0;
+      vents.forEach(function (v) {
+        var o = M.compute({ format: fmt, ventilation: v }).options[0];
+        cell(tr, num(o.physical.sprayLPerYear, 1) + ' L', 'num');
+        mins = o.physical.minutesPerTreatment;
+      });
+      cell(tr, num(mins, 0), 'num');
+      body.appendChild(tr);
+    });
+    var tr = document.createElement('tr');
+    cell(tr, 'Wall panels (silicone seams only)', '', 'th');
+    var pm = 0;
+    vents.forEach(function (v) {
+      var o = M.compute({ ventilation: v }).options[3];
+      cell(tr, num(o.physical.sprayLPerYear, 1) + ' L', 'num');
+      pm = o.physical.minutesPerTreatment;
+    });
+    cell(tr, num(pm, 0), 'num');
+    body.appendChild(tr);
+  }
+
+  // ---------- tile swatches ----------
+  var LAYOUT = {
+    mosaic: { w: 5, h: 5, bond: 'stack', ox: 2, oy: 3 },
+    metro: { w: 15, h: 7.5, bond: 'running', ox: 4, oy: 2 },
+    classic: { w: 20, h: 25, bond: 'stack', ox: 12, oy: 8 },
+    medium: { w: 60, h: 30, bond: 'stack', ox: 22, oy: 14 },
+    large: { w: 60, h: 120, bond: 'stack', ox: 28, oy: 62 },
+    slab: { w: 120, h: 260, bond: 'stack', ox: 58, oy: 74 },
+  };
+  function renderSwatches() {
+    var host = $('swatches');
+    clear(host);
+    Object.keys(M.FORMATS).forEach(function (key) {
+      var f = M.FORMATS[key], L = LAYOUT[key];
+      var jw = f.w * 100;
+      var px = L.w + jw, py = L.h + jw;
+      var perM2 = M.jointLengthPerM2(f), share = M.groutAreaShare(f) * 100;
+      var fig = document.createElement('figure');
+      fig.className = 'swatch';
+      var svg = svgEl('svg', { viewBox: '0 0 100 100', role: 'img', 'aria-label': f.label + ': ' + num(perM2, 1) + ' metres of joint per square metre' }, fig);
+      svgEl('rect', { x: 0, y: 0, width: 100, height: 100, class: 'sw-tile' }, svg);
+      var rowsY = [];
+      for (var yy = L.oy % py; yy < 100; yy += py) rowsY.push(yy);
+      rowsY.forEach(function (yy) {
+        svgEl('line', { x1: 0, x2: 100, y1: yy, y2: yy, class: 'sw-joint', 'vector-effect': 'non-scaling-stroke' }, svg);
+      });
+      if (L.bond === 'stack') {
+        for (var xx = L.ox % px; xx < 100; xx += px) {
+          svgEl('line', { x1: xx, x2: xx, y1: 0, y2: 100, class: 'sw-joint', 'vector-effect': 'non-scaling-stroke' }, svg);
+        }
+      } else {
+        var bands = [-py + (L.oy % py)].concat(rowsY);
+        bands.forEach(function (top, idx) {
+          var y1 = Math.max(0, top), y2 = Math.min(100, top + py);
+          if (y2 <= y1) return;
+          var shift = idx % 2 ? px / 2 : 0;
+          for (var xx2 = (L.ox + shift) % px; xx2 < 100; xx2 += px) {
+            svgEl('line', { x1: xx2, x2: xx2, y1: y1, y2: y2, class: 'sw-joint', 'vector-effect': 'non-scaling-stroke' }, svg);
+          }
+        });
+      }
+      var cap = document.createElement('figcaption');
+      var name = document.createElement('b');
+      name.textContent = f.label;
+      var big = document.createElement('span');
+      big.className = 'big';
+      big.textContent = num(perM2, 1) + ' m';
+      var line2 = document.createElement('span');
+      line2.textContent = 'of joint per m², ' + num(share, 1) + '% of the surface';
+      cap.appendChild(name); cap.appendChild(big); cap.appendChild(line2);
+      fig.appendChild(cap);
+      host.appendChild(fig);
+    });
+  }
+
+  // ---------- summary ----------
+  function renderSummary(res, opts) {
+    var sym = res.region.symbol, yrs = res.params.horizonYears;
+    var find = function (id) { return res.options.filter(function (o) { return o.id === id; })[0]; };
+    var tile = find('tile_cement'), panel = find('panels');
+    var diff = tile.total - panel.total;
+    var fmtLabel = M.FORMATS[state.format].label;
+    var fmtLower = fmtLabel.charAt(0).toLowerCase() + fmtLabel.slice(1);
+    var area = num(state.wetZoneM2, state.wetZoneM2 % 1 ? 1 : 0);
+    $('sum-main').textContent = 'Over ' + yrs + ' years, ' + area + ' m² of ' + fmtLower + ' tiles with cement grout cost ' +
+      money(tile.total, sym) + (state.countTime ? ' including your time' : '') + '. Waterproof wall panels cost ' +
+      money(panel.total, sym) + ', which is ' + money(Math.abs(diff), sym) + (diff >= 0 ? ' less.' : ' more.');
+    $('sum-cash').textContent = 'Cash alone: ' + money(tile.cash, sym) + ' for the tiles against ' + money(panel.cash, sym) +
+      ' for panels. Epoxy grout brings the tiles to ' + money(find('tile_epoxy').cash, sym) + '.';
+    var p = tile.physical;
+    $('sum-chem').textContent = 'Mould spray for the tiled wall: ' + num(p.sprayLPerYear, 1) + ' L a year, about ' +
+      num(p.bottlesPerYear, 0) + ' bottles of 750 ml holding ' + num(p.hypochloriteGPerYear, 0) + ' g of sodium hypochlorite, for ' +
+      money(tile.costs.chemicals / yrs, sym) + ' a year.';
+    $('sum-time').textContent = 'Time: ' + num(p.hoursTotal, 0) + ' hours of spraying, scrubbing and sealing' +
+      (state.diySilicone ? ' and resealing' : '') + ' over ' + yrs + ' years, against ' + num(panel.physical.hoursTotal, 0) + ' hours for panels.';
+    $('lg-l1').textContent = fmtLabel + ' tiles, cement grout';
+    $('lg-l2').textContent = fmtLabel + ' tiles, epoxy grout';
+  }
+
+  // ---------- controls ----------
+  function syncInputs() {
+    var pre = presets();
+    $('time-rate').value = state.timeRate != null ? state.timeRate : pre.timeRate;
+    $('time-rate').disabled = !state.countTime;
+    $('time-unit').textContent = M.REGIONS[state.region].symbol + ' per hour';
+    Array.prototype.forEach.call(document.querySelectorAll('.adv-grid input[data-key]'), function (inp) {
+      var k = inp.getAttribute('data-key');
+      inp.value = state[k] != null ? state[k] : pre[k];
+    });
+    var sqft = Math.round(state.wetZoneM2 * 10.7639);
+    $('area-hint').textContent = 'About ' + sqft + ' sq ft. A 90×90 cm shower tiled to 2.2 m on three sides is about 6 m².';
+    $('vent-hint').textContent = M.VENTILATION[state.ventilation].label + '.';
+  }
+
+  var raf = 0;
+  function recompute() {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(function () {
+      var res = M.compute(modelInput());
+      var opts = res.options.filter(function (o) { return !(o.id === 'large_cement' && state.format === 'large'); });
+      renderSummary(res, opts);
+      renderStacked(res, opts);
+      renderLines(res);
+      renderResultsTable(res, opts);
+      renderHeat();
+    });
+  }
+
+  function readNumber(inp) {
+    var v = parseFloat(inp.value);
+    return isFinite(v) && v >= 0 ? v : null;
+  }
+
+  function bind() {
+    Array.prototype.forEach.call(document.querySelectorAll('input[name="region"]'), function (inp) {
+      inp.addEventListener('change', function () {
+        state.region = inp.value;
+        PRICE_KEYS.forEach(function (k) { state[k] = null; });
+        syncInputs(); recompute();
+      });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('input[name="ventilation"]'), function (inp) {
+      inp.addEventListener('change', function () {
+        state.ventilation = inp.value;
+        state.treatmentsPerYear = null;
+        syncInputs(); recompute();
+      });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('input[name="horizon"]'), function (inp) {
+      inp.addEventListener('change', function () { state.horizonYears = parseInt(inp.value, 10); lineYear = null; recompute(); });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('input[name="silicone"]'), function (inp) {
+      inp.addEventListener('change', function () { state.diySilicone = inp.value === 'diy'; recompute(); });
+    });
+    $('format').addEventListener('change', function (e) {
+      state.format = e.target.value;
+      state.tileInstallPerM2 = null;
+      syncInputs(); recompute();
+    });
+    $('area').addEventListener('input', function (e) {
+      var v = parseFloat(e.target.value);
+      if (isFinite(v) && v >= 0.5 && v <= 60) { state.wetZoneM2 = v; syncInputs(); recompute(); }
+    });
+    $('count-time').addEventListener('change', function (e) {
+      state.countTime = e.target.checked;
+      syncInputs(); recompute();
+    });
+    $('time-rate').addEventListener('input', function (e) { state.timeRate = readNumber(e.target); recompute(); });
+    Array.prototype.forEach.call(document.querySelectorAll('.adv-grid input[data-key]'), function (inp) {
+      inp.addEventListener('input', function () { state[inp.getAttribute('data-key')] = readNumber(inp); recompute(); });
+    });
+    $('reset').addEventListener('click', function () {
+      ['treatmentsPerYear', 'sprayDoseMlPerM2'].concat(PRICE_KEYS).forEach(function (k) { state[k] = null; });
+      syncInputs(); recompute();
+    });
+    $('controls').addEventListener('submit', function (e) { e.preventDefault(); });
+
+    var lastW = 0;
+    var ro = new ResizeObserver(function (entries) {
+      var w = Math.round(entries[0].contentRect.width);
+      if (Math.abs(w - lastW) > 4) { lastW = w; recompute(); }
+    });
+    ro.observe($('chart-stacked'));
+  }
+
+  function readInitialControls() {
+    // Browsers may restore form values after a reload; start from what is on screen.
+    var checked = function (name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : null; };
+    state.region = checked('region') || state.region;
+    state.ventilation = checked('ventilation') || state.ventilation;
+    state.horizonYears = parseInt(checked('horizon') || state.horizonYears, 10);
+    state.diySilicone = checked('silicone') === 'diy';
+    state.format = $('format').value || state.format;
+    var a = parseFloat($('area').value);
+    if (isFinite(a) && a >= 0.5 && a <= 60) state.wetZoneM2 = a;
+    state.countTime = $('count-time').checked;
+  }
+
+  function start() {
+    readInitialControls();
+    renderSwatches();
+    renderChemTable();
+    syncInputs();
+    bind();
+    var res = M.compute(modelInput());
+    var opts = res.options.filter(function (o) { return !(o.id === 'large_cement' && state.format === 'large'); });
+    renderSummary(res, opts);
+    renderStacked(res, opts);
+    renderLines(res);
+    renderResultsTable(res, opts);
+    renderHeat();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
+</script>
