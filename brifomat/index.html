@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Брифомат</title>
-<meta name="description" content="Генератор случайных брифов для дизайнера: четыре барабана выбирают нишу, настроение, название и цвета для брендинга компании, которая делает курсы по аналоговой фотографии.">
+<meta name="description" content="Генератор случайных брифов для дизайнера: четыре барабана выбирают нишу, настроение, название компании и цвета для брендинга Nachbild, курса аналоговой фотографии из Вены.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231C1B19'/%3E%3Crect x='9' y='6' width='14' height='20' rx='2' fill='%23F6F4EE'/%3E%3Cg fill='%23E6A13A'%3E%3Crect x='3.5' y='6' width='3' height='4' rx='1'/%3E%3Crect x='3.5' y='14' width='3' height='4' rx='1'/%3E%3Crect x='3.5' y='22' width='3' height='4' rx='1'/%3E%3Crect x='25.5' y='6' width='3' height='4' rx='1'/%3E%3Crect x='25.5' y='14' width='3' height='4' rx='1'/%3E%3Crect x='25.5' y='22' width='3' height='4' rx='1'/%3E%3C/g%3E%3Cellipse cx='16' cy='16' rx='9' ry='11.5' fill='none' stroke='%23D2352A' stroke-width='2.2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -565,7 +565,7 @@
   <header class="masthead">
     <p class="kicker">Генератор брифов для дизайнера</p>
     <h1 class="title">Брифомат</h1>
-    <p class="lede">Придумайте оригинальный брендинг для компании, которая делает курсы по аналоговой фотографии. Нишу, настроение, название и цвета выберут барабаны.</p>
+    <p class="lede">Nachbild — курс по аналоговой фотографии от компании из Вены. Придумайте для него оригинальный брендинг, а нишу, настроение, название компании и цвета выберут барабаны.</p>
   </header>
 
   <main>
@@ -623,7 +623,7 @@
       </div>
       <div class="brief-main">
         <p class="label">Задача</p>
-        <p class="lead" id="lead">«<span class="val" data-field="name">Засветка</span>» — компания, которая делает курсы по аналоговой фотографии. Ниша — <span class="val" data-field="niche">домашняя проявка</span>. Нужен оригинальный брендинг: настроение — <span class="val" data-field="mood">ламповое</span>, цвета — палитра «<span class="val" data-field="palette">Берлинская лазурь</span>».</p>
+        <p class="lead" id="lead"><span class="val" data-field="name">Kornkammer</span> — компания из Вены, которая делает курсы по аналоговой фотографии. Курс называется <span class="val">Nachbild</span>, ниша — <span class="val" data-field="niche">домашняя проявка</span>. Нужен оригинальный брендинг курса: настроение — <span class="val" data-field="mood">ламповое</span>, цвета — палитра «<span class="val" data-field="palette">Берлинская лазурь</span>».</p>
         <p class="todo"><b>Что показать:</b> <span id="todo"></span></p>
       </div>
       <div class="brief-pal">
@@ -648,14 +648,14 @@
   'use strict';
   document.documentElement.lang = 'ru';
 
-  // Every brief is for a company that runs analog photography courses.
+  // Every brief is for Nachbild, an analog photography course run by a company based in Vienna.
   const REELS = [
     {
       id: 'niche', label: 'Ниша', kind: 'text',
       items: [
         'Плёнка с нуля', 'Домашняя проявка', 'Ручная печать', 'Средний формат', 'Крупный формат',
         'Пинхол-камеры', 'Цианотипия', 'Мокрый коллодий', 'Моментальные снимки', 'Плёночный портрет',
-        'Уличная съёмка', 'Свадьбы на плёнку', 'Курсы для подростков', 'Фототуры по городам', 'Фотограммы для детей',
+        'Уличная съёмка', 'Свадьбы на плёнку', 'Курсы для подростков', 'Фотопрогулки по Вене', 'Фотограммы для детей',
         'Ремонт старых камер', 'Кросс-процесс', 'Слайдовая плёнка', 'Ручная раскраска', 'Фотокниги и зины',
         'Дальномерные камеры', 'Полуформат', 'Натюрморт на плёнку', 'Мастер-классы для команд', 'Интенсив выходного дня',
         'Кино на 8 мм', 'Курсы 60+', 'Двойная экспозиция',
@@ -673,10 +673,10 @@
     {
       id: 'name', label: 'Название компании', kind: 'text',
       items: [
-        'Засветка', 'Серебро и соль', 'Тёмная комната', 'Фиксаж', '36 кадров', 'Кадр 37', 'Выдержка',
-        'Диафрагма', 'Полутон', 'Бромсеребро', 'Бачок', 'Катушка', 'Перемотка', 'Шторка',
-        'Камера-обскура', 'Светочувствительные', 'Стоп-ванна', 'Экспонометр', 'Красная лампа', 'Контактный лист', 'Эмульсия',
-        'Увеличитель', 'Чёрный мешок', 'Недосвет', 'Контровой свет', 'Серая карта', 'Зерно и свет', 'Негатив и позитив',
+        'Dunkelkammer', 'Silberkorn', 'Lichtfang', 'Fixierbad', 'Kontaktbogen', 'Blende Acht', 'Halbton',
+        'Lochkamera', 'Stoppbad', 'Graukarte', 'Kornkammer', 'Donaulicht', 'Silberblick', 'Augenblick',
+        'Momentaufnahme', 'Filmriss', 'Lichtschacht', 'Bromsilber', 'Camera Obscura', 'Spule & Dose', 'Ringblitz',
+        'Grätzlfilm', 'Negativraum', 'Auslöser', 'Emulsion', 'Weitwinkel', 'Korn & Kaffee', 'Entwickler',
       ],
     },
     {
@@ -697,14 +697,14 @@
         { name: 'Селеновый вираж', a: '#5A4659', b: '#E5DED4' },
         { name: 'Ночная плёнка', a: '#0E1B2B', b: '#F2C25A' },
         { name: 'Световой блик', a: '#FF5E37', b: '#FFD166' },
-        { name: 'Амбротип', a: '#3A2E27', b: '#D5C29F' },
+        { name: 'Венский меланж', a: '#7A5038', b: '#F1E6D6' },
         { name: 'Мятный фиксаж', a: '#9FD7C3', b: '#1E3B35' },
         { name: 'Инфракрасный лес', a: '#D6386C', b: '#3B7AD4' },
         { name: 'Золотой вираж', a: '#2D3B59', b: '#D2AC39' },
-        { name: 'Отпуск на плёнку', a: '#F09F59', b: '#3E8B7E' },
+        { name: 'Шёнбрунн', a: '#E8B730', b: '#2F4A36' },
         { name: 'Неоновая витрина', a: '#FF3A7E', b: '#1C1D3B' },
-        { name: 'Пляж, ISO 200', a: '#F4D2A5', b: '#2B85A9' },
-        { name: 'Вишнёвый слайд', a: '#8C1E3A', b: '#F2D8DB' },
+        { name: 'Голубой Дунай', a: '#7FB2D0', b: '#17324D' },
+        { name: 'Трамвай на Ринге', a: '#C8102E', b: '#F3EEE3' },
         { name: 'Зелёный вираж', a: '#4D6A3E', b: '#E8E3D1' },
       ],
     },
@@ -1123,7 +1123,7 @@
   function spoken(r) {
     const it = r.item;
     if (r.kind === 'palette') return '«' + it.name + '», ' + it.a + ' и ' + it.b;
-    return r.id === 'name' ? '«' + it + '»' : lowerFirst(it);
+    return r.id === 'name' ? it : lowerFirst(it);
   }
   function setField(key, text, flash) {
     fields[key].forEach(el => {
@@ -1167,14 +1167,15 @@
   }
   function briefSentence() {
     const b = parts();
-    return '«' + b.name + '» — компания, которая делает курсы по аналоговой фотографии. Ниша — ' + lowerFirst(b.niche) +
-      '. Нужен оригинальный брендинг: настроение — ' + lowerFirst(b.mood) + ', цвета — палитра «' + b.pal.name + '».';
+    return b.name + ' — компания из Вены, которая делает курсы по аналоговой фотографии. Курс называется Nachbild, ниша — ' +
+      lowerFirst(b.niche) + '. Нужен оригинальный брендинг курса: настроение — ' + lowerFirst(b.mood) +
+      ', цвета — палитра «' + b.pal.name + '».';
   }
   function briefText() {
     const b = parts();
     return [
-      'Бриф № ' + pad2(briefNo) + ': оригинальный брендинг',
-      '«' + b.name + '» — компания, которая делает курсы по аналоговой фотографии.',
+      'Бриф № ' + pad2(briefNo) + ': оригинальный брендинг курса Nachbild',
+      b.name + ' — компания из Вены, которая делает курсы по аналоговой фотографии. Курс называется Nachbild.',
       'Ниша: ' + lowerFirst(b.niche),
       'Настроение: ' + lowerFirst(b.mood),
       'Цвета: «' + b.pal.name + '» — ' + b.pal.a + ' и ' + b.pal.b,
