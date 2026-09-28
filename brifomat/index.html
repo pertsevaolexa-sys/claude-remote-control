@@ -1,0 +1,1281 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Брифомат</title>
+<meta name="description" content="Генератор случайных брифов для дизайнера: четыре барабана выбирают нишу, настроение, название и цвета для брендинга компании, которая делает курсы по аналоговой фотографии.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231C1B19'/%3E%3Crect x='9' y='6' width='14' height='20' rx='2' fill='%23F6F4EE'/%3E%3Cg fill='%23E6A13A'%3E%3Crect x='3.5' y='6' width='3' height='4' rx='1'/%3E%3Crect x='3.5' y='14' width='3' height='4' rx='1'/%3E%3Crect x='3.5' y='22' width='3' height='4' rx='1'/%3E%3Crect x='25.5' y='6' width='3' height='4' rx='1'/%3E%3Crect x='25.5' y='14' width='3' height='4' rx='1'/%3E%3Crect x='25.5' y='22' width='3' height='4' rx='1'/%3E%3C/g%3E%3Cellipse cx='16' cy='16' rx='9' ry='11.5' fill='none' stroke='%23D2352A' stroke-width='2.2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=IBM+Plex+Mono:wght@500;600&family=Sofia+Sans+Extra+Condensed:wght@700;800;900&family=Sofia+Sans:wght@400;500;700;800&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #E4E3DD;
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 -1.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.16'/%3E%3C/svg%3E");
+    --surface: #F5F4EF;
+    --ink: #1A1916;
+    --ink-2: #3B3934;
+    --muted: #68645C;
+    --line: #CDCAC1;
+    --accent: #E6A13A;
+    --accent-deep: #A66C16;
+    --on-accent: #1E1605;
+    --flash: rgba(230, 161, 58, .42);
+    --pencil: #D2352A;
+    --body: #1C1B19;
+    --body-edge: rgba(255, 255, 255, .09);
+    --body-line: rgba(255, 255, 255, .09);
+    --on-body: #EEEAE2;
+    --on-body-muted: #A9A398;
+    --bezel: #2B2926;
+    --bezel-glow: rgba(230, 161, 58, .6);
+    --film: #0F0E0D;
+    --frame: #F6F4EE;
+    --frame-ink: #1A1916;
+    --edge: #E6A13A;
+    --tape: #E3D9C2;
+    --tape-ink: #2B251B;
+    --perfs: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='5.5' y='5' width='9' height='10' rx='2.2' fill='%23D9D3C6'/%3E%3C/svg%3E");
+    --machine-shadow: 0 34px 60px -34px rgba(24, 22, 18, .6);
+    --toast-bg: #1A1916;
+    --toast-ink: #F5F4EF;
+
+    --f-display: "Sofia Sans Extra Condensed", "Roboto Condensed", "Arial Narrow", sans-serif;
+    --f-text: "Sofia Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    --f-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #11100E;
+      --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 3 0 0 0 -1.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.08'/%3E%3C/svg%3E");
+      --surface: #1B1A17;
+      --ink: #EEEAE2;
+      --ink-2: #CFCAC0;
+      --muted: #A29C91;
+      --line: #36332E;
+      --accent: #EBAA47;
+      --accent-deep: #94600F;
+      --flash: rgba(235, 170, 71, .3);
+      --pencil: #DE4135;
+      --body: #201F1C;
+      --body-edge: rgba(255, 255, 255, .08);
+      --film: #0B0A09;
+      --frame: #ECE8DF;
+      --edge: #E3A443;
+      --tape: #D2C7AE;
+      --perfs: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='5.5' y='5' width='9' height='10' rx='2.2' fill='%23BDB6A8'/%3E%3C/svg%3E");
+      --machine-shadow: 0 0 0 1px rgba(255, 255, 255, .05), 0 34px 60px -34px rgba(0, 0, 0, .9);
+      --toast-bg: #EEEAE2;
+      --toast-ink: #1A1916;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #11100E;
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 3 0 0 0 -1.45'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.08'/%3E%3C/svg%3E");
+    --surface: #1B1A17;
+    --ink: #EEEAE2;
+    --ink-2: #CFCAC0;
+    --muted: #A29C91;
+    --line: #36332E;
+    --accent: #EBAA47;
+    --accent-deep: #94600F;
+    --flash: rgba(235, 170, 71, .3);
+    --pencil: #DE4135;
+    --body: #201F1C;
+    --body-edge: rgba(255, 255, 255, .08);
+    --film: #0B0A09;
+    --frame: #ECE8DF;
+    --edge: #E3A443;
+    --tape: #D2C7AE;
+    --perfs: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='5.5' y='5' width='9' height='10' rx='2.2' fill='%23BDB6A8'/%3E%3C/svg%3E");
+    --machine-shadow: 0 0 0 1px rgba(255, 255, 255, .05), 0 34px 60px -34px rgba(0, 0, 0, .9);
+    --toast-bg: #EEEAE2;
+    --toast-ink: #1A1916;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    background-image: var(--grain);
+    color: var(--ink);
+    font: 400 16px/1.5 var(--f-text);
+    padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+    padding-block: clamp(20px, 4vw, 40px) 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+  [hidden] { display: none !important; }
+  button { font: inherit; }
+  .page { max-width: 1120px; margin-inline: auto; }
+  .sr-only {
+    position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+  .fx { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+  /* Masthead */
+  .masthead {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: end;
+    column-gap: clamp(24px, 5vw, 64px);
+    row-gap: 12px;
+  }
+  .kicker {
+    grid-column: 1 / -1;
+    margin: 0;
+    font: 500 12px/1.3 var(--f-mono);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .title {
+    margin: 0;
+    font: 900 clamp(64px, 11.5vw, 136px)/.82 var(--f-display);
+    letter-spacing: -.01em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .lede {
+    margin: 0;
+    max-width: 46ch;
+    padding-bottom: .15em;
+    font-size: clamp(16px, 1.6vw, 18px);
+    line-height: 1.5;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+
+  /* Machine */
+  .machine {
+    position: relative;
+    margin-top: clamp(22px, 3.5vw, 36px);
+    padding: clamp(14px, 2.4vw, 26px);
+    border-radius: 22px;
+    background-color: var(--body);
+    background-image: radial-gradient(rgba(255, 255, 255, .04) .8px, transparent 1.3px);
+    background-size: 5px 5px;
+    box-shadow: inset 0 1px 0 var(--body-edge), var(--machine-shadow);
+    color: var(--on-body);
+  }
+  .reels {
+    --frame-h: 92px;
+    --rebate: 22px;
+    --frame-pad: 8px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px 18px;
+  }
+  .reel-col { min-width: 0; display: grid; grid-template-rows: 1fr auto; gap: 10px; }
+  .reel-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 30px;
+  }
+  .tape {
+    max-width: 100%;
+    padding: 4px 12px 3px;
+    font: 700 21px/1.05 var(--f-hand);
+    color: var(--tape-ink);
+    background: var(--tape);
+    clip-path: polygon(0 12%, 3% 0, 50% 5%, 97% 0, 100% 16%, 98% 52%, 100% 86%, 96% 100%, 50% 95%, 4% 100%, 0 84%, 2% 50%);
+    transform: rotate(-1.4deg);
+  }
+  .reel-col:nth-child(even) .tape { transform: rotate(1.1deg); }
+  .key {
+    flex: none;
+    padding: 3px 6px 2px;
+    font: 500 11px/1 var(--f-mono);
+    color: var(--on-body-muted);
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+  }
+
+  .reel {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
+    background: none;
+    color: inherit;
+    text-align: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .reel:focus-visible { outline: 2px solid var(--accent); outline-offset: 8px; }
+  .reel[aria-busy="true"] { cursor: progress; }
+  /* payline pointers on the outer edges of each row of reels */
+  .reel::before, .reel::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    display: none;
+    border-block: 6px solid transparent;
+    transform: translateY(-50%);
+  }
+  .reel::before { left: -12px; border-left: 7px solid var(--accent); }
+  .reel::after { right: -12px; border-right: 7px solid var(--accent); }
+  .reel-col:first-child .reel::before,
+  .reel-col:last-child .reel::after { display: block; }
+
+  .gate {
+    position: relative;
+    display: block;
+    height: calc(var(--frame-h) * 2.3);
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: 8px;
+    background: var(--film);
+    box-shadow: 0 0 0 1px #000, 0 0 0 4px var(--bezel), 0 0 0 5px rgba(255, 255, 255, .08), 0 12px 20px -10px rgba(0, 0, 0, .75);
+    transition: box-shadow .2s;
+  }
+  .reel:hover .gate { box-shadow: 0 0 0 1px #000, 0 0 0 4px var(--bezel), 0 0 0 5px var(--bezel-glow), 0 12px 20px -10px rgba(0, 0, 0, .75); }
+  .strip { position: absolute; inset: 0; z-index: 0; }
+  .row {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: var(--frame-h);
+    margin-top: calc(var(--frame-h) / -2);
+    display: grid;
+    grid-template-columns: var(--rebate) minmax(0, 1fr) var(--rebate);
+    will-change: transform;
+  }
+  .perf { position: relative; background: var(--perfs) 50% 0 / 100% 25% repeat-y; }
+  .num {
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font: 600 9px/1 var(--f-mono);
+    letter-spacing: -.04em;
+    text-align: center;
+    color: var(--edge);
+  }
+  .frame {
+    min-width: 0;
+    margin-block: 5px;
+    display: grid;
+    place-items: center;
+    padding-inline: var(--frame-pad);
+    overflow: hidden;
+    border-radius: 3px;
+    background: var(--frame);
+    color: var(--frame-ink);
+  }
+  .fc-text {
+    display: block;
+    font-family: var(--f-display);
+    font-weight: 800;
+    line-height: .95;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .fc-palette { display: grid; justify-items: center; gap: calc(var(--frame-h) * .07); width: 100%; }
+  .sw {
+    position: relative;
+    display: flex;
+    width: 80%;
+    max-width: 150px;
+    height: calc(var(--frame-h) * .32);
+    overflow: hidden;
+    border-radius: 4px;
+  }
+  .sw i { flex: 1 1 0; }
+  .sw::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .18); }
+  .fc-name {
+    display: block;
+    font-family: var(--f-display);
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .shade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(8, 7, 6, .9) 0%, rgba(8, 7, 6, .6) 12%, rgba(8, 7, 6, .26) 22%, rgba(8, 7, 6, 0) 29%, rgba(8, 7, 6, 0) 71%, rgba(8, 7, 6, .26) 78%, rgba(8, 7, 6, .6) 88%, rgba(8, 7, 6, .9) 100%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0) 29%, rgba(255, 255, 255, .08) 32%, rgba(255, 255, 255, 0) 37%);
+  }
+  .mark {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .14s ease-out;
+  }
+  .mark.on { opacity: 1; }
+  .mark path {
+    fill: none;
+    stroke: var(--pencil);
+    stroke-width: 3.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 1.02;
+    opacity: .92;
+  }
+
+  /* Controls */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 24px;
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid var(--body-line);
+  }
+  .hint { margin: 0; max-width: 54ch; font-size: 14px; line-height: 1.5; color: var(--on-body-muted); }
+  .nw { white-space: nowrap; }
+  .hint kbd {
+    padding: 2px 5px 1px;
+    font: 500 12px/1 var(--f-mono);
+    color: var(--on-body);
+    border: 1px solid rgba(255, 255, 255, .18);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+  }
+  .actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+  .sound {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 16px 0 14px;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--on-body);
+    font: 500 14px/1 var(--f-text);
+    cursor: pointer;
+  }
+  .sound:hover { border-color: rgba(255, 255, 255, .32); }
+  .sound:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .sound svg { width: 18px; height: 18px; flex: none; }
+  .sound[aria-pressed="false"] { color: var(--on-body-muted); }
+  .sound[aria-pressed="false"] .waves,
+  .sound[aria-pressed="true"] .slash { display: none; }
+  .spin {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    height: 60px;
+    padding: 0 34px 0 24px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font: 800 30px/1 var(--f-display);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    box-shadow: 0 5px 0 var(--accent-deep), 0 16px 24px -12px rgba(0, 0, 0, .85);
+    cursor: pointer;
+    transition: transform .08s ease-out, box-shadow .08s ease-out, filter .15s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .spin:hover { filter: brightness(1.06); }
+  .spin:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--accent-deep), 0 6px 12px -8px rgba(0, 0, 0, .85); }
+  .spin:focus-visible { outline: 2px solid var(--on-body); outline-offset: 4px; }
+  .spin[aria-disabled="true"] { cursor: progress; filter: saturate(.7) brightness(.9); }
+  .aperture { width: 26px; height: 26px; flex: none; }
+  .machine.is-spinning .aperture { animation: turn 1.1s linear infinite; }
+  @keyframes turn { to { transform: rotate(360deg); } }
+
+  /* Brief */
+  .brief {
+    margin-top: clamp(22px, 3.5vw, 36px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: 22px clamp(24px, 4vw, 48px);
+    padding: clamp(18px, 3vw, 30px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .brief-head {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .brief-title {
+    margin: 0;
+    font: 900 clamp(30px, 4vw, 40px)/.9 var(--f-display);
+    letter-spacing: .01em;
+    text-transform: uppercase;
+  }
+  .brief-no {
+    margin-left: 8px;
+    font: 500 13px/1 var(--f-mono);
+    letter-spacing: .08em;
+    color: var(--muted);
+    vertical-align: middle;
+    font-variant-numeric: tabular-nums;
+  }
+  .label {
+    margin: 0 0 10px;
+    font: 500 12px/1.2 var(--f-mono);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .lead {
+    margin: 0;
+    max-width: 42ch;
+    font: 500 clamp(19px, 2.1vw, 24px)/1.42 var(--f-text);
+    text-wrap: pretty;
+  }
+  .val {
+    font-weight: 800;
+    border-radius: 3px;
+    padding-inline: .08em;
+    margin-inline: -.08em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .flash { animation: flash 1.1s ease-out; }
+  @keyframes flash { from { background-color: var(--flash); } to { background-color: transparent; } }
+  .todo { margin: 16px 0 0; max-width: 62ch; font-size: 15px; line-height: 1.55; color: var(--ink-2); }
+  .todo b { font-weight: 700; color: var(--ink); }
+  .copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 42px;
+    padding: 0 18px 0 15px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    font: 700 15px/1 var(--f-text);
+    cursor: pointer;
+    transition: background-color .15s, color .15s;
+  }
+  .copy:hover { background: var(--ink); color: var(--surface); }
+  .copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .copy svg { width: 16px; height: 16px; flex: none; }
+  .pal-name { margin: 0 0 12px; font: 800 clamp(24px, 2.6vw, 30px)/1 var(--f-display); }
+  .chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: clamp(112px, 12vw, 148px);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .chip {
+    display: flex;
+    align-items: flex-end;
+    margin: 0;
+    padding: 12px;
+    border: 0;
+    font: 600 14px/1 var(--f-mono);
+    letter-spacing: .02em;
+    text-align: left;
+    cursor: pointer;
+  }
+  .chip:focus-visible { outline: 2px solid currentColor; outline-offset: -6px; }
+  .chips-hint { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    z-index: 20;
+    max-width: calc(100% - 32px);
+    padding: 11px 16px;
+    border-radius: 999px;
+    background: var(--toast-bg);
+    color: var(--toast-ink);
+    font: 600 14px/1.3 var(--f-text);
+    text-align: center;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .5);
+    opacity: 0;
+    transform: translate(-50%, 10px);
+    transition: opacity .18s, transform .18s;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  .noscript { margin: 16px 0 0; color: var(--on-body); }
+
+  @media (max-width: 860px) {
+    .reels { grid-template-columns: repeat(2, minmax(0, 1fr)); --frame-h: 84px; }
+    .reel-col .reel::before, .reel-col .reel::after { display: none; }
+    .reel-col:nth-child(odd) .reel::before,
+    .reel-col:nth-child(even) .reel::after { display: block; }
+  }
+  @media (max-width: 760px) {
+    .masthead { grid-template-columns: minmax(0, 1fr); }
+    .title { font-size: clamp(52px, 15vw, 96px); }
+    .brief { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .reels { --frame-h: 72px; --rebate: 15px; --frame-pad: 5px; gap: 18px 14px; }
+    .tape { font-size: 19px; padding-inline: 10px; }
+    .num { font-size: 8px; }
+    .reel::before { left: -11px; border-left-width: 6px; border-block-width: 5px; }
+    .reel::after { right: -11px; border-right-width: 6px; border-block-width: 5px; }
+    .controls { flex-direction: column; align-items: stretch; }
+    .actions { order: -1; margin-left: 0; }
+    .spin { flex: 1; justify-content: center; padding-inline: 20px; }
+  }
+  @media (max-width: 340px) {
+    .reels { grid-template-columns: minmax(0, 1fr); }
+    .reel-col .reel::before, .reel-col .reel::after { display: block; }
+  }
+  @media (hover: none) {
+    .key, .keys { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .machine.is-spinning .aperture, .flash { animation: none; }
+    .toast, .gate, .spin, .mark, .copy { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <p class="kicker">Генератор брифов для дизайнера</p>
+    <h1 class="title">Брифомат</h1>
+    <p class="lede">Придумайте оригинальный брендинг для компании, которая делает курсы по аналоговой фотографии. Нишу, настроение, название и цвета выберут барабаны.</p>
+  </header>
+
+  <main>
+    <section class="machine" id="machine" aria-label="Барабаны">
+      <div class="reels" id="reels">
+        <div class="reel-col">
+          <div class="reel-head"><span class="tape">Ниша</span><kbd class="key" aria-hidden="true">1</kbd></div>
+          <button class="reel" type="button" aria-label="Ниша" aria-describedby="reel-hint">
+            <span class="gate" aria-hidden="true"><span class="strip"></span><span class="shade"></span><svg class="mark" focusable="false"><path pathLength="1"/></svg></span>
+          </button>
+        </div>
+        <div class="reel-col">
+          <div class="reel-head"><span class="tape">Настроение</span><kbd class="key" aria-hidden="true">2</kbd></div>
+          <button class="reel" type="button" aria-label="Настроение" aria-describedby="reel-hint">
+            <span class="gate" aria-hidden="true"><span class="strip"></span><span class="shade"></span><svg class="mark" focusable="false"><path pathLength="1"/></svg></span>
+          </button>
+        </div>
+        <div class="reel-col">
+          <div class="reel-head"><span class="tape">Название компании</span><kbd class="key" aria-hidden="true">3</kbd></div>
+          <button class="reel" type="button" aria-label="Название компании" aria-describedby="reel-hint">
+            <span class="gate" aria-hidden="true"><span class="strip"></span><span class="shade"></span><svg class="mark" focusable="false"><path pathLength="1"/></svg></span>
+          </button>
+        </div>
+        <div class="reel-col">
+          <div class="reel-head"><span class="tape">Цвета</span><kbd class="key" aria-hidden="true">4</kbd></div>
+          <button class="reel" type="button" aria-label="Цвета" aria-describedby="reel-hint">
+            <span class="gate" aria-hidden="true"><span class="strip"></span><span class="shade"></span><svg class="mark" focusable="false"><path pathLength="1"/></svg></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="controls">
+        <p class="hint" id="reel-hint">Клик по барабану крутит только его.<span class="keys"> <span class="nw"><kbd>Пробел</kbd> — все сразу,</span> <span class="nw"><kbd>1</kbd>–<kbd>4</kbd> — по одному.</span></span></p>
+        <div class="actions">
+          <button class="sound" id="sound" type="button" aria-pressed="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path class="waves" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/><path class="slash" d="m22 9-6 6m0-6 6 6"/></svg>
+            Звук
+          </button>
+          <button class="spin" id="spin" type="button" aria-disabled="false">
+            <svg class="aperture" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="m14.31 8 5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16 3.95 6.06M14.31 16H2.83m13.79-4-5.74 9.94"/></svg>
+            Крутить
+          </button>
+        </div>
+      </div>
+      <noscript><p class="noscript">Барабанам нужен JavaScript. Включите его в браузере и обновите страницу.</p></noscript>
+    </section>
+
+    <section class="brief" aria-labelledby="brief-title">
+      <div class="brief-head">
+        <h2 class="brief-title" id="brief-title">Бриф <span class="brief-no">№&nbsp;<span id="brief-no">01</span></span></h2>
+        <button class="copy" id="copy" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Скопировать бриф
+        </button>
+      </div>
+      <div class="brief-main">
+        <p class="label">Задача</p>
+        <p class="lead" id="lead">«<span class="val" data-field="name">Засветка</span>» — компания, которая делает курсы по аналоговой фотографии. Ниша — <span class="val" data-field="niche">домашняя проявка</span>. Нужен оригинальный брендинг: настроение — <span class="val" data-field="mood">ламповое</span>, цвета — палитра «<span class="val" data-field="palette">Берлинская лазурь</span>».</p>
+        <p class="todo"><b>Что показать:</b> <span id="todo"></span></p>
+      </div>
+      <div class="brief-pal">
+        <p class="label">Цвета</p>
+        <p class="pal-name" data-field="palette">Берлинская лазурь</p>
+        <div class="chips">
+          <button class="chip" id="chip-a" type="button"><span class="chip-hex">#1F4E8C</span></button>
+          <button class="chip" id="chip-b" type="button"><span class="chip-hex">#ECEAE2</span></button>
+        </div>
+        <p class="chips-hint">Клик по цвету копирует HEX-код.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<p class="sr-only" id="announce" aria-live="polite"></p>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<svg class="fx" id="fx" aria-hidden="true" focusable="false"></svg>
+
+<script>
+(() => {
+  'use strict';
+  document.documentElement.lang = 'ru';
+
+  // Every brief is for a company that runs analog photography courses.
+  const REELS = [
+    {
+      id: 'niche', label: 'Ниша', kind: 'text',
+      items: [
+        'Плёнка с нуля', 'Домашняя проявка', 'Ручная печать', 'Средний формат', 'Крупный формат',
+        'Пинхол-камеры', 'Цианотипия', 'Мокрый коллодий', 'Моментальные снимки', 'Плёночный портрет',
+        'Уличная съёмка', 'Свадьбы на плёнку', 'Курсы для подростков', 'Фототуры по городам', 'Фотограммы для детей',
+        'Ремонт старых камер', 'Кросс-процесс', 'Слайдовая плёнка', 'Ручная раскраска', 'Фотокниги и зины',
+        'Дальномерные камеры', 'Полуформат', 'Натюрморт на плёнку', 'Мастер-классы для команд', 'Интенсив выходного дня',
+        'Кино на 8 мм', 'Курсы 60+', 'Двойная экспозиция',
+      ],
+    },
+    {
+      id: 'mood', label: 'Настроение', kind: 'text',
+      items: [
+        'Ламповое', 'Дерзкое', 'Ностальгическое', 'Минималистичное', 'Игривое', 'Академичное', 'Бунтарское',
+        'Уютное', 'Кинематографичное', 'Нуарное', 'Меланхоличное', 'Мечтательное', 'Экспериментальное', 'Документальное',
+        'Ироничное', 'Сюрреалистичное', 'Тёплое', 'Строгое', 'Хулиганское', 'Медитативное', 'Романтичное',
+        'Солнечное', 'Загадочное', 'Премиальное', 'Камерное', 'Дружелюбное', 'Дикое', 'Праздничное',
+      ],
+    },
+    {
+      id: 'name', label: 'Название компании', kind: 'text',
+      items: [
+        'Засветка', 'Серебро и соль', 'Тёмная комната', 'Фиксаж', '36 кадров', 'Кадр 37', 'Выдержка',
+        'Диафрагма', 'Полутон', 'Бромсеребро', 'Бачок', 'Катушка', 'Перемотка', 'Шторка',
+        'Камера-обскура', 'Светочувствительные', 'Стоп-ванна', 'Экспонометр', 'Красная лампа', 'Контактный лист', 'Эмульсия',
+        'Увеличитель', 'Чёрный мешок', 'Недосвет', 'Контровой свет', 'Серая карта', 'Зерно и свет', 'Негатив и позитив',
+      ],
+    },
+    {
+      id: 'palette', label: 'Цвета', kind: 'palette',
+      items: [
+        { name: 'Берлинская лазурь', a: '#1F4E8C', b: '#ECEAE2' },
+        { name: 'Лабораторный свет', a: '#C62A1F', b: '#17110F' },
+        { name: 'Оранжевая маска', a: '#D8772C', b: '#2A201B' },
+        { name: 'Сепия', a: '#6E4A2C', b: '#EAD8BE' },
+        { name: 'Выцветший слайд', a: '#6DA0A3', b: '#E7B29D' },
+        { name: 'Кислотная проявка', a: '#D3EA4E', b: '#2B62AE' },
+        { name: 'Серебро и сажа', a: '#B7BABD', b: '#1C1D1F' },
+        { name: 'Тёплая проявка', a: '#E2A44D', b: '#3A291F' },
+        { name: 'Баритовая бумага', a: '#F2EEE4', b: '#151413' },
+        { name: 'Золотой час', a: '#F0A340', b: '#6B2E28' },
+        { name: 'Синий час', a: '#25336A', b: '#91B5DA' },
+        { name: 'Фото из альбома', a: '#E6D3AE', b: '#6C9C8E' },
+        { name: 'Селеновый вираж', a: '#5A4659', b: '#E5DED4' },
+        { name: 'Ночная плёнка', a: '#0E1B2B', b: '#F2C25A' },
+        { name: 'Световой блик', a: '#FF5E37', b: '#FFD166' },
+        { name: 'Амбротип', a: '#3A2E27', b: '#D5C29F' },
+        { name: 'Мятный фиксаж', a: '#9FD7C3', b: '#1E3B35' },
+        { name: 'Инфракрасный лес', a: '#D6386C', b: '#3B7AD4' },
+        { name: 'Золотой вираж', a: '#2D3B59', b: '#D2AC39' },
+        { name: 'Отпуск на плёнку', a: '#F09F59', b: '#3E8B7E' },
+        { name: 'Неоновая витрина', a: '#FF3A7E', b: '#1C1D3B' },
+        { name: 'Пляж, ISO 200', a: '#F4D2A5', b: '#2B85A9' },
+        { name: 'Вишнёвый слайд', a: '#8C1E3A', b: '#F2D8DB' },
+        { name: 'Зелёный вираж', a: '#4D6A3E', b: '#E8E3D1' },
+      ],
+    },
+  ];
+  const TODO = 'логотип, шрифтовую пару, фирменный паттерн и три носителя — сертификат курса, конверт для негативов и пост для соцсетей.';
+
+  // Drum geometry: neighbouring frames sit PHI apart on a cylinder.
+  const PHI = 28 * Math.PI / 180;
+  const OFFSETS = [-2, -1, 0, 1, 2];
+  // Motion: a short wind-up, a fast start, a long smooth slowdown, then a small spring bounce.
+  const WIND_T = 0.12, WIND_A = 0.22;
+  const EASE_P = 2.2, V_END = 2.4;
+  const ZETA = 0.42, OMEGA = 2 * Math.PI * 2.6, SETTLE = 0.6;
+  const OMEGA_D = OMEGA * Math.sqrt(1 - ZETA * ZETA);
+  const SVGNS = 'http://www.w3.org/2000/svg';
+
+  const motionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  const reduced = () => !!(motionQuery && motionQuery.matches);
+  const mod = (a, n) => ((a % n) + n) % n;
+  const randInt = n => Math.floor(Math.random() * n);
+  const pad2 = x => String(x).padStart(2, '0');
+  const lowerFirst = s => {
+    const second = s.charAt(1);
+    return second && second === second.toLowerCase() && second !== second.toUpperCase()
+      ? s.charAt(0).toLowerCase() + s.slice(1) : s;
+  };
+
+  // Position (in frames) and speed (frames per second) t seconds after the spin starts.
+  function motionAt(a, t) {
+    if (t < WIND_T) {
+      const q = t / WIND_T;
+      return { x: -WIND_A * (1 - Math.cos(Math.PI * q)) / 2, v: -WIND_A * Math.PI / (2 * WIND_T) * Math.sin(Math.PI * q), phase: 0, tau: 0 };
+    }
+    const u = t - WIND_T;
+    if (u < a.ta) return { x: -WIND_A + a.vmax * u * u / (2 * a.ta), v: a.vmax * u / a.ta, phase: 1, tau: 0 };
+    if (u < a.T) {
+      const s = (u - a.ta) / a.Td, left = 1 - s;
+      return {
+        x: -WIND_A + a.vmax * a.ta / 2 + a.Td * (V_END * s + (a.vmax - V_END) * (1 - Math.pow(left, EASE_P + 1)) / (EASE_P + 1)),
+        v: V_END + (a.vmax - V_END) * Math.pow(left, EASE_P),
+        phase: 1, tau: 0,
+      };
+    }
+    const tau = u - a.T;
+    if (tau < SETTLE) {
+      const e = Math.exp(-ZETA * OMEGA * tau), sn = Math.sin(OMEGA_D * tau), cs = Math.cos(OMEGA_D * tau);
+      return { x: a.D + V_END / OMEGA_D * e * sn, v: V_END * e * (cs - ZETA * OMEGA / OMEGA_D * sn), phase: 2, tau };
+    }
+    return { x: a.D, v: 0, phase: 3, tau };
+  }
+
+  // Largest font size (px) at which the text fits the frame in maxLines lines.
+  const measureCtx = document.createElement('canvas').getContext('2d');
+  function fitFont(text, font, maxW, maxLines, maxFs, minFs) {
+    measureCtx.font = font;
+    const widths = text.split(' ').map(w => measureCtx.measureText(w).width / 100);
+    const space = measureCtx.measureText(' ').width / 100;
+    for (let fs = maxFs; fs > minFs; fs -= 0.5) {
+      if (lineCount(widths, space, maxW / fs) <= maxLines) return fs;
+    }
+    return minFs;
+  }
+  function lineCount(widths, space, width) {
+    let lines = 1, current = -space;
+    for (const w of widths) {
+      if (w > width) return Infinity;
+      if (current + space + w <= width) current += space + w;
+      else { lines++; current = w; }
+    }
+    return lines;
+  }
+
+  // A hand-drawn grease pencil loop around the frame, as on a contact sheet.
+  function pencilLoop(cx, cy, rx, ry) {
+    const n = 2.4 + Math.random() * 1.8;
+    const e = 2 / n;
+    const start = -2.2 - Math.random() * 0.5;
+    const sweep = Math.PI * 2 + 0.3 + Math.random() * 0.35;
+    const p1 = Math.random() * 6.3, p2 = Math.random() * 6.3;
+    const tilt = (Math.random() - 0.5) * 0.05;
+    const points = [];
+    for (let i = 0; i <= 48; i++) {
+      const u = i / 48, t = start + sweep * u;
+      const c = Math.cos(t), s = Math.sin(t);
+      const k = (1 + 0.02 * Math.sin(3 * t + p1) + 0.012 * Math.sin(7 * t + p2)) * (0.965 + 0.07 * u);
+      const x = Math.sign(c) * Math.pow(Math.abs(c), e) * rx * k;
+      const y = Math.sign(s) * Math.pow(Math.abs(s), e) * ry * k;
+      points.push([cx + x * Math.cos(tilt) - y * Math.sin(tilt), cy + x * Math.sin(tilt) + y * Math.cos(tilt)]);
+    }
+    const f = v => v.toFixed(1);
+    let d = 'M' + f(points[0][0]) + ' ' + f(points[0][1]);
+    for (let i = 0; i < points.length - 1; i++) {
+      const a = points[i - 1] || points[i], b = points[i], c = points[i + 1], z = points[i + 2] || c;
+      d += 'C' + f(b[0] + (c[0] - a[0]) / 6) + ' ' + f(b[1] + (c[1] - a[1]) / 6) + ' ' +
+        f(c[0] - (z[0] - b[0]) / 6) + ' ' + f(c[1] - (z[1] - b[1]) / 6) + ' ' + f(c[0]) + ' ' + f(c[1]);
+    }
+    return d;
+  }
+
+  // Soft mechanical clicks made with Web Audio; the viewer can switch them off.
+  const sound = {
+    on: true,
+    ctx: null,
+    buf: null,
+    load() { try { if (localStorage.getItem('brifomat-sound') === 'off') this.on = false; } catch (e) { /* storage unavailable */ } },
+    save() { try { localStorage.setItem('brifomat-sound', this.on ? 'on' : 'off'); } catch (e) { /* storage unavailable */ } },
+    wake() {
+      if (!this.on) return;
+      try {
+        if (!this.ctx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          this.ctx = new AC();
+          const len = Math.floor(this.ctx.sampleRate * 0.05);
+          this.buf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+          const data = this.buf.getChannelData(0);
+          for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 5);
+        }
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+      } catch (e) { this.ctx = null; }
+    },
+    burst(freq, gain, q, delay) {
+      const c = this.ctx;
+      if (!this.on || !c || c.state !== 'running') return;
+      const src = c.createBufferSource(), filter = c.createBiquadFilter(), amp = c.createGain();
+      src.buffer = this.buf;
+      filter.type = 'bandpass';
+      filter.frequency.value = freq;
+      filter.Q.value = q;
+      amp.gain.value = gain;
+      src.connect(filter);
+      filter.connect(amp);
+      amp.connect(c.destination);
+      src.start(c.currentTime + (delay || 0));
+    },
+    tick() { this.burst(2400 + Math.random() * 1200, 0.5, 4, 0); },
+    shutter() { this.burst(1200, 0.9, 1.2, 0); this.burst(3400, 0.55, 2, 0.05); },
+  };
+
+  const fx = document.getElementById('fx');
+
+  class Reel {
+    constructor(def, col) {
+      this.id = def.id;
+      this.label = def.label;
+      this.kind = def.kind;
+      this.items = def.items;
+      this.n = def.items.length;
+      this.btn = col.querySelector('.reel');
+      this.gate = col.querySelector('.gate');
+      this.strip = col.querySelector('.strip');
+      this.markSvg = col.querySelector('.mark');
+      this.markPath = this.markSvg.querySelector('path');
+      this.pos = randInt(this.n);
+      this.anim = null;
+      this.fitKey = '';
+      this.sizes = [];
+      this.blurPx = 0;
+      this.lastIdx = this.pos;
+      this.lastTick = 0;
+      this.buildRows();
+      this.buildBlur();
+    }
+
+    get value() { return mod(Math.round(this.pos), this.n); }
+    get item() { return this.items[this.value]; }
+
+    buildRows() {
+      const inner = this.kind === 'palette'
+        ? '<span class="fc fc-palette"><span class="sw"><i></i><i></i></span><span class="fc-name"></span></span>'
+        : '<span class="fc fc-text"></span>';
+      this.rows = OFFSETS.map(k => {
+        const el = document.createElement('span');
+        el.className = 'row';
+        el.innerHTML = '<span class="perf"><span class="num"></span></span><span class="frame">' + inner + '</span><span class="perf"></span>';
+        this.strip.appendChild(el);
+        const row = { k, el, idx: -1, key: '', num: el.querySelector('.num') };
+        if (this.kind === 'palette') {
+          [row.a, row.b] = el.querySelectorAll('.sw i');
+          row.text = el.querySelector('.fc-name');
+        } else {
+          row.text = el.querySelector('.fc-text');
+        }
+        return row;
+      });
+    }
+
+    // Vertical-only motion blur, so fast frames smear along the direction of travel.
+    buildBlur() {
+      const filter = document.createElementNS(SVGNS, 'filter');
+      filter.setAttribute('id', 'blur-' + this.id);
+      filter.setAttribute('x', '0');
+      filter.setAttribute('y', '-25%');
+      filter.setAttribute('width', '100%');
+      filter.setAttribute('height', '150%');
+      filter.setAttribute('color-interpolation-filters', 'sRGB');
+      this.blurNode = document.createElementNS(SVGNS, 'feGaussianBlur');
+      this.blurNode.setAttribute('stdDeviation', '0 0');
+      filter.appendChild(this.blurNode);
+      fx.appendChild(filter);
+    }
+
+    measure(fontEpoch) {
+      const cs = getComputedStyle(this.gate);
+      this.H = parseFloat(cs.getPropertyValue('--frame-h')) || 92;
+      this.rebate = parseFloat(cs.getPropertyValue('--rebate')) || 22;
+      const pad = parseFloat(cs.getPropertyValue('--frame-pad')) || 8;
+      this.K = this.H / (2 * Math.tan(PHI / 2));
+      const avail = Math.max(40, this.gate.clientWidth - 2 * this.rebate - 2 * pad) * 0.96;
+      const key = Math.round(avail) + '/' + this.H + '/' + fontEpoch;
+      if (key === this.fitKey) return;
+      this.fitKey = key;
+      const family = getComputedStyle(document.documentElement).getPropertyValue('--f-display');
+      this.sizes = this.kind === 'palette'
+        ? this.items.map(it => fitFont(it.name, '700 100px ' + family, avail, 1, Math.round(this.H * 0.21), 11))
+        : this.items.map(s => fitFont(s, '800 100px ' + family, avail, 2, Math.round(this.H * 0.31), 12));
+    }
+
+    render() {
+      const c = Math.round(this.pos), frac = this.pos - c;
+      for (const row of this.rows) {
+        const th = (row.k - frac) * PHI;
+        row.el.style.transform = 'translate3d(0,' + (-this.K * Math.sin(th)).toFixed(2) + 'px,0) scale(1,' + Math.cos(th).toFixed(4) + ')';
+        this.paint(row, mod(c + row.k, this.n));
+      }
+    }
+
+    paint(row, idx) {
+      if (row.idx === idx && row.key === this.fitKey) return;
+      row.idx = idx;
+      row.key = this.fitKey;
+      const item = this.items[idx];
+      row.num.textContent = pad2(idx + 1);
+      row.text.style.fontSize = this.sizes[idx] + 'px';
+      if (this.kind === 'palette') {
+        row.text.textContent = item.name;
+        row.a.style.background = item.a;
+        row.b.style.background = item.b;
+      } else {
+        row.text.textContent = item;
+      }
+    }
+
+    setBlur(speed) {
+      const px = speed > 3 ? Math.round((speed - 3) * this.H * 0.011) / 2 : 0;
+      if (px === this.blurPx) return;
+      this.blurPx = px;
+      if (!px) { this.strip.style.filter = ''; return; }
+      this.blurNode.setAttribute('stdDeviation', '0 ' + px);
+      this.strip.style.filter = 'url(#blur-' + this.id + ')';
+    }
+
+    tickSound(speed, now) {
+      const c = Math.round(this.pos);
+      if (c === this.lastIdx) return;
+      this.lastIdx = c;
+      if (speed < 15 && now - this.lastTick > 28) { this.lastTick = now; sound.tick(); }
+    }
+
+    // Plans a spin to a random frame other than the current one.
+    // T is the running time in seconds; without it, the time follows the distance.
+    plan(T, delay, now) {
+      if (this.anim) return false;
+      const from = Math.round(this.pos), cur = mod(from, this.n);
+      let target = randInt(this.n - 1);
+      if (target >= cur) target++;
+      const d = mod(target - cur, this.n);
+      const t0 = now + delay * 1000;
+      if (reduced()) {
+        this.anim = { instant: true, t0, from, D: d };
+      } else {
+        const auto = T == null;
+        const want = (auto ? 1.35 : T) * 12;
+        let D = d + this.n * Math.max(0, Math.round((want - d) / this.n));
+        if (D < want * 0.6) D += this.n;
+        if (auto) T = Math.min(2.1, 1.05 + D * 0.022);
+        const ta = Math.min(0.3, T * 0.17), Td = T - ta;
+        const vmax = (D + WIND_A - Td * V_END * EASE_P / (EASE_P + 1)) / (ta / 2 + Td / (EASE_P + 1));
+        this.anim = { t0, from, D, T, ta, Td, vmax };
+      }
+      this.btn.setAttribute('aria-busy', 'true');
+      return true;
+    }
+
+    step(now) {
+      const a = this.anim;
+      if (!a) return false;
+      const t = (now - a.t0) / 1000;
+      if (t < 0) return true;
+      if (!a.started) { a.started = true; this.hideMark(); }
+      if (a.instant) {
+        this.pos = a.from + a.D;
+        this.render();
+        if (this.strip.animate) this.strip.animate([{ opacity: 0.2 }, { opacity: 1 }], { duration: 240, easing: 'ease-out' });
+        this.land();
+        this.finish();
+        return false;
+      }
+      const m = motionAt(a, t);
+      const speed = Math.abs(m.v);
+      this.pos = a.from + m.x;
+      this.render();
+      this.setBlur(speed);
+      this.tickSound(speed, now);
+      if (m.phase >= 2 && !a.landed) this.land();
+      if (m.phase >= 2 && !a.marked && m.tau >= 0.17) { a.marked = true; this.drawMark(true); }
+      if (m.phase === 3) { this.finish(); return false; }
+      return true;
+    }
+
+    land() {
+      this.anim.landed = true;
+      sound.shutter();
+      updateField(this, true);
+    }
+
+    finish() {
+      const a = this.anim;
+      if (!a.landed) this.land();
+      this.anim = null;
+      this.pos = mod(a.from + a.D, this.n);
+      this.lastIdx = this.pos;
+      this.render();
+      this.setBlur(0);
+      if (!a.marked) this.drawMark(!a.instant);
+      this.btn.removeAttribute('aria-busy');
+      reelDone(this);
+    }
+
+    drawMark(animate) {
+      const w = this.gate.clientWidth, h = this.gate.clientHeight;
+      if (!w || !h) return;
+      const rx = (w - 2 * this.rebate) / 2 + 7, ry = (this.H - 10) / 2 + 6;
+      this.markSvg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      this.markPath.setAttribute('d', pencilLoop(w / 2, h / 2, rx, ry));
+      if (this.markPath.getAnimations) this.markPath.getAnimations().forEach(an => an.cancel());
+      this.markSvg.classList.add('on');
+      if (animate && !reduced() && this.markPath.animate) {
+        this.markPath.style.strokeDashoffset = '';
+        this.markPath.animate([{ strokeDashoffset: 1.02 }, { strokeDashoffset: 0 }], { duration: 520, easing: 'cubic-bezier(.4,.1,.3,1)', fill: 'forwards' });
+      } else {
+        this.markPath.style.strokeDashoffset = '0';
+      }
+    }
+
+    hideMark() { this.markSvg.classList.remove('on'); }
+  }
+
+  const machine = document.getElementById('machine');
+  const reelsEl = document.getElementById('reels');
+  const spinBtn = document.getElementById('spin');
+  const soundBtn = document.getElementById('sound');
+  const copyBtn = document.getElementById('copy');
+  const leadEl = document.getElementById('lead');
+  const briefNoEl = document.getElementById('brief-no');
+  const chips = [document.getElementById('chip-a'), document.getElementById('chip-b')];
+  const announcer = document.getElementById('announce');
+  const toastEl = document.getElementById('toast');
+  const cols = Array.from(document.querySelectorAll('.reel-col'));
+  const reels = REELS.map((def, i) => new Reel(def, cols[i]));
+  const byId = {};
+  reels.forEach(r => { byId[r.id] = r; });
+  const fields = {};
+  ['name', 'niche', 'mood', 'palette'].forEach(k => { fields[k] = document.querySelectorAll('[data-field="' + k + '"]'); });
+  document.getElementById('todo').textContent = TODO;
+
+  let briefNo = 1;
+  let batch = null;
+  let raf = 0;
+  let layoutRaf = 0;
+  let fontEpoch = 0;
+
+  function frame(now) {
+    let busy = false;
+    for (const r of reels) if (r.step(now)) busy = true;
+    raf = busy ? requestAnimationFrame(frame) : 0;
+  }
+  function kick() {
+    updateBusy();
+    if (!raf) raf = requestAnimationFrame(frame);
+  }
+  function updateBusy() {
+    machine.classList.toggle('is-spinning', reels.some(r => r.anim));
+    spinBtn.setAttribute('aria-disabled', reels.every(r => r.anim) ? 'true' : 'false');
+  }
+
+  function spinAll() {
+    if (reels.every(r => r.anim)) return;
+    sound.wake();
+    const now = performance.now();
+    const started = reels.filter((r, i) => r.plan(1.3 + i * 0.45 + (Math.random() - 0.5) * 0.1, i * 0.06, now));
+    if (!started.length) return;
+    batch = new Set(started);
+    nextBrief();
+    kick();
+  }
+  function spinOne(r) {
+    if (r.anim) return;
+    sound.wake();
+    if (r.plan(null, 0, performance.now())) { nextBrief(); kick(); }
+  }
+  function nextBrief() {
+    briefNo++;
+    briefNoEl.textContent = pad2(briefNo);
+  }
+  function reelDone(r) {
+    updateBusy();
+    if (batch && batch.has(r)) {
+      batch.delete(r);
+      if (!batch.size) { batch = null; announce('Бриф № ' + pad2(briefNo) + '. ' + briefSentence()); }
+    } else {
+      announce(r.label + ': ' + spoken(r));
+    }
+  }
+
+  function spoken(r) {
+    const it = r.item;
+    if (r.kind === 'palette') return '«' + it.name + '», ' + it.a + ' и ' + it.b;
+    return r.id === 'name' ? '«' + it + '»' : lowerFirst(it);
+  }
+  function setField(key, text, flash) {
+    fields[key].forEach(el => {
+      el.textContent = text;
+      if (flash && !reduced()) {
+        el.classList.remove('flash');
+        void el.offsetWidth;
+        el.classList.add('flash');
+      }
+    });
+  }
+  function updateField(r, flash) {
+    const it = r.item;
+    if (r.kind === 'palette') {
+      setField('palette', it.name, flash);
+      paintChip(chips[0], it.a);
+      paintChip(chips[1], it.b);
+    } else {
+      setField(r.id, r.id === 'name' ? it : lowerFirst(it), flash);
+    }
+    r.btn.setAttribute('aria-label', r.label + ': ' + spoken(r) + '. Крутить этот барабан');
+  }
+  function luminance(hex) {
+    const n = parseInt(hex.slice(1), 16);
+    const lin = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(v => {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2];
+  }
+  function paintChip(el, hex) {
+    el.style.background = hex;
+    el.style.color = luminance(hex) > 0.179 ? '#141312' : '#FFFFFF';
+    el.querySelector('.chip-hex').textContent = hex;
+    el.dataset.hex = hex;
+    el.setAttribute('aria-label', 'Скопировать ' + hex);
+  }
+
+  function parts() {
+    return { niche: byId.niche.item, mood: byId.mood.item, name: byId.name.item, pal: byId.palette.item };
+  }
+  function briefSentence() {
+    const b = parts();
+    return '«' + b.name + '» — компания, которая делает курсы по аналоговой фотографии. Ниша — ' + lowerFirst(b.niche) +
+      '. Нужен оригинальный брендинг: настроение — ' + lowerFirst(b.mood) + ', цвета — палитра «' + b.pal.name + '».';
+  }
+  function briefText() {
+    const b = parts();
+    return [
+      'Бриф № ' + pad2(briefNo) + ': оригинальный брендинг',
+      '«' + b.name + '» — компания, которая делает курсы по аналоговой фотографии.',
+      'Ниша: ' + lowerFirst(b.niche),
+      'Настроение: ' + lowerFirst(b.mood),
+      'Цвета: «' + b.pal.name + '» — ' + b.pal.a + ' и ' + b.pal.b,
+      'Что показать: ' + TODO,
+    ].join('\n');
+  }
+
+  function announce(msg) {
+    announcer.textContent = '';
+    setTimeout(() => { announcer.textContent = msg; }, 60);
+  }
+  let toastTimer = 0;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2000);
+  }
+  function copy(text, done, selectEl) {
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+      if (ok) { toast(done); return; }
+      const range = document.createRange();
+      range.selectNodeContents(selectEl);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      toast('Текст выделен. Нажмите Ctrl+C или ⌘C, чтобы скопировать.');
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => toast(done), fallback);
+      else fallback();
+    } catch (e) { fallback(); }
+  }
+
+  function layout(redrawMarks) {
+    reels.forEach(r => {
+      r.measure(fontEpoch);
+      r.render();
+      if (redrawMarks && !r.anim) r.drawMark(false);
+    });
+  }
+  function scheduleLayout() {
+    cancelAnimationFrame(layoutRaf);
+    layoutRaf = requestAnimationFrame(() => layout(true));
+  }
+
+  spinBtn.addEventListener('click', () => {
+    if (spinBtn.getAttribute('aria-disabled') === 'true') return;
+    spinAll();
+  });
+  reels.forEach(r => r.btn.addEventListener('click', () => spinOne(r)));
+  copyBtn.addEventListener('click', () => copy(briefText(), 'Бриф скопирован', leadEl));
+  chips.forEach(ch => ch.addEventListener('click', () => copy(ch.dataset.hex, ch.dataset.hex + ' скопирован', ch.querySelector('.chip-hex'))));
+  soundBtn.addEventListener('click', () => {
+    sound.on = !sound.on;
+    sound.save();
+    soundBtn.setAttribute('aria-pressed', String(sound.on));
+    if (sound.on) { sound.wake(); setTimeout(() => sound.tick(), 40); }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.repeat) return;
+    const el = document.activeElement;
+    const tag = el ? el.tagName : '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (el && el.isContentEditable)) return;
+    if (e.key === ' ' || e.code === 'Space') {
+      if (tag === 'BUTTON' || tag === 'A' || tag === 'SUMMARY') return;
+      e.preventDefault();
+      spinAll();
+    } else if (e.key >= '1' && e.key <= '4' && e.key.length === 1) {
+      e.preventDefault();
+      spinOne(reels[Number(e.key) - 1]);
+    }
+  });
+
+  sound.load();
+  soundBtn.setAttribute('aria-pressed', String(sound.on));
+  briefNoEl.textContent = pad2(briefNo);
+  layout(false);
+  reels.forEach(r => updateField(r, false));
+  if (window.ResizeObserver) new ResizeObserver(scheduleLayout).observe(reelsEl);
+  else window.addEventListener('resize', scheduleLayout);
+  scheduleLayout();
+  if (document.fonts && document.fonts.load) {
+    Promise.all([
+      document.fonts.load('800 40px "Sofia Sans Extra Condensed"', 'Ниша Кадр'),
+      document.fonts.load('700 40px "Sofia Sans Extra Condensed"', 'Ниша Кадр'),
+    ]).catch(() => null).then(() => document.fonts.ready).then(() => {
+      fontEpoch++;
+      layout(false);
+    });
+  }
+})();
+</script>
+</body>
+</html>
