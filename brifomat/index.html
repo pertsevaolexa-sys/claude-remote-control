@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Брифомат</title>
-<meta name="description" content="Генератор случайных брифов для дизайнера: четыре барабана выбирают нишу, настроение, название компании и цвета для брендинга Nachbild, курса аналоговой фотографии из Вены.">
+<meta name="description" content="Генератор случайных брифов для дизайнера: брендинг Nachbild, курса аналоговой фотографии от венской компании The Photo Cluster. Барабаны выбирают нишу, настроение и цвета.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231C1B19'/%3E%3Crect x='9' y='6' width='14' height='20' rx='2' fill='%23F6F4EE'/%3E%3Cg fill='%23E6A13A'%3E%3Crect x='3.5' y='6' width='3' height='4' rx='1'/%3E%3Crect x='3.5' y='14' width='3' height='4' rx='1'/%3E%3Crect x='3.5' y='22' width='3' height='4' rx='1'/%3E%3Crect x='25.5' y='6' width='3' height='4' rx='1'/%3E%3Crect x='25.5' y='14' width='3' height='4' rx='1'/%3E%3Crect x='25.5' y='22' width='3' height='4' rx='1'/%3E%3C/g%3E%3Cellipse cx='16' cy='16' rx='9' ry='11.5' fill='none' stroke='%23D2352A' stroke-width='2.2'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -565,7 +565,7 @@
   <header class="masthead">
     <p class="kicker">Генератор брифов для дизайнера</p>
     <h1 class="title">Брифомат</h1>
-    <p class="lede">Nachbild — курс по аналоговой фотографии от компании из Вены. Придумайте для него оригинальный брендинг, а нишу, настроение, название компании и цвета выберут барабаны.</p>
+    <p class="lede">Nachbild — курс по аналоговой фотографии от венской компании The Photo Cluster. Придумайте для него оригинальный брендинг, а нишу, настроение и цвета выберут барабаны.</p>
   </header>
 
   <main>
@@ -623,7 +623,7 @@
       </div>
       <div class="brief-main">
         <p class="label">Задача</p>
-        <p class="lead" id="lead"><span class="val" data-field="name">Kornkammer</span> — компания из Вены, которая делает курсы по аналоговой фотографии. Курс называется <span class="val">Nachbild</span>, ниша — <span class="val" data-field="niche">домашняя проявка</span>. Нужен оригинальный брендинг курса: настроение — <span class="val" data-field="mood">ламповое</span>, цвета — палитра «<span class="val" data-field="palette">Берлинская лазурь</span>».</p>
+        <p class="lead" id="lead"><span class="val" data-field="name">The Photo Cluster</span> — компания из Вены, которая делает курсы по аналоговой фотографии. Курс называется <span class="val">Nachbild</span>, ниша — <span class="val" data-field="niche">домашняя проявка</span>. Нужен оригинальный брендинг курса: настроение — <span class="val" data-field="mood">ламповое</span>, цвета — палитра «<span class="val" data-field="palette">Берлинская лазурь</span>».</p>
         <p class="todo"><b>Что показать:</b> <span id="todo"></span></p>
       </div>
       <div class="brief-pal">
@@ -648,7 +648,7 @@
   'use strict';
   document.documentElement.lang = 'ru';
 
-  // Every brief is for Nachbild, an analog photography course run by a company based in Vienna.
+  // Every brief is for Nachbild, an analog photography course by The Photo Cluster, a company based in Vienna.
   const REELS = [
     {
       id: 'niche', label: 'Ниша', kind: 'text',
@@ -672,12 +672,8 @@
     },
     {
       id: 'name', label: 'Название компании', kind: 'text',
-      items: [
-        'Dunkelkammer', 'Silberkorn', 'Lichtfang', 'Fixierbad', 'Kontaktbogen', 'Blende Acht', 'Halbton',
-        'Lochkamera', 'Stoppbad', 'Graukarte', 'Kornkammer', 'Donaulicht', 'Silberblick', 'Augenblick',
-        'Momentaufnahme', 'Filmriss', 'Lichtschacht', 'Bromsilber', 'Camera Obscura', 'Spule & Dose', 'Ringblitz',
-        'Grätzlfilm', 'Negativraum', 'Auslöser', 'Emulsion', 'Weitwinkel', 'Korn & Kaffee', 'Entwickler',
-      ],
+      // The client is fixed: every frame on this reel is the company's name.
+      items: ['The Photo Cluster'],
     },
     {
       id: 'palette', label: 'Цвета', kind: 'palette',
@@ -1104,7 +1100,10 @@
   function spinOne(r) {
     if (r.anim) return;
     sound.wake();
-    if (r.plan(null, 0, performance.now())) { nextBrief(); kick(); }
+    if (!r.plan(null, 0, performance.now())) return;
+    // A reel with a single frame (the company) never changes the brief.
+    if (r.n > 1) nextBrief();
+    kick();
   }
   function nextBrief() {
     briefNo++;
@@ -1127,8 +1126,9 @@
   }
   function setField(key, text, flash) {
     fields[key].forEach(el => {
+      const changed = el.textContent !== text;
       el.textContent = text;
-      if (flash && !reduced()) {
+      if (flash && changed && !reduced()) {
         el.classList.remove('flash');
         void el.offsetWidth;
         el.classList.add('flash');
