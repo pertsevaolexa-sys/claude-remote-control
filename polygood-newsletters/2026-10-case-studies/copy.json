@@ -16,7 +16,11 @@
    "body": "De Bijenkorf reopened the women's fashion and shoe department of its Dam Square flagship in 2026. Random Studio, working with the store's own design team, ran a lifecycle assessment workshop before choosing what to build with. The store first used Polygood in 2023 and chose it again. We made the display stands in Salmon Terra: stepped plinths and blocks that lift mannequins and bags above the shop floor, built by Fiction Factory.\n\nEach panel is pressed from one type of recycled plastic, so when the displays change, the stands can come back through our take-back programme and become new panels.",
    "pattern": "Salmon Terra",
    "application": "Display stands: stepped plinths and blocks",
-   "link_label": "See the De Bijenkorf project"
+   "link_label": "See the De Bijenkorf project",
+   "page_url": "https://polygood.com/projects/de-bijenkorf/",
+   "image_url": "",
+   "image_file": "de-bijenkorf.jpg",
+   "image_alt": "Display stands in the Salmon Terra pattern at De Bijenkorf Amsterdam"
   },
   {
    "key": "henriette",
@@ -25,7 +29,11 @@
    "body": "In 2025 Verena Brandtner-Pastuszyn and Georg Pastuszyn renovated their family-run four-star hotel near the Prater as what they call Austria's first Circular Living hotel. The concept, inspired by Cradle to Cradle, weighs every material on its health, recyclability and carbon, and on its social and biodiversity impact.\n\nFor the new Circular Living rooms we made the bathroom washstands in Sapphire Terrazzo, Emerald Ghost and White Terrazzo. The White Terrazzo is made from old fridges and single-use plastic cutlery.",
    "pattern": "Sapphire Terrazzo, Emerald Ghost, White Terrazzo",
    "application": "Bathroom washstands for the Circular Living rooms",
-   "link_label": "See the Henriette project"
+   "link_label": "See the Henriette project",
+   "page_url": "https://polygood.com/projects/henriette-stadthotel/",
+   "image_url": "",
+   "image_file": null,
+   "image_alt": "Polygood washstand in a Circular Living room at Henriette Stadthotel, Vienna"
   },
   {
    "key": "orion",
@@ -34,7 +42,11 @@
    "body": "Aura designed the teal kitchenette where Orion's Paris team meets through the day. A white stone or wood top would have cut a line through the teal. We made the worktops on the island and back counter in Emerald Ghost, a flecked sea green a shade lighter than the cabinets, so the whole kitchenette reads as one block of colour. Samji Studio, which builds office furniture from recycled materials, fabricated the worktops and cut the island top to follow its rounded end.",
    "pattern": "Emerald Ghost",
    "application": "Kitchenette worktops (island and back counter)",
-   "link_label": "See the Orion project"
+   "link_label": "See the Orion project",
+   "page_url": "https://polygood.com/projects/orion/",
+   "image_url": "",
+   "image_file": "orion.jpg",
+   "image_alt": "Kitchenette worktop in the Emerald Ghost pattern at the Orion office in Paris"
   },
   {
    "key": "onedust",
@@ -43,7 +55,11 @@
    "body": "For our first project in Taiwan we worked with ONE DUST, a Taipei design studio that makes installation art and decorative finishes, including mineral wall coatings. Surfaces are its trade, so Polygood was a natural material for it to try. The studio designed and made tables, chairs, benches, shelves and sculptural objects in five patterns: Maldives, Black Lollipop, Emerald Ghost, Sapphire Terrazzo and Translucent Glitter Gold, which no other project has used so far.\n\nOutside, in a gravel garden backed by forest, a translucent blue slab lets the trees show through.",
    "pattern": "Maldives, Black Lollipop, Emerald Ghost, Sapphire Terrazzo, Translucent Glitter Gold",
    "application": "Tables, chairs, benches, shelves and decorative objects",
-   "link_label": "See the ONE DUST project"
+   "link_label": "See the ONE DUST project",
+   "page_url": "https://polygood.com/projects/one-dust-studio/",
+   "image_url": "",
+   "image_file": "one-dust-studio.jpg",
+   "image_alt": "Translucent blue Polygood slab in a gravel garden at ONE DUST Studio, Taipei"
   }
  ],
  "patterns_eyebrow": "The patterns",
@@ -54,6 +70,7 @@
    "name": "Salmon Terra",
    "used": "De Bijenkorf",
    "from": "plastic spools",
+   "swatch_url": "",
    "file": "salmon-terra.jpg",
    "id": "PS2121"
   },
@@ -61,6 +78,7 @@
    "name": "Sapphire Terrazzo",
    "used": "Henriette, ONE DUST",
    "from": "plastic spools",
+   "swatch_url": "",
    "file": "sapphire-terrazzo.jpg",
    "id": "PS1801"
   },
@@ -68,6 +86,7 @@
    "name": "Emerald Ghost",
    "used": "Henriette, Orion, ONE DUST",
    "from": "home appliances",
+   "swatch_url": "",
    "file": "emerald-ghost.jpg",
    "id": "PS1706"
   },
@@ -75,6 +94,7 @@
    "name": "White Terrazzo",
    "used": "Henriette",
    "from": "fridges and plastic cutlery",
+   "swatch_url": "",
    "file": "white-terrazzo.jpg",
    "id": "PS2107"
   },
@@ -82,6 +102,7 @@
    "name": "Maldives",
    "used": "ONE DUST",
    "from": "CD cases",
+   "swatch_url": "",
    "file": "maldives.jpg",
    "id": "PS1301"
   },
@@ -89,6 +110,7 @@
    "name": "Black Lollipop",
    "used": "ONE DUST",
    "from": "electronics and plastic cutlery",
+   "swatch_url": "",
    "file": "black-lollipop.jpg",
    "id": "PS1602"
   },
@@ -96,11 +118,15 @@
    "name": "Translucent Glitter Gold",
    "used": "ONE DUST",
    "from": "CD cases",
+   "swatch_url": "",
    "file": null,
    "id": "2118"
   }
  ],
+ "tile_heading": "Your project next?",
+ "tile_link": "Request a sample",
  "closing": "If one of these patterns suits a project you're specifying this autumn, we can send you a sample.",
  "cta_label": "Request a sample",
+ "samples_url": "",
  "signoff": "The Polygood team\nThe Good Plastic Company"
 }

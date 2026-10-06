@@ -6,6 +6,16 @@ De Bijenkorf (display plinths, Amsterdam), Henriette Stadthotel (washstands, Vie
 
 Facts come from the four case-study PDFs and the Notion pattern library (Marketing team space › All Patterns Images). `selling-brief.md` covers each detail in the newsletter: what it sells, who it's for, the proof, a line to reuse and the claim to avoid.
 
+**To change anything, see [`../EDITING.md`](../EDITING.md).** It covers six ways to edit, from a quick fix inside Mailchimp to rebuilding from `copy.json`.
+
+| File | Use |
+|---|---|
+| `mailchimp-code-block.html` | Paste into a Code block in Mailchimp (the usual way) |
+| `mailchimp-full-email.html` | The whole email with footer, for Mailchimp's "Paste in code" |
+| `mailchimp-patterns-block.html` | The patterns grid alone, if you build the rest from Mailchimp's own blocks |
+| `preview.html` | For looking at in a browser only. Never paste it into Mailchimp |
+| `copy.json` | Every word, link and image address. Rebuild with `build_email.py` after editing |
+
 ## Mailchimp settings
 
 | Field | Text |
@@ -19,14 +29,14 @@ Facts come from the four case-study PDFs and the Notion pattern library (Marketi
 
 1. Set the email width to 600px. Drag a **Code** block into the body and set its padding to 0.
 2. Paste the whole of `mailchimp-code-block.html` into the block and save.
-3. Upload the images to **Content Studio**, copy each one's URL and paste it over its placeholder in the code:
+3. Upload the images to **Content Studio**, copy each one's URL and paste it over its placeholder in the code. Or put the URLs into `copy.json` (`image_url`, `swatch_url`) and rebuild:
 
 | Placeholder in the code | Image |
 |---|---|
 | `PASTE-DE-BIJENKORF-IMAGE-URL-HERE` | `images/de-bijenkorf.jpg` (photo: Milenka Backx) |
-| `PASTE-HENRIETTE-IMAGE-URL-HERE` | Not in the PDF. Use one from the Henriette entry in Notion (Patrick Johannsen Fotografie or supersusi.com) |
+| `PASTE-HENRIETTE-STADTHOTEL-IMAGE-URL-HERE` | Not in the PDF. Use one from the Henriette entry in Notion (Patrick Johannsen Fotografie or supersusi.com) |
 | `PASTE-ORION-IMAGE-URL-HERE` | `images/orion.jpg` |
-| `PASTE-ONE-DUST-IMAGE-URL-HERE` | `images/one-dust-studio.jpg` (photo: ONE DUST Studio) |
+| `PASTE-ONE-DUST-STUDIO-IMAGE-URL-HERE` | `images/one-dust-studio.jpg` (photo: ONE DUST Studio) |
 | `PASTE-SWATCH-SALMON-TERRA-URL-HERE` | `images/swatches/salmon-terra.jpg` (cropped from the De Bijenkorf plinths) |
 | `PASTE-SWATCH-SAPPHIRE-TERRAZZO-URL-HERE` | `images/swatches/sapphire-terrazzo.jpg` |
 | `PASTE-SWATCH-EMERALD-GHOST-URL-HERE` | `images/swatches/emerald-ghost.jpg` |
@@ -35,7 +45,7 @@ Facts come from the four case-study PDFs and the Notion pattern library (Marketi
 | `PASTE-SWATCH-BLACK-LOLLIPOP-URL-HERE` | `images/swatches/black-lollipop.jpg` |
 | `PASTE-SWATCH-TRANSLUCENT-GLITTER-GOLD-URL-HERE` | Not exported. Take the first image on the Translucent Glitter Gold page in Notion and crop it square (240 × 240 px is enough) |
 
-4. Replace `PASTE-ORDER-SAMPLES-URL-HERE` with the samples page. It appears twice: in the tile at the end of the patterns grid and in the button.
+4. Replace `PASTE-ORDER-SAMPLES-URL-HERE` with the samples page. It appears twice: in the tile at the end of the patterns grid and in the button. Or set `samples_url` in `copy.json` and rebuild.
 5. Leave the template's own footer in place, because it carries the unsubscribe link.
 
 `preview.html` is the same email with the photos and swatches built in, for checking how it looks.
@@ -53,4 +63,4 @@ The Henriette PDF says the washstands are made "from plastic that once lined fri
 
 ## Changing the copy
 
-Edit `copy.json`, then run `python3 build_email.py 2026-10-case-studies/copy.json 2026-10-case-studies` from `polygood-newsletters/` to rebuild both HTML files. For the brief, edit `briefs.json` and run `python3 build_brief.py 2026-10-case-studies/briefs.json 2026-10-case-studies/selling-brief.md`.
+See [`../EDITING.md`](../EDITING.md). In short: edit `copy.json`, then run `python3 build_email.py 2026-10-case-studies/copy.json 2026-10-case-studies` from `polygood-newsletters/`. It rebuilds all the HTML files and lists any placeholders still to fill.
