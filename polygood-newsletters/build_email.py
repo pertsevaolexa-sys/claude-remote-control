@@ -58,7 +58,8 @@ CASES = {
     },
 }
 CTA_URL = "PASTE-ORDER-SAMPLES-URL-HERE"
-TILE = 122  # swatch width in px; four tiles plus gutters fill the 512px panel
+TILE = 120  # swatch width in px; 4 x (120 + 6) = 504, leaving slack in the 512px panel
+MSO_CELL = TILE + 6
 
 
 def esc(s):
@@ -92,31 +93,27 @@ def eyebrow(text, color=RUST, pad="0 0 8px 0"):
 
 def rule(color=RULE, weight=1, pad="0 0 36px 0"):
     return (
-        f'<tr><td style="padding:{pad};"><div style="border-top:{weight}px solid {color};'
-        f'font-size:0;line-height:0;">&nbsp;</div></td></tr>'
+        f'<tr><td style="padding:{pad};"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>'
+        f'<td height="{weight}" bgcolor="{color}" style="background:{color};height:{weight}px;font-size:{weight}px;'
+        f'line-height:{weight}px;mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td></tr>'
     )
 
 
 def case_block(c, images, last):
     meta = CASES[c["key"]]
     src = images.get(c["key"], meta["img"])
-    note = "" if meta["live"] else "<!-- This case page is not live yet: publish it on polygood.com before sending, or the link will 404 -->\n"
-    img_note = (
-        "<!-- No photo in the case PDF: use one from Notion (Patrick Johannsen Fotografie or supersusi.com) -->\n"
-        if meta["file"] is None
-        else ""
-    )
+    label = "Patterns" if "," in c["pattern"] else "Pattern"
     return f"""
-<!-- Case: {esc(c['title'])} -->
+<!-- Case: {esc(c['title']).replace("--", "-")} -->
 <tr><td style="padding:0 0 18px 0;">
-{img_note}<a href="{meta['url']}" target="_blank" style="text-decoration:none;"><img src="{src}" width="552" alt="{attr(meta['alt'])}" style="display:block;width:100%;max-width:552px;height:auto;border:0;"></a>
+<a href="{meta['url']}" target="_blank" style="text-decoration:none;"><img src="{src}" width="552" alt="{attr(meta['alt'])}" style="display:block;width:100%;max-width:552px;height:auto;border:0;"></a>
 </td></tr>
 {eyebrow(c['kicker'], pad="0 0 6px 0")}
 <tr><td style="padding:0 0 10px 0;font-family:{SERIF};font-size:24px;line-height:1.25;color:{INK};">{esc(c['title'])}</td></tr>
 <tr><td style="padding:0;">{paras(c['body'], margin=12)}</td></tr>
-<tr><td style="padding:0 0 14px 0;font-family:{SANS};font-size:13px;line-height:1.6;color:{MUTED};">Pattern: {esc(c['pattern'])}<br>Application: {esc(c['application'])}</td></tr>
+<tr><td style="padding:0 0 14px 0;font-family:{SANS};font-size:13px;line-height:1.6;color:{MUTED};">{label}: {esc(c['pattern'])}<br>Application: {esc(c['application'])}</td></tr>
 <tr><td style="padding:0 0 36px 0;font-family:{SANS};font-size:15px;line-height:1.4;font-weight:bold;">
-{note}<a href="{meta['url']}" target="_blank" style="color:{RUST};text-decoration:underline;">{esc(c['link_label'])}</a>
+<a href="{meta['url']}" target="_blank" style="color:{RUST};text-decoration:underline;">{esc(c['link_label'])}</a>
 </td></tr>
 {'' if last else rule()}"""
 
@@ -129,14 +126,8 @@ def tile(inner):
 
 
 def swatch_tile(p, swatches):
-    if p["file"] is None:
-        src = swatches.get(p["name"], f"PASTE-SWATCH-{slug(p['name'])}-URL-HERE")
-        note = "<!-- Swatch: Notion > Marketing team space > All Patterns Images > Translucent Glitter Gold -->"
-    else:
-        src = swatches.get(p["name"], f"PASTE-SWATCH-{slug(p['name'])}-URL-HERE")
-        note = ""
+    src = swatches.get(p["name"], f"PASTE-SWATCH-{slug(p['name'])}-URL-HERE")
     return tile(
-        f"{note}"
         f'<img src="{src}" width="{TILE}" height="{TILE}" alt="{attr(p["name"])} pattern swatch" '
         f'style="display:block;width:{TILE}px;height:{TILE}px;border:0;border-radius:2px;">'
         f'<div style="padding:8px 0 0 0;font-family:{SERIF};font-size:15px;line-height:1.25;color:{INK};">{esc(p["name"])}</div>'
@@ -147,12 +138,13 @@ def swatch_tile(p, swatches):
 
 def cta_tile():
     return tile(
-        f'<a href="{CTA_URL}" target="_blank" style="display:block;width:{TILE}px;height:{TILE}px;background:{RUST};'
-        f'text-decoration:none;border-radius:2px;">'
-        f'<table role="presentation" width="{TILE}" height="{TILE}" cellpadding="0" cellspacing="0" border="0"><tr>'
-        f'<td valign="bottom" bgcolor="{RUST}" style="padding:12px;font-family:{SERIF};font-size:16px;line-height:1.25;color:{CREAM};">'
-        f"Your project next?<br><span style=\"font-family:{SANS};font-size:12px;font-weight:bold;\">Request a sample &rarr;</span>"
-        f"</td></tr></table></a>"
+        f'<table role="presentation" width="{TILE}" height="{TILE}" cellpadding="0" cellspacing="0" border="0" '
+        f'style="width:{TILE}px;height:{TILE}px;"><tr>'
+        f'<td valign="bottom" bgcolor="{RUST}" style="background:{RUST};border-radius:2px;padding:12px;">'
+        f'<a href="{CTA_URL}" target="_blank" style="font-family:{SERIF};font-size:16px;line-height:20px;color:{CREAM};text-decoration:none;">'
+        f'<span style="color:{CREAM};">Your project next?</span><br>'
+        f'<span style="font-family:{SANS};font-size:12px;font-weight:bold;color:{CREAM};">Request a sample &rarr;</span></a>'
+        f"</td></tr></table>"
     )
 
 
@@ -161,9 +153,9 @@ def patterns_block(swatches):
     rows = [tiles[i:i + 4] for i in range(0, len(tiles), 4)]
     grid = ""
     for row in rows:
-        cells = f'<!--[if mso]></td><td width="{TILE + 6}" valign="top"><![endif]-->'.join(row)
+        cells = f'<!--[if mso]></td><td width="{MSO_CELL}" valign="top"><![endif]-->'.join(row)
         grid += (
-            f'<!--[if mso]><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="{TILE + 6}" valign="top"><![endif]-->'
+            f'<!--[if mso]><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="{MSO_CELL}" valign="top"><![endif]-->'
             f"{cells}"
             f"<!--[if mso]></td></tr></table><![endif]-->\n"
         )
@@ -176,7 +168,7 @@ def patterns_block(swatches):
 {eyebrow(copy['patterns_eyebrow'])}
 <tr><td style="padding:0 0 10px 0;font-family:{SERIF};font-size:24px;line-height:1.25;color:{INK};">{esc(copy['patterns_heading'])}</td></tr>
 <tr><td style="padding:0 0 18px 0;">{paras(copy['patterns_intro'], size=15, margin=0)}</td></tr>
-<tr><td style="padding:0;font-size:0;line-height:0;text-align:left;">
+<tr><td align="center" style="padding:0;font-size:0;line-height:0;text-align:center;">
 {grid}</td></tr>
 </table>
 </td></tr>
@@ -188,7 +180,7 @@ def snippet(images, swatches):
     cases = copy["cases"]
     body = "".join(case_block(c, images, i == len(cases) - 1) for i, c in enumerate(cases))
     stripe = "".join(
-        f'<td width="20%" height="6" bgcolor="{c}" style="background:{c};font-size:0;line-height:0;height:6px;">&nbsp;</td>'
+        f'<td width="20%" height="6" bgcolor="{c}" style="background:{c};height:6px;font-size:6px;line-height:6px;mso-line-height-rule:exactly;">&nbsp;</td>'
         for c in STRIPE
     )
     return f"""<!-- Polygood newsletter, autumn 2026: four new case studies. Paste into a Mailchimp Code block. -->
@@ -205,10 +197,9 @@ def snippet(images, swatches):
 {patterns_block(swatches)}
 <tr><td style="padding:0 0 8px 0;">{paras(copy['closing'])}</td></tr>
 <tr><td style="padding:4px 0 32px 0;">
-<!-- Button: replace the link with your samples or contact page -->
 <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-<td bgcolor="{RUST}" style="background:{RUST};border-radius:2px;">
-<a href="{CTA_URL}" target="_blank" style="display:inline-block;padding:14px 26px;font-family:{SANS};font-size:15px;font-weight:bold;line-height:1;color:{CREAM};text-decoration:none;">{esc(copy['cta_label'])}</a>
+<td bgcolor="{RUST}" style="background:{RUST};border-radius:2px;mso-padding-alt:14px 26px;">
+<a href="{CTA_URL}" target="_blank" style="display:inline-block;padding:14px 26px;font-family:{SANS};font-size:15px;font-weight:bold;line-height:1;color:{CREAM};text-decoration:none;mso-padding-alt:0;"><span style="color:{CREAM};">{esc(copy['cta_label'])}</span></a>
 </td></tr></table>
 </td></tr>
 <tr><td style="padding:0 0 32px 0;">{paras(copy['signoff'], size=15)}</td></tr>

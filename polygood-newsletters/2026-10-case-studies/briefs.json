@@ -46,10 +46,10 @@
  },
  {
   "id": "x6",
-  "detail": "Request samples",
+  "detail": "Request a sample",
   "for": "Architects, interior designers, fabricators",
   "sells": "A small next step: see the colour and finish in hand.",
-  "proof": "The newsletter's offer: \"we can send you a sample.\"",
+  "proof": "The newsletter's offer: \"we can send you a sample\", on the button and on the last tile of the patterns grid.",
   "say": "If one of these seven patterns suits a project, we can send you a sample.",
   "dont": "Don't promise free samples, sizes or delivery times unless sales has confirmed them."
  },
