@@ -4,6 +4,8 @@ Umbrella message: **One recycled panel, four different jobs**
 
 De Bijenkorf (display plinths, Amsterdam), Henriette Stadthotel (washstands, Vienna), Orion (kitchenette worktops, Paris) and ONE DUST Studio (furniture, Taipei). Every fact comes from the four case-study PDFs. Emerald Ghost appears in three of the projects, and the intro uses that to back the message.
 
+`selling-brief.md` covers each detail in the newsletter: what it sells, who it's for, the proof, a line to reuse and the claim to avoid.
+
 ## Mailchimp settings
 
 | Field | Text |

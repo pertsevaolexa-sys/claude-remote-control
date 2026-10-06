@@ -18,39 +18,28 @@ GROUPS = [
 ]
 
 
-QUOTES = "\u201c\u201d\""
-
-
-def one_line(s):
-    return " ".join(s.split())
-
-
 def cell(s):
-    return one_line(s).replace("|", "\\|")
+    return s.replace("|", "\\|")
 
 
 lines = [
     "# Selling brief: four new case studies",
     "",
-    "What each detail in the October 2026 newsletter sells, who it is for, the fact behind it, "
-    "a line to reuse in sales emails, calls and posts, and the overclaim to avoid. "
-    "Umbrella message: **One recycled panel, four different jobs.**",
+    "What each detail in the October 2026 newsletter sells, who it's for, the fact behind it, "
+    "a line to reuse in emails, calls and posts, and the claim to avoid.",
     "",
-    "Every proof comes from the four case-study PDFs (De Bijenkorf, Henriette Stadthotel, Orion, ONE DUST Studio). "
-    "If a claim isn't here, check it before using it.",
+    "Umbrella message: **One recycled panel, four different jobs.** "
+    "Every fact comes from the four case-study PDFs. Check anything that isn't here before you use it.",
     "",
-    "## At a glance",
-    "",
-    "| # | Detail | What it sells | For |",
-    "|---|---|---|---|",
+    "| # | Detail | For |",
+    "|---|---|---|",
 ]
-n = 0
 numbered = []
-for prefix, title in GROUPS:
+for prefix, _ in GROUPS:
     for b in [b for b in briefs if b["id"].startswith(prefix)]:
-        n += 1
-        numbered.append((prefix, n, b))
-        lines.append(f"| {n} | {cell(b['detail'])} | {cell(b['sells'])} | {cell(b['audience'])} |")
+        numbered.append((prefix, len(numbered) + 1, b))
+for _, i, b in numbered:
+    lines.append(f"| {i} | {cell(b['detail'])} | {cell(b['for'])} |")
 
 for prefix, title in GROUPS:
     lines += ["", f"## {title}"]
@@ -59,15 +48,14 @@ for prefix, title in GROUPS:
             continue
         lines += [
             "",
-            f"### {i}. {one_line(b['detail'])}",
+            f"### {i}. {b['detail']}",
             "",
-            f"- **In the newsletter:** “{one_line(b['in_newsletter']).strip(QUOTES)}”",
-            f"- **Sells:** {one_line(b['sells'])}",
-            f"- **For:** {one_line(b['audience'])}",
-            f"- **Proof:** {one_line(b['proof'])}",
-            f"- **Say it like this:** “{one_line(b['say_it']).strip(QUOTES)}”",
-            f"- **Don't say:** {one_line(b['dont_say'])}",
+            f"- **Sells:** {b['sells']}",
+            f"- **For:** {b['for']}",
+            f"- **Proof:** {b['proof']}",
+            f"- **Say:** “{b['say']}”",
+            f"- **Don't:** {b['dont']}",
         ]
 
 out.write_text("\n".join(lines) + "\n")
-print(f"{n} briefs -> {out}")
+print(f"{len(numbered)} briefs -> {out}")
