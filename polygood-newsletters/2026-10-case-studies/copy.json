@@ -62,13 +62,10 @@
    "image_alt": "Translucent blue Polygood slab in a gravel garden at ONE DUST Studio, Taipei"
   }
  ],
- "patterns_eyebrow": "The patterns",
- "patterns_heading": "Seven patterns, and what they used to be",
- "patterns_intro": "Between them, the four projects use seven patterns. Under each swatch: where it went and what it was made from.",
+ "palette_label": "Patterns in this project",
  "patterns": [
   {
    "name": "Salmon Terra",
-   "used": "De Bijenkorf",
    "from": "plastic spools",
    "swatch_url": "",
    "file": "salmon-terra.jpg",
@@ -76,7 +73,6 @@
   },
   {
    "name": "Sapphire Terrazzo",
-   "used": "Henriette, ONE DUST",
    "from": "plastic spools",
    "swatch_url": "",
    "file": "sapphire-terrazzo.jpg",
@@ -84,7 +80,6 @@
   },
   {
    "name": "Emerald Ghost",
-   "used": "Henriette, Orion, ONE DUST",
    "from": "home appliances",
    "swatch_url": "",
    "file": "emerald-ghost.jpg",
@@ -92,7 +87,6 @@
   },
   {
    "name": "White Terrazzo",
-   "used": "Henriette",
    "from": "fridges and plastic cutlery",
    "swatch_url": "",
    "file": "white-terrazzo.jpg",
@@ -100,7 +94,6 @@
   },
   {
    "name": "Maldives",
-   "used": "ONE DUST",
    "from": "CD cases",
    "swatch_url": "",
    "file": "maldives.jpg",
@@ -108,7 +101,6 @@
   },
   {
    "name": "Black Lollipop",
-   "used": "ONE DUST",
    "from": "electronics and plastic cutlery",
    "swatch_url": "",
    "file": "black-lollipop.jpg",
@@ -116,16 +108,13 @@
   },
   {
    "name": "Translucent Glitter Gold",
-   "used": "ONE DUST",
    "from": "CD cases",
    "swatch_url": "",
    "file": null,
    "id": "2118"
   }
  ],
- "tile_heading": "Your project next?",
- "tile_link": "Request a sample",
- "closing": "If one of these patterns suits a project you're specifying this autumn, we can send you a sample.",
+ "closing": "Between them, these four projects use seven patterns. If one of them suits a project you're specifying this autumn, we can send you a sample.",
  "cta_label": "Request a sample",
  "samples_url": "",
  "signoff": "The Polygood team\nThe Good Plastic Company"

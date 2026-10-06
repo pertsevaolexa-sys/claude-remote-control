@@ -80,13 +80,13 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 
 - **Sells:** A small next step: see the colour and finish in hand.
 - **For:** Architects, interior designers, fabricators
-- **Proof:** The newsletter's offer: "we can send you a sample", on the button and on the last tile of the patterns grid.
+- **Proof:** The newsletter's closing offer: "we can send you a sample", with the Request a sample button.
 - **Say:** “If one of these seven patterns suits a project, we can send you a sample.”
 - **Don't:** Don't promise free samples, sizes or delivery times unless sales has confirmed them.
 
 ### 7. What each pattern used to be
 
-- **Sells:** A named first life for every pattern in the issue.
+- **Sells:** A named first life for every pattern, shown under each case.
 - **For:** Designers, sustainability leads
 - **Proof:** Notion pattern library: Salmon Terra and Sapphire Terrazzo from spools; Emerald Ghost from home appliances; White Terrazzo from fridges and plastic cutlery; Maldives and Translucent Glitter Gold from CD cases; Black Lollipop from electronics and plastic cutlery.
 - **Say:** “Maldives and Translucent Glitter Gold are made from old CD cases.”

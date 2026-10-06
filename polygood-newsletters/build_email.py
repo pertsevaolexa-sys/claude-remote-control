@@ -5,7 +5,7 @@ usage: python3 build_email.py 2026-10-case-studies/copy.json 2026-10-case-studie
 Writes four files into the output folder:
   mailchimp-code-block.html      paste into a Code block in Mailchimp's email builder
   mailchimp-full-email.html      the whole email, for Mailchimp's "Paste in code" option
-  mailchimp-patterns-block.html  the patterns grid alone, for an email built from Mailchimp's own blocks
+  mailchimp-palettes.html        each case's swatch row alone, for an email built from Mailchimp's own blocks
   preview.html                   the same email with the local photos and swatches built in
 
 Words, links and images live in copy.json. The look (colours, fonts, sizes) is set below.
@@ -25,7 +25,6 @@ SANS = "Helvetica, Arial, sans-serif"
 SERIF = "Georgia, 'Times New Roman', serif"
 
 PAPER = "#fbf5ec"   # email background
-PANEL = "#f3e6d3"   # patterns block background
 INK = "#2b1d15"     # main text
 MUTED = "#7a6455"   # small grey-brown text
 RULE = "#e5d3bc"    # thin lines between cases
@@ -36,8 +35,9 @@ STRIPE = ["#c98a2e", "#6e2430", "#6b6a2e", "#d9a066", "#4a3226"]  # ochre, burgu
 HEADLINE_SIZE = 34
 TITLE_SIZE = 24
 BODY_SIZE = 16
-TILE = 120  # swatch width in px; 4 x (120 + 6) = 504, leaving slack in the 512px panel
-MSO_CELL = TILE + 6
+TILE = 96  # swatch width in px; up to 5 per row: 5 x (96 + 12) = 540, inside the 552px column
+GAP = 12   # space to the right of each swatch
+MSO_CELL = TILE + GAP
 CONTENT = 552  # width of the case photos (600 minus 24px padding each side)
 # -----------------------------------------------------------------------------
 
@@ -86,9 +86,13 @@ def rule(color=RULE, weight=1, pad="0 0 36px 0"):
     )
 
 
-def case_block(c, images, last):
+def case_patterns(c):
+    library = {p["name"]: p for p in copy["patterns"]}
+    return [library[name.strip()] for name in c["pattern"].split(",")]
+
+
+def case_block(c, images, swatches, last):
     src = images.get(c["key"], url_or_placeholder(c.get("image_url"), slug(c["title"]) + "-IMAGE"))
-    label = "Patterns" if "," in c["pattern"] else "Pattern"
     return f"""
 <!-- Case: {esc(c['title']).replace("--", "-")} -->
 <tr><td style="padding:0 0 18px 0;">
@@ -97,16 +101,17 @@ def case_block(c, images, last):
 {eyebrow(c['kicker'], pad="0 0 6px 0")}
 <tr><td style="padding:0 0 10px 0;font-family:{SERIF};font-size:{TITLE_SIZE}px;line-height:1.25;color:{INK};">{esc(c['title'])}</td></tr>
 <tr><td style="padding:0;">{paras(c['body'], margin=12)}</td></tr>
-<tr><td style="padding:0 0 14px 0;font-family:{SANS};font-size:13px;line-height:1.6;color:{MUTED};">{label}: {esc(c['pattern'])}<br>Application: {esc(c['application'])}</td></tr>
-<tr><td style="padding:0 0 36px 0;font-family:{SANS};font-size:15px;line-height:1.4;font-weight:bold;">
+<tr><td style="padding:0 0 14px 0;font-family:{SANS};font-size:13px;line-height:1.6;color:{MUTED};">Application: {esc(c['application'])}</td></tr>
+<tr><td style="padding:0 0 26px 0;font-family:{SANS};font-size:15px;line-height:1.4;font-weight:bold;">
 <a href="{attr(c['page_url'])}" target="_blank" style="color:{RUST};text-decoration:underline;">{esc(c['link_label'])}</a>
 </td></tr>
+{palette(c, swatches)}
 {'' if last else rule()}"""
 
 
 def tile(inner):
     return (
-        f'<div style="display:inline-block;width:{TILE}px;vertical-align:top;margin:0 3px 20px 3px;text-align:left;">'
+        f'<div style="display:inline-block;width:{TILE}px;vertical-align:top;margin:0 {GAP}px 16px 0;text-align:left;">'
         f"{inner}</div>"
     )
 
@@ -116,61 +121,31 @@ def swatch_tile(p, swatches):
     return tile(
         f'<img src="{attr(src)}" width="{TILE}" height="{TILE}" alt="{attr(p["name"])} pattern swatch" '
         f'style="display:block;width:{TILE}px;height:{TILE}px;border:0;border-radius:2px;">'
-        f'<div style="padding:8px 0 0 0;font-family:{SERIF};font-size:15px;line-height:1.25;color:{INK};">{esc(p["name"])}</div>'
-        f'<div style="padding:3px 0 0 0;font-family:{SANS};font-size:12px;line-height:1.4;color:{MUTED};">{esc(p["used"])}</div>'
+        f'<div style="padding:7px 0 0 0;font-family:{SERIF};font-size:14px;line-height:1.25;color:{INK};">{esc(p["name"])}</div>'
         f'<div style="padding:2px 0 0 0;font-family:{SANS};font-size:12px;line-height:1.4;color:{RUST};">Made from {esc(p["from"])}</div>'
     )
 
 
-def cta_tile():
-    return tile(
-        f'<table role="presentation" width="{TILE}" height="{TILE}" cellpadding="0" cellspacing="0" border="0" '
-        f'style="width:{TILE}px;height:{TILE}px;"><tr>'
-        f'<td valign="bottom" bgcolor="{RUST}" style="background:{RUST};border-radius:2px;padding:12px;">'
-        f'<a href="{attr(SAMPLES_URL)}" target="_blank" style="font-family:{SERIF};font-size:16px;line-height:20px;color:{CREAM};text-decoration:none;">'
-        f'<span style="color:{CREAM};">{esc(copy["tile_heading"])}</span><br>'
-        f'<span style="font-family:{SANS};font-size:12px;font-weight:bold;color:{CREAM};">{esc(copy["tile_link"])} &rarr;</span></a>'
-        f"</td></tr></table>"
-    )
-
-
-def patterns_block(swatches):
-    tiles = [swatch_tile(p, swatches) for p in copy["patterns"]] + [cta_tile()]
-    rows = [tiles[i:i + 4] for i in range(0, len(tiles), 4)]
-    grid = ""
-    for row in rows:
-        cells = f'<!--[if mso]></td><td width="{MSO_CELL}" valign="top"><![endif]-->'.join(row)
-        grid += (
-            f'<!--[if mso]><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="{MSO_CELL}" valign="top"><![endif]-->'
-            f"{cells}"
-            f"<!--[if mso]></td></tr></table><![endif]-->\n"
-        )
-    return f"""
-<!-- Patterns in this issue -->
-<tr><td style="padding:0 0 36px 0;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-<tr><td bgcolor="{PANEL}" style="background:{PANEL};padding:28px 20px 12px 20px;border-radius:2px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-{eyebrow(copy['patterns_eyebrow'])}
-<tr><td style="padding:0 0 10px 0;font-family:{SERIF};font-size:{TITLE_SIZE}px;line-height:1.25;color:{INK};">{esc(copy['patterns_heading'])}</td></tr>
-<tr><td style="padding:0 0 18px 0;">{paras(copy['patterns_intro'], size=15, margin=0)}</td></tr>
-<tr><td align="center" style="padding:0;font-size:0;line-height:0;text-align:center;">
-{grid}</td></tr>
-</table>
-</td></tr>
-</table>
+def palette(c, swatches):
+    """The row of swatches under a case: one tile per pattern the case used."""
+    tiles = [swatch_tile(p, swatches) for p in case_patterns(c)]
+    cells = f'<!--[if mso]></td><td width="{MSO_CELL}" valign="top"><![endif]-->'.join(tiles)
+    return f"""<!-- Palette: {esc(c['title']).replace("--", "-")} -->
+{eyebrow(copy['palette_label'], color=MUTED, pad="0 0 10px 0")}
+<tr><td style="padding:0 0 20px 0;font-size:0;line-height:0;text-align:left;">
+<!--[if mso]><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="{MSO_CELL}" valign="top"><![endif]-->{cells}<!--[if mso]></td></tr></table><![endif]-->
 </td></tr>"""
 
 
 def snippet(images, swatches):
     cases = copy["cases"]
-    body = "".join(case_block(c, images, i == len(cases) - 1) for i, c in enumerate(cases))
+    body = "".join(case_block(c, images, swatches, i == len(cases) - 1) for i, c in enumerate(cases))
     stripe = "".join(
         f'<td width="{100 // len(STRIPE)}%" height="6" bgcolor="{c}" style="background:{c};height:6px;font-size:6px;line-height:6px;mso-line-height-rule:exactly;">&nbsp;</td>'
         for c in STRIPE
     )
     return f"""<!-- Polygood newsletter. Paste into a Mailchimp Code block.
-Colours, for find and replace: background {PAPER} · patterns panel {PANEL} · text {INK} · small text {MUTED} · thin lines {RULE} · rust {RUST} · strip {' '.join(STRIPE)} -->
+Colours, for find and replace: background {PAPER} · text {INK} · small text {MUTED} · thin lines {RULE} · rust {RUST} · strip {' '.join(STRIPE)} -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;background:{PAPER};">
 <tr><td bgcolor="{RUST}" style="background:{RUST};padding:14px 24px;font-family:{SANS};font-size:12px;line-height:1.4;letter-spacing:0.12em;text-transform:uppercase;font-weight:bold;color:{CREAM};">{esc(copy['eyebrow'])}</td></tr>
 <tr><td style="padding:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>{stripe}</tr></table></td></tr>
@@ -182,7 +157,6 @@ Colours, for find and replace: background {PAPER} · patterns panel {PANEL} · t
 {rule(STRIPE[0], 2)}
 {body}
 {rule(STRIPE[0], 2)}
-{patterns_block(swatches)}
 <!-- Closing and button -->
 <tr><td style="padding:0 0 8px 0;">{paras(copy['closing'])}</td></tr>
 <tr><td style="padding:4px 0 32px 0;">
@@ -227,23 +201,26 @@ def full_email(inner):
 """
 
 
-def patterns_only(swatches):
-    """The patterns grid on its own, for an email built from Mailchimp's own blocks."""
-    return f"""<!-- Polygood patterns grid. Paste into a Mailchimp Code block between your other blocks. -->
+def palettes_only():
+    """Each case's swatch row on its own, for an email built from Mailchimp's own blocks."""
+    parts = []
+    for c in copy["cases"]:
+        parts.append(f"""<!-- ===== {esc(c['title'])}: paste this into a Code block under the {esc(c['title'])} case ===== -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;background:{PAPER};">
-<tr><td bgcolor="{PAPER}" style="background:{PAPER};padding:24px 24px 0 24px;">
+<tr><td bgcolor="{PAPER}" style="background:{PAPER};padding:0 24px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-{patterns_block(swatches)}
+{palette(c, {})}
 </table>
 </td></tr>
 </table>
-"""
+""")
+    return "\n".join(parts)
 
 
 code = snippet({}, {})
 (out / "mailchimp-code-block.html").write_text(code)
 (out / "mailchimp-full-email.html").write_text(full_email(code))
-(out / "mailchimp-patterns-block.html").write_text(patterns_only({}))
+(out / "mailchimp-palettes.html").write_text(palettes_only())
 
 
 def data_uri(path, mime="image/jpeg"):
@@ -254,7 +231,7 @@ def placeholder(w, h, label):
     svg = (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}"><rect width="100%" height="100%" fill="#e9dcc9"/>'
         f'<text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica,Arial" '
-        f'font-size="{max(12, w // 12)}" fill="{MUTED}">{label}</text></svg>'
+        f'font-size="{max(12, min(w // 12, 44))}" fill="{MUTED}">{label}</text></svg>'
     )
     return "data:image/svg+xml;base64," + base64.b64encode(svg.encode()).decode()
 
@@ -291,6 +268,6 @@ page = f"""<!doctype html>
 (out / "preview.html").write_text(page)
 
 placeholders = sorted(set(part.split('"')[0] for part in code.split("PASTE-")[1:]))
-words = sum(len(t.split()) for t in [copy["intro"], copy["closing"], copy["patterns_intro"]] + [c["body"] for c in copy["cases"]])
+words = sum(len(t.split()) for t in [copy["intro"], copy["closing"]] + [c["body"] for c in copy["cases"]])
 print(f"body words: {words}")
 print(f"placeholders still to fill: {len(placeholders)}" + "".join(f"\n  PASTE-{p}" for p in placeholders))
