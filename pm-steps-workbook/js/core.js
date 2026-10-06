@@ -2142,7 +2142,8 @@
       const columns = (spec.numbered ? [{ label: 'No.', width: 0.4, align: 'right' }] : []).concat(
         cols.map((c) => ({
           label: c.label + (c.kind === 'money' ? ' (' + q.cur() + ')' : c.kind === 'percent' ? ' (%)' : ''),
-          width: Math.max(0.5, (c.w || defaultWidth(c)) / 10),
+          // never narrower than the longest word of the header, so headers do not break mid-word
+          width: Math.max(0.5, (c.w || defaultWidth(c)) / 10, Math.max.apply(null, (c.label + (c.kind === 'percent' ? ' (%)' : '')).split(/\s+/).map((w) => w.length)) / 8),
           align: ['number', 'money', 'percent'].includes(c.kind) ? 'right' : 'left',
           kind: c.kind || 'text',
         }))
