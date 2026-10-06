@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PM Steps Workbook</title>
+<meta name="description" content="Project management file for the initiation and start of a project: every step, table and graphic of the planning process, ready to fill in.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="topbar">
+  <button type="button" class="btn-ghost sm nav-toggle" id="navToggle" aria-expanded="false" aria-controls="sidebar">Sections</button>
+  <div class="brand">
+    <span class="brand-mark">1.1</span>
+    <span class="brand-name">PM Steps Workbook</span>
+    <span class="brand-project" id="projName"></span>
+  </div>
+  <div class="top-actions">
+    <span class="pill" id="savePill" role="status" data-tone="busy">Opening…</span>
+    <label class="switch" for="exampleToggle"><input type="checkbox" id="exampleToggle"><span>Example</span></label>
+    <button type="button" class="btn sm" id="exportBtn">Export</button>
+  </div>
+</header>
+<div class="example-banner" id="exampleBanner" hidden><strong>Example project.</strong> A filled-in sample (a company summer festival) so you can see every table and graphic in use. It is read-only and your own file is unchanged. Turn off “Example” to go back.</div>
+<div class="layout">
+  <nav class="sidebar" id="sidebar" aria-label="Sections"></nav>
+  <main class="main" id="main" tabindex="-1"></main>
+</div>
+<div class="toast-host" id="toasts" aria-live="polite"></div>
+<div class="modal" id="modal" hidden></div>
+
+<script src="js/svg.js"></script>
+<script src="js/core.js"></script>
+<script src="js/shared.js"></script>
+<!-- sections: one file per part of the framework -->
+<script src="js/sections/overview.js"></script>
+<script src="js/sections/idea-category.js"></script>
+<script src="js/sections/boundaries-charter.js"></script>
+<script src="js/sections/stakeholders.js"></script>
+<script src="js/sections/scope.js"></script>
+<script src="js/sections/schedule.js"></script>
+<script src="js/sections/resources-costs.js"></script>
+<script src="js/sections/approvals.js"></script>
+<script src="js/sections/organisation.js"></script>
+<script src="js/sections/raci-wpspecs.js"></script>
+<script src="js/sections/risk.js"></script>
+<script src="js/sections/formats-contract-tailoring.js"></script>
+<!-- export writers -->
+<script src="js/zip.js"></script>
+<script src="js/docx.js"></script>
+<script src="js/xlsx.js"></script>
+</body>
+</html>
