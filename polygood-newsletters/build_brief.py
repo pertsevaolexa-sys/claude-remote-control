@@ -29,7 +29,8 @@ lines = [
     "a line to reuse in emails, calls and posts, and the claim to avoid.",
     "",
     "Umbrella message: **One recycled panel, four different jobs.** "
-    "Every fact comes from the four case-study PDFs. Check anything that isn't here before you use it.",
+    "Every fact comes from the four case-study PDFs and the Notion pattern library (Marketing team space › All Patterns Images). "
+    "Check anything that isn't here before you use it.",
     "",
     "| # | Detail | For |",
     "|---|---|---|",

@@ -1,11 +1,11 @@
 {
  "subject_lines": [
   "Four jobs for one recycled panel",
-  "Washstands from fridge plastic, plus three more jobs",
-  "Hotel washstands from plastic that once lined fridges"
+  "What old CD cases and fridges became",
+  "Hotel washstands, shop plinths, an office worktop"
  ],
  "preview_text": "Plinths in Amsterdam, washstands in Vienna, worktops in Paris, furniture in Taipei",
- "eyebrow": "Four new case studies",
+ "eyebrow": "Autumn 2026 · Four new case studies",
  "headline": "One recycled panel, four different jobs",
  "intro": "Polygood® is a panel made from recycled plastic. In the four projects below it became display plinths in an Amsterdam department store, washstands in a Vienna hotel, kitchenette worktops in a Paris office and furniture in a Taipei design studio.\n\nOne pattern, Emerald Ghost, appears in three of them: on the hotel's washstands, on the office worktops and among the studio's pieces.",
  "cases": [
@@ -22,7 +22,7 @@
    "key": "henriette",
    "kicker": "Vienna · Hotel",
    "title": "Henriette Stadthotel",
-   "body": "In 2025 Verena Brandtner-Pastuszyn and Georg Pastuszyn renovated their family-run four-star hotel near the Prater as what they call Austria's first Circular Living hotel. The concept, inspired by Cradle to Cradle, weighs every material on its health, recyclability and carbon, and on its social and biodiversity impact.\n\nFor the new Circular Living rooms we made the bathroom washstands in Sapphire Terrazzo, Emerald Ghost and White Terrazzo, from plastic that once lined fridges and freezers.",
+   "body": "In 2025 Verena Brandtner-Pastuszyn and Georg Pastuszyn renovated their family-run four-star hotel near the Prater as what they call Austria's first Circular Living hotel. The concept, inspired by Cradle to Cradle, weighs every material on its health, recyclability and carbon, and on its social and biodiversity impact.\n\nFor the new Circular Living rooms we made the bathroom washstands in Sapphire Terrazzo, Emerald Ghost and White Terrazzo. The White Terrazzo is made from old fridges and single-use plastic cutlery.",
    "pattern": "Sapphire Terrazzo, Emerald Ghost, White Terrazzo",
    "application": "Bathroom washstands for the Circular Living rooms",
    "link_label": "See the Henriette project"
@@ -46,7 +46,61 @@
    "link_label": "See the ONE DUST project"
   }
  ],
- "closing": "Between them, these four projects use seven Polygood patterns. If one of them suits something you are working on, we can send you a sample.",
+ "patterns_eyebrow": "The patterns",
+ "patterns_heading": "Seven patterns, and what they used to be",
+ "patterns_intro": "Between them, these four projects use seven Polygood patterns. Here is each one, where it went and the plastic it was made from.",
+ "patterns": [
+  {
+   "name": "Salmon Terra",
+   "used": "De Bijenkorf",
+   "from": "spools",
+   "file": "salmon-terra.jpg",
+   "id": "PS2121"
+  },
+  {
+   "name": "Sapphire Terrazzo",
+   "used": "Henriette, ONE DUST",
+   "from": "spools",
+   "file": "sapphire-terrazzo.jpg",
+   "id": "PS1801"
+  },
+  {
+   "name": "Emerald Ghost",
+   "used": "Henriette, Orion, ONE DUST",
+   "from": "home appliances",
+   "file": "emerald-ghost.jpg",
+   "id": "PS1706"
+  },
+  {
+   "name": "White Terrazzo",
+   "used": "Henriette",
+   "from": "fridges and plastic cutlery",
+   "file": "white-terrazzo.jpg",
+   "id": "PS2107"
+  },
+  {
+   "name": "Maldives",
+   "used": "ONE DUST",
+   "from": "CD cases",
+   "file": "maldives.jpg",
+   "id": "PS1301"
+  },
+  {
+   "name": "Black Lollipop",
+   "used": "ONE DUST",
+   "from": "electronics and plastic cutlery",
+   "file": "black-lollipop.jpg",
+   "id": "PS1602"
+  },
+  {
+   "name": "Translucent Glitter Gold",
+   "used": "ONE DUST",
+   "from": "CD cases",
+   "file": null,
+   "id": "2118"
+  }
+ ],
+ "closing": "If one of them suits something you're planning this autumn, we can send you a sample.",
  "cta_label": "Request samples",
  "signoff": "The Polygood team\nThe Good Plastic Company"
 }

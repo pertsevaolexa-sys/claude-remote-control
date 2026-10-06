@@ -2,7 +2,7 @@
 
 What each detail in the October 2026 newsletter sells, who it's for, the fact behind it, a line to reuse in emails, calls and posts, and the claim to avoid.
 
-Umbrella message: **One recycled panel, four different jobs.** Every fact comes from the four case-study PDFs. Check anything that isn't here before you use it.
+Umbrella message: **One recycled panel, four different jobs.** Every fact comes from the four case-study PDFs and the Notion pattern library (Marketing team space › All Patterns Images). Check anything that isn't here before you use it.
 
 | # | Detail | For |
 |---|---|---|
@@ -12,26 +12,27 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 | 4 | Seven patterns in four projects | Designers shortlisting colours |
 | 5 | Take-back | Retail brand teams, sustainability leads |
 | 6 | Request samples | Architects, interior designers, fabricators |
-| 7 | Repeat client | Retail brand teams |
-| 8 | Lifecycle assessment workshop | Brand teams with a sustainability brief |
-| 9 | Salmon Terra plinths and blocks | Retail teams, visual merchandisers, shopfitters |
-| 10 | Designed by Random Studio, built by Fiction Factory | Shopfitters, fabricators, designers |
-| 11 | The client's name | Brand teams and specifiers who need a known reference |
-| 12 | Hotel washstands | Hospitality brand teams, hotel designers |
-| 13 | Plastic that once lined fridges and freezers | Hotel teams who want a story for guests, designers |
-| 14 | Austria's first Circular Living hotel | Hotels and designers with circularity goals |
-| 15 | Three patterns in one project | Interior designers |
-| 16 | A family-run four-star hotel | Independent hotel owners, hospitality designers |
-| 17 | Colour that carries the scheme | Interior designers, workplace brand teams |
-| 18 | The flecks | Interior designers |
-| 19 | Cut to a rounded end | Designers, fabricators |
-| 20 | Samji Studio, the Paris fabricator | Paris workplace teams, fabricators |
-| 21 | The surface people use most | Workplace brand teams, office designers |
-| 22 | Our first project in Taiwan | Designers and brands working in Taiwan |
-| 23 | A surfaces studio's material | Designers, decorative-finish specialists |
-| 24 | Furniture and objects | Furniture designers, makers |
-| 25 | Translucent Glitter Gold | Designers choosing finishes |
-| 26 | The translucent slab | Designers, installation designers |
+| 7 | What each pattern used to be | Designers, sustainability leads |
+| 8 | Repeat client | Retail brand teams |
+| 9 | Lifecycle assessment workshop | Brand teams with a sustainability brief |
+| 10 | Salmon Terra plinths and blocks | Retail teams, visual merchandisers, shopfitters |
+| 11 | Designed by Random Studio, built by Fiction Factory | Shopfitters, fabricators, designers |
+| 12 | The client's name | Brand teams and specifiers who need a known reference |
+| 13 | Hotel washstands | Hospitality brand teams, hotel designers |
+| 14 | White Terrazzo, made from old fridges | Hotel teams who want a story for guests, designers |
+| 15 | Austria's first Circular Living hotel | Hotels and designers with circularity goals |
+| 16 | Three patterns in one project | Interior designers |
+| 17 | A family-run four-star hotel | Independent hotel owners, hospitality designers |
+| 18 | Colour that carries the scheme | Interior designers, workplace brand teams |
+| 19 | The flecks | Interior designers |
+| 20 | Cut to a rounded end | Designers, fabricators |
+| 21 | Samji Studio, the Paris fabricator | Paris workplace teams, fabricators |
+| 22 | The surface people use most | Workplace brand teams, office designers |
+| 23 | Our first project in Taiwan | Designers and brands working in Taiwan |
+| 24 | A surfaces studio's material | Designers, decorative-finish specialists |
+| 25 | Furniture and objects | Furniture designers, makers |
+| 26 | Translucent Glitter Gold | Designers choosing finishes |
+| 27 | The translucent slab | Designers, installation designers |
 
 ## Across the newsletter
 
@@ -83,9 +84,17 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “If one of these seven patterns suits a project, we can send you a sample.”
 - **Don't:** Don't promise free samples, sizes or delivery times unless sales has confirmed them.
 
+### 7. What each pattern used to be
+
+- **Sells:** A named first life for every pattern in the issue.
+- **For:** Designers, sustainability leads
+- **Proof:** Notion pattern library: Salmon Terra and Sapphire Terrazzo from spools; Emerald Ghost from home appliances; White Terrazzo from fridges and plastic cutlery; Maldives and Translucent Glitter Gold from CD cases; Black Lollipop from electronics and plastic cutlery.
+- **Say:** “Maldives and Translucent Glitter Gold are made from old CD cases.”
+- **Don't:** These are the pattern recipes, not a trace of the batch used on each project. No tonnages, and don't name whose waste it was.
+
 ## De Bijenkorf, Amsterdam · Retail
 
-### 7. Repeat client
+### 8. Repeat client
 
 - **Sells:** Reassurance: a premium department store used Polygood in 2023 and chose it again.
 - **For:** Retail brand teams
@@ -93,7 +102,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “De Bijenkorf first used Polygood in 2023 and chose it again for its new women's department.”
 - **Don't:** The case gives no reason for the second order, so don't say it was because the first performed well.
 
-### 8. Lifecycle assessment workshop
+### 9. Lifecycle assessment workshop
 
 - **Sells:** Chosen by a design team that had sustainability in the brief from the first meeting.
 - **For:** Brand teams with a sustainability brief
@@ -101,7 +110,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “De Bijenkorf's designers ran a lifecycle assessment workshop before choosing materials, then chose Polygood for the stands.”
 - **Don't:** Don't say the workshop scored or validated Polygood, or quote footprint figures: the case gives none.
 
-### 9. Salmon Terra plinths and blocks
+### 10. Salmon Terra plinths and blocks
 
 - **Sells:** A built example of Polygood as display furniture on a department store floor.
 - **For:** Retail teams, visual merchandisers, shopfitters
@@ -109,7 +118,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “At De Bijenkorf, stepped plinths in Salmon Terra lift mannequins and bags above the shop floor.”
 - **Don't:** No load ratings or wear claims: the case gives none.
 
-### 10. Designed by Random Studio, built by Fiction Factory
+### 11. Designed by Random Studio, built by Fiction Factory
 
 - **Sells:** Outside designers and builders worked with the panel.
 - **For:** Shopfitters, fabricators, designers
@@ -117,7 +126,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “Random Studio designed the stands with De Bijenkorf Store Design, and Fiction Factory built them in Polygood.”
 - **Don't:** Don't call either a Polygood partner or say they recommend it. The case credits their roles only.
 
-### 11. The client's name
+### 12. The client's name
 
 - **Sells:** A recognised name: the Netherlands' premium department store.
 - **For:** Brand teams and specifiers who need a known reference
@@ -127,7 +136,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 
 ## Henriette Stadthotel, Vienna · Hotel
 
-### 12. Hotel washstands
+### 13. Hotel washstands
 
 - **Sells:** A built hotel bathroom reference in a four-star Vienna hotel.
 - **For:** Hospitality brand teams, hotel designers
@@ -135,15 +144,15 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “We made the washstands for the new Circular Living rooms at Henriette Stadthotel in Vienna.”
 - **Don't:** No washstand count and no water or stain claims: the case gives neither.
 
-### 13. Plastic that once lined fridges and freezers
+### 14. White Terrazzo, made from old fridges
 
 - **Sells:** A first life anyone can picture.
 - **For:** Hotel teams who want a story for guests, designers
-- **Proof:** "…from plastic that once lined fridges and freezers."
-- **Say:** “Henriette's washstands are made from plastic that once lined fridges and freezers.”
-- **Don't:** The cases say this about Henriette only. Don't say all Polygood, or the same patterns elsewhere, comes from fridges.
+- **Proof:** Notion pattern library: White Terrazzo is made from refrigerators and single-use plastic cutlery.
+- **Say:** “The White Terrazzo washstands at Henriette are made from old fridges and single-use plastic cutlery.”
+- **Don't:** The case PDF says all the washstands came from fridge linings, but the pattern library gives spools for Sapphire Terrazzo and home appliances for Emerald Ghost. Say it about White Terrazzo only.
 
-### 14. Austria's first Circular Living hotel
+### 15. Austria's first Circular Living hotel
 
 - **Sells:** Polygood is in a hotel that weighs every material on health, recyclability and carbon.
 - **For:** Hotels and designers with circularity goals
@@ -151,7 +160,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “Henriette's owners call it Austria's first Circular Living hotel. We made the washstands for its new rooms.”
 - **Don't:** Attribute "Austria's first" to the owners. Don't say Polygood is Cradle to Cradle certified or passed the hotel's assessment.
 
-### 15. Three patterns in one project
+### 16. Three patterns in one project
 
 - **Sells:** Patterns can be mixed within one scheme.
 - **For:** Interior designers
@@ -159,7 +168,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “Henriette's washstands use three patterns: Sapphire Terrazzo, Emerald Ghost and White Terrazzo.”
 - **Don't:** The case doesn't say how the patterns are split across rooms, so don't describe it.
 
-### 16. A family-run four-star hotel
+### 17. A family-run four-star hotel
 
 - **Sells:** A peer reference for independent, family-run hotels.
 - **For:** Independent hotel owners, hospitality designers
@@ -169,7 +178,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 
 ## Orion, Paris · Workplace
 
-### 17. Colour that carries the scheme
+### 18. Colour that carries the scheme
 
 - **Sells:** A worktop that keeps a coloured kitchen in one block of colour.
 - **For:** Interior designers, workplace brand teams
@@ -177,7 +186,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “At Orion, Emerald Ghost sits a shade lighter than the teal cabinets, so the kitchenette reads as one block of colour.”
 - **Don't:** It's a named pattern a shade lighter, not a colour match, so don't offer custom colours.
 
-### 18. The flecks
+### 19. The flecks
 
 - **Sells:** Flecks that give a one-colour room depth and hint at the recycled plastic.
 - **For:** Interior designers
@@ -185,7 +194,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “Emerald Ghost's flecks give Orion's teal kitchenette depth and hint at the recycled plastic underneath.”
 - **Don't:** The stools aren't Polygood; the flecks only pick them up.
 
-### 19. Cut to a rounded end
+### 20. Cut to a rounded end
 
 - **Sells:** Curved plans work: the top was cut to follow a rounded island.
 - **For:** Designers, fabricators
@@ -193,7 +202,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “Samji Studio cut Orion's Emerald Ghost island top to follow its rounded end.”
 - **Don't:** The case shows cutting only. Don't promise bending, thermoforming or tight radii.
 
-### 20. Samji Studio, the Paris fabricator
+### 21. Samji Studio, the Paris fabricator
 
 - **Sells:** A Paris fabricator that already works with Polygood.
 - **For:** Paris workplace teams, fabricators
@@ -201,7 +210,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “Samji Studio, a Paris workshop building office furniture from recycled materials, fabricated Orion's worktops.”
 - **Don't:** Don't call Samji an approved or exclusive Polygood fabricator, or present Adidas as our case study.
 
-### 21. The surface people use most
+### 22. The surface people use most
 
 - **Sells:** Recycled material where a team sees and uses it every day.
 - **For:** Workplace brand teams, office designers
@@ -211,7 +220,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 
 ## ONE DUST Studio, Taipei · Design studio
 
-### 22. Our first project in Taiwan
+### 23. Our first project in Taiwan
 
 - **Sells:** A local reference in Taipei.
 - **For:** Designers and brands working in Taiwan
@@ -219,7 +228,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “Our first project in Taiwan was with ONE DUST, a Taipei design studio.”
 - **Don't:** Don't imply an office, stockist or local lead times in Taiwan. ONE DUST is a studio we worked with, not a client.
 
-### 23. A surfaces studio's material
+### 24. A surfaces studio's material
 
 - **Sells:** A studio whose trade is surfaces made a whole body of work in it.
 - **For:** Designers, decorative-finish specialists
@@ -227,7 +236,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “ONE DUST, a Taipei studio that makes decorative finishes, set its Polygood pieces against its own mineral walls and floors.”
 - **Don't:** "Surfaces are its trade" is our line, not a quote from ONE DUST, and the case reports no tests.
 
-### 24. Furniture and objects
+### 25. Furniture and objects
 
 - **Sells:** Designers can make their own furniture from the panel.
 - **For:** Furniture designers, makers
@@ -235,7 +244,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “In Taipei, ONE DUST designed and made tables, chairs, benches and shelves in Polygood.”
 - **Don't:** We didn't make these pieces and they aren't for sale. No load or durability claims.
 
-### 25. Translucent Glitter Gold
+### 26. Translucent Glitter Gold
 
 - **Sells:** The only built example so far of Translucent Glitter Gold.
 - **For:** Designers choosing finishes
@@ -243,7 +252,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “ONE DUST is the only project so far to use Translucent Glitter Gold.”
 - **Don't:** Keep "so far". Don't call it exclusive, new or made for ONE DUST.
 
-### 26. The translucent slab
+### 27. The translucent slab
 
 - **Sells:** Translucent patterns let what's behind them show through.
 - **For:** Designers, installation designers
