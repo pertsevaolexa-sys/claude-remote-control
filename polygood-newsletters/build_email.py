@@ -34,6 +34,7 @@ WHITE = "#ffffff"   # button text
 
 HERO_TITLE_SIZE = 26
 HEADLINE_SIZE = 28
+STATEMENT_SIZE = 20
 TITLE_SIZE = 22
 BODY_SIZE = 16
 HERO_TEXT_COL = 240  # header: text column width; the photo strip takes the rest of the 600px
@@ -95,6 +96,17 @@ def heading(text, size, pad="0 0 12px 0"):
     )
 
 
+def statement():
+    """The umbrella statement: one sentence under the headline, a size up from the text."""
+    text = copy.get("umbrella_statement", "").strip()
+    if not text:
+        return ""
+    return (
+        f'<tr><td style="padding:0 0 18px 0;font-family:{SANS};font-size:{STATEMENT_SIZE}px;line-height:1.4;'
+        f'color:{INK};">{esc(text)}</td></tr>'
+    )
+
+
 def case_patterns(c):
     library = {p["name"]: p for p in copy["patterns"]}
     return [library[name.strip()] for name in c["pattern"].split(",")]
@@ -108,7 +120,7 @@ def case_block(c, images, swatches, last):
 <a href="{attr(c['page_url'])}" target="_blank" style="text-decoration:none;"><img src="{attr(src)}" width="{CONTENT}" alt="{attr(c['image_alt'])}" style="display:block;width:100%;max-width:{CONTENT}px;height:auto;border:0;"></a>
 </td></tr>
 {label(c['kicker'], pad="0 0 6px 0")}
-{heading(c['title'], TITLE_SIZE, pad="0 0 10px 0")}
+{heading(c.get('headline') or c['title'], TITLE_SIZE, pad="0 0 10px 0")}
 <tr><td style="padding:0;">{paras(c['body'], margin=12)}</td></tr>
 <tr><td style="padding:0 0 14px 0;font-family:{SANS};font-size:13px;line-height:1.6;color:{MUTED};">Application: {esc(c['application'])}</td></tr>
 <tr><td style="padding:0 0 26px 0;font-family:{SANS};font-size:15px;line-height:1.4;font-weight:bold;">
@@ -203,6 +215,7 @@ def body(images, swatches):
 <!-- Headline and intro -->
 {label(copy['eyebrow'])}
 {heading(copy['headline'], HEADLINE_SIZE, pad="0 0 14px 0")}
+{statement()}
 <tr><td style="padding:0 0 16px 0;">{paras(copy['intro'], size=BODY_SIZE + 1)}</td></tr>
 {dashed()}
 {blocks}
