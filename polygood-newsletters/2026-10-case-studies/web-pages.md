@@ -106,6 +106,6 @@ Indoors, the pieces sit against ONE DUST's own mineral finishes, their patterned
 
 ### To do in WordPress
 
-- Set the slug to one-dust-studio-taipei and the SEO title below. Neither is set yet, and the newsletter button links to /projects/one-dust-studio-taipei/.
+- Set the slug to one-dust-studio-taipei and the SEO title above. Neither is set yet, and the newsletter button links to /projects/one-dust-studio-taipei/.
 - Alt text for A_6853073_1-1 (the garden photo): "Translucent blue Polygood panel among dark rocks in a gravel garden at ONE DUST Studio, Taipei". Describe the piece and pattern in each of the other three photos.
 - If the template has a credits field: Design and photography: ONE DUST Studio.
