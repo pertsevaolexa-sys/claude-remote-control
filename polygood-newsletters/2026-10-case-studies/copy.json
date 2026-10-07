@@ -1,13 +1,21 @@
 {
  "subject_lines": [
+  "The Polygood® Project Edit for autumn",
   "Four jobs for one recycled panel",
-  "What old CD cases and fridges became",
-  "The pattern three of our four new projects chose"
+  "What old CD cases and fridges became"
  ],
  "preview_text": "Plinths in Amsterdam, washstands in Vienna, worktops in Paris, furniture in Taipei",
+ "hero": {
+  "title": "The Polygood® Project Edit",
+  "subtitle": "Explore the projects, discover the patterns behind them, and find something for your next material palette.",
+  "intro": "This autumn, we’re back with a fresh selection of Polygood® projects to share with you. We’ve brought together four different takes on the material, from sculptural furniture to thoughtfully detailed interiors.",
+  "image_url": "",
+  "image_file": "hero-strip.jpg",
+  "image_alt": "Close-ups of four Polygood projects: Salmon Terra plinths, an Emerald Ghost worktop, a Sapphire Terrazzo washstand and a navy shelf at ONE DUST Studio"
+ },
  "eyebrow": "Autumn 2026 · Four new case studies",
  "headline": "One recycled panel, four different jobs",
- "intro": "Polygood® is a panel made from recycled plastic. In the four projects below it became display plinths in an Amsterdam department store, washstands in a Vienna hotel, kitchenette worktops in a Paris office and furniture made by a Taipei design studio.\n\nOne pattern, Emerald Ghost, appears in three of them: on the hotel's washstands, on the office worktops and among the studio's pieces.",
+ "intro": "Polygood is a panel made from recycled plastic. In the four projects below it became display plinths in an Amsterdam department store, washstands in a Vienna hotel, kitchenette worktops in a Paris office and furniture made by a Taipei design studio.\n\nOne pattern, Emerald Ghost, appears in three of them: on the hotel's washstands, on the office worktops and among the studio's pieces.",
  "cases": [
   {
    "key": "bijenkorf",
@@ -32,8 +40,8 @@
    "link_label": "See the Henriette project",
    "page_url": "https://polygood.com/projects/henriette-stadthotel/",
    "image_url": "",
-   "image_file": null,
-   "image_alt": "Polygood washstand in a Circular Living room at Henriette Stadthotel, Vienna"
+   "image_file": "henriette.jpg",
+   "image_alt": "Washstand in Sapphire Terrazzo with a white basin in a Circular Living bathroom at Henriette Stadthotel, Vienna"
   },
   {
    "key": "orion",
@@ -63,6 +71,7 @@
   }
  ],
  "palette_label": "Patterns in this project",
+ "palette_cta": "Order samples of these patterns",
  "patterns": [
   {
    "name": "Salmon Terra",
@@ -114,8 +123,8 @@
    "id": "2118"
   }
  ],
- "closing": "Between them, these four projects use seven patterns. If one of them suits a project you're specifying this autumn, we can send you a sample.",
- "cta_label": "Request a sample",
- "samples_url": "",
+ "closing": "Between them, these four projects use seven patterns. Order samples of the ones that suit a project you're specifying this autumn, and see the colour and finish in your hand.",
+ "cta_label": "Order samples",
+ "samples_url": "https://polygood.com/order-samples/",
  "signoff": "The Polygood team\nThe Good Plastic Company"
 }

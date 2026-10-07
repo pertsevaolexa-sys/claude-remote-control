@@ -12,12 +12,35 @@ All paths are inside `polygood-newsletters/`.
 |---|---|---|
 | `2026-10-case-studies/copy.json` | Every word, link, image address and alt text in the email | Yes: this is the master version for routes D, E and F |
 | `build_email.py` | Turns `copy.json` into the HTML. The top section sets colours, fonts and sizes | Only to change the look |
-| `2026-10-case-studies/mailchimp-code-block.html` | The email body, for a Code block in Mailchimp | Paste it. Edit it only in route A |
-| `2026-10-case-studies/mailchimp-full-email.html` | The whole email with footer, for Mailchimp's "Paste in code" | Route B |
-| `2026-10-case-studies/mailchimp-patterns-block.html` | The patterns grid on its own | Route C |
-| `2026-10-case-studies/preview.html` | The email with the photos built in, to look at in a browser | Never paste this into Mailchimp: it is about 850 KB and Gmail would clip it |
-| `2026-10-case-studies/images/` | Case photos (1200 × 800) and `swatches/` (240 × 240) | Swap them for other photos |
-| `2026-10-case-studies/briefs.json` and `build_brief.py` | The selling brief | Same way as `copy.json` |
+| `2026-10-case-studies/mailchimp-code-block.html` | Everything after the Project Edit header and intro, for a Code block under your header in Mailchimp | Paste it. Edit it only in route A |
+| `2026-10-case-studies/mailchimp-hero.html` | The Project Edit header (title, subtitle, photo strip), the dashed line and the intro | Only if the header isn't already built in Mailchimp |
+| `2026-10-case-studies/mailchimp-full-email.html` | The whole email (header, body, footer), for Mailchimp's "Paste in code" | Route B |
+| `2026-10-case-studies/mailchimp-palettes.html` | Each case's row of pattern swatches on its own | Route C |
+| `2026-10-case-studies/preview.html` | The email with the photos built in, to look at in a browser | Never paste this into Mailchimp: it is about 1 MB and Gmail would clip it |
+| `2026-10-case-studies/images/` | Case photos (1200 × 800), the header strip `hero-strip.jpg` (720 × 420) and `swatches/` (240 × 240) | Swap them for other photos |
+| `2026-10-case-studies/briefs.json` and `build_brief.py` | The selling brief | See "Selling brief" in route D |
+
+## How the email is laid out
+
+From top to bottom:
+
+1. **The Project Edit header** (in Mailchimp, or `mailchimp-hero.html`):
+   - "The Polygood® Project Edit" and its subtitle, beside the four-photo strip
+   - a teal dashed line
+   - the intro ("This autumn, we're back…")
+2. **The main code block** (`mailchimp-code-block.html`):
+   1. The small teal label "Autumn 2026 · Four new case studies", the headline "One recycled panel, four different jobs" and its two paragraphs
+   2. A teal dashed line
+   3. Four cases. Each one has:
+      - a photo
+      - a label, title and text
+      - the application line
+      - a "See the … project" link
+      - a "Patterns in this project" row of swatches
+      - an "Order samples of these patterns" link
+      - a dashed line, except after the last case
+   4. A dashed line
+   5. The closing paragraph, the "Order samples" button and the sign-off
 
 ## Which route?
 
@@ -26,7 +49,7 @@ All paths are inside `polygood-newsletters/`.
 | Fix a typo or change a sentence in this issue | A (in Mailchimp) or F (ask Claude) |
 | Put in the image links and the samples link | A for this issue. D if you'll rebuild later: set them once in `copy.json` |
 | Change colours or font sizes | A (find and replace) or D (top of `build_email.py`) |
-| Add, remove or reorder a case or a pattern | D or F. In route A it is fiddly |
+| Add, remove or reorder a case, or change which patterns a case shows | D or F. In route A it is fiddly |
 | Start the next newsletter from this one | D: copy the folder, edit, rebuild |
 | Let teammates edit without seeing code | C (rebuild in Mailchimp's own blocks) |
 | Control the whole email, footer included, as one HTML file | B |
@@ -52,7 +75,14 @@ For anything bigger than one word, use a text editor. Copy the whole block into 
 
 Leave `style="…"` and any line with `<!--[if mso]>` alone, unless a recipe below says otherwise. In text, write `&` as `&amp;`. Straight apostrophes (`'`) are fine.
 
-**Find your way around.** The code is marked in order: `Headline and intro`, `Case: De Bijenkorf`, `Case: Henriette Stadthotel`, `Case: Orion`, `Case: ONE DUST Studio`, `Patterns in this issue`, `Closing and button`. Search for those words.
+**Find your way around.** Search for these markers, in this order:
+- `Header: The Project Edit` (only in `mailchimp-hero.html` and the full email)
+- `Headline and intro`
+- `Case: De Bijenkorf`, `Palette: De Bijenkorf`
+- `Case: Henriette Stadthotel`, `Palette: Henriette Stadthotel`
+- `Case: Orion`, `Palette: Orion`
+- `Case: ONE DUST Studio`, `Palette: ONE DUST Studio`
+- `Closing and button`
 
 ### Recipes for route A
 
@@ -62,35 +92,53 @@ Leave `style="…"` and any line with `<!--[if mso]>` alone, unless a recipe bel
 
 **Add or swap an image.**
 1. In Mailchimp, open Content Studio, upload the image and copy its URL. Content Studio takes images up to 1 MB. Ours are 10 to 300 KB.
-2. Paste the URL over the matching `PASTE-…-URL-HERE`, or over the old address, inside `src="…"`.
+2. Paste the URL over the matching `PASTE-…-URL-HERE`, or over the old address, inside `src="…"`. A swatch appears once for every case that uses it: Emerald Ghost three times, Sapphire Terrazzo twice. So use Replace All on each `PASTE-SWATCH-…-URL-HERE`.
 
 Case photos should be 1200 × 800 px (they display at 552 × 368). Swatches should be square, 240 × 240 px.
 
-**Add the samples link.** Replace `PASTE-ORDER-SAMPLES-URL-HERE`. It appears twice: in the grid tile and in the button.
+**Change the samples link.** It is already set to `https://polygood.com/order-samples/`, the most-clicked link in your past campaigns. It appears five times: under each case's swatches and in the button. To change it, use Replace All.
 
-**Change a colour.** The first lines of the code list every colour. Use Replace All on the hex code. For example, `#9a3f22` (rust) colours the top band, labels, links, button and samples tile at once. `#fbf5ec` is both the background and the text colour on rust, so changing it changes both.
+**Change a colour.** The first lines of the code list every colour. Use Replace All on the hex code:
 
-**Change a font size.** The sizes are in `style`:
+| Colour | Used for |
+|---|---|
+| `#1b7f86` (teal) | The dashed lines, the small labels, the links and the button |
+| `#9a5b34` (warm brown) | The "Made from …" captions under the swatches |
+| `#fff9f4` | The background |
+| `#141414` | Headings and text |
+| `#6b625b` | Small grey text: the application lines and "Patterns in this project" |
+
+If you change the teal, change it in your Mailchimp header's dashed line too.
+
+**Change a font size.** The sizes are in `style`. Change only the number, and go up 2 to 4 px at most so the layout keeps its shape.
 
 | Text | Size |
 |---|---|
-| Headline | `font-size:34px` |
-| Case titles and the patterns heading | `font-size:24px` |
-| Intro | `font-size:17px` |
-| Body | `font-size:16px` |
+| Header title (header file only) | `font-size:26px` |
+| Header intro (header file only) | `font-size:18px` |
+| Headline | `font-size:28px` |
+| Case titles | `font-size:22px` |
+| The two paragraphs under the headline | `font-size:17px` |
+| Case text and the closing paragraph | `font-size:16px` |
+| "Order samples of these patterns" links | `font-size:14px` |
+| Application lines and pattern names under the swatches | `font-size:13px` |
 
-Change only the number.
+**Change the small label above the headline.** Search for `Autumn 2026 · Four new case studies`.
 
-**Change the band text.** Search for `Autumn 2026 · Four new case studies`.
-
-**Change a pattern caption.** Search for the words, for example `Made from plastic spools`.
+**Change a pattern caption.** Search for the pattern's name followed by `</div>`, for example `Emerald Ghost</div>`, and edit the "Made from …" text just after it. Don't use Replace All on captions: several patterns share the same words ("Made from plastic spools", "Made from CD cases"). A pattern also appears once for each case that uses it, so change it in each of those cases.
 
 **Remove a case.**
-1. Delete from its `<!-- Case: … -->` line down to, but not including, the next `<!-- Case:` line.
-2. Each case except the last ends with a thin divider. If you delete the last case (ONE DUST), also delete the divider row at the end of the case above it: the `<tr>` that contains `height="1"` just before `<!-- Case: ONE DUST Studio -->`.
-3. Then fix the intro and pattern tiles that mention the removed case.
+1. Delete from its `<!-- Case: … -->` line down to the line just before the next `<!-- Case:` line. That takes out the case, its palette, its "Order samples" link and the dashed line under it.
+2. The last case (ONE DUST) works differently, because nothing follows it:
+   1. First delete the dashed line at the end of the case above it. That is the line directly above `<!-- Case: ONE DUST Studio -->`.
+   2. Then delete from `<!-- Case: ONE DUST Studio -->` down to, but not including, the dashed line directly above `<!-- Closing and button -->`.
+3. Then fix every place that names or counts the cases:
+   - the label ("Four new case studies")
+   - the headline ("four different jobs")
+   - the intro
+   - "these four projects use seven patterns" in the closing
 
-**Reorder cases or remove a pattern tile.** It's possible, but the dividers and the Outlook grid code make it easy to break. Use route D or F instead.
+**Reorder cases, or add or remove a swatch.** It's possible, but the lines between cases and the Outlook code in each palette make it easy to break. Use route D or F instead.
 
 **Undo.** The original code is in `mailchimp-code-block.html` in the repository. Paste it back to start over.
 
@@ -98,7 +146,7 @@ Change only the number.
 
 ## Route B: the whole email as HTML ("Paste in code")
 
-Best for: full control of the email, footer included, as one HTML file.
+Best for: full control of the email, header and footer included, as one HTML file.
 
 1. In Mailchimp, create an email. When it asks for a design, choose to code your own and use **Paste in code**.
    - Mailchimp's help says custom-coded templates are in the classic builder and need a Standard plan or higher.
@@ -117,14 +165,20 @@ Trade-off: you control everything, but Mailchimp's drag-and-drop editing is off 
 
 Best for: issues that teammates will edit in Mailchimp without touching HTML.
 
-1. Start from a plain one-column layout, 600 px wide, background `#fbf5ec`.
-2. Top band: a Text block on background `#9a3f22`, white or `#fbf5ec` text, small capitals: "Autumn 2026 · Four new case studies".
-3. Headline: a Heading block in Georgia, colour `#2b1d15`, about 34 px. Intro: a Paragraph or Text block.
+1. Keep the Project Edit header you built. Set the email background to `#fff9f4`, 600 px wide.
+2. Label and headline: a Text block with "Autumn 2026 · Four new case studies" in teal `#1b7f86`, small capitals. Then a Heading block, "One recycled panel, four different jobs", in a bold sans-serif, colour `#141414`, about 28 px. Then a Text block for the two paragraphs.
+3. A Divider block: 2 px, dashed, teal `#1b7f86`. Use the same divider between every section.
 4. For each case:
    - an Image block with the photo, linked to the project page
-   - a Text block with the label (rust `#9a3f22`, small capitals), the title (Georgia), the body, the pattern line in `#7a6455`, and the "See the … project" link
-5. Patterns grid: Mailchimp's blocks can't lay out tiles like this. Add a Code block and paste `mailchimp-patterns-block.html`.
-6. Closing: a Text block, then a Button block "Request a sample" in `#9a3f22`.
+   - a Text block with:
+     - the label in teal, small capitals
+     - the title in bold
+     - the text
+     - the application line in `#6b625b`
+     - the "See the … project" link
+   - a Code block for the swatches: in `mailchimp-palettes.html`, find that case's section (it starts with `===== Case name`) and paste it in
+   - a Text block with the link "Order samples of these patterns →" to `https://polygood.com/order-samples/`
+5. Closing: a Text block, then a Button block "Order samples" in teal `#1b7f86`, linked to the same page.
 
 Trade-off: easy for anyone to edit afterwards, but spacing and fonts will be close to the design, not identical, especially in Outlook.
 
@@ -151,7 +205,7 @@ Best for: bigger changes, reusing the design for the next newsletter, keeping on
    python3 build_email.py 2026-10-case-studies/copy.json 2026-10-case-studies
    ```
    It prints the word count and any `PASTE-…` placeholders you still need to fill.
-3. Open `preview.html` in a browser to check it.
+3. Open `preview.html` in a browser to check it. Each picture comes from its `image_url` or `swatch_url` if filled. Otherwise it comes from the local file named in `image_file` (in `images/`) or `file` (in `images/swatches/`). If neither is found, you see a grey box with the name. That usually means the file name is misspelled (capitals, and `.jpg` vs `.jpeg`, matter) or the file is in the wrong folder.
 4. Paste the new `mailchimp-code-block.html` into the Code block in Mailchimp, replacing the old code.
 
 ### What each field in `copy.json` controls
@@ -159,43 +213,76 @@ Best for: bigger changes, reusing the design for the next newsletter, keeping on
 | Field | Where it shows |
 |---|---|
 | `subject_lines`, `preview_text` | Not in the email. Copy them into Mailchimp's settings. The first subject shows on the preview page |
-| `eyebrow` | Text in the rust band at the top |
-| `headline`, `intro` | Big headline and opening paragraphs |
-| `cases` | One block per case, in this order. Each has `kicker` (small rust label), `title`, `body`, `pattern`, `application`, `link_label`, `page_url`, `image_url` (Content Studio link), `image_file` (local photo for the preview) and `image_alt` |
-| `patterns_eyebrow`, `patterns_heading`, `patterns_intro` | Top of the patterns block |
-| `patterns` | One tile each, in this order: `name`, `used` (projects), `from` (shown as "Made from …"), `swatch_url` (Content Studio link), `file` (local swatch for the preview) |
-| `tile_heading`, `tile_link` | The rust samples tile at the end of the grid |
+| `hero` | The Project Edit header: `title`, `subtitle`, `intro`, and the photo strip (`image_url`, `image_file`, `image_alt`). Used in `mailchimp-hero.html`, the full email and the preview |
+| `eyebrow` | The small teal label above the headline |
+| `headline`, `intro` | The headline and its two paragraphs |
+| `cases` | One block per case, in this order. See the next table |
+| `palette_label` | The small heading over each swatch row ("Patterns in this project") |
+| `palette_cta` | The link under each swatch row ("Order samples of these patterns") |
+| `patterns` | The pattern library. Each has `name`, `from` (shown as "Made from …"), `swatch_url` (Content Studio link), `file` (local swatch for the preview) and `id` (the Polygood pattern ID, not shown) |
 | `closing`, `cta_label` | Last paragraph and the button text |
-| `samples_url` | Where the tile and the button link to |
+| `samples_url` | Where the button and the links under the swatches go (set to polygood.com/order-samples/) |
 | `signoff` | Last lines |
+
+Each case has these fields:
+
+| Case field | What it is |
+|---|---|
+| `key` | A short unique name with no spaces, for example `paris-showroom`. Used only to match the preview photo |
+| `kicker` | Small teal label above the title, for example "Vienna · Hotel" |
+| `title`, `body` | Title and text |
+| `pattern` | The patterns this case shows as swatches, separated by commas. Each name must match a `name` in `patterns` exactly |
+| `application` | The grey "Application:" line |
+| `link_label`, `page_url` | The project link text and address |
+| `image_url` | The photo's Content Studio link, once you have it |
+| `image_file` | The local photo in `images/`, for the preview |
+| `image_alt` | What the photo shows, for screen readers and blocked images |
 
 **Fill the links once.** Put the Content Studio URLs into `image_url` and `swatch_url`, and the samples page into `samples_url`. Every rebuild after that comes out finished, with no placeholders.
 
 ### JSON rules
 
 - Text sits between double quotes. Inside text, write a double quote as `\"`. Straight apostrophes are fine.
+- Type `&`, `<` and `>` as they are: the script converts them. (Don't use `&amp;` here. That's only for route A.)
 - `\n\n` starts a new paragraph, and `\n` a new line (the sign-off uses it).
-- Put a comma after every item except the last in a list or block.
-- If the script stops with something like `Expecting ',' delimiter: line 40 column 3`, look at that line for a missing comma or quote.
+- Every `{ … }` block in a list is followed by a comma, except the last one before `]`.
+- **When the script stops with an error**, nothing is rebuilt until you fix it. Read the last line of the error:
+  - `Expecting ',' delimiter: line 40 column 3`: look at the end of the line just above line 40 for a missing comma, or at line 40 for a missing or extra quote.
+  - `Illegal trailing comma` or `Expecting value`: there is a comma too many, usually after the last block before `]` or `}`.
 
 ### Common changes
 
-- **Add a case:** copy one `{ … }` block inside `cases`, give it a new `key` and new text, and put its photo in `images/`.
-- **Remove a case:** delete its block and the comma before it.
-- **Reorder cases:** move whole blocks around.
-- **Patterns:** they work the same way. The grid reflows on its own: four per row, with the samples tile always last.
+- **Add a case.**
+  1. Copy one `{ … }` block inside `cases`.
+  2. Give it a new `key`, then change all the text and links.
+  3. Put its photo in `images/` and write that exact file name in `image_file`.
+  4. List its patterns in `pattern`. If a pattern is new, add it to `patterns` with its swatch in `images/swatches/`.
+  5. Check the commas.
+- **Remove a case.**
+  1. Delete its `{ … }` block, then check the commas:
+     - If you deleted the last case, remove the comma after the new last block.
+     - If you deleted the first case, remove the comma left at the top.
+  2. Then update everything that names or counts the cases: `eyebrow`, `headline`, `intro`, the pattern count in `closing`, `subject_lines` and `preview_text`.
+- **Reorder cases:** move whole `{ … }` blocks, then check the commas the same way. The dashed lines between cases sort themselves out.
+- **Change which swatches a case shows:** edit its `pattern` field.
+- **Change a pattern's caption:** edit its `from` in `patterns`. It changes under every case that uses it.
 - **Change the look:** edit the section at the top of `build_email.py`:
-  - colours: `PAPER`, `PANEL`, `INK`, `MUTED`, `RULE`, `RUST`, `CREAM`, `STRIPE`
-  - fonts: `SANS`, `SERIF`
-  - sizes: `HEADLINE_SIZE`, `TITLE_SIZE`, `BODY_SIZE`, `TILE`
-- **Start the next newsletter:** copy the folder `2026-10-case-studies` to a new name, for example `2026-11-…`. Change its `copy.json` and `images/`, then run the same command with the new folder name, twice:
-  ```
-  python3 build_email.py 2026-11-…/copy.json 2026-11-…
-  ```
-- **Selling brief:** edit `briefs.json`, then run:
+  - colours: `PAPER`, `INK`, `MUTED`, `TEAL`, `WARM`, `WHITE`
+  - font: `SANS`
+  - sizes: `HERO_TITLE_SIZE`, `HEADLINE_SIZE`, `TITLE_SIZE`, `BODY_SIZE`, `HERO_TEXT_COL` (width of the header's text column), `TILE` (swatch size)
+- **Start the next newsletter.**
+  1. Copy the folder `2026-10-case-studies` and give the copy a new name with no spaces, for example `2026-11-showrooms`.
+  2. Change its `copy.json` and `images/`.
+  3. Run the build with the new name in both places. The first tells the script where to read and the second where to write:
+     ```
+     python3 build_email.py 2026-11-showrooms/copy.json 2026-11-showrooms
+     ```
+     If you change only the first name, the script overwrites the October files.
+- **Selling brief.** Edit `briefs.json`, then run:
   ```
   python3 build_brief.py 2026-10-case-studies/briefs.json 2026-10-case-studies/selling-brief.md
   ```
+  Each brief's `id` starts with a letter that puts it in a section: `x` across the newsletter, `b` De Bijenkorf, `h` Henriette, `o` Orion, `d` ONE DUST. A brief with any other letter is left out without warning. The section names and the title are set at the top of `build_brief.py`, so change them there for a new issue (or ask Claude).
 
 ---
 
@@ -217,7 +304,7 @@ Best for: anything, with no setup. Describe the change in plain words. Claude ed
 - "Change the headline to …"
 - "Take Orion out and add the Polygood Paris showroom"
 - "Here are the Content Studio links for the photos: …"
-- "Make the rust darker" or "switch to a winter palette"
+- "Make the teal darker" or "switch to a winter palette"
 - "Write the November issue from these three PDFs in the same design"
 
 If Mailchimp is connected to Zapier (the link was shared earlier in the chat), Claude can also create the draft campaign in Mailchimp. It won't send or schedule anything unless you say so.
@@ -233,7 +320,7 @@ If Mailchimp is connected to Zapier (the link was shared earlier in the chat), C
    - in Outlook on a computer
    - on a phone
 
-   The patterns grid should show four across on a computer and two across on a phone.
+   Each case's swatches should sit in one row on a computer (ONE DUST has five) and wrap to two or three per row on a phone.
 4. Click every link. Three project pages (Henriette, Orion, ONE DUST) only work once they're published on polygood.com.
 5. Check the subject line and preview text in Mailchimp's settings.
 
@@ -242,8 +329,9 @@ If Mailchimp is connected to Zapier (the link was shared earlier in the chat), C
 | You see | Likely cause and fix |
 |---|---|
 | A broken-image icon | The `src` is still a placeholder, or the address isn't public. It must start with `https://`. Use the Content Studio URL |
-| The grid shows three across on a computer | The Code block has padding. Set it to 0. Or in route D, lower `TILE` to 112 and rebuild |
-| The grid stacks one tile per row in Outlook only | Mailchimp may have removed the Outlook-only lines (`<!--[if mso]>`). This hasn't been tested yet. The email still works. For a tidy grid in Outlook, ask Claude for a table-based version of the grid |
+| ONE DUST's five swatches wrap onto two rows on a computer | The Code block has padding. Set it to 0. Or in route D, lower `TILE` to 88 and rebuild |
+| The header's title and photos sit one above the other on a computer | Your email app doesn't support the trick that puts them side by side. The email still reads well. If it happens in Gmail or Apple Mail, tell Claude |
+| Swatches stack one per row in Outlook only | Mailchimp may have removed the Outlook-only lines (`<!--[if mso]>`). This hasn't been tested yet. The email still works. For a tidy row in Outlook, ask Claude for a table-based version |
 | "[Message clipped]" in Gmail | The email is over 102 KB. Usually this means `preview.html` was pasted instead of `mailchimp-code-block.html` |
 | Odd characters such as `â€™` | The file was saved in a format other than UTF-8. Save it as UTF-8 and paste again |
 | A Mailchimp edit disappeared | You rebuilt from `copy.json` (route D) after editing in Mailchimp (route A). Put the edit into `copy.json` and rebuild |

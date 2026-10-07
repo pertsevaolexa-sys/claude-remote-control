@@ -11,7 +11,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 | 3 | Emerald Ghost in three of the four projects | Interior designers, architects |
 | 4 | Seven patterns in four projects | Designers shortlisting colours |
 | 5 | Take-back | Retail brand teams, sustainability leads |
-| 6 | Request a sample | Architects, interior designers, fabricators |
+| 6 | Order samples | Architects, interior designers, fabricators |
 | 7 | What each pattern used to be | Designers, sustainability leads |
 | 8 | Repeat client | Retail brand teams |
 | 9 | Lifecycle assessment workshop | Brand teams with a sustainability brief |
@@ -76,12 +76,12 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “Each panel is pressed from one type of recycled plastic, so De Bijenkorf's stands can come back and become new panels.”
 - **Don't:** The cases describe take-back for De Bijenkorf's stands only. Check the terms before offering it on a new project, and don't say any stands have come back yet.
 
-### 6. Request a sample
+### 6. Order samples
 
 - **Sells:** A small next step: see the colour and finish in hand.
 - **For:** Architects, interior designers, fabricators
-- **Proof:** The newsletter's closing offer: "we can send you a sample", with the Request a sample button.
-- **Say:** “If one of these seven patterns suits a project, we can send you a sample.”
+- **Proof:** The newsletter's one action, under each case's swatches and on the closing button. In past campaigns, Order samples was the most-clicked link in "Introducing GROWTH" (4.3% click rate, against a 2.8% average).
+- **Say:** “If one of these patterns suits a project, order samples at polygood.com/order-samples.”
 - **Don't:** Don't promise free samples, sizes or delivery times unless sales has confirmed them.
 
 ### 7. What each pattern used to be
