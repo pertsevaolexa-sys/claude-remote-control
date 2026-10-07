@@ -8,7 +8,7 @@ Writes five files into the output folder:
   mailchimp-hero.html        the Project Edit header, dashed line and intro, if you want those in code too
   mailchimp-full-email.html  the whole email (header + body + footer), for Mailchimp's "Paste in code"
   mailchimp-palettes.html    each case's swatch row alone, for an email built from Mailchimp's own blocks
-  preview.html               the whole email with the local photos and swatches built in
+  preview.html               the whole email to check in a browser, with the same hosted pictures as Mailchimp
 
 Words, links and images live in copy.json. The look (colours, fonts, sizes) is set below.
 Images: an image_url or swatch_url wins; otherwise image_base_url + the file name is used
@@ -338,7 +338,9 @@ def placeholder(w, h, text):
 
 
 def preview_image(url, local, folder, text, w, h):
-    """Preview uses the hosted image if there is one, then the local file, then a grey placeholder."""
+    """Preview uses the hosted image if there is one, then the local file, then a grey placeholder.
+    Hosted images keep preview.html small (embedding every photo made it over 1 MB, which some
+    viewers cut short) and show exactly what Mailchimp will load."""
     if url and url.strip():
         return url.strip()
     if local and (folder / local).exists():
@@ -348,12 +350,12 @@ def preview_image(url, local, folder, text, w, h):
 
 imgdir = out / "images"
 images = {
-    c["key"]: preview_image(c.get("image_url"), c.get("image_file"), imgdir, f"{c['title']} photo", 1200, 800)
+    c["key"]: preview_image(hosted(c.get("image_url"), c.get("image_file")), c.get("image_file"), imgdir, f"{c['title']} photo", 1200, 800)
     for c in copy["cases"]
 }
-images["hero"] = preview_image(copy["hero"].get("image_url"), copy["hero"].get("image_file"), imgdir, "Header photos", 720, 420)
+images["hero"] = preview_image(hosted(copy["hero"].get("image_url"), copy["hero"].get("image_file")), copy["hero"].get("image_file"), imgdir, "Header photos", 720, 420)
 swatches = {
-    p["name"]: preview_image(p.get("swatch_url"), p.get("file"), imgdir / "swatches", "Add swatch", 240, 240)
+    p["name"]: preview_image(hosted(p.get("swatch_url"), p.get("file"), "swatches/"), p.get("file"), imgdir / "swatches", "Add swatch", 240, 240)
     for p in copy["patterns"]
 }
 
