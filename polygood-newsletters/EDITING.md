@@ -88,7 +88,7 @@ Leave `style="…"` alone, unless a recipe below says otherwise. In the header f
 
 **Change a sentence.** Search for three or four words of it and retype it.
 
-**Change a project link.** Each case has its link twice: on the photo and on the "See the … project" button. Replace both, for example every `https://polygood.com/projects/orion/`.
+**Change a project link.** Each case has its link twice: on the photo and on the "See the … project" button. Replace both, for example every `https://polygood.com/projects/orion-office-kitchenette-paris/`.
 
 **Change a button's text.** Search for the words on the button, for example `See the Orion project` or `Order samples of these patterns`, and retype them. The text sits inside `<span …>` and `</span>`. Keep it short (five words at most) so the button stays on one line on a phone. "Order samples of these patterns" appears four times, once per case, so use Replace All if you change it.
 
@@ -351,7 +351,7 @@ Polygood is a premium material. The email never names or hints at what the plast
    - on a phone
 
    Each case's swatches should sit three to a row on a computer and on a phone. ONE DUST's five make a row of three and a row of two.
-4. Click every link. Three project pages (Henriette, Orion, ONE DUST) only work once they're published on polygood.com.
+4. Click every link. The project buttons only work once all four pages are published on polygood.com, with the ONE DUST slug set to `one-dust-studio-taipei`.
 5. Check the subject line and preview text in Mailchimp's settings.
 
 ## If something looks wrong

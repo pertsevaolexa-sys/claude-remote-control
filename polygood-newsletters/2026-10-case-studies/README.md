@@ -73,18 +73,24 @@ From Mailchimp analytics for the 44 campaigns sent between October 2024 and Sept
 
 ## Before sending
 
-- [ ] Henriette, Orion and ONE DUST are still drafts. Publish their pages first, or change the links: the code expects `/projects/henriette-stadthotel/`, `/projects/orion/` and `/projects/one-dust-studio/`. Only `/projects/de-bijenkorf/` is live.
+- [ ] All four project pages published with the copy from `web-pages.md`, and the ONE DUST slug set to `one-dust-studio-taipei`. Click every button in the test email to check it opens the right page.
 - [ ] The Henriette photographer confirmed, and the photo credits cleared for email use
 - [ ] Test email sent to yourself and opened in Outlook and on a phone: every photo and swatch shows, each case's swatches sit three to a row, and every button opens the right page
 
 ## The project pages behind the buttons
 
-The newsletter no longer mentions what any pattern is made from, but some of the project pages it links to still do. Check them before sending, so a reader doesn't click from the email into waste wording:
+`web-pages.md` has the copy for all four WordPress pages, written to match the newsletter: each text block, the slug, SEO title and meta description, alt text to check against the photos, and what to set in WordPress. It removes the waste wording the drafts had ("old cable spools", "once lined fridges and freezers", "recycled fridge and freezer plastic", "hint at the recycled plastic underneath").
 
-- **Henriette:** the subtitle "Washstands from recycled fridges for Austria's first circular hotel" and the line "plastic that once lined fridges and freezers". The fridge line is also wrong for two of the three patterns. Suggested subtitle: "Sapphire Terrazzo, Emerald Ghost and White Terrazzo washstands for the Henriette Stadthotel". End the body at "…and White Terrazzo."
-- **Orion:** the flecks "hint at the recycled plastic underneath". End that sentence at "pick up the speckled stools".
-- **ONE DUST:** "the recycled panel looks at home in the landscape". Drop it.
-- **Translucent Glitter Gold:** Notion records its code as `#2118` with no PS prefix, so the swatch shows the collection only. Add the code to its `caption` once it's confirmed. "Colourful splash" is written as Notion has it; if the house name is "Colourful Splash Collection", change the three captions to match.
+The newsletter buttons link to the pages' own slugs:
+
+| Case | Link |
+|---|---|
+| De Bijenkorf | `https://polygood.com/projects/de-bijenkorf/` |
+| Henriette | `https://polygood.com/projects/henriette-stadthotel-vienna/` |
+| Orion | `https://polygood.com/projects/orion-office-kitchenette-paris/` |
+| ONE DUST | `https://polygood.com/projects/one-dust-studio-taipei/` (set this slug in WordPress: the draft has none yet) |
+
+Translucent Glitter Gold: Notion records its code as `#2118` with no PS prefix, so its swatch shows the collection only. Add the code to its `caption` once it's confirmed. "Colourful splash" is written as Notion has it.
 
 ## Changing the copy
 

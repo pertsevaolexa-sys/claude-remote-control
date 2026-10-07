@@ -140,8 +140,8 @@ Umbrella headline: **Seven patterns in four cities.** Umbrella statement: “Und
 
 - **Sells:** A built hotel bathroom reference in a four-star Vienna hotel.
 - **For:** Hospitality brand teams, hotel designers
-- **Proof:** "For the new Circular Living rooms, we made the bathroom washstands."
-- **Say:** “We made the washstands for the new Circular Living rooms at Henriette Stadthotel in Vienna.”
+- **Proof:** "For the new Circular Living rooms, the hotel used Polygood® Sapphire Terrazzo, Emerald Ghost and White Terrazzo for the bathroom washstands" (project page).
+- **Say:** “Henriette Stadthotel in Vienna used Polygood for the washstands in its new Circular Living rooms.”
 - **Don't:** No washstand count and no water or stain claims: the case gives neither.
 
 ### 14. Sapphire Terrazzo, the washstand in the photo
@@ -157,7 +157,7 @@ Umbrella headline: **Seven patterns in four cities.** Umbrella statement: “Und
 - **Sells:** A built reference in a hotel its owners call Austria's first Circular Living hotel.
 - **For:** Hotels and designers with circularity goals
 - **Proof:** Renovated in 2025 as Austria's first Circular Living hotel; the concept is inspired by Cradle to Cradle.
-- **Say:** “Henriette's owners call it Austria's first Circular Living hotel. We made the washstands for its new rooms.”
+- **Say:** “Henriette's owners call it Austria's first Circular Living hotel. Its new rooms have Polygood washstands.”
 - **Don't:** Attribute "Austria's first" to the owners. Don't say Polygood is Cradle to Cradle certified or passed the hotel's assessment.
 
 ### 16. Three patterns in one project
