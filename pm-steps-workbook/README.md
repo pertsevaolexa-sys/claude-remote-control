@@ -13,6 +13,15 @@ live from what you type.
   fill in by hand), an Excel workbook (one sheet per table) and a JSON backup you can restore later.
 - Every graphic has **Save PNG** and **Save SVG** for slides and reports.
 
+## Ready-made files
+
+`templates/` holds files exported from the workbook, for working offline or on paper:
+
+- `PM Steps Workbook - blank template.docx`: all 23 sections with empty tables and blank lines to fill in, the method notes and the structure graphics (79 pages).
+- `PM Steps Workbook - blank template.pdf`: the same, for printing.
+- `PM Steps Workbook - blank template.xlsx`: one sheet per table.
+- `PM Steps Workbook - example (Summer Festival).docx`: the complete example project with every table and graphic filled in.
+
 ## How saving works
 
 - Opened as a claude.ai Artifact, the file is saved online in the artifact's own storage, so it is
@@ -62,6 +71,7 @@ The checks need Node.js 20+ and Playwright with Chromium.
 | `docs/EXPORT-MODEL.md` | The block model the Word and Excel writers accept |
 | `tools/` | Bundler, render check, export check |
 | `dist/` | Built single-file versions |
+| `templates/` | Ready-made files: the blank template as Word, Excel and PDF, and the filled example as Word |
 
 ## A note on the method
 

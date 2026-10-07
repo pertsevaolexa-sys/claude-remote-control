@@ -2094,7 +2094,7 @@
             out.push({ type: 'h3', text: b.title || 'Graphic' });
             const parts = sliceWide(svg);
             for (let i = 0; i < parts.length; i++) {
-              const png = await svgToPng(parts[i], 2);
+              const png = await svgToPng(parts[i], 1.5);
               const last = i === parts.length - 1;
               const cap = parts.length > 1 ? 'Part ' + (i + 1) + ' of ' + parts.length + (last && b.caption ? '. ' + b.caption : '') : b.caption || '';
               out.push({ type: 'image', png: png.bytes, width: png.width, height: png.height, caption: cap, alt: b.title || '' });
