@@ -37,9 +37,8 @@ HEADLINE_SIZE = 28
 TITLE_SIZE = 22
 BODY_SIZE = 16
 HERO_TEXT_COL = 240  # header: text column width; the photo strip takes the rest of the 600px
-TILE = 96  # swatch width in px; up to 5 per row: 5 x (96 + 12) = 540, inside the 552px column
-GAP = 12   # space to the right of each swatch
-MSO_CELL = TILE + GAP
+COLUMNS = 3   # swatches per row; a case with more patterns continues on the next row
+SWATCH = 160  # largest swatch size in px (on a computer); on a phone they shrink to fit
 CONTENT = 552  # width of the case photos (600 minus 24px padding each side)
 # -----------------------------------------------------------------------------
 
@@ -119,31 +118,40 @@ def case_block(c, images, swatches, last):
 {'' if last else dashed()}"""
 
 
-def tile(inner):
-    return (
-        f'<div style="display:inline-block;width:{TILE}px;vertical-align:top;margin:0 {GAP}px 16px 0;text-align:left;">'
-        f"{inner}</div>"
-    )
-
-
-def swatch_tile(p, swatches):
+def swatch_cell(p, swatches):
+    """One swatch in a plain table cell. Tables keep their layout in Mailchimp, Gmail and Outlook alike."""
     src = swatches.get(p["name"], url_or_placeholder(p.get("swatch_url"), "SWATCH-" + slug(p["name"])))
-    return tile(
-        f'<img src="{attr(src)}" width="{TILE}" height="{TILE}" alt="{attr(p["name"])} pattern swatch" '
-        f'style="display:block;width:{TILE}px;height:{TILE}px;border:0;border-radius:2px;">'
-        f'<div style="padding:7px 0 0 0;font-family:{SANS};font-size:13px;line-height:1.25;font-weight:bold;color:{INK};">{esc(p["name"])}</div>'
+    share = f"{100 // COLUMNS}%"
+    return (
+        f'<td width="{share}" valign="top" style="width:{share};padding:0 12px 18px 0;vertical-align:top;">'
+        f'<img src="{attr(src)}" width="{SWATCH}" height="{SWATCH}" alt="{attr(p["name"])} pattern swatch" '
+        f'style="display:block;width:100%;max-width:{SWATCH}px;height:auto;border:0;border-radius:2px;">'
+        f'<div style="padding:8px 0 0 0;font-family:{SANS};font-size:13px;line-height:1.25;font-weight:bold;color:{INK};">{esc(p["name"])}</div>'
         f'<div style="padding:2px 0 0 0;font-family:{SANS};font-size:12px;line-height:1.4;color:{WARM};">Made from {esc(p["from"])}</div>'
+        f"</td>"
     )
+
+
+def empty_cell():
+    share = f"{100 // COLUMNS}%"
+    return f'<td width="{share}" style="width:{share};padding:0;">&nbsp;</td>'
 
 
 def palette(c, swatches):
-    """The row of swatches under a case: one tile per pattern the case used."""
-    tiles = [swatch_tile(p, swatches) for p in case_patterns(c)]
-    cells = f'<!--[if mso]></td><td width="{MSO_CELL}" valign="top"><![endif]-->'.join(tiles)
+    """The swatches under a case, COLUMNS to a row: one per pattern the case used."""
+    cells = [swatch_cell(p, swatches) for p in case_patterns(c)]
+    rows = []
+    for i in range(0, len(cells), COLUMNS):
+        row = cells[i:i + COLUMNS]
+        row += [empty_cell()] * (COLUMNS - len(row))  # keep every column the same width
+        rows.append("<tr>" + "".join(row) + "</tr>")
+    grid = "\n".join(rows)
     return f"""<!-- Palette: {esc(c['title']).replace("--", "-")} -->
 {label(copy['palette_label'], color=MUTED, pad="0 0 10px 0")}
-<tr><td style="padding:0 0 4px 0;font-size:0;line-height:0;text-align:left;">
-<!--[if mso]><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="{MSO_CELL}" valign="top"><![endif]-->{cells}<!--[if mso]></td></tr></table><![endif]-->
+<tr><td style="padding:0 0 4px 0;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;">
+{grid}
+</table>
 </td></tr>
 <tr><td style="padding:0 0 30px 0;font-family:{SANS};font-size:14px;line-height:1.4;font-weight:bold;">
 <a href="{attr(SAMPLES_URL)}" target="_blank" style="color:{TEAL};text-decoration:underline;">{esc(copy['palette_cta'])} &rarr;</a>
@@ -203,8 +211,8 @@ def body(images, swatches):
 <tr><td style="padding:0 0 8px 0;">{paras(copy['closing'])}</td></tr>
 <tr><td style="padding:4px 0 32px 0;">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-<td bgcolor="{TEAL}" style="background:{TEAL};border-radius:2px;mso-padding-alt:14px 26px;">
-<a href="{attr(SAMPLES_URL)}" target="_blank" style="display:inline-block;padding:14px 26px;font-family:{SANS};font-size:15px;font-weight:bold;line-height:1;color:{WHITE};text-decoration:none;mso-padding-alt:0;"><span style="color:{WHITE};">{esc(copy['cta_label'])}</span></a>
+<td bgcolor="{TEAL}" style="background:{TEAL};border-radius:2px;padding:14px 26px;font-family:{SANS};font-size:15px;font-weight:bold;line-height:1;">
+<a href="{attr(SAMPLES_URL)}" target="_blank" style="font-family:{SANS};font-size:15px;font-weight:bold;line-height:1;color:{WHITE};text-decoration:none;"><span style="color:{WHITE};">{esc(copy['cta_label'])}</span></a>
 </td></tr></table>
 </td></tr>
 <tr><td style="padding:0 0 32px 0;">{paras(copy['signoff'], size=15)}</td></tr>

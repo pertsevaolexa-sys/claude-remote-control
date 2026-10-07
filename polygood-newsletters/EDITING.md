@@ -73,7 +73,7 @@ For anything bigger than one word, use a text editor. Copy the whole block into 
 - image addresses in `src="…"`
 - image descriptions in `alt="…"`
 
-Leave `style="…"` and any line with `<!--[if mso]>` alone, unless a recipe below says otherwise. In text, write `&` as `&amp;`. Straight apostrophes (`'`) are fine.
+Leave `style="…"` alone, unless a recipe below says otherwise. In the header file, also leave the lines with `<!--[if mso]>` alone: they are for Outlook. In text, write `&` as `&amp;`. Straight apostrophes (`'`) are fine.
 
 **Find your way around.** Search for these markers, in this order:
 - `Header: The Project Edit` (only in `mailchimp-hero.html` and the full email)
@@ -138,7 +138,13 @@ If you change the teal, change it in your Mailchimp header's dashed line too.
    - the intro
    - "these four projects use seven patterns" in the closing
 
-**Reorder cases, or add or remove a swatch.** It's possible, but the lines between cases and the Outlook code in each palette make it easy to break. Use route D or F instead.
+**Remove a swatch.** Each swatch is one table cell, from `<td width="33%" valign="top"` to its `</td>`, and each row of the grid holds three cells. Delete the swatch's cell, then put an empty cell in its place so the row still has three:
+
+```
+<td width="33%" style="width:33%;padding:0;">&nbsp;</td>
+```
+
+**Reorder cases or add a swatch.** It's possible, but easy to break. Use route D or F instead.
 
 **Undo.** The original code is in `mailchimp-code-block.html` in the repository. Paste it back to start over.
 
@@ -269,7 +275,7 @@ Each case has these fields:
 - **Change the look:** edit the section at the top of `build_email.py`:
   - colours: `PAPER`, `INK`, `MUTED`, `TEAL`, `WARM`, `WHITE`
   - font: `SANS`
-  - sizes: `HERO_TITLE_SIZE`, `HEADLINE_SIZE`, `TITLE_SIZE`, `BODY_SIZE`, `HERO_TEXT_COL` (width of the header's text column), `TILE` (swatch size)
+  - sizes: `HERO_TITLE_SIZE`, `HEADLINE_SIZE`, `TITLE_SIZE`, `BODY_SIZE`, `HERO_TEXT_COL` (width of the header's text column), `COLUMNS` (swatches per row, now 3), `SWATCH` (largest swatch size)
 - **Start the next newsletter.**
   1. Copy the folder `2026-10-case-studies` and give the copy a new name with no spaces, for example `2026-11-showrooms`.
   2. Change its `copy.json` and `images/`.
@@ -320,7 +326,7 @@ If Mailchimp is connected to Zapier (the link was shared earlier in the chat), C
    - in Outlook on a computer
    - on a phone
 
-   Each case's swatches should sit in one row on a computer (ONE DUST has five) and wrap to two or three per row on a phone.
+   Each case's swatches should sit three to a row on a computer and on a phone. ONE DUST's five make a row of three and a row of two.
 4. Click every link. Three project pages (Henriette, Orion, ONE DUST) only work once they're published on polygood.com.
 5. Check the subject line and preview text in Mailchimp's settings.
 
@@ -329,9 +335,8 @@ If Mailchimp is connected to Zapier (the link was shared earlier in the chat), C
 | You see | Likely cause and fix |
 |---|---|
 | A broken-image icon | The `src` is still a placeholder, or the address isn't public. It must start with `https://`. Use the Content Studio URL |
-| ONE DUST's five swatches wrap onto two rows on a computer | The Code block has padding. Set it to 0. Or in route D, lower `TILE` to 88 and rebuild |
 | The header's title and photos sit one above the other on a computer | Your email app doesn't support the trick that puts them side by side. The email still reads well. If it happens in Gmail or Apple Mail, tell Claude |
-| Swatches stack one per row in Outlook only | Mailchimp may have removed the Outlook-only lines (`<!--[if mso]>`). This hasn't been tested yet. The email still works. For a tidy row in Outlook, ask Claude for a table-based version |
+| Swatches stack one per row | An older copy of the code is in the block. The earlier version placed swatches side by side with `display:inline-block`, which Mailchimp's builder removes. Paste the current `mailchimp-code-block.html`: it uses table cells, which Mailchimp keeps |
 | "[Message clipped]" in Gmail | The email is over 102 KB. Usually this means `preview.html` was pasted instead of `mailchimp-code-block.html` |
 | Odd characters such as `â€™` | The file was saved in a format other than UTF-8. Save it as UTF-8 and paste again |
 | A Mailchimp edit disappeared | You rebuilt from `copy.json` (route D) after editing in Mailchimp (route A). Put the edit into `copy.json` and rebuild |

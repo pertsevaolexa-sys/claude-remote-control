@@ -77,7 +77,7 @@ A swatch appears once for every case that uses it (Emerald Ghost three times, Sa
 
 - [ ] Henriette, Orion and ONE DUST are still drafts. Publish their pages first, or change the links: the code expects `/projects/henriette-stadthotel/`, `/projects/orion/` and `/projects/one-dust-studio/`. Only `/projects/de-bijenkorf/` is live.
 - [ ] Translucent Glitter Gold swatch added, the Henriette photographer confirmed, and the photo credits cleared for email use
-- [ ] Test email sent to yourself and opened in Outlook and on a phone (each case's swatches should sit in one row on a computer and wrap on a phone)
+- [ ] Test email sent to yourself and opened in Outlook and on a phone (each case's swatches should sit three to a row)
 
 ## The Henriette fridge line
 
