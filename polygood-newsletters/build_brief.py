@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 briefs = json.loads(Path(sys.argv[1]).read_text())
+copy = json.loads((Path(sys.argv[1]).parent / "copy.json").read_text())  # the umbrella lines come from the email copy
 out = Path(sys.argv[2])
 
 GROUPS = [
@@ -28,9 +29,8 @@ lines = [
     "What each detail in the October 2026 newsletter sells, who it's for, the fact behind it, "
     "a line to reuse in emails, calls and posts, and the claim to avoid.",
     "",
-    "Umbrella message: **One recycled panel, four jobs.** "
-    "Umbrella statement: “Every swatch below says what the plastic used to be: "
-    "Emerald Ghost is made from home appliances, Maldives from CD cases.” "
+    f"Umbrella headline: **{copy['headline']}.** "
+    f"Umbrella statement: “{copy['umbrella_statement']}” "
     "Every fact comes from the four case-study PDFs and the Notion pattern library (Marketing team space › All Patterns Images). "
     "Check anything that isn't here before you use it.",
     "",

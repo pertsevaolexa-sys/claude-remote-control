@@ -31,7 +31,7 @@ PAPER = "#fff9f4"   # email background (warm off-white, as in the Project Edit h
 INK = "#141414"     # headings and text
 MUTED = "#6b625b"   # small grey-brown text
 TEAL = "#1b7f86"    # dashed lines, labels, links, buttons
-WARM = "#9a5b34"    # the "Made from ..." captions under the swatches
+WARM = "#9a5b34"    # the short caption under each swatch name
 WHITE = "#ffffff"   # text on the filled buttons
 
 HERO_TITLE_SIZE = 26
@@ -165,8 +165,9 @@ def swatch_cell(p, swatches):
         f'<img src="{attr(src)}" width="{SWATCH}" height="{SWATCH}" alt="{attr(p["name"])} pattern swatch" '
         f'style="display:block;width:100%;max-width:{SWATCH}px;height:auto;border:0;border-radius:2px;">'
         f'<div style="padding:8px 0 0 0;font-family:{SANS};font-size:13px;line-height:1.25;font-weight:bold;color:{INK};">{esc(p["name"])}</div>'
-        f'<div style="padding:2px 0 0 0;font-family:{SANS};font-size:12px;line-height:1.4;color:{WARM};">Made from {esc(p["from"])}</div>'
-        f"</td>"
+        + (f'<div style="padding:2px 0 0 0;font-family:{SANS};font-size:12px;line-height:1.4;color:{WARM};">{esc(p["caption"])}</div>'
+           if p.get("caption", "").strip() else "")
+        + "</td>"
     )
 
 
@@ -197,7 +198,7 @@ def palette(c, swatches):
 def colour_key():
     return (
         f"<!-- Colours, for find and replace: background {PAPER} · text {INK} · small text {MUTED} · "
-        f"teal lines, labels, links and buttons {TEAL} · Made from captions {WARM} -->"
+        f"teal lines, labels, links and buttons {TEAL} · swatch captions {WARM} -->"
     )
 
 

@@ -1,24 +1,24 @@
 # The Polygood® Project Edit, autumn 2026: four new case studies
 
-Umbrella headline: **One recycled panel, four jobs**
+Umbrella headline: **Seven patterns in four cities**
 
-Umbrella statement: **Every swatch below says what the plastic used to be: Emerald Ghost is made from home appliances, Maldives from CD cases.**
+Umbrella statement: **Under each project you'll find its swatches, named as you'd order them: the Amsterdam plinths are Salmon Terra, PS2121.**
 
 | Case | Label | Headline |
 |---|---|---|
-| De Bijenkorf (display plinths) | De Bijenkorf · Amsterdam | Old spools now lift mannequins on Dam Square |
-| Henriette Stadthotel (washstands) | Henriette Stadthotel · Vienna | Three washstand patterns, White Terrazzo from fridges |
+| De Bijenkorf (display plinths) | De Bijenkorf · Amsterdam | On Dam Square, Salmon Terra plinths lift mannequins |
+| Henriette Stadthotel (washstands) | Henriette Stadthotel · Vienna | Washstands in two terrazzos and Emerald Ghost |
 | Orion (kitchenette worktops) | Orion · Paris | Sea-green worktops a shade lighter than teal cabinets |
-| ONE DUST Studio (furniture and objects) | ONE DUST Studio · Taipei | Surface specialists turned Polygood into furniture and sculpture |
+| ONE DUST Studio (furniture and objects) | ONE DUST Studio · Taipei | Surface specialists made furniture and sculpture in Polygood |
 
-Each headline was written against the case PDFs and the pattern library, then fact-checked and style-checked. The Henriette headline names White Terrazzo as the fridge pattern because the photo shows a Sapphire Terrazzo washstand, which is made from spools.
+The copy is written for a premium brand: it never says what the plastic was before. Each line was checked against the case PDFs and the Notion pattern library, then checked again for waste connotations, facts and style. Each swatch is captioned with its collection and code from the pattern library (for example "Colourful splash · PS2121").
 
 The design follows the Project Edit header built in Mailchimp:
 - warm off-white background
 - bold black sans-serif headings
 - teal dashed lines between sections
 
-Each case has a "See the … project" button under its text, then its own row of pattern swatches (name and what it was made from) and an "Order samples of these patterns" button.
+Each case has a "See the … project" button under its text, then its own row of pattern swatches (name, collection and code) and an "Order samples of these patterns" button.
 
 Facts come from the four case-study PDFs and the Notion pattern library (Marketing team space › All Patterns Images). `selling-brief.md` covers each detail in the newsletter: what it sells, who it's for, the proof, a line to reuse and the claim to avoid.
 
@@ -48,8 +48,8 @@ From Mailchimp analytics for the 44 campaigns sent between October 2024 and Sept
 | Field | Text |
 |---|---|
 | Subject | The Polygood® Project Edit for autumn |
-| Subject, A/B option 2 | Four jobs for one recycled panel |
-| Subject, A/B option 3 | What old CD cases and fridges became |
+| Subject, A/B option 2 | Seven Polygood® patterns in four cities |
+| Subject, A/B option 3 | Emerald Ghost in a hotel, an office and a studio |
 | Preview text | Plinths in Amsterdam, washstands in Vienna, worktops in Paris, furniture in Taipei |
 | Send | Thursday, 13:00 UTC |
 
@@ -77,11 +77,14 @@ From Mailchimp analytics for the 44 campaigns sent between October 2024 and Sept
 - [ ] The Henriette photographer confirmed, and the photo credits cleared for email use
 - [ ] Test email sent to yourself and opened in Outlook and on a phone: every photo and swatch shows, each case's swatches sit three to a row, and every button opens the right page
 
-## The Henriette fridge line
+## The project pages behind the buttons
 
-The Henriette PDF says the washstands are made "from plastic that once lined fridges and freezers". The Notion pattern library gives different origins for two of the three patterns: Sapphire Terrazzo comes from spools, Emerald Ghost from home appliances, and White Terrazzo from refrigerators and single-use plastic cutlery. The swatches under each case show those origins, so the newsletter now credits fridges to White Terrazzo only. If the Henriette washstands really were all made from fridge linings, correct the pattern library and change the line back in `copy.json`.
+The newsletter no longer mentions what any pattern is made from, but some of the project pages it links to still do. Check them before sending, so a reader doesn't click from the email into waste wording:
 
-The Henriette project page has the same problem in its subtitle, "Washstands from recycled fridges for Austria's first circular hotel". It also states "Austria's first" as our own claim and drops "Living" from the owners' phrase. Before the page goes live, a safer subtitle is: "Washstands in three Polygood patterns for a Vienna hotel its owners call Austria's first Circular Living hotel".
+- **Henriette:** the subtitle "Washstands from recycled fridges for Austria's first circular hotel" and the line "plastic that once lined fridges and freezers". The fridge line is also wrong for two of the three patterns. Suggested subtitle: "Sapphire Terrazzo, Emerald Ghost and White Terrazzo washstands for the Henriette Stadthotel". End the body at "…and White Terrazzo."
+- **Orion:** the flecks "hint at the recycled plastic underneath". End that sentence at "pick up the speckled stools".
+- **ONE DUST:** "the recycled panel looks at home in the landscape". Drop it.
+- **Translucent Glitter Gold:** Notion records its code as `#2118` with no PS prefix, so the swatch shows the collection only. Add the code to its `caption` once it's confirmed. "Colourful splash" is written as Notion has it; if the house name is "Colourful Splash Collection", change the three captions to match.
 
 ## Changing the copy
 

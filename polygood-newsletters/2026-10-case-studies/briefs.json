@@ -1,21 +1,21 @@
 [
  {
   "id": "x1",
-  "detail": "One recycled panel, four jobs",
+  "detail": "Plinths, washstands, worktops and furniture",
   "for": "Architects, interior designers, brand teams",
   "sells": "One material with a built reference in retail, hospitality, workplace and furniture.",
-  "proof": "Display stands (De Bijenkorf), washstands (Henriette), kitchenette worktops (Orion), tables, chairs, benches and shelves (ONE DUST).",
-  "say": "One recycled panel, four jobs: plinths in Amsterdam, washstands in Vienna, worktops in Paris, furniture in Taipei.",
-  "dont": "Don't say it suits any use, or name uses these projects don't show, such as flooring or cladding."
+  "proof": "Display stands (De Bijenkorf), washstands (Henriette), kitchenette worktops (Orion), and tables, chairs, benches and shelves designed and made by ONE DUST.",
+  "say": "These four projects show Polygood as plinths in Amsterdam, washstands in Vienna, worktops in Paris and furniture in Taipei.",
+  "dont": "Don't say it suits any use, or name uses these projects don't show, such as flooring or cladding. Don't say what the panels were made from. ONE DUST made its own pieces, so don't say we made them."
  },
  {
   "id": "x2",
-  "detail": "A panel made from recycled plastic",
+  "detail": "Works like a solid surface",
   "for": "Fabricators, architects, interior designers",
   "sells": "Fabricators can work it like a solid surface.",
   "proof": "\"A recycled panel that can be cut, sanded and polished like a solid surface\" (ONE DUST case).",
-  "say": "Polygood is a recycled plastic panel you can cut, sand and polish like a solid surface.",
-  "dont": "No recycled-content percentages, tonnes, CO2, or fire, water or heat claims: the cases give none."
+  "say": "Polygood can be cut, sanded and polished like a solid surface.",
+  "dont": "No recycled-content percentages, tonnes, CO2, or fire, water or heat claims: the cases give none. Don't lead with 'recycled', and never say what the plastic was."
  },
  {
   "id": "x3",
@@ -40,9 +40,9 @@
   "detail": "Take-back",
   "for": "Retail brand teams, sustainability leads",
   "sells": "An end-of-life route to point to: De Bijenkorf's stands can come back and become new panels.",
-  "proof": "\"Every Polygood panel is pressed from one type of recycled plastic, so when the displays change, the stands can come back through our take-back programme and become new panels.\"",
-  "say": "Each panel is pressed from one type of recycled plastic, so De Bijenkorf's stands can come back and become new panels.",
-  "dont": "The cases describe take-back for De Bijenkorf's stands only. Check the terms before offering it on a new project, and don't say any stands have come back yet."
+  "proof": "\"Every Polygood panel is pressed from one type of recycled plastic, so when the displays change, the stands can come back through our take-back programme and become new panels.\" (De Bijenkorf case)",
+  "say": "When De Bijenkorf's displays change, the stands can come back through our take-back programme and become new panels.",
+  "dont": "The cases describe take-back for De Bijenkorf's stands only. Check the terms before offering it on a new project, and don't say any stands have come back yet. Don't talk about the feedstock or what the plastic was."
  },
  {
   "id": "x6",
@@ -55,12 +55,12 @@
  },
  {
   "id": "x7",
-  "detail": "What each pattern used to be (the umbrella statement)",
-  "for": "Designers, sustainability leads",
-  "sells": "A named first life for every pattern, shown under each case.",
-  "proof": "Notion pattern library: Salmon Terra and Sapphire Terrazzo from spools; Emerald Ghost from home appliances; White Terrazzo from fridges and plastic cutlery; Maldives and Translucent Glitter Gold from CD cases; Black Lollipop from electronics and plastic cutlery.",
-  "say": "Maldives and Translucent Glitter Gold are made from old CD cases.",
-  "dont": "These are the pattern recipes, not a trace of the batch used on each project. No tonnages, and don't name whose waste it was."
+  "detail": "Collection and code under the swatches",
+  "for": "Specifiers, interior designers shortlisting colours",
+  "sells": "Every pattern sits under the project that used it, with its collection and, where confirmed, its code, so a specifier can order a sample of the pattern they saw.",
+  "proof": "Notion pattern library (All Patterns Images): Salmon Terra PS2121, Sapphire Terrazzo PS1801 and Emerald Ghost PS1706 (Colourful splash); White Terrazzo PS2107 (Light Collection); Maldives PS1301 and Translucent Glitter Gold (Translucent Collection, code recorded as #2118, to be confirmed); Black Lollipop PS1602 (Dark Collection).",
+  "say": "Each pattern in these projects has a code, so you can order a sample of the same pattern: the Orion worktops are Emerald Ghost, PS1706.",
+  "dont": "Never name or hint at what the plastic in any pattern was, in writing or on a call. That means no appliances, fridges, CD cases, spools, cutlery, electronics or packaging, and no 'old', 'waste', 'first life' or 'used to be'. Talk about colour, pattern, finish and where it was used. A sample shows the pattern, not the exact panels used on the project. Don't quote a code for Translucent Glitter Gold until it is confirmed. Seven is the count for these projects, not the whole range."
  },
  {
   "id": "b1",
@@ -75,10 +75,10 @@
   "id": "b2",
   "detail": "Lifecycle assessment workshop",
   "for": "Brand teams with a sustainability brief",
-  "sells": "Chosen by a design team that had sustainability in the brief from the first meeting.",
+  "sells": "A design team with sustainability in its brief from the first meeting, which then chose Polygood for the stands.",
   "proof": "Random Studio, with the store's design team, sampled recycled and low-impact materials and ran a lifecycle assessment workshop before choosing what to build with.",
   "say": "De Bijenkorf's designers ran a lifecycle assessment workshop before choosing materials, then chose Polygood for the stands.",
-  "dont": "Don't say the workshop scored or validated Polygood, or quote footprint figures: the case gives none."
+  "dont": "Don't say the workshop scored or validated Polygood, or quote footprint figures: the case gives none. Never link the workshop to the choice of Polygood. This point is for sales calls only; it is not in the email."
  },
  {
   "id": "b3",
@@ -118,18 +118,18 @@
  },
  {
   "id": "h2",
-  "detail": "White Terrazzo, made from old fridges",
-  "for": "Hotel teams who want a story for guests, designers",
-  "sells": "A first life anyone can picture.",
-  "proof": "Notion pattern library: White Terrazzo is made from refrigerators and single-use plastic cutlery.",
-  "say": "The White Terrazzo washstands at Henriette are made from old fridges and single-use plastic cutlery.",
-  "dont": "The case PDF says all the washstands came from fridge linings, but the pattern library gives spools for Sapphire Terrazzo and home appliances for Emerald Ghost. Say it about White Terrazzo only."
+  "detail": "Sapphire Terrazzo, the washstand in the photo",
+  "for": "Hotel designers, hospitality brand teams",
+  "sells": "A terrazzo-pattern washstand in a built four-star hotel bathroom, something to show a client before ordering samples.",
+  "proof": "The Henriette photo shows a Sapphire Terrazzo washstand with a white basin. The case lists Sapphire Terrazzo, Emerald Ghost and White Terrazzo for the washstands. Notion pattern library: Sapphire Terrazzo, PS1801, Colourful splash collection, Terrazzo pattern type.",
+  "say": "The washstand in our Henriette photo is Sapphire Terrazzo, PS1801, from our Colourful splash collection, with a white basin.",
+  "dont": "Never name or hint at what the plastic in any of the three patterns was, even though the case PDF and the Notion project page do. Don't describe Sapphire Terrazzo's colour beyond its name, since no case text describes it. Don't say every washstand is Sapphire Terrazzo, and don't describe how the three patterns are split across rooms. Give no washstand count and make no water or stain claims."
  },
  {
   "id": "h3",
   "detail": "Austria's first Circular Living hotel",
   "for": "Hotels and designers with circularity goals",
-  "sells": "Polygood is in a hotel that weighs every material on health, recyclability and carbon.",
+  "sells": "A built reference in a hotel its owners call Austria's first Circular Living hotel.",
   "proof": "Renovated in 2025 as Austria's first Circular Living hotel; the concept is inspired by Cradle to Cradle.",
   "say": "Henriette's owners call it Austria's first Circular Living hotel. We made the washstands for its new rooms.",
   "dont": "Attribute \"Austria's first\" to the owners. Don't say Polygood is Cradle to Cradle certified or passed the hotel's assessment."
@@ -165,10 +165,10 @@
   "id": "o2",
   "detail": "The flecks",
   "for": "Interior designers",
-  "sells": "Flecks that give a one-colour room depth and hint at the recycled plastic.",
-  "proof": "\"Its flecks give the monochrome depth, pick up the speckled stools and hint at the recycled plastic underneath.\"",
-  "say": "Emerald Ghost's flecks give Orion's teal kitchenette depth and hint at the recycled plastic underneath.",
-  "dont": "The stools aren't Polygood; the flecks only pick them up."
+  "sells": "Flecks that give a one-colour kitchenette depth and pick up the speckled stools.",
+  "proof": "\"Its flecks give the monochrome depth, pick up the speckled stools...\" (Orion case).",
+  "say": "Emerald Ghost's flecks give Orion's teal kitchenette depth and pick up the speckled stools.",
+  "dont": "Never say what the flecks are or what the plastic was. Leave out the case's closing clause about 'the recycled plastic underneath'. The stools aren't Polygood; the flecks only pick them up."
  },
  {
   "id": "o3",
@@ -184,15 +184,15 @@
   "detail": "Samji Studio, the Paris fabricator",
   "for": "Paris workplace teams, fabricators",
   "sells": "A Paris fabricator that already works with Polygood.",
-  "proof": "Founded in Paris in 2021 to build office furniture from recycled materials; has made Polygood pieces for Adidas in the city.",
-  "say": "Samji Studio, a Paris workshop building office furniture from recycled materials, fabricated Orion's worktops.",
+  "proof": "Founded in Paris in 2021 to build office furniture from recycled materials; has made Polygood pieces for Adidas in the city (Orion case).",
+  "say": "Samji Studio, a Paris office-furniture workshop that has made Polygood pieces for Adidas, fabricated Orion's worktops.",
   "dont": "Don't call Samji an approved or exclusive Polygood fabricator, or present Adidas as our case study."
  },
  {
   "id": "o5",
   "detail": "The surface people use most",
   "for": "Workplace brand teams, office designers",
-  "sells": "Recycled material where a team sees and uses it every day.",
+  "sells": "A surface the team sees and uses every day.",
   "proof": "\"The kitchenette is where the team meets through the day, which makes the worktop the surface people see and use most.\"",
   "say": "Orion's team meets in the kitchenette through the day, so the Emerald Ghost worktop is the surface they use most.",
   "dont": "Don't turn daily use into durability, heat, stain or food-safety claims."

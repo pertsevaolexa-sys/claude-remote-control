@@ -29,7 +29,7 @@ From top to bottom:
    - a teal dashed line
    - the intro ("This autumn, we're back…")
 2. **The main code block** (`mailchimp-code-block.html`):
-   1. The small teal label "Autumn 2026 · Four new case studies", the headline "One recycled panel, four jobs", the umbrella statement in larger type ("Every swatch below says what the plastic used to be…") and two paragraphs
+   1. The small teal label "Autumn 2026 · New case studies", the headline "Seven patterns in four cities", the umbrella statement in larger type ("Under each project you'll find its swatches…") and two paragraphs
    2. A teal dashed line
    3. Four cases. Each one has:
       - a photo
@@ -105,7 +105,7 @@ Case photos should be 1200 × 800 px (they display at 552 × 368). Swatches shou
 | Colour | Used for |
 |---|---|
 | `#1b7f86` (teal) | The dashed lines, the small labels, the filled buttons, and the border and text of the outline buttons |
-| `#9a5b34` (warm brown) | The "Made from …" captions under the swatches |
+| `#9a5b34` (warm brown) | The captions under the swatches (collection and code) |
 | `#fff9f4` | The background, also the inside of the outline buttons |
 | `#141414` | Headings and text |
 | `#ffffff` | The text on the filled buttons |
@@ -129,9 +129,9 @@ If you change the teal, change it in your Mailchimp header's dashed line too.
 
 **Change the small label above the headline.** Search for `Autumn 2026 · Four new case studies`.
 
-**Change a headline or the umbrella statement.** Search for a few of its words, for example `lift mannequins` or `Every swatch below`, and retype it. Case headlines work best at eight words or fewer, without the client's name: the label above already gives it.
+**Change a headline or the umbrella statement.** Search for a few of its words, for example `lift mannequins` or `Under each project`, and retype it. Case headlines work best at eight words or fewer, without the client's name: the label above already gives it.
 
-**Change a pattern caption.** Search for the pattern's name followed by `</div>`, for example `Emerald Ghost</div>`, and edit the "Made from …" text just after it. Don't use Replace All on captions: several patterns share the same words ("Made from plastic spools", "Made from CD cases"). A pattern also appears once for each case that uses it, so change it in each of those cases.
+**Change a pattern caption.** Search for the pattern's name followed by `</div>`, for example `Emerald Ghost</div>`, and edit the caption just after it (for example `Colourful splash · PS1706`). A pattern appears once for each case that uses it, so change it in each of those cases. Keep captions to the collection and code: never say what a pattern is made from (see "Brand rule" below).
 
 **Remove a case.**
 1. Delete from its `<!-- Case: … -->` line down to the line just before the next `<!-- Case:` line. That takes out the case, its buttons, its palette and the dashed line under it.
@@ -140,7 +140,7 @@ If you change the teal, change it in your Mailchimp header's dashed line too.
    2. Then delete from `<!-- Case: ONE DUST Studio -->` down to, but not including, the dashed line directly above `<!-- Closing and button -->`.
 3. Then fix every place that names or counts the cases:
    - the label ("Four new case studies")
-   - the headline ("four jobs")
+   - the headline ("four cities")
    - the intro
    - "these four projects use seven patterns" in the closing
 
@@ -178,7 +178,7 @@ Trade-off: you control everything, but Mailchimp's drag-and-drop editing is off 
 Best for: issues that teammates will edit in Mailchimp without touching HTML.
 
 1. Keep the Project Edit header you built. Set the email background to `#fff9f4`, 600 px wide.
-2. Label and headline: a Text block with "Autumn 2026 · Four new case studies" in teal `#1b7f86`, small capitals. Then a Heading block, "One recycled panel, four jobs", in a bold sans-serif, colour `#141414`, about 28 px. Then a Text block with the umbrella statement at about 20 px, and one for the two paragraphs.
+2. Label and headline: a Text block with "Autumn 2026 · New case studies" in teal `#1b7f86`, small capitals. Then a Heading block, "Seven patterns in four cities", in a bold sans-serif, colour `#141414`, about 28 px. Then a Text block with the umbrella statement at about 20 px, and one for the two paragraphs.
 3. A Divider block: 2 px, dashed, teal `#1b7f86`. Use the same divider between every section.
 4. For each case:
    - an Image block with the photo, linked to the project page
@@ -227,13 +227,13 @@ Best for: bigger changes, reusing the design for the next newsletter, keeping on
 | `subject_lines`, `preview_text` | Not in the email. Copy them into Mailchimp's settings. The first subject shows on the preview page |
 | `hero` | The Project Edit header: `title`, `subtitle`, `intro`, and the photo strip (`image_url`, `image_file`, `image_alt`). Used in `mailchimp-hero.html`, the full email and the preview |
 | `eyebrow` | The small teal label above the headline |
-| `headline` | The umbrella headline ("One recycled panel, four jobs") |
+| `headline` | The umbrella headline ("Seven patterns in four cities") |
 | `umbrella_statement` | The one sentence under it, in larger type. Leave it empty (`""`) to drop it |
 | `intro` | The two paragraphs under the statement |
 | `cases` | One block per case, in this order. See the next table |
 | `palette_label` | The small heading over each swatch row ("Patterns in this project") |
 | `palette_cta` | The button under each swatch row ("Order samples of these patterns") |
-| `patterns` | The pattern library. Each has `name`, `from` (shown as "Made from …"), `swatch_url` (leave empty to use the hosted copy, or paste a Content Studio link), `file` (the swatch in `images/swatches/`) and `id` (the Polygood pattern ID, not shown) |
+| `patterns` | The pattern library. Each has `name`, `caption` (the line under the swatch: collection and code), `swatch_url` (leave empty to use the hosted copy, or paste a Content Studio link), `file` (the swatch in `images/swatches/`) and `id` (the Polygood pattern ID, not shown) |
 | `closing`, `cta_label` | Last paragraph and the closing button's text |
 | `samples_url` | Where the closing button and the button under each swatch row go (set to polygood.com/order-samples/) |
 | `image_base_url` | The public folder the pictures load from. Each picture's address is this plus its file name (swatches add `/swatches/`). See "Where the pictures live" |
@@ -290,7 +290,7 @@ To add a new picture: put it in `images/` (or `images/swatches/`), commit and pu
   2. Then update everything that names or counts the cases: `eyebrow`, `headline`, `umbrella_statement` (if it names a pattern from that case), `intro`, the pattern count in `closing`, `subject_lines` and `preview_text`.
 - **Reorder cases:** move whole `{ … }` blocks, then check the commas the same way. The dashed lines between cases sort themselves out.
 - **Change which swatches a case shows:** edit its `pattern` field.
-- **Change a pattern's caption:** edit its `from` in `patterns`. It changes under every case that uses it.
+- **Change a pattern's caption:** edit its `caption` in `patterns`. It changes under every case that uses it. Leave it empty (`""`) to show the name alone.
 - **Change the look:** edit the section at the top of `build_email.py`:
   - colours: `PAPER`, `INK`, `MUTED`, `TEAL`, `WARM`, `WHITE`
   - font: `SANS`
@@ -336,6 +336,10 @@ Best for: anything, with no setup. Describe the change in plain words. Claude ed
 If Mailchimp is connected to Zapier (the link was shared earlier in the chat), Claude can also create the draft campaign in Mailchimp. It won't send or schedule anything unless you say so.
 
 ---
+
+## Brand rule: premium wording
+
+Polygood is a premium material. The email never names or hints at what the plastic was before: no fridges, CD cases, spools, cutlery, appliances or electronics, and no "old", "waste", "used to be", "first life" or "made from". Talk about colour, pattern, finish, the designers and the spaces. The swatch captions give the collection and code, which is what a specifier needs to order a sample. The selling brief's "Don't" lines repeat this for sales calls.
 
 ## Before you send
 

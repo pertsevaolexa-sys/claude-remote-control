@@ -2,24 +2,24 @@
 
 What each detail in the October 2026 newsletter sells, who it's for, the fact behind it, a line to reuse in emails, calls and posts, and the claim to avoid.
 
-Umbrella message: **One recycled panel, four jobs.** Umbrella statement: “Every swatch below says what the plastic used to be: Emerald Ghost is made from home appliances, Maldives from CD cases.” Every fact comes from the four case-study PDFs and the Notion pattern library (Marketing team space › All Patterns Images). Check anything that isn't here before you use it.
+Umbrella headline: **Seven patterns in four cities.** Umbrella statement: “Under each project you'll find its swatches, named as you'd order them: the Amsterdam plinths are Salmon Terra, PS2121.” Every fact comes from the four case-study PDFs and the Notion pattern library (Marketing team space › All Patterns Images). Check anything that isn't here before you use it.
 
 | # | Detail | For |
 |---|---|---|
-| 1 | One recycled panel, four jobs | Architects, interior designers, brand teams |
-| 2 | A panel made from recycled plastic | Fabricators, architects, interior designers |
+| 1 | Plinths, washstands, worktops and furniture | Architects, interior designers, brand teams |
+| 2 | Works like a solid surface | Fabricators, architects, interior designers |
 | 3 | Emerald Ghost in three of the four projects | Interior designers, architects |
 | 4 | Seven patterns in four projects | Designers shortlisting colours |
 | 5 | Take-back | Retail brand teams, sustainability leads |
 | 6 | Order samples | Architects, interior designers, fabricators |
-| 7 | What each pattern used to be (the umbrella statement) | Designers, sustainability leads |
+| 7 | Collection and code under the swatches | Specifiers, interior designers shortlisting colours |
 | 8 | Repeat client | Retail brand teams |
 | 9 | Lifecycle assessment workshop | Brand teams with a sustainability brief |
 | 10 | Salmon Terra plinths and blocks | Retail teams, visual merchandisers, shopfitters |
 | 11 | Designed by Random Studio, built by Fiction Factory | Shopfitters, fabricators, designers |
 | 12 | The client's name | Brand teams and specifiers who need a known reference |
 | 13 | Hotel washstands | Hospitality brand teams, hotel designers |
-| 14 | White Terrazzo, made from old fridges | Hotel teams who want a story for guests, designers |
+| 14 | Sapphire Terrazzo, the washstand in the photo | Hotel designers, hospitality brand teams |
 | 15 | Austria's first Circular Living hotel | Hotels and designers with circularity goals |
 | 16 | Three patterns in one project | Interior designers |
 | 17 | A family-run four-star hotel | Independent hotel owners, hospitality designers |
@@ -36,21 +36,21 @@ Umbrella message: **One recycled panel, four jobs.** Umbrella statement: “Ever
 
 ## Across the newsletter
 
-### 1. One recycled panel, four jobs
+### 1. Plinths, washstands, worktops and furniture
 
 - **Sells:** One material with a built reference in retail, hospitality, workplace and furniture.
 - **For:** Architects, interior designers, brand teams
-- **Proof:** Display stands (De Bijenkorf), washstands (Henriette), kitchenette worktops (Orion), tables, chairs, benches and shelves (ONE DUST).
-- **Say:** “One recycled panel, four jobs: plinths in Amsterdam, washstands in Vienna, worktops in Paris, furniture in Taipei.”
-- **Don't:** Don't say it suits any use, or name uses these projects don't show, such as flooring or cladding.
+- **Proof:** Display stands (De Bijenkorf), washstands (Henriette), kitchenette worktops (Orion), and tables, chairs, benches and shelves designed and made by ONE DUST.
+- **Say:** “These four projects show Polygood as plinths in Amsterdam, washstands in Vienna, worktops in Paris and furniture in Taipei.”
+- **Don't:** Don't say it suits any use, or name uses these projects don't show, such as flooring or cladding. Don't say what the panels were made from. ONE DUST made its own pieces, so don't say we made them.
 
-### 2. A panel made from recycled plastic
+### 2. Works like a solid surface
 
 - **Sells:** Fabricators can work it like a solid surface.
 - **For:** Fabricators, architects, interior designers
 - **Proof:** "A recycled panel that can be cut, sanded and polished like a solid surface" (ONE DUST case).
-- **Say:** “Polygood is a recycled plastic panel you can cut, sand and polish like a solid surface.”
-- **Don't:** No recycled-content percentages, tonnes, CO2, or fire, water or heat claims: the cases give none.
+- **Say:** “Polygood can be cut, sanded and polished like a solid surface.”
+- **Don't:** No recycled-content percentages, tonnes, CO2, or fire, water or heat claims: the cases give none. Don't lead with 'recycled', and never say what the plastic was.
 
 ### 3. Emerald Ghost in three of the four projects
 
@@ -72,9 +72,9 @@ Umbrella message: **One recycled panel, four jobs.** Umbrella statement: “Ever
 
 - **Sells:** An end-of-life route to point to: De Bijenkorf's stands can come back and become new panels.
 - **For:** Retail brand teams, sustainability leads
-- **Proof:** "Every Polygood panel is pressed from one type of recycled plastic, so when the displays change, the stands can come back through our take-back programme and become new panels."
-- **Say:** “Each panel is pressed from one type of recycled plastic, so De Bijenkorf's stands can come back and become new panels.”
-- **Don't:** The cases describe take-back for De Bijenkorf's stands only. Check the terms before offering it on a new project, and don't say any stands have come back yet.
+- **Proof:** "Every Polygood panel is pressed from one type of recycled plastic, so when the displays change, the stands can come back through our take-back programme and become new panels." (De Bijenkorf case)
+- **Say:** “When De Bijenkorf's displays change, the stands can come back through our take-back programme and become new panels.”
+- **Don't:** The cases describe take-back for De Bijenkorf's stands only. Check the terms before offering it on a new project, and don't say any stands have come back yet. Don't talk about the feedstock or what the plastic was.
 
 ### 6. Order samples
 
@@ -84,13 +84,13 @@ Umbrella message: **One recycled panel, four jobs.** Umbrella statement: “Ever
 - **Say:** “If one of these patterns suits a project, order samples at polygood.com/order-samples.”
 - **Don't:** Don't promise free samples, sizes or delivery times unless sales has confirmed them.
 
-### 7. What each pattern used to be (the umbrella statement)
+### 7. Collection and code under the swatches
 
-- **Sells:** A named first life for every pattern, shown under each case.
-- **For:** Designers, sustainability leads
-- **Proof:** Notion pattern library: Salmon Terra and Sapphire Terrazzo from spools; Emerald Ghost from home appliances; White Terrazzo from fridges and plastic cutlery; Maldives and Translucent Glitter Gold from CD cases; Black Lollipop from electronics and plastic cutlery.
-- **Say:** “Maldives and Translucent Glitter Gold are made from old CD cases.”
-- **Don't:** These are the pattern recipes, not a trace of the batch used on each project. No tonnages, and don't name whose waste it was.
+- **Sells:** Every pattern sits under the project that used it, with its collection and, where confirmed, its code, so a specifier can order a sample of the pattern they saw.
+- **For:** Specifiers, interior designers shortlisting colours
+- **Proof:** Notion pattern library (All Patterns Images): Salmon Terra PS2121, Sapphire Terrazzo PS1801 and Emerald Ghost PS1706 (Colourful splash); White Terrazzo PS2107 (Light Collection); Maldives PS1301 and Translucent Glitter Gold (Translucent Collection, code recorded as #2118, to be confirmed); Black Lollipop PS1602 (Dark Collection).
+- **Say:** “Each pattern in these projects has a code, so you can order a sample of the same pattern: the Orion worktops are Emerald Ghost, PS1706.”
+- **Don't:** Never name or hint at what the plastic in any pattern was, in writing or on a call. That means no appliances, fridges, CD cases, spools, cutlery, electronics or packaging, and no 'old', 'waste', 'first life' or 'used to be'. Talk about colour, pattern, finish and where it was used. A sample shows the pattern, not the exact panels used on the project. Don't quote a code for Translucent Glitter Gold until it is confirmed. Seven is the count for these projects, not the whole range.
 
 ## De Bijenkorf, Amsterdam · Retail
 
@@ -104,11 +104,11 @@ Umbrella message: **One recycled panel, four jobs.** Umbrella statement: “Ever
 
 ### 9. Lifecycle assessment workshop
 
-- **Sells:** Chosen by a design team that had sustainability in the brief from the first meeting.
+- **Sells:** A design team with sustainability in its brief from the first meeting, which then chose Polygood for the stands.
 - **For:** Brand teams with a sustainability brief
 - **Proof:** Random Studio, with the store's design team, sampled recycled and low-impact materials and ran a lifecycle assessment workshop before choosing what to build with.
 - **Say:** “De Bijenkorf's designers ran a lifecycle assessment workshop before choosing materials, then chose Polygood for the stands.”
-- **Don't:** Don't say the workshop scored or validated Polygood, or quote footprint figures: the case gives none.
+- **Don't:** Don't say the workshop scored or validated Polygood, or quote footprint figures: the case gives none. Never link the workshop to the choice of Polygood. This point is for sales calls only; it is not in the email.
 
 ### 10. Salmon Terra plinths and blocks
 
@@ -144,17 +144,17 @@ Umbrella message: **One recycled panel, four jobs.** Umbrella statement: “Ever
 - **Say:** “We made the washstands for the new Circular Living rooms at Henriette Stadthotel in Vienna.”
 - **Don't:** No washstand count and no water or stain claims: the case gives neither.
 
-### 14. White Terrazzo, made from old fridges
+### 14. Sapphire Terrazzo, the washstand in the photo
 
-- **Sells:** A first life anyone can picture.
-- **For:** Hotel teams who want a story for guests, designers
-- **Proof:** Notion pattern library: White Terrazzo is made from refrigerators and single-use plastic cutlery.
-- **Say:** “The White Terrazzo washstands at Henriette are made from old fridges and single-use plastic cutlery.”
-- **Don't:** The case PDF says all the washstands came from fridge linings, but the pattern library gives spools for Sapphire Terrazzo and home appliances for Emerald Ghost. Say it about White Terrazzo only.
+- **Sells:** A terrazzo-pattern washstand in a built four-star hotel bathroom, something to show a client before ordering samples.
+- **For:** Hotel designers, hospitality brand teams
+- **Proof:** The Henriette photo shows a Sapphire Terrazzo washstand with a white basin. The case lists Sapphire Terrazzo, Emerald Ghost and White Terrazzo for the washstands. Notion pattern library: Sapphire Terrazzo, PS1801, Colourful splash collection, Terrazzo pattern type.
+- **Say:** “The washstand in our Henriette photo is Sapphire Terrazzo, PS1801, from our Colourful splash collection, with a white basin.”
+- **Don't:** Never name or hint at what the plastic in any of the three patterns was, even though the case PDF and the Notion project page do. Don't describe Sapphire Terrazzo's colour beyond its name, since no case text describes it. Don't say every washstand is Sapphire Terrazzo, and don't describe how the three patterns are split across rooms. Give no washstand count and make no water or stain claims.
 
 ### 15. Austria's first Circular Living hotel
 
-- **Sells:** Polygood is in a hotel that weighs every material on health, recyclability and carbon.
+- **Sells:** A built reference in a hotel its owners call Austria's first Circular Living hotel.
 - **For:** Hotels and designers with circularity goals
 - **Proof:** Renovated in 2025 as Austria's first Circular Living hotel; the concept is inspired by Cradle to Cradle.
 - **Say:** “Henriette's owners call it Austria's first Circular Living hotel. We made the washstands for its new rooms.”
@@ -188,11 +188,11 @@ Umbrella message: **One recycled panel, four jobs.** Umbrella statement: “Ever
 
 ### 19. The flecks
 
-- **Sells:** Flecks that give a one-colour room depth and hint at the recycled plastic.
+- **Sells:** Flecks that give a one-colour kitchenette depth and pick up the speckled stools.
 - **For:** Interior designers
-- **Proof:** "Its flecks give the monochrome depth, pick up the speckled stools and hint at the recycled plastic underneath."
-- **Say:** “Emerald Ghost's flecks give Orion's teal kitchenette depth and hint at the recycled plastic underneath.”
-- **Don't:** The stools aren't Polygood; the flecks only pick them up.
+- **Proof:** "Its flecks give the monochrome depth, pick up the speckled stools..." (Orion case).
+- **Say:** “Emerald Ghost's flecks give Orion's teal kitchenette depth and pick up the speckled stools.”
+- **Don't:** Never say what the flecks are or what the plastic was. Leave out the case's closing clause about 'the recycled plastic underneath'. The stools aren't Polygood; the flecks only pick them up.
 
 ### 20. Cut to a rounded end
 
@@ -206,13 +206,13 @@ Umbrella message: **One recycled panel, four jobs.** Umbrella statement: “Ever
 
 - **Sells:** A Paris fabricator that already works with Polygood.
 - **For:** Paris workplace teams, fabricators
-- **Proof:** Founded in Paris in 2021 to build office furniture from recycled materials; has made Polygood pieces for Adidas in the city.
-- **Say:** “Samji Studio, a Paris workshop building office furniture from recycled materials, fabricated Orion's worktops.”
+- **Proof:** Founded in Paris in 2021 to build office furniture from recycled materials; has made Polygood pieces for Adidas in the city (Orion case).
+- **Say:** “Samji Studio, a Paris office-furniture workshop that has made Polygood pieces for Adidas, fabricated Orion's worktops.”
 - **Don't:** Don't call Samji an approved or exclusive Polygood fabricator, or present Adidas as our case study.
 
 ### 22. The surface people use most
 
-- **Sells:** Recycled material where a team sees and uses it every day.
+- **Sells:** A surface the team sees and uses every day.
 - **For:** Workplace brand teams, office designers
 - **Proof:** "The kitchenette is where the team meets through the day, which makes the worktop the surface people see and use most."
 - **Say:** “Orion's team meets in the kitchenette through the day, so the Emerald Ghost worktop is the surface they use most.”
