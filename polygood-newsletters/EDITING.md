@@ -29,11 +29,11 @@ From top to bottom:
    - a teal dashed line
    - the intro ("This autumn, we're back…")
 2. **The main code block** (`mailchimp-code-block.html`):
-   1. The small teal label "Autumn 2026 · Four new case studies", the headline "One recycled panel, four different jobs" and its two paragraphs
+   1. The small teal label "Autumn 2026 · Four new case studies", the headline "One recycled panel, four jobs", the umbrella statement in larger type ("Every swatch below says what the plastic used to be…") and two paragraphs
    2. A teal dashed line
    3. Four cases. Each one has:
       - a photo
-      - a label, title and text
+      - a teal label with the client and city ("De Bijenkorf · Amsterdam"), a headline and text
       - the application line
       - a "See the … project" button (teal outline), linked to the project page
       - a "Patterns in this project" row of swatches
@@ -120,13 +120,16 @@ If you change the teal, change it in your Mailchimp header's dashed line too.
 | Header title (header file only) | `font-size:26px` |
 | Header intro (header file only) | `font-size:18px` |
 | Headline | `font-size:28px` |
-| Case titles | `font-size:22px` |
+| Umbrella statement | `font-size:20px` |
+| Case headlines | `font-size:22px` |
 | The two paragraphs under the headline | `font-size:17px` |
 | Case text and the closing paragraph | `font-size:16px` |
 | Button text | `font-size:15px` |
 | Application lines and pattern names under the swatches | `font-size:13px` |
 
 **Change the small label above the headline.** Search for `Autumn 2026 · Four new case studies`.
+
+**Change a headline or the umbrella statement.** Search for a few of its words, for example `lift mannequins` or `Every swatch below`, and retype it. Case headlines work best at eight words or fewer, without the client's name: the label above already gives it.
 
 **Change a pattern caption.** Search for the pattern's name followed by `</div>`, for example `Emerald Ghost</div>`, and edit the "Made from …" text just after it. Don't use Replace All on captions: several patterns share the same words ("Made from plastic spools", "Made from CD cases"). A pattern also appears once for each case that uses it, so change it in each of those cases.
 
@@ -137,7 +140,7 @@ If you change the teal, change it in your Mailchimp header's dashed line too.
    2. Then delete from `<!-- Case: ONE DUST Studio -->` down to, but not including, the dashed line directly above `<!-- Closing and button -->`.
 3. Then fix every place that names or counts the cases:
    - the label ("Four new case studies")
-   - the headline ("four different jobs")
+   - the headline ("four jobs")
    - the intro
    - "these four projects use seven patterns" in the closing
 
@@ -175,13 +178,13 @@ Trade-off: you control everything, but Mailchimp's drag-and-drop editing is off 
 Best for: issues that teammates will edit in Mailchimp without touching HTML.
 
 1. Keep the Project Edit header you built. Set the email background to `#fff9f4`, 600 px wide.
-2. Label and headline: a Text block with "Autumn 2026 · Four new case studies" in teal `#1b7f86`, small capitals. Then a Heading block, "One recycled panel, four different jobs", in a bold sans-serif, colour `#141414`, about 28 px. Then a Text block for the two paragraphs.
+2. Label and headline: a Text block with "Autumn 2026 · Four new case studies" in teal `#1b7f86`, small capitals. Then a Heading block, "One recycled panel, four jobs", in a bold sans-serif, colour `#141414`, about 28 px. Then a Text block with the umbrella statement at about 20 px, and one for the two paragraphs.
 3. A Divider block: 2 px, dashed, teal `#1b7f86`. Use the same divider between every section.
 4. For each case:
    - an Image block with the photo, linked to the project page
    - a Text block with:
-     - the label in teal, small capitals
-     - the title in bold
+     - the label (client · city) in teal, small capitals
+     - the headline in bold
      - the text
      - the application line in `#6b625b`
    - a Button block "See the … project", linked to the project page: outline style, border and text teal `#1b7f86`, background `#fff9f4`
@@ -224,7 +227,9 @@ Best for: bigger changes, reusing the design for the next newsletter, keeping on
 | `subject_lines`, `preview_text` | Not in the email. Copy them into Mailchimp's settings. The first subject shows on the preview page |
 | `hero` | The Project Edit header: `title`, `subtitle`, `intro`, and the photo strip (`image_url`, `image_file`, `image_alt`). Used in `mailchimp-hero.html`, the full email and the preview |
 | `eyebrow` | The small teal label above the headline |
-| `headline`, `intro` | The headline and its two paragraphs |
+| `headline` | The umbrella headline ("One recycled panel, four jobs") |
+| `umbrella_statement` | The one sentence under it, in larger type. Leave it empty (`""`) to drop it |
+| `intro` | The two paragraphs under the statement |
 | `cases` | One block per case, in this order. See the next table |
 | `palette_label` | The small heading over each swatch row ("Patterns in this project") |
 | `palette_cta` | The button under each swatch row ("Order samples of these patterns") |
@@ -239,8 +244,10 @@ Each case has these fields:
 | Case field | What it is |
 |---|---|
 | `key` | A short unique name with no spaces, for example `paris-showroom`. Used only to match the preview photo |
-| `kicker` | Small teal label above the title, for example "Vienna · Hotel" |
-| `title`, `body` | Title and text |
+| `kicker` | Small teal label above the headline: the client and city, for example "Henriette Stadthotel · Vienna" |
+| `title` | The client's name. Not shown in the email: it names the case in the code's markers (`Case: Orion`) and in the placeholders |
+| `headline` | The bold line above the text. Without one, the email shows `title` there instead |
+| `body` | The text |
 | `pattern` | The patterns this case shows as swatches, separated by commas. Each name must match a `name` in `patterns` exactly |
 | `application` | The grey "Application:" line |
 | `link_label`, `page_url` | The text on the outline button and the project page it opens (the photo links there too) |
@@ -280,14 +287,14 @@ To add a new picture: put it in `images/` (or `images/swatches/`), commit and pu
   1. Delete its `{ … }` block, then check the commas:
      - If you deleted the last case, remove the comma after the new last block.
      - If you deleted the first case, remove the comma left at the top.
-  2. Then update everything that names or counts the cases: `eyebrow`, `headline`, `intro`, the pattern count in `closing`, `subject_lines` and `preview_text`.
+  2. Then update everything that names or counts the cases: `eyebrow`, `headline`, `umbrella_statement` (if it names a pattern from that case), `intro`, the pattern count in `closing`, `subject_lines` and `preview_text`.
 - **Reorder cases:** move whole `{ … }` blocks, then check the commas the same way. The dashed lines between cases sort themselves out.
 - **Change which swatches a case shows:** edit its `pattern` field.
 - **Change a pattern's caption:** edit its `from` in `patterns`. It changes under every case that uses it.
 - **Change the look:** edit the section at the top of `build_email.py`:
   - colours: `PAPER`, `INK`, `MUTED`, `TEAL`, `WARM`, `WHITE`
   - font: `SANS`
-  - sizes: `HERO_TITLE_SIZE`, `HEADLINE_SIZE`, `TITLE_SIZE`, `BODY_SIZE`, `HERO_TEXT_COL` (width of the header's text column), `COLUMNS` (swatches per row, now 3), `SWATCH` (largest swatch size)
+  - sizes: `HERO_TITLE_SIZE`, `HEADLINE_SIZE`, `STATEMENT_SIZE` (the umbrella statement), `TITLE_SIZE` (case headlines), `BODY_SIZE`, `HERO_TEXT_COL` (width of the header's text column), `COLUMNS` (swatches per row, now 3), `SWATCH` (largest swatch size)
 - **Start the next newsletter.**
   1. Copy the folder `2026-10-case-studies` and give the copy a new name with no spaces, for example `2026-11-showrooms`.
   2. Change its `copy.json` and `images/`.
@@ -319,7 +326,7 @@ Best for: changing words without installing anything.
 
 Best for: anything, with no setup. Describe the change in plain words. Claude edits `copy.json`, rebuilds, checks the preview, pushes the change and sends you the new code. For example:
 
-- "Change the headline to …"
+- "Change the headline to …" or "Give me three other umbrella statements"
 - "Take Orion out and add the Polygood Paris showroom"
 - "Here are the Content Studio links for the photos: …"
 - "Add this photo to the Orion case" (Claude pushes it and updates the address)

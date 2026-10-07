@@ -2,17 +2,17 @@
 
 What each detail in the October 2026 newsletter sells, who it's for, the fact behind it, a line to reuse in emails, calls and posts, and the claim to avoid.
 
-Umbrella message: **One recycled panel, four different jobs.** Every fact comes from the four case-study PDFs and the Notion pattern library (Marketing team space › All Patterns Images). Check anything that isn't here before you use it.
+Umbrella message: **One recycled panel, four jobs.** Umbrella statement: “Every swatch below says what the plastic used to be: Emerald Ghost is made from home appliances, Maldives from CD cases.” Every fact comes from the four case-study PDFs and the Notion pattern library (Marketing team space › All Patterns Images). Check anything that isn't here before you use it.
 
 | # | Detail | For |
 |---|---|---|
-| 1 | One recycled panel, four different jobs | Architects, interior designers, brand teams |
+| 1 | One recycled panel, four jobs | Architects, interior designers, brand teams |
 | 2 | A panel made from recycled plastic | Fabricators, architects, interior designers |
 | 3 | Emerald Ghost in three of the four projects | Interior designers, architects |
 | 4 | Seven patterns in four projects | Designers shortlisting colours |
 | 5 | Take-back | Retail brand teams, sustainability leads |
 | 6 | Order samples | Architects, interior designers, fabricators |
-| 7 | What each pattern used to be | Designers, sustainability leads |
+| 7 | What each pattern used to be (the umbrella statement) | Designers, sustainability leads |
 | 8 | Repeat client | Retail brand teams |
 | 9 | Lifecycle assessment workshop | Brand teams with a sustainability brief |
 | 10 | Salmon Terra plinths and blocks | Retail teams, visual merchandisers, shopfitters |
@@ -36,7 +36,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 
 ## Across the newsletter
 
-### 1. One recycled panel, four different jobs
+### 1. One recycled panel, four jobs
 
 - **Sells:** One material with a built reference in retail, hospitality, workplace and furniture.
 - **For:** Architects, interior designers, brand teams
@@ -84,7 +84,7 @@ Umbrella message: **One recycled panel, four different jobs.** Every fact comes 
 - **Say:** “If one of these patterns suits a project, order samples at polygood.com/order-samples.”
 - **Don't:** Don't promise free samples, sizes or delivery times unless sales has confirmed them.
 
-### 7. What each pattern used to be
+### 7. What each pattern used to be (the umbrella statement)
 
 - **Sells:** A named first life for every pattern, shown under each case.
 - **For:** Designers, sustainability leads

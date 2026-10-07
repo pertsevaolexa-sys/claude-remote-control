@@ -28,7 +28,9 @@ lines = [
     "What each detail in the October 2026 newsletter sells, who it's for, the fact behind it, "
     "a line to reuse in emails, calls and posts, and the claim to avoid.",
     "",
-    "Umbrella message: **One recycled panel, four different jobs.** "
+    "Umbrella message: **One recycled panel, four jobs.** "
+    "Umbrella statement: “Every swatch below says what the plastic used to be: "
+    "Emerald Ghost is made from home appliances, Maldives from CD cases.” "
     "Every fact comes from the four case-study PDFs and the Notion pattern library (Marketing team space › All Patterns Images). "
     "Check anything that isn't here before you use it.",
     "",

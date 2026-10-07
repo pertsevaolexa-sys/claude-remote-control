@@ -1,8 +1,17 @@
 # The Polygood® Project Edit, autumn 2026: four new case studies
 
-Umbrella message: **One recycled panel, four different jobs**
+Umbrella headline: **One recycled panel, four jobs**
 
-De Bijenkorf (display plinths, Amsterdam), Henriette Stadthotel (washstands, Vienna), Orion (kitchenette worktops, Paris) and ONE DUST Studio (furniture, Taipei).
+Umbrella statement: **Every swatch below says what the plastic used to be: Emerald Ghost is made from home appliances, Maldives from CD cases.**
+
+| Case | Label | Headline |
+|---|---|---|
+| De Bijenkorf (display plinths) | De Bijenkorf · Amsterdam | Old spools now lift mannequins on Dam Square |
+| Henriette Stadthotel (washstands) | Henriette Stadthotel · Vienna | Three washstand patterns, White Terrazzo from fridges |
+| Orion (kitchenette worktops) | Orion · Paris | Sea-green worktops a shade lighter than teal cabinets |
+| ONE DUST Studio (furniture and objects) | ONE DUST Studio · Taipei | Surface specialists turned Polygood into furniture and sculpture |
+
+Each headline was written against the case PDFs and the pattern library, then fact-checked and style-checked. The Henriette headline names White Terrazzo as the fridge pattern because the photo shows a Sapphire Terrazzo washstand, which is made from spools.
 
 The design follows the Project Edit header built in Mailchimp:
 - warm off-white background
@@ -71,6 +80,8 @@ From Mailchimp analytics for the 44 campaigns sent between October 2024 and Sept
 ## The Henriette fridge line
 
 The Henriette PDF says the washstands are made "from plastic that once lined fridges and freezers". The Notion pattern library gives different origins for two of the three patterns: Sapphire Terrazzo comes from spools, Emerald Ghost from home appliances, and White Terrazzo from refrigerators and single-use plastic cutlery. The swatches under each case show those origins, so the newsletter now credits fridges to White Terrazzo only. If the Henriette washstands really were all made from fridge linings, correct the pattern library and change the line back in `copy.json`.
+
+The Henriette project page has the same problem in its subtitle, "Washstands from recycled fridges for Austria's first circular hotel". It also states "Austria's first" as our own claim and drops "Living" from the owners' phrase. Before the page goes live, a safer subtitle is: "Washstands in three Polygood patterns for a Vienna hotel its owners call Austria's first Circular Living hotel".
 
 ## Changing the copy
 
