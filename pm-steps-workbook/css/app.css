@@ -557,6 +557,8 @@ button { font: inherit; color: inherit; }
   .step-ref > div:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
 }
 @media (max-width: 600px) {
+  /* graphics keep a readable size on phones and scroll sideways inside their figure */
+  .fig-body svg { max-width: none; width: max(100%, 620px); height: auto; }
   .brand-name { font-size: 16px; }
   .top-actions { gap: 6px; }
   .pill { display: none; }
