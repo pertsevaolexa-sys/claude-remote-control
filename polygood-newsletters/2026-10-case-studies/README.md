@@ -9,7 +9,7 @@ The design follows the Project Edit header built in Mailchimp:
 - bold black sans-serif headings
 - teal dashed lines between sections
 
-Each case ends with its own row of pattern swatches (name and what it was made from) and an "Order samples" link.
+Each case has a "See the … project" button under its text, then its own row of pattern swatches (name and what it was made from) and an "Order samples of these patterns" button.
 
 Facts come from the four case-study PDFs and the Notion pattern library (Marketing team space › All Patterns Images). `selling-brief.md` covers each detail in the newsletter: what it sells, who it's for, the proof, a line to reuse and the claim to avoid.
 
@@ -48,27 +48,16 @@ From Mailchimp analytics for the 44 campaigns sent between October 2024 and Sept
 
 1. Under your Project Edit header and intro, drag a **Code** block into the email and set its padding to 0. The email should be 600px wide.
 2. Paste the whole of `mailchimp-code-block.html` into the block and save.
-3. Upload the images to **Content Studio**, copy each one's URL and paste it over its placeholder in the code. Or put the URLs into `copy.json` (`image_url`, `swatch_url`) and rebuild:
+3. The photos and swatches are already linked. They load from this public GitHub repository, so they show in Mailchimp's preview, in the test email and for subscribers. If you'd rather host them in Mailchimp, see "Where the pictures live" in the editing guide.
 
-| Placeholder in the code | Image |
-|---|---|
-| `PASTE-DE-BIJENKORF-IMAGE-URL-HERE` | `images/de-bijenkorf.jpg` (photo: Milenka Backx) |
-| `PASTE-HENRIETTE-STADTHOTEL-IMAGE-URL-HERE` | `images/henriette.jpg` (photo supplied on 6 Oct 2026; credit Patrick Johannsen Fotografie or supersusi.com, so check which) |
-| `PASTE-ORION-IMAGE-URL-HERE` | `images/orion.jpg` |
-| `PASTE-ONE-DUST-STUDIO-IMAGE-URL-HERE` | `images/one-dust-studio.jpg` (photo: ONE DUST Studio) |
-| `PASTE-HERO-STRIP-IMAGE-URL-HERE` | `images/hero-strip.jpg`, only in `mailchimp-hero.html` and the full email |
-
-A swatch appears once for every case that uses it (Emerald Ghost three times, Sapphire Terrazzo twice), so use Replace All for swatch links.
-
-| Swatch placeholder | Image |
-|---|---|
-| `PASTE-SWATCH-SALMON-TERRA-URL-HERE` | `images/swatches/salmon-terra.jpg` (cropped from the De Bijenkorf plinths) |
-| `PASTE-SWATCH-SAPPHIRE-TERRAZZO-URL-HERE` | `images/swatches/sapphire-terrazzo.jpg` |
-| `PASTE-SWATCH-EMERALD-GHOST-URL-HERE` | `images/swatches/emerald-ghost.jpg` |
-| `PASTE-SWATCH-WHITE-TERRAZZO-URL-HERE` | `images/swatches/white-terrazzo.jpg` |
-| `PASTE-SWATCH-MALDIVES-URL-HERE` | `images/swatches/maldives.jpg` |
-| `PASTE-SWATCH-BLACK-LOLLIPOP-URL-HERE` | `images/swatches/black-lollipop.jpg` |
-| `PASTE-SWATCH-TRANSLUCENT-GLITTER-GOLD-URL-HERE` | Not exported. Take the first image on the Translucent Glitter Gold page in Notion and crop it square (240 × 240 px is enough) |
+| Image | File | Credit |
+|---|---|---|
+| De Bijenkorf | `images/de-bijenkorf.jpg` | Milenka Backx |
+| Henriette Stadthotel | `images/henriette.jpg` | Supplied on 6 Oct 2026: Patrick Johannsen Fotografie or supersusi.com, so check which |
+| Orion | `images/orion.jpg` | |
+| ONE DUST Studio | `images/one-dust-studio.jpg` | ONE DUST Studio |
+| Header strip | `images/hero-strip.jpg` | Crops of the four case photos. Only in `mailchimp-hero.html` and the full email |
+| Seven swatches | `images/swatches/` | Salmon Terra is cropped from the De Bijenkorf plinths. Translucent Glitter Gold is the first image on its Notion pattern page |
 
 4. The samples link is already set to `https://polygood.com/order-samples/`.
 5. Leave the template's own footer in place, because it carries the unsubscribe link.
@@ -76,8 +65,8 @@ A swatch appears once for every case that uses it (Emerald Ghost three times, Sa
 ## Before sending
 
 - [ ] Henriette, Orion and ONE DUST are still drafts. Publish their pages first, or change the links: the code expects `/projects/henriette-stadthotel/`, `/projects/orion/` and `/projects/one-dust-studio/`. Only `/projects/de-bijenkorf/` is live.
-- [ ] Translucent Glitter Gold swatch added, the Henriette photographer confirmed, and the photo credits cleared for email use
-- [ ] Test email sent to yourself and opened in Outlook and on a phone (each case's swatches should sit three to a row)
+- [ ] The Henriette photographer confirmed, and the photo credits cleared for email use
+- [ ] Test email sent to yourself and opened in Outlook and on a phone: every photo and swatch shows, each case's swatches sit three to a row, and every button opens the right page
 
 ## The Henriette fridge line
 

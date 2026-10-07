@@ -17,7 +17,7 @@ All paths are inside `polygood-newsletters/`.
 | `2026-10-case-studies/mailchimp-full-email.html` | The whole email (header, body, footer), for Mailchimp's "Paste in code" | Route B |
 | `2026-10-case-studies/mailchimp-palettes.html` | Each case's row of pattern swatches on its own | Route C |
 | `2026-10-case-studies/preview.html` | The email with the photos built in, to look at in a browser | Never paste this into Mailchimp: it is about 1 MB and Gmail would clip it |
-| `2026-10-case-studies/images/` | Case photos (1200 × 800), the header strip `hero-strip.jpg` (720 × 420) and `swatches/` (240 × 240) | Swap them for other photos |
+| `2026-10-case-studies/images/` | Case photos (1200 × 800), the header strip `hero-strip.jpg` (720 × 420) and `swatches/` (240 × 240). The code loads them from GitHub (see "Where the pictures live") | Swap them for other photos |
 | `2026-10-case-studies/briefs.json` and `build_brief.py` | The selling brief | See "Selling brief" in route D |
 
 ## How the email is laid out
@@ -35,9 +35,9 @@ From top to bottom:
       - a photo
       - a label, title and text
       - the application line
-      - a "See the … project" link
+      - a "See the … project" button (teal outline), linked to the project page
       - a "Patterns in this project" row of swatches
-      - an "Order samples of these patterns" link
+      - an "Order samples of these patterns" button (filled teal), linked to the samples page
       - a dashed line, except after the last case
    4. A dashed line
    5. The closing paragraph, the "Order samples" button and the sign-off
@@ -47,7 +47,7 @@ From top to bottom:
 | You want to… | Use |
 |---|---|
 | Fix a typo or change a sentence in this issue | A (in Mailchimp) or F (ask Claude) |
-| Put in the image links and the samples link | A for this issue. D if you'll rebuild later: set them once in `copy.json` |
+| Swap a picture or a link | A for this issue. D if you'll rebuild later: set it once in `copy.json` |
 | Change colours or font sizes | A (find and replace) or D (top of `build_email.py`) |
 | Add, remove or reorder a case, or change which patterns a case shows | D or F. In route A it is fiddly |
 | Start the next newsletter from this one | D: copy the folder, edit, rebuild |
@@ -88,24 +88,27 @@ Leave `style="…"` alone, unless a recipe below says otherwise. In the header f
 
 **Change a sentence.** Search for three or four words of it and retype it.
 
-**Change a project link.** Each case has its link twice: on the photo and on "See the … project". Replace both, for example every `https://polygood.com/projects/orion/`.
+**Change a project link.** Each case has its link twice: on the photo and on the "See the … project" button. Replace both, for example every `https://polygood.com/projects/orion/`.
+
+**Change a button's text.** Search for the words on the button, for example `See the Orion project` or `Order samples of these patterns`, and retype them. The text sits inside `<span …>` and `</span>`. Keep it short (five words at most) so the button stays on one line on a phone. "Order samples of these patterns" appears four times, once per case, so use Replace All if you change it.
 
 **Add or swap an image.**
 1. In Mailchimp, open Content Studio, upload the image and copy its URL. Content Studio takes images up to 1 MB. Ours are 10 to 300 KB.
-2. Paste the URL over the matching `PASTE-…-URL-HERE`, or over the old address, inside `src="…"`. A swatch appears once for every case that uses it: Emerald Ghost three times, Sapphire Terrazzo twice. So use Replace All on each `PASTE-SWATCH-…-URL-HERE`.
+2. Paste the URL over the old address inside `src="…"`. Each address ends in the file name, for example `…/images/orion.jpg` or `…/images/swatches/emerald-ghost.jpg`, so search for that. A swatch appears once for every case that uses it: Emerald Ghost three times, Sapphire Terrazzo twice. So use Replace All on the swatch's address.
 
 Case photos should be 1200 × 800 px (they display at 552 × 368). Swatches should be square, 240 × 240 px.
 
-**Change the samples link.** It is already set to `https://polygood.com/order-samples/`, the most-clicked link in your past campaigns. It appears five times: under each case's swatches and in the button. To change it, use Replace All.
+**Change the samples link.** It is already set to `https://polygood.com/order-samples/`, the most-clicked link in your past campaigns. It appears five times: on the button under each case's swatches and on the closing button. To change it, use Replace All.
 
 **Change a colour.** The first lines of the code list every colour. Use Replace All on the hex code:
 
 | Colour | Used for |
 |---|---|
-| `#1b7f86` (teal) | The dashed lines, the small labels, the links and the button |
+| `#1b7f86` (teal) | The dashed lines, the small labels, the filled buttons, and the border and text of the outline buttons |
 | `#9a5b34` (warm brown) | The "Made from …" captions under the swatches |
-| `#fff9f4` | The background |
+| `#fff9f4` | The background, also the inside of the outline buttons |
 | `#141414` | Headings and text |
+| `#ffffff` | The text on the filled buttons |
 | `#6b625b` | Small grey text: the application lines and "Patterns in this project" |
 
 If you change the teal, change it in your Mailchimp header's dashed line too.
@@ -120,7 +123,7 @@ If you change the teal, change it in your Mailchimp header's dashed line too.
 | Case titles | `font-size:22px` |
 | The two paragraphs under the headline | `font-size:17px` |
 | Case text and the closing paragraph | `font-size:16px` |
-| "Order samples of these patterns" links | `font-size:14px` |
+| Button text | `font-size:15px` |
 | Application lines and pattern names under the swatches | `font-size:13px` |
 
 **Change the small label above the headline.** Search for `Autumn 2026 · Four new case studies`.
@@ -128,7 +131,7 @@ If you change the teal, change it in your Mailchimp header's dashed line too.
 **Change a pattern caption.** Search for the pattern's name followed by `</div>`, for example `Emerald Ghost</div>`, and edit the "Made from …" text just after it. Don't use Replace All on captions: several patterns share the same words ("Made from plastic spools", "Made from CD cases"). A pattern also appears once for each case that uses it, so change it in each of those cases.
 
 **Remove a case.**
-1. Delete from its `<!-- Case: … -->` line down to the line just before the next `<!-- Case:` line. That takes out the case, its palette, its "Order samples" link and the dashed line under it.
+1. Delete from its `<!-- Case: … -->` line down to the line just before the next `<!-- Case:` line. That takes out the case, its buttons, its palette and the dashed line under it.
 2. The last case (ONE DUST) works differently, because nothing follows it:
    1. First delete the dashed line at the end of the case above it. That is the line directly above `<!-- Case: ONE DUST Studio -->`.
    2. Then delete from `<!-- Case: ONE DUST Studio -->` down to, but not including, the dashed line directly above `<!-- Closing and button -->`.
@@ -161,7 +164,7 @@ Best for: full control of the email, header and footer included, as one HTML fil
 3. Set the subject and the preview text in the email settings. The file already contains:
    - `*|MC:SUBJECT|*` and `*|MC_PREVIEW_TEXT|*`, which Mailchimp fills in
    - the unsubscribe link (`*|UNSUB|*`), the preferences link (`*|UPDATE_PROFILE|*`) and your postal address (`*|LIST:ADDRESSLINE|*`), which Mailchimp requires
-4. Add the image links as in route A. Edit with the same recipes, in the code editor.
+4. The pictures and links are already in. Edit with the same recipes as route A, in the code editor.
 
 Trade-off: you control everything, but Mailchimp's drag-and-drop editing is off for this email.
 
@@ -181,9 +184,8 @@ Best for: issues that teammates will edit in Mailchimp without touching HTML.
      - the title in bold
      - the text
      - the application line in `#6b625b`
-     - the "See the … project" link
-   - a Code block for the swatches: in `mailchimp-palettes.html`, find that case's section (it starts with `===== Case name`) and paste it in
-   - a Text block with the link "Order samples of these patterns →" to `https://polygood.com/order-samples/`
+   - a Button block "See the … project", linked to the project page: outline style, border and text teal `#1b7f86`, background `#fff9f4`
+   - a Code block for the swatches and their "Order samples of these patterns" button: in `mailchimp-palettes.html`, find that case's section (it starts with `===== Case name`) and paste it in
 5. Closing: a Text block, then a Button block "Order samples" in teal `#1b7f86`, linked to the same page.
 
 Trade-off: easy for anyone to edit afterwards, but spacing and fonts will be close to the design, not identical, especially in Outlook.
@@ -212,6 +214,7 @@ Best for: bigger changes, reusing the design for the next newsletter, keeping on
    ```
    It prints the word count and any `PASTE-…` placeholders you still need to fill.
 3. Open `preview.html` in a browser to check it. Each picture comes from its `image_url` or `swatch_url` if filled. Otherwise it comes from the local file named in `image_file` (in `images/`) or `file` (in `images/swatches/`). If neither is found, you see a grey box with the name. That usually means the file name is misspelled (capitals, and `.jpg` vs `.jpeg`, matter) or the file is in the wrong folder.
+   The Mailchimp files get each picture from `image_url` or `swatch_url` if filled, otherwise from `image_base_url` plus the file name. A new photo must be pushed to GitHub (or put in Content Studio) before it shows in Mailchimp; see "Where the pictures live".
 4. Paste the new `mailchimp-code-block.html` into the Code block in Mailchimp, replacing the old code.
 
 ### What each field in `copy.json` controls
@@ -224,10 +227,11 @@ Best for: bigger changes, reusing the design for the next newsletter, keeping on
 | `headline`, `intro` | The headline and its two paragraphs |
 | `cases` | One block per case, in this order. See the next table |
 | `palette_label` | The small heading over each swatch row ("Patterns in this project") |
-| `palette_cta` | The link under each swatch row ("Order samples of these patterns") |
-| `patterns` | The pattern library. Each has `name`, `from` (shown as "Made from …"), `swatch_url` (Content Studio link), `file` (local swatch for the preview) and `id` (the Polygood pattern ID, not shown) |
-| `closing`, `cta_label` | Last paragraph and the button text |
-| `samples_url` | Where the button and the links under the swatches go (set to polygood.com/order-samples/) |
+| `palette_cta` | The button under each swatch row ("Order samples of these patterns") |
+| `patterns` | The pattern library. Each has `name`, `from` (shown as "Made from …"), `swatch_url` (leave empty to use the hosted copy, or paste a Content Studio link), `file` (the swatch in `images/swatches/`) and `id` (the Polygood pattern ID, not shown) |
+| `closing`, `cta_label` | Last paragraph and the closing button's text |
+| `samples_url` | Where the closing button and the button under each swatch row go (set to polygood.com/order-samples/) |
+| `image_base_url` | The public folder the pictures load from. Each picture's address is this plus its file name (swatches add `/swatches/`). See "Where the pictures live" |
 | `signoff` | Last lines |
 
 Each case has these fields:
@@ -239,12 +243,20 @@ Each case has these fields:
 | `title`, `body` | Title and text |
 | `pattern` | The patterns this case shows as swatches, separated by commas. Each name must match a `name` in `patterns` exactly |
 | `application` | The grey "Application:" line |
-| `link_label`, `page_url` | The project link text and address |
-| `image_url` | The photo's Content Studio link, once you have it |
-| `image_file` | The local photo in `images/`, for the preview |
+| `link_label`, `page_url` | The text on the outline button and the project page it opens (the photo links there too) |
+| `image_url` | Leave empty to use the hosted copy, or paste a Content Studio link to use that instead |
+| `image_file` | The photo's file name in `images/` |
 | `image_alt` | What the photo shows, for screen readers and blocked images |
 
-**Fill the links once.** Put the Content Studio URLs into `image_url` and `swatch_url`, and the samples page into `samples_url`. Every rebuild after that comes out finished, with no placeholders.
+**Where the pictures live.** Email apps can only show a picture that sits at a public `https://` address. This issue's photos and swatches are in the public GitHub repository, and `image_base_url` points at them, pinned to one commit so the files can't change under a sent email:
+
+```
+https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/428bdaf…/polygood-newsletters/2026-10-case-studies/images
+```
+
+That works as long as the repository stays public and the branch `claude/wizardly-mccarthy-9h1wct` (or a merge of it) stays on GitHub. If either might change, move the pictures to Mailchimp's Content Studio: upload them, paste each link into that picture's `image_url` or `swatch_url`, and rebuild. A filled `image_url` or `swatch_url` always wins over `image_base_url`.
+
+To add a new picture: put it in `images/` (or `images/swatches/`), commit and push it, then set `image_base_url` to the new commit (replace the long code after `claude-remote-control/`), or ask Claude to do it. A picture that isn't pushed yet shows in `preview.html` but appears broken in Mailchimp.
 
 ### JSON rules
 
@@ -310,6 +322,7 @@ Best for: anything, with no setup. Describe the change in plain words. Claude ed
 - "Change the headline to …"
 - "Take Orion out and add the Polygood Paris showroom"
 - "Here are the Content Studio links for the photos: …"
+- "Add this photo to the Orion case" (Claude pushes it and updates the address)
 - "Make the teal darker" or "switch to a winter palette"
 - "Write the November issue from these three PDFs in the same design"
 
@@ -334,7 +347,8 @@ If Mailchimp is connected to Zapier (the link was shared earlier in the chat), C
 
 | You see | Likely cause and fix |
 |---|---|
-| A broken-image icon | The `src` is still a placeholder, or the address isn't public. It must start with `https://`. Use the Content Studio URL |
+| A broken-image icon | The `src` is still a placeholder, the picture was never pushed to GitHub, or the address isn't public (it must start with `https://`). Open the address in a browser: if it doesn't show the picture, upload it to Content Studio and use that link |
+| A button shows as plain underlined text | The code was pasted into a Text block instead of a Code block. Delete it and paste it into a Code block |
 | The header's title and photos sit one above the other on a computer | Your email app doesn't support the trick that puts them side by side. The email still reads well. If it happens in Gmail or Apple Mail, tell Claude |
 | Swatches stack one per row | An older copy of the code is in the block. The earlier version placed swatches side by side with `display:inline-block`, which Mailchimp's builder removes. Paste the current `mailchimp-code-block.html`: it uses table cells, which Mailchimp keeps |
 | "[Message clipped]" in Gmail | The email is over 102 KB. Usually this means `preview.html` was pasted instead of `mailchimp-code-block.html` |

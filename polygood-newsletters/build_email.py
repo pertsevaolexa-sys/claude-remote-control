@@ -11,7 +11,9 @@ Writes five files into the output folder:
   preview.html               the whole email with the local photos and swatches built in
 
 Words, links and images live in copy.json. The look (colours, fonts, sizes) is set below.
-An empty image_url, swatch_url or samples_url becomes a PASTE-...-URL-HERE placeholder.
+Images: an image_url or swatch_url wins; otherwise image_base_url + the file name is used
+(swatches from image_base_url + "/swatches/"). With neither, the code gets a PASTE-...-URL-HERE
+placeholder. An empty samples_url becomes a placeholder too.
 """
 import base64
 import html
@@ -28,9 +30,9 @@ SANS = "'Helvetica Neue', Helvetica, Arial, sans-serif"
 PAPER = "#fff9f4"   # email background (warm off-white, as in the Project Edit header)
 INK = "#141414"     # headings and text
 MUTED = "#6b625b"   # small grey-brown text
-TEAL = "#1b7f86"    # dashed lines, labels, links, button
+TEAL = "#1b7f86"    # dashed lines, labels, links, buttons
 WARM = "#9a5b34"    # the "Made from ..." captions under the swatches
-WHITE = "#ffffff"   # button text
+WHITE = "#ffffff"   # text on the filled buttons
 
 HERO_TITLE_SIZE = 26
 HEADLINE_SIZE = 28
@@ -62,6 +64,16 @@ def url_or_placeholder(value, name):
 
 
 SAMPLES_URL = url_or_placeholder(copy.get("samples_url"), "ORDER-SAMPLES")
+IMAGE_BASE = (copy.get("image_base_url") or "").strip().rstrip("/")
+
+
+def hosted(url, file, sub=""):
+    """The image's own URL if set, else the hosted copy under image_base_url, else nothing."""
+    if url and url.strip():
+        return url.strip()
+    if IMAGE_BASE and file:
+        return f"{IMAGE_BASE}/{sub}{file}"
+    return ""
 
 
 def paras(text, size=BODY_SIZE, color=INK, margin=16):
@@ -96,6 +108,22 @@ def heading(text, size, pad="0 0 12px 0"):
     )
 
 
+def button(text, href, filled=True, pad="0 0 26px 0"):
+    """A button that stays a button in Mailchimp, Gmail and Outlook: the padding and colour sit
+    on the table cell, so the whole shape shows even where the link styles are stripped."""
+    fill = TEAL if filled else PAPER
+    ink = WHITE if filled else TEAL
+    return (
+        f'<tr><td style="padding:{pad};">'
+        f'<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
+        f'<td bgcolor="{fill}" style="background:{fill};border:2px solid {TEAL};border-radius:2px;padding:12px 22px;'
+        f'font-family:{SANS};font-size:15px;font-weight:bold;line-height:1.2;">'
+        f'<a href="{attr(href)}" target="_blank" style="font-family:{SANS};font-size:15px;font-weight:bold;line-height:1.2;'
+        f'color:{ink};text-decoration:none;"><span style="color:{ink};">{esc(text)}</span></a>'
+        f"</td></tr></table></td></tr>"
+    )
+
+
 def statement():
     """The umbrella statement: one sentence under the headline, a size up from the text."""
     text = copy.get("umbrella_statement", "").strip()
@@ -113,7 +141,7 @@ def case_patterns(c):
 
 
 def case_block(c, images, swatches, last):
-    src = images.get(c["key"], url_or_placeholder(c.get("image_url"), slug(c["title"]) + "-IMAGE"))
+    src = images.get(c["key"], url_or_placeholder(hosted(c.get("image_url"), c.get("image_file")), slug(c["title"]) + "-IMAGE"))
     return f"""
 <!-- Case: {esc(c['title']).replace("--", "-")} -->
 <tr><td style="padding:0 0 18px 0;">
@@ -122,17 +150,15 @@ def case_block(c, images, swatches, last):
 {label(c['kicker'], pad="0 0 6px 0")}
 {heading(c.get('headline') or c['title'], TITLE_SIZE, pad="0 0 10px 0")}
 <tr><td style="padding:0;">{paras(c['body'], margin=12)}</td></tr>
-<tr><td style="padding:0 0 14px 0;font-family:{SANS};font-size:13px;line-height:1.6;color:{MUTED};">Application: {esc(c['application'])}</td></tr>
-<tr><td style="padding:0 0 26px 0;font-family:{SANS};font-size:15px;line-height:1.4;font-weight:bold;">
-<a href="{attr(c['page_url'])}" target="_blank" style="color:{TEAL};text-decoration:underline;">{esc(c['link_label'])}</a>
-</td></tr>
+<tr><td style="padding:0 0 16px 0;font-family:{SANS};font-size:13px;line-height:1.6;color:{MUTED};">Application: {esc(c['application'])}</td></tr>
+{button(c['link_label'], c['page_url'], filled=False, pad="0 0 28px 0")}
 {palette(c, swatches)}
 {'' if last else dashed()}"""
 
 
 def swatch_cell(p, swatches):
     """One swatch in a plain table cell. Tables keep their layout in Mailchimp, Gmail and Outlook alike."""
-    src = swatches.get(p["name"], url_or_placeholder(p.get("swatch_url"), "SWATCH-" + slug(p["name"])))
+    src = swatches.get(p["name"], url_or_placeholder(hosted(p.get("swatch_url"), p.get("file"), "swatches/"), "SWATCH-" + slug(p["name"])))
     share = f"{100 // COLUMNS}%"
     return (
         f'<td width="{share}" valign="top" style="width:{share};padding:0 12px 18px 0;vertical-align:top;">'
@@ -165,22 +191,20 @@ def palette(c, swatches):
 {grid}
 </table>
 </td></tr>
-<tr><td style="padding:0 0 30px 0;font-family:{SANS};font-size:14px;line-height:1.4;font-weight:bold;">
-<a href="{attr(SAMPLES_URL)}" target="_blank" style="color:{TEAL};text-decoration:underline;">{esc(copy['palette_cta'])} &rarr;</a>
-</td></tr>"""
+{button(copy['palette_cta'], SAMPLES_URL, pad="0 0 32px 0")}"""
 
 
 def colour_key():
     return (
         f"<!-- Colours, for find and replace: background {PAPER} · text {INK} · small text {MUTED} · "
-        f"teal lines, labels, links and button {TEAL} · Made from captions {WARM} -->"
+        f"teal lines, labels, links and buttons {TEAL} · Made from captions {WARM} -->"
     )
 
 
 def hero(images):
     """The Project Edit header: title and subtitle beside the photo strip, a dashed line, then the intro."""
     h = copy["hero"]
-    src = images.get("hero", url_or_placeholder(h.get("image_url"), "HERO-STRIP-IMAGE"))
+    src = images.get("hero", url_or_placeholder(hosted(h.get("image_url"), h.get("image_file")), "HERO-STRIP-IMAGE"))
     img_col = 600 - HERO_TEXT_COL
     # Two columns side by side on wide screens, stacked on phones (no media queries needed).
     col = "display:inline-block;vertical-align:middle;width:100%;max-width:100%;width:calc((480px - 100%) * 480);"
@@ -222,12 +246,7 @@ def body(images, swatches):
 {dashed()}
 <!-- Closing and button -->
 <tr><td style="padding:0 0 8px 0;">{paras(copy['closing'])}</td></tr>
-<tr><td style="padding:4px 0 32px 0;">
-<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-<td bgcolor="{TEAL}" style="background:{TEAL};border-radius:2px;padding:14px 26px;font-family:{SANS};font-size:15px;font-weight:bold;line-height:1;">
-<a href="{attr(SAMPLES_URL)}" target="_blank" style="font-family:{SANS};font-size:15px;font-weight:bold;line-height:1;color:{WHITE};text-decoration:none;"><span style="color:{WHITE};">{esc(copy['cta_label'])}</span></a>
-</td></tr></table>
-</td></tr>
+{button(copy['cta_label'], SAMPLES_URL, pad="4px 0 32px 0")}
 <tr><td style="padding:0 0 32px 0;">{paras(copy['signoff'], size=15)}</td></tr>
 </table>
 </td></tr>
