@@ -125,7 +125,7 @@ is looking at (their own file, or the example when "Example" is on).
 
 ## Graphics
 
-`render(q, pal)` returns one SVG string made with `PM.svg` and colours only from `pal`.
+`render(q, pal, ctx)` returns one SVG string made with `PM.svg` and colours only from `pal`. `ctx.export` is true when the drawing goes into the Word file, where a page is about 1,000px wide (landscape about 1,450px): very wide drawings should wrap into rows there instead of shrinking.
 
 - `pal` is `PM.pal.light` or `PM.pal.dark`; the Word export always uses light. Keys: `bg ink ink2 muted
   line grid axis box boxLine accent accentSoft accentInk strong strongInk mile mileSoft crit critSoft

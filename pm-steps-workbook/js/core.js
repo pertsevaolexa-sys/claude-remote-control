@@ -1399,11 +1399,12 @@
       body.innerHTML = graphicSvg(inst.b, q, currentPal());
     },
   };
-  function graphicSvg(b, q, pal) {
+  /** ctx.export is true when the drawing goes into the Word file (a page is ~1000px wide). */
+  function graphicSvg(b, q, pal, ctx) {
     try {
       const msg = b.empty ? b.empty(q) : null;
       if (msg) return S.placeholder(b.emptyW || 720, b.emptyH || 160, msg, pal);
-      const out = b.render(q, pal);
+      const out = b.render(q, pal, ctx || {});
       return typeof out === 'string' ? out : out && out.svg ? out.svg : '';
     } catch (e) {
       console.error('Graphic failed:', b.title, e);
@@ -1949,6 +1950,34 @@
     }
   }
 
+  /**
+   * Very wide drawings (a network diagram, a long timeline) would shrink to unreadable text on a
+   * Word page. Cut them into overlapping windows of the same SVG, each at most maxW wide, so
+   * lines run on from one part into the next.
+   */
+  function sliceWide(svg, maxW, overlap) {
+    maxW = maxW || 1100;
+    overlap = overlap || 60;
+    const m = /^<svg[^>]*\bwidth="(\d+(?:\.\d+)?)" height="(\d+(?:\.\d+)?)"/.exec(svg);
+    if (!m) return [svg];
+    const w = +m[1];
+    const h = +m[2];
+    if (w <= maxW * 1.2) return [svg];
+    const n = Math.ceil((w - overlap) / (maxW - overlap));
+    const partW = Math.ceil((w + (n - 1) * overlap) / n);
+    const parts = [];
+    for (let i = 0; i < n; i++) {
+      const x0 = Math.min(i * (partW - overlap), w - partW);
+      parts.push(
+        svg
+          .replace(/viewBox="[^"]*"/, 'viewBox="' + x0 + ' 0 ' + partW + ' ' + h + '"')
+          .replace(/(<svg[^>]*?)\bwidth="[^"]*"/, '$1width="' + partW + '"')
+          .replace(/min-width:\d+px;/, '')
+      );
+    }
+    return parts;
+  }
+
   async function saveFile(filename, data, mime) {
     const blob = data instanceof Blob ? data : new Blob([data], { type: mime || 'application/octet-stream' });
     let dl = null;
@@ -2059,12 +2088,17 @@
         case 'graphic': {
           if (!opts.graphics) break;
           if (b.empty && b.empty(q)) break;
-          const svg = graphicSvg(b, q, PM.pal.light);
+          const svg = graphicSvg(b, q, PM.pal.light, { export: true });
           if (!svg.startsWith('<svg')) break;
           try {
-            const png = await svgToPng(svg, 2);
             out.push({ type: 'h3', text: b.title || 'Graphic' });
-            out.push({ type: 'image', png: png.bytes, width: png.width, height: png.height, caption: b.caption || '', alt: b.title || '' });
+            const parts = sliceWide(svg);
+            for (let i = 0; i < parts.length; i++) {
+              const png = await svgToPng(parts[i], 2);
+              const last = i === parts.length - 1;
+              const cap = parts.length > 1 ? 'Part ' + (i + 1) + ' of ' + parts.length + (last && b.caption ? '. ' + b.caption : '') : b.caption || '';
+              out.push({ type: 'image', png: png.bytes, width: png.width, height: png.height, caption: cap, alt: b.title || '' });
+            }
           } catch (e) {
             console.error('Graphic export failed', b.title, e);
           }

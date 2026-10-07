@@ -595,8 +595,11 @@
     const gm = q.f('cost.grossMargin');
     let my = (Y(cTot) + Y(pTot)) / 2;
     if (Math.abs(Y(cTot) - Y(pTot)) < 64) my = Math.max(yc, yp) + 22;
-    body += S.text(lx, my - 7, 'Gross margin', { size: 11, fill: pal.ink2, v: 'middle' });
-    body += S.text(lx, my + 8, moneyText(q, typeof gm === 'number' ? gm : pTot - m.totalPlan), { size: 12, weight: 600, fill: pal.ink, v: 'middle' });
+    // a gross margin only means something when a customer pays; internal projects fund the gap themselves
+    const external = q.f('meta.kind') === 'External (customer) project';
+    const margin = typeof gm === 'number' ? gm : pTot - m.totalPlan;
+    body += S.text(lx, my - 7, external ? 'Gross margin' : 'Own funding needed', { size: 11, fill: pal.ink2, v: 'middle' });
+    body += S.text(lx, my + 8, moneyText(q, external ? margin : Math.max(0, -margin)), { size: 12, weight: 600, fill: pal.ink, v: 'middle' });
     const h = Math.max(yB + 14, my + 22);
     let foot = '';
     const undated = m.active.filter((l) => !l.dated);
