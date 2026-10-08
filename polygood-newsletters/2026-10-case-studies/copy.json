@@ -76,12 +76,13 @@
   }
  ],
  "palette_label": "Patterns in this project",
- "palette_cta": "Order samples of these patterns",
- "palette_cta_one": "Order a sample of this pattern",
+ "palette_cta": "Order samples",
+ "palette_cta_one": "Order a sample",
+ "swatch_links": false,
  "patterns": [
   {
    "name": "Salmon Terra",
-   "caption": "Colourful Splash Collection · PS2121",
+   "caption": "#PS2121",
    "pattern_url": "https://polygood.com/product/salmon-terra/",
    "swatch_url": "",
    "file": "salmon-terra.jpg",
@@ -89,7 +90,7 @@
   },
   {
    "name": "Sapphire Terrazzo",
-   "caption": "Colourful Splash Collection · PS1801",
+   "caption": "#PS1801",
    "pattern_url": "https://polygood.com/product/sapphire-terrazzo/",
    "swatch_url": "",
    "file": "sapphire-terrazzo.jpg",
@@ -97,7 +98,7 @@
   },
   {
    "name": "Emerald Ghost",
-   "caption": "Colourful Splash Collection · PS1706",
+   "caption": "#PS1706",
    "pattern_url": "https://polygood.com/product/emerald-ghost/",
    "swatch_url": "",
    "file": "emerald-ghost.jpg",
@@ -105,7 +106,7 @@
   },
   {
    "name": "White Terrazzo",
-   "caption": "Light Collection · PS2107",
+   "caption": "#PS2107",
    "pattern_url": "https://polygood.com/product/white-terrazzo/",
    "swatch_url": "",
    "file": "white-terrazzo.jpg",
@@ -113,7 +114,7 @@
   },
   {
    "name": "Maldives",
-   "caption": "Translucent Collection · PS1301",
+   "caption": "#PS1301",
    "pattern_url": "https://polygood.com/product/maldives/",
    "swatch_url": "",
    "file": "maldives.jpg",
@@ -121,7 +122,7 @@
   },
   {
    "name": "Black Lollipop",
-   "caption": "Dark Collection · PS1602",
+   "caption": "#PS1602",
    "pattern_url": "https://polygood.com/product/black-lollipop/",
    "swatch_url": "",
    "file": "black-lollipop.jpg",
@@ -129,7 +130,7 @@
   },
   {
    "name": "Translucent Glitter Gold",
-   "caption": "Translucent Collection · PS2118",
+   "caption": "#PS2118",
    "pattern_url": "https://polygood.com/product/translucent-glitter-gold/",
    "swatch_url": "",
    "file": "translucent-glitter-gold.jpg",

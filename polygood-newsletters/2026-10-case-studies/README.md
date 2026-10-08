@@ -79,7 +79,7 @@ From Mailchimp analytics for the 44 campaigns sent between October 2024 and Sept
 
 ## The sample chooser page
 
-Each case's sample button opens a "choose a sample" page at that project's section, and every swatch in the email links to its pattern. On the chooser page each sample links to its pattern page on polygood.com.
+Each project has one link to samples: its "Order samples" button. It opens a small menu page showing only that project's patterns (for ONE DUST, all five), and each pattern there opens its product page on polygood.com, where the sample is ordered. The swatches in the email are not links, to keep one clean link per project; set `swatch_links` to `true` in `copy.json` to link them too. Opened without a project, the page lists all four.
 
 | File | Use |
 |---|---|

@@ -185,16 +185,21 @@ def swatch_src(p, swatches):
 
 def swatch_cell(p, swatches, c=None):
     """One swatch in a plain table cell. Tables keep their layout in Mailchimp, Gmail and Outlook alike.
-    The swatch and its name link to the pattern's page, so a reader can pick a sample straight from the email."""
+    With swatch_links on, the swatch and its name link to the pattern's page. Off (the default), the case's
+    one button is the only link: it opens the sample menu, where the reader picks a pattern."""
     src = swatch_src(p, swatches)
-    href = attr(pattern_link(p, c))
+    img = (f'<img src="{attr(src)}" width="{SWATCH}" height="{SWATCH}" alt="{attr(p["name"])} pattern swatch" '
+           f'style="display:block;width:100%;max-width:{SWATCH}px;height:auto;border:0;border-radius:2px;">')
+    name = esc(p["name"])
+    if copy.get("swatch_links"):
+        href = attr(pattern_link(p, c))
+        img = f'<a href="{href}" target="_blank" style="text-decoration:none;">{img}</a>'
+        name = f'<a href="{href}" target="_blank" style="color:{INK};text-decoration:none;">{name}</a>'
     share = f"{100 // COLUMNS}%"
     return (
         f'<td width="{share}" valign="top" style="width:{share};padding:0 12px 18px 0;vertical-align:top;">'
-        f'<a href="{href}" target="_blank" style="text-decoration:none;"><img src="{attr(src)}" width="{SWATCH}" height="{SWATCH}" alt="{attr(p["name"])} pattern swatch" '
-        f'style="display:block;width:100%;max-width:{SWATCH}px;height:auto;border:0;border-radius:2px;"></a>'
-        f'<div style="padding:8px 0 0 0;font-family:{SANS};font-size:13px;line-height:1.25;font-weight:bold;color:{INK};">'
-        f'<a href="{href}" target="_blank" style="color:{INK};text-decoration:none;">{esc(p["name"])}</a></div>'
+        f'{img}'
+        f'<div style="padding:8px 0 0 0;font-family:{SANS};font-size:13px;line-height:1.25;font-weight:bold;color:{INK};">{name}</div>'
         + (f'<div style="padding:2px 0 0 0;font-family:{SANS};font-size:12px;line-height:1.4;color:{WARM};">{esc(p["caption"])}</div>'
            if p.get("caption", "").strip() else "")
         + "</td>"
@@ -378,6 +383,7 @@ def chooser_sections(swatches):
 <h2>{esc(c.get('headline') or c['title'])}</h2>
 <p class="pg-count">{esc(count_line(len(pats)))}</p>
 <div class="pg-grid">{cards}</div>
+<a class="pg-back" href="#">{esc(CHOOSER.get('back_link', 'See the patterns from all {n} projects').format(n=NUMBERS.get(len(copy['cases']), len(copy['cases']))))} &rarr;</a>
 </section>""")
     return "\n".join(parts)
 
@@ -400,7 +406,15 @@ def chooser_css(font):
 .pg-chooser .pg-jump a{{color:{TEAL};text-decoration:none;border-bottom:2px solid transparent;}}
 .pg-chooser .pg-jump a:hover{{border-bottom-color:{TEAL};}}
 .pg-chooser .pg-case{{border-top:2px dashed {TEAL};padding:28px 0 8px;margin-top:28px;scroll-margin-top:110px;}}
-.pg-chooser .pg-case:target{{background:linear-gradient({PAPER},{PAPER}) padding-box;box-shadow:0 0 0 14px {PAPER};}}
+/* Opened from a project's button (#one-dust-studio etc.): show only that project's patterns, as a small menu.
+   Browsers without :has() show every project, scrolled to the right one. */
+.pg-chooser:has(.pg-case:target) .pg-case:not(:target),
+.pg-chooser:has(.pg-case:target) .pg-jump,
+.pg-chooser:has(.pg-case:target) .pg-intro,
+.pg-chooser:has(.pg-case:target) .pg-all{{display:none;}}
+.pg-chooser .pg-case:target{{border-top:0;margin-top:0;padding-top:8px;}}
+.pg-chooser .pg-back{{display:none;margin-top:26px;color:{TEAL};font-weight:bold;font-size:14px;text-decoration:none;}}
+.pg-chooser .pg-case:target .pg-back{{display:inline-block;}}
 .pg-chooser .pg-kicker{{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:bold;color:{TEAL};}}
 .pg-chooser h2{{margin:0 0 6px;font-size:26px;line-height:1.2;letter-spacing:-.01em;}}
 .pg-chooser .pg-count{{margin:0 0 18px;color:{MUTED};font-size:15px;}}
