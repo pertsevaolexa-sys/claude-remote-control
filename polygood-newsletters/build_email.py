@@ -2,18 +2,24 @@
 
 usage: python3 build_email.py 2026-10-case-studies/copy.json 2026-10-case-studies
 
-Writes five files into the output folder:
+Writes seven files into the output folder:
   mailchimp-code-block.html  everything after the header and intro: paste into a Code block
                              under the Project Edit header you built in Mailchimp
   mailchimp-hero.html        the Project Edit header, dashed line and intro, if you want those in code too
   mailchimp-full-email.html  the whole email (header + body + footer), for Mailchimp's "Paste in code"
   mailchimp-palettes.html    each case's swatch row alone, for an email built from Mailchimp's own blocks
   preview.html               the whole email to check in a browser, with the same hosted pictures as Mailchimp
+  sample-chooser.html        the "choose a sample" page the sample buttons open: one section per project,
+                             each sample linking to its pattern page on polygood.com
+  sample-chooser-wordpress.html  the same page as one block to paste into a WordPress Custom HTML block
 
 Words, links and images live in copy.json. The look (colours, fonts, sizes) is set below.
 Images: an image_url or swatch_url wins; otherwise image_base_url + the file name is used
 (swatches from image_base_url + "/swatches/"). With neither, the code gets a PASTE-...-URL-HERE
 placeholder. An empty samples_url becomes a placeholder too.
+Sample links: each case's "Order samples" button opens chooser.url at that case's section
+(#de-bijenkorf, #henriette-stadthotel, ...). Each swatch links to its pattern_url, or to the
+chooser section when a pattern has no pattern_url yet.
 """
 import base64
 import html
@@ -64,6 +70,23 @@ def url_or_placeholder(value, name):
 
 
 SAMPLES_URL = url_or_placeholder(copy.get("samples_url"), "ORDER-SAMPLES")
+CHOOSER = copy.get("chooser", {})
+CHOOSER_URL = url_or_placeholder(CHOOSER.get("url"), "SAMPLE-CHOOSER")
+
+
+def anchor(c):
+    """The id of a case's section on the chooser page, e.g. one-dust-studio."""
+    return slug(c["title"]).lower()
+
+
+def chooser_link(c=None):
+    return CHOOSER_URL + (f"#{anchor(c)}" if c else "")
+
+
+def pattern_link(p, c=None):
+    """A pattern's own page on polygood.com, or the chooser section until that page is known."""
+    url = (p.get("pattern_url") or "").strip()
+    return url or chooser_link(c)
 IMAGE_BASE = (copy.get("image_base_url") or "").strip().rstrip("/")
 
 
@@ -156,15 +179,22 @@ def case_block(c, images, swatches, last):
 {'' if last else dashed()}"""
 
 
-def swatch_cell(p, swatches):
-    """One swatch in a plain table cell. Tables keep their layout in Mailchimp, Gmail and Outlook alike."""
-    src = swatches.get(p["name"], url_or_placeholder(hosted(p.get("swatch_url"), p.get("file"), "swatches/"), "SWATCH-" + slug(p["name"])))
+def swatch_src(p, swatches):
+    return swatches.get(p["name"], url_or_placeholder(hosted(p.get("swatch_url"), p.get("file"), "swatches/"), "SWATCH-" + slug(p["name"])))
+
+
+def swatch_cell(p, swatches, c=None):
+    """One swatch in a plain table cell. Tables keep their layout in Mailchimp, Gmail and Outlook alike.
+    The swatch and its name link to the pattern's page, so a reader can pick a sample straight from the email."""
+    src = swatch_src(p, swatches)
+    href = attr(pattern_link(p, c))
     share = f"{100 // COLUMNS}%"
     return (
         f'<td width="{share}" valign="top" style="width:{share};padding:0 12px 18px 0;vertical-align:top;">'
-        f'<img src="{attr(src)}" width="{SWATCH}" height="{SWATCH}" alt="{attr(p["name"])} pattern swatch" '
-        f'style="display:block;width:100%;max-width:{SWATCH}px;height:auto;border:0;border-radius:2px;">'
-        f'<div style="padding:8px 0 0 0;font-family:{SANS};font-size:13px;line-height:1.25;font-weight:bold;color:{INK};">{esc(p["name"])}</div>'
+        f'<a href="{href}" target="_blank" style="text-decoration:none;"><img src="{attr(src)}" width="{SWATCH}" height="{SWATCH}" alt="{attr(p["name"])} pattern swatch" '
+        f'style="display:block;width:100%;max-width:{SWATCH}px;height:auto;border:0;border-radius:2px;"></a>'
+        f'<div style="padding:8px 0 0 0;font-family:{SANS};font-size:13px;line-height:1.25;font-weight:bold;color:{INK};">'
+        f'<a href="{href}" target="_blank" style="color:{INK};text-decoration:none;">{esc(p["name"])}</a></div>'
         + (f'<div style="padding:2px 0 0 0;font-family:{SANS};font-size:12px;line-height:1.4;color:{WARM};">{esc(p["caption"])}</div>'
            if p.get("caption", "").strip() else "")
         + "</td>"
@@ -178,7 +208,7 @@ def empty_cell():
 
 def palette(c, swatches):
     """The swatches under a case, COLUMNS to a row: one per pattern the case used."""
-    cells = [swatch_cell(p, swatches) for p in case_patterns(c)]
+    cells = [swatch_cell(p, swatches, c) for p in case_patterns(c)]
     rows = []
     for i in range(0, len(cells), COLUMNS):
         row = cells[i:i + COLUMNS]
@@ -192,7 +222,7 @@ def palette(c, swatches):
 {grid}
 </table>
 </td></tr>
-{button(copy['palette_cta'], SAMPLES_URL, pad="0 0 32px 0")}"""
+{button(copy['palette_cta'] if len(case_patterns(c)) > 1 else copy.get('palette_cta_one', copy['palette_cta']), chooser_link(c), pad="0 0 32px 0")}"""
 
 
 def colour_key():
@@ -247,7 +277,7 @@ def body(images, swatches):
 {dashed()}
 <!-- Closing and button -->
 <tr><td style="padding:0 0 8px 0;">{paras(copy['closing'])}</td></tr>
-{button(copy['cta_label'], SAMPLES_URL, pad="4px 0 32px 0")}
+{button(copy['cta_label'], chooser_link(), pad="4px 0 32px 0")}
 <tr><td style="padding:0 0 32px 0;">{paras(copy['signoff'], size=15)}</td></tr>
 </table>
 </td></tr>
@@ -318,11 +348,104 @@ def palettes_only():
     return "\n".join(parts)
 
 
+def chooser_sections(swatches):
+    parts = []
+    for c in copy["cases"]:
+        pats = case_patterns(c)
+        cards = "".join(
+            f'<a class="pg-card" href="{attr((p.get("pattern_url") or "").strip() or SAMPLES_URL)}">'
+            f'<img src="{attr(swatch_src(p, swatches))}" width="240" height="240" alt="{attr(p["name"])} pattern swatch" loading="lazy">'
+            f'<span class="pg-name">{esc(p["name"])}</span>'
+            + (f'<span class="pg-cap">{esc(p["caption"])}</span>' if p.get("caption", "").strip() else "")
+            + f'<span class="pg-go">{esc(CHOOSER.get("card_cta", "Order this sample"))} &rarr;</span></a>'
+            for p in pats
+        )
+        parts.append(f"""<section class="pg-case" id="{anchor(c)}">
+<p class="pg-kicker">{esc(c['kicker'])}</p>
+<h2>{esc(c.get('headline') or c['title'])}</h2>
+<p class="pg-count">{esc(count_line(len(pats)))}</p>
+<div class="pg-grid">{cards}</div>
+</section>""")
+    return "\n".join(parts)
+
+
+NUMBERS = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine"}
+
+
+def count_line(n):
+    word = str(NUMBERS.get(n, n)).capitalize()
+    if n == 1:
+        return "One pattern from this project."
+    return f"{word} patterns from this project. Choose one to order its sample."
+
+
+def chooser_css(font):
+    return f""".pg-chooser{{max-width:1040px;margin:0 auto;padding:8px 20px 48px;color:{INK};font-family:{font};}}
+.pg-chooser *{{box-sizing:border-box;}}
+.pg-chooser .pg-intro{{max-width:640px;font-size:18px;line-height:1.55;margin:0 0 8px;}}
+.pg-chooser .pg-jump{{display:flex;flex-wrap:wrap;gap:8px 18px;margin:18px 0 8px;padding:0;list-style:none;font-size:14px;font-weight:bold;}}
+.pg-chooser .pg-jump a{{color:{TEAL};text-decoration:none;border-bottom:2px solid transparent;}}
+.pg-chooser .pg-jump a:hover{{border-bottom-color:{TEAL};}}
+.pg-chooser .pg-case{{border-top:2px dashed {TEAL};padding:28px 0 8px;margin-top:28px;scroll-margin-top:110px;}}
+.pg-chooser .pg-case:target{{background:linear-gradient({PAPER},{PAPER}) padding-box;box-shadow:0 0 0 14px {PAPER};}}
+.pg-chooser .pg-kicker{{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:bold;color:{TEAL};}}
+.pg-chooser h2{{margin:0 0 6px;font-size:26px;line-height:1.2;letter-spacing:-.01em;}}
+.pg-chooser .pg-count{{margin:0 0 18px;color:{MUTED};font-size:15px;}}
+.pg-chooser .pg-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:22px 18px;}}
+.pg-chooser .pg-card{{display:flex;flex-direction:column;gap:4px;color:{INK};text-decoration:none;}}
+.pg-chooser .pg-card img{{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:2px;margin-bottom:8px;transition:transform .2s ease;}}
+.pg-chooser .pg-card:hover img,.pg-chooser .pg-card:focus-visible img{{transform:scale(1.03);}}
+.pg-chooser .pg-card:focus-visible{{outline:2px solid {TEAL};outline-offset:4px;}}
+.pg-chooser .pg-name{{font-weight:bold;font-size:16px;line-height:1.25;}}
+.pg-chooser .pg-cap{{color:{WARM};font-size:13px;line-height:1.4;}}
+.pg-chooser .pg-go{{margin-top:6px;color:{TEAL};font-weight:bold;font-size:14px;}}
+.pg-chooser .pg-all{{margin:36px 0 0;padding-top:24px;border-top:2px dashed {TEAL};font-size:16px;}}
+.pg-chooser .pg-all a{{color:{TEAL};font-weight:bold;}}
+@media (max-width:480px){{.pg-chooser .pg-grid{{grid-template-columns:repeat(2,1fr);gap:18px 14px;}}.pg-chooser h2{{font-size:22px;}}}}"""
+
+
+def chooser_body(swatches):
+    jump = "".join(f'<li><a href="#{anchor(c)}">{esc(c["title"])}</a></li>' for c in copy["cases"])
+    return f"""<div class="pg-chooser">
+<p class="pg-intro">{esc(CHOOSER.get('intro', ''))}</p>
+<ul class="pg-jump">{jump}</ul>
+{chooser_sections(swatches)}
+<p class="pg-all">{esc(CHOOSER.get('all_text', 'Looking for another pattern?'))} <a href="{attr(SAMPLES_URL)}">{esc(CHOOSER.get('all_link', 'See all samples'))} &rarr;</a></p>
+</div>"""
+
+
+def chooser_wordpress(swatches):
+    """For a WordPress Custom HTML block: scoped styles plus the content. The theme supplies the font and page title."""
+    return (
+        "<!-- Polygood sample chooser: paste into a Custom HTML block on the page at " + esc(CHOOSER_URL) + " -->\n"
+        f"<style>\n{chooser_css('inherit')}\n</style>\n{chooser_body(swatches)}\n"
+    )
+
+
+def chooser_standalone(swatches):
+    return f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{esc(CHOOSER.get('title', 'Order samples'))}</title>
+<style>
+body{{margin:0;background:{PAPER};}}
+.pg-head{{max-width:1040px;margin:0 auto;padding:40px 20px 0;font-family:{SANS};color:{INK};}}
+.pg-head h1{{margin:0;font-size:34px;line-height:1.15;letter-spacing:-.01em;}}
+{chooser_css(SANS)}
+</style></head>
+<body>
+<header class="pg-head"><h1>{esc(CHOOSER.get('title', 'Order samples'))}</h1></header>
+{chooser_body(swatches)}
+</body></html>
+"""
+
+
 code = code_block({}, {})
 (out / "mailchimp-code-block.html").write_text(code)
 (out / "mailchimp-hero.html").write_text(hero_block({}))
 (out / "mailchimp-full-email.html").write_text(full_email({}, {}))
 (out / "mailchimp-palettes.html").write_text(palettes_only())
+(out / "sample-chooser.html").write_text(chooser_standalone({}))
+(out / "sample-chooser-wordpress.html").write_text(chooser_wordpress({}))
 
 
 def data_uri(path, mime="image/jpeg"):
@@ -377,3 +500,6 @@ placeholders = sorted(set(part.split('"')[0] for part in (code + hero_block({}))
 words = sum(len(t.split()) for t in [copy["intro"], copy["closing"]] + [c["body"] for c in copy["cases"]])
 print(f"body words: {words}")
 print(f"placeholders still to fill: {len(placeholders)}" + "".join(f"\n  PASTE-{p}" for p in placeholders))
+missing = [p["name"] for p in copy["patterns"] if not (p.get("pattern_url") or "").strip()]
+if missing:
+    print("patterns without a pattern_url (their links open the chooser section instead): " + ", ".join(missing))

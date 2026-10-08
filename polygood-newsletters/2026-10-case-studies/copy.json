@@ -57,8 +57,8 @@
    "link_label": "See the Orion project",
    "page_url": "https://polygood.com/projects/orion-office-kitchenette-paris/",
    "image_url": "",
-   "image_file": "orion.jpg",
-   "image_alt": "Flecked sea-green Emerald Ghost worktop on a fluted teal island at Orion's Paris office, with teal cabinets behind and speckled stools in front"
+   "image_file": "orion-kitchenette.jpg",
+   "image_alt": "Teal kitchenette at Orion's Paris office: a fluted island with an Emerald Ghost worktop, ring-base stools and teal cabinets"
   },
   {
    "key": "onedust",
@@ -71,16 +71,18 @@
    "link_label": "See the ONE DUST project",
    "page_url": "https://polygood.com/projects/one-dust-studio-taipei/",
    "image_url": "",
-   "image_file": "one-dust-studio.jpg",
-   "image_alt": "Translucent blue Polygood panel among dark rocks in a gravel garden at ONE DUST Studio, Taipei, with forest behind"
+   "image_file": "one-dust-studio-shelf.jpg",
+   "image_alt": "Dark blue Polygood shelving unit against a textured mineral wall at ONE DUST Studio, Taipei"
   }
  ],
  "palette_label": "Patterns in this project",
  "palette_cta": "Order samples of these patterns",
+ "palette_cta_one": "Order a sample of this pattern",
  "patterns": [
   {
    "name": "Salmon Terra",
    "caption": "Colourful splash · PS2121",
+   "pattern_url": "",
    "swatch_url": "",
    "file": "salmon-terra.jpg",
    "id": "PS2121"
@@ -88,6 +90,7 @@
   {
    "name": "Sapphire Terrazzo",
    "caption": "Colourful splash · PS1801",
+   "pattern_url": "",
    "swatch_url": "",
    "file": "sapphire-terrazzo.jpg",
    "id": "PS1801"
@@ -95,6 +98,7 @@
   {
    "name": "Emerald Ghost",
    "caption": "Colourful splash · PS1706",
+   "pattern_url": "",
    "swatch_url": "",
    "file": "emerald-ghost.jpg",
    "id": "PS1706"
@@ -102,6 +106,7 @@
   {
    "name": "White Terrazzo",
    "caption": "Light Collection · PS2107",
+   "pattern_url": "",
    "swatch_url": "",
    "file": "white-terrazzo.jpg",
    "id": "PS2107"
@@ -109,6 +114,7 @@
   {
    "name": "Maldives",
    "caption": "Translucent Collection · PS1301",
+   "pattern_url": "",
    "swatch_url": "",
    "file": "maldives.jpg",
    "id": "PS1301"
@@ -116,6 +122,7 @@
   {
    "name": "Black Lollipop",
    "caption": "Dark Collection · PS1602",
+   "pattern_url": "",
    "swatch_url": "",
    "file": "black-lollipop.jpg",
    "id": "PS1602"
@@ -123,6 +130,7 @@
   {
    "name": "Translucent Glitter Gold",
    "caption": "Translucent Collection",
+   "pattern_url": "",
    "swatch_url": "",
    "file": "translucent-glitter-gold.jpg",
    "id": "2118"
@@ -131,6 +139,14 @@
  "closing": "If one of these patterns suits a project you're specifying this autumn, order a sample and see the colour and finish in your hand.",
  "cta_label": "Order samples",
  "samples_url": "https://polygood.com/order-samples/",
- "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/428bdaf4c99d315375eb4a83e60b446372d44a81/polygood-newsletters/2026-10-case-studies/images",
+ "chooser": {
+  "url": "https://polygood.com/project-edit-samples/",
+  "title": "Order samples: The Polygood® Project Edit",
+  "intro": "Choose a pattern from any of the four projects. Each one opens its page on polygood.com, where you can order a sample.",
+  "card_cta": "Order this sample",
+  "all_text": "Looking for another pattern?",
+  "all_link": "See all samples"
+ },
+ "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/e94625cce81bcd4e8d97ccb619cab4e8c1811d9e/polygood-newsletters/2026-10-case-studies/images",
  "signoff": "The Polygood team\nThe Good Plastic Company"
 }

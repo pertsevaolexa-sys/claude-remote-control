@@ -77,6 +77,17 @@ From Mailchimp analytics for the 44 campaigns sent between October 2024 and Sept
 - [ ] The Henriette photographer confirmed, and the photo credits cleared for email use
 - [ ] Test email sent to yourself and opened in Outlook and on a phone: every photo and swatch shows, each case's swatches sit three to a row, and every button opens the right page
 
+## The sample chooser page
+
+Each case's sample button opens a "choose a sample" page at that project's section, and every swatch in the email links to its pattern. On the chooser page each sample links to its pattern page on polygood.com.
+
+| File | Use |
+|---|---|
+| `sample-chooser-wordpress.html` | Paste into a **Custom HTML** block on a new WordPress page with the slug `project-edit-samples`. It brings its own styles and uses your theme's font |
+| `sample-chooser.html` | The same page on its own, to preview in a browser |
+
+The email links to `https://polygood.com/project-edit-samples/#de-bijenkorf`, `#henriette-stadthotel`, `#orion` and `#one-dust-studio`, and the closing button to the top of the page. If you give the page another address, change `chooser.url` in `copy.json` and rebuild. Each pattern's own page goes in its `pattern_url`; until one is filled, that swatch opens its project's section of the chooser, and the chooser card opens the general samples page.
+
 ## The project pages behind the buttons
 
 `web-pages.md` has the copy for all four WordPress pages, written to match the newsletter: each text block, the slug, SEO title and meta description, alt text to check against the photos, and what to set in WordPress. It removes the waste wording the drafts had ("old cable spools", "once lined fridges and freezers", "recycled fridge and freezer plastic", "hint at the recycled plastic underneath").
