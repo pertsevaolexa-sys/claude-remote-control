@@ -197,24 +197,30 @@ def swatch_cell(p, swatches, c=None):
     if copy.get("swatch_links") or copy.get("swatch_buttons"):
         img = f'<a href="{href}" target="_blank" style="text-decoration:none;">{img}</a>'
         name = f'<a href="{href}" target="_blank" style="color:{INK};text-decoration:none;">{name}</a>'
-    small_button = ""
-    if copy.get("swatch_buttons"):
-        # A small filled button per sample, opening that pattern's page on polygood.com.
-        small_button = (
-            f'<div style="padding:10px 0 0 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
-            f'<td bgcolor="{TEAL}" style="background:{TEAL};border-radius:2px;padding:6px 8px;font-family:{SANS};font-size:11px;font-weight:bold;line-height:1.2;">'
-            f'<a href="{href}" target="_blank" style="font-family:{SANS};font-size:11px;font-weight:bold;line-height:1.2;color:{WHITE};text-decoration:none;white-space:nowrap;">'
-            f'<span style="color:{WHITE};">{esc(copy.get("swatch_cta", "Order sample"))}</span></a></td></tr></table></div>'
-        )
     share = f"{100 // COLUMNS}%"
+    bottom = "10px" if copy.get("swatch_buttons") else "18px"  # the button row adds its own space below
     return (
-        f'<td width="{share}" valign="top" style="width:{share};padding:0 12px 22px 0;vertical-align:top;">'
+        f'<td width="{share}" valign="top" style="width:{share};padding:0 12px {bottom} 0;vertical-align:top;">'
         f'{img}'
         f'<div style="padding:8px 0 0 0;font-family:{SANS};font-size:13px;line-height:1.25;font-weight:bold;color:{INK};">{name}</div>'
         + (f'<div style="padding:2px 0 0 0;font-family:{SANS};font-size:12px;line-height:1.4;color:{WARM};">{esc(p["caption"])}</div>'
            if p.get("caption", "").strip() else "")
-        + small_button
         + "</td>"
+    )
+
+
+def sample_button_cell(p, c=None):
+    """The small outline button under a sample. Buttons sit in their own row, so they line up
+    even when a pattern name wraps to two lines."""
+    href = attr(pattern_link(p, c))
+    share = f"{100 // COLUMNS}%"
+    return (
+        f'<td width="{share}" valign="top" style="width:{share};padding:0 12px 24px 0;vertical-align:top;">'
+        f'<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
+        f'<td bgcolor="{PAPER}" style="background:{PAPER};border:1px solid {TEAL};border-radius:2px;padding:6px 9px;font-family:{SANS};font-size:11px;font-weight:bold;line-height:1.2;">'
+        f'<a href="{href}" target="_blank" style="font-family:{SANS};font-size:11px;font-weight:bold;line-height:1.2;color:{TEAL};text-decoration:none;white-space:nowrap;">'
+        f'<span style="color:{TEAL};">{esc(copy.get("swatch_cta", "Order sample"))}</span></a></td></tr></table>'
+        f"</td>"
     )
 
 
@@ -225,12 +231,14 @@ def empty_cell():
 
 def palette(c, swatches):
     """The swatches under a case, COLUMNS to a row: one per pattern the case used."""
-    cells = [swatch_cell(p, swatches, c) for p in case_patterns(c)]
+    pats = case_patterns(c)
     rows = []
-    for i in range(0, len(cells), COLUMNS):
-        row = cells[i:i + COLUMNS]
-        row += [empty_cell()] * (COLUMNS - len(row))  # keep every column the same width
-        rows.append("<tr>" + "".join(row) + "</tr>")
+    for i in range(0, len(pats), COLUMNS):
+        group = pats[i:i + COLUMNS]
+        pad = [empty_cell()] * (COLUMNS - len(group))  # keep every column the same width
+        rows.append("<tr>" + "".join(swatch_cell(p, swatches, c) for p in group) + "".join(pad) + "</tr>")
+        if copy.get("swatch_buttons"):
+            rows.append("<tr>" + "".join(sample_button_cell(p, c) for p in group) + "".join(pad) + "</tr>")
     grid = "\n".join(rows)
     return f"""<!-- Palette: {esc(c['title']).replace("--", "-")} -->
 {label(copy['palette_label'] if len(case_patterns(c)) > 1 else copy.get('palette_label_one', copy['palette_label']), color=MUTED, pad="0 0 10px 0")}
