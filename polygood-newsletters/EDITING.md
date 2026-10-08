@@ -259,7 +259,7 @@ Each case has these fields:
 **Where the pictures live.** Email apps can only show a picture that sits at a public `https://` address. This issue's photos and swatches are in the public GitHub repository, and `image_base_url` points at them, pinned to one commit so the files can't change under a sent email:
 
 ```
-https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/e94625c…/polygood-newsletters/2026-10-case-studies/images
+https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/f0010ec…/polygood-newsletters/2026-10-case-studies/images
 ```
 
 That works as long as the repository stays public and the branch `claude/wizardly-mccarthy-9h1wct` (or a merge of it) stays on GitHub. If either might change, move the pictures to Mailchimp's Content Studio: upload them, paste each link into that picture's `image_url` or `swatch_url`, and rebuild. A filled `image_url` or `swatch_url` always wins over `image_base_url`.

@@ -313,7 +313,7 @@ def case_block_edit(c, images, swatches, last):
 <tr><td style="padding:0 0 4px 0;font-family:{SANS};font-size:20px;line-height:1.25;font-weight:bold;color:{INK};">{esc(c.get('place_title') or c['title'])}</td></tr>
 <tr><td style="padding:0 0 14px 0;font-family:{SANS};font-size:14px;line-height:1.5;font-weight:bold;color:{MUTED};">Application: {esc(c['application'])}</td></tr>
 <tr><td style="padding:0 0 6px 0;">{paras(c['body'], margin=12)}</td></tr>
-{button(c['link_label'], c['page_url'], filled=False, pad="0 0 28px 0")}
+{button(c['link_label'], c['page_url'], filled=True, pad="0 0 28px 0")}
 {palette(c, swatches)}
 {'' if last else dashed()}"""
 

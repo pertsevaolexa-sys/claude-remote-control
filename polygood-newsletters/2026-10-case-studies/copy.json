@@ -79,8 +79,8 @@
    "link_label": "See the ONE DUST project",
    "page_url": "https://polygood.com/projects/one-dust-studio-taipei/",
    "image_url": "",
-   "image_file": "one-dust-studio-shelf.jpg",
-   "image_alt": "Dark blue Polygood shelving unit against a textured mineral wall at ONE DUST Studio, Taipei"
+   "image_file": "one-dust-studio-green-shelves.jpg",
+   "image_alt": "Green Polygood shelving under a grey stone top on a rose plaster floor at ONE DUST Studio, Taipei"
   }
  ],
  "palette_label": "Project patterns",
@@ -157,7 +157,7 @@
   "all_link": "See all samples",
   "enabled": false
  },
- "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/e94625cce81bcd4e8d97ccb619cab4e8c1811d9e/polygood-newsletters/2026-10-case-studies/images",
+ "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/f0010ec1d0840f50a7e132cec1bbd64f0ceecae2/polygood-newsletters/2026-10-case-studies/images",
  "signoff": "The Polygood team\nThe Good Plastic Company",
  "closing_cta": {
   "text": "Explore how Polygood can make your projects even more interesting",
