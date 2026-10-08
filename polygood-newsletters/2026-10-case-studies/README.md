@@ -77,15 +77,13 @@ From Mailchimp analytics for the 44 campaigns sent between October 2024 and Sept
 - [ ] The Henriette photographer confirmed, and the photo credits cleared for email use
 - [ ] Test email sent to yourself and opened in Outlook and on a phone: every photo and swatch shows, each case's swatches sit three to a row, and every button opens the right page
 
-## The sample menu
+## Samples
 
-Each project has one link to samples: its "Order samples" button. It opens a small pop-up style menu, separate from polygood.com, showing only that project's patterns (for ONE DUST, all five). Each pattern there opens its product page on polygood.com, where the sample is ordered. The closing "Order samples" button opens the menu's project list.
+Every sample has its own link: the swatch, its name and a small "Order sample" button under it all open that pattern's product page on polygood.com (`pattern_url` in `copy.json`), where the sample is ordered. There is no separate menu page any more.
 
-The menu is published as a Claude artifact: https://claude.ai/artifact/PR9kNdeMr5Aw7kGdsspCka. Its source is `sample-menu/index.html`, rebuilt with the email from `copy.json`. The buttons open it at `#de-bijenkorf`, `#henriette-stadthotel`, `#orion` and `#one-dust-studio`.
+## Layout
 
-**Before sending:** the artifact starts private. Open it, use **Share** and give access to anyone with the link, then open a project link in a private browser window to check that a reader without a Claude account can see it.
-
-The swatches in the email are not links, to keep one link per project; set `swatch_links` to `true` in `copy.json` to link them too. `sample-chooser-wordpress.html` and `sample-chooser.html` are the same menu as a polygood.com page, if you later want it on the website instead: publish it there and set `chooser.url` to its address.
+The email follows the version built in Mailchimp (`"layout": "edit"` in `copy.json`): the header intro centred at the top, then for each project a centred headline over the photo, the sector label, name and city, the application line, the text, a "See the … project" button and the samples. It ends with the closing line "Explore how Polygood can make your projects even more interesting". Each case's `sector`, `place_title`, `headline`, `application` and `body` hold the words; set `layout` to anything else to go back to the earlier layout with the umbrella headline and sign-off.
 
 ## The project pages behind the buttons
 

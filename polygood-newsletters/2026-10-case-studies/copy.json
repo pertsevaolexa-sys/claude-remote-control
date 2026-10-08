@@ -21,11 +21,13 @@
   {
    "key": "bijenkorf",
    "kicker": "De Bijenkorf · Amsterdam",
+   "sector": "Retail",
+   "place_title": "De Bijenkorf, Amsterdam",
    "title": "De Bijenkorf",
    "headline": "On Dam Square, Salmon Terra plinths lift mannequins",
-   "body": "De Bijenkorf, the Netherlands' premium department store, reopened the women's fashion and shoe department of its Dam Square flagship in 2026, with sustainability in the brief from the first meeting. The design is by Random Studio with the store's own design team, and Fiction Factory built the display stands in Salmon Terra: stepped plinths and blocks that lift mannequins and bags above the shop floor. The store first used Polygood in 2023, for retail fixtures, and chose it again.\n\nWhen the displays change, the stands can come back through our take-back programme and become new panels.",
+   "body": "De Bijenkorf, the Netherlands' premium department store, reopened the women's fashion and shoe department of its Dam Square flagship in 2026, with sustainability in the brief from the first meeting. The design is by Random Studio with the store's own design team, and Fiction Factory built the display stands in Salmon Terra: stepped plinths and blocks that lift mannequins and bags above the shop floor. The store first used Polygood in 2023, for retail fixtures, and chose it again.",
    "pattern": "Salmon Terra",
-   "application": "Stepped display plinths and blocks",
+   "application": "Display stands: stepped plinths and blocks",
    "link_label": "See the De Bijenkorf project",
    "page_url": "https://polygood.com/projects/de-bijenkorf/",
    "image_url": "",
@@ -35,11 +37,13 @@
   {
    "key": "henriette",
    "kicker": "Henriette Stadthotel · Vienna",
+   "sector": "Hospitality",
+   "place_title": "Henriette Stadthotel, Vienna",
    "title": "Henriette Stadthotel",
-   "headline": "Washstands in two terrazzos and Emerald Ghost",
-   "body": "Henriette is a family-run four-star hotel with 68 rooms on Praterstraße in Vienna, a short walk from the Prater. In 2025 its owners, Verena Brandtner-Pastuszyn and Georg Pastuszyn, renovated it as what they call Austria's first Circular Living hotel. Their concept draws on Cradle to Cradle.\n\nIn the new Circular Living rooms, the hotel used Polygood for the bathroom washstands, in three patterns: Sapphire Terrazzo, Emerald Ghost and White Terrazzo. The one pictured is Sapphire Terrazzo, with a white basin.",
+   "headline": "Washstands for the first Circular Living rooms in Austria in two terrazzos and Emerald Ghost",
+   "body": "In 2025 Verena Brandtner-Pastuszyn and Georg Pastuszyn renovated their family-run four-star hotel on Praterstraße, a short walk from the Prater. They call it Austria's first Circular Living hotel, a concept inspired by Cradle to Cradle.\n\nIn the new Circular Living rooms, the hotel used Polygood for the bathroom washstands, in three patterns: Sapphire Terrazzo, Emerald Ghost and White Terrazzo. The one pictured is Sapphire Terrazzo, with a white basin.",
    "pattern": "Sapphire Terrazzo, Emerald Ghost, White Terrazzo",
-   "application": "Bathroom washstands",
+   "application": "Bathroom washstands for the Circular Living rooms",
    "link_label": "See the Henriette project",
    "page_url": "https://polygood.com/projects/henriette-stadthotel-vienna/",
    "image_url": "",
@@ -49,9 +53,11 @@
   {
    "key": "orion",
    "kicker": "Orion · Paris",
+   "sector": "Office spaces",
+   "place_title": "Orion, Paris",
    "title": "Orion",
-   "headline": "Sea-green worktops a shade lighter than teal cabinets",
-   "body": "Aura designed the teal kitchenette where Orion's Paris team meets through the day. A white stone or wood top would have cut a line through the teal. The worktops are Polygood Emerald Ghost, a flecked sea green a shade lighter than the cabinets, so the island and counters read as one block of colour. The flecks give the monochrome scheme depth and pick up the speckled stools.\n\nSamji Studio made the worktops and cut the island top to follow its rounded end. The Paris studio has also made Polygood pieces for Adidas.",
+   "headline": "Sea-green worktops for an office in Paris",
+   "body": "Aura designed the teal kitchenette where Orion's Paris team meets through the day. The worktops on the island and back counter are Emerald Ghost, a flecked sea green a shade lighter than the cabinets, so the island and counters read as one block of colour. The flecks give the monochrome scheme depth and pick up the speckled stools. Samji Studio, a Paris office-furniture workshop, fabricated the worktops and cut the island top to follow its rounded end.",
    "pattern": "Emerald Ghost",
    "application": "Kitchenette worktops (island and back counter)",
    "link_label": "See the Orion project",
@@ -63,11 +69,13 @@
   {
    "key": "onedust",
    "kicker": "ONE DUST Studio · Taipei",
+   "sector": "Installations",
+   "place_title": "ONE DUST Studio, Taipei",
    "title": "ONE DUST Studio",
-   "headline": "Furniture where the surface is also the structure",
-   "body": "Our first project in Taiwan was with ONE DUST, a Taipei studio that makes decorative finishes, mineral coatings and installation art. The studio designed and made tables, chairs, benches, shelves and sculptural objects in five Polygood patterns, among them Translucent Glitter Gold, which no other project has used so far. In every piece the panels form both surface and structure, with no separate frame.\n\nIndoors, the pieces sit against the studio's mineral finishes on walls and floors. In the garden, a translucent blue panel stands among dark rocks, and the forest shows through it.",
+   "headline": "Surface specialists made furniture and sculpture in Polygood®",
+   "body": "For our first project in Taiwan we worked with ONE DUST, a Taipei design studio that makes installation art and decorative finishes, including mineral wall coatings. Polygood can be cut, sanded and polished like a solid surface. The studio designed and made tables, chairs, benches, shelves and sculptural objects in five patterns: Maldives, Black Lollipop, Emerald Ghost, Sapphire Terrazzo and Translucent Glitter Gold, which no other project has used so far.\n\nIndoors, the colours sit against the studio's own mineral finishes on walls and floors. Outdoors, in a gravel garden backed by forest, a translucent blue slab lets the trees show through.",
    "pattern": "Maldives, Black Lollipop, Emerald Ghost, Sapphire Terrazzo, Translucent Glitter Gold",
-   "application": "Tables, chairs, benches, shelves and sculptural objects",
+   "application": "Tables, chairs, benches, shelves and decorative objects",
    "link_label": "See the ONE DUST project",
    "page_url": "https://polygood.com/projects/one-dust-studio-taipei/",
    "image_url": "",
@@ -75,10 +83,10 @@
    "image_alt": "Dark blue Polygood shelving unit against a textured mineral wall at ONE DUST Studio, Taipei"
   }
  ],
- "palette_label": "Patterns in this project",
+ "palette_label": "Project patterns",
  "palette_cta": "Order samples",
  "palette_cta_one": "Order a sample",
- "swatch_links": false,
+ "swatch_links": true,
  "patterns": [
   {
    "name": "Salmon Terra",
@@ -146,12 +154,17 @@
   "intro": "Choose a pattern from any of the four projects. Each one opens its page on polygood.com, where you can order a sample.",
   "card_cta": "Order this sample",
   "all_text": "Looking for another pattern?",
-  "all_link": "See all samples"
+  "all_link": "See all samples",
+  "enabled": false
  },
  "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/e94625cce81bcd4e8d97ccb619cab4e8c1811d9e/polygood-newsletters/2026-10-case-studies/images",
  "signoff": "The Polygood team\nThe Good Plastic Company",
  "closing_cta": {
   "text": "Explore how Polygood can make your projects even more interesting",
   "url": "https://polygood.com/"
- }
+ },
+ "layout": "edit",
+ "swatch_buttons": true,
+ "swatch_cta": "Order sample",
+ "palette_label_one": "Project pattern"
 }

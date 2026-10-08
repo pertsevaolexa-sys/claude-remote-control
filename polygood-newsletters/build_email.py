@@ -45,6 +45,7 @@ HERO_TITLE_SIZE = 26
 HEADLINE_SIZE = 28
 STATEMENT_SIZE = 20
 TITLE_SIZE = 22
+EDIT_HEADLINE_SIZE = 26  # the centred headline over each photo in the Project Edit layout
 BODY_SIZE = 16
 HERO_TEXT_COL = 240  # header: text column width; the photo strip takes the rest of the 600px
 COLUMNS = 3   # swatches per row; a case with more patterns continues on the next row
@@ -192,17 +193,27 @@ def swatch_cell(p, swatches, c=None):
     img = (f'<img src="{attr(src)}" width="{SWATCH}" height="{SWATCH}" alt="{attr(p["name"])} pattern swatch" '
            f'style="display:block;width:100%;max-width:{SWATCH}px;height:auto;border:0;border-radius:2px;">')
     name = esc(p["name"])
-    if copy.get("swatch_links"):
-        href = attr(pattern_link(p, c))
+    href = attr(pattern_link(p, c))
+    if copy.get("swatch_links") or copy.get("swatch_buttons"):
         img = f'<a href="{href}" target="_blank" style="text-decoration:none;">{img}</a>'
         name = f'<a href="{href}" target="_blank" style="color:{INK};text-decoration:none;">{name}</a>'
+    small_button = ""
+    if copy.get("swatch_buttons"):
+        # A small filled button per sample, opening that pattern's page on polygood.com.
+        small_button = (
+            f'<div style="padding:10px 0 0 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
+            f'<td bgcolor="{TEAL}" style="background:{TEAL};border-radius:2px;padding:6px 8px;font-family:{SANS};font-size:11px;font-weight:bold;line-height:1.2;">'
+            f'<a href="{href}" target="_blank" style="font-family:{SANS};font-size:11px;font-weight:bold;line-height:1.2;color:{WHITE};text-decoration:none;white-space:nowrap;">'
+            f'<span style="color:{WHITE};">{esc(copy.get("swatch_cta", "Order sample"))}</span></a></td></tr></table></div>'
+        )
     share = f"{100 // COLUMNS}%"
     return (
-        f'<td width="{share}" valign="top" style="width:{share};padding:0 12px 18px 0;vertical-align:top;">'
+        f'<td width="{share}" valign="top" style="width:{share};padding:0 12px 22px 0;vertical-align:top;">'
         f'{img}'
         f'<div style="padding:8px 0 0 0;font-family:{SANS};font-size:13px;line-height:1.25;font-weight:bold;color:{INK};">{name}</div>'
         + (f'<div style="padding:2px 0 0 0;font-family:{SANS};font-size:12px;line-height:1.4;color:{WARM};">{esc(p["caption"])}</div>'
            if p.get("caption", "").strip() else "")
+        + small_button
         + "</td>"
     )
 
@@ -222,13 +233,13 @@ def palette(c, swatches):
         rows.append("<tr>" + "".join(row) + "</tr>")
     grid = "\n".join(rows)
     return f"""<!-- Palette: {esc(c['title']).replace("--", "-")} -->
-{label(copy['palette_label'], color=MUTED, pad="0 0 10px 0")}
-<tr><td style="padding:0 0 4px 0;">
+{label(copy['palette_label'] if len(case_patterns(c)) > 1 else copy.get('palette_label_one', copy['palette_label']), color=MUTED, pad="0 0 10px 0")}
+<tr><td style="padding:0 0 {'14px' if copy.get('swatch_buttons') else '4px'} 0;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;">
 {grid}
 </table>
 </td></tr>
-{button(copy['palette_cta'] if len(case_patterns(c)) > 1 else copy.get('palette_cta_one', copy['palette_cta']), chooser_link(c), pad="0 0 32px 0")}"""
+{'' if copy.get('swatch_buttons') else button(copy['palette_cta'] if len(case_patterns(c)) > 1 else copy.get('palette_cta_one', copy['palette_cta']), chooser_link(c), pad="0 0 32px 0")}"""
 
 
 def closing_cta():
@@ -251,7 +262,7 @@ def colour_key():
     )
 
 
-def hero(images):
+def hero(images, with_intro=True):
     """The Project Edit header: title and subtitle beside the photo strip, a dashed line, then the intro."""
     h = copy["hero"]
     src = images.get("hero", url_or_placeholder(hosted(h.get("image_url"), h.get("image_file")), "HERO-STRIP-IMAGE"))
@@ -275,12 +286,51 @@ def hero(images):
 <tr><td style="padding:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
 <td style="border-top:2px dashed {TEAL};font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td>
 </tr></table></td></tr>
-<tr><td bgcolor="{PAPER}" style="background:{PAPER};padding:24px 24px 4px 24px;">{paras(h['intro'], size=18)}</td></tr>
+{f'<tr><td bgcolor="{PAPER}" style="background:{PAPER};padding:24px 24px 4px 24px;">{paras(h["intro"], size=18)}</td></tr>' if with_intro else ''}
+</table>
+"""
+
+
+def case_block_edit(c, images, swatches, last):
+    """A case in the Project Edit layout: centred headline over the photo, then sector, name and city,
+    application, text, project button and the samples, each with its own small button."""
+    src = images.get(c["key"], url_or_placeholder(hosted(c.get("image_url"), c.get("image_file")), slug(c["title"]) + "-IMAGE"))
+    return f"""
+<!-- Case: {esc(c['title']).replace("--", "-")} -->
+<tr><td style="padding:0 0 18px 0;font-family:{SANS};font-size:{EDIT_HEADLINE_SIZE}px;line-height:1.25;font-weight:bold;letter-spacing:-0.01em;color:{INK};text-align:center;">{esc(c.get('headline') or c['title'])}</td></tr>
+<tr><td style="padding:0 0 18px 0;">
+<a href="{attr(c['page_url'])}" target="_blank" style="text-decoration:none;"><img src="{attr(src)}" width="{CONTENT}" alt="{attr(c['image_alt'])}" style="display:block;width:100%;max-width:{CONTENT}px;height:auto;border:0;"></a>
+</td></tr>
+{label(c.get('sector') or c['kicker'], pad="0 0 6px 0")}
+<tr><td style="padding:0 0 4px 0;font-family:{SANS};font-size:20px;line-height:1.25;font-weight:bold;color:{INK};">{esc(c.get('place_title') or c['title'])}</td></tr>
+<tr><td style="padding:0 0 14px 0;font-family:{SANS};font-size:14px;line-height:1.5;font-weight:bold;color:{MUTED};">Application: {esc(c['application'])}</td></tr>
+<tr><td style="padding:0 0 6px 0;">{paras(c['body'], margin=12)}</td></tr>
+{button(c['link_label'], c['page_url'], filled=False, pad="0 0 28px 0")}
+{palette(c, swatches)}
+{'' if last else dashed()}"""
+
+
+def body_edit(images, swatches):
+    """The whole body in the Project Edit layout: the header intro, then the four cases, then the closing line."""
+    cases = copy["cases"]
+    blocks = "".join(case_block_edit(c, images, swatches, i == len(cases) - 1) for i, c in enumerate(cases))
+    lead = copy["hero"]["intro"]
+    return f"""<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;background:{PAPER};">
+<tr><td bgcolor="{PAPER}" style="background:{PAPER};padding:24px 24px 8px 24px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<!-- Intro -->
+<tr><td style="padding:0 0 24px 0;font-family:{SANS};font-size:18px;line-height:1.5;font-weight:bold;color:{INK};text-align:center;">{esc(lead)}</td></tr>
+{dashed()}
+{blocks}
+{closing_cta()}</table>
+</td></tr>
 </table>
 """
 
 
 def body(images, swatches):
+    if copy.get("layout") == "edit":
+        return body_edit(images, swatches)
     cases = copy["cases"]
     blocks = "".join(case_block(c, images, swatches, i == len(cases) - 1) for i, c in enumerate(cases))
     return f"""<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;background:{PAPER};">
@@ -335,7 +385,7 @@ def full_email(images, swatches):
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f3efe9" style="background:#f3efe9;">
 <tr><td align="center" style="padding:24px 0;">
 {colour_key()}
-{hero(images)}
+{hero(images, with_intro=copy.get("layout") != "edit")}
 {body(images, swatches)}
 <!-- Footer: Mailchimp needs the unsubscribe link and your postal address -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;">
@@ -583,14 +633,15 @@ code = code_block({}, {})
 (out / "mailchimp-hero.html").write_text(hero_block({}))
 (out / "mailchimp-full-email.html").write_text(full_email({}, {}))
 (out / "mailchimp-palettes.html").write_text(palettes_only())
-(out / "sample-chooser.html").write_text(chooser_standalone({}))
-(out / "sample-chooser-wordpress.html").write_text(chooser_wordpress({}))
-menu_dir = out / "sample-menu"
-(menu_dir / "swatches").mkdir(parents=True, exist_ok=True)
-(menu_dir / "index.html").write_text(sample_menu())
-for pat in copy["patterns"]:  # the menu publishes its own copies of the swatches next to it
-    if pat.get("file") and (out / "images" / "swatches" / pat["file"]).exists():
-        (menu_dir / "swatches" / pat["file"]).write_bytes((out / "images" / "swatches" / pat["file"]).read_bytes())
+if CHOOSER.get("enabled", True):
+    (out / "sample-chooser.html").write_text(chooser_standalone({}))
+    (out / "sample-chooser-wordpress.html").write_text(chooser_wordpress({}))
+    menu_dir = out / "sample-menu"
+    (menu_dir / "swatches").mkdir(parents=True, exist_ok=True)
+    (menu_dir / "index.html").write_text(sample_menu())
+    for pat in copy["patterns"]:  # the menu publishes its own copies of the swatches next to it
+        if pat.get("file") and (out / "images" / "swatches" / pat["file"]).exists():
+            (menu_dir / "swatches" / pat["file"]).write_bytes((out / "images" / "swatches" / pat["file"]).read_bytes())
 
 
 def data_uri(path, mime="image/jpeg"):
@@ -635,7 +686,7 @@ page = f"""<!doctype html>
 <div style="max-width:600px;margin:0 auto 16px auto;font-family:{SANS};font-size:13px;line-height:1.5;color:#4a4039;">
 <div><b>Subject:</b> {esc(copy['subject_lines'][0])}</div><div><b>Preview text:</b> {esc(copy['preview_text'])}</div>
 </div>
-{hero(images)}
+{hero(images, with_intro=copy.get("layout") != "edit")}
 {body(images, swatches)}
 </body></html>
 """
