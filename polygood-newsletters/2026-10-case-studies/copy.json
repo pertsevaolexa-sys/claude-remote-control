@@ -148,5 +148,9 @@
   "all_link": "See all samples"
  },
  "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/e94625cce81bcd4e8d97ccb619cab4e8c1811d9e/polygood-newsletters/2026-10-case-studies/images",
- "signoff": "The Polygood team\nThe Good Plastic Company"
+ "signoff": "The Polygood team\nThe Good Plastic Company",
+ "closing_cta": {
+  "text": "Explore how Polygood can make your projects even more interesting",
+  "url": "https://polygood.com/"
+ }
 }

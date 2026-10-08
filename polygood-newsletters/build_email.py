@@ -225,6 +225,19 @@ def palette(c, swatches):
 {button(copy['palette_cta'] if len(case_patterns(c)) > 1 else copy.get('palette_cta_one', copy['palette_cta']), chooser_link(c), pad="0 0 32px 0")}"""
 
 
+def closing_cta():
+    """The small call to action at the very end of the email, under a dashed line."""
+    cta = copy.get("closing_cta") or {}
+    if not (cta.get("text") or "").strip():
+        return ""
+    return (
+        f"<!-- Closing call to action -->\n{dashed(pad='0 0 22px 0')}"
+        f'<tr><td style="padding:0 0 32px 0;font-family:{SANS};font-size:16px;line-height:1.45;font-weight:bold;">'
+        f'<a href="{attr(cta.get("url") or "https://polygood.com/")}" target="_blank" style="color:{TEAL};text-decoration:none;">'
+        f'{esc(cta["text"])}&nbsp;&rarr;</a></td></tr>\n'
+    )
+
+
 def colour_key():
     return (
         f"<!-- Colours, for find and replace: background {PAPER} · text {INK} · small text {MUTED} · "
@@ -279,7 +292,7 @@ def body(images, swatches):
 <tr><td style="padding:0 0 8px 0;">{paras(copy['closing'])}</td></tr>
 {button(copy['cta_label'], chooser_link(), pad="4px 0 32px 0")}
 <tr><td style="padding:0 0 32px 0;">{paras(copy['signoff'], size=15)}</td></tr>
-</table>
+{closing_cta()}</table>
 </td></tr>
 </table>
 """

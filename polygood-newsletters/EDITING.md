@@ -237,7 +237,8 @@ Best for: bigger changes, reusing the design for the next newsletter, keeping on
 | `closing`, `cta_label` | Last paragraph and the closing button's text |
 | `samples_url` | Where the closing button and the button under each swatch row go (set to polygood.com/order-samples/) |
 | `image_base_url` | The public folder the pictures load from. Each picture's address is this plus its file name (swatches add `/swatches/`). See "Where the pictures live" |
-| `signoff` | Last lines |
+| `signoff` | The sign-off lines |
+| `closing_cta` | The small teal link at the very end (`text` and `url`). Leave `text` empty to drop it |
 
 Each case has these fields:
 
