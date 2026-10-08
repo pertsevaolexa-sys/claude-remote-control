@@ -86,11 +86,11 @@ Umbrella headline: **Seven patterns in four cities.** Umbrella statement: “Und
 
 ### 7. Collection and code under the swatches
 
-- **Sells:** Every pattern sits under the project that used it, with its collection and, where confirmed, its code, so a specifier can order a sample of the pattern they saw.
+- **Sells:** Every pattern sits under the project that used it, with its collection and code, so a specifier can order a sample of the pattern they saw.
 - **For:** Specifiers, interior designers shortlisting colours
-- **Proof:** Notion pattern library (All Patterns Images): Salmon Terra PS2121, Sapphire Terrazzo PS1801 and Emerald Ghost PS1706 (Colourful splash); White Terrazzo PS2107 (Light Collection); Maldives PS1301 and Translucent Glitter Gold (Translucent Collection, code recorded as #2118, to be confirmed); Black Lollipop PS1602 (Dark Collection).
+- **Proof:** Notion pattern library (All Patterns Images): Salmon Terra PS2121, Sapphire Terrazzo PS1801 and Emerald Ghost PS1706 (Colourful Splash Collection); White Terrazzo PS2107 (Light Collection); Maldives PS1301 and Translucent Glitter Gold PS2118 (Translucent Collection); Black Lollipop PS1602 (Dark Collection).
 - **Say:** “Each pattern in these projects has a code, so you can order a sample of the same pattern: the Orion worktops are Emerald Ghost, PS1706.”
-- **Don't:** Never name or hint at what the plastic in any pattern was, in writing or on a call. That means no appliances, fridges, CD cases, spools, cutlery, electronics or packaging, and no 'old', 'waste', 'first life' or 'used to be'. Talk about colour, pattern, finish and where it was used. A sample shows the pattern, not the exact panels used on the project. Don't quote a code for Translucent Glitter Gold until it is confirmed. Seven is the count for these projects, not the whole range.
+- **Don't:** Never name or hint at what the plastic in any pattern was, in writing or on a call. That means no appliances, fridges, CD cases, spools, cutlery, electronics or packaging, and no 'old', 'waste', 'first life' or 'used to be'. Talk about colour, pattern, finish and where it was used. A sample shows the pattern, not the exact panels used on the project. Seven is the count for these projects, not the whole range.
 
 ## De Bijenkorf, Amsterdam · Retail
 
@@ -149,7 +149,7 @@ Umbrella headline: **Seven patterns in four cities.** Umbrella statement: “Und
 - **Sells:** A terrazzo-pattern washstand in a built four-star hotel bathroom, something to show a client before ordering samples.
 - **For:** Hotel designers, hospitality brand teams
 - **Proof:** The Henriette photo shows a Sapphire Terrazzo washstand with a white basin. The case lists Sapphire Terrazzo, Emerald Ghost and White Terrazzo for the washstands. Notion pattern library: Sapphire Terrazzo, PS1801, Colourful splash collection, Terrazzo pattern type.
-- **Say:** “The washstand in our Henriette photo is Sapphire Terrazzo, PS1801, from our Colourful splash collection, with a white basin.”
+- **Say:** “The washstand in our Henriette photo is Sapphire Terrazzo, PS1801, from our Colourful Splash Collection, with a white basin.”
 - **Don't:** Never name or hint at what the plastic in any of the three patterns was, even though the case PDF and the Notion project page do. Don't describe Sapphire Terrazzo's colour beyond its name, since no case text describes it. Don't say every washstand is Sapphire Terrazzo, and don't describe how the three patterns are split across rooms. Give no washstand count and make no water or stain claims.
 
 ### 15. Austria's first Circular Living hotel

@@ -81,24 +81,24 @@
  "patterns": [
   {
    "name": "Salmon Terra",
-   "caption": "Colourful splash · PS2121",
-   "pattern_url": "",
+   "caption": "Colourful Splash Collection · PS2121",
+   "pattern_url": "https://polygood.com/product/salmon-terra/",
    "swatch_url": "",
    "file": "salmon-terra.jpg",
    "id": "PS2121"
   },
   {
    "name": "Sapphire Terrazzo",
-   "caption": "Colourful splash · PS1801",
-   "pattern_url": "",
+   "caption": "Colourful Splash Collection · PS1801",
+   "pattern_url": "https://polygood.com/product/sapphire-terrazzo/",
    "swatch_url": "",
    "file": "sapphire-terrazzo.jpg",
    "id": "PS1801"
   },
   {
    "name": "Emerald Ghost",
-   "caption": "Colourful splash · PS1706",
-   "pattern_url": "",
+   "caption": "Colourful Splash Collection · PS1706",
+   "pattern_url": "https://polygood.com/product/emerald-ghost/",
    "swatch_url": "",
    "file": "emerald-ghost.jpg",
    "id": "PS1706"
@@ -106,7 +106,7 @@
   {
    "name": "White Terrazzo",
    "caption": "Light Collection · PS2107",
-   "pattern_url": "",
+   "pattern_url": "https://polygood.com/product/white-terrazzo/",
    "swatch_url": "",
    "file": "white-terrazzo.jpg",
    "id": "PS2107"
@@ -114,7 +114,7 @@
   {
    "name": "Maldives",
    "caption": "Translucent Collection · PS1301",
-   "pattern_url": "",
+   "pattern_url": "https://polygood.com/product/maldives/",
    "swatch_url": "",
    "file": "maldives.jpg",
    "id": "PS1301"
@@ -122,18 +122,18 @@
   {
    "name": "Black Lollipop",
    "caption": "Dark Collection · PS1602",
-   "pattern_url": "",
+   "pattern_url": "https://polygood.com/product/black-lollipop/",
    "swatch_url": "",
    "file": "black-lollipop.jpg",
    "id": "PS1602"
   },
   {
    "name": "Translucent Glitter Gold",
-   "caption": "Translucent Collection",
-   "pattern_url": "",
+   "caption": "Translucent Collection · PS2118",
+   "pattern_url": "https://polygood.com/product/translucent-glitter-gold/",
    "swatch_url": "",
    "file": "translucent-glitter-gold.jpg",
-   "id": "2118"
+   "id": "PS2118"
   }
  ],
  "closing": "If one of these patterns suits a project you're specifying this autumn, order a sample and see the colour and finish in your hand.",

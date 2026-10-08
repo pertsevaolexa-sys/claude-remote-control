@@ -131,7 +131,7 @@ If you change the teal, change it in your Mailchimp header's dashed line too.
 
 **Change a headline or the umbrella statement.** Search for a few of its words, for example `lift mannequins` or `Under each project`, and retype it. Case headlines work best at eight words or fewer, without the client's name: the label above already gives it.
 
-**Change a pattern caption.** Search for the pattern's name followed by `</div>`, for example `Emerald Ghost</div>`, and edit the caption just after it (for example `Colourful splash · PS1706`). A pattern appears once for each case that uses it, so change it in each of those cases. Keep captions to the collection and code: never say what a pattern is made from (see "Brand rule" below).
+**Change a pattern caption.** Search for the pattern's name followed by `</div>`, for example `Emerald Ghost</div>`, and edit the caption just after it (for example `Colourful Splash Collection · PS1706`). A pattern appears once for each case that uses it, so change it in each of those cases. Keep captions to the collection and code: never say what a pattern is made from (see "Brand rule" below).
 
 **Remove a case.**
 1. Delete from its `<!-- Case: … -->` line down to the line just before the next `<!-- Case:` line. That takes out the case, its buttons, its palette and the dashed line under it.

@@ -11,7 +11,7 @@ Umbrella statement: **Under each project you'll find its swatches, named as you'
 | Orion (kitchenette worktops) | Orion · Paris | Sea-green worktops a shade lighter than teal cabinets |
 | ONE DUST Studio (furniture and objects) | ONE DUST Studio · Taipei | Surface specialists made furniture and sculpture in Polygood |
 
-The copy is written for a premium brand: it never says what the plastic was before. Each line was checked against the case PDFs and the Notion pattern library, then checked again for waste connotations, facts and style. Each swatch is captioned with its collection and code from the pattern library (for example "Colourful splash · PS2121").
+The copy is written for a premium brand: it never says what the plastic was before. Each line was checked against the case PDFs and the Notion pattern library, then checked again for waste connotations, facts and style. Each swatch is captioned with its collection and code from the pattern library (for example "Colourful Splash Collection · PS2121").
 
 The design follows the Project Edit header built in Mailchimp:
 - warm off-white background
@@ -86,7 +86,7 @@ Each case's sample button opens a "choose a sample" page at that project's secti
 | `sample-chooser-wordpress.html` | Paste into a **Custom HTML** block on a new WordPress page with the slug `project-edit-samples`. It brings its own styles and uses your theme's font |
 | `sample-chooser.html` | The same page on its own, to preview in a browser |
 
-The email links to `https://polygood.com/project-edit-samples/#de-bijenkorf`, `#henriette-stadthotel`, `#orion` and `#one-dust-studio`, and the closing button to the top of the page. If you give the page another address, change `chooser.url` in `copy.json` and rebuild. Each pattern's own page goes in its `pattern_url`; until one is filled, that swatch opens its project's section of the chooser, and the chooser card opens the general samples page.
+The email links to `https://polygood.com/project-edit-samples/#de-bijenkorf`, `#henriette-stadthotel`, `#orion` and `#one-dust-studio`, and the closing button to the top of the page. If you give the page another address, change `chooser.url` in `copy.json` and rebuild. Each swatch and chooser card links to its pattern's product page on polygood.com (`pattern_url` in `copy.json`, for example `https://polygood.com/product/emerald-ghost/`), where the reader orders that sample. The seven addresses were matched to their page titles in polygood.com search results; the site itself is blocked from Claude's sandbox, so click each one once before sending. Search snapshots showed White Terrazzo and Translucent Glitter Gold samples as out of stock at some point: check them. If a pattern page ever goes away, empty its `pattern_url` and rebuild: the swatch then opens its project's section of the chooser, and the chooser card opens the general samples page.
 
 ## The project pages behind the buttons
 
@@ -101,7 +101,6 @@ The newsletter buttons link to the pages' own slugs:
 | Orion | `https://polygood.com/projects/orion-office-kitchenette-paris/` |
 | ONE DUST | `https://polygood.com/projects/one-dust-studio-taipei/` (set this slug in WordPress: the draft has none yet) |
 
-Translucent Glitter Gold: Notion records its code as `#2118` with no PS prefix, so its swatch shows the collection only. Add the code to its `caption` once it's confirmed. "Colourful splash" is written as Notion has it.
 
 ## Changing the copy
 
