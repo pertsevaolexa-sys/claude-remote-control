@@ -12,6 +12,7 @@ Writes seven files into the output folder:
   sample-chooser.html        the "choose a sample" page the sample buttons open: one section per project,
                              each sample linking to its pattern page on polygood.com
   sample-chooser-wordpress.html  the same page as one block to paste into a WordPress Custom HTML block
+  sample-menu/index.html     the pop-up style sample menu, published as a Claude artifact (with sample-menu/swatches/)
 
 Words, links and images live in copy.json. The look (colours, fonts, sizes) is set below.
 Images: an image_url or swatch_url wins; otherwise image_base_url + the file name is used
@@ -466,6 +467,117 @@ body{{margin:0;background:{PAPER};}}
 """
 
 
+def sample_menu():
+    """The pop-up style sample menu: a small card that lists one project's patterns, each opening its
+    page on polygood.com. #one-dust-studio etc. picks the project; with no project it lists all four.
+    Written for a Claude artifact: no html/head/body tags, swatches published next to it in swatches/."""
+    cases = copy["cases"]
+    title = CHOOSER.get("menu_title", "Project Edit Samples")
+    rows_for = lambda c: "".join(
+        f'<li><a class="pm-row" href="{attr((p.get("pattern_url") or "").strip() or SAMPLES_URL)}">'
+        f'<img src="swatches/{attr(p["file"])}" width="56" height="56" alt="">'
+        f'<span class="pm-text"><span class="pm-name">{esc(p["name"])}</span>'
+        f'<span class="pm-code">{esc(p.get("caption", ""))}</span></span>'
+        f'<span class="pm-go" aria-hidden="true">&rarr;</span></a></li>'
+        for p in case_patterns(c)
+    )
+
+    def sub(n):
+        if n == 1:
+            return "One pattern from this project. It opens on polygood.com, where you order its sample."
+        return f"{NUMBERS.get(n, n).capitalize()} patterns from this project. Each opens on polygood.com, where you order its sample."
+
+    projects = "".join(
+        f"""<section class="pm-view" id="{anchor(c)}" aria-labelledby="h-{anchor(c)}">
+<a class="pm-back" href="#all">&larr; All projects</a>
+<p class="pm-eyebrow">Order a sample</p>
+<h1 class="pm-title" id="h-{anchor(c)}">{esc(c['kicker'])}</h1>
+<p class="pm-sub">{esc(sub(len(case_patterns(c))))}</p>
+<ul class="pm-list">{rows_for(c)}</ul>
+</section>
+"""
+        for c in cases
+    )
+    picker_rows = "".join(
+        f'<li><a class="pm-row" href="#{anchor(c)}">'
+        f'<span class="pm-stack">'
+        + "".join(f'<img src="swatches/{attr(p["file"])}" width="56" height="56" alt="">' for p in case_patterns(c)[:3])
+        + f'</span><span class="pm-text"><span class="pm-name">{esc(c["title"])}</span>'
+        f'<span class="pm-code">{esc(c["kicker"].split(" · ")[-1])} · {NUMBERS.get(len(case_patterns(c)), len(case_patterns(c))).capitalize()} pattern{"" if len(case_patterns(c)) == 1 else "s"}</span></span>'
+        f'<span class="pm-go" aria-hidden="true">&rarr;</span></a></li>'
+        for c in cases
+    )
+    return f"""<title>{esc(title)}</title>
+<style>
+/* Layout: one small card centred on a quiet ground, like a pop-up over the email; one project at a time. */
+:root{{
+  --ground:#ece5dc; --card:{PAPER}; --ink:{INK}; --muted:{MUTED}; --teal:{TEAL}; --warm:{WARM}; --line:#e2d8cc; --shadow:rgba(40,28,16,.14);
+  --sans:{SANS};
+}}
+@media (prefers-color-scheme: dark){{:root:not([data-theme="light"]){{
+  --ground:#14110e; --card:#1f1b17; --ink:#f3ede6; --muted:#b3a89c; --teal:#5cc1c8; --warm:#e0a47c; --line:#3a332c; --shadow:rgba(0,0,0,.5); color-scheme:dark;
+}}}}
+:root[data-theme="dark"]{{
+  --ground:#14110e; --card:#1f1b17; --ink:#f3ede6; --muted:#b3a89c; --teal:#5cc1c8; --warm:#e0a47c; --line:#3a332c; --shadow:rgba(0,0,0,.5); color-scheme:dark;
+}}
+body{{background:var(--ground);color:var(--ink);font-family:var(--sans);}}
+.pm-wrap{{min-height:100%;display:grid;grid-template-columns:minmax(0,520px);justify-content:center;align-content:start;padding-inline:16px;padding-block:clamp(24px,8vh,72px);}}
+.pm-card{{min-width:0;background:var(--card);border-radius:6px;box-shadow:0 18px 50px var(--shadow),0 2px 6px var(--shadow);padding:clamp(20px,5vw,32px);}}
+.pm-brand{{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:16px;margin-bottom:18px;border-bottom:2px dashed var(--teal);}}
+.pm-brand b{{font-size:15px;letter-spacing:-.01em;}}
+.pm-brand span{{font-size:12px;color:var(--muted);}}
+.pm-eyebrow{{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);}}
+.pm-title{{margin:0 0 8px;font-size:clamp(22px,5vw,26px);line-height:1.2;letter-spacing:-.01em;text-wrap:balance;}}
+.pm-sub{{margin:0 0 18px;font-size:15px;line-height:1.5;color:var(--muted);max-width:60ch;}}
+.pm-list{{list-style:none;margin:0;padding:0;display:grid;}}
+.pm-list li+li{{border-top:1px solid var(--line);}}
+.pm-row{{display:flex;align-items:center;gap:14px;padding:12px 4px;color:var(--ink);text-decoration:none;border-radius:4px;}}
+.pm-row img{{width:56px;height:56px;max-width:100%;object-fit:cover;border-radius:3px;flex:none;}}
+.pm-text{{display:grid;gap:2px;min-width:0;flex:1;}}
+.pm-name{{font-weight:700;font-size:16px;line-height:1.25;}}
+.pm-code{{font-size:13px;color:var(--warm);font-variant-numeric:tabular-nums;}}
+.pm-go{{color:var(--teal);font-weight:700;font-size:18px;transition:transform .15s ease;}}
+.pm-row:hover .pm-go,.pm-row:focus-visible .pm-go{{transform:translateX(3px);}}
+.pm-row:hover{{background:color-mix(in srgb,var(--teal) 7%,transparent);}}
+.pm-row:focus-visible{{outline:2px solid var(--teal);outline-offset:2px;}}
+.pm-stack{{display:flex;flex:none;width:96px;}}
+.pm-stack img{{width:40px;height:40px;border:2px solid var(--card);}}
+.pm-stack img+img{{margin-left:-14px;}}
+.pm-back{{display:inline-block;margin:0 0 14px;font-size:14px;font-weight:700;color:var(--teal);text-decoration:none;}}
+.pm-back:focus-visible,.pm-all a:focus-visible{{outline:2px solid var(--teal);outline-offset:2px;}}
+.pm-all{{margin:18px 0 0;padding-top:16px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);}}
+.pm-all a{{color:var(--teal);font-weight:700;}}
+.pm-view+.pm-view{{margin-top:32px;padding-top:24px;border-top:2px dashed var(--teal);}}
+.js .pm-view+.pm-view{{margin-top:0;padding-top:0;border-top:0;}}
+@media (prefers-reduced-motion: reduce){{.pm-go{{transition:none;}}}}
+</style>
+<div class="pm-wrap"><div class="pm-card">
+<div class="pm-brand"><b>The Polygood® Project Edit</b><span>Autumn 2026</span></div>
+<section class="pm-view" id="all" aria-labelledby="h-all">
+<p class="pm-eyebrow">Order a sample</p>
+<h1 class="pm-title" id="h-all">Choose a project</h1>
+<p class="pm-sub">See the patterns each project used, then pick the one you'd like to sample.</p>
+<ul class="pm-list">{picker_rows}</ul>
+<p class="pm-all">Looking for another pattern? <a href="{attr(SAMPLES_URL)}">See all samples &rarr;</a></p>
+</section>
+{projects}</div></div>
+<script>
+(function () {{
+  document.documentElement.classList.add('js');
+  var views = Array.prototype.slice.call(document.querySelectorAll('.pm-view'));
+  function show() {{
+    var id = decodeURIComponent((location.hash || '').slice(1));
+    var current = views.some(function (v) {{ return v.id === id; }}) ? id : 'all';
+    views.forEach(function (v) {{ v.hidden = v.id !== current; }});
+    window.scrollTo(0, 0);
+  }}
+  window.addEventListener('hashchange', show);
+  show();
+}})();
+</script>
+"""
+
+
 code = code_block({}, {})
 (out / "mailchimp-code-block.html").write_text(code)
 (out / "mailchimp-hero.html").write_text(hero_block({}))
@@ -473,6 +585,12 @@ code = code_block({}, {})
 (out / "mailchimp-palettes.html").write_text(palettes_only())
 (out / "sample-chooser.html").write_text(chooser_standalone({}))
 (out / "sample-chooser-wordpress.html").write_text(chooser_wordpress({}))
+menu_dir = out / "sample-menu"
+(menu_dir / "swatches").mkdir(parents=True, exist_ok=True)
+(menu_dir / "index.html").write_text(sample_menu())
+for pat in copy["patterns"]:  # the menu publishes its own copies of the swatches next to it
+    if pat.get("file") and (out / "images" / "swatches" / pat["file"]).exists():
+        (menu_dir / "swatches" / pat["file"]).write_bytes((out / "images" / "swatches" / pat["file"]).read_bytes())
 
 
 def data_uri(path, mime="image/jpeg"):

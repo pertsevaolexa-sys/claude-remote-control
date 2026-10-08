@@ -77,16 +77,15 @@ From Mailchimp analytics for the 44 campaigns sent between October 2024 and Sept
 - [ ] The Henriette photographer confirmed, and the photo credits cleared for email use
 - [ ] Test email sent to yourself and opened in Outlook and on a phone: every photo and swatch shows, each case's swatches sit three to a row, and every button opens the right page
 
-## The sample chooser page
+## The sample menu
 
-Each project has one link to samples: its "Order samples" button. It opens a small menu page showing only that project's patterns (for ONE DUST, all five), and each pattern there opens its product page on polygood.com, where the sample is ordered. The swatches in the email are not links, to keep one clean link per project; set `swatch_links` to `true` in `copy.json` to link them too. Opened without a project, the page lists all four.
+Each project has one link to samples: its "Order samples" button. It opens a small pop-up style menu, separate from polygood.com, showing only that project's patterns (for ONE DUST, all five). Each pattern there opens its product page on polygood.com, where the sample is ordered. The closing "Order samples" button opens the menu's project list.
 
-| File | Use |
-|---|---|
-| `sample-chooser-wordpress.html` | Paste into a **Custom HTML** block on a new WordPress page with the slug `project-edit-samples`. It brings its own styles and uses your theme's font |
-| `sample-chooser.html` | The same page on its own, to preview in a browser |
+The menu is published as a Claude artifact: https://claude.ai/artifact/PR9kNdeMr5Aw7kGdsspCka. Its source is `sample-menu/index.html`, rebuilt with the email from `copy.json`. The buttons open it at `#de-bijenkorf`, `#henriette-stadthotel`, `#orion` and `#one-dust-studio`.
 
-The email links to `https://polygood.com/project-edit-samples/#de-bijenkorf`, `#henriette-stadthotel`, `#orion` and `#one-dust-studio`, and the closing button to the top of the page. If you give the page another address, change `chooser.url` in `copy.json` and rebuild. Each swatch and chooser card links to its pattern's product page on polygood.com (`pattern_url` in `copy.json`, for example `https://polygood.com/product/emerald-ghost/`), where the reader orders that sample. The seven addresses were matched to their page titles in polygood.com search results; the site itself is blocked from Claude's sandbox, so click each one once before sending. Search snapshots showed White Terrazzo and Translucent Glitter Gold samples as out of stock at some point: check them. If a pattern page ever goes away, empty its `pattern_url` and rebuild: the swatch then opens its project's section of the chooser, and the chooser card opens the general samples page.
+**Before sending:** the artifact starts private. Open it, use **Share** and give access to anyone with the link, then open a project link in a private browser window to check that a reader without a Claude account can see it.
+
+The swatches in the email are not links, to keep one link per project; set `swatch_links` to `true` in `copy.json` to link them too. `sample-chooser-wordpress.html` and `sample-chooser.html` are the same menu as a polygood.com page, if you later want it on the website instead: publish it there and set `chooser.url` to its address.
 
 ## The project pages behind the buttons
 
