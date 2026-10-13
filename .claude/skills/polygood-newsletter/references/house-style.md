@@ -7,6 +7,7 @@ Adapted from `polygood-case-tracker/docs/case-study-outline.md` (the outline for
 - **Polygood®** on first mention in the email, **Polygood** after. The company is **The Good Plastic Company**.
 - **Colour (pattern) names** as polygood.com spells them on product pages, in title case: Salmon Terra, Emerald Ghost, Sapphire Terrazzo, White Terrazzo, Black Lollipop, Translucent Glitter Gold, Maldives, Terrazzo Nuovo, Timeless Duo, Salt Dune, Fleur de Sel. The Notion catalogue sometimes misspells them ("White Terazzo", "Black lolipop", "Emerald ghost"); correct these in the email.
 - **Product links** follow `https://polygood.com/product/<colour-slug>/`, lower case with hyphens (`salmon-terra`, `emerald-ghost`). Check the page exists before relying on a guessed slug; if unsure, mark `[check URL]`.
+- **Sample links** go to the "Order Samples" page linked in the polygood.com footer. Check its current URL before the first send and reuse it; in 2026 search results still showed the older shop at thegoodplasticcompany.com/product-category/samples/, so confirm which one is live.
 - **Project links** follow `https://polygood.com/projects/<short-name>/`. Use the catalogue's `siteUrl` when it has one. A project without a case page can still appear, but link it to the closest real page and say so in the notes.
 - **Client, venue and partner names** are spelled the way they spell them, accents included: Module Carré, Les Rendez-vous de la Matière, Wallpaper*.
 

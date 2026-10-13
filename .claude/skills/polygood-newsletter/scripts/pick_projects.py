@@ -92,6 +92,8 @@ def why_blocked(project):
 def clearance(project):
     """Whether the project can go in the default copy or only as an optional swap."""
     if project.get("siteUrl") or project.get("status") == "live":
+        if not project.get("agreement") and not (project.get("rights") or "").strip():
+            return "cleared: published on polygood.com, but photo rights not recorded (reuse case-page photos; confirm rights)"
         return "cleared: already published on polygood.com"
     if project.get("agreement"):
         return "cleared: publishing agreement signed"

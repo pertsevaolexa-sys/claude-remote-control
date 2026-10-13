@@ -50,9 +50,9 @@ python3 .claude/skills/polygood-newsletter/scripts/pick_projects.py --region all
 
 It ranks projects by how ready they are for an email, prints each one's clearance, credits and any recorded facts, and leaves out NDA, restricted and expired-licence projects (saying why). Pass `--catalog <path>` if the file lives elsewhere; if there is no catalogue, ask the user for projects. The catalogue can lag behind the website (its "updated" date is printed at the top): de Bijenkorf and Henriette Stadthotel had case pages by October 2026 although the September catalogue says "no case page yet", so check polygood.com/projects/ before writing a project off as unlinkable.
 
-**Use only cleared projects in the default copy.** A project is cleared when it already has a case page on polygood.com, a signed publishing agreement, or a rights note that allows use. The script labels each one. A project that isn't cleared yet can appear only as an optional swap, flagged "check rights before use". Follow each partner's credit wording exactly; some ask to be credited first, with a link (SAMJI does).
+**Use only cleared projects in the default copy.** A project is cleared when it already has a case page on polygood.com, a signed publishing agreement, or a rights note that allows use. The script labels each one. A project that isn't cleared yet can appear only as an optional swap, flagged "check rights before use". When the script says "photo rights not recorded" (a published case with no agreement or rights note), the project can run, but use the photos already on its case page and add a checklist item to confirm the rights. Follow each partner's credit wording exactly; some ask to be credited first, with a link (SAMJI does). When a name is known only from a social handle ("@montevers_merdeglace"), write it as you think it's spelled and add `[check spelling]`.
 
-**Choose the hero** in this order: cleared with strong photos; enough known facts to tell a short story; fits the issue's theme; relevant to the main region; not featured in the last two issues. Facts come from the user, the case page, the catalogue's case note and credits. If the hero would need more than one `[fact needed]`, ask the user for one or two facts about it, or pick a better-documented project.
+**Choose the hero** in this order: cleared with recorded rights or a signed agreement, and strong photos; a case page to link to; enough known facts to tell a short story; fits the issue's theme; relevant to the main region; not featured in the last two issues. A cleared project without a case page can fill a story slot, linked to its closest real page and flagged `[no case page]`, but shouldn't be the hero. Facts come from the user, the case page, the catalogue's case note and credits. If the hero would need more than one `[fact needed]`, ask the user for one or two facts about it, or pick a better-documented project.
 
 ### 3. Decide on versions
 
@@ -93,13 +93,13 @@ Follow `references/house-style.md`. In short: sentence case, UK spelling, Polygo
 
 **Order:**
 
-1. **Open on the hero project.** Either start straight with it, or with a one-line intro that names the projects only. For an event or launch, a single banner line above the hero is fine ("Meet us at [fair], Paris, [dates] — details below"); the event block itself comes after the hero.
+1. **Open on the hero project.** Either start straight with it, or with a one-line intro that names the projects (it may end with "plus [product news]"). Only a dated event or a launch happening in this issue gets a single banner line above the hero ("Meet us at [fair], Paris, [dates] — details below"); a reminder about an earlier launch goes in the intro line or the news block, not above the hero.
 2. **Hero project.** Title (client or venue, city), one line on what was made, 40–70 words of story, "Colours used:", a button to the case page and a sample link.
 3. **Two or three more projects.** Same pattern, 30–50 words each.
 4. **One short news block** (product launch, event, Wall Tiles) only if there is real news, tied to a project where possible.
 5. **Footer.** Sustainability page and social links live here, not as content blocks; almost nobody clicked them.
 
-**Links.** Every project block needs a case-page link and a sample link; these come first. One shared sample link per block is fine ("Order samples of Salmon Terra and Espresso Noir"). Link colour names to their product pages only if the total stays around 10–14 tracked links. Link partners only when their credit request asks for it. Never drop a project's sample link to save room: cut a project instead.
+**Links.** Every project block needs a case-page link and a sample link; these come first. One shared sample link per block is fine ("Order samples of Salmon Terra and Espresso Noir"). Link colour names to their product pages only if the total stays around 10–14 tracked links. "Tracked links" means links with a `utm_content` value; partner credit links that the partner asked for don't carry UTM tags and don't count. Count the links from your utm_content list rather than by eye. Never drop a project's sample link to save room: cut a project instead.
 
 Write real text, not text inside images: image-only emails land in junk more often. Every image needs alt text naming the object, the pattern and the place ("Bathroom countertop in Sapphire Terrazzo at Henriette Stadthotel, Vienna").
 
@@ -107,9 +107,10 @@ Write real text, not text inside images: image-only emails land in junk more oft
 
 Events still need projects: design-week announcements on their own had the weakest results of the six sends analysed. Pair the event with projects from the host city or country, ideally ones visitors can go and see, or pieces on the stand.
 
-- **Details not confirmed yet:** write a save-the-date with a details box in two versions, "unconfirmed" (month, city, fair name if known, "dates and stand number to follow") and "confirmed" (dates, hall and stand, opening hours), so the user can send either. Don't guess the venue or dates.
+- **Ask first** what will be on the stand (panels, products, pieces from a project) if the user hasn't said; otherwise the event block carries a `[fact needed]`.
+- **Details not confirmed yet:** write a save-the-date with a details box in two versions, "unconfirmed" (month, city, fair name if known, "dates and stand number to follow") and "confirmed" (dates, hall and stand, opening hours), so the user can send either. Don't guess the venue or dates. Every version (Global and regional) needs a subject line and preview text for both states, or says it reuses the Global ones.
 - **Calls to action:** book a meeting at the stand, get a visitor pass if the fair offers one, or ask for samples to be brought along. Bookings are the success measure; tag the booking link with its own `utm_content`.
-- **Sequence:** suggest save-the-date (6–8 weeks before), details confirmed (2–3 weeks before), last call (a few days before), and a follow-up after the fair with the projects shown. Send each to the same audience; don't narrow the last call to Mailchimp "clickers", who are mostly filters.
+- **Sequence:** suggest save-the-date (6–8 weeks before), details confirmed (2–3 weeks before), last call (a few days before), and a follow-up after the fair with the projects shown. Give each planned send its own subject line and preview text. Send each to the same audience; don't narrow the last call to Mailchimp "clickers", who are mostly filters.
 - **Versions:** the host country (plus Benelux and DACH for a European fair) and Global are usually enough; a US version only if US visitors are expected.
 
 ### 7. Plan the audience and the send
@@ -123,7 +124,7 @@ Events still need projects: design-week announcements on their own had the weake
 
 Turn on Google Analytics link tracking in the Mailchimp campaign settings and tag links consistently: `utm_source=mailchimp`, `utm_medium=email`, `utm_campaign=<yyyy-mm>-<slug>`, `utm_content=<block>` (for example `hero`, `story-2`, `sample-hero`, `book-meeting`). Website sessions in Google Analytics are the source of truth for clicks, because filters rarely load pages like a browser does.
 
-For A/B tests, choose "manually select winner" and decide after 48 hours on Google Analytics sessions or people-only clicks, not on Mailchimp's automatic winner, which picks within hours on inflated opens or clicks.
+For A/B tests, choose "manually select winner" and decide at send time + 48 hours on Google Analytics sessions or people-only clicks, not on Mailchimp's automatic winner, which picks within hours on inflated opens or clicks. The final read is 72 hours after the winner goes to the rest of the list.
 
 ### 9. If asked to build it in Mailchimp
 
@@ -147,10 +148,10 @@ The deliverable is for a marketing manager who will build the email, so keep it 
 A/B test: [x] vs [y] · Preview text ([n] characters): [text]
 
 ## Email copy (Global)
-[Paste-ready copy, block by block. Only link targets in [brackets] and image notes in *italics*; no commentary.]
+[Paste-ready copy, block by block, with neutral block labels. Only link targets in [brackets] and image notes in *italics*; no commentary, and no variant or send instructions (those go in the send plan).]
 
 ## Regional versions
-[Only the parts that change: hero block and subject line per version.]
+[Per version, every element that changes (subject, preview, intro, hero, other blocks), written out in full.]
 
 ## Send plan and tracking
 | Item | Setting |
@@ -170,7 +171,7 @@ A/B test: [x] vs [y] · Preview text ([n] characters): [text]
 [3–4 lines: when to read results (72 hours, or the Tuesday after a Friday send), to judge by Google Analytics sessions and people-only clicks rather than Mailchimp's totals, and to pass the people who clicked to sales.]
 
 ## Assumptions and open questions
-[At most 5 short lines]
+[At most 5 bullets, one point each, about 20 words or fewer]
 ```
 
 Write the email copy in English unless the user asks otherwise. Talk to the user in the language they write in.
