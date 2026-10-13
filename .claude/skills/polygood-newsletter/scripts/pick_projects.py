@@ -89,6 +89,17 @@ def why_blocked(project):
     return None
 
 
+def clearance(project):
+    """Whether the project can go in the default copy or only as an optional swap."""
+    if project.get("siteUrl") or project.get("status") == "live":
+        return "cleared: already published on polygood.com"
+    if project.get("agreement"):
+        return "cleared: publishing agreement signed"
+    if re.search(r"free to use|use with|permission to use|yes", project.get("rights") or "", re.IGNORECASE):
+        return "cleared: rights note allows use (follow its credit wording)"
+    return "not yet cleared: optional swap only, check rights first"
+
+
 def score(project):
     points = 0
     if project.get("siteUrl"):
@@ -126,6 +137,12 @@ def main():
     path = find_catalog(args.catalog)
     catalog = json.loads(path.read_text(encoding="utf-8"))
     projects = catalog.get("projects", [])
+    # Facts recorded for website cases (brief, result, credits), keyed by Notion id.
+    case_notes = {}
+    for case in catalog.get("siteCases", []) or []:
+        for notion_id in case.get("notion") or []:
+            if case.get("note"):
+                case_notes[notion_id] = case["note"]
 
     picked, skipped = [], []
     for p in projects:
@@ -158,6 +175,8 @@ def main():
             "added": (p.get("added") or "")[:10],
             "score": score(p),
             "notion": p.get("notion") or "",
+            "clearance": clearance(p),
+            "case_note": case_notes.get(p.get("id"), ""),
         })
 
     picked.sort(key=lambda x: x["added"], reverse=True)  # newest first among equal scores
@@ -179,6 +198,9 @@ def main():
         print(f"   Colours: {x['patterns']}")
         print(f"   Case page: {x['case_url']}")
         print(f"   Photos: {x['photos']} · Rights: {x['rights'][:120]}")
+        print(f"   Clearance: {x['clearance']}")
+        if x["case_note"]:
+            print(f"   Case note: {x['case_note'][:240]}")
         print(f"   Credits: {x['credits'][:160]}")
         print(f"   Added: {x['added']} · Notion: {x['notion']}\n")
     if skipped:
