@@ -20,8 +20,8 @@ from urllib.parse import urlencode
 
 
 def load_env_file():
-    """Load .env file from project root."""
-    current = Path(__file__).resolve().parent
+    """Load .env file from the working folder or one of its parents."""
+    current = Path.cwd()
     for _ in range(10):
         env_path = current / ".env"
         if env_path.exists():

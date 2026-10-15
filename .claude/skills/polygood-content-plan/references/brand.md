@@ -1,6 +1,6 @@
 # Polygood brand context
 
-Read by content-planner, together with the account files in this folder.
+Background for the content plan: what Polygood is, who it sells to and who it competes with.
 
 ## Brand
 - **Product:** Polygood, a sheet material made from 100% recycled plastic (mostly polystyrene from post-consumer and post-industrial waste such as fridges, cutlery and electronics). Recyclable again at end of life
@@ -22,4 +22,4 @@ B2B: architects, interior designers, retail and hospitality brands, furniture ma
 
 ## Content notes for planning
 - Ideas should suit a B2B design audience: project reveals, material close-ups, making-of, client cases. Consumer lifestyle trends rarely fit
-- Case study copy follows `polygood-case-tracker/docs/case-study-outline.md` in this repository (sentence case, no exclamation marks, short titles)
+- polygood.com style: sentence case, no exclamation marks, short titles. Use the same for on-screen text and headlines in the plan

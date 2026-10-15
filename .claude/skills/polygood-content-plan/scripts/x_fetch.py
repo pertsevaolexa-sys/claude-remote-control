@@ -14,7 +14,7 @@ from pathlib import Path
 # Load .env file if present
 try:
     from dotenv import load_dotenv
-    load_dotenv()
+    load_dotenv(Path.cwd() / ".env")
 except ImportError:
     pass  # dotenv not installed, rely on environment variables
 
@@ -113,7 +113,7 @@ def fetch_tweets(
 def main():
     parser = argparse.ArgumentParser(description='Fetch tweets from X/Twitter accounts')
     parser.add_argument('--accounts-file', '-a',
-                        default='.claude/context/x-accounts.md',
+                        default=str(Path(__file__).resolve().parent.parent / 'references' / 'accounts' / 'x.md'),
                         help='Path to accounts markdown file')
     parser.add_argument('--handles', '-H', nargs='+',
                         help='Specific handles to fetch (overrides accounts file)')

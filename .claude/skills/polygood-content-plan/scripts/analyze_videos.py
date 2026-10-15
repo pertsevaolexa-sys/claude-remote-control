@@ -30,7 +30,7 @@ except ImportError:
 # Load environment variables
 try:
     from dotenv import load_dotenv
-    load_dotenv()
+    load_dotenv(Path.cwd() / ".env")
 except ImportError:
     pass
 

@@ -14,7 +14,7 @@ from pathlib import Path
 # Load .env file if present
 try:
     from dotenv import load_dotenv
-    load_dotenv()
+    load_dotenv(Path.cwd() / ".env")
 except ImportError:
     pass  # dotenv not installed, rely on environment variables
 
@@ -152,7 +152,7 @@ def fetch_tiktok(
 def main():
     parser = argparse.ArgumentParser(description='Fetch TikTok videos from accounts')
     parser.add_argument('--accounts-file', '-a',
-                        default='.claude/context/tiktok-accounts.md',
+                        default=str(Path(__file__).resolve().parent.parent / 'references' / 'accounts' / 'tiktok.md'),
                         help='Path to accounts markdown file')
     parser.add_argument('--usernames', '-u', nargs='+',
                         help='Specific usernames to fetch (overrides accounts file)')

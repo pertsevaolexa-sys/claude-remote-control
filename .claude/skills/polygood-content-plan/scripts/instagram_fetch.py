@@ -14,7 +14,7 @@ from pathlib import Path
 # Load .env file if present
 try:
     from dotenv import load_dotenv
-    load_dotenv()
+    load_dotenv(Path.cwd() / ".env")
 except ImportError:
     pass  # dotenv not installed, rely on environment variables
 
@@ -161,7 +161,7 @@ def fetch_instagram(
 def main():
     parser = argparse.ArgumentParser(description='Fetch Instagram posts/reels from accounts')
     parser.add_argument('--accounts-file', '-a',
-                        default='.claude/context/instagram-accounts.md',
+                        default=str(Path(__file__).resolve().parent.parent / 'references' / 'accounts' / 'instagram.md'),
                         help='Path to accounts markdown file')
     parser.add_argument('--usernames', '-u', nargs='+',
                         help='Specific usernames to fetch (overrides accounts file)')

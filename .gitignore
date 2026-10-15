@@ -1,1 +1,4 @@
 .env
+
+# Raw research data from the polygood-content-plan skill
+brands/polygood/content-plans/*/research/
