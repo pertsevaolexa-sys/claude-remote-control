@@ -1,0 +1,44 @@
+{
+  "name": "polygood-prefab-film",
+  "version": "1.0.0",
+  "description": "Polygood prefabrication film: 15 s motion piece for Instagram Reels (9:16) and LinkedIn (4:5)",
+  "repository": {},
+  "license": "UNLICENSED",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
+  "private": true,
+  "dependencies": {
+    "@remotion/bundler": "4.0.536",
+    "@remotion/cli": "4.0.536",
+    "@remotion/fonts": "4.0.536",
+    "@remotion/media": "4.0.536",
+    "@remotion/renderer": "4.0.536",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.536"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.536",
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "eslint": "10.12.0",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "remotion studio",
+    "build": "remotion bundle",
+    "render:reels": "remotion render PolygoodPrefab-Reels out/polygood-prefab-reels-1080x1920.mp4",
+    "render:linkedin": "remotion render PolygoodPrefab-LinkedIn out/polygood-prefab-linkedin-1080x1350.mp4",
+    "render": "npm run render:reels && npm run render:linkedin",
+    "stills": "node scripts/stills.mjs",
+    "assets:material": "python3 -I scripts/generate_placeholder_material.py",
+    "assets:audio": "python3 -I scripts/generate_audio.py",
+    "upgrade": "remotion upgrade",
+    "lint": "eslint src && tsc"
+  },
+  "allowScripts": {
+    "esbuild": false
+  }
+}
