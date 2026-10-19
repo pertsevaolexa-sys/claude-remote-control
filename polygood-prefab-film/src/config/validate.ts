@@ -1,3 +1,4 @@
+import { ASSETS } from "./assets";
 import { AUDIO_CUES } from "./audio";
 import { LINKEDIN, REELS } from "./layout";
 import {
@@ -10,10 +11,10 @@ import {
   SILENT_FROM,
 } from "./timing";
 
-// The brief's hard timing rules, checked whenever the project loads, so a
+// The film's hard timing rules, checked whenever the project loads, so a
 // config edit that breaks one fails in Studio and at render time.
 const rules: [string, boolean][] = [
-  ["Total duration is exactly 15 s", DURATION_IN_FRAMES === 15 * FPS],
+  ["Total duration is at most 30 s", DURATION_IN_FRAMES <= 30 * FPS],
   [
     "Scenes are contiguous and fill the timeline",
     Object.values(SCENES).every((s, i, all) =>
@@ -24,19 +25,18 @@ const rules: [string, boolean][] = [
       SCENES.endCard.from + SCENES.endCard.durationInFrames ===
         DURATION_IN_FRAMES,
   ],
-  ["Checklist appears at exactly 2.0 s", CHECKLIST.appear === 2 * FPS],
+  ["Checklist appears with scene 02", CHECKLIST.appear === SCENES.cutting.from],
   [
-    "Finish identifier stays until 12.5 s",
-    FINISH_TAG.from === 0 && FINISH_TAG.until === 12.5 * FPS,
+    "Finish identifier is gone before the logo animation",
+    FINISH_TAG.until + FINISH_TAG.fadeOutFrames <= SCENES.endCard.from,
   ],
   [
-    "End card occupies the final 2.5 s",
-    SCENES.endCard.from === 12.5 * FPS &&
-      SCENES.endCard.durationInFrames === 2.5 * FPS,
+    "End card plays the whole logo animation",
+    SCENES.endCard.durationInFrames === ASSETS.endCardVideo.durationInFrames,
   ],
   [
-    "End card is static for the final second",
-    SCENES.endCard.from + S6.staticFrom <= DURATION_IN_FRAMES - FPS,
+    "Final second is static",
+    S6.staticFrom <= SCENES.endCard.durationInFrames - FPS,
   ],
   [
     "Final 0.5 s is silent",

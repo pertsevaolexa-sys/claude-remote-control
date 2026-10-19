@@ -86,31 +86,25 @@ const SHEETS: Slab[] = Array.from({ length: SHEET_COUNT }, (_, i) => ({
   z: i * THICK,
   textureOffset: [0, 0],
   // The first sheet is already landing on frame 0, so the cut never shows an empty frame.
-  enter: [S5.sheets[0] + i * 3 - 6, S5.sheets[0] + i * 3 + 4] as [
-    number,
-    number,
-  ],
+  enter: [
+    S5.sheets[0] + i * S5.sheetStagger - 8,
+    S5.sheets[0] + i * S5.sheetStagger - 8 + S5.sheetDrop,
+  ] as [number, number],
 }));
 
+// Drop window for a part starting `delay` frames into the parts beat.
+const partWindow = (delay: number): [number, number] => [
+  S5.parts[0] + delay,
+  S5.parts[0] + delay + S5.partDrop,
+];
+
 const PARTS_STACK: Slab[] = [
-  partSlab("tabletop", [0, 0], 0, [S5.parts[0], S5.parts[0] + 10]),
-  partSlab("tableLegA", [0, 50], 1, [S5.parts[0] + 4, S5.parts[0] + 14]),
-  partSlab("tableLegB", [560, 50], 1, [S5.parts[0] + 6, S5.parts[0] + 16]),
-  partSlab(
-    "benchLegA",
-    [1140, 40],
-    1,
-    [S5.parts[0] + 8, S5.parts[0] + 18],
-    true,
-  ),
-  partSlab(
-    "benchLegB",
-    [1140, 420],
-    1,
-    [S5.parts[0] + 10, S5.parts[0] + 20],
-    true,
-  ),
-  partSlab("benchSeat", [0, 220], 2, [S5.parts[1] - 10, S5.parts[1]]),
+  partSlab("tabletop", [0, 0], 0, partWindow(0)),
+  partSlab("tableLegA", [0, 50], 1, partWindow(6)),
+  partSlab("tableLegB", [560, 50], 1, partWindow(9)),
+  partSlab("benchLegA", [1140, 40], 1, partWindow(12), true),
+  partSlab("benchLegB", [1140, 420], 1, partWindow(15), true),
+  partSlab("benchSeat", [0, 220], 2, [S5.parts[1] - S5.partDrop, S5.parts[1]]),
 ];
 
 // Offcuts laid out in front of the parts stack before they move away.
@@ -231,14 +225,14 @@ export const Scene05Benefits: React.FC = () => {
   const drop = (slab: Slab) => {
     const t = ramp(frame, slab.enter, EASE.out);
     // A short drop keeps falling slabs clear of the headline.
-    return { dz: (1 - t) * 260, opacity: Math.min(1, t * 4) };
+    return { dz: (1 - t) * 120, opacity: Math.min(1, t * 2.5) };
   };
 
   // Offcuts appear beside the parts, then slide away towards the strip.
   const offIn = ramp(frame, S5.offcutsIn, EASE.out);
   const away = ramp(frame, S5.offcutsAway, EASE.inOut);
   const offShift: Pt = [-300 * away, 1300 * away];
-  const offFade = 1 - ramp(frame, [S5.granules[0], S5.granules[0] + 8]);
+  const offFade = 1 - ramp(frame, [S5.granules[0], S5.granules[0] + 12]);
 
   // Screen bounds of the offcuts once they have moved away: where chips start.
   const offPts = OFFCUT_SLABS.flatMap((o) =>
@@ -250,8 +244,10 @@ export const Scene05Benefits: React.FC = () => {
   const oy1 = Math.max(...offPts.map((p) => p[1]));
 
   const panelIn = ramp(frame, S5.newPanel, EASE.inOut);
+  // The new material clears before the logo animation, which opens on paper.
+  const stripOut = ramp(frame, S5.stripOut, EASE.in);
   const stripLabel =
-    ramp(frame, [S5.granules[0] + 4, S5.granules[0] + 16]) * (1 - labelsOut);
+    ramp(frame, [S5.granules[0] + 6, S5.granules[0] + 22]) * (1 - labelsOut);
 
   const label = (
     text: string,
@@ -293,9 +289,9 @@ export const Scene05Benefits: React.FC = () => {
     0,
   );
   const sheetsLabel =
-    ramp(frame, [S5.sheets[1] - 4, S5.sheets[1] + 6]) * (1 - labelsOut);
+    ramp(frame, [S5.sheets[1] - 4, S5.sheets[1] + 10]) * (1 - labelsOut);
   const partsLabel =
-    ramp(frame, [S5.settle - 2, S5.settle + 8]) * (1 - labelsOut);
+    ramp(frame, [S5.settle - 2, S5.settle + 12]) * (1 - labelsOut);
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.paper }}>
@@ -359,7 +355,8 @@ export const Scene05Benefits: React.FC = () => {
           position: "absolute",
           inset: 0,
           clipPath: `inset(0 ${(1 - panelIn) * (layout.width - strip.x)}px 0 0)`,
-          opacity: panelIn > 0 ? 1 : 0,
+          opacity: panelIn > 0 ? 1 - stripOut : 0,
+          translate: `0 ${-stripOut * 40}px`,
         }}
       >
         <TextureWindow x={strip.x} y={strip.y} w={strip.w} h={strip.h} />
@@ -381,8 +378,9 @@ export const Scene05Benefits: React.FC = () => {
         {Array.from({ length: GRANULES }, (_, i) => {
           const r = (n: number) => random(`granule-${i}-${n}`);
           // Every chip has landed before the scene ends.
-          const start = S5.granules[0] + r(1) * 8;
-          const dur = 12 + r(2) * 6;
+          const spread = S5.granules[1] - S5.granules[0];
+          const start = S5.granules[0] + r(1) * spread * 0.3;
+          const dur = spread * (0.5 + r(2) * 0.2);
           const t = interpolate(frame, [start, start + dur], [0, 1], {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",

@@ -6,11 +6,17 @@ export const ASSETS = {
     book: "fonts/PPNeueMontreal-Book.otf", // supplied
     bold: "fonts/PPNeueMontreal-Bold.otf", // supplied
   },
-  logo: {
-    // Supplied Polygood_vertical_Black.svg with only its viewBox tightened to
-    // the artwork (paths unchanged). Original kept as polygood-vertical-black.svg.
-    src: "images/polygood-vertical-black-cropped.svg",
-    aspectRatio: 327.981 / 210.113,
+  // Supplied logo animation (polygood-LineDraw.mp4), the end card, played as
+  // is. 1920 x 1080, 30 fps, 150 frames, no audio. contentBox is where the
+  // lockup sits in the clip, so it can be scaled to fill each format; the rest
+  // of the clip is plain background in `background`.
+  endCardVideo: {
+    src: "video/polygood-linedraw.mp4",
+    width: 1920,
+    height: 1080,
+    durationInFrames: 150,
+    background: "#F4F3ED",
+    contentBox: { x: 383, y: 320, w: 1154, h: 431 },
   },
   material: {
     // PLACEHOLDER: procedural texture from scripts/generate_placeholder_material.py.
@@ -47,7 +53,7 @@ export const MATERIAL_LEVELS = [
 // The opening frame looks at the centre of the macro crop.
 export const MACRO_CENTER = { x: 1480, y: 170.5 };
 
-// Finish identifier shown bottom-left until 12.5 s and in the end-card band.
+// Finish identifier shown bottom-left until the logo animation.
 // PLACEHOLDER: no finish was specified. Set the real PS code and pattern name
 // to match the material image above.
 export const FINISH = {
@@ -58,8 +64,6 @@ export const FINISH = {
 
 // Claims that must be confirmed before they appear on screen.
 export const CLAIMS = {
-  // End-card supporting line. Shown only when confirmed for the finish shown.
-  material: { text: "100% recycled polystyrene", confirmed: false },
   // Thickness callout in scene 03. The actual tabletop thickness is unknown,
   // so the label states both available thicknesses. Set to "19 mm" or "12 mm"
   // once the real component is known.

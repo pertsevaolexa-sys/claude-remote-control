@@ -61,7 +61,7 @@ const Slab: React.FC<{ frame: number }> = ({ frame }) => {
   // Push back so the end face finishes exactly in the picture plane, where it
   // matches the 2D section pixel for pixel.
   const z = (s * L * Math.sin(rz * rad) * Math.sin(rx * rad)) / 2;
-  const shadow = 1 - ramp(frame, [S3.rotate[0], S3.rotate[0] + 12]);
+  const shadow = 1 - ramp(frame, [S3.rotate[0], S3.rotate[0] + 18]);
 
   const face = (
     w: number,

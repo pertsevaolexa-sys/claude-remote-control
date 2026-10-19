@@ -7,7 +7,6 @@ export const HEADLINES = {
   edges: ["Your edge,", "your profile"],
   cnc: ["Curved without", "thermoforming"],
   benefits: ["Lighter to ship,", "less waste"],
-  endCard: ["Send your drawing"],
 } as const;
 
 export const CHECKLIST_ITEMS = ["Cut", "Edged", "Machined", "Curved"] as const;
@@ -47,13 +46,4 @@ export const LINKEDIN_SPECS = {
     "Reduce transport weight and shipping costs",
     "Minimise material waste",
   ),
-} as const;
-
-export const END_CARD = {
-  reels: {
-    urls: ["polygood.com/prefabrication"],
-  },
-  linkedin: {
-    urls: ["polygood.com/contact-us", "polygood.com/prefabrication"],
-  },
 } as const;

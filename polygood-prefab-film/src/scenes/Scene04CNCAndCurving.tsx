@@ -36,7 +36,7 @@ const CUT_INDEX = CUTOUTS.map((c) =>
   PANEL_TOOLPATH.findIndex((s) => s.type === "cut" && s.pts === c.outline),
 );
 
-const PLUG_DROP = 10; // frames for each cut-out plug to fall away
+const PLUG_DROP = S4.plugDrop; // frames for each cut-out plug to fall away
 
 // Plugs leave one after another and are all gone before the bend starts.
 const removalStart = (i: number) =>

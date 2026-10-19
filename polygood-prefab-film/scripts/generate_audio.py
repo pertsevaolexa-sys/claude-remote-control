@@ -89,8 +89,8 @@ def write(name, sig):
 
 
 def pad():
-    """Low atmospheric pad in D, fading out before the resolving note."""
-    secs = 13.8
+    """Low atmospheric pad in D, fading out under the resolving note."""
+    secs = 28.0
     t = t_axis(secs)
     freqs = [73.42, 110.0, 146.83, 185.0, 220.0]
     gains = [0.9, 0.55, 0.5, 0.22, 0.18]
@@ -106,7 +106,7 @@ def pad():
     e = np.ones_like(t)
     fi = int(1.6 * SR)
     e[:fi] = np.linspace(0, 1, fi) ** 2
-    fo_start = int(12.4 * SR)
+    fo_start = int(26.4 * SR)
     e[fo_start:] = np.linspace(1, 0, len(t) - fo_start) ** 1.6
     sig = np.stack([left * e, right * e], axis=1)
     return normalise(sig, -11)
@@ -114,7 +114,7 @@ def pad():
 
 def plotter():
     """Pen-plotter scratch: bursts of fine paper noise following the strokes."""
-    secs = 1.0
+    secs = 1.75
     t = t_axis(secs)
     base = band(noise(secs), 2500, 9000)
     strokes = np.zeros_like(t)
@@ -132,7 +132,7 @@ def plotter():
 
 def spindle():
     """Spindle whir rising as the cut proceeds."""
-    secs = 1.2
+    secs = 1.55
     t = t_axis(secs)
     f = 180 + 520 * (t / secs) ** 1.4
     phase = 2 * np.pi * np.cumsum(f) / SR
@@ -166,7 +166,7 @@ def mech_click():
 
 def cnc_engrave():
     """CNC engraving: a high, slightly gritty tone with chatter."""
-    secs = 1.1
+    secs = 1.6
     t = t_axis(secs)
     f = 1150 + 40 * np.sin(2 * np.pi * 3 * t)
     phase = 2 * np.pi * np.cumsum(f) / SR
@@ -179,7 +179,7 @@ def cnc_engrave():
 
 def flex():
     """Soft panel flex: a low swell with a gentle creak."""
-    secs = 0.9
+    secs = 1.2
     t = t_axis(secs)
     swell = band(noise(secs), 80, 400) * np.sin(np.pi * t / secs) ** 2
     f = 140 - 50 * t / secs

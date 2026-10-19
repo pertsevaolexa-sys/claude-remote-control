@@ -2,7 +2,7 @@
 // and for process graphics. Orange marks anything the machine is doing.
 
 export const COLORS = {
-  paper: "#F5F4F0", // page background
+  paper: "#F4F3ED", // page background, matched to the logo animation
   label: "#FBFAF7", // labels over material
   ink: "#0E0E0E", // typography and technical linework on paper
   inkSoft: "rgba(14, 14, 14, 0.55)", // secondary linework

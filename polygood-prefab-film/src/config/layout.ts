@@ -28,17 +28,8 @@ export type Layout = {
   panel: { cx: number; cy: number; heightPx: number };
   stacks: { cx: number; cy: number; mmToPx: number; labelSize: number };
   strip: { x: number; y: number; w: number; h: number };
-  endCard: {
-    bandHeight: number;
-    logoY: number;
-    logoWidth: number;
-    ctaY: number;
-    ctaSize: number;
-    urlGap: number;
-    urlSize: number;
-    urlRow: number;
-    supportSize: number;
-  };
+  // Width of the logo lockup in the end-card animation, on screen.
+  endCard: { lockupWidthPx: number };
 };
 
 // Instagram Reels, 1080 x 1920. The platform UI covers roughly the top 220 px,
@@ -68,17 +59,7 @@ export const REELS: Layout = {
   panel: { cx: 540, cy: 960, heightPx: 920 },
   stacks: { cx: 540, cy: 760, mmToPx: 0.17, labelSize: 28 },
   strip: { x: 80, y: 1250, w: 920, h: 170 },
-  endCard: {
-    bandHeight: 640,
-    logoY: 800,
-    logoWidth: 320,
-    ctaY: 1190,
-    ctaSize: 92,
-    urlGap: 34,
-    urlSize: 40,
-    urlRow: 52,
-    supportSize: 30,
-  },
+  endCard: { lockupWidthPx: 900 },
 };
 
 // LinkedIn feed, 1080 x 1350. Little UI overlay, so tighter margins and room
@@ -105,19 +86,9 @@ export const LINKEDIN: Layout = {
     labelRow: 52,
   },
   panel: { cx: 540, cy: 805, heightPx: 760 },
-  stacks: { cx: 540, cy: 615, mmToPx: 0.16, labelSize: 26 },
-  strip: { x: 72, y: 1045, w: 936, h: 150 },
-  endCard: {
-    bandHeight: 450,
-    logoY: 560,
-    logoWidth: 270,
-    ctaY: 900,
-    ctaSize: 80,
-    urlGap: 28,
-    urlSize: 34,
-    urlRow: 46,
-    supportSize: 26,
-  },
+  stacks: { cx: 540, cy: 665, mmToPx: 0.16, labelSize: 26 },
+  strip: { x: 72, y: 1080, w: 936, h: 140 },
+  endCard: { lockupWidthPx: 880 },
 };
 
 export const LAYOUTS: Record<Variant, Layout> = {

@@ -64,16 +64,8 @@ export const Scene02CustomCutting: React.FC = () => {
   const toolFade = 1 - ramp(frame, S2.toolpathFade, EASE.standard);
   const lift = ramp(frame, S2.lift);
   const isolate = ramp(frame, S2.isolate, EASE.inOut);
-  const othersOut = ramp(
-    frame,
-    [S2.isolate[0], S2.isolate[0] + 12],
-    EASE.standard,
-  );
-  const sheetOut = ramp(
-    frame,
-    [S2.isolate[0], S2.isolate[0] + 14],
-    EASE.standard,
-  );
+  const othersOut = ramp(frame, S2.othersOut, EASE.standard);
+  const sheetOut = ramp(frame, S2.sheetOut, EASE.standard);
   const present = tabletopPresentation(layout);
   const liftOffset = px(8) * lift;
 
@@ -127,7 +119,7 @@ export const Scene02CustomCutting: React.FC = () => {
 
         {/* Part outlines slide from the drawing into the nested layout */}
         {PARTS.map((part) => {
-          const start = S2.separate[0] + part.stagger * 3;
+          const start = S2.separate[0] + part.stagger * S2.separateStagger;
           const t = ramp(frame, [start, start + S2.separateEach], EASE.inOut);
           const s = lerp(DRAW_SCALE, 1, t);
           const cut = ramp(frame, [S2.toolpath[0], S2.toolpath[1] + 2]);
