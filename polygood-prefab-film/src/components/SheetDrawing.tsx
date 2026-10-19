@@ -1,14 +1,7 @@
 import React from "react";
 import { COLORS, STROKES } from "../config/theme";
-import { Pt } from "../geometry/polyline";
-import {
-  DETAIL_STROKES,
-  DIMENSION_STROKES,
-  DRAWN_PARTS,
-  Stroke,
-  drawingPartOutline,
-  partById,
-} from "../geometry/sheet";
+import { PLOT_STROKES } from "../geometry/drawing";
+import { DIMENSION_STROKES, DRAWN_PARTS, Stroke } from "../geometry/sheet";
 import { TechnicalLine, plotProgress } from "./TechnicalLine";
 import { useWorld } from "./WorldSvg";
 
@@ -22,35 +15,6 @@ const STYLE: Record<
   dim: { width: STROKES.dimension, opacity: 0.85 },
   tick: { width: STROKES.dimension * 0.8, opacity: 0.75 },
 };
-
-// Start the tabletop plan at its top-right corner, where the opening macro
-// looks, so the first line the plotter draws is in frame.
-const startNear = (pts: Pt[], target: Pt): Pt[] => {
-  const open = pts.slice(0, -1);
-  let best = 0;
-  open.forEach((p, i) => {
-    if (
-      Math.hypot(p[0] - target[0], p[1] - target[1]) <
-      Math.hypot(open[best][0] - target[0], open[best][1] - target[1])
-    ) {
-      best = i;
-    }
-  });
-  return [...open.slice(best), ...open.slice(0, best), open[best]];
-};
-
-const tabletop = partById("tabletop");
-export const PLOT_STROKES: Stroke[] = [
-  ...DRAWN_PARTS.map((id) => {
-    const outline = drawingPartOutline(partById(id));
-    const pts =
-      id === "tabletop"
-        ? startNear(outline, [tabletop.drawing.x + 1280, tabletop.drawing.y])
-        : outline;
-    return { kind: "part" as const, pts };
-  }),
-  ...DETAIL_STROKES,
-];
 
 const StrokeSet: React.FC<{
   strokes: Stroke[];

@@ -5,3 +5,10 @@ dist
 
 # Ignore the output video from Git but not videos you import into src/.
 out
+
+# Blender: rendered frame sequences, previews and build intermediates
+public/renders3d/*/frame_*.png
+public/renders3d-preview
+blender/.scene-data.bundle.mjs
+*.blend1
+__pycache__

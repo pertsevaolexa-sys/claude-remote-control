@@ -169,7 +169,7 @@ const Slab: React.FC<{ frame: number }> = ({ frame }) => {
   );
 };
 
-const ProfileLabels: React.FC<{ frame: number }> = ({ frame }) => {
+export const ProfileLabels: React.FC<{ frame: number }> = ({ frame }) => {
   const layout = useLayout();
   const { section } = layout;
   const active = activeProfile(frame);

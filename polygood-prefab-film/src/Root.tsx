@@ -6,6 +6,7 @@ import { SCENE_LIST } from "./compositions/PolygoodFilm";
 import { LayoutProvider } from "./components/LayoutContext";
 import { LINKEDIN, REELS } from "./config/layout";
 import { DURATION_IN_FRAMES, FPS, SCENES } from "./config/timing";
+import { RealisticFilm } from "./realistic/RealisticFilm";
 import "./config/validate";
 
 export const RemotionRoot: React.FC = () => (
@@ -26,6 +27,21 @@ export const RemotionRoot: React.FC = () => (
       width={LINKEDIN.width}
       height={LINKEDIN.height}
     />
+    {/* Photoreal versions: Blender renders under the same overlays. Need
+        the frame sequences from blender/render.py in public/renders3d/. */}
+    <Folder name="Realistic">
+      {[REELS, LINKEDIN].map((layout) => (
+        <Composition
+          key={layout.variant}
+          id={`PolygoodRealistic-${layout.variant === "reels" ? "Reels" : "LinkedIn"}`}
+          component={() => <RealisticFilm variant={layout.variant} />}
+          durationInFrames={DURATION_IN_FRAMES}
+          fps={FPS}
+          width={layout.width}
+          height={layout.height}
+        />
+      ))}
+    </Folder>
     {/* Each scene on its own timeline, for editing in Studio. Persistent
         overlays (finish tag, checklist, sound) only appear in the full films. */}
     {[REELS, LINKEDIN].map((layout) => (

@@ -18,7 +18,7 @@ import { Scene06EndCard } from "../scenes/Scene06EndCard";
 
 loadFonts();
 
-const FinishTagOverlay: React.FC = () => {
+export const FinishTagOverlay: React.FC = () => {
   const frame = useCurrentFrame();
   const { finishTag } = useLayout();
   // Fully visible until 12.5 s; it then hands over to the end-card band.
