@@ -28,10 +28,19 @@ export const STROKES = {
   profileHighlight: 5,
 } as const;
 
-// Shared eases
+// Shared eases. Kept gentle: low peak speed so moves read as calm and
+// deliberate rather than snappy.
 export const EASE = {
-  out: [0.16, 1, 0.3, 1] as const, // decisive arrival
-  inOut: [0.65, 0, 0.35, 1] as const, // camera-like moves
-  in: [0.5, 0, 0.75, 0] as const, // exits
+  out: [0.33, 1, 0.68, 1] as const, // arrivals (ease-out cubic)
+  inOut: [0.45, 0, 0.55, 1] as const, // camera-like moves
+  in: [0.32, 0, 0.67, 0] as const, // exits (ease-in cubic)
   standard: [0.4, 0, 0.2, 1] as const,
+};
+
+// Durations shared by reusable animations (frames).
+export const DURATIONS = {
+  lineIn: 22, // headline line rising into its mask
+  lineOut: 13, // and leaving
+  lineStaggerIn: 3,
+  lineStaggerOut: 2,
 };

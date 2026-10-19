@@ -46,7 +46,7 @@ export const Scene01Drawing: React.FC = () => {
     easing: (t) => t ** 1.6, // slow first lines, then the plotter speeds up
   });
   const dims = ramp(frame, S1.dims, EASE.standard);
-  const shadow = ramp(frame, [S1.pullBackEnd - 10, S1.pullBackEnd + 4]);
+  const shadow = ramp(frame, [S1.pullBackEnd - 12, S1.pullBackEnd + 4]);
 
   const sweep = windowed(
     frame,

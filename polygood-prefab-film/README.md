@@ -36,8 +36,8 @@ To check frames without rendering the whole film: `node scripts/stills.mjs Polyg
 |---|---|---|---|---|
 | 01 | 0–2 s | 0–59 | Start with your drawing | Extreme macro of the material, light sweep, pull-back to the full sheet. A pen plots a plan and end elevations of a table and bench, then dimension lines and ticks (no numbers). |
 | 02 | 2–4.5 s | 60–134 | Prefabricated in-house | The drawing separates into six parts that slide into a nested layout on a 2800 × 1400 mm sheet. An orange CAM toolpath cuts each part (dashed rapids between them), the parts lift off the dimmed skeleton, and the tabletop moves to centre. Checklist appears at exactly 2.0 s; **Cut** ticks. |
-| 03 | 4.5–7 s | 135–209 | Your edge, your profile | The tabletop turns and tips (CSS 3D) until only its end face shows, which becomes a 2D cross-section. The camera pushes in on the edge, which morphs square → bullnose → chamfer → bevelled, with the active label and an orange contour. Thickness callout. **Edged** ticks. A toolpath sweeps across the frame. |
-| 04 | 7–10 s | 210–299 | Curved without thermoforming | The gantry returns to reveal a second panel. A toolpath engraves a staggered pattern of capsule cut-outs; the plugs drop away; the panel bends into a curved partition built from 40 strips in 3D, with a floor shadow tracing the curve. **Machined** and **Curved** tick. |
+| 03 | 4.5–7 s | 135–209 | Your edge, your profile | The tabletop turns and tips (CSS 3D) until only its end face shows, which becomes a 2D cross-section. The camera pushes in on the edge, which morphs square → bullnose → chamfer → bevelled, with the active label and an orange contour. Thickness callout. **Edged** ticks. |
+| 04 | 7–10 s | 210–299 | Curved without thermoforming | A toolpath crosses the frame, wiping the edge close-up away to reveal a second panel. The toolpath engraves a staggered pattern of capsule cut-outs; the plugs drop away; the panel bends into a curved partition built from 40 strips in 3D, with a floor shadow tracing the curve. **Machined** and **Curved** tick. |
 | 05 | 10–12.5 s | 300–374 | Lighter to ship, less waste | Isometric delivery stacks: full sheets beside the shorter stack of finished parts (dry tap as they settle). Offcuts move away, break into chips and re-form as a strip of new panel material. |
 | 06 | 12.5–15 s | 375–449 | Send your drawing | The new material rises into the top band (finish identifier inside it), then the logo, call to action and URL. Static for the final second; silent for the final 0.5 s. |
 
@@ -48,7 +48,7 @@ The finish identifier sits bottom-left from frame 0 until 12.5 s, then moves int
 - **Type:** PP Neue Montreal (Book for headlines and labels, Bold for the PS code), black on off-white `#F5F4F0`. Sentence case, five words or fewer per headline, set line by line behind masks. If the font files are missing, `config/typography.ts` logs a warning and falls back to Inter / Helvetica Neue instead of failing the render.
 - **Colour:** the material keeps its own colours. Orange `#FF5A1F` marks anything the machine does (toolpaths, tool head, active profile, checkmarks). The drawing is plotted in white on the material and dimensioned in black on paper.
 - **Grid:** 80 px side margins on Reels (72 on LinkedIn). On Reels, key content stays between y = 250 and y = 1500 to clear the platform UI.
-- **Motion:** every value is computed from the frame (`interpolate`, eased with Béziers). There are no CSS transitions and no randomness beyond seeded `random()`, so any frame renders the same way every time.
+- **Motion:** calm rather than snappy. Eases in `config/theme.ts` keep peak speed low (ease-in-out for camera moves, ease-out cubic for arrivals), and headline lines take 22 frames to rise and 13 to leave. Hero objects fill most of the stage. Every value is computed from the frame (`interpolate`, eased with Béziers). There are no CSS transitions and no randomness beyond seeded `random()`, so any frame renders the same way every time.
 
 ## Project structure
 
@@ -112,7 +112,7 @@ All sound is synthesised by `scripts/generate_audio.py` (numpy only): pad, pen-p
 
 - Cue times are derived from the scene beats in `timing.ts`, so they move with the picture.
 - Loading the project fails if any cue runs into the final 0.5 s (frame 435 onwards).
-- Rendered mix: −22.9 LUFS integrated, −6.5 dBFS true peak, digital silence from 14.5 s.
+- Rendered mix: −23.0 LUFS integrated, −6.7 dBFS true peak, digital silence from 14.5 s.
 
 **Voice-over (optional, not recorded).** Script: *Start with your drawing. We prefabricate in-house: cut to shape, edged in the profile you need, CNC milled, engraved, or cut to bend without thermoforming. Lighter to ship. Offcuts become new panels. Send your drawing.* Record it confident and understated, keep it inside 14.5 s, save it as `public/audio/voiceover.wav` and set `VOICEOVER` in `config/audio.ts`. Lower the pad volume when it's in.
 
@@ -130,7 +130,7 @@ On the rendered files I confirmed the following:
 - Both are H.264 + AAC, 450 frames at 30 fps, and 15.0 s long.
 - Frames 420 and 449 are identical apart from encoding noise (PSNR 69 dB).
 - The audio from 14.5 s is at −91 dB.
-- Scene boundaries are continuous: the S2→S3 tabletop handover and the S3→S4 toolpath sweep line up, and the S5 strip and S6 band are the same window onto the sheet.
+- Scene boundaries are continuous: the S2→S3 tabletop handover lines up, S4 opens on S3's last frame and wipes it away, and the S5 strip and S6 band are the same window onto the sheet.
 
 ## Missing assets and claims to confirm
 

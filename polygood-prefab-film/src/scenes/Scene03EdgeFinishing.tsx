@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  AbsoluteFill,
-  interpolate,
-  interpolateColors,
-  useCurrentFrame,
-  useVideoConfig,
-} from "remotion";
-import { bezier, ramp } from "../anim";
+import { AbsoluteFill, interpolateColors, useCurrentFrame } from "remotion";
+import { ramp } from "../anim";
 import { CLAIMS } from "../config/assets";
 import { EDGE_PROFILES, HEADLINES, LINKEDIN_SPECS } from "../config/copy";
 import { S3 } from "../config/timing";
@@ -16,7 +10,6 @@ import { Headline } from "../components/Headline";
 import { useLayout } from "../components/LayoutContext";
 import { MaterialPyramid, SheetRegion } from "../components/MaterialTexture";
 import { TechnicalLine } from "../components/TechnicalLine";
-import { ToolHead } from "../components/Toolpath";
 import { WorldSvg } from "../components/WorldSvg";
 import { Camera, toScreen, zoomTowards } from "../geometry/camera";
 import { Pt, lerp, lerpPt, toPath } from "../geometry/polyline";
@@ -68,7 +61,7 @@ const Slab: React.FC<{ frame: number }> = ({ frame }) => {
   // Push back so the end face finishes exactly in the picture plane, where it
   // matches the 2D section pixel for pixel.
   const z = (s * L * Math.sin(rz * rad) * Math.sin(rx * rad)) / 2;
-  const shadow = 1 - ramp(frame, [S3.rotate[0], S3.rotate[0] + 8]);
+  const shadow = 1 - ramp(frame, [S3.rotate[0], S3.rotate[0] + 12]);
 
   const face = (
     w: number,
@@ -192,11 +185,11 @@ const ProfileLabels: React.FC<{ frame: number }> = ({ frame }) => {
       {EDGE_PROFILES.map((label, i) => {
         const appear = ramp(frame, [
           S3.zoom[0] + i * 2,
-          S3.zoom[0] + i * 2 + 12,
+          S3.zoom[0] + i * 2 + 14,
         ]);
         const on = i === active ? 1 : 0;
         const mid = (S3.morphs[i][0] + S3.morphs[i][1]) / 2;
-        const lit = on * ramp(frame, [mid, mid + 4]);
+        const lit = on * ramp(frame, [mid, mid + 6]);
         return (
           <div
             key={label}
@@ -244,9 +237,10 @@ const ProfileLabels: React.FC<{ frame: number }> = ({ frame }) => {
   );
 };
 
-export const Scene03EdgeFinishing: React.FC = () => {
-  const frame = useCurrentFrame();
-  const { width } = useVideoConfig();
+// The 2D close-up of the edge: cross-section, thickness callout and profile
+// labels, at a given scene-03 frame. Scene 04 draws its last frame while
+// wiping it away.
+export const EdgeCloseUp: React.FC<{ frame: number }> = ({ frame }) => {
   const layout = useLayout();
   const { stage, section } = layout;
 
@@ -270,20 +264,121 @@ export const Scene03EdgeFinishing: React.FC = () => {
 
   const contour = morphedContour(frame);
   const polygon = sectionPolygon(contour, SLAB_W);
-  const highlight = ramp(frame, [S3.morphs[0][0], S3.morphs[0][0] + 6]);
+  const highlight = ramp(frame, [S3.morphs[0][0], S3.morphs[0][0] + 8]);
   const stock = ramp(frame, [S3.morphs[0][0], S3.morphs[0][1]]);
   const thickness = ramp(frame, S3.thickness);
 
-  // Toolpath sweep that clears the frame for scene 04.
-  const sweepX = interpolate(frame, S3.sweep, [-60, width + 60], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: bezier(EASE.inOut),
-  });
-  const sweeping = frame >= S3.sweep[0];
+  const dimX = 7.5;
+  const labelPos = toScreen(camera, stage.cx, stage.cy, [dimX + 3.5, T / 2]);
 
-  const dimX = 9.5;
-  const labelPos = toScreen(camera, stage.cx, stage.cy, [dimX + 4, T / 2]);
+  return (
+    <AbsoluteFill>
+      {handover > 0 ? (
+        <AbsoluteFill style={{ opacity: handover }}>
+          <WorldSvg camera={camera} anchor={stage}>
+            <defs>
+              <clipPath id="s3-section">
+                <path d={toPath(polygon, true)} />
+              </clipPath>
+            </defs>
+            <g clipPath="url(#s3-section)">
+              {/* Same chips as the sheet; the macro level sits at the edge */}
+              <g transform="translate(-1520 -161)">
+                <MaterialPyramid k={camera.k} idPrefix="s3" />
+              </g>
+            </g>
+            <path
+              d={toPath(polygon, true)}
+              fill="none"
+              stroke={COLORS.ink}
+              strokeWidth={px(STROKES.sectionOutline)}
+            />
+            {/* The raw sawn edge, for reference */}
+            <TechnicalLine
+              pts={[
+                [-T * 1.3, 0],
+                [0, 0],
+                [0, T],
+                [-T * 1.3, T],
+              ]}
+              color={COLORS.ink}
+              width={1.2}
+              dash={[6, 6]}
+              opacity={stock * 0.45}
+              cap="butt"
+            />
+            <TechnicalLine
+              pts={contour}
+              color={COLORS.accent}
+              width={STROKES.profileHighlight}
+              opacity={highlight}
+            />
+            {/* Thickness dimension */}
+            <g opacity={thickness}>
+              <TechnicalLine
+                pts={[
+                  [1.5, 0],
+                  [dimX + 2.5, 0],
+                ]}
+                color={COLORS.ink}
+                width={1.2}
+              />
+              <TechnicalLine
+                pts={[
+                  [1.5, T],
+                  [dimX + 2.5, T],
+                ]}
+                color={COLORS.ink}
+                width={1.2}
+              />
+              <TechnicalLine
+                pts={[
+                  [dimX, 0],
+                  [dimX, T],
+                ]}
+                progress={thickness}
+                color={COLORS.ink}
+                width={1.4}
+              />
+              {[0, T].map((y) => (
+                <TechnicalLine
+                  key={y}
+                  pts={[
+                    [dimX - px(9), y + px(9)],
+                    [dimX + px(9), y - px(9)],
+                  ]}
+                  color={COLORS.ink}
+                  width={1.4}
+                />
+              ))}
+            </g>
+          </WorldSvg>
+          <div
+            style={{
+              position: "absolute",
+              left: labelPos[0],
+              top: labelPos[1],
+              translate: "0 -50%",
+              fontFamily: fontStack,
+              fontSize: section.labelSize * 0.72,
+              letterSpacing: TYPE.label.tracking,
+              color: COLORS.ink,
+              whiteSpace: "nowrap",
+              opacity: thickness,
+            }}
+          >
+            {CLAIMS.thicknessLabel}
+          </div>
+        </AbsoluteFill>
+      ) : null}
+      <ProfileLabels frame={frame} />
+    </AbsoluteFill>
+  );
+};
+
+export const Scene03EdgeFinishing: React.FC = () => {
+  const frame = useCurrentFrame();
+  const handover = ramp(frame, S3.handover, EASE.standard);
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.paper }}>
@@ -292,133 +387,7 @@ export const Scene03EdgeFinishing: React.FC = () => {
           <Slab frame={frame} />
         </AbsoluteFill>
       ) : null}
-
-      <AbsoluteFill
-        style={{
-          clipPath: sweeping
-            ? `inset(0 0 0 ${Math.max(0, sweepX)}px)`
-            : undefined,
-        }}
-      >
-        {handover > 0 ? (
-          <AbsoluteFill style={{ opacity: handover }}>
-            <WorldSvg camera={camera} anchor={stage}>
-              <defs>
-                <clipPath id="s3-section">
-                  <path d={toPath(polygon, true)} />
-                </clipPath>
-              </defs>
-              <g clipPath="url(#s3-section)">
-                {/* Same chips as the sheet; the macro level sits at the edge */}
-                <g transform="translate(-1520 -161)">
-                  <MaterialPyramid k={camera.k} idPrefix="s3" />
-                </g>
-              </g>
-              <path
-                d={toPath(polygon, true)}
-                fill="none"
-                stroke={COLORS.ink}
-                strokeWidth={px(STROKES.sectionOutline)}
-              />
-              {/* The raw sawn edge, for reference */}
-              <TechnicalLine
-                pts={[
-                  [-T * 1.3, 0],
-                  [0, 0],
-                  [0, T],
-                  [-T * 1.3, T],
-                ]}
-                color={COLORS.ink}
-                width={1.2}
-                dash={[6, 6]}
-                opacity={stock * 0.45}
-                cap="butt"
-              />
-              <TechnicalLine
-                pts={contour}
-                color={COLORS.accent}
-                width={STROKES.profileHighlight}
-                opacity={highlight}
-              />
-              {/* Thickness dimension */}
-              <g opacity={thickness}>
-                <TechnicalLine
-                  pts={[
-                    [1.5, 0],
-                    [dimX + 2.5, 0],
-                  ]}
-                  color={COLORS.ink}
-                  width={1.2}
-                />
-                <TechnicalLine
-                  pts={[
-                    [1.5, T],
-                    [dimX + 2.5, T],
-                  ]}
-                  color={COLORS.ink}
-                  width={1.2}
-                />
-                <TechnicalLine
-                  pts={[
-                    [dimX, 0],
-                    [dimX, T],
-                  ]}
-                  progress={thickness}
-                  color={COLORS.ink}
-                  width={1.4}
-                />
-                {[0, T].map((y) => (
-                  <TechnicalLine
-                    key={y}
-                    pts={[
-                      [dimX - px(9), y + px(9)],
-                      [dimX + px(9), y - px(9)],
-                    ]}
-                    color={COLORS.ink}
-                    width={1.4}
-                  />
-                ))}
-              </g>
-            </WorldSvg>
-            <div
-              style={{
-                position: "absolute",
-                left: labelPos[0],
-                top: labelPos[1],
-                translate: "0 -50%",
-                fontFamily: fontStack,
-                fontSize: section.labelSize * 0.72,
-                letterSpacing: TYPE.label.tracking,
-                color: COLORS.ink,
-                whiteSpace: "nowrap",
-                opacity: thickness,
-              }}
-            >
-              {CLAIMS.thicknessLabel}
-            </div>
-          </AbsoluteFill>
-        ) : null}
-        <ProfileLabels frame={frame} />
-      </AbsoluteFill>
-
-      {sweeping ? (
-        <svg
-          width={width}
-          height={layout.height}
-          style={{ position: "absolute", inset: 0 }}
-        >
-          <line
-            x1={-60}
-            y1={section.cy}
-            x2={sweepX}
-            y2={section.cy}
-            stroke={COLORS.accent}
-            strokeWidth={STROKES.toolpath}
-          />
-          <ToolHead at={[sweepX, section.cy]} />
-        </svg>
-      ) : null}
-
+      <EdgeCloseUp frame={frame} />
       <Headline
         lines={HEADLINES.edges}
         inFrame={S3.headlineIn}

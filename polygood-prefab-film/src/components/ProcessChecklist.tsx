@@ -22,7 +22,7 @@ export const ProcessChecklist: React.FC = () => {
   const box = Math.round(checklist.size * 0.82);
   const out = ramp(
     frame,
-    [CHECKLIST.disappear, CHECKLIST.disappear + 10],
+    [CHECKLIST.disappear, CHECKLIST.disappear + 14],
     EASE.in,
   );
   if (frame < CHECKLIST.appear || out >= 1) return null;
@@ -41,10 +41,10 @@ export const ProcessChecklist: React.FC = () => {
       {CHECKLIST_ITEMS.map((item, i) => {
         const appear = ramp(frame, [
           CHECKLIST.appear + i * 2,
-          CHECKLIST.appear + i * 2 + 12,
+          CHECKLIST.appear + i * 2 + 14,
         ]);
-        const fill = ramp(frame, [CHECK_AT[i], CHECK_AT[i] + 5]);
-        const tick = ramp(frame, [CHECK_AT[i] + 2, CHECK_AT[i] + 9]);
+        const fill = ramp(frame, [CHECK_AT[i], CHECK_AT[i] + 7]);
+        const tick = ramp(frame, [CHECK_AT[i] + 2, CHECK_AT[i] + 12]);
         const pulse =
           ramp(frame, [CHECK_AT[i], CHECK_AT[i] + 4]) *
           (1 - ramp(frame, [CHECK_AT[i] + 4, CHECK_AT[i] + 14]));

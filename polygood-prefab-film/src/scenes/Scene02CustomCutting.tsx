@@ -66,12 +66,12 @@ export const Scene02CustomCutting: React.FC = () => {
   const isolate = ramp(frame, S2.isolate, EASE.inOut);
   const othersOut = ramp(
     frame,
-    [S2.isolate[0], S2.isolate[0] + 8],
+    [S2.isolate[0], S2.isolate[0] + 12],
     EASE.standard,
   );
   const sheetOut = ramp(
     frame,
-    [S2.isolate[0], S2.isolate[0] + 10],
+    [S2.isolate[0], S2.isolate[0] + 14],
     EASE.standard,
   );
   const present = tabletopPresentation(layout);
@@ -128,7 +128,7 @@ export const Scene02CustomCutting: React.FC = () => {
         {/* Part outlines slide from the drawing into the nested layout */}
         {PARTS.map((part) => {
           const start = S2.separate[0] + part.stagger * 3;
-          const t = ramp(frame, [start, start + 14], EASE.inOut);
+          const t = ramp(frame, [start, start + S2.separateEach], EASE.inOut);
           const s = lerp(DRAW_SCALE, 1, t);
           const cut = ramp(frame, [S2.toolpath[0], S2.toolpath[1] + 2]);
           const done = tool.progress[cutSegmentIndex(part)] >= 1;

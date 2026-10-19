@@ -93,24 +93,24 @@ const SHEETS: Slab[] = Array.from({ length: SHEET_COUNT }, (_, i) => ({
 }));
 
 const PARTS_STACK: Slab[] = [
-  partSlab("tabletop", [0, 0], 0, [S5.parts[0], S5.parts[0] + 8]),
-  partSlab("tableLegA", [0, 50], 1, [S5.parts[0] + 4, S5.parts[0] + 12]),
-  partSlab("tableLegB", [560, 50], 1, [S5.parts[0] + 6, S5.parts[0] + 14]),
+  partSlab("tabletop", [0, 0], 0, [S5.parts[0], S5.parts[0] + 10]),
+  partSlab("tableLegA", [0, 50], 1, [S5.parts[0] + 4, S5.parts[0] + 14]),
+  partSlab("tableLegB", [560, 50], 1, [S5.parts[0] + 6, S5.parts[0] + 16]),
   partSlab(
     "benchLegA",
     [1140, 40],
     1,
-    [S5.parts[0] + 8, S5.parts[0] + 16],
+    [S5.parts[0] + 8, S5.parts[0] + 18],
     true,
   ),
   partSlab(
     "benchLegB",
     [1140, 420],
     1,
-    [S5.parts[0] + 10, S5.parts[0] + 18],
+    [S5.parts[0] + 10, S5.parts[0] + 20],
     true,
   ),
-  partSlab("benchSeat", [0, 220], 2, [S5.parts[1] - 8, S5.parts[1]]),
+  partSlab("benchSeat", [0, 220], 2, [S5.parts[1] - 10, S5.parts[1]]),
 ];
 
 // Offcuts laid out in front of the parts stack before they move away.
@@ -118,7 +118,7 @@ const partsFrontScreen =
   (PARTS_ORIGIN[0] + 1600 + PARTS_ORIGIN[1] + 800) * 0.5 * ISO_S;
 const partsMidX =
   (PARTS_ORIGIN[0] + 800 - PARTS_ORIGIN[1] - 400) * COS30 * ISO_S;
-const offcutCentre = planFor(partsMidX + 10, partsFrontScreen + 175, ISO_S);
+const offcutCentre = planFor(partsMidX + 10, partsFrontScreen + 235, ISO_S);
 const OFFCUT_ORIGIN: Pt = [offcutCentre[0] - 700, offcutCentre[1] - 450];
 const OFFCUT_LAYOUT: Record<string, Pt> = {
   strip: [0, 0],
@@ -224,7 +224,7 @@ export const Scene05Benefits: React.FC = () => {
 
   const stacksOut = ramp(
     frame,
-    [S5.labelsOut[0] - 2, S5.labelsOut[1] + 2],
+    [S5.labelsOut[0] - 4, S5.labelsOut[1]],
     EASE.in,
   );
   const labelsOut = ramp(frame, S5.labelsOut, EASE.in);
@@ -238,7 +238,7 @@ export const Scene05Benefits: React.FC = () => {
   const offIn = ramp(frame, S5.offcutsIn, EASE.out);
   const away = ramp(frame, S5.offcutsAway, EASE.inOut);
   const offShift: Pt = [-300 * away, 1300 * away];
-  const offFade = 1 - ramp(frame, [S5.granules[0], S5.granules[0] + 6]);
+  const offFade = 1 - ramp(frame, [S5.granules[0], S5.granules[0] + 8]);
 
   // Screen bounds of the offcuts once they have moved away: where chips start.
   const offPts = OFFCUT_SLABS.flatMap((o) =>
@@ -251,7 +251,7 @@ export const Scene05Benefits: React.FC = () => {
 
   const panelIn = ramp(frame, S5.newPanel, EASE.inOut);
   const stripLabel =
-    ramp(frame, [S5.granules[0] + 4, S5.granules[0] + 14]) * (1 - labelsOut);
+    ramp(frame, [S5.granules[0] + 4, S5.granules[0] + 16]) * (1 - labelsOut);
 
   const label = (
     text: string,
@@ -333,7 +333,7 @@ export const Scene05Benefits: React.FC = () => {
             key={slab.key}
             slab={slab}
             iso={iso}
-            dz={(1 - offIn) * 300}
+            dz={(1 - offIn) * 60}
             opacity={offIn * offFade}
             shift={offShift}
           />
@@ -380,8 +380,9 @@ export const Scene05Benefits: React.FC = () => {
       >
         {Array.from({ length: GRANULES }, (_, i) => {
           const r = (n: number) => random(`granule-${i}-${n}`);
-          const start = S5.granules[0] + r(1) * 9;
-          const dur = 11 + r(2) * 6;
+          // Every chip has landed before the scene ends.
+          const start = S5.granules[0] + r(1) * 8;
+          const dur = 12 + r(2) * 6;
           const t = interpolate(frame, [start, start + dur], [0, 1], {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",

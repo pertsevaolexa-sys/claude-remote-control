@@ -1,7 +1,7 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { ramp } from "../anim";
-import { COLORS, EASE } from "../config/theme";
+import { COLORS, DURATIONS, EASE } from "../config/theme";
 import { TYPE, fontStack } from "../config/typography";
 import { useLayout } from "./LayoutContext";
 
@@ -37,21 +37,24 @@ export const Headline: React.FC<{
   const pad = fontSize * 0.22; // room for descenders inside the mask
   const labelPadX = label ? fontSize * 0.2 : 0;
 
+  const { lineIn, lineOut, lineStaggerIn, lineStaggerOut } = DURATIONS;
   const lineOffset = (i: number) => {
-    const enter = ramp(frame, [inFrame + i * 3, inFrame + i * 3 + 16]);
+    const start = inFrame + i * lineStaggerIn;
+    const enter = ramp(frame, [start, start + lineIn]);
+    const leave = (outFrame ?? 0) + i * lineStaggerOut;
     const exit =
       outFrame === undefined
         ? 0
-        : ramp(frame, [outFrame + i * 2, outFrame + i * 2 + 9], EASE.in);
+        : ramp(frame, [leave, leave + lineOut], EASE.in);
     // 130% clears the mask, which is taller than the line by the descender pad.
     return (1 - enter) * 130 - exit * 130;
   };
 
-  const specIn = ramp(frame, [inFrame + 8, inFrame + 22]);
+  const specIn = ramp(frame, [inFrame + 10, inFrame + 30]);
   const specOut =
     outFrame === undefined
       ? 0
-      : ramp(frame, [outFrame - 2, outFrame + 6], EASE.in);
+      : ramp(frame, [outFrame - 2, outFrame + 10], EASE.in);
 
   return (
     <div

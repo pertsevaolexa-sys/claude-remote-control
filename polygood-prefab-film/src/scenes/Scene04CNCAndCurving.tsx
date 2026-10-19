@@ -7,7 +7,7 @@ import {
 } from "remotion";
 import { bezier, ramp } from "../anim";
 import { HEADLINES, LINKEDIN_SPECS } from "../config/copy";
-import { S4 } from "../config/timing";
+import { S4, SCENES } from "../config/timing";
 import { COLORS, EASE, STROKES } from "../config/theme";
 import { Headline } from "../components/Headline";
 import { useLayout } from "../components/LayoutContext";
@@ -15,6 +15,7 @@ import { SheetImage } from "../components/MaterialTexture";
 import { TechnicalLine } from "../components/TechnicalLine";
 import { ToolHead, toolpathState } from "../components/Toolpath";
 import { WorldSvg } from "../components/WorldSvg";
+import { EdgeCloseUp } from "./Scene03EdgeFinishing";
 import {
   CUTOUTS,
   PANEL,
@@ -35,8 +36,12 @@ const CUT_INDEX = CUTOUTS.map((c) =>
   PANEL_TOOLPATH.findIndex((s) => s.type === "cut" && s.pts === c.outline),
 );
 
+const PLUG_DROP = 10; // frames for each cut-out plug to fall away
+
+// Plugs leave one after another and are all gone before the bend starts.
 const removalStart = (i: number) =>
-  S4.removal[0] + (i / CUTOUTS.length) * (S4.removal[1] - S4.removal[0] - 8);
+  S4.removal[0] +
+  (i / CUTOUTS.length) * (S4.removal[1] - S4.removal[0] - PLUG_DROP);
 
 const PanelTexture: React.FC = () => (
   <g transform={TEXTURE_TRANSFORM}>
@@ -109,7 +114,11 @@ const FlatPanel: React.FC<{ frame: number }> = ({ frame }) => {
       {state.head ? <ToolHead at={state.head.p} /> : null}
       {/* Cut-out plugs drop away, one after another */}
       {CUTOUTS.map((c, i) => {
-        const d = ramp(frame, [removalStart(i), removalStart(i) + 9], EASE.in);
+        const d = ramp(
+          frame,
+          [removalStart(i), removalStart(i) + PLUG_DROP],
+          EASE.in,
+        );
         if (frame < removalStart(i) || d >= 1) return null;
         return (
           <g
@@ -239,6 +248,10 @@ const BentPanel: React.FC<{ bend: number; k: number }> = ({ bend, k }) => {
         inset: 0,
         perspective: 2600,
         perspectiveOrigin: `${panel.cx}px ${panel.cy}px`,
+        // Grows a little as it bends, so it keeps its presence while its
+        // width shrinks to the chord of the curve.
+        scale: 1 + 0.06 * bend,
+        transformOrigin: `${panel.cx}px ${panel.cy}px`,
       }}
     >
       <div
@@ -322,13 +335,14 @@ export const Scene04CNCAndCurving: React.FC = () => {
   const k = panel.heightPx / PANEL.h;
   const camera = { x: PANEL.w / 2, y: PANEL.h / 2, k };
 
-  // The gantry returns from S3's sweep, revealing the panel behind it.
-  const gantryX = interpolate(frame, S4.gantry, [width + 60, -60], {
+  // One toolpath crosses the frame: behind it the new panel, ahead of it the
+  // last frame of scene 03's edge close-up.
+  const sweepX = interpolate(frame, S4.sweep, [-60, width + 60], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: bezier(EASE.inOut),
   });
-  const gantryOn = frame <= S4.gantry[1];
+  const sweeping = frame <= S4.sweep[1];
   const bend = ramp(frame, S4.bend, EASE.inOut);
   const exit = ramp(frame, S4.exit, EASE.in);
 
@@ -336,8 +350,8 @@ export const Scene04CNCAndCurving: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: COLORS.paper }}>
       <AbsoluteFill
         style={{
-          clipPath: gantryOn
-            ? `inset(0 0 0 ${Math.max(0, gantryX)}px)`
+          clipPath: sweeping
+            ? `inset(0 ${Math.max(0, width - sweepX)}px 0 0)`
             : undefined,
           // Slides out of frame rather than fading, handing the motion to the
           // delivery stacks arriving from the right in scene 05.
@@ -355,22 +369,38 @@ export const Scene04CNCAndCurving: React.FC = () => {
         )}
       </AbsoluteFill>
 
-      {gantryOn ? (
-        <svg
-          width={width}
-          height={layout.height}
-          style={{ position: "absolute", inset: 0 }}
-        >
-          <line
-            x1={-60}
-            y1={section.cy}
-            x2={gantryX}
-            y2={section.cy}
-            stroke={COLORS.accent}
-            strokeWidth={STROKES.toolpath}
-          />
-          <ToolHead at={[gantryX, section.cy]} />
-        </svg>
+      {sweeping ? (
+        <>
+          <AbsoluteFill
+            style={{ clipPath: `inset(0 0 0 ${Math.max(0, sweepX)}px)` }}
+          >
+            <EdgeCloseUp frame={SCENES.edges.durationInFrames - 1} />
+          </AbsoluteFill>
+          <svg
+            width={width}
+            height={layout.height}
+            style={{ position: "absolute", inset: 0 }}
+          >
+            <line
+              x1={sweepX}
+              y1={0}
+              x2={sweepX}
+              y2={layout.height}
+              stroke={COLORS.accent}
+              strokeWidth={1.5}
+              opacity={0.55}
+            />
+            <line
+              x1={sweepX - 140}
+              y1={section.cy}
+              x2={sweepX}
+              y2={section.cy}
+              stroke={COLORS.accent}
+              strokeWidth={STROKES.toolpath}
+            />
+            <ToolHead at={[sweepX, section.cy]} />
+          </svg>
+        </>
       ) : null}
 
       <Headline
