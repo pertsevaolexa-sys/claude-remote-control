@@ -151,6 +151,7 @@ def anchors(sc, film, layout):
             rec["parts"] = project(sc, cam, root @ Vector((pb.x + 0.2, pb.y - 0.5, 0.0)), W, H)
             nx, ny = film.new_panel_origin
             rec["strip"] = project(sc, cam, root @ Vector((nx, ny - 0.22, 0.019)), W, H)  # front-left corner
+            rec["stripEnd"] = project(sc, cam, root @ Vector((nx + 2.6, ny - 0.22, 0.019)), W, H)  # front-right corner
         out[f] = rec
     return out
 

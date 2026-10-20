@@ -142,6 +142,23 @@ const Footage3D: React.FC<{ variant: Variant }> = ({ variant }) => {
   const { width, height } = layout;
   if (frame >= SCENES.endCard.from) return null;
 
+  // Scene 05 clears to paper by holding its last frame before the 3D fade
+  // and dissolving it here: part-transparent slabs in Cycles show their
+  // insides, which reads as a glitch.
+  const l5 = frame - SCENES.benefits.from;
+  const clearFrom = S5.labelsOut[0] - 4;
+  if (l5 >= clearFrom) {
+    const out = ramp(l5, [clearFrom, S5.stripOut[1]], EASE.in);
+    return (
+      <AbsoluteFill style={{ opacity: 1 - out }}>
+        <Footage
+          variant={variant}
+          frame={SCENES.benefits.from + clearFrom - 1}
+        />
+      </AbsoluteFill>
+    );
+  }
+
   const l4 = frame - SCENES.cnc.from;
   if (l4 < 0 || l4 > S4.sweep[1])
     return <Footage variant={variant} frame={frame} />;
@@ -206,7 +223,7 @@ const StackLabels: React.FC<{ variant: Variant }> = ({ variant }) => {
     at: Pt | undefined,
     o: number,
     dy: number,
-    align: "center" | "left" = "center",
+    align: "center" | "right" = "center",
   ) =>
     at && o > 0 ? (
       <div
@@ -214,7 +231,7 @@ const StackLabels: React.FC<{ variant: Variant }> = ({ variant }) => {
           position: "absolute",
           left: at[0],
           top: at[1] + dy,
-          translate: align === "center" ? "-50% 0" : undefined,
+          translate: align === "center" ? "-50% 0" : "-100% 0",
           fontFamily: fontStack,
           fontSize: stacks.labelSize,
           letterSpacing: TYPE.label.tracking,
@@ -242,10 +259,10 @@ const StackLabels: React.FC<{ variant: Variant }> = ({ variant }) => {
       )}
       {label(
         STACK_LABELS.offcuts,
-        a.strip,
+        a.stripEnd,
         ramp(frame, [S5.granules[0] + 6, S5.granules[0] + 22]) * out,
-        stacks.labelSize * 0.7,
-        "left",
+        stacks.labelSize * 0.6,
+        "right",
       )}
     </AbsoluteFill>
   );
@@ -300,6 +317,7 @@ export const RealisticFilm: React.FC<{ variant: Variant }> = ({ variant }) => (
           inFrame={S4.headlineIn}
           outFrame={S4.headlineOut}
           spec={LINKEDIN_SPECS.cnc}
+          label
         />
       </Sequence>
       <Sequence name="05 Lighter to ship, less waste" {...scene("benefits")}>

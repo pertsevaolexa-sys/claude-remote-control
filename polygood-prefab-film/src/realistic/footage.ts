@@ -19,6 +19,7 @@ export type Anchors = Partial<{
   sheets: Pt;
   parts: Pt;
   strip: Pt;
+  stripEnd: Pt;
 }>;
 
 type AnchorFile = {

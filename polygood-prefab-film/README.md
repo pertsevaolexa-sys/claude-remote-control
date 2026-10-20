@@ -11,7 +11,7 @@ A 30-second motion piece on Polygood's in-house prefabrication, from a technical
 
 The original brief asked for 15 s. The film was later lengthened to 30 s so every headline and label can be read, and the end card was replaced by the supplied logo animation, played as is.
 
-Rendered previews and storyboard sheets are in [`renders/`](renders/).
+Rendered films (2D and realistic) and storyboard sheets are in [`renders/`](renders/).
 
 > **Placeholders.** No material scan, renders, reference video or audio were supplied (only the fonts, the logo and the logo animation). The material is a procedural terrazzo-style texture and the finish identifier reads `PS 000 · Placeholder finish`. Both are clearly marked and are swapped in one config file (see [Replacing assets](#replacing-assets)). Don't publish the film until they are replaced.
 
@@ -72,6 +72,11 @@ Rendering:
 - **Not committed:** the PNG sequences (about 2 GB) are gitignored. The `.blend` files are committed, so the scene can be opened, inspected or re-lit in Blender 5.x.
 
 Change the scene in `blender/pgscene/` and rebuild, rather than editing the `.blend` by hand: `build.py` also regenerates the anchors the overlays are placed from.
+
+Two things the composite does instead of the 3D:
+
+- **End of scene 05:** the film holds the last 3D frame before the stacks clear and dissolves it to paper. Partly transparent slabs in Cycles show their insides as they fade.
+- **Scene 04 headline:** set on paper labels, as in scene 01, because the partition rises behind it as it stands up.
 
 ## Storyboard
 
@@ -172,6 +177,7 @@ On the rendered files I confirmed the following:
 - Both are H.264 + AAC, 900 frames at 30 fps, and 30.0 s long.
 - Frames 870 and 899 are visually identical (PSNR 53–55 dB). What difference there is comes from a faint easing tail in the supplied clip itself.
 - The audio from 29.5 s is at −91 dB.
+- The realistic Reels film checks out the same way: 900 frames, 30.0 s, −23.3 LUFS, −91 dB from 29.5 s, and frames 870 and 899 at a PSNR of 55 dB.
 - Scene boundaries are continuous: the S2→S3 tabletop handover lines up, S4 opens on S3's last frame and wipes it away, and S5 clears to paper before the logo clip, which opens on the same paper colour.
 
 ## Missing assets and claims to confirm
