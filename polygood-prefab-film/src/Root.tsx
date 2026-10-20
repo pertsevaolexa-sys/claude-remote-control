@@ -27,8 +27,9 @@ export const RemotionRoot: React.FC = () => (
       width={LINKEDIN.width}
       height={LINKEDIN.height}
     />
-    {/* Photoreal versions: Blender renders under the same overlays. Need
-        the frame sequences from blender/render.py in public/renders3d/. */}
+    {/* Photoreal versions: Blender renders under the headlines and
+        checklist, without the finish tag or sound. Need the frame sequences
+        from blender/render.py in public/renders3d/. */}
     <Folder name="Realistic">
       {[REELS, LINKEDIN].map((layout) => (
         <Composition

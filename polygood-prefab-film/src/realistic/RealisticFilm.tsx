@@ -7,18 +7,16 @@ import {
   useCurrentFrame,
 } from "remotion";
 import { bezier, ramp } from "../anim";
-import { Soundtrack } from "../audio/Soundtrack";
 import { LayoutProvider, useLayout } from "../components/LayoutContext";
 import { Headline } from "../components/Headline";
 import { ProcessChecklist } from "../components/ProcessChecklist";
 import { TechnicalLine } from "../components/TechnicalLine";
 import { ToolHead } from "../components/Toolpath";
-import { FinishTagOverlay } from "../compositions/PolygoodFilm";
 import { CLAIMS } from "../config/assets";
 import { HEADLINES, LINKEDIN_SPECS, STACK_LABELS } from "../config/copy";
 import { LAYOUTS, Variant } from "../config/layout";
 import { COLORS, EASE, STROKES } from "../config/theme";
-import { FINISH_TAG, S1, S2, S3, S4, S5, SCENES } from "../config/timing";
+import { S1, S2, S3, S4, S5, SCENES } from "../config/timing";
 import { TYPE, fontStack, loadFonts } from "../config/typography";
 import { Pt } from "../geometry/polyline";
 import { ProfileLabels } from "../scenes/Scene03EdgeFinishing";
@@ -279,8 +277,8 @@ const scene = (key: keyof typeof SCENES) => ({
 });
 
 // The photoreal cut: Blender renders (blender/) for scenes 01–05 under the
-// same headlines, checklist, finish tag and sound as the motion-graphics
-// film, ending on the supplied logo animation.
+// same headlines and checklist as the motion-graphics film, ending on the
+// supplied logo animation. No finish tag and no sound: rendered muted.
 export const RealisticFilm: React.FC<{ variant: Variant }> = ({ variant }) => (
   <LayoutProvider layout={LAYOUTS[variant]}>
     <AbsoluteFill style={{ backgroundColor: COLORS.paper }}>
@@ -333,15 +331,7 @@ export const RealisticFilm: React.FC<{ variant: Variant }> = ({ variant }) => (
         <Scene06EndCard />
       </Sequence>
 
-      <Sequence
-        name="Finish identifier"
-        from={FINISH_TAG.from}
-        durationInFrames={FINISH_TAG.until + FINISH_TAG.fadeOutFrames}
-      >
-        <FinishTagOverlay />
-      </Sequence>
       <ProcessChecklist />
-      <Soundtrack />
     </AbsoluteFill>
   </LayoutProvider>
 );
