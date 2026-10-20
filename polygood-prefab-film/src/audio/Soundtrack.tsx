@@ -1,11 +1,16 @@
 import { Audio } from "@remotion/media";
 import React from "react";
 import { Sequence, staticFile } from "remotion";
-import { AUDIO_CUES, VOICEOVER } from "../config/audio";
+import {
+  AUDIO_CUES,
+  AudioCue,
+  REALISTIC_CUES,
+  VOICEOVER,
+} from "../config/audio";
 import { SILENT_FROM } from "../config/timing";
 
 // Fail loudly if a cue would sound in the final half second (the loop point).
-for (const cue of AUDIO_CUES) {
+for (const cue of [...AUDIO_CUES, ...REALISTIC_CUES]) {
   if (cue.from + cue.durationInFrames > SILENT_FROM) {
     throw new Error(
       `Audio cue "${cue.id}" runs past frame ${SILENT_FROM}; the last 0.5 s must be silent.`,
@@ -13,9 +18,11 @@ for (const cue of AUDIO_CUES) {
   }
 }
 
-export const Soundtrack: React.FC = () => (
+export const Soundtrack: React.FC<{ cues?: AudioCue[] }> = ({
+  cues = AUDIO_CUES,
+}) => (
   <>
-    {AUDIO_CUES.map((cue) => (
+    {cues.map((cue) => (
       <Sequence
         key={cue.id}
         name={`Audio: ${cue.id}`}

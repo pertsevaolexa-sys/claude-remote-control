@@ -211,6 +211,119 @@ def resolve():
     return normalise(stereo(sig, 0.3, 11), -9)
 
 
+def midi_hz(n):
+    return 440.0 * 2 ** ((n - 69) / 12)
+
+
+def music():
+    """Music bed for the realistic films, voiced for phone speakers: a soft
+    plucked arpeggio (400 Hz to 1.5 kHz plus overtones) over a warm pad, at
+    120 BPM so
+    every chord change lands on a scene cut (0, 4, 9, 14, 19.5, 25 s). A light
+    pulse builds from scene 02; under the logo it resolves on D and decays to
+    nothing by 29.2 s, inside the film's silent last half second."""
+    r = np.random.default_rng(11)  # own generator: the other cues stay identical
+    secs = 29.2
+    n = int(secs * SR)
+    t = np.arange(n) / SR
+    beat = 0.5
+    # (start s, pad voicing, arpeggio tones), MIDI note numbers
+    sections = [
+        (0.0, [50, 57, 62, 64, 66], [62, 66, 69, 74, 76]),  # D add9
+        (4.0, [47, 54, 59, 62, 66], [59, 62, 66, 69, 74]),  # Bm7
+        (9.0, [43, 55, 59, 62, 66], [55, 59, 62, 66, 71]),  # Gmaj7
+        (14.0, [52, 59, 62, 66, 67], [59, 62, 66, 67, 71]),  # Em9
+        (19.5, [45, 57, 62, 64, 69], [57, 62, 64, 69, 74]),  # Asus4
+        (22.5, [45, 57, 61, 64, 69], [57, 61, 64, 69, 73]),  # A
+        (25.0, [50, 57, 62, 66, 69], [62, 66, 69, 74, 78]),  # D
+    ]
+    ends = [s[0] for s in sections[1:]] + [secs]
+    left, right = np.zeros(n), np.zeros(n)
+
+    # Warm pad: band-limited sawtooth per chord tone, crossfading at changes
+    for (start, voicing, _), end in zip(sections, ends):
+        a, b = int(start * SR), int(min(secs, end + 0.35) * SR)
+        tt = t[a:b] - start
+        seg_l, seg_r = np.zeros(b - a), np.zeros(b - a)
+        for j, note in enumerate(voicing):
+            f = midi_hz(note)
+            weight = 0.4 if j == 0 else 1.0  # light bass: phones can't play it
+            for k in range(1, 20):
+                if k * f > 4000:
+                    break
+                g = weight * (1 / k) * np.exp(-k * f / 2600)
+                seg_l += g * np.sin(2 * np.pi * k * f * 0.998 * tt)
+                seg_r += g * np.sin(2 * np.pi * k * f * 1.002 * tt + 0.4 * k)
+        env = np.clip(tt / 0.35, 0, 1) * np.clip((end + 0.35 - start - tt) / 0.35, 0, 1)
+        if start >= 25.0:  # final chord rings out and decays to zero
+            env = np.clip(tt / 0.2, 0, 1) * np.exp(-tt * 0.9) * np.clip((secs - start - tt) / 0.6, 0, 1)
+        left[a:b] += seg_l * env * 0.05
+        right[a:b] += seg_r * env * 0.05
+
+    def pluck(f, dur=0.6):
+        m = int(dur * SR)
+        tt = np.arange(m) / SR
+        sig = (
+            np.sin(2 * np.pi * f * tt) * np.exp(-tt * 5.5)
+            + 0.5 * np.sin(2 * np.pi * 2 * f * tt) * np.exp(-tt * 9)
+            + 0.25 * np.sin(2 * np.pi * 3 * f * tt) * np.exp(-tt * 13)
+            + 0.1 * np.sin(2 * np.pi * 3.98 * f * tt) * np.exp(-tt * 18)
+        )
+        return sig * np.clip(tt / 0.003, 0, 1)
+
+    def place(sig, at, gain, pan):
+        a = int(at * SR)
+        if a >= n:
+            return
+        m = min(len(sig), n - a)
+        left[a : a + m] += sig[:m] * gain * (1 - pan)
+        right[a : a + m] += sig[:m] * gain * (1 + pan)
+
+    # Arpeggio: quarter notes in scene 01, eighth notes from scene 02
+    pattern = [0, 2, 4, 2, 1, 3, 4, 3]
+    step = 0
+    for (start, _, tones), end in zip(sections, ends):
+        if start >= 25.0:
+            # Last gesture under the logo: three rising notes, then let it ring
+            for i, note in enumerate(tones[2:]):
+                place(pluck(midi_hz(note + 12), 1.6), start + i * beat / 2, 0.22, (-0.3, 0.0, 0.3)[i])
+            break
+        sub = beat if start < 4.0 else beat / 2
+        at = start
+        while at < end - 1e-6:
+            note = tones[pattern[step % len(pattern)]]
+            accent = 1.0 if abs((at / beat) % 2) < 1e-6 else 0.75
+            place(pluck(midi_hz(note + 12)), at, 0.16 * accent, 0.25 if step % 2 else -0.25)
+            step += 1
+            at += sub
+
+    # Pulse: soft kick with an audible click on the beat (from scene 03),
+    # shaker on the off-beat eighths (from scene 02)
+    kick_len = int(0.3 * SR)
+    kt = np.arange(kick_len) / SR
+    kick = np.sin(2 * np.pi * np.cumsum(55 + 110 * np.exp(-kt * 30)) / SR) * np.exp(-kt * 12)
+    kick += band(r.standard_normal(kick_len), 1200, 4000) * np.exp(-kt * 120) * 0.25
+    shake_len = int(0.06 * SR)
+    st = np.arange(shake_len) / SR
+    for i in range(int(25.0 / beat)):
+        at = i * beat
+        if at >= 9.0:
+            place(kick, at, 0.22 if i % 2 == 0 else 0.14, 0.0)
+        if at >= 4.0:
+            shaker = band(r.standard_normal(shake_len), 5000, 11000) * np.exp(-st * 70)
+            place(shaker, at + beat / 2, 0.05, 0.2)
+
+    # A little space: one soft echo of everything, a dotted eighth later
+    d = int(0.375 * SR)
+    left[d:] += 0.22 * right[:-d]
+    right[d:] += 0.22 * left[:-d]
+
+    sig = np.stack([left, right], axis=1)
+    sig[: int(0.4 * SR)] *= np.linspace(0, 1, int(0.4 * SR))[:, None] ** 2
+    sig[-int(0.05 * SR) :] = 0
+    return normalise(sig, -6)
+
+
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     write("pad.wav", pad())
@@ -222,6 +335,7 @@ def main():
     write("flex.wav", flex())
     write("tap.wav", tap())
     write("resolve.wav", resolve())
+    write("music.wav", music())
 
 
 if __name__ == "__main__":

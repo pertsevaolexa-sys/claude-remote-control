@@ -102,6 +102,19 @@ export const AUDIO_CUES: AudioCue[] = [
   },
 ];
 
+// The realistic films swap the low pad (inaudible on phone speakers) for a
+// music bed voiced in the range phones play; the sound effects stay.
+export const REALISTIC_CUES: AudioCue[] = [
+  {
+    id: "music",
+    src: "audio/music.wav",
+    from: 0,
+    durationInFrames: 876,
+    volume: 0.5,
+  },
+  ...AUDIO_CUES.filter((cue) => cue.id !== "pad"),
+];
+
 // Optional voice-over. Leave null for the sound-led cut. To add one, record the
 // script in the README and set { src: "audio/voiceover.wav", from: 0, volume: 1 }.
 export const VOICEOVER: { src: string; from: number; volume: number } | null =

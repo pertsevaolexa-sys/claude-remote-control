@@ -14,6 +14,7 @@ import { ProcessChecklist } from "../components/ProcessChecklist";
 import { TechnicalLine } from "../components/TechnicalLine";
 import { ToolHead } from "../components/Toolpath";
 import { CLAIMS } from "../config/assets";
+import { REALISTIC_CUES } from "../config/audio";
 import { HEADLINES, LINKEDIN_SPECS, STACK_LABELS } from "../config/copy";
 import { LAYOUTS, Variant } from "../config/layout";
 import { COLORS, EASE, STROKES } from "../config/theme";
@@ -333,7 +334,7 @@ export const RealisticFilm: React.FC<{ variant: Variant }> = ({ variant }) => (
       </Sequence>
 
       <ProcessChecklist />
-      <Soundtrack />
+      <Soundtrack cues={REALISTIC_CUES} />
     </AbsoluteFill>
   </LayoutProvider>
 );
