@@ -112,7 +112,22 @@ export const Headline: React.FC<{
             translate: `0 ${(1 - specIn) * 14}px`,
           }}
         >
-          {spec}
+          {label ? (
+            // One paper label per wrapped line, like the headline lines
+            <span
+              style={{
+                background: COLORS.paper,
+                padding: `0.1em ${labelPadX}px`,
+                marginLeft: -labelPadX,
+                boxDecorationBreak: "clone",
+                WebkitBoxDecorationBreak: "clone",
+              }}
+            >
+              {spec}
+            </span>
+          ) : (
+            spec
+          )}
         </div>
       ) : null}
     </div>

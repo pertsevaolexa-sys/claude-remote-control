@@ -76,7 +76,7 @@ Change the scene in `blender/pgscene/` and rebuild, rather than editing the `.bl
 Two things the composite does instead of the 3D:
 
 - **End of scene 05:** the film holds the last 3D frame before the stacks clear and dissolves it to paper. Partly transparent slabs in Cycles show their insides as they fade.
-- **Scene 04 headline:** set on paper labels, as in scene 01, because the partition rises behind it as it stands up.
+- **Scene 04 headline and its LinkedIn spec lines:** set on paper labels, as in scene 01, because the partition rises behind them as it stands up.
 
 ## Storyboard
 
@@ -177,7 +177,7 @@ On the rendered files I confirmed the following:
 - Both are H.264 + AAC, 900 frames at 30 fps, and 30.0 s long.
 - Frames 870 and 899 are visually identical (PSNR 53–55 dB). What difference there is comes from a faint easing tail in the supplied clip itself.
 - The audio from 29.5 s is at −91 dB.
-- The realistic Reels film checks out the same way: 900 frames, 30.0 s, −23.3 LUFS, −91 dB from 29.5 s, and frames 870 and 899 at a PSNR of 55 dB.
+- The realistic films check out the same way: 900 frames, 30.0 s, −23.3 LUFS, −91 dB from 29.5 s, and frames 870 and 899 at a PSNR of 55 dB (Reels) and 53.5 dB (LinkedIn).
 - Scene boundaries are continuous: the S2→S3 tabletop handover lines up, S4 opens on S3's last frame and wipes it away, and S5 clears to paper before the logo clip, which opens on the same paper colour.
 
 ## Missing assets and claims to confirm
