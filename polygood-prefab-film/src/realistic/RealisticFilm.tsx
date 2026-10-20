@@ -7,6 +7,7 @@ import {
   useCurrentFrame,
 } from "remotion";
 import { bezier, ramp } from "../anim";
+import { Soundtrack } from "../audio/Soundtrack";
 import { LayoutProvider, useLayout } from "../components/LayoutContext";
 import { Headline } from "../components/Headline";
 import { ProcessChecklist } from "../components/ProcessChecklist";
@@ -277,8 +278,8 @@ const scene = (key: keyof typeof SCENES) => ({
 });
 
 // The photoreal cut: Blender renders (blender/) for scenes 01–05 under the
-// same headlines and checklist as the motion-graphics film, ending on the
-// supplied logo animation. No finish tag and no sound: rendered muted.
+// same headlines, checklist and sound as the motion-graphics film, ending
+// on the supplied logo animation. No finish tag.
 export const RealisticFilm: React.FC<{ variant: Variant }> = ({ variant }) => (
   <LayoutProvider layout={LAYOUTS[variant]}>
     <AbsoluteFill style={{ backgroundColor: COLORS.paper }}>
@@ -332,6 +333,7 @@ export const RealisticFilm: React.FC<{ variant: Variant }> = ({ variant }) => (
       </Sequence>
 
       <ProcessChecklist />
+      <Soundtrack />
     </AbsoluteFill>
   </LayoutProvider>
 );
