@@ -14,7 +14,8 @@ Tiles and their CNC engraving.
 | `BRIEF.md` | The design brief: concept, spaces and sizes, Polygood rules, engraving concepts, materials, furniture, lighting, cameras |
 | `STAGES.md` | The prompts to paste, one stage at a time |
 | `REFERENCES.md` | Dezeen projects and Polygood Notion pages behind each decision |
-| `textures/grooves/` | Eight groove layouts as SVG drawings and tileable PNG height maps (one 700 × 700 mm module each) |
+| `textures/grooves/` | Twelve groove layouts as SVG drawings and tileable PNG height maps (one 700 × 700 mm module each). The four `cat_` layouts follow the catalogue's tile samples |
+| `textures/samples/` | Seamless photo textures of six Polygood patterns from Notion, and the catalogue's tile-sample photos |
 | `tools/groove_patterns.py` | Regenerates or adds groove layouts |
 
 ## Run it from your terminal
@@ -61,8 +62,8 @@ runs on across panels. The SVG is also the drawing to send to Polygood for a cus
 
 ## Before you show renders outside the team
 
-- Polygood colours marked `APPROX` or `TEXTURE_NEEDED` are not product matches. Replace them
-  with photos of real samples first.
+- Smaragd and Terracotta are still `APPROX` colours, not product matches. Replace them with
+  photos of real samples first. The other six use studio photos at an assumed scale.
 - Groove depth, joint width and wet-zone approval for each colour are assumptions. See
   `BRIEF.md` section 11.
 - The hotel is invented. Don't present the renders as a real project.

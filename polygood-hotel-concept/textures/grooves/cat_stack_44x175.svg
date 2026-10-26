@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="700mm" height="700mm" viewBox="0 0 700 700">
+<title>Polygood Wall Tile groove layout: cat_stack_44x175</title>
+<desc>Catalogue (Terracotta sample): fine vertical stack, 43.75 x 175 mm. Units: mm. Lines are tool centrelines; stroke width is the cutter diameter (6.35 mm, 1/4 in single-flute end mill, max 4.0 mm per pass). Groove depth to be confirmed with Polygood. Grooves on the module edge continue into the next module.</desc>
+<defs><clipPath id="module"><rect x="0" y="0" width="700" height="700"/></clipPath></defs>
+<rect id="module-outline" x="0" y="0" width="700" height="700" fill="none" stroke="#999999" stroke-width="0.5"/>
+<g id="grooves" clip-path="url(#module)" fill="none" stroke="#000000" stroke-width="6.35" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="0.000,0.000 0.000,700.000"/>
+<polyline points="43.750,0.000 43.750,700.000"/>
+<polyline points="87.500,0.000 87.500,700.000"/>
+<polyline points="131.250,0.000 131.250,700.000"/>
+<polyline points="175.000,0.000 175.000,700.000"/>
+<polyline points="218.750,0.000 218.750,700.000"/>
+<polyline points="262.500,0.000 262.500,700.000"/>
+<polyline points="306.250,0.000 306.250,700.000"/>
+<polyline points="350.000,0.000 350.000,700.000"/>
+<polyline points="393.750,0.000 393.750,700.000"/>
+<polyline points="437.500,0.000 437.500,700.000"/>
+<polyline points="481.250,0.000 481.250,700.000"/>
+<polyline points="525.000,0.000 525.000,700.000"/>
+<polyline points="568.750,0.000 568.750,700.000"/>
+<polyline points="612.500,0.000 612.500,700.000"/>
+<polyline points="656.250,0.000 656.250,700.000"/>
+<polyline points="700.000,0.000 700.000,700.000"/>
+<polyline points="0.000,0.000 700.000,0.000"/>
+<polyline points="0.000,175.000 700.000,175.000"/>
+<polyline points="0.000,350.000 700.000,350.000"/>
+<polyline points="0.000,525.000 700.000,525.000"/>
+<polyline points="0.000,700.000 700.000,700.000"/>
+</g>
+</svg>

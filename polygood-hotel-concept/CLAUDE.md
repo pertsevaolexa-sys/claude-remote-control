@@ -20,6 +20,9 @@ interpret faithfully, not a loose mood board.
 - `textures/grooves/`: CNC groove layouts. `<name>.png` is a tileable height map, 1400 × 1400 px
   for one 700 × 700 mm module (2 px/mm, white = face, black = groove floor). `<name>.svg` holds
   the groove centrelines in mm.
+- `textures/samples/`: seamless photo textures of six Polygood patterns (2048 × 2048 px, start
+  at 180 × 180 mm per tile), plus `catalogue/` with the catalogue's tile-sample photos, which
+  show the four launch engravings. Use those photos as visual reference for the `cat_` layouts.
 - `tools/groove_patterns.py`: regenerates the groove layouts (`python3 tools/groove_patterns.py --help`).
 
 ## 1. Inspect before you change anything

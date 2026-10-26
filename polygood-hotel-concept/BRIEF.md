@@ -59,6 +59,10 @@ Source pages are listed in REFERENCES.md.
   silicone or MS sealant.
 - **Selected tile samples (catalogue):** Oyster, Milky Way #PS1104, Smaragd #PS1321,
   Terracotta #PS1322. The full core palette is said to be available in tile format.
+- **Launch engravings:** each catalogue tile sample carries a different groove pattern. These
+  are most likely the four engravings available at launch: Smaragd, a vertical stack with wavy
+  joints; Milky Way, a vertical stack; Oyster, a grid; Terracotta, a fine vertical stack.
+  Photos are in `textures/samples/catalogue/`; the layouts are the `cat_` files in section 4.
 - **Growth Collection:** the palette Polygood curated for wet areas (hotel bathrooms, wet
   rooms, washrooms): Cliff #PS2602, Frost #PS2603, Gossamer #PS2406, Haze #PS2407,
   Midnight #PS1707, Oyster #PS2701, Pebble #PS1906, Pumice #PS2405.
@@ -84,21 +88,25 @@ Source pages are listed in REFERENCES.md.
 | Broad shallow fields | 80 mm (3.15") face cutter, 1 mm passes. Could make wide, very low relief bands. Ask Polygood first. |
 | Groove spacing | Must divide 700, so the pattern runs on across panels and slabs |
 
-### Colours (approximations, not product matches)
+### Colours and textures
 
-Sampled from the compressed catalogue PDF. Replace them with photo textures of real samples
-(Notion › Marketing team space › All Patterns Images) as soon as you have them.
+Six patterns have photo textures in `textures/samples/`, cut from the studio photos in Notion ›
+Marketing team space › All Patterns Images. Each is 2048 × 2048 px, seamless, with the studio
+lighting evened out. Each texture covers 90% of the width of the photographed sample panel. The
+sample size isn't recorded in Notion, so **assume one texture tile = 180 × 180 mm** and adjust
+it on the material board until the chips look right. Smaragd and Terracotta have no Notion
+photos yet, only the small catalogue tile photos, so they stay colour approximations.
 
-| Pattern | Code | Base colour | Notes |
-|---|---|---|---|
-| Smaragd | #PS1321 | `#1C382D` | Deep green, fine tonal speckle |
-| Terracotta | #PS1322 | `#853930` | Red-brown, fine tonal speckle |
-| Milky Way | #PS1104 | `#E6E5E1` | Near-white; the catalogue swatch reads `#D7D7D6` in shade |
-| Oyster | #PS2701 | `#D6D4D0` | Terrazzo-like chips `#3A3836` and `#8D8B8D`, 2–12 mm |
-| Midnight | #PS1707 | photo texture needed | Black, Growth Collection; public WCs |
-| Espresso Noir | #PS2114 | photo texture needed | Dark brown; bar top |
-| Terrazzo Nuovo | #PS1901 | photo texture needed | Light terrazzo; coffee and dining tables |
-| White Lollipop | #PS1601 | photo texture needed | White with colour chips; dining tables |
+| Pattern | Code | Texture | Average colour | Notes |
+|---|---|---|---|---|
+| Smaragd | #PS1321 | none yet (APPROX) | `#1C382D` | Deep green, fine tonal speckle. Colour from the catalogue tile photo |
+| Terracotta | #PS1322 | none yet (APPROX) | `#853930` | Red-brown, fine tonal speckle. Colour from the catalogue tile photo |
+| Milky Way | #PS1104 | `MilkyWay_PS1104.jpg` | `#D9DBD8` | Plain near-white |
+| Oyster | #PS2701 | `Oyster_PS2701.jpg` | `#CCCCC8` | White and grey chips with fine dark outlines |
+| Midnight | #PS1707 | `Midnight_PS1707.jpg` | `#0E0E0E` | Black with a few pale chips |
+| Espresso Noir | #PS2114 | `EspressoNoir_PS2114.jpg` | `#544844` | Dark brown with pale flecks; the photo is slightly soft |
+| Terrazzo Nuovo | #PS1901 | `TerrazzoNuovo_PS1901.jpg` | `#D3D3C8` | Cream terrazzo with grey, black and ochre chips |
+| White Lollipop | #PS1601 | `WhiteLollipop_PS1601.jpg` | `#D8D9D6` | White with small colour chips |
 
 **Polygood shader starting point (Principled BSDF):** roughness 0.55 (satin) or 0.65 (matte),
 IOR 1.59 (polystyrene), no coat, no metallic. Inside the groove, roughness +0.1 (machined
@@ -113,19 +121,21 @@ has an SVG (drawing for Polygood, or curves for Blender) and a tileable PNG heig
 
 | Layout file | Type | Where in RELIEF | Idea |
 |---|---|---|---|
-| `stack_vertical_87x350` | Standard look | Bathroom type A, Smaragd | Slim vertical "tiles", deep green, like the catalogue kitchen |
-| `herringbone_45` | Standard look | Bathroom type B, Milky Way | Quiet white herringbone; the chips show only up close |
-| `grid_50` | Standard look | Bathroom type C, Oyster | Mosaic grid over terrazzo-like chips |
+| `cat_wave_stack_117x350` | **Launch engraving** | Bathroom type A, Smaragd | Slim vertical tiles with wavy joints, exactly the catalogue sample |
+| `cat_stack_117x350` | **Launch engraving** | Bathroom type B, Milky Way | Quiet white vertical stack |
+| `cat_grid_140x175` | **Launch engraving** | Bathroom type C, Oyster | Grid over the chip pattern |
+| `cat_stack_44x175` | **Launch engraving** | Bathroom type D, Terracotta | Fine, dense vertical stack in red-brown |
 | `grid_175` | Standard look | Public WCs, Midnight | A dark, moody WC: black grid, chrome, one warm light |
-| `tide` | **Custom** | Bathroom type D, Terracotta | Horizontal waves: water, made from what was thrown away |
+| `tide` | **Custom** | Corner suite bathroom (Phase 3), Terracotta | Horizontal waves: water, made from what was thrown away |
 | `fluted_25` | **Custom** | Bar front, Terracotta, 12 mm | Reeded relief, lit from below so every flute reads |
 | `arcade` | **Custom** | Reception counter front, Milky Way | Nested arches: the hotel's own motif, "your pattern, cut to order" |
 | `grid_175` | Standard look | Corridor dado, Milky Way, 12 mm | Calm large grid, with **room numbers engraved** beside each door |
 | `running_bond_175x87` | Standard look | Back-bar splashback (option) | Classic brick bond, no grout |
+| `herringbone_45`, `grid_50`, `stack_vertical_87x350` | Options | Alternatives for any wall | Extra layouts to test on the material board |
 
-**Bond study:** bathrooms A–D use the same room, the same camera and the same system, with a
-different colour and groove each time. This makes the "same tile, four bonds, four rooms"
-image set from the wall tile launch plan.
+**Bond study:** bathrooms A–D use the same room, the same camera and the same system, each
+with one of the four launch engravings in its catalogue colour. This makes the "same tile,
+four bonds, four rooms" image set from the wall tile launch plan, using the real products.
 
 **Signature detail, "one line, no joints":** in the bar and on the reception front, one
 engraved horizontal line runs the full length of the counter, across the panel joints. It
@@ -203,18 +213,20 @@ Panel joints fall on groove lines wherever possible.
 
 Name every Blender material exactly as below. Shader values are a starting point. Texture
 files, where they exist, take priority over procedural approximations, and approximations
-keep the `APPROX` tag in their name until they are replaced.
+keep the `APPROX` tag in their name until they are replaced. Polygood photo textures are in
+`textures/samples/`, one tile = 180 × 180 mm to start with. The groove height map goes on top
+at its own scale (one image = 700 × 700 mm).
 
 | Material name | Used for | Base colour | Roughness | Other |
 |---|---|---|---|---|
 | `PG_Smaragd_PS1321_APPROX` | Bathroom A | `#1C382D` | 0.55 | IOR 1.59, speckle ±6% value, groove map |
-| `PG_MilkyWay_PS1104_APPROX` | Bathroom B, reception front, corridor dado | `#E6E5E1` | 0.55 | Groove map per location |
-| `PG_Oyster_PS2701_APPROX` | Bathroom C | `#D6D4D0` + chips | 0.60 | Voronoi chips 2–12 mm |
+| `PG_MilkyWay_PS1104` | Bathroom B, reception front, corridor dado | `MilkyWay_PS1104.jpg` | 0.55 | Groove map per location |
+| `PG_Oyster_PS2701` | Bathroom C | `Oyster_PS2701.jpg` | 0.60 | Groove map |
 | `PG_Terracotta_PS1322_APPROX` | Bathroom D, bar front | `#853930` | 0.55 | Groove map per location |
-| `PG_Midnight_PS1707_TEXTURE_NEEDED` | Public WCs | `#1A1A1A` placeholder | 0.60 | Placeholder until photo |
-| `PG_EspressoNoir_PS2114_TEXTURE_NEEDED` | Bar top | `#3B2A22` placeholder | 0.50 | Placeholder until photo |
-| `PG_TerrazzoNuovo_PS1901_TEXTURE_NEEDED` | Coffee table, dining tables | photo | 0.50 | Placeholder until photo |
-| `PG_WhiteLollipop_PS1601_TEXTURE_NEEDED` | Dining tables | photo | 0.50 | Placeholder until photo |
+| `PG_Midnight_PS1707` | Public WCs | `Midnight_PS1707.jpg` | 0.60 | Groove map |
+| `PG_EspressoNoir_PS2114` | Bar top | `EspressoNoir_PS2114.jpg` | 0.50 | No grooves |
+| `PG_TerrazzoNuovo_PS1901` | Coffee table, dining tables | `TerrazzoNuovo_PS1901.jpg` | 0.50 | No grooves |
+| `PG_WhiteLollipop_PS1601` | Dining tables | `WhiteLollipop_PS1601.jpg` | 0.50 | No grooves |
 | `Oak_Smoked` | Joinery, panelling | `#5A4632` | 0.50 | Grain texture, boards 180 wide |
 | `Oak_Parquet_Reclaimed` | Floors | `#8A6A4A`, varied | 0.50 | Planks 90 × 600, slight colour variation per plank |
 | `Plaster_Lime_WarmWhite` | Walls, ceilings | `#E8E1D6` | 0.88 | Low-frequency trowel bump, strength 0.3 |
@@ -309,7 +321,10 @@ Still frames from C01–C09 can also be cut into the short "install film" the la
 - **Groove depth** is assumed (2.5 on 8 mm, 3.0 on 12 mm). Confirm with Polygood.
 - **Thickness options:** 8 / 12 (catalogue) or 6 / 8 / 12 (launch post).
 - **Panel joint width** is assumed at 2 mm, sealed and colour-matched.
-- **Colours** are approximated from a compressed PDF. Use photos of real samples.
+- **Smaragd and Terracotta** have no photo textures yet; ask the Polygood team for flat photos.
+  The other six use studio photos from Notion at an assumed scale of 180 mm per texture tile.
+- **Launch engravings:** the four `cat_` layouts are measured by eye from the catalogue tile
+  photos. Confirm their names and exact sizes with Polygood.
 - **Countertop and tabletop thickness** for Polygood is assumed at 20. Confirm.
 - **Wet-zone approval** (constantly wet or splash only) is still an open item in the launch
   brief. For marketing renders the brief assumes full shower use, as in the catalogue.

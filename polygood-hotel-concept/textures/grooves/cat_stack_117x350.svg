@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="700mm" height="700mm" viewBox="0 0 700 700">
+<title>Polygood Wall Tile groove layout: cat_stack_117x350</title>
+<desc>Catalogue (Milky Way sample): vertical stack, 116.7 x 350 mm. Units: mm. Lines are tool centrelines; stroke width is the cutter diameter (6.35 mm, 1/4 in single-flute end mill, max 4.0 mm per pass). Groove depth to be confirmed with Polygood. Grooves on the module edge continue into the next module.</desc>
+<defs><clipPath id="module"><rect x="0" y="0" width="700" height="700"/></clipPath></defs>
+<rect id="module-outline" x="0" y="0" width="700" height="700" fill="none" stroke="#999999" stroke-width="0.5"/>
+<g id="grooves" clip-path="url(#module)" fill="none" stroke="#000000" stroke-width="6.35" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="0.000,0.000 0.000,700.000"/>
+<polyline points="116.667,0.000 116.667,700.000"/>
+<polyline points="233.333,0.000 233.333,700.000"/>
+<polyline points="350.000,0.000 350.000,700.000"/>
+<polyline points="466.667,0.000 466.667,700.000"/>
+<polyline points="583.333,0.000 583.333,700.000"/>
+<polyline points="700.000,0.000 700.000,700.000"/>
+<polyline points="0.000,0.000 700.000,0.000"/>
+<polyline points="0.000,350.000 700.000,350.000"/>
+<polyline points="0.000,700.000 700.000,700.000"/>
+</g>
+</svg>

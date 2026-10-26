@@ -93,6 +93,16 @@ def herringbone_45(period=87.5):
     ]
 
 
+def wave_stack(w, h, amplitude, step=1.0):
+    """Vertical stack whose horizontal joints are one sine wave per column."""
+    polys = [[(i * w, 0.0), (i * w, MODULE)] for i in range(round(MODULE / w) + 1)]
+    xs = [k * step for k in range(round(w / step) + 1)]
+    for j in range(round(MODULE / h) + 1):
+        for i in range(round(MODULE / w)):
+            polys.append([(i * w + x, j * h + amplitude * math.sin(2 * math.pi * x / w)) for x in xs])
+    return polys
+
+
 def fluted(pitch):
     return [[(pitch / 2 + i * pitch, 0.0), (pitch / 2 + i * pitch, MODULE)]
             for i in range(round(MODULE / pitch))]
@@ -122,6 +132,15 @@ def tide(pitch=35.0, wavelength=175.0, amplitude=10.0, step=2.5):
 
 
 LAYOUTS = {
+    # The four engravings on the tile samples in the Polygood Wall Tiles catalogue.
+    "cat_wave_stack_117x350": (lambda: wave_stack(MODULE / 6, 350, 15),
+                               "Catalogue (Smaragd sample): vertical stack, wavy joints, 116.7 x 350 mm."),
+    "cat_stack_117x350": (lambda: grid(MODULE / 6, 350),
+                          "Catalogue (Milky Way sample): vertical stack, 116.7 x 350 mm."),
+    "cat_grid_140x175": (lambda: grid(140, 175),
+                         "Catalogue (Oyster sample): grid of 140 x 175 mm."),
+    "cat_stack_44x175": (lambda: grid(43.75, 175),
+                         "Catalogue (Terracotta sample): fine vertical stack, 43.75 x 175 mm."),
     "grid_50": (lambda: grid(50, 50),
                 "Small square grid, 50 mm. Mosaic look, as on the catalogue cover."),
     "grid_175": (lambda: grid(175, 175),

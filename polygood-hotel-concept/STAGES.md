@@ -11,7 +11,8 @@ approve it before going on. Each stage ends with a saved, incrementally numbered
 Stage 0. Read CLAUDE.md and BRIEF.md. List the Bonsai MCP tools you can use, and say which of
 them create IFC elements and which only run Blender Python. Inspect the open Blender scene:
 objects, collections, materials, units, render engine, and whether an IFC project is loaded.
-Check that textures/grooves/ has the eight .png height maps. Do not change anything. Report
+Check that textures/grooves/ has the twelve .png height maps and textures/samples/ has the
+six Polygood photo textures. Do not change anything. Report
 what you found and anything that blocks the brief.
 ```
 
@@ -40,8 +41,10 @@ List which objects are IFC and which are visual-only.
 
 ```
 Stage 3. Create every material in the BRIEF materials library, named exactly as listed. Build
-the Polygood materials so the groove height map from textures/grooves/ maps one image to
-exactly 700 x 700 mm, with bump strength and distance as given. In a separate collection
+the Polygood materials from the photo textures in textures/samples/ (one texture tile = 180 x
+180 mm to start with) where the brief lists one, and the groove height map from
+textures/grooves/ mapped one image to exactly 700 x 700 mm, with bump strength and distance as
+given. In a separate collection
 "99_MaterialBoard", lay out one 700 x 700 sample of each Polygood colour and groove pairing
 from section 4, plus 300 x 300 samples of the other materials, under one raking light from
 the left. Render the board at 1920 x 1080 and show it to me. Do not assign materials to the
@@ -53,7 +56,7 @@ building yet. Save relief_v002.blend.
 ```
 Stage 4. Model the Polygood surfaces for Phase 1 as real panels: 8 mm (12 mm on the bar
 front), 700 mm modules, 2 mm sealed joints, laid out from the setting-out points in the plan.
-Bathroom L1-01: Smaragd stack_vertical_87x350 on all walls, plus the niche and washstand.
+Bathroom L1-01: Smaragd cat_wave_stack_117x350 on all walls, plus the niche and washstand.
 Reception front: Milky Way arcade, with the one-line horizontal groove across all panels. Bar
 front: Terracotta fluted_25. Make them IfcCovering (CLADDING) with Pset_PolygoodWallTile.
 Check that grooves line up across every panel joint and show me close-ups of two joints.
@@ -84,8 +87,8 @@ relief_v005.blend.
 ## Stage 7: bond study and launch shots
 
 ```
-Stage 7. Make bathroom variants B (Milky Way herringbone_45), C (Oyster grid_50) and D
-(Terracotta tide) as separate collections that swap with bathroom A, without duplicating the
+Stage 7. Make bathroom variants B (Milky Way cat_stack_117x350), C (Oyster cat_grid_140x175)
+and D (Terracotta cat_stack_44x175) as separate collections that swap with bathroom A, without duplicating the
 architecture. Set up C07 (same framing as C05 for A–D), C08 (engraved and plain panels side
 by side) and C09 (corridor with engraved room numbers on a Milky Way grid_175 dado). Render
 test frames. Save relief_v006.blend.
