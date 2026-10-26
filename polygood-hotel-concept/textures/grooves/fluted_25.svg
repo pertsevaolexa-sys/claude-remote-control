@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="700mm" height="700mm" viewBox="0 0 700 700">
+<title>Polygood Wall Tile groove layout: fluted_25</title>
+<desc>Custom: vertical flutes at 25 mm centres. Reads like reeded timber under raking light. Units: mm. Lines are tool centrelines; stroke width is the cutter diameter (6.35 mm, 1/4 in single-flute end mill, max 4.0 mm per pass). Groove depth to be confirmed with Polygood. Grooves on the module edge continue into the next module.</desc>
+<defs><clipPath id="module"><rect x="0" y="0" width="700" height="700"/></clipPath></defs>
+<rect id="module-outline" x="0" y="0" width="700" height="700" fill="none" stroke="#999999" stroke-width="0.5"/>
+<g id="grooves" clip-path="url(#module)" fill="none" stroke="#000000" stroke-width="6.35" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="12.500,0.000 12.500,700.000"/>
+<polyline points="37.500,0.000 37.500,700.000"/>
+<polyline points="62.500,0.000 62.500,700.000"/>
+<polyline points="87.500,0.000 87.500,700.000"/>
+<polyline points="112.500,0.000 112.500,700.000"/>
+<polyline points="137.500,0.000 137.500,700.000"/>
+<polyline points="162.500,0.000 162.500,700.000"/>
+<polyline points="187.500,0.000 187.500,700.000"/>
+<polyline points="212.500,0.000 212.500,700.000"/>
+<polyline points="237.500,0.000 237.500,700.000"/>
+<polyline points="262.500,0.000 262.500,700.000"/>
+<polyline points="287.500,0.000 287.500,700.000"/>
+<polyline points="312.500,0.000 312.500,700.000"/>
+<polyline points="337.500,0.000 337.500,700.000"/>
+<polyline points="362.500,0.000 362.500,700.000"/>
+<polyline points="387.500,0.000 387.500,700.000"/>
+<polyline points="412.500,0.000 412.500,700.000"/>
+<polyline points="437.500,0.000 437.500,700.000"/>
+<polyline points="462.500,0.000 462.500,700.000"/>
+<polyline points="487.500,0.000 487.500,700.000"/>
+<polyline points="512.500,0.000 512.500,700.000"/>
+<polyline points="537.500,0.000 537.500,700.000"/>
+<polyline points="562.500,0.000 562.500,700.000"/>
+<polyline points="587.500,0.000 587.500,700.000"/>
+<polyline points="612.500,0.000 612.500,700.000"/>
+<polyline points="637.500,0.000 637.500,700.000"/>
+<polyline points="662.500,0.000 662.500,700.000"/>
+<polyline points="687.500,0.000 687.500,700.000"/>
+</g>
+</svg>
