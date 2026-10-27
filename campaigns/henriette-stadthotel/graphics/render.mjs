@@ -31,6 +31,7 @@ function parseArgs(argv) {
     if (arg === "--photos") opts.photos = path.resolve(argv[++i]);
     else if (arg === "--brand") opts.brand = path.resolve(argv[++i]);
     else if (arg === "--out") opts.out = path.resolve(argv[++i]);
+    else if (arg === "--dump") opts.dump = true;
     else opts.specs.push(path.resolve(arg));
   }
   return opts;
@@ -82,13 +83,13 @@ function slideHtml(spec, slide, index, assets, warnings) {
     const item = assets.photos.get(id);
     if (!item) {
       warnings.push(`slide ${index + 1}: unknown photo id "${id}"`);
-      return `<div class="${extraClass} missing">unknown photo ${text(id)}</div>`;
+      return `<div class="${extraClass} missing" data-photo="${text(id)}">unknown photo ${text(id)}</div>`;
     }
     if (!item.url) {
       warnings.push(`slide ${index + 1}: photo ${id} not found in assets/photos/ (${item.file})`);
-      return `<div class="${extraClass} missing">missing photo ${text(id)}</div>`;
+      return `<div class="${extraClass} missing" data-photo="${id}" data-focus="${focus}">missing photo ${text(id)}</div>`;
     }
-    return `<div class="${extraClass}" style="background-image:url('${item.url}');background-position:${focus}"></div>`;
+    return `<div class="${extraClass}" data-photo="${id}" data-focus="${focus}" style="background-image:url('${item.url}');background-position:${focus}"></div>`;
   };
   const creditsFor = (ids) =>
     [...new Set(ids.map((id) => assets.photos.get(id)?.credit).filter(Boolean))].join("  ·  ");
@@ -261,6 +262,125 @@ async function fitText(page) {
   });
 }
 
+// Describes the rendered slide as flat layers (boxes, lines, gradients, photos with their crop,
+// text with its type settings, logos) so figma/builder.js can rebuild it as editable Figma nodes.
+async function dumpLayers(page) {
+  return page.evaluate(async () => {
+    const frameEl = document.querySelector(".frame");
+    const origin = frameEl.getBoundingClientRect();
+    const box = (r) => ({
+      x: +(r.left - origin.left).toFixed(1),
+      y: +(r.top - origin.top).toFixed(1),
+      w: +r.width.toFixed(1),
+      h: +r.height.toFixed(1),
+    });
+    const transparent = (c) => !c || c === "transparent" || /rgba\(.*,\s*0\)$/.test(c);
+    const opacityOf = (el) => {
+      let o = 1;
+      for (let n = el; n && n !== document.body; n = n.parentElement) o *= parseFloat(getComputedStyle(n).opacity);
+      return +o.toFixed(3);
+    };
+    // Corner radii inherited from the nearest rounded, clipping ancestor (e.g. triptych tiles).
+    const radii = (el, r) => {
+      const own = parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0;
+      if (own) return [own, own, own, own];
+      for (let n = el.parentElement; n && n !== frameEl; n = n.parentElement) {
+        const cs = getComputedStyle(n);
+        const rad = parseFloat(cs.borderTopLeftRadius) || 0;
+        if (rad && cs.overflow === "hidden") {
+          const p = n.getBoundingClientRect();
+          const near = (a, b) => Math.abs(a - b) < 1;
+          const top = near(r.top, p.top), bottom = near(r.bottom, p.bottom);
+          const left = near(r.left, p.left), right = near(r.right, p.right);
+          return [top && left ? rad : 0, top && right ? rad : 0, bottom && right ? rad : 0, bottom && left ? rad : 0];
+        }
+      }
+      return [0, 0, 0, 0];
+    };
+    // Text with <br> kept as line breaks and HTML whitespace collapsed; .hl spans become ranges.
+    const textOf = (el) => {
+      let out = "";
+      const ranges = [];
+      const visit = (node) => {
+        for (const child of node.childNodes) {
+          if (child.nodeType === 3) out += child.textContent.replace(/\s+/g, " ");
+          else if (child.nodeName === "BR") out += "\n";
+          else if (child.nodeType === 1) {
+            const start = out.length;
+            visit(child);
+            if (child.classList.contains("hl")) ranges.push({ start, end: out.length, color: getComputedStyle(child).color });
+          }
+        }
+      };
+      visit(el);
+      const before = getComputedStyle(el, "::before").content;
+      let prefix = "";
+      if (before && before !== "none" && before !== "normal") prefix = before.replace(/^"|"$/g, "") + "  ";
+      ranges.forEach((r) => { r.start += prefix.length; r.end += prefix.length; });
+      return { text: prefix + out.trim(), ranges };
+    };
+    const layers = [];
+    const walk = async (el) => {
+      const cs = getComputedStyle(el);
+      if (cs.display === "none" || cs.visibility === "hidden") return;
+      const r = el.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0) return;
+      if (el.dataset.photo) {
+        const url = (cs.backgroundImage.match(/url\("?(.*?)"?\)/) || [])[1];
+        let natural = null;
+        if (url) {
+          const img = new Image();
+          img.src = url;
+          await img.decode().catch(() => {});
+          natural = { w: img.naturalWidth, h: img.naturalHeight };
+        }
+        layers.push({ kind: "photo", ...box(r), photo: el.dataset.photo, focus: el.dataset.focus || "50% 50%", natural, radii: radii(el, r) });
+        return;
+      }
+      if (el.classList.contains("logo") && el.querySelector("svg")) {
+        const svg = el.querySelector("svg");
+        const path = svg.querySelector("path");
+        layers.push({ kind: "logo", ...box(svg.getBoundingClientRect()), color: path ? getComputedStyle(path).fill : "rgb(0, 0, 0)" });
+        return;
+      }
+      if (cs.backgroundImage.startsWith("linear-gradient")) {
+        layers.push({ kind: "gradient", ...box(r), css: cs.backgroundImage, radii: radii(el, r) });
+      }
+      if (el !== frameEl && !transparent(cs.backgroundColor)) {
+        layers.push({ kind: "box", ...box(r), fill: cs.backgroundColor, radii: radii(el, r) });
+      }
+      if (parseFloat(cs.borderTopWidth) > 0) {
+        layers.push({ kind: "line", ...box(r), h: parseFloat(cs.borderTopWidth), color: cs.borderTopColor });
+      }
+      const ownText = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
+      if (ownText) {
+        const { text, ranges } = textOf(el);
+        const shadow = cs.textShadow !== "none" ? cs.textShadow : null;
+        // Content box: padding belongs to the pill or list row, not to the text.
+        const [pt, pr, pb, pl] = ["Top", "Right", "Bottom", "Left"].map((s) => parseFloat(cs[`padding${s}`]) || 0);
+        const content = box(r);
+        content.x += pl; content.y += pt; content.w -= pl + pr; content.h -= pt + pb;
+        layers.push({
+          kind: "text", ...content, text, ranges,
+          font: cs.fontFamily.split(",")[0].replace(/["']/g, "").trim(),
+          weight: parseInt(cs.fontWeight, 10),
+          size: parseFloat(cs.fontSize),
+          lineHeight: cs.lineHeight === "normal" ? parseFloat(cs.fontSize) * 1.2 : parseFloat(cs.lineHeight),
+          letterSpacing: cs.letterSpacing === "normal" ? 0 : parseFloat(cs.letterSpacing),
+          upper: cs.textTransform === "uppercase",
+          color: cs.color, opacity: opacityOf(el), align: cs.textAlign, shadow,
+          role: el.className || el.tagName.toLowerCase(),
+        });
+        return;
+      }
+      for (const child of el.children) await walk(child);
+    };
+    await walk(frameEl);
+    const bg = getComputedStyle(frameEl).backgroundColor;
+    return { background: transparent(bg) ? getComputedStyle(document.body).backgroundColor : bg, layers };
+  });
+}
+
 async function contactSheet(browser, dir, files, size) {
   const [w, h] = size;
   const thumbW = 360;
@@ -302,6 +422,7 @@ async function main() {
     const [width, height] = spec.size;
     const page = await browser.newPage({ viewport: { width, height } });
     const files = [];
+    const dumped = [];
 
     for (const [i, slide] of spec.slides.entries()) {
       const warnings = [];
@@ -316,12 +437,17 @@ async function main() {
       const file = `${String(i + 1).padStart(2, "0")}-${slide.layout}.png`;
       await page.screenshot({ path: path.join(dir, file) });
       files.push(file);
+      if (opts.dump) dumped.push({ name: `${String(i + 1).padStart(2, "0")} ${slide.layout}`, ...(await dumpLayers(page)) });
       for (const w of warnings) console.warn(`  ! ${name}: ${w}`);
       problems += warnings.length;
     }
     await page.close();
     await contactSheet(browser, dir, files, spec.size);
     await writeFile(path.join(dir, "_spec.json"), JSON.stringify(spec, null, 2));
+    if (opts.dump) {
+      const layers = { spec: name, channel: spec.channel, size: spec.size, slides: dumped };
+      await writeFile(path.join(dir, "layers.json"), JSON.stringify(layers));
+    }
     console.log(`${name}: ${files.length} images → ${dir}`);
   }
 

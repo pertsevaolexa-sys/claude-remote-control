@@ -50,4 +50,15 @@ node render.mjs specs/linkedin-carousel.json   # одна спецификаци
 - `**слово**` в тексте выделяет слово цветом.
 - `counter: true` на уровне спецификации включает номера слайдов «2/7».
 
+## Перенос в Figma
+
+Макеты можно собрать в Figma как редактируемые слои: текст, плашки, градиенты, логотип-компонент и фото с той же кадрировкой. Для этого нужен Figma MCP, а в нём инструмент `use_figma`.
+
+1. Отрендерите макеты с выгрузкой слоёв: `node render.mjs --dump`. В каждой папке `out/<спецификация>/` появится `layers.json`.
+2. Выполните `node figma/make-script.mjs setup` и запустите получившийся `out/figma/00-setup.js` через `use_figma`. Скрипт создаёт страницу, блок «Read me» и компонент логотипа и возвращает `logoId`.
+3. Выполните `node figma/make-script.mjs build <logoId>` и запустите каждый `out/figma/NN-build.js` отдельным вызовом. На местах фото появятся подписанные заглушки `photo/<id>`.
+4. Загрузите фото через `upload_assets` без указания цели и соберите их `imageHash` в JSON вида `{"J123": "…"}`. Затем выполните `node figma/make-script.mjs photos hashes.json` и запустите `out/figma/photos.js`. Фото встанут во все заглушки с нужной кадрировкой.
+
+Первые черновики уже лежат в Figma: «Polygood × Henriette Stadthotel — campaign drafts v1», https://www.figma.com/design/IeSGuOc1DqLqN8wiOX4XNB
+
 Цвета и шрифты берутся из `brand/tokens.css`. Они временные: сверьте их с брендбуком Polygood, разметка от этого не изменится. Логотип берётся из `../assets/brand/`. Если его там нет, на месте логотипа будет текст «polygood®».
