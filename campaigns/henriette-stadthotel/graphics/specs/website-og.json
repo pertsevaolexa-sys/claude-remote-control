@@ -1,0 +1,16 @@
+{
+  "channel": "Link preview (Open Graph) for polygood.com/projects/henriette-stadthotel/. The case page itself uses the photos without text",
+  "copy_status": "starter copy; title and subtitle must match outputs/henriette/01-website-case.md",
+  "size": [1200, 630],
+  "slides": [
+    {
+      "layout": "banner",
+      "bg": "paper",
+      "photo": "J123",
+      "focus": "62% 50%",
+      "eyebrow": "Case study",
+      "headline": "Henriette Stadthotel, Vienna",
+      "body": "Washstands in three Polygood® patterns for award-winning Circular Living rooms"
+    }
+  ]
+}

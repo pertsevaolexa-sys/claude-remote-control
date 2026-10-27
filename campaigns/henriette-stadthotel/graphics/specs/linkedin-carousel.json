@@ -1,0 +1,62 @@
+{
+  "channel": "LinkedIn document post (export the PNGs to one PDF)",
+  "copy_status": "starter copy from 03-channel-kit.md; the agent rewrites it in outputs/henriette/03-linkedin.md and mirrors the final text here",
+  "size": [1080, 1350],
+  "counter": true,
+  "slides": [
+    {
+      "layout": "photo-hook",
+      "photo": "J101",
+      "focus": "50% 58%",
+      "eyebrow": "Case study · Henriette Stadthotel Vienna",
+      "headline": "A year of hotel guests. Daily steam cleaning.",
+      "body": "The co-owner calls the condition of the Polygood® washstands **impeccable**."
+    },
+    {
+      "layout": "statement",
+      "bg": "paper",
+      "eyebrow": "The rule for every material",
+      "big": "Low in emissions. Removable at the next refit.",
+      "body": "That applied to everything in the new Circular Living rooms, from the reclaimed parquet to the washstands."
+    },
+    {
+      "layout": "triptych",
+      "bg": "paper",
+      "eyebrow": "Three patterns",
+      "headline": "One for each room's colour scheme",
+      "items": [
+        { "photo": "J101", "focus": "50% 62%", "label": "Sapphire Terrazzo", "sub": "#PS1801" },
+        { "photo": "J123", "focus": "93% 55%", "label": "Emerald Ghost", "sub": "#PS1706" },
+        { "photo": "S1516", "focus": "45% 72%", "label": "White Terrazzo", "sub": "#PS2107" }
+      ]
+    },
+    {
+      "layout": "photo-split",
+      "photo": "S5050",
+      "focus": "50% 64%",
+      "bg": "sand",
+      "eyebrow": "After more than a year of guests",
+      "headline": "“Impeccable condition”",
+      "body": "Verena Brandtner-Pastuszyn, co-owner, on the washstands"
+    },
+    {
+      "layout": "quote",
+      "bg": "sapphire",
+      "eyebrow": "Steam cleaning, no chemicals. Compared with the ceramic basins in the other rooms:",
+      "quote": "It works perfectly and definitely doesn't require any extra effort.",
+      "name": "Verena Brandtner-Pastuszyn",
+      "role": "Co-owner, Henriette Stadthotel Vienna"
+    },
+    {
+      "layout": "cta",
+      "bg": "ink",
+      "eyebrow": "Cut, edged and CNC-finished to your drawings",
+      "headline": "Planning a refit or a trip to Vienna?",
+      "actions": [
+        "Send your drawings or order samples: link in the first comment",
+        "Or book a Circular Living room at Henriette and see the washstands for yourself"
+      ],
+      "footer": "polygood.com"
+    }
+  ]
+}

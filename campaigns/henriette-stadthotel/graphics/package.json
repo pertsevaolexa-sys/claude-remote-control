@@ -1,0 +1,13 @@
+{
+  "name": "henriette-graphics",
+  "private": true,
+  "type": "module",
+  "description": "Renders the Henriette Stadthotel campaign graphics from JSON specs and real project photos",
+  "scripts": {
+    "render": "node render.mjs",
+    "setup": "npm install && npx playwright install chromium"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0"
+  }
+}

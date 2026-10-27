@@ -1,0 +1,28 @@
+{
+  "channel": "Mailchimp email for the HoReCa tag: hero and a quote band (600 px wide in the email, rendered at 2x)",
+  "copy_status": "starter copy; the agent rewrites it in outputs/henriette/02-newsletter.md",
+  "size": [
+    1200,
+    600
+  ],
+  "slides": [
+    {
+      "layout": "banner",
+      "bg": "paper",
+      "photo": "J123",
+      "focus": "62% 50%",
+      "eyebrow": "Case study · Vienna",
+      "headline": "“Impeccable condition” after a year of guests",
+      "body": "Polygood® washstands at Henriette Stadthotel Vienna"
+    },
+    {
+      "layout": "banner",
+      "bg": "sapphire",
+      "photo": "S5050",
+      "focus": "50% 66%",
+      "eyebrow": "Steam cleaning, no chemicals",
+      "headline": "“Definitely doesn’t require any extra effort”",
+      "body": "The co-owner, comparing the washstands with ceramic basins"
+    }
+  ]
+}

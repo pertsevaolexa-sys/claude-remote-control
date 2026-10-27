@@ -1,0 +1,39 @@
+{
+  "channel": "Instagram Stories: quiz in the style of the hotel's guided tour. Add the quiz sticker in Instagram over the empty lower half of frame 1",
+  "copy_status": "starter copy; the agent rewrites it in outputs/henriette/04-instagram.md",
+  "size": [
+    1080,
+    1920
+  ],
+  "slides": [
+    {
+      "layout": "story",
+      "photo": "S1516",
+      "focus": "50% 60%",
+      "position": "top",
+      "eyebrow": "Guess the material",
+      "headline": "What are these washstands made of?",
+      "body": "Henriette Stadthotel Vienna asks its guests the same question on its tours."
+    },
+    {
+      "layout": "story",
+      "photo": "S1516",
+      "focus": "30% 85%",
+      "position": "bottom",
+      "eyebrow": "The answer",
+      "headline": "100% recycled and recyclable plastic",
+      "body": "Polygood® White Terrazzo, after more than a year of guests and daily steam cleaning."
+    },
+    {
+      "layout": "cta",
+      "bg": "ink",
+      "eyebrow": "zeig profil award 2026",
+      "headline": "Planning a refit or a trip to Vienna?",
+      "actions": [
+        "Samples and drawings: link sticker",
+        "Rooms: @hotel.henriette"
+      ],
+      "footer": "polygood.com"
+    }
+  ]
+}

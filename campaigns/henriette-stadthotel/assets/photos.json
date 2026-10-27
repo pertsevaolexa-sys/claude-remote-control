@@ -1,0 +1,148 @@
+{
+  "note": "Photos are licensed for social media with credits and are NOT stored in this public repository. Download them into assets/photos/ (git-ignored). See assets/README.md.",
+  "credits": {
+    "johannsen": "© Stadthotel Henriette / Patrick Johannsen Fotografie",
+    "supersusi": "© Henriette Stadthotel Vienna / supersusi.com"
+  },
+  "instagram": {
+    "hotel": "@hotel.henriette"
+  },
+  "photos": [
+    {
+      "id": "J55",
+      "file": "55_-_03_Hotelzimmer_1_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_19.jpg",
+      "set": "johannsen",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+      "notion_file": "notion-file-block://37d82e7c-7c86-80a6-9960-fbd6f62272d8/f18ebb15-cf83-40c9-9eeb-8085d111dda7?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=55_-_03_Hotelzimmer_1_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_19.jpg",
+      "orientation": "vertical",
+      "pattern": "Sapphire Terrazzo",
+      "shows": "Room 1 bathroom: Sapphire Terrazzo washstand with white vessel basin, round mirror, brass pendant light",
+      "reviewed": true
+    },
+    {
+      "id": "J56",
+      "file": "56_-_03_Hotelzimmer_1_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_20.jpg",
+      "set": "johannsen",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+      "notion_file": "notion-file-block://37d82e7c-7c86-80ef-b00d-c401e1cd2cd1/54016957-d13c-4ead-9fa3-59ad01755fde?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=56_-_03_Hotelzimmer_1_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_20.jpg",
+      "pattern": "Room 1 (check)",
+      "reviewed": false
+    },
+    {
+      "id": "J57",
+      "file": "57_-_03_Hotelzimmer_1_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_21.jpg",
+      "set": "johannsen",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+      "notion_file": "notion-file-block://37d82e7c-7c86-8081-be50-c2891f7b7459/b7453818-5917-4665-b396-cc024a3f5306?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=57_-_03_Hotelzimmer_1_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_21.jpg",
+      "pattern": "Room 1 (check)",
+      "reviewed": false
+    },
+    {
+      "id": "J59",
+      "file": "59_-_03_Hotelzimmer_1_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_23.jpg",
+      "set": "johannsen",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+      "notion_file": "notion-file-block://37d82e7c-7c86-805d-9186-d620c81c5127/b586ba37-3ff4-42eb-acf8-28e7009dd60a?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=59_-_03_Hotelzimmer_1_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_23.jpg",
+      "pattern": "Room 1 (check)",
+      "reviewed": false
+    },
+    {
+      "id": "J101",
+      "file": "101_-_04_Hotelzimmer_2_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_41.jpg",
+      "set": "johannsen",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+      "notion_file": "notion-file-block://37d82e7c-7c86-80ff-95e5-c1b22b4edc62/b84afe6b-93e4-4b14-8b2b-a7fc6aa6759a?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=101_-_04_Hotelzimmer_2_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_41.jpg",
+      "orientation": "vertical",
+      "pattern": "Sapphire Terrazzo",
+      "shows": "Room 2 bathroom: long Sapphire Terrazzo washstand, round black mirror, towel rail",
+      "reviewed": true
+    },
+    {
+      "id": "J102",
+      "file": "102_-_04_Hotelzimmer_2_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_42.jpg",
+      "set": "johannsen",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+      "notion_file": "notion-file-block://37d82e7c-7c86-806c-b729-d40454c7189c/c9622da1-5b33-4a8f-84d4-85de98900c0e?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=102_-_04_Hotelzimmer_2_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_42.jpg",
+      "pattern": "Room 2 (check)",
+      "reviewed": false
+    },
+    {
+      "id": "J103",
+      "file": "103_-_04_Hotelzimmer_2_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_43.jpg",
+      "set": "johannsen",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+      "notion_file": "notion-file-block://37d82e7c-7c86-802c-bae7-e4d07c77e351/6da58f86-9948-499b-8bd5-c5c19d631331?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=103_-_04_Hotelzimmer_2_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_43.jpg",
+      "pattern": "Room 2 (check)",
+      "reviewed": false
+    },
+    {
+      "id": "J104",
+      "file": "104_-_04_Hotelzimmer_2_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_44.jpg",
+      "set": "johannsen",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+      "notion_file": "notion-file-block://37d82e7c-7c86-80ef-9b3e-dddbec98045a/1694b0d8-1633-4b72-9100-5e8dbf40c711?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=104_-_04_Hotelzimmer_2_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_44.jpg",
+      "pattern": "Room 2 (check)",
+      "reviewed": false
+    },
+    {
+      "id": "J123",
+      "file": "123_-_05_Hotelzimmer_3_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_16.jpg",
+      "set": "johannsen",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+      "notion_file": "notion-file-block://37d82e7c-7c86-8090-9666-d4998dd280e8/2415126d-f718-458f-bb68-9d00d7da2b3b?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=123_-_05_Hotelzimmer_3_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_16.jpg",
+      "orientation": "horizontal",
+      "pattern": "Emerald Ghost",
+      "shows": "Room 3, widest shot: herringbone parquet, terracotta sofa, bed, Emerald Ghost washstand on the right",
+      "reviewed": true
+    },
+    {
+      "id": "J124",
+      "file": "124_-_05_Hotelzimmer_3_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_17.jpg",
+      "set": "johannsen",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+      "notion_file": "notion-file-block://37d82e7c-7c86-8064-86e0-c66b22aa9f87/7e1fb275-477f-432d-ae23-cd48f3def0b5?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=124_-_05_Hotelzimmer_3_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_17.jpg",
+      "pattern": "Room 3, probably Emerald Ghost (check)",
+      "reviewed": false
+    },
+    {
+      "id": "J125",
+      "file": "125_-_05_Hotelzimmer_3_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_18.jpg",
+      "set": "johannsen",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c868006a6f4d95174a8957e",
+      "notion_file": "notion-file-block://37d82e7c-7c86-8072-8288-f96a27d57271/4d5fc608-fae4-4733-8513-b35808d0d95b?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=125_-_05_Hotelzimmer_3_Stadthotel_Henriette_Patrick_Johannsen_Fotografie_18.jpg",
+      "pattern": "Room 3, probably Emerald Ghost (check)",
+      "reviewed": false
+    },
+    {
+      "id": "S5050",
+      "file": "SE-SH-2025-5050.jpg",
+      "set": "supersusi",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c8680628e92ef18e4219540",
+      "notion_file": "notion-file-block://37d82e7c-7c86-80ae-8778-e139a8cc26c2/982d549b-de2b-4922-837e-e7035d3c9264?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=SE-SH-2025-5050.jpg",
+      "orientation": "vertical",
+      "pattern": "Sapphire Terrazzo",
+      "shows": "Sapphire Terrazzo washstand, closer view: basin, tap, dried flowers, towels",
+      "reviewed": true
+    },
+    {
+      "id": "S5023",
+      "file": "SE-SH-2025-5023.jpg",
+      "set": "supersusi",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c8680628e92ef18e4219540",
+      "notion_file": "notion-file-block://37d82e7c-7c86-80e2-b73b-fcdb50c4aa98/f7c3aff1-f1a8-431b-8b06-990a9034d5fa?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=SE-SH-2025-5023.jpg",
+      "pattern": "Sapphire Terrazzo or White Terrazzo (check)",
+      "reviewed": false
+    },
+    {
+      "id": "S1516",
+      "file": "SE-SH-2025-1516.jpg",
+      "set": "supersusi",
+      "notion_page": "https://app.notion.com/p/37d82e7c7c8680628e92ef18e4219540",
+      "notion_file": "notion-file-block://37d82e7c-7c86-8070-bac7-f21ec74ba14d/20f5b824-ab6e-418e-8823-729ece487582?space_id=c71fba88-bd84-432d-98d2-e14f6c3b5c87&name=SE-SH-2025-1516.jpg",
+      "orientation": "vertical",
+      "pattern": "White Terrazzo",
+      "shows": "White Terrazzo washstand close-up: multicoloured flecks, white vessel basin, chrome tap, dried yarrow",
+      "reviewed": true
+    }
+  ]
+}

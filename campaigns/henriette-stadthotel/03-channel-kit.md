@@ -157,7 +157,7 @@ CTA        Длинный общий CTA
   3. Крупный план Emerald Ghost + образец.
   4. Крупный план White Terrazzo + образец.
   5. «A year of guests and steam» + цитата 1.
-  6. Цитата 4.
+  6. Цитата 2: она про уход и долговечность. Цитату 4 можно взять в подпись или в Stories.
   7. Короткий общий CTA.
 - **Подпись:** первая строка до 125 знаков (хук 2 или 1), всего 60–100 слов, подписи фотографов, 5–8 хэштегов: #hoteldesign #interiordesign #hotelrenovation #bathroomdesign #recycledmaterials #vienna #polygood
 - **Stories:** опрос по мотивам экскурсии в отеле, «What are these washstands made of?». Варианты: recycled plastic / ceramic / stone / glass. Если сырьё подтвердится: «What were these washstands before?».

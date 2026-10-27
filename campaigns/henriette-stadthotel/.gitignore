@@ -1,0 +1,7 @@
+# Licensed photos, brand files and renders stay local (public repository)
+assets/photos/*
+assets/brand/*
+!assets/photos/.gitkeep
+!assets/brand/.gitkeep
+graphics/out/
+graphics/node_modules/

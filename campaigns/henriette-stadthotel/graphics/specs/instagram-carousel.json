@@ -1,0 +1,74 @@
+{
+  "channel": "Instagram collab post with @hotel.henriette",
+  "copy_status": "starter copy from 03-channel-kit.md; the agent rewrites it in outputs/henriette/04-instagram.md and mirrors the final text here",
+  "size": [
+    1080,
+    1350
+  ],
+  "counter": true,
+  "slides": [
+    {
+      "layout": "photo-hook",
+      "photo": "J123",
+      "focus": "68% 50%",
+      "eyebrow": "Henriette Stadthotel Vienna",
+      "headline": "A year of hotel guests and daily steam cleaning",
+      "body": "This is how the Polygood® washstands look now."
+    },
+    {
+      "layout": "photo-split",
+      "photo": "J101",
+      "focus": "50% 62%",
+      "tag": "#PS1801",
+      "eyebrow": "Pattern 1 of 3",
+      "headline": "Sapphire Terrazzo",
+      "body": "Washstand in a Circular Living room"
+    },
+    {
+      "layout": "photo-split",
+      "photo": "J123",
+      "focus": "100% 55%",
+      "tag": "#PS1706",
+      "eyebrow": "Pattern 2 of 3",
+      "headline": "Emerald Ghost",
+      "body": "Picks up its room's colours",
+      "note": "Replace J123 with an Emerald Ghost close-up (probably J124 or J125) once the photos are downloaded"
+    },
+    {
+      "layout": "photo-split",
+      "photo": "S1516",
+      "focus": "50% 90%",
+      "tag": "#PS2107",
+      "eyebrow": "Pattern 3 of 3",
+      "headline": "White Terrazzo",
+      "body": "Washstand in a Circular Living room"
+    },
+    {
+      "layout": "statement",
+      "bg": "sapphire",
+      "eyebrow": "After more than a year of guests",
+      "big": "“Impeccable condition”",
+      "body": "A new guest every night or two. Water, soap, cosmetics. Then steam cleaning, no chemicals.",
+      "note": "Verena Brandtner-Pastuszyn, co-owner, Henriette Stadthotel Vienna"
+    },
+    {
+      "layout": "quote",
+      "bg": "sand",
+      "eyebrow": "Compared with the ceramic basins in the hotel's other rooms",
+      "quote": "It works perfectly and definitely doesn't require any extra effort.",
+      "name": "Verena Brandtner-Pastuszyn",
+      "role": "Co-owner, Henriette Stadthotel Vienna"
+    },
+    {
+      "layout": "cta",
+      "bg": "ink",
+      "eyebrow": "zeig profil award 2026 · Circular Living rooms",
+      "headline": "Planning a refit or a trip to Vienna?",
+      "actions": [
+        "Drawings and samples: link in bio",
+        "Rooms: @hotel.henriette"
+      ],
+      "footer": "polygood.com"
+    }
+  ]
+}
