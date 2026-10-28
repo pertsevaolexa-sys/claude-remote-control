@@ -12,7 +12,6 @@ from mathutils import Matrix, Vector
 
 from .common import (
     DATA,
-    LAST_3D_FRAME,
     S1,
     S2,
     S3,
@@ -30,7 +29,7 @@ from .common import (
     sheet_xy,
     toolpath_state,
 )
-from .geometry import bisect_x, box_mesh, look_at_matrix, obj, ribbon, slab_mesh
+from .geometry import bisect_x, look_at_matrix, obj, ribbon, slab_mesh, tube
 from .rig import PALLET_TOP, TIP_UP, Gantry, pallet, pen
 
 Z_TOP = mm(THICK)
@@ -219,6 +218,34 @@ class Film:
         self.tabletop = o
         self.profile_sections = sections
         self.profile_n = n
+
+        # Scene 03 callouts, drawn on the end face (local +x) and parented to
+        # the slab: the profile contour in accent and the thickness dimension
+        # in ink. Widths match the 2D strokes at the close-up's px per mm.
+        k = self.L["section"]["k"]
+        fx = L / 2 + 0.0003
+        contours = [[(fx, yy, zz) for yy, zz in sec[:n]] for sec in sections]
+        hl = tube("EdgeHighlight", contours[0], mm(2.5 / k), self.m.line_accent, parent=o)
+        hl.shape_key_add(name="square")
+        for key, pts in zip(order[1:], contours[1:]):
+            sk = hl.shape_key_add(name=key)
+            for pt, co in zip(sk.data, pts):
+                pt.co = co
+        self.edge_highlight = hl
+
+        def at(x_mm, y_mm):  # section mm (x out from the edge, y down) -> local
+            return (fx, mm(x_mm + width / 2), mm(T - y_mm))
+
+        d = 9 / k  # tick half-length
+        thin, thick = mm(0.6 / k), mm(0.7 / k)
+        ink = self.m.line_ink
+        self.dim_parts = [
+            tube("DimExtTop", [at(1.5, 0), at(10, 0)], thin, ink, o),
+            tube("DimExtBottom", [at(1.5, T), at(10, T)], thin, ink, o),
+            tube("DimTickTop", [at(7.5 - d, d), at(7.5 + d, -d)], thick, ink, o),
+            tube("DimTickBottom", [at(7.5 - d, T + d), at(7.5 + d, T - d)], thick, ink, o),
+        ]
+        self.dim_line = tube("DimLine", [at(7.5, 0), at(7.5, T)], thick, ink, o)
 
     def _build_panel(self):
         P = DATA["panel"]
@@ -570,10 +597,21 @@ class Film:
         w_bull = t[0] * (1 - t[1])
         w_cham = t[1] * (1 - t[2])
         w_bev = t[2]
-        key = self.tabletop.data.shape_keys
-        rec.set(key, 'key_blocks["bullnose"].value', w_bull, f)
-        rec.set(key, 'key_blocks["chamfer"].value', w_cham, f)
-        rec.set(key, 'key_blocks["bevelled"].value', w_bev, f)
+        for key in (self.tabletop.data.shape_keys, self.edge_highlight.data.shape_keys):
+            rec.set(key, 'key_blocks["bullnose"].value', w_bull, f)
+            rec.set(key, 'key_blocks["chamfer"].value', w_cham, f)
+            rec.set(key, 'key_blocks["bevelled"].value', w_bev, f)
+
+        # Callouts: the contour lights up with the first morph, then the
+        # thickness dimension draws in
+        lit = ramp(l3, (S3["morphs"][0][0], S3["morphs"][0][0] + 8))
+        self.vis(self.edge_highlight, on and lit > 0, f)
+        self.alpha(self.edge_highlight, lit, f)
+        dim = ramp(l3, S3["thickness"])
+        for o in [*self.dim_parts, self.dim_line]:
+            self.vis(o, on and dim > 0, f)
+            self.alpha(o, dim, f)
+        rec.set(self.dim_line.data, "bevel_factor_end", max(0.0, min(1.0, dim)), f)
 
     # Scene 04 --------------------------------------------------------------
 

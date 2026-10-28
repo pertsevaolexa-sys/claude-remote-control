@@ -89,6 +89,23 @@ def ribbon(name, polylines, width, material, z=0.0, flatten=0.12):
     return o
 
 
+def tube(name, points, radius, material, parent=None):
+    """Round line through 3D points: a callout drawn into the scene. Reveal
+    it with bevel_factor_end."""
+    cu = bpy.data.curves.new(name, "CURVE")
+    cu.dimensions = "3D"
+    cu.bevel_mode = "ROUND"
+    cu.bevel_depth = radius
+    cu.bevel_resolution = 2
+    cu.use_fill_caps = True
+    cu.bevel_factor_mapping_end = "SPLINE"
+    sp = cu.splines.new("POLY")
+    sp.points.add(len(points) - 1)
+    for p, (x, y, z) in zip(sp.points, points):
+        p.co = (x, y, z, 1.0)
+    return obj(name, cu, material, parent=parent)
+
+
 def box_mesh(name, size, center=(0, 0, 0)):
     bm = bmesh.new()
     bmesh.ops.create_cube(bm, size=1.0)

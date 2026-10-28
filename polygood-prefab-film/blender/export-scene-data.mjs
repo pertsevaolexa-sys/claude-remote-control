@@ -15,8 +15,9 @@ const src = path.join(here, "..", "src");
 const entry = `
 import * as timing from "./config/timing";
 import { LAYOUTS } from "./config/layout";
-import { COLORS } from "./config/theme";
-import { ASSETS, MATERIAL_LEVELS, MACRO_CENTER, FINISH } from "./config/assets";
+import { COLORS, DURATIONS, EASE } from "./config/theme";
+import { HEADLINES, CHECKLIST_ITEMS, EDGE_PROFILES, STACK_LABELS, LINKEDIN_SPECS } from "./config/copy";
+import { ASSETS, MATERIAL_LEVELS, MACRO_CENTER, FINISH, CLAIMS } from "./config/assets";
 import { SHEET, PARTS, DRAW_SCALE, DIMENSION_STROKES, SHEET_TOOLPATH, OFFCUTS, nestedOutline } from "./geometry/sheet";
 import { PLOT_STROKES } from "./geometry/drawing";
 import { PANEL, PANEL_SOURCE, CUTOUTS, PANEL_TOOLPATH } from "./geometry/partition";
@@ -26,6 +27,9 @@ export const data = {
   timing,
   layouts: LAYOUTS,
   colors: COLORS,
+  durations: DURATIONS,
+  ease: EASE,
+  copy: { headlines: HEADLINES, checklist: CHECKLIST_ITEMS, edgeProfiles: EDGE_PROFILES, stackLabels: STACK_LABELS, specs: LINKEDIN_SPECS, claims: CLAIMS },
   assets: { ...ASSETS, materialLevels: MATERIAL_LEVELS, macroCenter: MACRO_CENTER, finish: FINISH },
   sheet: SHEET,
   drawScale: DRAW_SCALE,

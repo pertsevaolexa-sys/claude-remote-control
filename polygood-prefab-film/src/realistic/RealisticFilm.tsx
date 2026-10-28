@@ -11,7 +11,6 @@ import { Soundtrack } from "../audio/Soundtrack";
 import { LayoutProvider, useLayout } from "../components/LayoutContext";
 import { Headline } from "../components/Headline";
 import { ProcessChecklist } from "../components/ProcessChecklist";
-import { TechnicalLine } from "../components/TechnicalLine";
 import { ToolHead } from "../components/Toolpath";
 import { CLAIMS } from "../config/assets";
 import { REALISTIC_CUES } from "../config/audio";
@@ -46,71 +45,18 @@ const Footage: React.FC<{ variant: Variant; frame: number; clip?: string }> = ({
   />
 );
 
-// Scene 03 callouts drawn over the rendered edge: the profile contour, the
-// thickness dimension and the profile list. `frame` is the scene-03 frame.
+// Scene 03 labels over the rendered edge: the thickness label and the
+// profile list. The contour and dimension lines are drawn in the 3D frames
+// (blender/pgscene/film.py). `frame` is the scene-03 frame.
 const EdgeCallouts: React.FC<{ variant: Variant; frame: number }> = ({
   variant,
   frame,
 }) => {
   const layout = useLayout();
   const a = anchorsAt(variant, SCENES.edges.from + frame);
-  const highlight = ramp(frame, [S3.morphs[0][0], S3.morphs[0][0] + 8]);
   const thickness = ramp(frame, S3.thickness);
-  const tick = (p: Pt): Pt[] => [
-    [p[0] - 9, p[1] + 9],
-    [p[0] + 9, p[1] - 9],
-  ];
   return (
     <AbsoluteFill>
-      <svg
-        width={layout.width}
-        height={layout.height}
-        style={{ position: "absolute", inset: 0 }}
-      >
-        {a.contour ? (
-          <TechnicalLine
-            pts={a.contour}
-            color={COLORS.accent}
-            width={STROKES.profileHighlight}
-            opacity={highlight}
-          />
-        ) : null}
-        {a.extTopA &&
-        a.extTopB &&
-        a.extBotA &&
-        a.extBotB &&
-        a.dimTop &&
-        a.dimBot ? (
-          <g opacity={thickness}>
-            <TechnicalLine
-              pts={[a.extTopA, a.extTopB]}
-              color={COLORS.ink}
-              width={1.2}
-            />
-            <TechnicalLine
-              pts={[a.extBotA, a.extBotB]}
-              color={COLORS.ink}
-              width={1.2}
-            />
-            <TechnicalLine
-              pts={[a.dimTop, a.dimBot]}
-              progress={thickness}
-              color={COLORS.ink}
-              width={1.4}
-            />
-            <TechnicalLine
-              pts={tick(a.dimTop)}
-              color={COLORS.ink}
-              width={1.4}
-            />
-            <TechnicalLine
-              pts={tick(a.dimBot)}
-              color={COLORS.ink}
-              width={1.4}
-            />
-          </g>
-        ) : null}
-      </svg>
       {a.label ? (
         <div
           style={{

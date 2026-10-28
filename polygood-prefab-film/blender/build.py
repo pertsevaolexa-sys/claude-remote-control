@@ -12,7 +12,6 @@ blender/scene-data.json (node blender/export-scene-data.mjs).
 
 import argparse
 import json
-import math
 import os
 import sys
 
@@ -25,20 +24,24 @@ from bpy_extras.object_utils import world_to_camera_view  # noqa: E402
 from mathutils import Vector  # noqa: E402
 
 from pgscene.common import DATA, LAST_3D_FRAME, PROJECT, S3, SCENES, Recorder, local, ramp  # noqa: E402
+from pgscene.edit import Edit  # noqa: E402
 from pgscene.film import Film  # noqa: E402
 from pgscene.geometry import obj  # noqa: E402
 from pgscene.materials import Library  # noqa: E402
 
 
-def setup_scene(layout, samples):
+def setup_scene(layout, samples, frames_dir):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     addon_utils.enable("cycles", default_set=True)
     sc = bpy.context.scene
+    sc.name = "3D"
     sc.render.engine = "CYCLES"
-    sc.cycles.device = "CPU"
+    # Final quality, for a Mac GPU (Metal); blender/render_mac.py turns the
+    # GPU on. render.py overrides device and samples for CPU renders.
+    sc.cycles.device = "GPU"
     sc.cycles.samples = samples
     sc.cycles.use_adaptive_sampling = True
-    sc.cycles.adaptive_threshold = 0.03
+    sc.cycles.adaptive_threshold = 0.01
     sc.cycles.use_denoising = True
     sc.cycles.denoiser = "OPENIMAGEDENOISE"
     sc.cycles.max_bounces = 6
@@ -63,6 +66,12 @@ def setup_scene(layout, samples):
     sc.render.image_settings.file_format = "PNG"
     sc.render.image_settings.color_mode = "RGBA"
     sc.render.image_settings.compression = 30
+    # Render Animation writes frame_0000.png ... and, with overwrite off and
+    # placeholders on, picks up where it stopped (or shares the work across
+    # machines rendering into the same folder)
+    sc.render.filepath = os.path.join(frames_dir, "frame_")
+    sc.render.use_overwrite = False
+    sc.render.use_placeholder = True
     sc.view_settings.view_transform = "Khronos PBR Neutral"
     sc.view_settings.look = "None"
     sc.view_settings.exposure = 0.0
@@ -159,11 +168,12 @@ def anchors(sc, film, layout):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--variant", default="reels", choices=["reels", "linkedin"])
-    ap.add_argument("--samples", type=int, default=32)
+    ap.add_argument("--samples", type=int, default=64)
     args = ap.parse_args(sys.argv[sys.argv.index("--") + 1 :] if "--" in sys.argv else sys.argv[1:])
 
     layout = DATA["layouts"][args.variant]
-    sc = setup_scene(layout, args.samples)
+    frames_dir = os.path.join(PROJECT, "public", "renders3d", args.variant)
+    sc = setup_scene(layout, args.samples, frames_dir)
     mats = Library()
     rec = Recorder()
     film = Film(layout, rec, mats)
@@ -175,18 +185,26 @@ def main():
     hold_cuts(rec)
     rec.write()
 
-    out_dir = os.path.join(PROJECT, "public", "renders3d", args.variant)
-    os.makedirs(out_dir, exist_ok=True)
-    with open(os.path.join(out_dir, "frames.json"), "w") as fh:
+    os.makedirs(frames_dir, exist_ok=True)
+    with open(os.path.join(frames_dir, "frames.json"), "w") as fh:
         json.dump({"canonical": canonical}, fh)
-    with open(os.path.join(out_dir, "anchors.json"), "w") as fh:
-        json.dump({"width": layout["width"], "height": layout["height"], "frames": anchors(sc, film, layout)}, fh)
+    marks = anchors(sc, film, layout)
+    with open(os.path.join(frames_dir, "anchors.json"), "w") as fh:
+        json.dump({"width": layout["width"], "height": layout["height"], "frames": marks}, fh)
 
     blend_dir = os.path.join(HERE, "blend")
     os.makedirs(blend_dir, exist_ok=True)
     path = os.path.join(blend_dir, f"polygood-{args.variant}.blend")
     sc.frame_set(0)
-    bpy.ops.wm.save_as_mainfile(filepath=path, relative_remap=True)
+    bpy.ops.wm.save_as_mainfile(filepath=path)
+
+    # Every file the .blend uses is stored relative to it
+    def rel(p):
+        return "//" + os.path.relpath(p, blend_dir).replace(os.sep, "/")
+
+    sc.render.filepath = rel(os.path.join(frames_dir, "frame_"))
+    Edit(layout, args.variant, frames_dir, marks, rel).build()
+    bpy.ops.wm.save_as_mainfile(filepath=path)
     unique = len(set(canonical.values()))
     print(f"saved {path}; {unique} unique of {len(canonical)} frames")
 
