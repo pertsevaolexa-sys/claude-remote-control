@@ -55,7 +55,7 @@ The 3D render can be stopped and restarted: frames already on disk are skipped.
 
 What the camera sees:
 
-- **Material:** Polygood #PS1801 Sapphire Terrazzo on every panel and part. It's a procedural material (`blender/pgscene/terrazzo.py`) matched to the pattern's studio photos in Notion: 18 chip colours in their measured shares, flakes of about 7.5 mm with pockets of 3 mm ones, pressed flat so a sawn edge shows them as slivers, a satin face and matte sanded edges. It stays sharp at any zoom, including the opening macro and the edge close-up.
+- **Material:** Polygood #PS1202 Reverse Timeless Duo on every panel and part. It's a procedural material (`blender/pgscene/terrazzo.py`) matched to the pattern's photos in Notion: a near-black body with sparse white flakes, about 2 per 10 × 10 cm and 3–5 mm across, angular with chipped-in notches. The flakes lie flat in the sheet, so a saw cut shows them as ovals. The moulded face is a black satin; sawn and milled faces are matte charcoal with pinholes. It stays sharp at any zoom, including the opening macro and the edge close-up. The pattern is set by `PATTERN` in `blender/pgscene/materials.py`; Sapphire Terrazzo (#PS1801) is still there as `"sapphire"`.
 - **Scene 01:** a 2800 × 1400 × 19 mm sheet, and a pen plotting the drawing in white ink.
 - **Scene 02:** a gantry CNC router cutting the nest, with kerfs trailing the bit.
 - **Scene 03:** the tabletop turning to its end face, its edge morphing between profiles (shape keys), with the orange profile contour and the thickness dimension drawn in 3D on the edge.

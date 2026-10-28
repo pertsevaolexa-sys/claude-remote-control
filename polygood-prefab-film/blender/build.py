@@ -55,7 +55,8 @@ def setup_scene(layout, samples, frames_dir):
     sc.render.use_persistent_data = True
     sc.render.film_transparent = True
     sc.render.use_motion_blur = True
-    sc.render.motion_blur_shutter = 0.25
+    # Short shutter: white flakes on black streak badly in the fast pull-back
+    sc.render.motion_blur_shutter = 0.12
     sc.render.motion_blur_position = "START"
     sc.render.resolution_x = layout["width"]
     sc.render.resolution_y = layout["height"]

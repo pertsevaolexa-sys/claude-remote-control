@@ -5,6 +5,9 @@ import bpy
 
 from .common import DATA
 
+# The panel pattern used throughout the film: a key of terrazzo.PALETTES
+PATTERN = "reverse_timeless_duo"
+
 
 def _hex(h):
     h = h.lstrip("#")
@@ -143,20 +146,21 @@ class Library:
         c = DATA["colors"]
         from .terrazzo import PALETTES, terrazzo_procedural
 
-        # Polygood #PS1801 Sapphire Terrazzo, solid through every part
-        palette = PALETTES["sapphire"]
-        self.terrazzo = terrazzo_procedural("Sapphire Terrazzo", palette)
+        # Polygood #PS1202 Reverse Timeless Duo, solid through every part
+        palette = PALETTES[PATTERN]
+        self.terrazzo = terrazzo_procedural(palette["label"], palette)
         self.slab = self.terrazzo
         self.line_accent = emission("Callout accent", c["accent"])
         self.line_ink = emission("Callout ink", c["ink"])
         self.ink = principled("Ink", "#F7F6F2", roughness=0.62)
-        self.kerf = principled("Kerf", "#0B0D14", roughness=0.92)
+        self.kerf = principled("Kerf", palette.get("kerf", "#0B0D14"), roughness=0.92)
         self.aluminium = brushed_aluminium()
         self.dark = principled("Black", "#16171A", roughness=0.42)
         self.steel = principled("Steel", "#9EA3AA", roughness=0.25, metallic=1.0)
         self.accent = principled("AccentLED", c["accent"], roughness=0.35, emission=c["accent"], strength=3.0)
         self.pen_body = principled("PenBody", "#EDEBE6", roughness=0.35, coat=0.5)
         self.wood = wood()
-        # Granules of the same plastic, for the offcuts turned into new panel
-        top = sorted(palette["chips"], key=lambda cw: -cw[1])[:6] + [("#2B45B5", 1), ("#1E8CC8", 1)]
-        self.chips = [principled(f"Chip{i}", col, roughness=0.35) for i, (col, _) in enumerate(top)]
+        # Regrind of the same plastic, for the offcuts turned into new panel.
+        # The film picks one per granule at random, so repeat by weight.
+        grains = [(principled(f"Granule{i}", col, roughness=0.4), w) for i, (col, w) in enumerate(palette["granules"])]
+        self.chips = [m for m, w in grains for _ in range(max(1, round(w * 14)))]

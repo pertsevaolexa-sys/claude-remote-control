@@ -837,4 +837,5 @@ class Film:
         x = mx - 0.35 + 0.7 * t
         win = ramp(l1, (a, a + 8)) * (1 - ramp(l1, (b - 8, b)))
         self.rec.set(self.sweep, "location", (x, my, 0.55), f)
-        self.rec.set(self.sweep_d, "energy", 6.0 * win, f)
+        # Gentle: on the black face the sweep shows as a satin sheen
+        self.rec.set(self.sweep_d, "energy", 2.5 * win, f)

@@ -41,6 +41,26 @@ PALETTES = {
             ("#83AFCA", 0.012),
             ("#2B3640", 0.075),
         ],
+        "granules": [(c, 1) for c in ("#4D80AF", "#538BB5", "#456AAD", "#4475AB", "#5E95BA", "#5C82CA", "#2B45B5", "#1E8CC8")],
+    },
+    # Polygood #PS1202 Reverse Timeless Duo: near-black recycled polystyrene
+    # with sparse white flakes. Measured from the pattern's Notion photos:
+    # flakes cover 2-3% of the face, about 2 per 10 x 10 cm, 2-6 mm across,
+    # angular with chipped-in notches; cool white on the moulded face, a
+    # little creamier where a saw cuts through them. The moulded face is a
+    # fine satin; sawn edges are matte charcoal, full of tiny pores.
+    "reverse_timeless_duo": {
+        "label": "Reverse Timeless Duo #PS1202",
+        "style": "flecked",
+        "base": "#151617",
+        "edge": "#1F2022",
+        "chip": "#EEF1F1",
+        "chip_cool": "#B9C6D0",
+        "chip_cut": "#E7E2D6",
+        # CNC cuts leave a dusty grey trench in the black sheet
+        "kerf": "#3B3C3F",
+        # Regrind for the film's granule shots: mostly black, some white
+        "granules": [("#141517", 0.5), ("#1C1D20", 0.36), ("#ECEFF0", 0.14)],
     },
     "navy": {
         "label": "Navy",
@@ -162,9 +182,9 @@ def _sheet_coords(nt):
     return (xs, ys, zs), sepn.outputs[2]
 
 
-def _voronoi(nt, vec, size_mm, feature):
+def _voronoi(nt, vec, size_mm, feature, dims="3D"):
     v = nt.nodes.new("ShaderNodeTexVoronoi")
-    v.voronoi_dimensions = "3D"
+    v.voronoi_dimensions = dims
     v.feature = feature
     v.inputs["Scale"].default_value = 1.0 / size_mm
     nt.links.new(vec, v.inputs["Vector"])
@@ -270,6 +290,181 @@ def _packed(name, palette, chip_scale=1.0):
     return m
 
 
+def _vec(nt, op, a, b):
+    n = nt.nodes.new("ShaderNodeVectorMath")
+    n.operation = op
+    for i, v in enumerate((a, b)):
+        if v is None:
+            continue
+        if isinstance(v, tuple):
+            n.inputs[i].default_value = v
+        else:
+            nt.links.new(v, n.inputs[i])
+    return n.outputs[0]
+
+
+def _clamp01(nt, x):
+    return _math(nt, "MINIMUM", 1.0, _math(nt, "MAXIMUM", 0.0, x))
+
+
+def _step(nt, x, edge, soft):
+    """0 below edge, 1 above it, over a band of width soft."""
+    return _clamp01(nt, _math(nt, "MULTIPLY", _math(nt, "SUBTRACT", x, edge), 1.0 / soft))
+
+
+def _flakes(nt, p, size, share, layer, soft=0.035):
+    """Sparse angular flakes lying flat in the sheet, as pressing leaves
+    them: the body is split into wavy layers `layer` mm thick, each with its
+    own scatter of 2D Voronoi cells of about `size` mm, a random share of
+    which are flakes. A flake is lens-shaped through its layer, so a face
+    shows mostly whole flakes and a saw cut shows ovals. Outlines get a few
+    chipped-in notches. Returns (mask, mm inside the outline, two per-flake
+    randoms)."""
+    sep = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(p, sep.inputs[0])
+    x, y, z = sep.outputs
+    # Layers undulate gently, so flakes sit at mixed depths; slow enough
+    # that a layer boundary rarely runs through a flake
+    sway = nt.nodes.new("ShaderNodeTexNoise")
+    sway.noise_dimensions = "2D"
+    sway.inputs["Scale"].default_value = 1.0 / 40.0
+    nt.links.new(p, sway.inputs["Vector"])
+    zl = _math(nt, "DIVIDE", _math(nt, "ADD", z, _math(nt, "MULTIPLY", sway.outputs["Fac"], 1.6 * layer)), layer)
+    k = _math(nt, "FLOOR", zl)
+    f = _math(nt, "ABSOLUTE", _math(nt, "SUBTRACT", _math(nt, "SUBTRACT", zl, k), 0.5))
+    # Fracture lines are straight-ish but never ruler-straight
+    warp = nt.nodes.new("ShaderNodeTexNoise")
+    warp.noise_dimensions = "3D"
+    warp.inputs["Scale"].default_value = 1.0 / 4.0
+    warp.inputs["Detail"].default_value = 3.0
+    nt.links.new(p, warp.inputs["Vector"])
+    wobble = _vec(nt, "SCALE", _vec(nt, "SUBTRACT", warp.outputs["Color"], (0.5, 0.5, 0.5)), None)
+    wobble.node.inputs["Scale"].default_value = 0.16 * size
+    seed = _combine(nt, _math(nt, "MULTIPLY", k, 37.17), _math(nt, "MULTIPLY", k, 91.31), 0.0)
+    q = _vec(nt, "ADD", _vec(nt, "ADD", _combine(nt, x, y, 0.0), wobble), seed)
+
+    cell, edge = _voronoi(nt, q, size, "F1", "2D"), _voronoi(nt, q, size, "DISTANCE_TO_EDGE", "2D")
+    rnd = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(cell.outputs["Color"], rnd.inputs[0])
+    # Lens: full outline mid-layer, shrinking to nothing at the layer's faces
+    lens = _math(nt, "POWER", _math(nt, "MULTIPLY", f, 2.0), 6.0)
+    # (0.12 mm in from the cell edge, so neighbouring flakes never fuse)
+    d = _math(nt, "SUBTRACT", _math(nt, "MULTIPLY", edge.outputs["Distance"], size), _math(nt, "ADD", 0.12, _math(nt, "MULTIPLY", lens, 0.46 * size)))
+    mask = _math(nt, "MULTIPLY", _math(nt, "LESS_THAN", rnd.outputs[0], share), _step(nt, d, 0.0, soft))
+    # Notches: small cells that bite into the outline (never into the middle)
+    bq = _vec(nt, "ADD", q, (17.1, 5.3, 0.0))
+    bite = _voronoi(nt, bq, size * 0.3, "F1", "2D")
+    brnd = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(bite.outputs["Color"], brnd.inputs[0])
+    in_bite = _math(nt, "LESS_THAN", brnd.outputs[0], 0.25)
+    near_rim = _math(nt, "LESS_THAN", d, size * 0.1)
+    mask = _math(nt, "MULTIPLY", mask, _math(nt, "SUBTRACT", 1.0, _math(nt, "MULTIPLY", in_bite, near_rim)))
+    return mask, d, rnd.outputs[1], rnd.outputs[2]
+
+
+def _dots(nt, p, size, share, r_min, r_max, offset):
+    """Round dots (pores, specks) of r_min..r_max mm, one in a random share
+    of `size` mm cells; returns a 0..1 mask, soft at the rim."""
+    q = _vec(nt, "ADD", p, offset)
+    cell = _voronoi(nt, q, size, "F1")
+    rnd = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(cell.outputs["Color"], rnd.inputs[0])
+    r = _math(nt, "ADD", r_min, _math(nt, "MULTIPLY", rnd.outputs[1], r_max - r_min))
+    d = _math(nt, "MULTIPLY", cell.outputs["Distance"], size)
+    inside = _step(nt, _math(nt, "SUBTRACT", r, d), 0.0, 0.03)
+    return _math(nt, "MULTIPLY", inside, _math(nt, "LESS_THAN", rnd.outputs[0], share))
+
+
+def _flecked(name, palette, chip_scale=1.0):
+    """Sparse white flakes in a near-black body, as in Polygood's Reverse
+    Timeless Duo. Flakes lie flat in the sheet, so a sawn edge cuts them
+    into ovals; the moulded face is satin with the odd pinhole, while a sawn
+    or milled face is matte, a shade lighter and open-pored."""
+    m, nt = _new(name)
+    (xs, ys, zs), nz = _sheet_coords(nt)
+    p = _combine(nt, xs, ys, zs)
+    side = _step(nt, _math(nt, "SUBTRACT", 0.6, _math(nt, "ABSOLUTE", nz)), 0.0, 0.2)
+
+    flake, d, tone, cool = _flakes(nt, p, 5.0 * chip_scale, 0.037, 2.4 * chip_scale)
+    # Stray white specks, a few tenths of a millimetre
+    speck = _dots(nt, p, 1.4, 0.006, 0.07, 0.17, (3.3, 8.1, 2.2))
+
+    # Flake colour: white, with cool translucent patches, a greyer rim where
+    # the flake thins out, and a fine grey speckle (recycled HIPS)
+    patches = nt.nodes.new("ShaderNodeTexNoise")
+    patches.noise_dimensions = "3D"
+    patches.inputs["Scale"].default_value = 1.0 / 1.3
+    patches.inputs["Detail"].default_value = 3.0
+    nt.links.new(p, patches.inputs["Vector"])
+    cool_amt = _math(nt, "MULTIPLY", _step(nt, patches.outputs["Fac"], 0.52, 0.12), _math(nt, "ADD", 0.15, _math(nt, "MULTIPLY", cool, 0.6)))
+    white = _mix_color(nt, _math(nt, "MULTIPLY", side, 0.85), _rgb(nt, palette["chip"]), _rgb(nt, palette["chip_cut"]))
+    chip = _mix_color(nt, _math(nt, "MULTIPLY", cool_amt, _math(nt, "SUBTRACT", 1.0, side)), white, _rgb(nt, palette["chip_cool"]))
+    rim = _math(nt, "SUBTRACT", 1.0, _step(nt, d, 0.04, 0.22))
+    chip = _mix_color(nt, _math(nt, "MULTIPLY", rim, 0.45), chip, _rgb(nt, palette["chip_cool"]))
+    grit = _dots(nt, p, 0.32, 0.22, 0.02, 0.05, (1.7, 4.4, 0.9))
+    chip = _mix_color(nt, _math(nt, "MULTIPLY", grit, 0.55), chip, _rgb(nt, "#6F7476"))
+    # Each flake its own white, from paper-white to a light grey
+    gain = _math(nt, "ADD", 0.78, _math(nt, "MULTIPLY", tone, 0.24))
+    shade = nt.nodes.new("ShaderNodeCombineColor")
+    for i in range(3):
+        nt.links.new(gain, shade.inputs[i])
+    tinted = nt.nodes.new("ShaderNodeMix")
+    tinted.data_type = "RGBA"
+    tinted.blend_type = "MULTIPLY"
+    sock = lambda coll, ident: next(x for x in coll if x.identifier == ident)
+    sock(tinted.inputs, "Factor_Float").default_value = 1.0
+    nt.links.new(chip, sock(tinted.inputs, "A_Color"))
+    nt.links.new(shade.outputs[0], sock(tinted.inputs, "B_Color"))
+    chip = sock(tinted.outputs, "Result_Color")
+
+    # Body: faint mottle, lighter and open-pored where it has been cut
+    mottle = nt.nodes.new("ShaderNodeTexNoise")
+    mottle.noise_dimensions = "3D"
+    mottle.inputs["Scale"].default_value = 1.0 / 14.0
+    mottle.inputs["Detail"].default_value = 4.0
+    nt.links.new(p, mottle.inputs["Vector"])
+    body = _mix_color(nt, side, _rgb(nt, palette["base"]), _rgb(nt, palette["edge"]))
+    body = _mix_color(nt, _math(nt, "MULTIPLY", mottle.outputs["Fac"], 0.35), body, _rgb(nt, "#0E0F10"))
+    pore_share = _mix_float(nt, side, 0.05, 0.38)
+    pores = _dots(nt, p, 0.75, pore_share, 0.08, 0.32, (9.9, 2.4, 6.6))
+    pores = _math(nt, "MULTIPLY", pores, _math(nt, "SUBTRACT", 1.0, flake))
+    color = _mix_color(nt, flake, body, chip)
+    color = _mix_color(nt, _math(nt, "MULTIPLY", speck, 0.8), color, _rgb(nt, "#C9CCCB"))
+    color = _mix_color(nt, _math(nt, "MULTIPLY", pores, 0.85), color, _rgb(nt, "#050506"))
+
+    bsdf = nt.nodes.new("ShaderNodeBsdfPrincipled")
+    nt.links.new(color, bsdf.inputs["Base Color"])
+    bsdf.inputs["IOR"].default_value = 1.59  # polystyrene
+    grain = nt.nodes.new("ShaderNodeTexNoise")
+    grain.noise_dimensions = "3D"
+    grain.inputs["Scale"].default_value = 1.0 / 0.11
+    grain.inputs["Detail"].default_value = 2.0
+    nt.links.new(p, grain.inputs["Vector"])
+    face_rough = _math(nt, "ADD", 0.46, _math(nt, "MULTIPLY", grain.outputs["Fac"], 0.1))
+    face_rough = _math(nt, "SUBTRACT", face_rough, _math(nt, "MULTIPLY", flake, 0.08))
+    rough = _mix_float(nt, side, face_rough, _math(nt, "ADD", 0.66, _math(nt, "MULTIPLY", grain.outputs["Fac"], 0.14)))
+    rough = _math(nt, "MAXIMUM", rough, _math(nt, "MULTIPLY", pores, 0.9))
+    nt.links.new(rough, bsdf.inputs["Roughness"])
+    # Light wanders a little inside the white flakes, not in the carbon black
+    nt.links.new(_math(nt, "MULTIPLY", flake, 0.35), bsdf.inputs["Subsurface Weight"])
+    bsdf.inputs["Subsurface Radius"].default_value = (1.0, 1.0, 1.0)
+    bsdf.inputs["Subsurface Scale"].default_value = 0.0005
+    # Sawn faces have a faint dusty sheen
+    nt.links.new(_math(nt, "MULTIPLY", side, 0.15), bsdf.inputs["Sheen Weight"])
+    bsdf.inputs["Sheen Roughness"].default_value = 0.6
+
+    # Fine satin grain on the face, coarse tooling grain and pinholes on cuts
+    height = _math(nt, "MULTIPLY", grain.outputs["Fac"], _math(nt, "ADD", 0.25, _math(nt, "MULTIPLY", side, 0.75)))
+    height = _math(nt, "SUBTRACT", height, pores)
+    bump = nt.nodes.new("ShaderNodeBump")
+    bump.inputs["Strength"].default_value = 0.35
+    bump.inputs["Distance"].default_value = 0.00004
+    nt.links.new(height, bump.inputs["Height"])
+    nt.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+    _finish(nt, bsdf.outputs[0])
+    return m
+
+
 def _mix_float(nt, fac, a, b):
     mix = nt.nodes.new("ShaderNodeMix")
     mix.data_type = "FLOAT"
@@ -293,6 +488,8 @@ def terrazzo_procedural(name, palette, chip_scale=1.0):
     resizes every chip layer (1.0 = the sizes in LAYERS)."""
     if palette.get("style") == "packed":
         return _packed(name, palette, chip_scale)
+    if palette.get("style") == "flecked":
+        return _flecked(name, palette, chip_scale)
     m, nt = _new(name)
     tc = nt.nodes.new("ShaderNodeTexCoord")
     sep = nt.nodes.new("ShaderNodeSeparateXYZ")
