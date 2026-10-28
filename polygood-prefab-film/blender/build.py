@@ -159,6 +159,11 @@ def anchors(sc, film, layout):
             pa, pb = film.pallet_a.location, film.pallet_b.location
             rec["sheets"] = project(sc, cam, root @ Vector((pa.x + 0.3, pa.y - 0.72, 0.0)), W, H)
             rec["parts"] = project(sc, cam, root @ Vector((pb.x + 0.2, pb.y - 0.5, 0.0)), W, H)
+            # Front-left floor corners of the pallets (the labels' column)
+            for key, pal in (("sheetsCorner", film.pallet_a), ("partsCorner", film.pallet_b)):
+                bb = [v for c in pal.children for v in c.bound_box]
+                corner = Vector((min(v[0] for v in bb), min(v[1] for v in bb), 0.0))
+                rec[key] = project(sc, cam, pal.matrix_world @ corner, W, H)
             nx, ny = film.new_panel_origin
             rec["strip"] = project(sc, cam, root @ Vector((nx, ny - 0.22, 0.019)), W, H)  # front-left corner
             rec["stripEnd"] = project(sc, cam, root @ Vector((nx + 2.6, ny - 0.22, 0.019)), W, H)  # front-right corner

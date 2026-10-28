@@ -377,25 +377,39 @@ class Edit:
         return (p[0] / self.W, 1 - (p[1] + LABEL_BASELINE * size - VSE_BASELINE * size) / self.H)
 
     def stack_labels(self):
+        """The three labels in one column on the headline's margin, evenly
+        spaced down the staircase of objects: under the sheets pallet, level
+        with the parts pallet, under the new strip."""
         b = SCENES["benefits"]["from"]
         end = b + SCENES["benefits"]["durationInFrames"]
         size = self.L["stacks"]["labelSize"]
+        x, lh = self.L["headline"]["x"], 1.2 * size
         frames = range(b, end)
         out = lambda f: 1 - ramp(f - b, S5["labelsOut"], "in")
-        for ch, (key, text, anchor_x, window) in enumerate((
-            ("sheets", COPY["stackLabels"]["sheets"], "CENTER", (S5["sheets"][1] - 4, S5["sheets"][1] + 10)),
-            ("parts", COPY["stackLabels"]["parts"], "CENTER", (S5["settle"] - 2, S5["settle"] + 12)),
-            ("stripEnd", COPY["stackLabels"]["offcuts"], "RIGHT", (S5["granules"][0] + 6, S5["granules"][0] + 22)),
+
+        def tops(f):
+            a = self.anchors[f]
+            first = a["sheetsCorner"][1] + 2 * size
+            last = a["strip"][1] + 2 * size
+            return first, (first + last) / 2, last
+
+        ch = 70
+        for row, (text, window) in enumerate((
+            (COPY["stackLabels"]["sheets"], (S5["sheets"][1] - 4, S5["sheets"][1] + 10)),
+            (COPY["stackLabels"]["parts"], (S5["settle"] - 2, S5["settle"] + 12)),
+            (COPY["stackLabels"]["offcuts"], (S5["granules"][0] + 6, S5["granules"][0] + 22)),
         )):
-            t = self.text(text, size, b, end, 70 + ch, anchor_x=anchor_x)
+            # A narrow column: long labels wrap to two balanced lines
+            for i, line in enumerate(self.balanced(text, size, 8 * size)):
+                t = self.text(line, size, b, end, ch)
+                ch += 1
 
-            def loc(f, key=key):
-                p = self.anchors[f][key]
-                base = p[1] + 0.6 * size + NORMAL_TOP_BASELINE * size
-                return (p[0] / self.W, 1 - (base - VSE_BASELINE * size) / self.H)
+                def loc(f, row=row, i=i):
+                    base = tops(f)[row] + NORMAL_TOP_BASELINE * size + i * lh
+                    return (x / self.W, 1 - (base - VSE_BASELINE * size) / self.H)
 
-            self.keys(t, "location", frames, loc)
-            self.keys(t, "blend_alpha", frames, lambda f, window=window: ramp(f - b, window) * out(f))
+                self.keys(t, "location", frames, loc)
+                self.keys(t, "blend_alpha", frames, lambda f, window=window: ramp(f - b, window) * out(f))
 
     def sweep_x(self, f):
         l4 = f - SCENES["cnc"]["from"]
