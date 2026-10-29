@@ -4,7 +4,7 @@ import math
 
 import bmesh
 import bpy
-from mathutils import Matrix, Vector
+from mathutils import Matrix, Vector, geometry
 
 
 def link(obj):
@@ -43,17 +43,43 @@ def slab_mesh(name, outer, holes=(), thickness=0.019):
     return me
 
 
-def bisect_x(me, step, x0, x1):
+def add_slab(bm, outer, holes, z0, z1, top=True, bottom=True):
+    """Add to bm a slab from z0 to z1 whose outline is `outer` with `holes`
+    (counter-clockwise (x, y) loops, metres). Caps are tessellated, so any
+    number of holes works; walls face out of the material. Returns
+    (top faces, bottom faces, wall faces)."""
+    loops = [outer, *holes]
+    flat = [Vector((x, y, 0.0)) for loop in loops for x, y in loop]
+    tris = geometry.tessellate_polygon([[Vector((x, y, 0.0)) for x, y in loop] for loop in loops])
+    vb = [bm.verts.new((p.x, p.y, z0)) for p in flat]
+    vt = [bm.verts.new((p.x, p.y, z1)) for p in flat]
+    tops, bottoms, walls = [], [], []
+    for a, b, c in tris:
+        # tessellation winding varies: make the top face up
+        ccw = (flat[b] - flat[a]).cross(flat[c] - flat[a]).z > 0
+        a, b, c = (a, b, c) if ccw else (a, c, b)
+        if top:
+            tops.append(bm.faces.new((vt[a], vt[b], vt[c])))
+        if bottom:
+            bottoms.append(bm.faces.new((vb[a], vb[c], vb[b])))
+    start = 0
+    for k, loop in enumerate(loops):
+        n = len(loop)
+        for i in range(n):
+            i0, i1 = start + i, start + (i + 1) % n
+            quad = (vb[i0], vb[i1], vt[i1], vt[i0])
+            walls.append(bm.faces.new(quad if k == 0 else tuple(reversed(quad))))
+        start += n
+    return tops, bottoms, walls
+
+
+def bisect_x(bm, step, x0, x1):
     """Add vertical cut lines every `step` along X, so the mesh can bend."""
-    bm = bmesh.new()
-    bm.from_mesh(me)
     x = x0 + step
     while x < x1 - 1e-6:
         geom = bm.verts[:] + bm.edges[:] + bm.faces[:]
         bmesh.ops.bisect_plane(bm, geom=geom, plane_co=(x, 0, 0), plane_no=(1, 0, 0))
         x += step
-    bm.to_mesh(me)
-    bm.free()
 
 
 def obj(name, data, material=None, location=(0, 0, 0), parent=None):

@@ -25,15 +25,19 @@ from .common import (
     mm,
     plot_progress,
     point_at,
+    poly_length,
     ramp,
     sheet_xy,
     toolpath_state,
 )
-from .geometry import bisect_x, look_at_matrix, obj, ribbon, slab_mesh, tube
+from . import kerf
+from .geometry import add_slab, bisect_x, look_at_matrix, obj, ribbon, slab_mesh, tube
 from .rig import PALLET_TOP, TIP_UP, Gantry, pallet, pen
 
 Z_TOP = mm(THICK)
 CUT_Z = Z_TOP - 0.002
+# Scene 04: how far the kerf-bent panel curls (radians)
+BEND = math.radians(190)
 SENSOR = 36.0
 
 # Ribbon widths (m) for the plotted drawing and the cut lines
@@ -248,48 +252,81 @@ class Film:
         self.dim_line = tube("DimLine", [at(7.5, 0), at(7.5, T)], thick, ink, o)
 
     def _build_panel(self):
+        """The scene 04 panel, for kerf bending: a lattice of pockets milled
+        into its face down to a thin skin (kerf.py), plus caps that fill the
+        pockets until the router reaches them."""
         P = DATA["panel"]
         Wp, Hp = P["w"], P["h"]
+        outer, holes, pockets = kerf.lattice(Wp, Hp)
 
-        def to_local(u, v):
-            # panel mm (u right, v down from the top) → build plane (x, y=height)
-            return (mm(u) - mm(Wp) / 2, mm(Hp - v))
+        def local(loop):
+            # panel mm (x from the left, y up from the bottom) → panel local
+            # (x centred, y = height, z = thickness), metres
+            return [(mm(x) - mm(Wp) / 2, mm(y)) for x, y in loop]
 
-        outer = [to_local(0, 0), to_local(Wp, 0), to_local(Wp, Hp), to_local(0, Hp)]
-        holes = [[to_local(u, v) for u, v in c["outline"]] for c in DATA["cutouts"]]
-        me = slab_mesh("Panel", outer, holes)
-        # build plane (x, y, z=thickness) → panel local (x, y=thickness, z=height)
-        me.transform(Matrix(((1, 0, 0, 0), (0, 0, 1, 0), (0, 1, 0, 0), (0, 0, 0, 1))))
-        bisect_x(me, 0.02, -mm(Wp) / 2, mm(Wp) / 2)
+        skin, top = mm(kerf.SKIN), Z_TOP
+        bm = bmesh.new()
+        rect = local([(0, 0), (Wp, 0), (Wp, Hp), (0, Hp)])
+        add_slab(bm, rect, [], 0.0, skin)
+        # the ribs: open underneath, they stand on the skin
+        add_slab(bm, local(outer), [local(h) for h in holes], skin, top, bottom=False)
+        # cut lines every 2 cm so the panel bends smoothly
+        bisect_x(bm, 0.02, -mm(Wp) / 2, mm(Wp) / 2)
+        bm.normal_update()
+        # the skin's upper face shows only at the pocket floors
+        floor = [1.0 if fc.normal.z > 0.5 and fc.calc_center_median().z < skin + 1e-6 else 0.0 for fc in bm.faces]
+        me = bpy.data.meshes.new("Panel")
+        bm.to_mesh(me)
+        me.attributes.new("milled", "FLOAT", "FACE").data.foreach_set("value", floor)
+        bm.free()
         self.panel = obj("Panel", me, self.m.terrazzo)
         # texture: panel X ↔ sheet x around the sheet centre
         self.panel["tex_off"] = (1400.0, 700.0, 0.0)
+        # Simple Deform only bends X round Z: give it a frame whose Z is the
+        # panel's height and whose Y points out of the back, so the width
+        # wraps round the height with the milled ribs on the outside
+        frame = obj("PanelBendFrame", None, parent=self.panel)
+        frame.rotation_euler = (-math.pi / 2, 0.0, 0.0)
         bend = self.panel.modifiers.new("Bend", "SIMPLE_DEFORM")
         bend.deform_method = "BEND"
         bend.deform_axis = "Z"
+        bend.origin = frame
         bend.angle = 0.0
         self.bend = bend
 
-        self.plugs, self.cut_kerfs = [], []
-        for i, c in enumerate(DATA["cutouts"]):
-            pts = [to_local(u, v) for u, v in c["outline"]]
-            pm = slab_mesh(f"Plug{i:02d}", pts)
-            pm.transform(Matrix(((1, 0, 0, 0), (0, 0, 1, 0), (0, 1, 0, 0), (0, 0, 0, 1))))
-            plug = obj(f"Plug{i:02d}", pm, self.m.terrazzo, parent=self.panel)
-            plug["tex_off"] = (1400.0, 700.0, 0.0)
-            self.plugs.append(plug)
-            k = ribbon(f"CutKerf{i:02d}", [pts], W_KERF, self.m.kerf, z=0.0)
-            k.parent = self.panel
-            k.rotation_euler = (math.pi / 2, 0, 0)
-            k.location = (0, -0.0004, 0)
-            self.cut_kerfs.append(k)
-        self.panel_toolpath = DATA["panelToolpath"]
-        self.cut_index = []
-        for c in DATA["cutouts"]:
-            for j, s in enumerate(self.panel_toolpath):
-                if s["type"] == "cut" and s["pts"] == c["outline"]:
-                    self.cut_index.append(j)
-                    break
+        # Router path: passes across the panel, from the near edge to the far
+        # one, each milling a band of pockets (panel mm, v down from the top)
+        band = 240.0
+        first = -80.0
+        n = int((Hp + 80.0 - first) // band) + 1
+        segs, starts, x_in, x_out = [], [], -10.0, Wp + 10.0
+        for i in range(n):
+            v = Hp - (first + (i + 0.5) * band)
+            a, b = (x_in, x_out) if i % 2 == 0 else (x_out, x_in)
+            if segs:
+                segs.append({"type": "cut", "pts": [segs[-1]["pts"][-1], [a, v]]})
+            starts.append(sum(poly_length(sg["pts"]) for sg in segs))
+            segs.append({"type": "cut", "pts": [[a, v], [b, v]]})
+        self.panel_toolpath = segs
+        total = sum(poly_length(sg["pts"]) for sg in segs)
+
+        def order(cx, cy):
+            i = min(n - 1, max(0, int((cy - first) // band)))
+            along = (cx - x_in) if i % 2 == 0 else (x_out - cx)
+            return (starts[i] + along) / total
+
+        bm = bmesh.new()
+        orders = []
+        for poly, (cx, cy) in pockets:
+            t, bt, w = add_slab(bm, local(poly), [], skin, top)
+            orders += [order(cx, cy)] * (len(t) + len(bt) + len(w))
+        me = bpy.data.meshes.new("PocketCaps")
+        bm.to_mesh(me)
+        bm.free()
+        me.attributes.new("order", "FLOAT", "FACE").data.foreach_set("value", orders)
+        self.caps = obj("PocketCaps", me, self.m.terrazzo_uncut, parent=self.panel)
+        self.caps["tex_off"] = (1400.0, 700.0, 0.0)
+        self.caps["cut"] = 0.0
 
     def _panel_world(self, u, v):
         """Panel mm → world point while the panel lies flat (scene 04)."""
@@ -625,24 +662,17 @@ class Film:
         stand = ramp(l4, (98, 120), "inOut")
         bend = ramp(l4, (108, S4["bend"][1]), "inOut")
         exit_ = ramp(l4, S4["exit"], "in")
-        y_edge = -mm(P["h"]) / 2
-        rec.set(self.panel, "rotation_euler", (-math.pi / 2 * (1 - stand), 0.0, 0.0), f)
-        rec.set(self.panel, "location", (-2.6 * exit_, y_edge, Z_TOP * (1 - stand)), f)
-        rec.set(self.panel, 'modifiers["Bend"].angle', math.radians(140) * bend, f)
+        # lies flat, milled face up; stands on its bottom edge, milled face
+        # to camera, and bends round its height
+        rec.set(self.panel, "rotation_euler", (math.pi / 2 * stand, 0.0, 0.0), f)
+        rec.set(self.panel, "location", (-2.6 * exit_, -mm(P["h"]) / 2, 0.0), f)
+        rec.set(self.panel, 'modifiers["Bend"].angle', BEND * bend, f)
 
+        # The router mills the pockets as it passes over them
         t_tool = ramp(l4, S4["toolpath"], "standard") if l4 >= 0 else 0.0
-        progress, head, _ = toolpath_state(self.panel_toolpath, t_tool)
-        n = len(self.plugs)
-        span = S4["removal"][1] - S4["removal"][0] - S4["plugDrop"]
-        for i, (plug, kerf) in enumerate(zip(self.plugs, self.cut_kerfs)):
-            start = S4["removal"][0] + i / n * span
-            d = ramp(l4, (start, start + S4["plugDrop"]), "in")
-            rec.set(plug, "location", (0.0, -0.09 * d, 0.0), f)
-            self.alpha(plug, 1 - d, f)
-            self.vis(plug, on and d < 1, f)
-            p = progress[self.cut_index[i]]
-            rec.set(kerf.data, "bevel_factor_end", max(0.0, min(1.0, p)), f)
-            self.vis(kerf, on and p > 0 and l4 < S4["removal"][1] + 4, f)
+        rec.set(self.caps, '["cut"]', t_tool, f)
+        self.vis(self.caps, on and t_tool < 1, f)
+        _, head, _ = toolpath_state(self.panel_toolpath, t_tool)
 
         g_on = 0 <= l4 < 96
         if g_on:
@@ -799,10 +829,12 @@ class Film:
             d_flat = self.dist_for(flat_k, lens)
             move = ramp(l4, (92, 128), "inOut")
             flat_t = (0.0, 0.0, Z_TOP)
-            stand_t = (0.0, -mm(P["h"]) / 2 + 0.25, mm(P["h"]) / 2)
+            # the bent panel's centre, a little behind its front
+            stand_t = (0.0, -mm(P["h"]) / 2 + 0.3, mm(P["h"]) * 0.5)
             target = lerp3(flat_t, stand_t, move)
-            d = lerp(d_flat, d_flat * 1.08, move)
-            self.shot(f, target, d, lerp(72.0, 10.0, move), lens, (pan["cx"], pan["cy"]), az_deg=lerp(0.0, -22.0, move), fstop=11.0)
+            d = lerp(d_flat, d_flat * 0.98, move)
+            # from above, so the comb of milled ribs shows along the top edge
+            self.shot(f, target, d, lerp(72.0, 36.0, move), lens, (pan["cx"], pan["cy"]), az_deg=lerp(0.0, -34.0, move), fstop=11.0)
             return
 
         st = L["stacks"]

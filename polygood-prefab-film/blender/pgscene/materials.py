@@ -74,6 +74,28 @@ def _combine(nt, x, y, z, loc=(0, 0)):
     return n.outputs[0]
 
 
+def revealing(mat, name):
+    """Copy of `mat` that turns invisible on faces whose "order" attribute is
+    below the object's "cut" property: material the router has removed."""
+    m = mat.copy()
+    m.name = name
+    nt = m.node_tree
+    out = next(n for n in nt.nodes if n.type == "OUTPUT_MATERIAL")
+    shader = out.inputs["Surface"].links[0].from_socket
+    order = nt.nodes.new("ShaderNodeAttribute")
+    order.attribute_type, order.attribute_name = "GEOMETRY", "order"
+    cut = nt.nodes.new("ShaderNodeAttribute")
+    cut.attribute_type, cut.attribute_name = "OBJECT", "cut"
+    gone = _math(nt, "LESS_THAN", order.outputs["Fac"], cut.outputs["Fac"])
+    transp = nt.nodes.new("ShaderNodeBsdfTransparent")
+    mix = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(gone, mix.inputs["Fac"])
+    nt.links.new(shader, mix.inputs[1])
+    nt.links.new(transp.outputs[0], mix.inputs[2])
+    nt.links.new(mix.outputs[0], out.inputs["Surface"])
+    return m
+
+
 def emission(name, color, strength=1.0):
     """Flat unlit colour, for graphic lines drawn into the 3D (callouts)."""
     m, nt = _new(name)
@@ -150,6 +172,8 @@ class Library:
         palette = PALETTES[PATTERN]
         self.terrazzo = terrazzo_procedural(palette["label"], palette)
         self.slab = self.terrazzo
+        # Pocket caps on the kerf-bending panel, milled away as the router passes
+        self.terrazzo_uncut = revealing(self.terrazzo, palette["label"] + " (uncut)")
         self.line_accent = emission("Callout accent", c["accent"])
         self.line_ink = emission("Callout ink", c["ink"])
         self.ink = principled("Ink", "#F7F6F2", roughness=0.62)

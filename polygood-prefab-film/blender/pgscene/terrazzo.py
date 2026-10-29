@@ -384,6 +384,11 @@ def _flecked(name, palette, chip_scale=1.0):
     (xs, ys, zs), nz = _sheet_coords(nt)
     p = _combine(nt, xs, ys, zs)
     side = _step(nt, _math(nt, "SUBTRACT", 0.6, _math(nt, "ABSOLUTE", nz)), 0.0, 0.2)
+    # Faces a router has milled flat (pocket floors) are matte like a cut edge
+    milled = nt.nodes.new("ShaderNodeAttribute")
+    milled.attribute_type = "GEOMETRY"
+    milled.attribute_name = "milled"
+    side = _math(nt, "MAXIMUM", side, milled.outputs["Fac"])
 
     flake, d, tone, cool = _flakes(nt, p, 5.0 * chip_scale, 0.037, 2.4 * chip_scale)
     # Stray white specks, a few tenths of a millimetre

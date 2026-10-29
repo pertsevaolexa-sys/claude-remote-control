@@ -59,7 +59,7 @@ What the camera sees:
 - **Scene 01:** a 2800 × 1400 × 19 mm sheet, and a pen plotting the drawing in white ink.
 - **Scene 02:** a gantry CNC router cutting the nest, with kerfs trailing the bit.
 - **Scene 03:** the tabletop turning to its end face, its edge morphing between profiles (shape keys), with the orange profile contour and the thickness dimension drawn in 3D on the edge.
-- **Scene 04:** the slotted partition machined, then bent upright.
+- **Scene 04:** kerf bending, after the FLEX samples on the "3d shaping" page in Notion. The router mills a lattice of lens-shaped pockets into the panel, leaving a 3 mm skin; then the panel stands and bends into a curve with the ribs on the outside and a comb along its top edge (`blender/pgscene/kerf.py`).
 - **Scene 05:** pallets of full sheets and finished parts, with offcuts breaking into chips that land as a new strip.
 
 Lighting is three soft area lights plus a dim world, through the Khronos PBR Neutral view transform. The default is 64 samples with OpenImageDenoise. The `Film` scene uses the Standard view transform, so the paper is exactly #F4F3ED and the cut into the logo clip is invisible.
@@ -88,7 +88,7 @@ The rendered frames (about 2 GB per format) are not committed. The Remotion comp
 | 01 | 0–4 s | 0–119 | Start with your drawing | Extreme macro of the material, light sweep, pull-back to the full sheet. A pen plots a plan and end elevations of a table and bench, then dimension lines and ticks (no numbers). |
 | 02 | 4–9 s | 120–269 | Prefabricated in-house | The drawing separates into six parts that slide into a nested layout on a 2800 × 1400 mm sheet. An orange CAM toolpath cuts each part (dashed rapids between them), the parts lift off the dimmed skeleton, and the tabletop moves to centre. The checklist appears as the scene starts; **Cut** ticks. |
 | 03 | 9–14 s | 270–419 | Your edge, your profile | The tabletop turns and tips (CSS 3D) until only its end face shows, which becomes a 2D cross-section. The camera pushes in on the edge, which morphs square → bullnose → chamfer → bevelled, with the active label and an orange contour. Thickness callout. **Edged** ticks. |
-| 04 | 14–19.5 s | 420–584 | Curved without thermoforming | A toolpath crosses the frame, wiping the edge close-up away to reveal a second panel. The toolpath engraves a staggered pattern of capsule cut-outs; the plugs drop away; the panel bends into a curved partition built from 40 strips in 3D, with a floor shadow tracing the curve. **Machined** and **Curved** tick. |
+| 04 | 14–19.5 s | 420–584 | Kerf bending, by CNC milling | A toolpath crosses the frame, wiping the edge close-up away to reveal a second panel. The toolpath engraves a staggered pattern of capsule cut-outs; the plugs drop away; the panel bends into a curved partition built from 40 strips in 3D, with a floor shadow tracing the curve. **Machined** and **Curved** tick. |
 | 05 | 19.5–25 s | 585–749 | Lighter to ship, less waste | Isometric delivery stacks: full sheets beside the shorter stack of finished parts (dry tap as they settle). Offcuts move away, break into chips and re-form as a strip of new panel material, which then clears. |
 | 06 | 25–30 s | 750–899 | (logo) | The supplied logo animation, played as is: the mark draws and fills, then "polygood" and "by the good plastic company". Static for the final second; silent for the final 0.5 s. |
 

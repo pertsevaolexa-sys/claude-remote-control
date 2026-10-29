@@ -5,7 +5,7 @@ export const HEADLINES = {
   drawing: ["Start with", "your drawing"],
   cutting: ["Prefabricated", "in-house"],
   edges: ["Your edge,", "your profile"],
-  cnc: ["Curved without", "thermoforming"],
+  cnc: ["Kerf bending,", "by CNC milling"],
   benefits: ["Lighter to ship,", "less waste"],
 } as const;
 
@@ -39,8 +39,8 @@ export const LINKEDIN_SPECS = {
     "Eased",
   ),
   cnc: spec(
-    "Cut, milled or engraved",
-    "Cut-out designs for partitions, walls, backlit panels and ceilings",
+    "Milled so it bends without thermoforming",
+    "For partitions, walls, backlit panels and ceilings",
   ),
   benefits: spec(
     "Reduce transport weight and shipping costs",

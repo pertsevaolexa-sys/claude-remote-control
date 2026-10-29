@@ -261,7 +261,8 @@ class Edit:
 
     def balanced(self, text, size, maxw):
         """Break text into the fewest lines that fit maxw, as evenly as
-        CSS text-wrap: balance does."""
+        CSS text-wrap: balance does, but after a "·" between spec items
+        whenever that fits."""
         words = text.split(" ")
         if self.text_width(text, size) <= maxw:
             return [text]
@@ -269,8 +270,10 @@ class Edit:
         for k in range(1, len(words)):
             a, b = " ".join(words[:k]), " ".join(words[k:])
             wa, wb = self.text_width(a, size), self.text_width(b, size)
-            if wa <= maxw and wb <= maxw and (best is None or max(wa, wb) < best[0]):
-                best = (max(wa, wb), [a, b])
+            if wa <= maxw and wb <= maxw:
+                key = (not a.endswith("·"), max(wa, wb))
+                if best is None or key < best[0]:
+                    best = (key, [a, b])
         return best[1] if best else [text]
 
     def checklist(self):
