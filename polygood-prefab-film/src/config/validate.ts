@@ -14,7 +14,7 @@ import {
 // The film's hard timing rules, checked whenever the project loads, so a
 // config edit that breaks one fails in Studio and at render time.
 const rules: [string, boolean][] = [
-  ["Total duration is at most 30 s", DURATION_IN_FRAMES <= 30 * FPS],
+  ["Total duration is at most 32 s", DURATION_IN_FRAMES <= 32 * FPS],
   [
     "Scenes are contiguous and fill the timeline",
     Object.values(SCENES).every((s, i, all) =>

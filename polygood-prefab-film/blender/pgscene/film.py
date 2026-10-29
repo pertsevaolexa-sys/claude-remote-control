@@ -36,8 +36,36 @@ from .rig import PALLET_TOP, TIP_UP, Gantry, pallet, pen
 
 Z_TOP = mm(THICK)
 CUT_Z = Z_TOP - 0.002
-# Scene 04: how far the kerf-bent panel curls (radians)
+# Scene 04: the kerf-bent panel first curls into a U (total turn, radians),
+# then flexes into an S, each half turning the opposite way
 BEND = math.radians(190)
+S_TURN = math.radians(150)
+SPINE_POINTS = 61  # one every 2 cm along the 1.2 m width
+
+
+def spine_points(kappa):
+    """Points along the panel's 1.2 m width for a curvature profile
+    kappa(u) (1/m, u = 0..1 across the width), integrated out from the middle
+    so the middle stays put and keeps facing the camera; positive curvature
+    curls the ends back, with the milled ribs outside."""
+    length = mm(DATA["panel"]["w"])
+    n = SPINE_POINTS
+    ds = length / (n - 1)
+    mid = (n - 1) // 2
+    theta = [0.0] * n
+    pts = [None] * n
+    pts[mid] = (length / 2, 0.0)
+    for i in range(mid, n - 1):
+        theta[i + 1] = theta[i] + kappa((i + 0.5) / (n - 1)) * ds
+    for i in range(mid, 0, -1):
+        theta[i - 1] = theta[i] - kappa((i - 0.5) / (n - 1)) * ds
+    for i in range(mid, n - 1):
+        a = (theta[i] + theta[i + 1]) / 2
+        pts[i + 1] = (pts[i][0] + ds * math.cos(a), pts[i][1] + ds * math.sin(a))
+    for i in range(mid, 0, -1):
+        a = (theta[i] + theta[i - 1]) / 2
+        pts[i - 1] = (pts[i][0] - ds * math.cos(a), pts[i][1] - ds * math.sin(a))
+    return pts
 SENSOR = 36.0
 
 # Ribbon widths (m) for the plotted drawing and the cut lines
@@ -282,17 +310,22 @@ class Film:
         self.panel = obj("Panel", me, self.m.terrazzo)
         # texture: panel X ↔ sheet x around the sheet centre
         self.panel["tex_off"] = (1400.0, 700.0, 0.0)
-        # Simple Deform only bends X round Z: give it a frame whose Z is the
-        # panel's height and whose Y points out of the back, so the width
-        # wraps round the height with the milled ribs on the outside
-        frame = obj("PanelBendFrame", None, parent=self.panel)
-        frame.rotation_euler = (-math.pi / 2, 0.0, 0.0)
-        bend = self.panel.modifiers.new("Bend", "SIMPLE_DEFORM")
-        bend.deform_method = "BEND"
-        bend.deform_axis = "Z"
-        bend.origin = frame
-        bend.angle = 0.0
-        self.bend = bend
+        # The panel bends along a spine: a curve in the panel's width and
+        # thickness plane, starting at its left edge, whose shape comes from
+        # a curvature profile (spine_points), so its length never changes
+        cu = bpy.data.curves.new("PanelSpine", "CURVE")
+        cu.dimensions = "2D"
+        sp = cu.splines.new("POLY")
+        sp.points.add(SPINE_POINTS - 1)
+        for p, (x, y) in zip(sp.points, spine_points(lambda u: 0.0)):
+            p.co = (x, y, 0.0, 1.0)
+        self.spine = obj("PanelSpine", cu, parent=self.panel)
+        # curve X along the width, curve Y out of the panel's back, curve Z up
+        self.spine.location = (-mm(Wp) / 2, 0.0, 0.0)
+        self.spine.rotation_euler = (-math.pi / 2, 0.0, 0.0)
+        bend = self.panel.modifiers.new("Bend", "CURVE")
+        bend.object = self.spine
+        bend.deform_axis = "POS_X"
 
         # Router path: passes across the panel, from the near edge to the far
         # one, each milling a band of pockets (panel mm, v down from the top)
@@ -661,12 +694,21 @@ class Film:
 
         stand = ramp(l4, (98, 120), "inOut")
         bend = ramp(l4, (108, S4["bend"][1]), "inOut")
+        flex = ramp(l4, S4["flex"], "inOut")
         exit_ = ramp(l4, S4["exit"], "in")
         # lies flat, milled face up; stands on its bottom edge, milled face
-        # to camera, and bends round its height
+        # to camera, and bends round its height: into a U, then an S
         rec.set(self.panel, "rotation_euler", (math.pi / 2 * stand, 0.0, 0.0), f)
         rec.set(self.panel, "location", (-2.6 * exit_, -mm(P["h"]) / 2, 0.0), f)
-        rec.set(self.panel, 'modifiers["Bend"].angle', BEND * bend, f)
+        width = mm(P["w"])
+        k_u = BEND / width * bend
+        k_s = S_TURN * math.pi / width  # cosine profile: each half turns S_TURN
+
+        def kappa(u):
+            return lerp(k_u, k_s * math.cos(math.pi * u), flex)
+
+        for i, (x, y) in enumerate(spine_points(kappa)):
+            rec.set(self.spine.data, f"splines[0].points[{i}].co", (x, y, 0.0, 1.0), f)
 
         # The router mills the pockets as it passes over them
         t_tool = ramp(l4, S4["toolpath"], "standard") if l4 >= 0 else 0.0
@@ -832,9 +874,13 @@ class Film:
             # the bent panel's centre, a little behind its front
             stand_t = (0.0, -mm(P["h"]) / 2 + 0.3, mm(P["h"]) * 0.5)
             target = lerp3(flat_t, stand_t, move)
-            d = lerp(d_flat, d_flat * 0.98, move)
-            # from above, so the comb of milled ribs shows along the top edge
-            self.shot(f, target, d, lerp(72.0, 36.0, move), lens, (pan["cx"], pan["cy"]), az_deg=lerp(0.0, -34.0, move), fstop=11.0)
+            # from above, so the comb of milled ribs shows along the top edge;
+            # then a slow orbit while the panel flexes, as in the FLEX video
+            orbit = ramp(l4, (S4["flex"][0] - 8, S4["flex"][1] + 8), "inOut")
+            d = lerp(d_flat, d_flat * 0.98, move) * lerp(1.0, 0.95, orbit)
+            elev = lerp(lerp(72.0, 36.0, move), 52.0, orbit)
+            az = lerp(lerp(0.0, -34.0, move), -8.0, orbit)
+            self.shot(f, target, d, elev, lens, (pan["cx"], pan["cy"]), az_deg=az, fstop=11.0)
             return
 
         st = L["stacks"]

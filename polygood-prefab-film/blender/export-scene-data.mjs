@@ -14,6 +14,7 @@ const src = path.join(here, "..", "src");
 
 const entry = `
 import * as timing from "./config/timing";
+import { REALISTIC_CUES } from "./config/audio";
 import { LAYOUTS } from "./config/layout";
 import { COLORS, DURATIONS, EASE } from "./config/theme";
 import { HEADLINES, CHECKLIST_ITEMS, EDGE_PROFILES, STACK_LABELS, LINKEDIN_SPECS } from "./config/copy";
@@ -25,6 +26,7 @@ import { profileContour, PROFILE_POINTS } from "./geometry/profiles";
 
 export const data = {
   timing,
+  audio: REALISTIC_CUES,
   layouts: LAYOUTS,
   colors: COLORS,
   durations: DURATIONS,

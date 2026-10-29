@@ -215,27 +215,32 @@ def midi_hz(n):
     return 440.0 * 2 ** ((n - 69) / 12)
 
 
+# Scene starts in seconds, as SCENES in src/config/timing.ts (32 s cut)
+CUTS = {"drawing": 0.0, "cutting": 4.0, "edges": 9.0, "cnc": 14.0, "benefits": 21.5, "endCard": 27.0}
+
+
 def music():
     """Music bed for the realistic films, voiced for phone speakers: a soft
     plucked arpeggio (400 Hz to 1.5 kHz plus overtones) over a warm pad, at
     120 BPM so
-    every chord change lands on a scene cut (0, 4, 9, 14, 19.5, 25 s). A light
-    pulse builds from scene 02; under the logo it resolves on D and decays to
-    nothing by 29.2 s, inside the film's silent last half second."""
+    every chord change lands on a scene cut (CUTS). A light pulse builds
+    from scene 02; under the logo it resolves on D and decays to nothing
+    0.8 s before the end, inside the film's silent last half second."""
     r = np.random.default_rng(11)  # own generator: the other cues stay identical
-    secs = 29.2
+    logo = CUTS["endCard"]
+    secs = logo + 4.2
     n = int(secs * SR)
     t = np.arange(n) / SR
     beat = 0.5
     # (start s, pad voicing, arpeggio tones), MIDI note numbers
     sections = [
-        (0.0, [50, 57, 62, 64, 66], [62, 66, 69, 74, 76]),  # D add9
-        (4.0, [47, 54, 59, 62, 66], [59, 62, 66, 69, 74]),  # Bm7
-        (9.0, [43, 55, 59, 62, 66], [55, 59, 62, 66, 71]),  # Gmaj7
-        (14.0, [52, 59, 62, 66, 67], [59, 62, 66, 67, 71]),  # Em9
-        (19.5, [45, 57, 62, 64, 69], [57, 62, 64, 69, 74]),  # Asus4
-        (22.5, [45, 57, 61, 64, 69], [57, 61, 64, 69, 73]),  # A
-        (25.0, [50, 57, 62, 66, 69], [62, 66, 69, 74, 78]),  # D
+        (CUTS["drawing"], [50, 57, 62, 64, 66], [62, 66, 69, 74, 76]),  # D add9
+        (CUTS["cutting"], [47, 54, 59, 62, 66], [59, 62, 66, 69, 74]),  # Bm7
+        (CUTS["edges"], [43, 55, 59, 62, 66], [55, 59, 62, 66, 71]),  # Gmaj7
+        (CUTS["cnc"], [52, 59, 62, 66, 67], [59, 62, 66, 67, 71]),  # Em9
+        (CUTS["benefits"], [45, 57, 62, 64, 69], [57, 62, 64, 69, 74]),  # Asus4
+        (CUTS["benefits"] + 3.0, [45, 57, 61, 64, 69], [57, 61, 64, 69, 73]),  # A
+        (logo, [50, 57, 62, 66, 69], [62, 66, 69, 74, 78]),  # D
     ]
     ends = [s[0] for s in sections[1:]] + [secs]
     left, right = np.zeros(n), np.zeros(n)
@@ -255,7 +260,7 @@ def music():
                 seg_l += g * np.sin(2 * np.pi * k * f * 0.998 * tt)
                 seg_r += g * np.sin(2 * np.pi * k * f * 1.002 * tt + 0.4 * k)
         env = np.clip(tt / 0.35, 0, 1) * np.clip((end + 0.35 - start - tt) / 0.35, 0, 1)
-        if start >= 25.0:  # final chord rings out and decays to zero
+        if start >= logo:  # final chord rings out and decays to zero
             env = np.clip(tt / 0.2, 0, 1) * np.exp(-tt * 0.9) * np.clip((secs - start - tt) / 0.6, 0, 1)
         left[a:b] += seg_l * env * 0.05
         right[a:b] += seg_r * env * 0.05
@@ -283,12 +288,12 @@ def music():
     pattern = [0, 2, 4, 2, 1, 3, 4, 3]
     step = 0
     for (start, _, tones), end in zip(sections, ends):
-        if start >= 25.0:
+        if start >= logo:
             # Last gesture under the logo: three rising notes, then let it ring
             for i, note in enumerate(tones[2:]):
                 place(pluck(midi_hz(note + 12), 1.6), start + i * beat / 2, 0.22, (-0.3, 0.0, 0.3)[i])
             break
-        sub = beat if start < 4.0 else beat / 2
+        sub = beat if start < CUTS["cutting"] else beat / 2
         at = start
         while at < end - 1e-6:
             note = tones[pattern[step % len(pattern)]]
@@ -305,11 +310,11 @@ def music():
     kick += band(r.standard_normal(kick_len), 1200, 4000) * np.exp(-kt * 120) * 0.25
     shake_len = int(0.06 * SR)
     st = np.arange(shake_len) / SR
-    for i in range(int(25.0 / beat)):
+    for i in range(int(logo / beat)):
         at = i * beat
-        if at >= 9.0:
+        if at >= CUTS["edges"]:
             place(kick, at, 0.22 if i % 2 == 0 else 0.14, 0.0)
-        if at >= 4.0:
+        if at >= CUTS["cutting"]:
             shaker = band(r.standard_normal(shake_len), 5000, 11000) * np.exp(-st * 70)
             place(shaker, at + beat / 2, 0.05, 0.2)
 

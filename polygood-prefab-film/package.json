@@ -40,7 +40,8 @@
     "assets:material": "python3 -I scripts/generate_placeholder_material.py",
     "assets:audio": "python3 -I scripts/generate_audio.py",
     "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc"
+    "lint": "eslint src && tsc",
+    "audio:mix": "python3 -I scripts/mix_audio.py"
   },
   "allowScripts": {
     "esbuild": false

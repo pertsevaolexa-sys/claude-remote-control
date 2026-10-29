@@ -2,19 +2,21 @@
 // scene; the absolute frames used by persistent overlays and audio are derived
 // from them, so moving a beat keeps sound and checklist in sync.
 //
-// 30 s cut: each scene holds long enough for its headline and labels to be
+// 32 s cut: each scene holds long enough for its headline and labels to be
 // read, and the film ends on the supplied logo animation, played as is.
+// Scene 04 runs 2 s longer than the original 30 s brief, for the panel to
+// flex from a U into an S, as in Polygood's FLEX video.
 
 export const FPS = 30;
-export const DURATION_IN_FRAMES = 900; // 30 s
+export const DURATION_IN_FRAMES = 960; // 32 s
 
 export const SCENES = {
   drawing: { from: 0, durationInFrames: 120 }, // 00:00–00:04
   cutting: { from: 120, durationInFrames: 150 }, // 00:04–00:09
   edges: { from: 270, durationInFrames: 150 }, // 00:09–00:14
-  cnc: { from: 420, durationInFrames: 165 }, // 00:14–00:19.5
-  benefits: { from: 585, durationInFrames: 165 }, // 00:19.5–00:25
-  endCard: { from: 750, durationInFrames: 150 }, // 00:25–00:30, logo clip
+  cnc: { from: 420, durationInFrames: 225 }, // 00:14–00:21.5
+  benefits: { from: 645, durationInFrames: 165 }, // 00:21.5–00:27
+  endCard: { from: 810, durationInFrames: 150 }, // 00:27–00:32, logo clip
 } as const;
 
 // Scene 01: material macro → sheet → plotted drawing
@@ -63,18 +65,20 @@ export const S3 = {
   headlineOut: 133,
 } as const;
 
-// Scene 04: CNC toolpath → cut-outs → bend
+// Scene 04: kerf bending. The router mills the pattern, the panel bends
+// into a U, then flexes into an S.
 export const S4 = {
   sweep: [0, 30], // a toolpath crosses the frame, wiping the edge close-up away
   headlineIn: 10,
   toolpath: [28, 76],
   machinedCheck: 74,
-  removal: [76, 98], // cut-out plugs drop away
+  removal: [76, 98], // 2D film: cut-out plugs drop away
   plugDrop: 14, // frames for each plug to fall
   bend: [100, 136],
   curvedCheck: 134,
-  headlineOut: 148,
-  exit: [150, 165], // curved panel moves out
+  flex: [142, 196], // the U flexes into an S
+  headlineOut: 208,
+  exit: [210, 225], // curved panel moves out
 } as const;
 
 // Scene 05: delivery stacks, offcuts recycled

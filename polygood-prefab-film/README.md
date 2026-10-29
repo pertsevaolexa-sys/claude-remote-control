@@ -1,15 +1,15 @@
 # Polygood prefabrication film
 
-A 30-second motion piece on Polygood's in-house prefabrication, from a technical drawing to finished parts, ending on the Polygood logo animation. Built with Remotion, React and TypeScript. Two compositions share every scene and differ only in layout:
+A 32-second motion piece on Polygood's in-house prefabrication, from a technical drawing to finished parts, ending on the Polygood logo animation. Built with Remotion, React and TypeScript. Two compositions share every scene and differ only in layout:
 
 | Composition | Size | Ratio | Length |
 |---|---|---|---|
-| `PolygoodPrefab-Reels` | 1080 × 1920 | 9:16 | 900 frames at 30 fps (30 s) |
-| `PolygoodPrefab-LinkedIn` | 1080 × 1350 | 4:5 | 900 frames at 30 fps (30 s) |
-| `PolygoodRealistic-Reels` | 1080 × 1920 | 9:16 | 900 frames at 30 fps (30 s), photoreal 3D |
-| `PolygoodRealistic-LinkedIn` | 1080 × 1350 | 4:5 | 900 frames at 30 fps (30 s), photoreal 3D |
+| `PolygoodPrefab-Reels` | 1080 × 1920 | 9:16 | 960 frames at 30 fps (32 s) |
+| `PolygoodPrefab-LinkedIn` | 1080 × 1350 | 4:5 | 960 frames at 30 fps (32 s) |
+| `PolygoodRealistic-Reels` | 1080 × 1920 | 9:16 | 960 frames at 30 fps (32 s), photoreal 3D |
+| `PolygoodRealistic-LinkedIn` | 1080 × 1350 | 4:5 | 960 frames at 30 fps (32 s), photoreal 3D |
 
-The original brief asked for 15 s. The film was later lengthened to 30 s so every headline and label can be read, and the end card was replaced by the supplied logo animation, played as is.
+The original brief asked for 15 s. The film was later lengthened to 30 s so every headline and label can be read, and the end card was replaced by the supplied logo animation, played as is. Scene 04 then gained 2 s for the kerf-bent panel to flex from a U into an S, as in Polygood's FLEX video, making 32 s. The Remotion renders in `renders/` (`polygood-prefab-*`, `polygood-realistic-*`) are from the 30 s cut; the Blender film is the current one.
 
 Rendered films (2D and realistic) and storyboard sheets are in [`renders/`](renders/).
 
@@ -59,7 +59,7 @@ What the camera sees:
 - **Scene 01:** a 2800 × 1400 × 19 mm sheet, and a pen plotting the drawing in white ink.
 - **Scene 02:** a gantry CNC router cutting the nest, with kerfs trailing the bit.
 - **Scene 03:** the tabletop turning to its end face, its edge morphing between profiles (shape keys), with the orange profile contour and the thickness dimension drawn in 3D on the edge.
-- **Scene 04:** kerf bending, after the FLEX samples on the "3d shaping" page in Notion. The router mills a lattice of lens-shaped pockets into the panel, leaving a 3 mm skin; then the panel stands and bends into a curve with the ribs on the outside and a comb along its top edge (`blender/pgscene/kerf.py`).
+- **Scene 04:** kerf bending, after the FLEX samples and video on the "3d shaping" page in Notion. The router mills a lattice of lens-shaped pockets into the panel, leaving a 3 mm skin (`blender/pgscene/kerf.py`). The panel stands and bends into a U with the ribs on the outside and a comb along its top edge, then flexes into an S while the camera circles above it. It bends along a spine curve driven by a curvature profile, so its length never changes.
 - **Scene 05:** pallets of full sheets and finished parts, with offcuts breaking into chips that land as a new strip.
 
 Lighting is three soft area lights plus a dim world, through the Khronos PBR Neutral view transform. The default is 64 samples with OpenImageDenoise. The `Film` scene uses the Standard view transform, so the paper is exactly #F4F3ED and the cut into the logo clip is invisible.
@@ -88,9 +88,9 @@ The rendered frames (about 2 GB per format) are not committed. The Remotion comp
 | 01 | 0–4 s | 0–119 | Start with your drawing | Extreme macro of the material, light sweep, pull-back to the full sheet. A pen plots a plan and end elevations of a table and bench, then dimension lines and ticks (no numbers). |
 | 02 | 4–9 s | 120–269 | Prefabricated in-house | The drawing separates into six parts that slide into a nested layout on a 2800 × 1400 mm sheet. An orange CAM toolpath cuts each part (dashed rapids between them), the parts lift off the dimmed skeleton, and the tabletop moves to centre. The checklist appears as the scene starts; **Cut** ticks. |
 | 03 | 9–14 s | 270–419 | Your edge, your profile | The tabletop turns and tips (CSS 3D) until only its end face shows, which becomes a 2D cross-section. The camera pushes in on the edge, which morphs square → bullnose → chamfer → bevelled, with the active label and an orange contour. Thickness callout. **Edged** ticks. |
-| 04 | 14–19.5 s | 420–584 | Kerf bending, by CNC milling | A toolpath crosses the frame, wiping the edge close-up away to reveal a second panel. The toolpath engraves a staggered pattern of capsule cut-outs; the plugs drop away; the panel bends into a curved partition built from 40 strips in 3D, with a floor shadow tracing the curve. **Machined** and **Curved** tick. |
-| 05 | 19.5–25 s | 585–749 | Lighter to ship, less waste | Isometric delivery stacks: full sheets beside the shorter stack of finished parts (dry tap as they settle). Offcuts move away, break into chips and re-form as a strip of new panel material, which then clears. |
-| 06 | 25–30 s | 750–899 | (logo) | The supplied logo animation, played as is: the mark draws and fills, then "polygood" and "by the good plastic company". Static for the final second; silent for the final 0.5 s. |
+| 04 | 14–21.5 s | 420–644 | Kerf bending, by CNC milling | A toolpath crosses the frame, wiping the edge close-up away to reveal a second panel. The toolpath engraves a staggered pattern of capsule cut-outs; the plugs drop away; the panel bends into a curved partition built from 40 strips in 3D, with a floor shadow tracing the curve. **Machined** and **Curved** tick. (The Blender film mills a kerf-bending lattice instead and flexes the panel from a U into an S; see below.) |
+| 05 | 21.5–27 s | 645–809 | Lighter to ship, less waste | Isometric delivery stacks: full sheets beside the shorter stack of finished parts (dry tap as they settle). Offcuts move away, break into chips and re-form as a strip of new panel material, which then clears. |
+| 06 | 27–32 s | 810–959 | (logo) | The supplied logo animation, played as is: the mark draws and fills, then "polygood" and "by the good plastic company". Static for the final second; silent for the final 0.5 s. |
 
 The finish identifier sits bottom-left until just before the logo animation. LinkedIn adds the technical spec lines from the brief beneath each headline.
 
@@ -162,24 +162,25 @@ All sound is synthesised by `scripts/generate_audio.py` (numpy only): pad, pen-p
 
 - Cue times are derived from the scene beats in `timing.ts`, so they move with the picture.
 - Loading the project fails if any cue runs into the final 0.5 s (frame 885 onwards).
-- Rendered mix: −23.3 LUFS integrated, −8.3 dBFS true peak, digital silence from 29.5 s.
+- Rendered mix (30 s cut): −23.3 LUFS integrated, −8.3 dBFS true peak, digital silence from 29.5 s.
 - **Phones:** the pad sits almost entirely below 300 Hz, which phone speakers can't reproduce, so on a phone the 2D films sound nearly silent apart from the effects.
-- **Realistic films, music bed:** they use `music.wav` instead (`REALISTIC_CUES` in `config/audio.ts`). It is a plucked arpeggio and warm pad at 120 BPM, voiced between about 400 Hz and 3 kHz, with a chord change on every scene cut and a resolve on D under the logo. It ends at 29.2 s.
+- **Realistic films, music bed:** they use `music.wav` instead (`REALISTIC_CUES` in `config/audio.ts`). It is a plucked arpeggio and warm pad at 120 BPM, voiced between about 400 Hz and 3 kHz, with a chord change on every scene cut (`CUTS` in `generate_audio.py`, matching `timing.ts`) and a resolve on D under the logo. It ends at 31.2 s.
+- **Blender film soundtrack:** `npm run audio:mix` (`scripts/mix_audio.py`) mixes `REALISTIC_CUES` straight from the cue files, as Remotion would, and masters the result to `public/audio/realistic-mix.wav` (−14 LUFS). Run `npm run blender:export` first if the cues or timing changed.
 - **Realistic films, mastering:** their render scripts then run `scripts/master_audio.py`, which raises the mix to −14 LUFS (the usual level for Instagram and LinkedIn) behind a −2 dBFS limiter.
 - **2D films:** to make them work on phones, swap their pad for the music bed and master them the same way.
 
-**Voice-over (optional, not recorded).** Script: *Start with your drawing. We prefabricate in-house: cut to shape, edged in the profile you need, CNC milled, engraved, or cut to bend without thermoforming. Lighter to ship. Offcuts become new panels. Send your drawing.* Record it confident and understated, keep it inside 29.5 s, save it as `public/audio/voiceover.wav` and set `VOICEOVER` in `config/audio.ts`. Lower the pad volume when it's in.
+**Voice-over (optional, not recorded).** Script: *Start with your drawing. We prefabricate in-house: cut to shape, edged in the profile you need, CNC milled, engraved, or cut to bend without thermoforming. Lighter to ship. Offcuts become new panels. Send your drawing.* Record it confident and understated, keep it inside 31.5 s, save it as `public/audio/voiceover.wav` and set `VOICEOVER` in `config/audio.ts`. Lower the pad volume when it's in.
 
 ## Validation
 
 `src/config/validate.ts` checks on every load (Studio and render) that:
 
-- the total is at most 30 s and the six scenes are contiguous;
+- the total is at most 32 s and the six scenes are contiguous;
 - the checklist appears with scene 02, the finish identifier is gone before the logo animation, and the end card plays the whole clip with its final second static;
 - the last 0.5 s is silent;
 - the formats are 1080 × 1920 and 1080 × 1350.
 
-On the rendered files I confirmed the following:
+On the rendered files of the 30 s cut I confirmed the following:
 
 - Both are H.264 + AAC, 900 frames at 30 fps, and 30.0 s long.
 - Frames 870 and 899 are visually identical (PSNR 53–55 dB). What difference there is comes from a faint easing tail in the supplied clip itself.
