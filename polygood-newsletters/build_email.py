@@ -40,12 +40,14 @@ MUTED = "#6b625b"   # small grey-brown text
 TEAL = "#1b7f86"    # dashed lines, labels, links, buttons
 WARM = "#9a5b34"    # the short caption under each swatch name
 WHITE = "#ffffff"   # text on the filled buttons
+PANEL = "#f4ebe1"   # background of the boxed partner call
 
 HERO_TITLE_SIZE = 26
 HEADLINE_SIZE = 28
 STATEMENT_SIZE = 20
 TITLE_SIZE = 22
 EDIT_HEADLINE_SIZE = 26  # the centred headline over each photo in the Project Edit layout
+PARTNER_HEADING_SIZE = 24
 BODY_SIZE = 16
 HERO_TEXT_COL = 240  # header: text column width; the photo strip takes the rest of the 600px
 COLUMNS = 3   # swatches per row; a case with more patterns continues on the next row
@@ -263,6 +265,42 @@ def closing_cta():
     )
 
 
+def credits_line(c):
+    """The project's credits in small text, e.g. "Fabrication and design: Samji Studio · Client: Maison Kyka".
+    A credit with a url links the name (some makers ask for a link on their credit)."""
+    parts = []
+    for cr in c.get("credits") or []:
+        name = esc(cr["name"])
+        if (cr.get("url") or "").strip():
+            name = f'<a href="{attr(cr["url"].strip())}" target="_blank" style="color:{MUTED};text-decoration:underline;">{name}</a>'
+        parts.append(f"{esc(cr['role'])}: {name}")
+    if not parts:
+        return ""
+    return (
+        f'\n<tr><td style="padding:0 0 18px 0;font-family:{SANS};font-size:13px;line-height:1.6;color:{MUTED};">'
+        + " &middot; ".join(parts) + "</td></tr>"
+    )
+
+
+def partner_block():
+    """A boxed call to action after the cases, e.g. the call for kitchen-making partners."""
+    p = copy.get("partner") or {}
+    if not (p.get("heading") or "").strip():
+        return ""
+    return f"""<!-- Partner call -->
+{dashed()}
+<tr><td bgcolor="{PANEL}" style="background:{PANEL};padding:26px 24px 4px 24px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+{label(p.get('eyebrow', ''), pad="0 0 8px 0") if (p.get('eyebrow') or '').strip() else ''}
+{heading(p['heading'], PARTNER_HEADING_SIZE, pad="0 0 12px 0")}
+<tr><td style="padding:0 0 4px 0;">{paras(p['body'])}</td></tr>
+{button(p['button_label'], url_or_placeholder(p.get('button_url'), 'PARTNER-CONTACT'), filled=True, pad="0 0 24px 0")}
+</table>
+</td></tr>
+<tr><td style="padding:0 0 32px 0;font-size:1px;line-height:1px;">&nbsp;</td></tr>
+"""
+
+
 def colour_key():
     return (
         f"<!-- Colours, for find and replace: background {PAPER} · text {INK} · small text {MUTED} · "
@@ -312,7 +350,7 @@ def case_block_edit(c, images, swatches, last):
 {label(c.get('sector') or c['kicker'], pad="0 0 6px 0")}
 <tr><td style="padding:0 0 4px 0;font-family:{SANS};font-size:20px;line-height:1.25;font-weight:bold;color:{INK};">{esc(c.get('place_title') or c['title'])}</td></tr>
 <tr><td style="padding:0 0 14px 0;font-family:{SANS};font-size:14px;line-height:1.5;font-weight:bold;color:{MUTED};">Application: {esc(c['application'])}</td></tr>
-<tr><td style="padding:0 0 6px 0;">{paras(c['body'], margin=12)}</td></tr>
+<tr><td style="padding:0 0 6px 0;">{paras(c['body'], margin=12)}</td></tr>{credits_line(c)}
 {button(c['link_label'], c['page_url'], filled=True, pad="0 0 28px 0")}
 {palette(c, swatches)}
 {'' if last else dashed()}"""
@@ -330,10 +368,22 @@ def body_edit(images, swatches):
 <tr><td style="padding:0 0 24px 0;font-family:{SANS};font-size:18px;line-height:1.5;font-weight:bold;color:{INK};text-align:center;">{esc(lead)}</td></tr>
 {dashed()}
 {blocks}
-{closing_cta()}</table>
+{partner_block()}{closing_cta() if not copy.get('partner') else closing_line()}</table>
 </td></tr>
 </table>
 """
+
+
+def closing_line():
+    """The closing call to action straight after the partner box, which already ends with a gap."""
+    cta = copy.get("closing_cta") or {}
+    if not (cta.get("text") or "").strip():
+        return ""
+    return (
+        f'<!-- Closing call to action -->\n<tr><td style="padding:0 0 32px 0;font-family:{SANS};font-size:16px;line-height:1.45;font-weight:bold;text-align:center;">'
+        f'<a href="{attr(cta.get("url") or "https://polygood.com/")}" target="_blank" style="color:{TEAL};text-decoration:none;">'
+        f'{esc(cta["text"])}&nbsp;&rarr;</a></td></tr>\n'
+    )
 
 
 def body(images, swatches):
