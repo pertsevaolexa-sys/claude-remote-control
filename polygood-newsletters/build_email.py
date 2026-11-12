@@ -320,7 +320,7 @@ def partner_eyebrow(p):
         return ""
     if copy.get("layout") == "story":
         return (f'<tr><td style="padding:0 0 6px 0;font-family:{SANS};font-size:15px;line-height:1.4;font-style:italic;color:{WARM};">'
-                f'{esc(text)}</td></tr>')
+                f'<span style="font-style:italic;color:{WARM};">{esc(text)}</span></td></tr>')
     return label(text, pad="0 0 8px 0")
 
 
@@ -539,7 +539,7 @@ def closing_line():
     )
 
 
-STORY_IMG = 252   # chapter photo column (story layout); the text column takes the other 300px
+STORY_IMG = 240   # chapter photo column (story layout); the text column takes the rest
 STORY_TEXT = CONTENT - STORY_IMG
 
 
@@ -549,47 +549,49 @@ def story_header():
     if not (sh.get("title") or "").strip():
         return ""
     if all(c.get("toc") for c in copy["cases"]):
-        toc = f'&nbsp; <span style="color:{TEAL};font-style:normal;font-weight:bold;">&middot;</span> &nbsp;'.join(esc(c["toc"]) for c in copy["cases"])
+        toc = f'&nbsp; <span style="color:{TEAL};font-style:normal;font-weight:bold;">&middot;</span> &nbsp;'.join(
+            f'<span style="font-style:italic;color:{WARM};">{esc(c["toc"])}</span>' for c in copy["cases"])
     else:
         toc = " &nbsp;&middot;&nbsp; ".join(
             f'<span style="color:{LINE};">{esc(c["chapter"].split(" ")[0])}</span>&nbsp;{esc(" ".join(c["chapter"].split(" ")[1:]))}'
             for c in copy["cases"])
     return f"""<!-- Story title -->
-<tr><td style="padding:0 0 6px 0;font-family:{SANS};font-size:22px;line-height:1.25;font-weight:bold;color:{INK};text-align:center;">{esc(sh['title'])}</td></tr>
-<tr><td style="padding:0 0 28px 0;font-family:{SANS};font-size:16px;line-height:1.6;font-style:italic;color:{WARM};text-align:center;">{toc}</td></tr>
+<tr><td align="center" style="padding:0 0 6px 0;font-family:{SANS};font-size:22px;line-height:1.25;font-weight:bold;color:{INK};text-align:center;">{esc(sh['title'])}</td></tr>
+<tr><td align="center" style="padding:0 0 28px 0;font-family:{SANS};font-size:16px;line-height:1.6;font-style:italic;color:{WARM};text-align:center;">{toc}</td></tr>
 """
 
 
 def chapter_block(c, images, swatches, last):
-    """One chapter of the story layout: a square photo beside a short text, stacking on phones."""
+    """One chapter of the story layout: a photo beside a short text in a plain two-column table
+    (no calc(), no hidden copies, so it survives Mailchimp's editor). Phones stack the columns
+    where media queries work; elsewhere the two columns stay side by side."""
     src = images.get(c["key"], url_or_placeholder(hosted(c.get("image_url"), c.get("image_file")), slug(c["title"]) + "-IMAGE"))
-    col = "display:inline-block;vertical-align:middle;width:100%;max-width:100%;width:calc((480px - 100%) * 480);"
     pats = case_patterns(c)
+
     def sample_card(p_):
         href = attr(pattern_link(p_, c))
         return (
-            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid {CARD_BORDER};background:{CARD_BG};margin:0 0 10px 0;">'
-            f'<tr><td style="padding:10px 10px 10px 10px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid {CARD_BORDER};background:{CARD_BG};">'
+            f'<tr><td style="padding:10px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
             f'<td width="40" valign="middle" style="width:40px;vertical-align:middle;"><a href="{href}" target="_blank" style="text-decoration:none;">'
             f'<img src="{attr(swatch_src(p_, swatches))}" width="40" height="40" alt="{attr(p_["name"])} pattern swatch" style="display:block;width:40px;height:40px;border:0;"></a></td>'
             f'<td valign="middle" style="vertical-align:middle;padding:0 0 0 12px;font-family:{SANS};font-size:14px;line-height:1.3;color:{INK};">'
-            f'<a href="{href}" target="_blank" style="color:{INK};text-decoration:none;"><b>{esc(p_["name"])}</b><br>'
-            f'<span style="font-size:12px;color:{WARM};">{esc(p_.get("caption", ""))}</span></a></td>'
+            f'<a href="{href}" target="_blank" style="color:{INK};text-decoration:none;"><b style="color:{INK};">{esc(p_["name"])}</b></a><br>'
+            f'<span style="font-size:12px;color:{WARM};">{esc(p_.get("caption", ""))}</span></td>'
             f'</tr></table></td></tr>'
-            f'<tr><td bgcolor="{CARD_BAR}" align="center" style="background:{CARD_BAR};padding:0;text-align:center;">'
-            f'<a href="{href}" target="_blank" style="display:block;padding:9px 10px;font-family:{SANS};font-size:13px;line-height:1.2;font-weight:bold;letter-spacing:0.02em;color:{TEAL};text-decoration:none;">'
+            f'<tr><td bgcolor="{CARD_BAR}" align="center" style="background:{CARD_BAR};padding:9px 10px;text-align:center;font-family:{SANS};font-size:13px;line-height:1.2;font-weight:bold;">'
+            f'<a href="{href}" target="_blank" style="font-family:{SANS};font-size:13px;line-height:1.2;font-weight:bold;letter-spacing:0.02em;color:{TEAL};text-decoration:none;">'
             f'<span style="color:{TEAL};">{esc(copy.get("swatch_cta", "Order sample"))}</span></a></td></tr></table>'
         )
-    cards = "".join(sample_card(p_) for p_ in pats)
+    cards = "".join(f'<tr><td style="padding:16px 0 0 0;">{sample_card(p_)}</td></tr>' for p_ in pats)
     return f"""
 <!-- Chapter: {esc(c['title']).replace("--", "-")} -->
-<tr><td style="padding:0 0 26px 0;font-size:0;line-height:0;">
-<!--[if mso]><table role="presentation" width="{CONTENT}" cellpadding="0" cellspacing="0" border="0"><tr><td width="{STORY_IMG}" valign="middle"><![endif]-->
-<div style="{col}min-width:{STORY_IMG}px;">
-<a href="{attr(c['page_url'])}" target="_blank" style="text-decoration:none;"><img src="{attr(src)}" width="{STORY_IMG}" alt="{attr(c['image_alt'])}" style="display:block;width:100%;height:auto;border:0;"></a>
-<div class="pg-card-desk"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:12px 0 0 0;">{cards}</td></tr></table></div>
-</div><!--[if mso]></td><td width="{STORY_TEXT}" valign="middle"><![endif]--><div style="{col}min-width:{STORY_TEXT}px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="pg-story-text" style="padding:14px 0 14px 20px;">
+<tr><td style="padding:0 0 26px 0;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+<td class="pg-col" width="{STORY_IMG}" valign="middle" style="width:{STORY_IMG}px;vertical-align:middle;padding:0;">
+<a href="{attr(c['page_url'])}" target="_blank" style="text-decoration:none;"><img class="pg-img" src="{attr(src)}" width="{STORY_IMG}" alt="{attr(c['image_alt'])}" style="display:block;width:{STORY_IMG}px;max-width:100%;height:auto;border:0;"></a>
+</td>
+<td class="pg-col pg-story-text" valign="middle" style="vertical-align:middle;padding:0 0 0 20px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 {chapter_label(c)}
 <tr><td style="padding:0 0 12px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
@@ -598,11 +600,10 @@ def chapter_block(c, images, swatches, last):
 <tr><td style="padding:0 0 14px 0;">{paras(c['body'], size=15, margin=10)}</td></tr>
 {button(c['link_label'], c['page_url'], filled=True, pad="2px 0 14px 0")}
 <tr><td style="padding:0;font-family:{SANS};font-size:11px;line-height:1.5;color:{MUTED};">{credits_text(c)}</td></tr>
-<!--[if !mso]><!--><tr><td style="padding:0;"><div class="pg-card-mob" style="display:none;max-height:0;overflow:hidden;mso-hide:all;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:16px 0 0 0;">{cards}</td></tr></table></div></td></tr><!--<![endif]-->
+{cards}
 </table>
-</td></tr></table>
-</div>
-<!--[if mso]></td></tr></table><![endif]-->
+</td>
+</tr></table>
 </td></tr>
 {case_note(c)}{'' if last else dashed(pad="0 0 26px 0")}"""
 
@@ -612,7 +613,7 @@ def chapter_label(c):
     ("Shaped in the workshop"), else the numbered chapter in capitals."""
     if (c.get("kicker_line") or "").strip():
         return (f'<tr><td style="padding:0 0 4px 0;font-family:{SANS};font-size:15px;line-height:1.4;font-style:italic;color:{WARM};">'
-                f'{esc(c["kicker_line"])}</td></tr>')
+                f'<span style="font-style:italic;color:{WARM};">{esc(c["kicker_line"])}</span></td></tr>')
     return (f'<tr><td style="padding:0 0 6px 0;font-family:{SANS};font-size:12px;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;font-weight:bold;color:{TEAL};">'
             f'<span style="color:{LINE};">{esc(c["chapter"].split(" ")[0])}</span> {esc(" ".join(c["chapter"].split(" ")[1:]))}'
             f'<span style="color:{MUTED};font-weight:normal;"> &nbsp;&middot;&nbsp; {esc(c["headline"])}</span></td></tr>')
@@ -622,18 +623,28 @@ def body_story(images, swatches):
     """The whole body as one story: intro, chapter list, chapters, partner box, closing line."""
     cases = copy["cases"]
     blocks = "".join(chapter_block(c, images, swatches, i == len(cases) - 1) for i, c in enumerate(cases))
-    return f"""<style>@media only screen and (max-width:540px){{.pg-story-text{{padding-left:0 !important;}} .pg-card-desk{{display:none !important;max-height:0 !important;overflow:hidden !important;}} .pg-card-mob{{display:block !important;max-height:none !important;overflow:visible !important;}}}}</style>
+    return robust(f"""<style>@media only screen and (max-width:540px){{.pg-col{{display:block !important;width:100% !important;}} .pg-img{{width:100% !important;}} .pg-story-text{{padding:16px 0 0 0 !important;}}}}</style>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;background:{PAPER};">
 <tr><td bgcolor="{PAPER}" style="background:{PAPER};padding:24px 24px 8px 24px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 <!-- Intro -->
-<tr><td style="padding:0 0 22px 0;font-family:{SANS};font-size:18px;line-height:1.5;font-weight:bold;color:{INK};text-align:center;">{esc(copy['hero']['intro'])}</td></tr>
+<tr><td align="center" style="padding:0 0 22px 0;font-family:{SANS};font-size:18px;line-height:1.5;font-weight:bold;color:{INK};text-align:center;">{esc(copy['hero']['intro'])}</td></tr>
 {intro_button()}{dashed(pad="0 0 26px 0")}
 {story_header()}{blocks}
 {partner_block()}{closing_line()}</table>
 </td></tr>
 </table>
-"""
+""")
+
+
+def robust(html_):
+    """Mailchimp's editor can lay its own text and link styles over the code (centring, colours,
+    underlines). !important on those few properties keeps ours."""
+    import re
+    for prop in ("text-decoration:none", "text-align:center", "font-style:italic"):
+        html_ = html_.replace(prop + ";", prop + " !important;")
+    html_ = re.sub(r'(<(?:a|span|b)\b[^>]*style="[^"]*?)color:(#[0-9a-fA-F]{3,6});', r'\1color:\2 !important;', html_)
+    return html_
 
 
 def body(images, swatches):
