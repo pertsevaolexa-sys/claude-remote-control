@@ -11,7 +11,7 @@
     "intro": "Every kitchen in this edition was made by an independent workshop: Samji Studio in Paris and WUNSCH in the UK. We want more collaborations like these, so this edition doubles as an open call. If you make kitchens, this is what a joint project with Polygood® looks like.",
     "image_url": "",
     "image_file": "hero-strip.jpg",
-    "image_alt": "Close-ups from four Polygood projects: a wave-cut Terrazzo Nuovo worktop edge, an Emerald Ghost table, a White Lollipop worktop and an Espresso Noir table top"
+    "image_alt": "Close-ups from four Polygood projects: a wave-cut Terrazzo Nuovo worktop edge, an Emerald Ghost table, a White Lollipop worktop and a Timeless Duo Blue countertop"
   },
   "eyebrow": "Kitchens edition",
   "headline": "Kitchens, and the makers behind them",
@@ -115,31 +115,30 @@
       "image_alt": "Kitchen with mustard-yellow cabinet fronts, green glazed tiles, a brass tap and a White Lollipop worktop with small coloured flecks"
     },
     {
-      "key": "vko",
-      "kicker": "Verloskundigenpraktijk Oost · Netherlands",
-      "sector": "Healthcare",
-      "place_title": "Verloskundigenpraktijk Oost, the Netherlands",
-      "title": "Verloskundigenpraktijk Oost",
-      "headline": "Beyond the kitchen: tables for a midwifery practice",
-      "body": "Verloskundigenpraktijk Oost is a midwifery practice in the Netherlands. Studio Anne Witten and Maaike Veenstra Interieur designed it to feel like a home rather than a clinic: pale oak, upholstered benches, blush tiles and a wall of cards. The tables are Polygood Espresso Noir, a deep brown with fine flecks that sits close to dark timber, on slim black bases between the benches and chairs.",
+      "key": "commerzbank",
+      "kicker": "Commerzbank · Amsterdam",
+      "sector": "Office pantry",
+      "place_title": "Commerzbank, Amsterdam",
+      "title": "Commerzbank",
+      "headline": "DRAFT",
+      "body": "DRAFT",
       "credits": [
         {
           "role": "Design",
-          "name": "Studio Anne Witten and Maaike Veenstra Interieur"
+          "name": "CBRE Design Collective"
         },
         {
-          "role": "Photography",
-          "name": "By Luna Photography",
-          "url": "https://www.bylunaconcepts.com/"
+          "role": "Client",
+          "name": "Commerzbank AG"
         }
       ],
-      "pattern": "Espresso Noir",
-      "application": "Waiting-room tables",
-      "link_label": "See the midwifery practice",
-      "page_url": "https://polygood.com/projects/verloskundigenpraktijk-oost/",
+      "pattern": "Timeless Duo Blue",
+      "application": "Pantry countertops",
+      "link_label": "See the Commerzbank pantry",
+      "page_url": "https://polygood.com/projects/commerzbank-amsterdam/",
       "image_url": "",
-      "image_file": "verloskundigenpraktijk-oost.jpg",
-      "image_alt": "Waiting room at Verloskundigenpraktijk Oost with upholstered benches, timber chairs and round Espresso Noir tables on black bases"
+      "image_file": "commerzbank.jpg",
+      "image_alt": "Office pantry at Commerzbank Amsterdam with a Timeless Duo Blue countertop, an undermount steel sink, blue glazed tiles and teal cabinets"
     }
   ],
   "partner": {
@@ -182,12 +181,12 @@
       "id": "PS1601"
     },
     {
-      "name": "Espresso Noir",
-      "caption": "#PS2114",
-      "pattern_url": "https://polygood.com/product/espresso-noir/",
+      "name": "Timeless Duo Blue",
+      "caption": "#PS1802",
+      "pattern_url": "https://polygood.com/product/timeless-duo-blue/",
       "swatch_url": "",
-      "file": "espresso-noir.jpg",
-      "id": "PS2114"
+      "file": "timeless-duo-blue.jpg",
+      "id": "PS1802"
     }
   ],
   "closing": "",
