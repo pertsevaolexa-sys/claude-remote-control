@@ -238,7 +238,7 @@
   "chooser": {
     "enabled": false
   },
-  "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/polygood-newsletter-images/main/2026-11-kitchens",
+  "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/60446bb03a9dd990b7e90ae2829e625bd93f4586/polygood-newsletters/2026-11-kitchens/images",
   "signoff": "The Polygood team\nThe Good Plastic Company",
   "closing_cta": {
     "text": "",

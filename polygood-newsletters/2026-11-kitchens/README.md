@@ -27,7 +27,7 @@ These are built in Mailchimp as separate blocks (`"header_in_mailchimp": true`),
 
 ## Before sending
 
-- [ ] **Images.** The code links to a separate public repository, `pertsevaolexa-sys/polygood-newsletter-images`, under `main/2026-11-kitchens/`. The images load once that repository exists and holds them: 4 photos (`pt-*.jpg`), 4 swatches and 4 logos.
+- [x] **Images.** These are hosted in this repository, which is public again, through links pinned to a commit. All 12 images load.
 - [ ] **Project pages.** Publish the four pages on polygood.com. All four buttons return 404 until then:
   `/projects/maison-kyka-paris/`, `/projects/thermoformed-kitchen-paris/`, `/projects/station-road-kitchen/`, `/projects/commerzbank-amsterdam/`.
 - [ ] **Samji photographer.** Confirm the photographer's name for both Samji projects. The credits say "Photography: Samji Studio". Samji asks to be on the first credit line with a link to ateliersamji.com, which is done.

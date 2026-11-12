@@ -590,6 +590,7 @@ def chapter_block(c, images, swatches, last):
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
 <td class="pg-col" width="{STORY_IMG}" valign="middle" style="width:{STORY_IMG}px;vertical-align:middle;padding:0;">
 <a href="{attr(c['page_url'])}" target="_blank" style="text-decoration:none;"><img class="pg-img" src="{attr(src)}" width="{STORY_IMG}" alt="{attr(c['image_alt'])}" style="display:block;width:{STORY_IMG}px;max-width:100%;height:auto;border:0;"></a>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0">{button(c['link_label'], c['page_url'], filled=True, pad="14px 0 0 0")}</table>
 </td>
 <td class="pg-col pg-story-text" valign="middle" style="vertical-align:middle;padding:0 0 0 20px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -599,7 +600,6 @@ def chapter_block(c, images, swatches, last):
 {logos_inline(c)}</tr></table></td></tr>
 <tr><td style="padding:0 0 10px 0;">{paras(c['body'], size=15, margin=10)}</td></tr>
 {cards}
-{button(c['link_label'], c['page_url'], filled=True, pad="0 0 14px 0")}
 <tr><td style="padding:0;font-family:{SANS};font-size:11px;line-height:1.5;color:{MUTED};">{credits_text(c)}</td></tr>
 </table>
 </td>
