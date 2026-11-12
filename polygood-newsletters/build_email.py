@@ -70,6 +70,9 @@ PANEL = THEME.get("panel", PANEL)
 OUTER = THEME.get("outer", OUTER)
 NOTE = THEME.get("note", NOTE)
 WHITE_BOX = THEME.get("box", "#ffffff")  # background of the "why" box under the intro
+CARD_BORDER = THEME.get("card_border", "#d9dbe8")  # sample card under a chapter photo (story layout)
+CARD_BG = THEME.get("card_bg", "#ffffff")
+CARD_BAR = THEME.get("card_bar", PANEL)  # the "Order sample" bar at the bottom of the card
 # -----------------------------------------------------------------------------
 
 
@@ -548,20 +551,29 @@ def chapter_block(c, images, swatches, last):
     src = images.get(c["key"], url_or_placeholder(hosted(c.get("image_url"), c.get("image_file")), slug(c["title"]) + "-IMAGE"))
     col = "display:inline-block;vertical-align:middle;width:100%;max-width:100%;width:calc((480px - 100%) * 480);"
     pats = case_patterns(c)
-    swatch_rows = "".join(
-        f'<tr><td width="44" valign="middle" style="width:44px;padding:0 10px 8px 0;vertical-align:middle;">'
-        f'<a href="{attr(pattern_link(p_, c))}" target="_blank" style="text-decoration:none;"><img src="{attr(swatch_src(p_, swatches))}" width="44" height="44" alt="{attr(p_["name"])} pattern swatch" style="display:block;width:44px;height:44px;border:0;border-radius:2px;"></a></td>'
-        f'<td valign="middle" style="padding:0 0 8px 0;vertical-align:middle;font-family:{SANS};font-size:13px;line-height:1.35;color:{INK};">'
-        f'<b>{esc(p_["name"])}</b> <span style="color:{WARM};">{esc(p_.get("caption", ""))}</span><br>'
-        f'<a href="{attr(pattern_link(p_, c))}" target="_blank" style="color:{TEAL};font-weight:bold;text-decoration:none;">{esc(copy.get("swatch_cta", "Order sample"))}&nbsp;&rarr;</a></td></tr>'
-        for p_ in pats)
+    def sample_card(p_):
+        href = attr(pattern_link(p_, c))
+        return (
+            f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid {CARD_BORDER};background:{CARD_BG};margin:0 0 10px 0;">'
+            f'<tr><td style="padding:10px 10px 10px 10px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
+            f'<td width="40" valign="middle" style="width:40px;vertical-align:middle;"><a href="{href}" target="_blank" style="text-decoration:none;">'
+            f'<img src="{attr(swatch_src(p_, swatches))}" width="40" height="40" alt="{attr(p_["name"])} pattern swatch" style="display:block;width:40px;height:40px;border:0;"></a></td>'
+            f'<td valign="middle" style="vertical-align:middle;padding:0 0 0 12px;font-family:{SANS};font-size:14px;line-height:1.3;color:{INK};">'
+            f'<a href="{href}" target="_blank" style="color:{INK};text-decoration:none;"><b>{esc(p_["name"])}</b><br>'
+            f'<span style="font-size:12px;color:{WARM};">{esc(p_.get("caption", ""))}</span></a></td>'
+            f'</tr></table></td></tr>'
+            f'<tr><td bgcolor="{CARD_BAR}" align="center" style="background:{CARD_BAR};padding:0;text-align:center;">'
+            f'<a href="{href}" target="_blank" style="display:block;padding:9px 10px;font-family:{SANS};font-size:13px;line-height:1.2;font-weight:bold;letter-spacing:0.02em;color:{TEAL};text-decoration:none;">'
+            f'<span style="color:{TEAL};">{esc(copy.get("swatch_cta", "Order sample"))}</span></a></td></tr></table>'
+        )
+    cards = "".join(sample_card(p_) for p_ in pats)
     return f"""
 <!-- Chapter: {esc(c['title']).replace("--", "-")} -->
 <tr><td style="padding:0 0 26px 0;font-size:0;line-height:0;">
 <!--[if mso]><table role="presentation" width="{CONTENT}" cellpadding="0" cellspacing="0" border="0"><tr><td width="{STORY_IMG}" valign="middle"><![endif]-->
 <div style="{col}min-width:{STORY_IMG}px;">
 <a href="{attr(c['page_url'])}" target="_blank" style="text-decoration:none;"><img src="{attr(src)}" width="{STORY_IMG}" alt="{attr(c['image_alt'])}" style="display:block;width:100%;height:auto;border:0;"></a>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:14px 0 0 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0">{swatch_rows}</table></td></tr></table>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:12px 0 0 0;">{cards}</td></tr></table>
 </div><!--[if mso]></td><td width="{STORY_TEXT}" valign="middle"><![endif]--><div style="{col}min-width:{STORY_TEXT}px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="pg-story-text" style="padding:14px 0 14px 20px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -570,7 +582,7 @@ def chapter_block(c, images, swatches, last):
 <td valign="middle" style="vertical-align:middle;font-family:{SANS};font-size:22px;line-height:1.2;font-weight:bold;color:{INK};">{esc(c['place_title'])}</td>
 {logos_inline(c)}</tr></table></td></tr>
 <tr><td style="padding:0 0 14px 0;">{paras(c['body'], size=15, margin=10)}</td></tr>
-<tr><td style="padding:0 0 10px 0;font-family:{SANS};font-size:13px;line-height:1.5;font-weight:bold;"><a href="{attr(c['page_url'])}" target="_blank" style="color:{TEAL};text-decoration:none;">{esc(c['link_label'])}&nbsp;&rarr;</a></td></tr>
+{button(c['link_label'], c['page_url'], filled=True, pad="2px 0 14px 0")}
 <tr><td style="padding:0;font-family:{SANS};font-size:11px;line-height:1.5;color:{MUTED};">{credits_text(c)}</td></tr>
 </table>
 </td></tr></table>
