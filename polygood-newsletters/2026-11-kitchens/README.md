@@ -27,7 +27,7 @@ These are built in Mailchimp as separate blocks (`"header_in_mailchimp": true`),
 
 ## Before sending
 
-- [ ] **Images.** They point to this GitHub repository, which is now private, so they don't load for readers. Either make the repository public, or upload the files in `images/` (photos, swatches and logos) to Mailchimp and paste each URL into `copy.json`. A case takes it as `image_url`, a pattern as `swatch_url` and the header as `hero.image_url`. Then rebuild.
+- [ ] **Images.** The code links to a separate public repository, `pertsevaolexa-sys/polygood-newsletter-images`, under `main/2026-11-kitchens/`. The images load once that repository exists and holds them: 4 photos (`pt-*.jpg`), 4 swatches and 4 logos.
 - [ ] **Project pages.** Publish the four pages on polygood.com. All four buttons return 404 until then:
   `/projects/maison-kyka-paris/`, `/projects/thermoformed-kitchen-paris/`, `/projects/station-road-kitchen/`, `/projects/commerzbank-amsterdam/`.
 - [ ] **Samji photographer.** Confirm the photographer's name for both Samji projects. The credits say "Photography: Samji Studio". Samji asks to be on the first credit line with a link to ateliersamji.com, which is done.
