@@ -405,6 +405,23 @@ def logos_row(c, height=30):
             f'{cells}</tr></table></td></tr>\n')
 
 
+def logos_inline(c, height=22):
+    """The firms' logos side by side at the right of the project name (story layout)."""
+    logos = c.get("logos") or []
+    if not logos:
+        return ""
+    cells = ""
+    for i, lg in enumerate(logos):
+        w = round(lg["width"] * height / 30)
+        src = LOGO_PREVIEW.get(lg.get("file")) or url_or_placeholder(hosted(lg.get("image_url"), lg.get("file"), "logos/"), "LOGO-" + slug(lg["alt"]))
+        img = f'<img src="{attr(src)}" width="{w}" height="{height}" alt="{attr(lg["alt"])}" style="display:block;width:{w}px;height:{height}px;border:0;">'
+        if lg.get("url"):
+            img = f'<a href="{attr(lg["url"])}" target="_blank" style="text-decoration:none;">{img}</a>'
+        cells += f'<td valign="middle" style="vertical-align:middle;padding:0 0 0 {10 if i else 0}px;">{img}</td>'
+    return (f'<td valign="middle" align="right" style="vertical-align:middle;padding:0 0 0 12px;">'
+            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="right"><tr>{cells}</tr></table></td>\n')
+
+
 def logos_stack(c, height=22):
     """The firms' logos at the right of a chapter heading, one above the other (story layout)."""
     logos = c.get("logos") or []
@@ -529,7 +546,7 @@ def story_header():
 def chapter_block(c, images, swatches, last):
     """One chapter of the story layout: a square photo beside a short text, stacking on phones."""
     src = images.get(c["key"], url_or_placeholder(hosted(c.get("image_url"), c.get("image_file")), slug(c["title"]) + "-IMAGE"))
-    col = "display:inline-block;vertical-align:top;width:100%;max-width:100%;width:calc((480px - 100%) * 480);"
+    col = "display:inline-block;vertical-align:middle;width:100%;max-width:100%;width:calc((480px - 100%) * 480);"
     pats = case_patterns(c)
     swatch_rows = "".join(
         f'<tr><td width="44" valign="middle" style="width:44px;padding:0 10px 8px 0;vertical-align:middle;">'
@@ -541,19 +558,16 @@ def chapter_block(c, images, swatches, last):
     return f"""
 <!-- Chapter: {esc(c['title']).replace("--", "-")} -->
 <tr><td style="padding:0 0 26px 0;font-size:0;line-height:0;">
-<!--[if mso]><table role="presentation" width="{CONTENT}" cellpadding="0" cellspacing="0" border="0"><tr><td width="{STORY_IMG}" valign="top"><![endif]-->
+<!--[if mso]><table role="presentation" width="{CONTENT}" cellpadding="0" cellspacing="0" border="0"><tr><td width="{STORY_IMG}" valign="middle"><![endif]-->
 <div style="{col}min-width:{STORY_IMG}px;">
 <a href="{attr(c['page_url'])}" target="_blank" style="text-decoration:none;"><img src="{attr(src)}" width="{STORY_IMG}" alt="{attr(c['image_alt'])}" style="display:block;width:100%;height:auto;border:0;"></a>
-</div><!--[if mso]></td><td width="{STORY_TEXT}" valign="top"><![endif]--><div style="{col}min-width:{STORY_TEXT}px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:14px 0 0 20px;">
+</div><!--[if mso]></td><td width="{STORY_TEXT}" valign="middle"><![endif]--><div style="{col}min-width:{STORY_TEXT}px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:14px 0 14px 20px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-<tr><td style="padding:0 0 10px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-<td valign="top" style="vertical-align:top;">
-<div style="padding:0 0 4px 0;font-family:{SANS};font-size:12px;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;font-weight:bold;color:{TEAL};"><span style="color:{LINE};">{esc(c['chapter'].split(' ')[0])}</span> {esc(' '.join(c['chapter'].split(' ')[1:]))}</div>
-<div style="padding:0 0 2px 0;font-family:{SANS};font-size:22px;line-height:1.2;font-weight:bold;color:{INK};">{esc(c['headline'])}</div>
-<div style="font-family:{SANS};font-size:13px;line-height:1.5;font-weight:bold;color:{MUTED};">{esc(c['place_title'])}</div>
-</td>
-{logos_stack(c)}</tr></table></td></tr>
+<tr><td style="padding:0 0 6px 0;font-family:{SANS};font-size:12px;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;font-weight:bold;color:{TEAL};"><span style="color:{LINE};">{esc(c['chapter'].split(' ')[0])}</span> {esc(' '.join(c['chapter'].split(' ')[1:]))}<span style="color:{MUTED};font-weight:normal;"> &nbsp;&middot;&nbsp; {esc(c['headline'])}</span></td></tr>
+<tr><td style="padding:0 0 12px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+<td valign="middle" style="vertical-align:middle;font-family:{SANS};font-size:22px;line-height:1.2;font-weight:bold;color:{INK};">{esc(c['place_title'])}</td>
+{logos_inline(c)}</tr></table></td></tr>
 <tr><td style="padding:0 0 12px 0;">{paras(c['body'], size=15, margin=10)}</td></tr>
 <tr><td style="padding:0 0 4px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0">{swatch_rows}</table></td></tr>
 <tr><td style="padding:0 0 8px 0;font-family:{SANS};font-size:13px;line-height:1.5;font-weight:bold;"><a href="{attr(c['page_url'])}" target="_blank" style="color:{TEAL};text-decoration:none;">{esc(c['link_label'])}&nbsp;&rarr;</a></td></tr>
