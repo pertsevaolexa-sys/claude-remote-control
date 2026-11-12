@@ -313,6 +313,17 @@ def credits_line(c):
     )
 
 
+def partner_eyebrow(p):
+    """The small line above the partner heading: italic in the story layout, capitals otherwise."""
+    text = (p.get("eyebrow") or "").strip()
+    if not text:
+        return ""
+    if copy.get("layout") == "story":
+        return (f'<tr><td style="padding:0 0 6px 0;font-family:{SANS};font-size:15px;line-height:1.4;font-style:italic;color:{WARM};">'
+                f'{esc(text)}</td></tr>')
+    return label(text, pad="0 0 8px 0")
+
+
 def partner_block():
     """A boxed call to action after the cases, e.g. the call for kitchen-making partners."""
     p = copy.get("partner") or {}
@@ -322,7 +333,7 @@ def partner_block():
 {dashed()}
 <tr><td bgcolor="{PANEL}" style="background:{PANEL};padding:26px 24px 4px 24px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-{label(p.get('eyebrow', ''), pad="0 0 8px 0") if (p.get('eyebrow') or '').strip() else ''}
+{partner_eyebrow(p)}
 {heading(p['heading'], PARTNER_HEADING_SIZE, pad="0 0 12px 0")}
 <tr><td style="padding:0 0 4px 0;">{paras(p['body'])}</td></tr>
 {button(p['button_label'], url_or_placeholder(p.get('button_url'), 'PARTNER-CONTACT'), filled=True, pad="0 0 24px 0")}
