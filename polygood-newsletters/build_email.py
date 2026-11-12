@@ -537,12 +537,15 @@ def story_header():
     sh = copy.get("story_header") or {}
     if not (sh.get("title") or "").strip():
         return ""
-    toc = " &nbsp;&middot;&nbsp; ".join(
-        f'<span style="color:{LINE};">{esc(c["chapter"].split(" ")[0])}</span>&nbsp;{esc(" ".join(c["chapter"].split(" ")[1:]))}'
-        for c in copy["cases"])
+    if all(c.get("toc") for c in copy["cases"]):
+        toc = f' &nbsp;<span style="color:{LINE};">&middot;</span>&nbsp; '.join(esc(c["toc"]) for c in copy["cases"])
+    else:
+        toc = " &nbsp;&middot;&nbsp; ".join(
+            f'<span style="color:{LINE};">{esc(c["chapter"].split(" ")[0])}</span>&nbsp;{esc(" ".join(c["chapter"].split(" ")[1:]))}'
+            for c in copy["cases"])
     return f"""<!-- Story title -->
 <tr><td style="padding:0 0 6px 0;font-family:{SANS};font-size:22px;line-height:1.25;font-weight:bold;color:{INK};text-align:center;">{esc(sh['title'])}</td></tr>
-<tr><td style="padding:0 0 28px 0;font-family:{SANS};font-size:13px;line-height:1.6;font-weight:bold;letter-spacing:0.04em;color:{TEAL};text-align:center;">{toc}</td></tr>
+<tr><td style="padding:0 0 28px 0;font-family:{SANS};font-size:15px;line-height:1.6;font-style:italic;color:{WARM};text-align:center;">{toc}</td></tr>
 """
 
 
@@ -577,7 +580,7 @@ def chapter_block(c, images, swatches, last):
 </div><!--[if mso]></td><td width="{STORY_TEXT}" valign="middle"><![endif]--><div style="{col}min-width:{STORY_TEXT}px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="pg-story-text" style="padding:14px 0 14px 20px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-<tr><td style="padding:0 0 6px 0;font-family:{SANS};font-size:12px;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;font-weight:bold;color:{TEAL};"><span style="color:{LINE};">{esc(c['chapter'].split(' ')[0])}</span> {esc(' '.join(c['chapter'].split(' ')[1:]))}<span style="color:{MUTED};font-weight:normal;"> &nbsp;&middot;&nbsp; {esc(c['headline'])}</span></td></tr>
+{chapter_label(c)}
 <tr><td style="padding:0 0 12px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
 <td valign="middle" style="vertical-align:middle;font-family:{SANS};font-size:22px;line-height:1.2;font-weight:bold;color:{INK};">{esc(c['place_title'])}</td>
 {logos_inline(c)}</tr></table></td></tr>
@@ -591,6 +594,17 @@ def chapter_block(c, images, swatches, last):
 <!--[if mso]></td></tr></table><![endif]-->
 </td></tr>
 {case_note(c)}{'' if last else dashed(pad="0 0 26px 0")}"""
+
+
+def chapter_label(c):
+    """The small line above the client name: a plain sentence-case phrase if the case has one
+    ("Shaped in the workshop"), else the numbered chapter in capitals."""
+    if (c.get("kicker_line") or "").strip():
+        return (f'<tr><td style="padding:0 0 4px 0;font-family:{SANS};font-size:15px;line-height:1.4;font-style:italic;color:{WARM};">'
+                f'{esc(c["kicker_line"])}</td></tr>')
+    return (f'<tr><td style="padding:0 0 6px 0;font-family:{SANS};font-size:12px;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;font-weight:bold;color:{TEAL};">'
+            f'<span style="color:{LINE};">{esc(c["chapter"].split(" ")[0])}</span> {esc(" ".join(c["chapter"].split(" ")[1:]))}'
+            f'<span style="color:{MUTED};font-weight:normal;"> &nbsp;&middot;&nbsp; {esc(c["headline"])}</span></td></tr>')
 
 
 def body_story(images, swatches):
@@ -670,7 +684,7 @@ def full_email(images, swatches):
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="{OUTER}" style="background:{OUTER};">
 <tr><td align="center" style="padding:24px 0;">
 {colour_key()}
-{hero(images, with_intro=copy.get("layout") not in ("edit", "story"))}
+{'' if copy.get("header_in_mailchimp") else hero(images, with_intro=copy.get("layout") not in ("edit", "story"))}
 {body(images, swatches)}
 <!-- Footer: Mailchimp needs the unsubscribe link and your postal address -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;">
@@ -973,10 +987,10 @@ page = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Newsletter preview</title></head>
 <body style="margin:0;padding:24px 12px;background:{OUTER};">
-<div style="max-width:600px;margin:0 auto 16px auto;font-family:{SANS};font-size:13px;line-height:1.5;color:{NOTE};">
+{'' if copy.get("header_in_mailchimp") else f"""<div style="max-width:600px;margin:0 auto 16px auto;font-family:{SANS};font-size:13px;line-height:1.5;color:{NOTE};">
 <div><b>Subject:</b> {esc(copy['subject_lines'][0])}</div><div><b>Preview text:</b> {esc(copy['preview_text'])}</div>
 </div>
-{hero(images, with_intro=copy.get("layout") not in ("edit", "story"))}
+{hero(images, with_intro=copy.get("layout") not in ("edit", "story"))}"""}
 {body(images, swatches)}
 </body></html>
 """

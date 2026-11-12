@@ -11,6 +11,10 @@ The layout is `"layout": "story"`: each chapter is a square photo beside a short
 
 The claims come from polygood.com: the tech guide, stain test, cleaning guide, take-back page and material data.
 
+## Header, subject and preview text
+
+These are built in Mailchimp as separate blocks (`"header_in_mailchimp": true`), so the code block starts with the bold intro and ends with the open call. The header photo strip is `polygood-kitchen-edit-header.png`: 1440×840, twice the size it shows in the email. Subject and preview text options are in `copy.json` (`subject_lines`, `preview_text`).
+
 ## Files
 
 - `copy.json`: all the words, links, credits and image names. Edit here, then rebuild:

@@ -57,7 +57,9 @@
           "url": "https://www.ateliersamji.com/"
         }
       ],
-      "chapter": "01 Shaped"
+      "chapter": "01 Shaped",
+      "kicker_line": "Shaped in the workshop",
+      "toc": "Shaped"
     },
     {
       "key": "kyka",
@@ -107,7 +109,9 @@
           "url": "https://www.maison-kyka.com/"
         }
       ],
-      "chapter": "02 Fitted"
+      "chapter": "02 Fitted",
+      "kicker_line": "Fitted in the kitchen",
+      "toc": "Fitted"
     },
     {
       "key": "station",
@@ -139,7 +143,9 @@
           "url": "https://www.wunsch.co.uk/"
         }
       ],
-      "chapter": "03 Lived in"
+      "chapter": "03 Lived in",
+      "kicker_line": "Lived in at home",
+      "toc": "Lived in"
     },
     {
       "key": "commerzbank",
@@ -173,7 +179,9 @@
           "width": 45
         }
       ],
-      "chapter": "04 Shared"
+      "chapter": "04 Shared",
+      "kicker_line": "Shared at work",
+      "toc": "Shared"
     }
   ],
   "partner": {
@@ -233,7 +241,7 @@
   "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/a1d31dfdc10624658b48709b746a63f8a2aa2ba0/polygood-newsletters/2026-11-kitchens/images",
   "signoff": "The Polygood team\nThe Good Plastic Company",
   "closing_cta": {
-    "text": "Explore how Polygood can make your projects even more interesting",
+    "text": "",
     "url": "https://polygood.com/"
   },
   "theme": {
@@ -253,5 +261,6 @@
   },
   "story_header": {
     "title": "The life of a worktop"
-  }
+  },
+  "header_in_mailchimp": true
 }
