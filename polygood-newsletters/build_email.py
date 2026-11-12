@@ -283,6 +283,16 @@ def closing_cta():
     )
 
 
+def credits_text(c):
+    parts = []
+    for cr in c.get("credits") or []:
+        name = esc(cr["name"])
+        if (cr.get("url") or "").strip():
+            name = f'<a href="{attr(cr["url"].strip())}" target="_blank" style="color:{MUTED};text-decoration:underline;">{name}</a>'
+        parts.append(f"{esc(cr['role'])}: {name}")
+    return " &middot; ".join(parts)
+
+
 def credits_line(c):
     """The project's credits in small text, e.g. "Fabrication and design: Samji Studio · Client: Maison Kyka".
     A credit with a url links the name (some makers ask for a link on their credit)."""
@@ -377,7 +387,7 @@ def case_block_edit(c, images, swatches, last):
 LOGO_PREVIEW = {}  # file name -> image source, filled in for preview.html only
 
 
-def logos_row(c):
+def logos_row(c, height=30):
     """Small logos of the firms behind a case, in a row under the photo (each 30px tall)."""
     logos = c.get("logos") or []
     if not logos:
@@ -386,12 +396,12 @@ def logos_row(c):
         f'<td valign="middle" style="padding:0 20px 0 0;vertical-align:middle;">'
         + (f'<a href="{attr(lg["url"])}" target="_blank" style="text-decoration:none;">' if lg.get("url") else "")
         + f'<img src="{attr(LOGO_PREVIEW.get(lg.get("file")) or url_or_placeholder(hosted(lg.get("image_url"), lg.get("file"), "logos/"), "LOGO-" + slug(lg["alt"])))}" '
-        f'width="{lg["width"]}" height="30" alt="{attr(lg["alt"])}" style="display:block;width:{lg["width"]}px;height:30px;border:0;">'
+        f'width="{round(lg["width"] * height / 30)}" height="{height}" alt="{attr(lg["alt"])}" style="display:block;width:{round(lg["width"] * height / 30)}px;height:{height}px;border:0;">'
         + ("</a>" if lg.get("url") else "")
         + "</td>"
         for lg in logos
     )
-    return (f'<tr><td style="padding:0 0 14px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
+    return (f'<tr><td style="padding:0 0 {12 if height < 30 else 14}px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
             f'{cells}</tr></table></td></tr>\n')
 
 
@@ -481,7 +491,80 @@ def closing_line():
     )
 
 
+STORY_IMG = 252   # chapter photo column (story layout); the text column takes the other 300px
+STORY_TEXT = CONTENT - STORY_IMG
+
+
+def story_header():
+    """The story's title and its chapter list, under the intro (story layout)."""
+    sh = copy.get("story_header") or {}
+    if not (sh.get("title") or "").strip():
+        return ""
+    toc = " &nbsp;&middot;&nbsp; ".join(
+        f'<span style="color:{LINE};">{esc(c["chapter"].split(" ")[0])}</span>&nbsp;{esc(" ".join(c["chapter"].split(" ")[1:]))}'
+        for c in copy["cases"])
+    return f"""<!-- Story title -->
+<tr><td style="padding:0 0 6px 0;font-family:{SANS};font-size:22px;line-height:1.25;font-weight:bold;color:{INK};text-align:center;">{esc(sh['title'])}</td></tr>
+<tr><td style="padding:0 0 28px 0;font-family:{SANS};font-size:13px;line-height:1.6;font-weight:bold;letter-spacing:0.04em;color:{TEAL};text-align:center;">{toc}</td></tr>
+"""
+
+
+def chapter_block(c, images, swatches, last):
+    """One chapter of the story layout: a square photo beside a short text, stacking on phones."""
+    src = images.get(c["key"], url_or_placeholder(hosted(c.get("image_url"), c.get("image_file")), slug(c["title"]) + "-IMAGE"))
+    col = "display:inline-block;vertical-align:top;width:100%;max-width:100%;width:calc((480px - 100%) * 480);"
+    pats = case_patterns(c)
+    swatch_rows = "".join(
+        f'<tr><td width="44" valign="middle" style="width:44px;padding:0 10px 8px 0;vertical-align:middle;">'
+        f'<a href="{attr(pattern_link(p_, c))}" target="_blank" style="text-decoration:none;"><img src="{attr(swatch_src(p_, swatches))}" width="44" height="44" alt="{attr(p_["name"])} pattern swatch" style="display:block;width:44px;height:44px;border:0;border-radius:2px;"></a></td>'
+        f'<td valign="middle" style="padding:0 0 8px 0;vertical-align:middle;font-family:{SANS};font-size:13px;line-height:1.35;color:{INK};">'
+        f'<b>{esc(p_["name"])}</b> <span style="color:{WARM};">{esc(p_.get("caption", ""))}</span><br>'
+        f'<a href="{attr(pattern_link(p_, c))}" target="_blank" style="color:{TEAL};font-weight:bold;text-decoration:none;">{esc(copy.get("swatch_cta", "Order sample"))}&nbsp;&rarr;</a></td></tr>'
+        for p_ in pats)
+    return f"""
+<!-- Chapter: {esc(c['title']).replace("--", "-")} -->
+<tr><td style="padding:0 0 26px 0;font-size:0;line-height:0;">
+<!--[if mso]><table role="presentation" width="{CONTENT}" cellpadding="0" cellspacing="0" border="0"><tr><td width="{STORY_IMG}" valign="top"><![endif]-->
+<div style="{col}min-width:{STORY_IMG}px;">
+<a href="{attr(c['page_url'])}" target="_blank" style="text-decoration:none;"><img src="{attr(src)}" width="{STORY_IMG}" alt="{attr(c['image_alt'])}" style="display:block;width:100%;height:auto;border:0;"></a>
+</div><!--[if mso]></td><td width="{STORY_TEXT}" valign="top"><![endif]--><div style="{col}min-width:{STORY_TEXT}px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:14px 0 0 20px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+{logos_row(c, height=22)}<tr><td style="padding:0 0 4px 0;font-family:{SANS};font-size:12px;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;font-weight:bold;color:{TEAL};"><span style="color:{LINE};">{esc(c['chapter'].split(' ')[0])}</span> {esc(' '.join(c['chapter'].split(' ')[1:]))}</td></tr>
+<tr><td style="padding:0 0 2px 0;font-family:{SANS};font-size:22px;line-height:1.2;font-weight:bold;color:{INK};">{esc(c['headline'])}</td></tr>
+<tr><td style="padding:0 0 10px 0;font-family:{SANS};font-size:13px;line-height:1.5;font-weight:bold;color:{MUTED};">{esc(c['place_title'])}</td></tr>
+<tr><td style="padding:0 0 12px 0;">{paras(c['body'], size=15, margin=10)}</td></tr>
+<tr><td style="padding:0 0 4px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0">{swatch_rows}</table></td></tr>
+<tr><td style="padding:0 0 8px 0;font-family:{SANS};font-size:13px;line-height:1.5;font-weight:bold;"><a href="{attr(c['page_url'])}" target="_blank" style="color:{TEAL};text-decoration:none;">{esc(c['link_label'])}&nbsp;&rarr;</a></td></tr>
+<tr><td style="padding:0;font-family:{SANS};font-size:11px;line-height:1.5;color:{MUTED};">{credits_text(c)}</td></tr>
+</table>
+</td></tr></table>
+</div>
+<!--[if mso]></td></tr></table><![endif]-->
+</td></tr>
+{case_note(c)}{'' if last else dashed(pad="0 0 26px 0")}"""
+
+
+def body_story(images, swatches):
+    """The whole body as one story: intro, chapter list, chapters, partner box, closing line."""
+    cases = copy["cases"]
+    blocks = "".join(chapter_block(c, images, swatches, i == len(cases) - 1) for i, c in enumerate(cases))
+    return f"""<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;background:{PAPER};">
+<tr><td bgcolor="{PAPER}" style="background:{PAPER};padding:24px 24px 8px 24px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<!-- Intro -->
+<tr><td style="padding:0 0 22px 0;font-family:{SANS};font-size:18px;line-height:1.5;font-weight:bold;color:{INK};text-align:center;">{esc(copy['hero']['intro'])}</td></tr>
+{intro_button()}{dashed(pad="0 0 26px 0")}
+{story_header()}{blocks}
+{partner_block()}{closing_line()}</table>
+</td></tr>
+</table>
+"""
+
+
 def body(images, swatches):
+    if copy.get("layout") == "story":
+        return body_story(images, swatches)
     if copy.get("layout") == "edit":
         return body_edit(images, swatches)
     cases = copy["cases"]
@@ -538,7 +621,7 @@ def full_email(images, swatches):
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="{OUTER}" style="background:{OUTER};">
 <tr><td align="center" style="padding:24px 0;">
 {colour_key()}
-{hero(images, with_intro=copy.get("layout") != "edit")}
+{hero(images, with_intro=copy.get("layout") not in ("edit", "story"))}
 {body(images, swatches)}
 <!-- Footer: Mailchimp needs the unsubscribe link and your postal address -->
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;">
@@ -844,7 +927,7 @@ page = f"""<!doctype html>
 <div style="max-width:600px;margin:0 auto 16px auto;font-family:{SANS};font-size:13px;line-height:1.5;color:{NOTE};">
 <div><b>Subject:</b> {esc(copy['subject_lines'][0])}</div><div><b>Preview text:</b> {esc(copy['preview_text'])}</div>
 </div>
-{hero(images, with_intro=copy.get("layout") != "edit")}
+{hero(images, with_intro=copy.get("layout") not in ("edit", "story"))}
 {body(images, swatches)}
 </body></html>
 """
