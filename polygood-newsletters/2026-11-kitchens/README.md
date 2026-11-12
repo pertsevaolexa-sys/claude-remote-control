@@ -1,11 +1,11 @@
 # The Polygood® Kitchen Edit (November 2026)
 
-One story in four chapters, "The life of a worktop". The bold intro explains the idea, and the story leads to the open call to kitchen makers at the end ("Your workshop could write the next chapter"). Each chapter is one kitchen and one job a worktop has to do:
+One story in four chapters, "The life of a worktop", from the workshop to a busy office pantry. The bold intro explains the idea, and the story leads to the open call to kitchen makers at the end ("Your workshop could write the next chapter"). Each chapter is one kitchen and one job a worktop has to do:
 
 1. **01 Shaped: the curve.** A private home in Paris. Samji Studio thermoformed an Emerald Ghost worktop and made a matching table.
 2. **02 Fitted: the edge.** Maison Kyka, Paris. Samji Studio made Terrazzo Nuovo worktops; the solid edge needs no edging strip and is cut into a wave.
 3. **03 Lived in: stains and care.** Station Road, UK. WUNSCH fitted a White Lollipop worktop. The chapter covers the stain test, sanding marks out, and daily care.
-4. **04 Renewed: water and the next refit.** Commerzbank, Amsterdam, designed by CBRE Design Collective. The chapter covers the undermount sink in Timeless Duo Blue and the take-back programme.
+4. **04 Shared: daily use at work.** Commerzbank, Amsterdam, designed by CBRE Design Collective. The chapter covers the office pantry in Timeless Duo Blue: no moisture absorption at the undermount sink, food-contact testing and the 10-year limited warranty.
 
 The layout is `"layout": "story"`: each chapter is a square photo beside a short text. The photos show the whole room (portrait, `pt-*.jpg`); the close-ups stay in the header strip. Under each photo is a sample card: swatch, pattern name and code, and an "Order sample" bar, all one link. On phones the card moves to the end of the chapter, after the story. A small media query does this; mail apps without media queries keep the desktop order. In the text column come the chapter label, the client name with the firms' logos at the right, the story, a filled "See the project" button and the credits. On phones the photo and text stack. Colours come from the Polygood brand palette: blue is the main colour and olive the accent (see `theme` in `copy.json`).
 

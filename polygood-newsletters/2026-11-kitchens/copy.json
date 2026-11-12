@@ -1,14 +1,14 @@
 {
   "subject_lines": [
     "The life of a Polygood® worktop, in four kitchens",
-    "Shaped, fitted, lived in, renewed: Polygood® in the kitchen",
+    "Shaped, fitted, lived in, shared: Polygood® in the kitchen",
     "Your workshop could write the next chapter"
   ],
-  "preview_text": "Shaped, fitted, lived in, renewed: one worktop's life in four kitchens.",
+  "preview_text": "Shaped, fitted, lived in, shared: one worktop's life in four kitchens.",
   "hero": {
     "title": "The Polygood® Kitchen Edit",
-    "subtitle": "The life of a worktop, from the workshop to the next refit, told in four kitchens.",
-    "intro": "This edition follows one worktop through its life in four chapters: shaped in the workshop, fitted in the kitchen, lived in every day and renewed at the next refit. Each chapter is a real kitchen in Polygood® and shows what the material does at that stage.",
+    "subtitle": "The life of a worktop, from the workshop to a busy office pantry, told in four kitchens.",
+    "intro": "This edition follows one worktop through its life in four chapters: shaped in the workshop, fitted in the kitchen, lived in at home and shared at work. Each chapter is a real kitchen in Polygood® and shows what the material does at that stage.",
     "image_url": "",
     "image_file": "hero-strip.jpg",
     "image_alt": "Close-ups from four Polygood projects: a wave-cut Terrazzo Nuovo worktop edge, an Emerald Ghost table, a White Lollipop worktop and a Timeless Duo Blue countertop"
@@ -16,7 +16,7 @@
   "eyebrow": "Kitchens edition",
   "headline": "Kitchens, and the makers behind them",
   "umbrella_statement": "",
-  "intro": "This edition follows one worktop through its life in four chapters: shaped in the workshop, fitted in the kitchen, lived in every day and renewed at the next refit. Each chapter is a real kitchen in Polygood® and shows what the material does at that stage.",
+  "intro": "This edition follows one worktop through its life in four chapters: shaped in the workshop, fitted in the kitchen, lived in at home and shared at work. Each chapter is a real kitchen in Polygood® and shows what the material does at that stage.",
   "layout": "story",
   "cases": [
     {
@@ -147,8 +147,8 @@
       "sector": "04 · Water and the next refit",
       "place_title": "Commerzbank, Amsterdam",
       "title": "Commerzbank",
-      "headline": "Water and refit",
-      "body": "Polygood absorbs no moisture, so in Commerzbank's pantry, designed by CBRE Design Collective, the sink sits under the Timeless Duo Blue countertop with the cut-out edge left bare. When the pantry is refitted, the countertops can come back to us through our take-back programme. Polygood is 100% recyclable.",
+      "headline": "Daily use at work",
+      "body": "In an office, the pantry is where the day happens: coffee between meetings, lunch, a queue at the sink. For the Amsterdam office of Commerzbank, one of Germany's largest banks, CBRE Design Collective chose Polygood Timeless Duo Blue for the pantry countertops. It absorbs no moisture, so the sink sits under the countertop with the cut-out edge left bare. It is tested for food contact and carries a 10-year limited warranty for interior use.",
       "credits": [
         {
           "role": "Design",
@@ -173,7 +173,7 @@
           "width": 45
         }
       ],
-      "chapter": "04 Renewed"
+      "chapter": "04 Shared"
     }
   ],
   "partner": {
