@@ -22,7 +22,7 @@
     {
       "key": "thermo",
       "kicker": "Private home · Paris",
-      "sector": "02 · The curve",
+      "sector": "01 · The curve",
       "place_title": "Private home, Paris",
       "title": "Thermoformed kitchen",
       "headline": "The curve",
@@ -62,7 +62,7 @@
     {
       "key": "kyka",
       "kicker": "Maison Kyka · Paris",
-      "sector": "01 · The edge",
+      "sector": "02 · The edge",
       "place_title": "Maison Kyka, Paris",
       "title": "Maison Kyka",
       "headline": "The edge",
@@ -144,7 +144,7 @@
     {
       "key": "commerzbank",
       "kicker": "Commerzbank · Amsterdam",
-      "sector": "04 · Water and the next refit",
+      "sector": "04 · Daily use at work",
       "place_title": "Commerzbank, Amsterdam",
       "title": "Commerzbank",
       "headline": "Daily use at work",
