@@ -53,6 +53,22 @@ HERO_TEXT_COL = 240  # header: text column width; the photo strip takes the rest
 COLUMNS = 3   # swatches per row; a case with more patterns continues on the next row
 SWATCH = 160  # largest swatch size in px (on a computer); on a phone they shrink to fit
 CONTENT = 552  # width of the case photos (600 minus 24px padding each side)
+LINE = TEAL         # the dashed lines between sections
+OUTER = "#f3efe9"   # the page around the 600px email (full email and preview)
+NOTE = "#4a4039"    # subject and preview text above the preview
+
+# An edition can bring its own colours: "theme" in copy.json overrides any of the above.
+THEME = copy.get("theme") or {}
+PAPER = THEME.get("paper", PAPER)
+INK = THEME.get("ink", INK)
+MUTED = THEME.get("muted", MUTED)
+TEAL = THEME.get("accent", TEAL)
+LINE = THEME.get("line", TEAL if "accent" in THEME else LINE)
+WARM = THEME.get("caption", WARM)
+WHITE = THEME.get("button_text", WHITE)
+PANEL = THEME.get("panel", PANEL)
+OUTER = THEME.get("outer", OUTER)
+NOTE = THEME.get("note", NOTE)
 # -----------------------------------------------------------------------------
 
 
@@ -123,7 +139,7 @@ def dashed(pad="0 0 32px 0"):
     """The teal dashed line from the Project Edit header, used between every section."""
     return (
         f'<tr><td style="padding:{pad};"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>'
-        f'<td style="border-top:2px dashed {TEAL};font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td>'
+        f'<td style="border-top:2px dashed {LINE};font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td>'
         f"</tr></table></td></tr>"
     )
 
@@ -135,15 +151,16 @@ def heading(text, size, pad="0 0 12px 0"):
     )
 
 
-def button(text, href, filled=True, pad="0 0 26px 0"):
+def button(text, href, filled=True, pad="0 0 26px 0", center=False):
     """A button that stays a button in Mailchimp, Gmail and Outlook: the padding and colour sit
     on the table cell, so the whole shape shows even where the link styles are stripped."""
     fill = TEAL if filled else PAPER
     ink = WHITE if filled else TEAL
     return (
-        f'<tr><td style="padding:{pad};">'
-        f'<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
-        f'<td bgcolor="{fill}" style="background:{fill};border:2px solid {TEAL};border-radius:2px;padding:12px 22px;'
+        (f'<tr><td align="center" style="padding:{pad};"><table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tr>'
+         if center else
+         f'<tr><td style="padding:{pad};"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>')
+        + f'<td bgcolor="{fill}" style="background:{fill};border:2px solid {TEAL};border-radius:2px;padding:12px 22px;'
         f'font-family:{SANS};font-size:15px;font-weight:bold;line-height:1.2;">'
         f'<a href="{attr(href)}" target="_blank" style="font-family:{SANS};font-size:15px;font-weight:bold;line-height:1.2;'
         f'color:{ink};text-decoration:none;"><span style="color:{ink};">{esc(text)}</span></a>'
@@ -304,7 +321,7 @@ def partner_block():
 def colour_key():
     return (
         f"<!-- Colours, for find and replace: background {PAPER} · text {INK} · small text {MUTED} · "
-        f"teal lines, labels, links and buttons {TEAL} · swatch captions {WARM} -->"
+        f"labels, links and buttons {TEAL} · dashed lines {LINE} · swatch captions {WARM} -->"
     )
 
 
@@ -330,7 +347,7 @@ def hero(images, with_intro=True):
 <!--[if mso]></td></tr></table><![endif]-->
 </td></tr>
 <tr><td style="padding:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
-<td style="border-top:2px dashed {TEAL};font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td>
+<td style="border-top:2px dashed {LINE};font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td>
 </tr></table></td></tr>
 {f'<tr><td bgcolor="{PAPER}" style="background:{PAPER};padding:24px 24px 4px 24px;">{paras(h["intro"], size=18)}</td></tr>' if with_intro else ''}
 </table>
@@ -353,7 +370,26 @@ def case_block_edit(c, images, swatches, last):
 <tr><td style="padding:0 0 6px 0;">{paras(c['body'], margin=12)}</td></tr>{credits_line(c)}
 {button(c['link_label'], c['page_url'], filled=True, pad="0 0 28px 0")}
 {palette(c, swatches)}
-{'' if last else dashed()}"""
+{case_note(c)}{'' if last else dashed()}"""
+
+
+def case_note(c):
+    """An optional centred line after a case, with one link, e.g. a nudge to the partner call."""
+    n = c.get("note") or {}
+    if not (n.get("link_text") or "").strip():
+        return ""
+    return (
+        f'<tr><td style="padding:0 0 30px 0;font-family:{SANS};font-size:15px;line-height:1.5;color:{INK};text-align:center;">'
+        f'{esc(n.get("before", ""))}<a href="{attr(n["url"])}" target="_blank" style="color:{TEAL};font-weight:bold;text-decoration:underline;">'
+        f'{esc(n["link_text"])}</a>{esc(n.get("after", ""))}</td></tr>\n'
+    )
+
+
+def intro_button():
+    b = copy.get("intro_button") or {}
+    if not (b.get("label") or "").strip():
+        return ""
+    return button(b["label"], url_or_placeholder(b.get("url"), "INTRO-BUTTON"), filled=True, pad="0 0 28px 0", center=True) + "\n"
 
 
 def body_edit(images, swatches):
@@ -366,7 +402,7 @@ def body_edit(images, swatches):
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 <!-- Intro -->
 <tr><td style="padding:0 0 24px 0;font-family:{SANS};font-size:18px;line-height:1.5;font-weight:bold;color:{INK};text-align:center;">{esc(lead)}</td></tr>
-{dashed()}
+{intro_button()}{dashed()}
 {blocks}
 {partner_block()}{closing_cta() if not copy.get('partner') else closing_line()}</table>
 </td></tr>
@@ -438,9 +474,9 @@ def full_email(images, swatches):
 <meta name="x-apple-disable-message-reformatting">
 <title>*|MC:SUBJECT|*</title>
 </head>
-<body style="margin:0;padding:0;background:#f3efe9;">
+<body style="margin:0;padding:0;background:{OUTER};">
 <div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">*|MC_PREVIEW_TEXT|*</div>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f3efe9" style="background:#f3efe9;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="{OUTER}" style="background:{OUTER};">
 <tr><td align="center" style="padding:24px 0;">
 {colour_key()}
 {hero(images, with_intro=copy.get("layout") != "edit")}
@@ -740,8 +776,8 @@ swatches = {
 page = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Newsletter preview</title></head>
-<body style="margin:0;padding:24px 12px;background:#f3efe9;">
-<div style="max-width:600px;margin:0 auto 16px auto;font-family:{SANS};font-size:13px;line-height:1.5;color:#4a4039;">
+<body style="margin:0;padding:24px 12px;background:{OUTER};">
+<div style="max-width:600px;margin:0 auto 16px auto;font-family:{SANS};font-size:13px;line-height:1.5;color:{NOTE};">
 <div><b>Subject:</b> {esc(copy['subject_lines'][0])}</div><div><b>Preview text:</b> {esc(copy['preview_text'])}</div>
 </div>
 {hero(images, with_intro=copy.get("layout") != "edit")}

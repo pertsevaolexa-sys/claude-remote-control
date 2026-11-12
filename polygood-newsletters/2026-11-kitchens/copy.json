@@ -1,14 +1,14 @@
 {
   "subject_lines": [
+    "Two workshops, three Polygood® kitchens. Yours next?",
     "The Polygood® Project Edit: kitchens",
-    "We're looking for kitchen makers to work with",
-    "Kitchen worktops by Samji Studio and WUNSCH"
+    "We're looking for kitchen makers to work with"
   ],
-  "preview_text": "Worktops from Paris and the UK, and an invitation to kitchen makers",
+  "preview_text": "Samji Studio and WUNSCH built these worktops. We want to work with more kitchen makers.",
   "hero": {
     "title": "The Polygood® Project Edit",
-    "subtitle": "Kitchen worktops from Paris and the UK, a furnished office in the Netherlands, and an invitation to kitchen makers.",
-    "intro": "The kitchen worktops in this edition were made by two independent workshops: Samji Studio in Paris and WUNSCH in the UK. We're now looking for more kitchen makers to work with on joint projects. If you make kitchens, see what they did with Polygood®, then get in touch at the end.",
+    "subtitle": "This edition is an open call to kitchen makers. Two independent workshops show what a joint project with us looks like.",
+    "intro": "Every kitchen in this edition was made by an independent workshop: Samji Studio in Paris and WUNSCH in the UK. We want more collaborations like these, so this edition doubles as an open call. If you make kitchens, this is what a joint project with Polygood® looks like.",
     "image_url": "",
     "image_file": "hero-strip.jpg",
     "image_alt": "Close-ups from four Polygood projects: a wave-cut Terrazzo Nuovo worktop edge, an Emerald Ghost table, a White Lollipop worktop and an Aqua Drift lampshade"
@@ -16,22 +16,35 @@
   "eyebrow": "Kitchens edition",
   "headline": "Kitchens, and the makers behind them",
   "umbrella_statement": "",
-  "intro": "The kitchen worktops in this edition were made by two independent workshops: Samji Studio in Paris and WUNSCH in the UK. We're now looking for more kitchen makers to work with on joint projects.",
+  "intro": "Every kitchen in this edition was made by an independent workshop: Samji Studio in Paris and WUNSCH in the UK. We want more collaborations like these, so this edition doubles as an open call. If you make kitchens, this is what a joint project with Polygood® looks like.",
   "layout": "edit",
   "cases": [
     {
       "key": "kyka",
       "kicker": "Maison Kyka · Paris",
-      "sector": "Residential kitchens",
+      "sector": "Made with Samji Studio",
       "place_title": "Maison Kyka, Paris",
       "title": "Maison Kyka",
       "headline": "Terrazzo Nuovo worktops for two Paris flats",
       "body": "Samji Studio, a Paris workshop that makes furniture to measure, made the worktops for two Maison Kyka apartment kitchens: one in the 7th arrondissement, one near Saint-Germain in the 6th. Both are in Terrazzo Nuovo, a pale terrazzo pattern with fine dark flecks. In the 7th it sits on timber cabinets around a black sink. In the 6th, Samji cut the front edge into a wave that echoes the cabinet handles.",
       "credits": [
-        {"role": "Fabrication and design", "name": "Samji Studio", "url": "https://www.ateliersamji.com/"},
-        {"role": "Design", "name": "Kyka"},
-        {"role": "Client", "name": "Maison Kyka"},
-        {"role": "Photography", "name": "Samji Studio"}
+        {
+          "role": "Fabrication and design",
+          "name": "Samji Studio",
+          "url": "https://www.ateliersamji.com/"
+        },
+        {
+          "role": "Design",
+          "name": "Kyka"
+        },
+        {
+          "role": "Client",
+          "name": "Maison Kyka"
+        },
+        {
+          "role": "Photography",
+          "name": "Samji Studio"
+        }
       ],
       "pattern": "Terrazzo Nuovo",
       "application": "Kitchen worktops in two apartments",
@@ -44,15 +57,25 @@
     {
       "key": "thermo",
       "kicker": "Private home · Paris",
-      "sector": "Residential kitchens",
+      "sector": "Made with Samji Studio",
       "place_title": "A private home, Paris",
       "title": "Thermoformed kitchen",
       "headline": "An Emerald Ghost kitchen with a thermoformed curve",
       "body": "A private client in Paris asked Samji Studio for a kitchen worktop and a table to match. Samji made both in Emerald Ghost, a flecked sea green, set against timber cabinets and herringbone parquet. Part of the work was thermoformed: Samji heated the panel until it softened, shaped it over a mould and let it cool into a curve. It is the only thermoformed kitchen in our project archive so far.",
       "credits": [
-        {"role": "Fabrication", "name": "Samji Studio", "url": "https://www.ateliersamji.com/"},
-        {"role": "Client", "name": "Private"},
-        {"role": "Photography", "name": "Samji Studio"}
+        {
+          "role": "Fabrication",
+          "name": "Samji Studio",
+          "url": "https://www.ateliersamji.com/"
+        },
+        {
+          "role": "Client",
+          "name": "Private"
+        },
+        {
+          "role": "Photography",
+          "name": "Samji Studio"
+        }
       ],
       "pattern": "Emerald Ghost",
       "application": "Kitchen worktop and matching table",
@@ -60,18 +83,28 @@
       "page_url": "https://polygood.com/projects/thermoformed-kitchen-paris/",
       "image_url": "",
       "image_file": "thermoformed-kitchen.jpg",
-      "image_alt": "Emerald Ghost kitchen worktop and matching table in a Paris flat with a concrete ceiling, timber cabinets and herringbone parquet"
+      "image_alt": "Emerald Ghost kitchen worktop and matching table in a Paris flat with a concrete ceiling, timber cabinets and herringbone parquet",
+      "note": {
+        "before": "We want to do more projects like this one. If you make kitchens, ",
+        "link_text": "tell us about your workshop",
+        "url": "https://polygood.com/contact-us/",
+        "after": "."
+      }
     },
     {
       "key": "station",
       "kicker": "Station Road · UK",
-      "sector": "Residential kitchens",
+      "sector": "Made with WUNSCH",
       "place_title": "Station Road, UK",
       "title": "Station Road",
       "headline": "A White Lollipop worktop for a Station Road kitchen",
       "body": "WUNSCH, cabinetmakers in the UK, cut and fitted the worktop for this kitchen on Station Road in White Lollipop, a white ground with small flecks of colour. The flecks pick up the rest of the room: mustard-yellow fronts, pale birch ply, green glazed tiles and the reds and oranges on the open shelf. WUNSCH also photographed the finished kitchen.",
       "credits": [
-        {"role": "Cabinetmaking and photography", "name": "WUNSCH", "url": "https://www.wunsch.co.uk/"}
+        {
+          "role": "Cabinetmaking and photography",
+          "name": "WUNSCH",
+          "url": "https://www.wunsch.co.uk/"
+        }
       ],
       "pattern": "White Lollipop",
       "application": "Kitchen worktop",
@@ -90,9 +123,19 @@
       "headline": "Beyond the kitchen: tables, chairs and lights",
       "body": "Rootz is a knowledge and innovation centre for the tree nursery sector in West Brabant, a place for work, meetings and research. In February 2025 All Art Design furnished it in Polygood: tables and chairs in Terrazzo Nuovo and Sapphire Terrazzo, lampshades and a chandelier in Aqua Drift. The panels form both the surface and the structure, so the furniture needs no separate frame, and the blue shades soften the light that passes through them.",
       "credits": [
-        {"role": "Design and fabrication", "name": "All Art Design"},
-        {"role": "Photography", "name": "Jesper Productions", "url": "https://jesperproductions.nl/"},
-        {"role": "Client", "name": "Rootz"}
+        {
+          "role": "Design and fabrication",
+          "name": "All Art Design"
+        },
+        {
+          "role": "Photography",
+          "name": "Jesper Productions",
+          "url": "https://jesperproductions.nl/"
+        },
+        {
+          "role": "Client",
+          "name": "Rootz"
+        }
       ],
       "pattern": "Terrazzo Nuovo, Sapphire Terrazzo, Aqua Drift",
       "application": "Tables, chairs, lampshades and a chandelier",
@@ -118,20 +161,72 @@
   "swatch_buttons": true,
   "swatch_cta": "Order sample",
   "patterns": [
-    {"name": "Terrazzo Nuovo", "caption": "#PS1901", "pattern_url": "https://polygood.com/product/terrazzo-nuovo/", "swatch_url": "", "file": "terrazzo-nuovo.jpg", "id": "PS1901"},
-    {"name": "Emerald Ghost", "caption": "#PS1706", "pattern_url": "https://polygood.com/product/emerald-ghost/", "swatch_url": "", "file": "emerald-ghost.jpg", "id": "PS1706"},
-    {"name": "White Lollipop", "caption": "#PS1601", "pattern_url": "https://polygood.com/product/white-lollipop/", "swatch_url": "", "file": "white-lollipop.jpg", "id": "PS1601"},
-    {"name": "Sapphire Terrazzo", "caption": "#PS1801", "pattern_url": "https://polygood.com/product/sapphire-terrazzo/", "swatch_url": "", "file": "sapphire-terrazzo.jpg", "id": "PS1801"},
-    {"name": "Aqua Drift", "caption": "#PS1508", "pattern_url": "https://polygood.com/product/aqua-drift/", "swatch_url": "", "file": "aqua-drift.jpg", "id": "PS1508"}
+    {
+      "name": "Terrazzo Nuovo",
+      "caption": "#PS1901",
+      "pattern_url": "https://polygood.com/product/terrazzo-nuovo/",
+      "swatch_url": "",
+      "file": "terrazzo-nuovo.jpg",
+      "id": "PS1901"
+    },
+    {
+      "name": "Emerald Ghost",
+      "caption": "#PS1706",
+      "pattern_url": "https://polygood.com/product/emerald-ghost/",
+      "swatch_url": "",
+      "file": "emerald-ghost.jpg",
+      "id": "PS1706"
+    },
+    {
+      "name": "White Lollipop",
+      "caption": "#PS1601",
+      "pattern_url": "https://polygood.com/product/white-lollipop/",
+      "swatch_url": "",
+      "file": "white-lollipop.jpg",
+      "id": "PS1601"
+    },
+    {
+      "name": "Sapphire Terrazzo",
+      "caption": "#PS1801",
+      "pattern_url": "https://polygood.com/product/sapphire-terrazzo/",
+      "swatch_url": "",
+      "file": "sapphire-terrazzo.jpg",
+      "id": "PS1801"
+    },
+    {
+      "name": "Aqua Drift",
+      "caption": "#PS1508",
+      "pattern_url": "https://polygood.com/product/aqua-drift/",
+      "swatch_url": "",
+      "file": "aqua-drift.jpg",
+      "id": "PS1508"
+    }
   ],
   "closing": "",
   "cta_label": "Order samples",
   "samples_url": "https://polygood.com/order-samples/",
-  "chooser": {"enabled": false},
+  "chooser": {
+    "enabled": false
+  },
   "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/a51f1508633292ea796dc73a15ee8fbc3bb79a1a/polygood-newsletters/2026-11-kitchens/images",
   "signoff": "The Polygood team\nThe Good Plastic Company",
   "closing_cta": {
-    "text": "Explore how Polygood can make your projects even more interesting",
-    "url": "https://polygood.com/"
+    "text": "Make kitchens? Tell us about your workshop",
+    "url": "https://polygood.com/contact-us/"
+  },
+  "intro_button": {
+    "label": "Partner with us on a kitchen",
+    "url": "https://polygood.com/contact-us/"
+  },
+  "theme": {
+    "paper": "#f5f6f8",
+    "outer": "#e7eaef",
+    "ink": "#15203a",
+    "muted": "#5a6375",
+    "accent": "#23395d",
+    "line": "#d9a21b",
+    "caption": "#9a6a00",
+    "panel": "#fbf0d4",
+    "note": "#4a5160"
   }
 }
