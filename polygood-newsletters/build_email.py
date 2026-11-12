@@ -573,7 +573,7 @@ def chapter_block(c, images, swatches, last):
 <!--[if mso]><table role="presentation" width="{CONTENT}" cellpadding="0" cellspacing="0" border="0"><tr><td width="{STORY_IMG}" valign="middle"><![endif]-->
 <div style="{col}min-width:{STORY_IMG}px;">
 <a href="{attr(c['page_url'])}" target="_blank" style="text-decoration:none;"><img src="{attr(src)}" width="{STORY_IMG}" alt="{attr(c['image_alt'])}" style="display:block;width:100%;height:auto;border:0;"></a>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:12px 0 0 0;">{cards}</td></tr></table>
+<div class="pg-card-desk"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:12px 0 0 0;">{cards}</td></tr></table></div>
 </div><!--[if mso]></td><td width="{STORY_TEXT}" valign="middle"><![endif]--><div style="{col}min-width:{STORY_TEXT}px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="pg-story-text" style="padding:14px 0 14px 20px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -584,6 +584,7 @@ def chapter_block(c, images, swatches, last):
 <tr><td style="padding:0 0 14px 0;">{paras(c['body'], size=15, margin=10)}</td></tr>
 {button(c['link_label'], c['page_url'], filled=True, pad="2px 0 14px 0")}
 <tr><td style="padding:0;font-family:{SANS};font-size:11px;line-height:1.5;color:{MUTED};">{credits_text(c)}</td></tr>
+<!--[if !mso]><!--><tr><td style="padding:0;"><div class="pg-card-mob" style="display:none;max-height:0;overflow:hidden;mso-hide:all;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:16px 0 0 0;">{cards}</td></tr></table></div></td></tr><!--<![endif]-->
 </table>
 </td></tr></table>
 </div>
@@ -596,7 +597,7 @@ def body_story(images, swatches):
     """The whole body as one story: intro, chapter list, chapters, partner box, closing line."""
     cases = copy["cases"]
     blocks = "".join(chapter_block(c, images, swatches, i == len(cases) - 1) for i, c in enumerate(cases))
-    return f"""<style>@media only screen and (max-width:520px){{.pg-story-text{{padding-left:0 !important;}}}}</style>
+    return f"""<style>@media only screen and (max-width:540px){{.pg-story-text{{padding-left:0 !important;}} .pg-card-desk{{display:none !important;max-height:0 !important;overflow:hidden !important;}} .pg-card-mob{{display:block !important;max-height:none !important;overflow:visible !important;}}}}</style>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;background:{PAPER};">
 <tr><td bgcolor="{PAPER}" style="background:{PAPER};padding:24px 24px 8px 24px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
