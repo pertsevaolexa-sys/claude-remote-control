@@ -1,21 +1,15 @@
-# The Polygood® Project Edit: kitchens (November 2026)
+# The Polygood® Kitchen Edit (November 2026)
 
-Four projects and a call for kitchen-making partners:
+One story in four chapters, "The life of a worktop", followed by a call for kitchen-making partners. Each chapter is one kitchen and one job a worktop has to do:
 
-1. **Maison Kyka, Paris**: Terrazzo Nuovo worktops in two apartment kitchens, made by Samji Studio.
-2. **A thermoformed kitchen, Paris**: an Emerald Ghost worktop and matching table, made by Samji Studio.
-3. **Station Road, UK**: a White Lollipop worktop, cut and fitted by WUNSCH.
-4. **Commerzbank, Amsterdam**: Timeless Duo Blue pantry countertops designed by CBRE Design Collective.
+1. **01 Shaped: the curve.** A private home in Paris. Samji Studio thermoformed an Emerald Ghost worktop and made a matching table.
+2. **02 Fitted: the edge.** Maison Kyka, Paris. Samji Studio made Terrazzo Nuovo worktops; the solid edge needs no edging strip and is cut into a wave.
+3. **03 Lived in: stains and care.** Station Road, UK. WUNSCH fitted a White Lollipop worktop. The chapter covers the stain test, sanding marks out, and daily care.
+4. **04 Renewed: water and the next refit.** Commerzbank, Amsterdam, designed by CBRE Design Collective. The chapter covers the undermount sink in Timeless Duo Blue and the take-back programme.
 
-Each case shows one job a kitchen surface has to do, set out as the challenge, how Polygood answers it, and what that means over the years:
-- 01 the edge
-- 02 the curve
-- 03 stains and care
-- 04 water and the next refit
+The layout is `"layout": "story"`: each chapter is a square photo beside a short text, with a small swatch, "Order sample" and "See the project" links, logos and credits. On phones the photo and text stack. Colours come from the Polygood brand palette: blue is the main colour and olive the accent (see `theme` in `copy.json`).
 
-The claims come from polygood.com: the tech guide, stain test, cleaning guide, warranty, food-contact report and take-back page. Small logos of the firms sit under each photo.
-
-After the cases comes a boxed call for kitchen makers ("We're looking for kitchen makers"). Its "Get in touch" button opens https://polygood.com/contact-us/. Then comes the closing line.
+The claims come from polygood.com: the tech guide, stain test, cleaning guide, take-back page and material data.
 
 ## Files
 
