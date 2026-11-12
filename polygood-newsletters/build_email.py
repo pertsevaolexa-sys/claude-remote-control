@@ -538,14 +538,14 @@ def story_header():
     if not (sh.get("title") or "").strip():
         return ""
     if all(c.get("toc") for c in copy["cases"]):
-        toc = f' &nbsp;<span style="color:{LINE};">&middot;</span>&nbsp; '.join(esc(c["toc"]) for c in copy["cases"])
+        toc = f'&nbsp; <span style="color:{TEAL};font-style:normal;font-weight:bold;">&middot;</span> &nbsp;'.join(esc(c["toc"]) for c in copy["cases"])
     else:
         toc = " &nbsp;&middot;&nbsp; ".join(
             f'<span style="color:{LINE};">{esc(c["chapter"].split(" ")[0])}</span>&nbsp;{esc(" ".join(c["chapter"].split(" ")[1:]))}'
             for c in copy["cases"])
     return f"""<!-- Story title -->
 <tr><td style="padding:0 0 6px 0;font-family:{SANS};font-size:22px;line-height:1.25;font-weight:bold;color:{INK};text-align:center;">{esc(sh['title'])}</td></tr>
-<tr><td style="padding:0 0 28px 0;font-family:{SANS};font-size:15px;line-height:1.6;font-style:italic;color:{WARM};text-align:center;">{toc}</td></tr>
+<tr><td style="padding:0 0 28px 0;font-family:{SANS};font-size:16px;line-height:1.6;font-style:italic;color:{WARM};text-align:center;">{toc}</td></tr>
 """
 
 
