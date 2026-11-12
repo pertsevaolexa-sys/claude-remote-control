@@ -583,7 +583,7 @@ def chapter_block(c, images, swatches, last):
             f'<a href="{href}" target="_blank" style="font-family:{SANS};font-size:13px;line-height:1.2;font-weight:bold;letter-spacing:0.02em;color:{TEAL};text-decoration:none;">'
             f'<span style="color:{TEAL};">{esc(copy.get("swatch_cta", "Order sample"))}</span></a></td></tr></table>'
         )
-    cards = "".join(f'<tr><td style="padding:16px 0 0 0;">{sample_card(p_)}</td></tr>' for p_ in pats)
+    cards = "".join(f'<tr><td style="padding:2px 0 16px 0;">{sample_card(p_)}</td></tr>' for p_ in pats)
     return f"""
 <!-- Chapter: {esc(c['title']).replace("--", "-")} -->
 <tr><td style="padding:0 0 26px 0;">
@@ -597,10 +597,10 @@ def chapter_block(c, images, swatches, last):
 <tr><td style="padding:0 0 12px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
 <td valign="middle" style="vertical-align:middle;font-family:{SANS};font-size:22px;line-height:1.2;font-weight:bold;color:{INK};">{esc(c['place_title'])}</td>
 {logos_inline(c)}</tr></table></td></tr>
-<tr><td style="padding:0 0 14px 0;">{paras(c['body'], size=15, margin=10)}</td></tr>
-{button(c['link_label'], c['page_url'], filled=True, pad="2px 0 14px 0")}
-<tr><td style="padding:0;font-family:{SANS};font-size:11px;line-height:1.5;color:{MUTED};">{credits_text(c)}</td></tr>
+<tr><td style="padding:0 0 10px 0;">{paras(c['body'], size=15, margin=10)}</td></tr>
 {cards}
+{button(c['link_label'], c['page_url'], filled=True, pad="0 0 14px 0")}
+<tr><td style="padding:0;font-family:{SANS};font-size:11px;line-height:1.5;color:{MUTED};">{credits_text(c)}</td></tr>
 </table>
 </td>
 </tr></table>
