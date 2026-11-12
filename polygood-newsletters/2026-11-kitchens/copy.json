@@ -130,7 +130,7 @@
       "page_url": "https://polygood.com/projects/station-road-kitchen/",
       "image_url": "",
       "image_file": "sq-station-road.jpg",
-      "image_alt": "White Lollipop worktop with small coloured flecks beside a brass sink, with a cabbage on the counter",
+      "image_alt": "Kitchen on Station Road with long runs of White Lollipop worktop, birch-ply cabinets, an island with stools and green glazed tiles",
       "logos": [
         {
           "file": "wunsch.png",
@@ -230,7 +230,7 @@
   "chooser": {
     "enabled": false
   },
-  "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/0a9cb7126539186b6bdd4e2bc70bec405a884cf0/polygood-newsletters/2026-11-kitchens/images",
+  "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/7f2009a09f1a931244d7526ea9d7c61720caa1c6/polygood-newsletters/2026-11-kitchens/images",
   "signoff": "The Polygood team\nThe Good Plastic Company",
   "closing_cta": {
     "text": "Explore how Polygood can make your projects even more interesting",
