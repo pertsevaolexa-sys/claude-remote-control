@@ -1,14 +1,14 @@
 {
   "subject_lines": [
     "The life of a Polygood® worktop, in four kitchens",
-    "From workshop to take-back: four Polygood® kitchens",
-    "Two workshops, four Polygood® kitchens. Yours next?"
+    "Shaped, fitted, lived in, renewed: Polygood® in the kitchen",
+    "Your workshop could write the next chapter"
   ],
-  "preview_text": "Shaped, fitted, lived in, renewed: one worktop's life in four chapters.",
+  "preview_text": "Shaped, fitted, lived in, renewed: one worktop's life in four kitchens.",
   "hero": {
     "title": "The Polygood® Kitchen Edit",
-    "subtitle": "The life of a worktop, from the workshop to the next refit, in four kitchens. And an open call to kitchen makers.",
-    "intro": "A kitchen worktop lives a hard life. It is shaped in a workshop, fitted, used every day and, one day, refitted. Four kitchens, one chapter each, show what Polygood® does at every stage.",
+    "subtitle": "The life of a worktop, from the workshop to the next refit, told in four kitchens.",
+    "intro": "This edition follows one worktop through its life in four chapters: shaped in the workshop, fitted in the kitchen, lived in every day and renewed at the next refit. Each chapter is a real kitchen in Polygood® and shows what the material does at that stage.",
     "image_url": "",
     "image_file": "hero-strip.jpg",
     "image_alt": "Close-ups from four Polygood projects: a wave-cut Terrazzo Nuovo worktop edge, an Emerald Ghost table, a White Lollipop worktop and a Timeless Duo Blue countertop"
@@ -16,7 +16,7 @@
   "eyebrow": "Kitchens edition",
   "headline": "Kitchens, and the makers behind them",
   "umbrella_statement": "",
-  "intro": "A kitchen worktop lives a hard life. It is shaped in a workshop, fitted, used every day and, one day, refitted. Four kitchens, one chapter each, show what Polygood® does at every stage.",
+  "intro": "This edition follows one worktop through its life in four chapters: shaped in the workshop, fitted in the kitchen, lived in every day and renewed at the next refit. Each chapter is a real kitchen in Polygood® and shows what the material does at that stage.",
   "layout": "story",
   "cases": [
     {
@@ -107,13 +107,7 @@
           "url": "https://www.maison-kyka.com/"
         }
       ],
-      "chapter": "02 Fitted",
-      "note": {
-        "before": "We want to do more projects like these. If you make kitchens, ",
-        "link_text": "tell us about your workshop",
-        "url": "https://polygood.com/contact-us/",
-        "after": "."
-      }
+      "chapter": "02 Fitted"
     },
     {
       "key": "station",
@@ -183,10 +177,10 @@
     }
   ],
   "partner": {
-    "eyebrow": "Joint projects",
-    "heading": "We're looking for kitchen makers",
-    "body": "We'd like to work with more kitchen studios, cabinetmakers and worktop fabricators on joint projects. Polygood is worked with standard woodworking tools, and we support you with samples, our technical guide, adhesive matrix and care guide. Finished projects are shared on polygood.com and here, credited to the people who made them.",
-    "button_label": "Get in touch",
+    "eyebrow": "Open call to kitchen makers",
+    "heading": "Your workshop could write the next chapter",
+    "body": "Every kitchen in this story came from a workshop or design studio working with Polygood. We'd like to work with more of them: kitchen studios, cabinetmakers and worktop fabricators, on joint projects.\n\nWe support you with samples, our technical guide, adhesive matrix and care guide. When a kitchen is finished, we share it on polygood.com and in this newsletter, credited to the people who made it.",
+    "button_label": "Tell us about your workshop",
     "button_url": "https://polygood.com/contact-us/"
   },
   "palette_label": "Project patterns",
@@ -239,12 +233,8 @@
   "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/0a9cb7126539186b6bdd4e2bc70bec405a884cf0/polygood-newsletters/2026-11-kitchens/images",
   "signoff": "The Polygood team\nThe Good Plastic Company",
   "closing_cta": {
-    "text": "Make kitchens? Tell us about your workshop",
-    "url": "https://polygood.com/contact-us/"
-  },
-  "intro_button": {
-    "label": "Partner with us on a kitchen",
-    "url": "https://polygood.com/contact-us/"
+    "text": "Explore how Polygood can make your projects even more interesting",
+    "url": "https://polygood.com/"
   },
   "theme": {
     "paper": "#f6f6fa",

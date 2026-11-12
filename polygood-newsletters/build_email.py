@@ -405,6 +405,23 @@ def logos_row(c, height=30):
             f'{cells}</tr></table></td></tr>\n')
 
 
+def logos_stack(c, height=22):
+    """The firms' logos at the right of a chapter heading, one above the other (story layout)."""
+    logos = c.get("logos") or []
+    if not logos:
+        return ""
+    rows = ""
+    for i, lg in enumerate(logos):
+        w = round(lg["width"] * height / 30)
+        src = LOGO_PREVIEW.get(lg.get("file")) or url_or_placeholder(hosted(lg.get("image_url"), lg.get("file"), "logos/"), "LOGO-" + slug(lg["alt"]))
+        img = f'<img src="{attr(src)}" width="{w}" height="{height}" alt="{attr(lg["alt"])}" style="display:block;width:{w}px;height:{height}px;border:0;">'
+        if lg.get("url"):
+            img = f'<a href="{attr(lg["url"])}" target="_blank" style="text-decoration:none;">{img}</a>'
+        rows += f'<tr><td align="right" style="padding:{"0" if i == 0 else "8px"} 0 0 0;">{img}</td></tr>'
+    return (f'<td valign="top" align="right" style="vertical-align:top;padding:2px 0 0 12px;">'
+            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="right">{rows}</table></td>\n')
+
+
 def story(c):
     """The case told in short labelled steps, e.g. the challenge, Polygood's answer, the long run."""
     return "".join(
@@ -530,9 +547,13 @@ def chapter_block(c, images, swatches, last):
 </div><!--[if mso]></td><td width="{STORY_TEXT}" valign="top"><![endif]--><div style="{col}min-width:{STORY_TEXT}px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:14px 0 0 20px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-{logos_row(c, height=22)}<tr><td style="padding:0 0 4px 0;font-family:{SANS};font-size:12px;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;font-weight:bold;color:{TEAL};"><span style="color:{LINE};">{esc(c['chapter'].split(' ')[0])}</span> {esc(' '.join(c['chapter'].split(' ')[1:]))}</td></tr>
-<tr><td style="padding:0 0 2px 0;font-family:{SANS};font-size:22px;line-height:1.2;font-weight:bold;color:{INK};">{esc(c['headline'])}</td></tr>
-<tr><td style="padding:0 0 10px 0;font-family:{SANS};font-size:13px;line-height:1.5;font-weight:bold;color:{MUTED};">{esc(c['place_title'])}</td></tr>
+<tr><td style="padding:0 0 10px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+<td valign="top" style="vertical-align:top;">
+<div style="padding:0 0 4px 0;font-family:{SANS};font-size:12px;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;font-weight:bold;color:{TEAL};"><span style="color:{LINE};">{esc(c['chapter'].split(' ')[0])}</span> {esc(' '.join(c['chapter'].split(' ')[1:]))}</div>
+<div style="padding:0 0 2px 0;font-family:{SANS};font-size:22px;line-height:1.2;font-weight:bold;color:{INK};">{esc(c['headline'])}</div>
+<div style="font-family:{SANS};font-size:13px;line-height:1.5;font-weight:bold;color:{MUTED};">{esc(c['place_title'])}</div>
+</td>
+{logos_stack(c)}</tr></table></td></tr>
 <tr><td style="padding:0 0 12px 0;">{paras(c['body'], size=15, margin=10)}</td></tr>
 <tr><td style="padding:0 0 4px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0">{swatch_rows}</table></td></tr>
 <tr><td style="padding:0 0 8px 0;font-family:{SANS};font-size:13px;line-height:1.5;font-weight:bold;"><a href="{attr(c['page_url'])}" target="_blank" style="color:{TEAL};text-decoration:none;">{esc(c['link_label'])}&nbsp;&rarr;</a></td></tr>
