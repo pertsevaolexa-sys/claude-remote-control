@@ -1,14 +1,14 @@
 {
   "subject_lines": [
-    "Two workshops, three Polygood® kitchens. Yours next?",
-    "The Polygood® Project Edit: kitchens",
-    "We're looking for kitchen makers to work with"
+    "Four jobs a kitchen worktop has to do, in Polygood®",
+    "Two workshops, four Polygood® kitchens. Yours next?",
+    "Edges, curves, stains and water: Polygood® in the kitchen"
   ],
-  "preview_text": "Samji Studio and WUNSCH built these worktops. We want to work with more kitchen makers.",
+  "preview_text": "Each project shows one job a worktop has to do, and how Polygood handles it.",
   "hero": {
     "title": "The Polygood® Project Edit",
-    "subtitle": "This edition is an open call to kitchen makers. Two independent workshops show what a joint project with us looks like.",
-    "intro": "Every kitchen in this edition was made by an independent workshop: Samji Studio in Paris and WUNSCH in the UK. We want more collaborations like these, so this edition doubles as an open call. If you make kitchens, this is what a joint project with Polygood® looks like.",
+    "subtitle": "Kitchens edition: four projects, four jobs a worktop has to do, and an open call to kitchen makers.",
+    "intro": "A kitchen worktop does more work than any other surface in a building: water at the sink, spills, knocks on the edge and years of daily cleaning. Each project below shows one of those jobs and how Polygood® handles it. If you make kitchens, this edition is also an open call to work with us.",
     "image_url": "",
     "image_file": "hero-strip.jpg",
     "image_alt": "Close-ups from four Polygood projects: a wave-cut Terrazzo Nuovo worktop edge, an Emerald Ghost table, a White Lollipop worktop and a Timeless Duo Blue countertop"
@@ -16,17 +16,17 @@
   "eyebrow": "Kitchens edition",
   "headline": "Kitchens, and the makers behind them",
   "umbrella_statement": "",
-  "intro": "Every kitchen in this edition was made by an independent workshop: Samji Studio in Paris and WUNSCH in the UK. We want more collaborations like these, so this edition doubles as an open call. If you make kitchens, this is what a joint project with Polygood® looks like.",
+  "intro": "A kitchen worktop does more work than any other surface in a building: water at the sink, spills, knocks on the edge and years of daily cleaning. Each project below shows one of those jobs and how Polygood® handles it. If you make kitchens, this edition is also an open call to work with us.",
   "layout": "edit",
   "cases": [
     {
       "key": "kyka",
       "kicker": "Maison Kyka · Paris",
-      "sector": "Made with Samji Studio",
+      "sector": "01 · The edge",
       "place_title": "Maison Kyka, Paris",
       "title": "Maison Kyka",
-      "headline": "Terrazzo Nuovo worktops for two Paris flats",
-      "body": "Samji Studio, a Paris workshop that makes furniture to measure, made the worktops for two Maison Kyka apartment kitchens: one in the 7th arrondissement, one near Saint-Germain in the 6th. Both are in Terrazzo Nuovo, a pale terrazzo pattern with fine dark flecks. In the 7th it sits on timber cabinets around a black sink. In the 6th, Samji cut the front edge into a wave that echoes the cabinet handles.",
+      "headline": "An edge with nothing to peel off",
+      "body": "Samji Studio made the Terrazzo Nuovo worktops for two compact Maison Kyka apartment kitchens in Paris, one in the 7th arrondissement and one near Saint-Germain in the 6th.",
       "credits": [
         {
           "role": "Fabrication and design",
@@ -52,16 +52,44 @@
       "page_url": "https://polygood.com/projects/maison-kyka-paris/",
       "image_url": "",
       "image_file": "maison-kyka.jpg",
-      "image_alt": "Compact Paris kitchen with beige cabinets, wavy timber handles and a Terrazzo Nuovo worktop with a wave-cut front edge"
+      "image_alt": "Compact Paris kitchen with beige cabinets, wavy timber handles and a Terrazzo Nuovo worktop with a wave-cut front edge",
+      "story": [
+        {
+          "label": "The challenge.",
+          "text": "In a small kitchen the front edge takes the knocks: hips, bags, wet hands. On many worktops that edge is a strip glued over the core, and it is often the first thing to lift."
+        },
+        {
+          "label": "How Polygood answers it.",
+          "text": "Polygood is the same material all the way through, so a worktop needs no edge protection. In the 6th, Samji cut the edge into a wave that echoes the cabinet handles and left it bare."
+        },
+        {
+          "label": "Over the years.",
+          "text": "There is no strip to come away, and a mark on a satin finish can be sanded out rather than the worktop replaced."
+        }
+      ],
+      "logos": [
+        {
+          "file": "samji.png",
+          "alt": "Samji Studio",
+          "width": 73,
+          "url": "https://www.ateliersamji.com/"
+        },
+        {
+          "file": "kyka.png",
+          "alt": "Maison Kyka",
+          "width": 54,
+          "url": "https://www.maison-kyka.com/"
+        }
+      ]
     },
     {
       "key": "thermo",
       "kicker": "Private home · Paris",
-      "sector": "Made with Samji Studio",
+      "sector": "02 · The curve",
       "place_title": "A private home, Paris",
       "title": "Thermoformed kitchen",
-      "headline": "An Emerald Ghost kitchen with a thermoformed curve",
-      "body": "A private client in Paris asked Samji Studio for a kitchen worktop and a table to match. Samji made both in Emerald Ghost, a flecked sea green, set against timber cabinets and herringbone parquet. Part of the work was thermoformed: Samji heated the panel until it softened, shaped it over a mould and let it cool into a curve. It is the only thermoformed kitchen in our project archive so far.",
+      "headline": "A curve made with heat, not joints",
+      "body": "A private client in Paris asked Samji Studio for a kitchen worktop and a table to match. Samji made both in Emerald Ghost, a flecked sea green. It is the only thermoformed kitchen in our project archive so far.",
       "credits": [
         {
           "role": "Fabrication",
@@ -89,16 +117,38 @@
         "link_text": "tell us about your workshop",
         "url": "https://polygood.com/contact-us/",
         "after": "."
-      }
+      },
+      "story": [
+        {
+          "label": "The challenge.",
+          "text": "Curves are hard in most worktop materials. They are built up from pieces or left out, and every joint is another line to keep clean."
+        },
+        {
+          "label": "How Polygood answers it.",
+          "text": "Polygood can be thermoformed. Samji heated the panel until it softened, shaped it over a mould and let it cool into a curve, in the same pattern as the table."
+        },
+        {
+          "label": "Over the years.",
+          "text": "A bend instead of a joint means one less line for dirt to collect in, and the panel holds its new shape once it has cooled."
+        }
+      ],
+      "logos": [
+        {
+          "file": "samji.png",
+          "alt": "Samji Studio",
+          "width": 73,
+          "url": "https://www.ateliersamji.com/"
+        }
+      ]
     },
     {
       "key": "station",
       "kicker": "Station Road · UK",
-      "sector": "Made with WUNSCH",
+      "sector": "03 · Stains and care",
       "place_title": "Station Road, UK",
       "title": "Station Road",
-      "headline": "A White Lollipop worktop for a Station Road kitchen",
-      "body": "WUNSCH, cabinetmakers in the UK, cut and fitted the worktop for this kitchen on Station Road in White Lollipop, a white ground with small flecks of colour. The flecks pick up the rest of the room: mustard-yellow fronts, pale birch ply, green glazed tiles and the reds and oranges on the open shelf. WUNSCH also photographed the finished kitchen.",
+      "headline": "A white worktop that is easy to look after",
+      "body": "WUNSCH, cabinetmakers who design and make bespoke kitchens in their Lewes workshop in Sussex, cut and fitted this worktop on Station Road in White Lollipop: a white ground with small flecks of colour.",
       "credits": [
         {
           "role": "Cabinetmaking and photography",
@@ -112,16 +162,38 @@
       "page_url": "https://polygood.com/projects/station-road-kitchen/",
       "image_url": "",
       "image_file": "station-road.jpg",
-      "image_alt": "Kitchen with mustard-yellow cabinet fronts, green glazed tiles, a brass tap and a White Lollipop worktop with small coloured flecks"
+      "image_alt": "Kitchen with mustard-yellow cabinet fronts, green glazed tiles, a brass tap and a White Lollipop worktop with small coloured flecks",
+      "story": [
+        {
+          "label": "The challenge.",
+          "text": "A white worktop is the one clients hesitate over. Everyday spills show on a pale surface, and they worry it will look tired in a few years."
+        },
+        {
+          "label": "How Polygood answers it.",
+          "text": "In our stain test with 20 everyday agents, most left no trace on Polygood. Daily cleaning is a pH-neutral cleaner or a little washing-up liquid, nothing stronger."
+        },
+        {
+          "label": "Over the years.",
+          "text": "A mark that does stay can be sanded out, so the surface is renewed rather than replaced, and the panels carry a 10-year limited warranty for interior use."
+        }
+      ],
+      "logos": [
+        {
+          "file": "wunsch.png",
+          "alt": "WUNSCH",
+          "width": 68,
+          "url": "https://www.wunsch.co.uk/"
+        }
+      ]
     },
     {
       "key": "commerzbank",
       "kicker": "Commerzbank · Amsterdam",
-      "sector": "Office pantry",
+      "sector": "04 · Water and the next refit",
       "place_title": "Commerzbank, Amsterdam",
       "title": "Commerzbank",
-      "headline": "Timeless Duo Blue countertops for Commerzbank's Amsterdam pantry",
-      "body": "Commerzbank's Amsterdam office is in Zuidas, the city's business district. CBRE Design Collective designed the interior, including the pantry where the team meets between meetings. The countertops are Polygood Timeless Duo Blue, a white ground with blue flecks. A steel sink sits under the worktop, framed by blue glazed tiles and teal cabinets.",
+      "headline": "Built for the sink and the next refit",
+      "body": "CBRE Design Collective designed the staff pantry in Commerzbank's Amsterdam office in Zuidas, with countertops in Timeless Duo Blue: a white ground with blue flecks.",
       "credits": [
         {
           "role": "Design",
@@ -138,13 +210,34 @@
       "page_url": "https://polygood.com/projects/commerzbank-amsterdam/",
       "image_url": "",
       "image_file": "commerzbank.jpg",
-      "image_alt": "Office pantry at Commerzbank Amsterdam with a Timeless Duo Blue countertop, an undermount steel sink, blue glazed tiles and teal cabinets"
+      "image_alt": "Office pantry at Commerzbank Amsterdam with a Timeless Duo Blue countertop, an undermount steel sink, blue glazed tiles and teal cabinets",
+      "story": [
+        {
+          "label": "The challenge.",
+          "text": "An office pantry is used by many people all day. Water sits around the sink, food is prepared on the counter, and an office fit-out rarely lasts as long as the building."
+        },
+        {
+          "label": "How Polygood answers it.",
+          "text": "Polygood absorbs no moisture, so the steel sink is mounted under the countertop with the edge of the cut-out left bare. The material is tested for food contact under EU Regulation 10/2011."
+        },
+        {
+          "label": "Over the years.",
+          "text": "When the pantry is refitted, the countertops can come back to us through our take-back programme. Polygood is a single material and 100% recyclable."
+        }
+      ],
+      "logos": [
+        {
+          "file": "commerzbank.png",
+          "alt": "Commerzbank",
+          "width": 45
+        }
+      ]
     }
   ],
   "partner": {
     "eyebrow": "Joint projects",
     "heading": "We're looking for kitchen makers",
-    "body": "We'd like to work with more kitchen studios, cabinetmakers and worktop fabricators on joint projects in Polygood.\n\nTell us about your workshop and the kitchens you make. We'll start with a conversation and samples of the patterns that suit your work. When a project is finished, we share it on polygood.com and in this newsletter, credited to the people who made it, as you've seen above.",
+    "body": "We'd like to work with more kitchen studios, cabinetmakers and worktop fabricators on joint projects in Polygood.\n\nPolygood is worked with standard woodworking tools, and we support you with samples, our technical guide, adhesive matrix and care guide. Tell us about your workshop and the kitchens you make. When a project is finished, we share it on polygood.com and in this newsletter, credited to the people who made it.",
     "button_label": "Get in touch",
     "button_url": "https://polygood.com/contact-us/"
   },
@@ -195,7 +288,7 @@
   "chooser": {
     "enabled": false
   },
-  "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/9df7795849cf165e95798ddf56fe825d921642c1/polygood-newsletters/2026-11-kitchens/images",
+  "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/bfa7c73e46b963b0a2dfc079a45eb6914963417a/polygood-newsletters/2026-11-kitchens/images",
   "signoff": "The Polygood team\nThe Good Plastic Company",
   "closing_cta": {
     "text": "Make kitchens? Tell us about your workshop",
@@ -206,14 +299,37 @@
     "url": "https://polygood.com/contact-us/"
   },
   "theme": {
-    "paper": "#f5f6f8",
-    "outer": "#e7eaef",
-    "ink": "#15203a",
-    "muted": "#5a6375",
-    "accent": "#23395d",
-    "line": "#d9a21b",
-    "caption": "#9a6a00",
-    "panel": "#fbf0d4",
-    "note": "#4a5160"
+    "paper": "#f6f6fa",
+    "outer": "#dfe1ee",
+    "ink": "#1d2c52",
+    "muted": "#5e6684",
+    "accent": "#2e477e",
+    "line": "#9f9f5d",
+    "caption": "#6e6c3a",
+    "panel": "#efedd8",
+    "box": "#ffffff",
+    "note": "#4c5370"
+  },
+  "proof": {
+    "heading": "Four jobs a kitchen surface has to do",
+    "items": [
+      {
+        "title": "01 The edge",
+        "text": "Maison Kyka, Paris: a worktop edge with nothing to peel off."
+      },
+      {
+        "title": "02 The curve",
+        "text": "A private home, Paris: a curve made with heat, not joints."
+      },
+      {
+        "title": "03 Stains and care",
+        "text": "Station Road, UK: a white worktop that is easy to look after."
+      },
+      {
+        "title": "04 Water and the next refit",
+        "text": "Commerzbank, Amsterdam: countertops right up to the sink, and a way back at the end."
+      }
+    ],
+    "note": "All four patterns are the same solid panel underneath, worked and cared for the same way. Clean with a pH-neutral cleaner or diluted washing-up liquid, avoid bleach and scouring pads, and put hot pans on a trivet."
   }
 }
