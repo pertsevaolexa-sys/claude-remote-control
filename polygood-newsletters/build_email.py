@@ -69,6 +69,7 @@ WHITE = THEME.get("button_text", WHITE)
 PANEL = THEME.get("panel", PANEL)
 OUTER = THEME.get("outer", OUTER)
 NOTE = THEME.get("note", NOTE)
+WHITE_BOX = THEME.get("box", "#ffffff")  # background of the "why" box under the intro
 # -----------------------------------------------------------------------------
 
 
@@ -364,13 +365,43 @@ def case_block_edit(c, images, swatches, last):
 <tr><td style="padding:0 0 18px 0;">
 <a href="{attr(c['page_url'])}" target="_blank" style="text-decoration:none;"><img src="{attr(src)}" width="{CONTENT}" alt="{attr(c['image_alt'])}" style="display:block;width:100%;max-width:{CONTENT}px;height:auto;border:0;"></a>
 </td></tr>
-{label(c.get('sector') or c['kicker'], pad="0 0 6px 0")}
+{logos_row(c)}{label(c.get('sector') or c['kicker'], pad="0 0 6px 0")}
 <tr><td style="padding:0 0 4px 0;font-family:{SANS};font-size:20px;line-height:1.25;font-weight:bold;color:{INK};">{esc(c.get('place_title') or c['title'])}</td></tr>
 <tr><td style="padding:0 0 14px 0;font-family:{SANS};font-size:14px;line-height:1.5;font-weight:bold;color:{MUTED};">Application: {esc(c['application'])}</td></tr>
-<tr><td style="padding:0 0 6px 0;">{paras(c['body'], margin=12)}</td></tr>{credits_line(c)}
+<tr><td style="padding:0 0 6px 0;">{paras(c['body'], margin=12)}{story(c)}</td></tr>{credits_line(c)}
 {button(c['link_label'], c['page_url'], filled=True, pad="0 0 28px 0")}
 {palette(c, swatches)}
 {case_note(c)}{'' if last else dashed()}"""
+
+
+LOGO_PREVIEW = {}  # file name -> image source, filled in for preview.html only
+
+
+def logos_row(c):
+    """Small logos of the firms behind a case, in a row under the photo (each 30px tall)."""
+    logos = c.get("logos") or []
+    if not logos:
+        return ""
+    cells = "".join(
+        f'<td valign="middle" style="padding:0 20px 0 0;vertical-align:middle;">'
+        + (f'<a href="{attr(lg["url"])}" target="_blank" style="text-decoration:none;">' if lg.get("url") else "")
+        + f'<img src="{attr(LOGO_PREVIEW.get(lg.get("file")) or url_or_placeholder(hosted(lg.get("image_url"), lg.get("file"), "logos/"), "LOGO-" + slug(lg["alt"])))}" '
+        f'width="{lg["width"]}" height="30" alt="{attr(lg["alt"])}" style="display:block;width:{lg["width"]}px;height:30px;border:0;">'
+        + ("</a>" if lg.get("url") else "")
+        + "</td>"
+        for lg in logos
+    )
+    return (f'<tr><td style="padding:0 0 14px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>'
+            f'{cells}</tr></table></td></tr>\n')
+
+
+def story(c):
+    """The case told in short labelled steps, e.g. the challenge, Polygood's answer, the long run."""
+    return "".join(
+        f'<p style="margin:0 0 12px 0;font-family:{SANS};font-size:{BODY_SIZE}px;line-height:1.55;color:{INK};">'
+        f'<span style="font-weight:bold;color:{TEAL};">{esc(st["label"])}</span>&nbsp; {esc(st["text"])}</p>'
+        for st in c.get("story") or []
+    )
 
 
 def case_note(c):
@@ -383,6 +414,34 @@ def case_note(c):
         f'{esc(n.get("before", ""))}<a href="{attr(n["url"])}" target="_blank" style="color:{TEAL};font-weight:bold;text-decoration:underline;">'
         f'{esc(n["link_text"])}</a>{esc(n.get("after", ""))}</td></tr>\n'
     )
+
+
+def proof_block():
+    """An optional boxed list under the intro, e.g. "Why Polygood works in a kitchen": a heading,
+    short points with a bold lead-in, and a small note."""
+    pr = copy.get("proof") or {}
+    if not pr.get("items"):
+        return ""
+    rows = "".join(
+        f'<tr><td style="padding:0 0 12px 0;font-family:{SANS};font-size:15px;line-height:1.55;color:{INK};">'
+        f'<span style="font-weight:bold;color:{TEAL};">{esc(it["title"])}</span>&nbsp; {esc(it["text"])}</td></tr>'
+        for it in pr["items"]
+    )
+    note = (f'<tr><td style="padding:2px 0 0 0;font-family:{SANS};font-size:13px;line-height:1.55;color:{MUTED};">{esc(pr["note"])}</td></tr>'
+            if (pr.get("note") or "").strip() else "")
+    return f"""<!-- Why Polygood -->
+<tr><td style="padding:0 0 32px 0;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td bgcolor="{WHITE_BOX}" style="background:{WHITE_BOX};border-top:3px solid {LINE};padding:22px 22px 14px 22px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+{heading(pr.get('heading', ''), 20, pad="0 0 14px 0")}
+{rows}
+{note}
+</table>
+</td></tr>
+</table>
+</td></tr>
+"""
 
 
 def intro_button():
@@ -403,7 +462,7 @@ def body_edit(images, swatches):
 <!-- Intro -->
 <tr><td style="padding:0 0 24px 0;font-family:{SANS};font-size:18px;line-height:1.5;font-weight:bold;color:{INK};text-align:center;">{esc(lead)}</td></tr>
 {intro_button()}{dashed()}
-{blocks}
+{proof_block()}{blocks}
 {partner_block()}{closing_cta() if not copy.get('partner') else closing_line()}</table>
 </td></tr>
 </table>
@@ -738,7 +797,8 @@ if CHOOSER.get("enabled", True):
             (menu_dir / "swatches" / pat["file"]).write_bytes((out / "images" / "swatches" / pat["file"]).read_bytes())
 
 
-def data_uri(path, mime="image/jpeg"):
+def data_uri(path, mime=None):
+    mime = mime or ("image/png" if path.suffix.lower() == ".png" else "image/jpeg")
     return f"data:{mime};base64,{base64.b64encode(path.read_bytes()).decode()}"
 
 
@@ -772,6 +832,10 @@ swatches = {
     p["name"]: preview_image(hosted(p.get("swatch_url"), p.get("file"), "swatches/"), p.get("file"), imgdir / "swatches", "Add swatch", 240, 240)
     for p in copy["patterns"]
 }
+
+for c_ in copy["cases"]:
+    for lg in c_.get("logos") or []:
+        LOGO_PREVIEW[lg["file"]] = preview_image(hosted(lg.get("image_url"), lg.get("file"), "logos/"), lg.get("file"), imgdir / "logos", lg["alt"], lg["width"] * 2, 60)
 
 page = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
