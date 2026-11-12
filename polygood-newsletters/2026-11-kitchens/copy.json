@@ -11,7 +11,7 @@
     "intro": "Every kitchen in this edition was made by an independent workshop: Samji Studio in Paris and WUNSCH in the UK. We want more collaborations like these, so this edition doubles as an open call. If you make kitchens, this is what a joint project with Polygood® looks like.",
     "image_url": "",
     "image_file": "hero-strip.jpg",
-    "image_alt": "Close-ups from four Polygood projects: a wave-cut Terrazzo Nuovo worktop edge, an Emerald Ghost table, a White Lollipop worktop and an Aqua Drift lampshade"
+    "image_alt": "Close-ups from four Polygood projects: a wave-cut Terrazzo Nuovo worktop edge, an Emerald Ghost table, a White Lollipop worktop and an Espresso Noir table top"
   },
   "eyebrow": "Kitchens edition",
   "headline": "Kitchens, and the makers behind them",
@@ -115,35 +115,31 @@
       "image_alt": "Kitchen with mustard-yellow cabinet fronts, green glazed tiles, a brass tap and a White Lollipop worktop with small coloured flecks"
     },
     {
-      "key": "rootz",
-      "kicker": "Rootz · Netherlands",
-      "sector": "Workplace",
-      "place_title": "Rootz, the Netherlands",
-      "title": "Rootz",
-      "headline": "Beyond the kitchen: tables, chairs and lights",
-      "body": "Rootz is a knowledge and innovation centre for the tree nursery sector in West Brabant, a place for work, meetings and research. In February 2025 All Art Design furnished it in Polygood: tables and chairs in Terrazzo Nuovo and Sapphire Terrazzo, lampshades and a chandelier in Aqua Drift. The panels form both the surface and the structure, so the furniture needs no separate frame, and the blue shades soften the light that passes through them.",
+      "key": "vko",
+      "kicker": "Verloskundigenpraktijk Oost · Netherlands",
+      "sector": "Healthcare",
+      "place_title": "Verloskundigenpraktijk Oost, the Netherlands",
+      "title": "Verloskundigenpraktijk Oost",
+      "headline": "Beyond the kitchen: tables for a midwifery practice",
+      "body": "Verloskundigenpraktijk Oost is a midwifery practice in the Netherlands. Studio Anne Witten and Maaike Veenstra Interieur designed it to feel like a home rather than a clinic: pale oak, upholstered benches, blush tiles and a wall of cards. The tables are Polygood Espresso Noir, a deep brown with fine flecks that sits close to dark timber, on slim black bases between the benches and chairs.",
       "credits": [
         {
-          "role": "Design and fabrication",
-          "name": "All Art Design"
+          "role": "Design",
+          "name": "Studio Anne Witten and Maaike Veenstra Interieur"
         },
         {
           "role": "Photography",
-          "name": "Jesper Productions",
-          "url": "https://jesperproductions.nl/"
-        },
-        {
-          "role": "Client",
-          "name": "Rootz"
+          "name": "By Luna Photography",
+          "url": "https://www.bylunaconcepts.com/"
         }
       ],
-      "pattern": "Terrazzo Nuovo, Sapphire Terrazzo, Aqua Drift",
-      "application": "Tables, chairs, lampshades and a chandelier",
-      "link_label": "See the Rootz project",
-      "page_url": "https://polygood.com/projects/rootz/",
+      "pattern": "Espresso Noir",
+      "application": "Waiting-room tables",
+      "link_label": "See the midwifery practice",
+      "page_url": "https://polygood.com/projects/verloskundigenpraktijk-oost/",
       "image_url": "",
-      "image_file": "rootz.jpg",
-      "image_alt": "Lounge at Rootz with blue Polygood side tables, upholstered chairs and Aqua Drift pendant lamps against a warm textured wall"
+      "image_file": "verloskundigenpraktijk-oost.jpg",
+      "image_alt": "Waiting room at Verloskundigenpraktijk Oost with upholstered benches, timber chairs and round Espresso Noir tables on black bases"
     }
   ],
   "partner": {
@@ -186,20 +182,12 @@
       "id": "PS1601"
     },
     {
-      "name": "Sapphire Terrazzo",
-      "caption": "#PS1801",
-      "pattern_url": "https://polygood.com/product/sapphire-terrazzo/",
+      "name": "Espresso Noir",
+      "caption": "#PS2114",
+      "pattern_url": "https://polygood.com/product/espresso-noir/",
       "swatch_url": "",
-      "file": "sapphire-terrazzo.jpg",
-      "id": "PS1801"
-    },
-    {
-      "name": "Aqua Drift",
-      "caption": "#PS1508",
-      "pattern_url": "https://polygood.com/product/aqua-drift/",
-      "swatch_url": "",
-      "file": "aqua-drift.jpg",
-      "id": "PS1508"
+      "file": "espresso-noir.jpg",
+      "id": "PS2114"
     }
   ],
   "closing": "",
@@ -208,7 +196,7 @@
   "chooser": {
     "enabled": false
   },
-  "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/a51f1508633292ea796dc73a15ee8fbc3bb79a1a/polygood-newsletters/2026-11-kitchens/images",
+  "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/9df7795849cf165e95798ddf56fe825d921642c1/polygood-newsletters/2026-11-kitchens/images",
   "signoff": "The Polygood team\nThe Good Plastic Company",
   "closing_cta": {
     "text": "Make kitchens? Tell us about your workshop",
