@@ -561,16 +561,16 @@ def chapter_block(c, images, swatches, last):
 <!--[if mso]><table role="presentation" width="{CONTENT}" cellpadding="0" cellspacing="0" border="0"><tr><td width="{STORY_IMG}" valign="middle"><![endif]-->
 <div style="{col}min-width:{STORY_IMG}px;">
 <a href="{attr(c['page_url'])}" target="_blank" style="text-decoration:none;"><img src="{attr(src)}" width="{STORY_IMG}" alt="{attr(c['image_alt'])}" style="display:block;width:100%;height:auto;border:0;"></a>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:14px 0 0 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0">{swatch_rows}</table></td></tr></table>
 </div><!--[if mso]></td><td width="{STORY_TEXT}" valign="middle"><![endif]--><div style="{col}min-width:{STORY_TEXT}px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding:14px 0 14px 20px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="pg-story-text" style="padding:14px 0 14px 20px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr><td style="padding:0 0 6px 0;font-family:{SANS};font-size:12px;line-height:1.4;letter-spacing:0.08em;text-transform:uppercase;font-weight:bold;color:{TEAL};"><span style="color:{LINE};">{esc(c['chapter'].split(' ')[0])}</span> {esc(' '.join(c['chapter'].split(' ')[1:]))}<span style="color:{MUTED};font-weight:normal;"> &nbsp;&middot;&nbsp; {esc(c['headline'])}</span></td></tr>
 <tr><td style="padding:0 0 12px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
 <td valign="middle" style="vertical-align:middle;font-family:{SANS};font-size:22px;line-height:1.2;font-weight:bold;color:{INK};">{esc(c['place_title'])}</td>
 {logos_inline(c)}</tr></table></td></tr>
-<tr><td style="padding:0 0 12px 0;">{paras(c['body'], size=15, margin=10)}</td></tr>
-<tr><td style="padding:0 0 4px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0">{swatch_rows}</table></td></tr>
-<tr><td style="padding:0 0 8px 0;font-family:{SANS};font-size:13px;line-height:1.5;font-weight:bold;"><a href="{attr(c['page_url'])}" target="_blank" style="color:{TEAL};text-decoration:none;">{esc(c['link_label'])}&nbsp;&rarr;</a></td></tr>
+<tr><td style="padding:0 0 14px 0;">{paras(c['body'], size=15, margin=10)}</td></tr>
+<tr><td style="padding:0 0 10px 0;font-family:{SANS};font-size:13px;line-height:1.5;font-weight:bold;"><a href="{attr(c['page_url'])}" target="_blank" style="color:{TEAL};text-decoration:none;">{esc(c['link_label'])}&nbsp;&rarr;</a></td></tr>
 <tr><td style="padding:0;font-family:{SANS};font-size:11px;line-height:1.5;color:{MUTED};">{credits_text(c)}</td></tr>
 </table>
 </td></tr></table>
@@ -584,7 +584,8 @@ def body_story(images, swatches):
     """The whole body as one story: intro, chapter list, chapters, partner box, closing line."""
     cases = copy["cases"]
     blocks = "".join(chapter_block(c, images, swatches, i == len(cases) - 1) for i, c in enumerate(cases))
-    return f"""<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;background:{PAPER};">
+    return f"""<style>@media only screen and (max-width:520px){{.pg-story-text{{padding-left:0 !important;}}}}</style>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;margin:0 auto;background:{PAPER};">
 <tr><td bgcolor="{PAPER}" style="background:{PAPER};padding:24px 24px 8px 24px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
 <!-- Intro -->
