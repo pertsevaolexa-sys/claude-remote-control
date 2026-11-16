@@ -334,52 +334,167 @@ const Glow: React.FC = () => {
   );
 };
 
-// Small sparkles bursting out of the number
-const Sparkles: React.FC = () => {
+// ---------------------------------------------------------------------------
+// Instagram moments: double-tap heart, Live-style floating hearts,
+// follower notification bubble
+// ---------------------------------------------------------------------------
+
+const BRAND_BLUE = "#2c4789";
+const HEART_PATH =
+  "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z";
+const PERSON_PATH =
+  "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z";
+
+const Heart: React.FC<{ color: string; size: number }> = ({ color, size }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} style={{ display: "block" }}>
+    <path d={HEART_PATH} fill={color} />
+  </svg>
+);
+
+// The big heart that pops when you double-tap a post
+const DoubleTapHeart: React.FC = () => {
   const frame = useCurrentFrame();
-  const start = 108;
-  const t = frame - start;
-  if (t < 0) return null;
-  const count = 26;
+  return (
+    <Interactive.Div
+      name="Double-tap heart"
+      style={{
+        position: "absolute",
+        left: 390,
+        top: 560,
+        width: 300,
+        height: 300,
+        filter: "drop-shadow(0 10px 30px rgba(20, 30, 80, 0.35))",
+        opacity: interpolate(frame, [108, 110, 134, 142], [0, 1, 1, 0], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        }),
+        scale: interpolate(frame, [108, 118, 126, 142], [0.2, 1.15, 1, 0.6], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+          easing: [
+            Easing.bezier(0.34, 1.56, 0.64, 1),
+            Easing.bezier(0.33, 1, 0.68, 1),
+            Easing.bezier(0.55, 0, 1, 0.45),
+          ],
+          output: "perceptual-scale",
+        }),
+      }}
+    >
+      <Heart color="#ffffff" size={300} />
+    </Interactive.Div>
+  );
+};
+
+// Hearts floating up from the corners, like reactions on Instagram Live
+const FloatingHearts: React.FC = () => {
+  const frame = useCurrentFrame();
+  const count = 30;
   return (
     <AbsoluteFill>
       {Array.from({ length: count }, (_, i) => {
-        const angle = random(`a${i}`) * Math.PI * 2;
-        const dist = 220 + random(`d${i}`) * 330;
-        const delay = random(`t${i}`) * 6;
-        const life = 50 + random(`l${i}`) * 30;
-        const p = interpolate(t - delay, [0, life], [0, 1], {
+        const start = 120 + i * 3.6 + random(`st${i}`) * 4;
+        const t = frame - start;
+        const life = 70 + random(`l${i}`) * 25;
+        if (t < 0 || t > life) return null;
+        const right = random(`side${i}`) < 0.65;
+        const baseX = right ? 905 + random(`x${i}`) * 50 : 140 + random(`x${i}`) * 50;
+        const p = t / life;
+        const sway = Math.sin(t / 9 + random(`ph${i}`) * 6) * (18 + random(`sw${i}`) * 22);
+        const x = baseX + sway;
+        const y = 1330 - p * (560 + random(`h${i}`) * 160);
+        const size = 44 + random(`s${i}`) * 34;
+        const pop = interpolate(t, [0, 10], [0.3, 1], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
-          easing: Easing.bezier(0.16, 1, 0.3, 1),
+          easing: Easing.bezier(0.34, 1.56, 0.64, 1),
         });
-        const opacity = interpolate(
-          t - delay,
-          [0, 4, life * 0.55, life],
-          [0, 1, 0.8, 0],
-          { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
-        );
-        const size = 4 + random(`s${i}`) * 8;
-        const cx = 540 + Math.cos(angle) * dist * p * 1.15;
-        const cy = 740 + Math.sin(angle) * dist * p * 0.75;
+        const opacity = interpolate(p, [0, 0.08, 0.6, 1], [0, 1, 0.9, 0]);
         return (
           <div
             key={i}
             style={{
               position: "absolute",
-              left: cx - size / 2,
-              top: cy - size / 2,
-              width: size,
-              height: size,
-              borderRadius: "50%",
-              background: "#ffffff",
-              boxShadow: "0 0 12px 3px rgba(255,255,255,0.7)",
+              left: x - size / 2,
+              top: y - size / 2,
               opacity,
+              scale: pop,
+              rotate: `${sway * 0.3}deg`,
+              filter: "drop-shadow(0 4px 10px rgba(20, 30, 80, 0.25))",
             }}
-          />
+          >
+            <Heart color="#ffffff" size={size} />
+          </div>
         );
       })}
     </AbsoluteFill>
+  );
+};
+
+// Instagram-style activity bubble: new followers
+const NotificationBubble: React.FC = () => {
+  const frame = useCurrentFrame();
+  return (
+    <Interactive.Div
+      name="Notification bubble"
+      style={{
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 205,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        transformOrigin: "50% 100%",
+        opacity: interpolate(frame, [112, 116], [0, 1], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        }),
+        scale: interpolate(frame, [112, 132], [0, 1], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+          easing: Easing.spring({ damping: 9 }),
+          output: "perceptual-scale",
+        }),
+        translate: interpolate(frame, [132, 240], ["0px 0px", "0px -8px"], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+          easing: Easing.inOut(Easing.sin),
+        }),
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 14,
+          padding: "18px 34px 18px 28px",
+          borderRadius: 26,
+          backgroundColor: "#ffffff",
+          color: BRAND_BLUE,
+          fontFamily,
+          fontWeight: 800,
+          fontSize: 54,
+          letterSpacing: "-0.01em",
+          boxShadow: "0 14px 40px rgba(20, 30, 80, 0.25)",
+        }}
+      >
+        <svg viewBox="0 0 24 24" width={58} height={58}>
+          <path d={PERSON_PATH} fill={BRAND_BLUE} />
+        </svg>
+        <span>30K</span>
+      </div>
+      {/* tail */}
+      <div
+        style={{
+          width: 0,
+          height: 0,
+          marginTop: -1,
+          borderLeft: "16px solid transparent",
+          borderRight: "16px solid transparent",
+          borderTop: "16px solid #ffffff",
+        }}
+      />
+    </Interactive.Div>
   );
 };
 
@@ -445,9 +560,11 @@ export const Followers30K: React.FC = () => {
       <Background />
       <Glow />
       <Logo />
-      <Sparkles />
       <Count />
       <FollowersWord />
+      <FloatingHearts />
+      <NotificationBubble />
+      <DoubleTapHeart />
     </AbsoluteFill>
   );
 };
