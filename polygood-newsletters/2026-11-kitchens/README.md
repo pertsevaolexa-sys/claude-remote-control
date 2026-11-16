@@ -23,6 +23,7 @@ These are built in Mailchimp as separate blocks (`"header_in_mailchimp": true`),
 - `mailchimp-hero.html`: the Project Edit header with this edition's photo strip.
 - `mailchimp-full-email.html`: the whole email, for Mailchimp's "Paste in code".
 - `preview.html`: open in a browser to check.
+- `newsletter-images/`: every image the email uses, in one folder and in reading order: the header, then for each chapter the photo, the logos and the swatch. `polygood-kitchen-edit-images.zip` is the same folder as one download. The email code itself still loads its images from `images/`.
 - `images/`: case photos at 1200px wide, the header strip at 720×420, and swatches at 240×240. The swatches are cropped from the official pattern images on polygood.com.
 
 ## Before sending
