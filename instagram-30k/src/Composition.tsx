@@ -558,7 +558,7 @@ const FollowersWord: React.FC = () => {
 export const Followers30K: React.FC = () => {
   return (
     <AbsoluteFill name="Scene">
-      {/* Soundtrack: ElevenLabs Music instrumental, trimmed so its first hit lands with 30 000 */}
+      {/* Soundtrack: scored in scripts/make_music.py, played by MuseScore General soundfont instruments */}
       <Audio name="Music" src={staticFile("music.wav")} />
       <Background />
       <Glow />
