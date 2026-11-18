@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="729" height="314" viewBox="0 0 729 314">
+  <title>Conceptual framework: the US business model of TGPC</title>
+  <g id="Background">
+    <rect x="0" y="0" width="729" height="314" fill="#20201f"/>
+  </g>
+  <g id="Header">
+    <text x="24.5" y="33.5" font-family="Inter-SemiBold, Inter, sans-serif" font-weight="600" font-size="13" fill="#f0efec">Context: the US business model of TGPC</text>
+    <text x="24.5" y="49.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#c3c2b8">Business Model Canvas (Osterwalder and Pigneur, 2010) · SQ1</text>
+  </g>
+  <g id="Arrows">
+    <g id="Arrow_IV_to_Mediator">
+      <line x1="221" y1="245.5" x2="259" y2="245.5" stroke="#40403d" stroke-width="1"/>
+      <polygon points="258.5,242 265.5,245.5 258.5,249" fill="#40403d"/>
+    </g>
+    <g id="Arrow_Mediator_to_DV">
+      <line x1="463.5" y1="245.5" x2="501.5" y2="245.5" stroke="#40403d" stroke-width="1"/>
+      <polygon points="501,242 508,245.5 501,249" fill="#40403d"/>
+    </g>
+    <g id="Arrow_Moderator_to_path">
+      <line x1="243.5" y1="174" x2="243.5" y2="237" stroke="#40403d" stroke-width="1"/>
+      <polygon points="240,236.5 243.5,243.5 247,236.5" fill="#40403d"/>
+    </g>
+  </g>
+  <g id="Boxes">
+    <g id="Moderator">
+      <rect x="145.5" y="69.5" width="196" height="104" rx="7" ry="7" fill="none" stroke="#40403d" stroke-width="1"/>
+      <text x="243.5" y="93.5" font-family="Inter-SemiBold, Inter, sans-serif" font-weight="600" font-size="13" fill="#f0efec" text-anchor="middle">US rules and standards</text>
+      <text x="243.5" y="109.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#c3c2b8" text-anchor="middle">Moderator</text>
+      <text x="243.5" y="125.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#f0efec" text-anchor="middle">FTC Green Guides, SB 343,</text>
+      <text x="243.5" y="141.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#f0efec" text-anchor="middle">LEED v5, EPD, HPD, Declare</text>
+      <text x="243.5" y="157.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#c3c2b8" text-anchor="middle">Which proof counts · SQ3</text>
+    </g>
+    <g id="Independent_variable">
+      <rect x="24.5" y="201.5" width="196" height="88" rx="7" ry="7" fill="none" stroke="#40403d" stroke-width="1"/>
+      <text x="122.5" y="225.5" font-family="Inter-SemiBold, Inter, sans-serif" font-weight="600" font-size="13" fill="#f0efec" text-anchor="middle">Sustainability claims</text>
+      <text x="122.5" y="241.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#c3c2b8" text-anchor="middle">Independent variable</text>
+      <text x="122.5" y="257.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#f0efec" text-anchor="middle">Claims and their proof</text>
+      <text x="122.5" y="273.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#c3c2b8" text-anchor="middle">Greenwashing · SQ2, SQ4</text>
+    </g>
+    <g id="Mediator">
+      <rect x="266.5" y="201.5" width="196" height="88" rx="7" ry="7" fill="#262c36" stroke="#4e85de" stroke-width="2"/>
+      <text x="364.5" y="225.5" font-family="Inter-SemiBold, Inter, sans-serif" font-weight="600" font-size="13" fill="#f0efec" text-anchor="middle">Perceived credibility</text>
+      <text x="364.5" y="241.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#c3c2b8" text-anchor="middle">Mediator</text>
+      <text x="364.5" y="257.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#f0efec" text-anchor="middle">Do designers believe them?</text>
+      <text x="364.5" y="273.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#c3c2b8" text-anchor="middle">ELM · SQ5</text>
+    </g>
+    <g id="Dependent_variable">
+      <rect x="508.5" y="201.5" width="196" height="88" rx="7" ry="7" fill="none" stroke="#40403d" stroke-width="1"/>
+      <text x="606.5" y="225.5" font-family="Inter-SemiBold, Inter, sans-serif" font-weight="600" font-size="13" fill="#f0efec" text-anchor="middle">Specification decision</text>
+      <text x="606.5" y="241.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#c3c2b8" text-anchor="middle">Dependent variable</text>
+      <text x="606.5" y="257.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#f0efec" text-anchor="middle">Polygood named in a spec</text>
+      <text x="606.5" y="273.5" font-family="Inter-Regular, Inter, sans-serif" font-weight="400" font-size="11.5" fill="#c3c2b8" text-anchor="middle">Buying centre · SQ1, SQ5</text>
+    </g>
+  </g>
+</svg>
