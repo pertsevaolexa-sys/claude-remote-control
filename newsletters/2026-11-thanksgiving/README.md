@@ -1,6 +1,6 @@
 # Polygood® Thanksgiving postcard (send 27 November 2026)
 
-A very short Thanksgiving greeting from The Good Plastic Company to the whole database, laid out as one simple postcard. A white card on the brand's paper background holds a photo from the Thanksgiving film, “Happy Thanksgiving”, one line of wishes, the signature and a small Polygood stamp.
+A very short Thanksgiving greeting from The Good Plastic Company to the whole database, laid out as a simple two-sided postcard on the brand's paper background. The front is a photo from the Thanksgiving film in a white border. The back has “Happy Thanksgiving”, one line of wishes and the signature on the left, and a small Polygood stamp with *To* / *From* lines on the right.
 
 | File | What it is |
 |---|---|
@@ -11,7 +11,7 @@ A very short Thanksgiving greeting from The Good Plastic Company to the whole da
 | `polygood-thanksgiving-2026-mailchimp.zip` (not committed) | `index.html` + `images/`, for Mailchimp's *Code your own → Import zip* |
 | `polygood-thanksgiving-2026-stills.zip` (not committed) | The six stills, for download |
 
-Earlier versions are in git history: the project edition at commit `2c336c3`, and the first postcard (three stills, address lines) at `b7cc8aa`.
+Earlier versions are in git history: the project edition at commit `2c336c3`, the first postcard (three tilted stills, postmark) at `b7cc8aa`, and the one-card version at `9512866`.
 
 ## Subject line and preheader
 
@@ -19,12 +19,12 @@ Earlier versions are in git history: the project edition at commit `2c336c3`, an
 - **A/B alternative:** A Thanksgiving postcard from us (31)
 - **Preheader** (already in the HTML): Wishing you a warm Thanksgiving and good company around the table (65)
 
-## The card
+## The postcard
 
-- **Photo:** the top of still 04 (the kitchen with the fruit plate, green tiles and mugs), cropped above the film’s text overlay to 3:2.
-- **Text:** “Happy Thanksgiving”, “Wishing you a warm Thanksgiving and good company around the table.”, then “From all of us at The Good Plastic Company” in bronze.
-- **Stamp:** a small perforated stamp with a Translucent Bronze (#PS1302) picture, the Polygood mark and “Thanksgiving 2026”.
-- Colours: paper `#F5F4F1` background, white card with a `#DEDAD3` border, ink `#252525`, bronze `#8A4F2A` for the signature.
+- **Front:** the top of still 04 (the kitchen with the fruit plate, green tiles and mugs), cropped above the film’s text overlay to 3:2.
+- **Back, left:** “Happy Thanksgiving”, “Wishing you a warm Thanksgiving and good company around the table.”, then “From all of us at The Good Plastic Company” in bronze.
+- **Back, right:** a small perforated stamp with a Translucent Bronze (#PS1302) picture, the Polygood mark and “Thanksgiving 2026”, then *To: Our friends, near and far* and *From: The Good Plastic Company* on ruled lines. On phones the two halves stack.
+- Colours: paper `#F5F4F1` background, white cards with a `#DEDAD3` border, ink `#252525`, bronze `#8A4F2A` for the signature.
 
 ## The stills
 
