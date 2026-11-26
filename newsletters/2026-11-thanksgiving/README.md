@@ -5,7 +5,7 @@ A short Thanksgiving greeting from The Good Plastic Company to the whole databas
 | File | What it is |
 |---|---|
 | `email.html` | The newsletter with relative `images/…` paths, for the Mailchimp ZIP import |
-| `email-github-images.html` | The same newsletter with its 3 images linked from this public repo (pinned to commit `b7cc8aa`), so it shows images wherever you paste it |
+| `email-github-images.html` | The same newsletter with its 3 images linked from this public repo (pinned to commit `3e6dc74`), so it shows images wherever you paste it |
 | `images/` | 3 images, about 160 KB: the postcard front, the postmark, and the logo |
 | `plain-text.txt` | Plain-text version for the campaign's text part |
 | `stills/` | 6 full-resolution stills (1080 × 1920) from `Polygood_Thanksgiving_2026_-_9x16_v12_1.mp4`, one per scene |
