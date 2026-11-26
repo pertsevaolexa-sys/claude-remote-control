@@ -28,7 +28,7 @@ These are built in Mailchimp as separate blocks (`"header_in_mailchimp": true`),
 
 ## Before sending
 
-- [x] **Images.** These are hosted in this repository, which is public again, through links pinned to a commit. All 12 images load.
+- [ ] **Images.** The code loads them from this repository through links pinned to a commit. The repository was made private again on 12 November 2026, so all 12 links return 404. Either upload `newsletter-images/` to Mailchimp's Content Studio and put the links into `copy.json` (`image_url`, `swatch_url`, the logos' `image_url`), or make the repository public again. Then rebuild and run the skill's `check_links.py`.
 - [ ] **Project pages.** Publish the four pages on polygood.com. All four buttons return 404 until then:
   `/projects/maison-kyka-paris/`, `/projects/thermoformed-kitchen-paris/`, `/projects/station-road-kitchen/`, `/projects/commerzbank-amsterdam/`.
 - [ ] **Samji photographer.** Confirm the photographer's name for both Samji projects. The credits say "Photography: Samji Studio". Samji asks to be on the first credit line with a link to ateliersamji.com, which is done.

@@ -1,0 +1,266 @@
+{
+  "subject_lines": [
+    "The life of a Polygood® worktop, in four kitchens",
+    "Shaped, fitted, lived in, shared: Polygood® in the kitchen",
+    "Your workshop could write the next chapter"
+  ],
+  "preview_text": "Shaped, fitted, lived in, shared: one worktop's life in four kitchens.",
+  "hero": {
+    "title": "The Polygood® Kitchen Edit",
+    "subtitle": "The life of a worktop, from the workshop to a busy office pantry, told in four kitchens.",
+    "intro": "This edition follows one worktop through its life in four chapters: shaped in the workshop, fitted in the kitchen, lived in at home and shared at work. Each chapter is a real kitchen in Polygood® and shows what the material does at that stage.",
+    "image_url": "",
+    "image_file": "hero-strip.jpg",
+    "image_alt": "Close-ups from four Polygood projects: a wave-cut Terrazzo Nuovo worktop edge, an Emerald Ghost table, a White Lollipop worktop and a Timeless Duo Blue countertop"
+  },
+  "eyebrow": "Kitchens edition",
+  "headline": "Kitchens, and the makers behind them",
+  "umbrella_statement": "",
+  "intro": "This edition follows one worktop through its life in four chapters: shaped in the workshop, fitted in the kitchen, lived in at home and shared at work. Each chapter is a real kitchen in Polygood® and shows what the material does at that stage.",
+  "layout": "story",
+  "cases": [
+    {
+      "key": "thermo",
+      "kicker": "Private home · Paris",
+      "sector": "01 · The curve",
+      "place_title": "Private home, Paris",
+      "title": "Thermoformed kitchen",
+      "headline": "The curve",
+      "body": "Curves are hard in most worktop materials: they are built from pieces, and every joint is a line to keep clean. Samji Studio heated an Emerald Ghost panel until it softened, bent it into a curve and made the table to match. A bend instead of a joint.",
+      "credits": [
+        {
+          "role": "Fabrication",
+          "name": "Samji Studio",
+          "url": "https://www.ateliersamji.com/"
+        },
+        {
+          "role": "Client",
+          "name": "Private"
+        },
+        {
+          "role": "Photography",
+          "name": "Samji Studio"
+        }
+      ],
+      "pattern": "Emerald Ghost",
+      "application": "Kitchen worktop and matching table",
+      "link_label": "See the project",
+      "page_url": "https://polygood.com/projects/thermoformed-kitchen-paris/",
+      "image_url": "",
+      "image_file": "pt-thermoformed-kitchen.jpg",
+      "image_alt": "Emerald Ghost table and kitchen worktop in a Paris flat with a concrete ceiling, timber cabinets and herringbone parquet",
+      "logos": [
+        {
+          "file": "samji.png",
+          "alt": "Samji Studio",
+          "width": 73,
+          "url": "https://www.ateliersamji.com/"
+        }
+      ],
+      "chapter": "01 Shaped",
+      "kicker_line": "Shaped in the workshop",
+      "toc": "Shaped"
+    },
+    {
+      "key": "kyka",
+      "kicker": "Maison Kyka · Paris",
+      "sector": "02 · The edge",
+      "place_title": "Maison Kyka, Paris",
+      "title": "Maison Kyka",
+      "headline": "The edge",
+      "body": "Polygood is solid all the way through, so the front edge of a worktop needs no edging strip and can become part of the design. For two compact Maison Kyka flats, Samji Studio made the Terrazzo Nuovo worktops. In one, the edge is shaped into a soft wave that picks up the curves of the wooden handles, so worktop and cabinets read as one design.",
+      "credits": [
+        {
+          "role": "Fabrication and design",
+          "name": "Samji Studio",
+          "url": "https://www.ateliersamji.com/"
+        },
+        {
+          "role": "Design",
+          "name": "Kyka"
+        },
+        {
+          "role": "Client",
+          "name": "Maison Kyka"
+        },
+        {
+          "role": "Photography",
+          "name": "Samji Studio"
+        }
+      ],
+      "pattern": "Terrazzo Nuovo",
+      "application": "Kitchen worktops in two apartments",
+      "link_label": "See the project",
+      "page_url": "https://polygood.com/projects/maison-kyka-paris/",
+      "image_url": "",
+      "image_file": "pt-maison-kyka.jpg",
+      "image_alt": "Compact Maison Kyka kitchen in Paris with beige cabinets, wavy wooden handles and a Terrazzo Nuovo worktop with a wave-shaped edge",
+      "logos": [
+        {
+          "file": "samji.png",
+          "alt": "Samji Studio",
+          "width": 73,
+          "url": "https://www.ateliersamji.com/"
+        },
+        {
+          "file": "kyka.png",
+          "alt": "Maison Kyka",
+          "width": 54,
+          "url": "https://www.maison-kyka.com/"
+        }
+      ],
+      "chapter": "02 Fitted",
+      "kicker_line": "Fitted in the kitchen",
+      "toc": "Fitted"
+    },
+    {
+      "key": "station",
+      "kicker": "Station Road · UK",
+      "sector": "03 · Stains and care",
+      "place_title": "Station Road, UK",
+      "title": "Station Road",
+      "headline": "Stains and care",
+      "body": "A white worktop is the one clients hesitate over. In our stain test with 20 everyday agents, most left no trace on Polygood, and a mark that stays can be sanded out. WUNSCH fitted this one in White Lollipop. Daily care is a pH-neutral cleaner, with a trivet for hot pans.",
+      "credits": [
+        {
+          "role": "Cabinetmaking and photography",
+          "name": "WUNSCH",
+          "url": "https://www.wunsch.co.uk/"
+        }
+      ],
+      "pattern": "White Lollipop",
+      "application": "Kitchen worktop",
+      "link_label": "See the project",
+      "page_url": "https://polygood.com/projects/station-road-kitchen/",
+      "image_url": "",
+      "image_file": "pt-station-road.jpg",
+      "image_alt": "Kitchen run on Station Road with a White Lollipop worktop, mustard-yellow and birch-ply fronts, green glazed tiles and a brass tap",
+      "logos": [
+        {
+          "file": "wunsch.png",
+          "alt": "WUNSCH",
+          "width": 68,
+          "url": "https://www.wunsch.co.uk/"
+        }
+      ],
+      "chapter": "03 Lived in",
+      "kicker_line": "Lived in at home",
+      "toc": "Lived in"
+    },
+    {
+      "key": "commerzbank",
+      "kicker": "Commerzbank · Amsterdam",
+      "sector": "04 · Daily use at work",
+      "place_title": "Commerzbank, Amsterdam",
+      "title": "Commerzbank",
+      "headline": "Daily use at work",
+      "body": "In an office, the pantry is where the day happens: coffee between meetings, lunch, a queue at the sink. For the Amsterdam office of Commerzbank, one of Germany's largest banks, CBRE Design Collective chose Polygood Timeless Duo Blue for the pantry countertops. It absorbs no moisture, so the sink can sit directly under the countertop. It is tested for food contact and carries a 10-year limited warranty for interior use.",
+      "credits": [
+        {
+          "role": "Design",
+          "name": "CBRE Design Collective"
+        },
+        {
+          "role": "Client",
+          "name": "Commerzbank AG"
+        }
+      ],
+      "pattern": "Timeless Duo Blue",
+      "application": "Pantry countertops",
+      "link_label": "See the project",
+      "page_url": "https://polygood.com/projects/commerzbank-amsterdam/",
+      "image_url": "",
+      "image_file": "pt-commerzbank.jpg",
+      "image_alt": "Commerzbank's Amsterdam pantry with two islands topped in Timeless Duo Blue, stools, teal cabinets and a lounge area",
+      "logos": [
+        {
+          "file": "commerzbank.png",
+          "alt": "Commerzbank",
+          "width": 45
+        }
+      ],
+      "chapter": "04 Shared",
+      "kicker_line": "Shared at work",
+      "toc": "Shared"
+    }
+  ],
+  "partner": {
+    "eyebrow": "Open call to kitchen makers",
+    "heading": "Your workshop could write the next chapter",
+    "body": "Every kitchen in this story came from a workshop or design studio working with Polygood. We'd like to make the next ones with you: kitchen studios, cabinetmakers and worktop fabricators.\n\nYou get a material your workshop can cut, shape and finish with standard tools, and a team behind it: free sample boxes for industry professionals, advice on your project, our technical guide and adhesive matrix, custom pattern development, and a take-back programme for the next refit.",
+    "button_label": "Tell us about your workshop",
+    "button_url": "https://polygood.com/contact-us/"
+  },
+  "palette_label": "Project patterns",
+  "palette_label_one": "Project pattern",
+  "palette_cta": "Order samples",
+  "palette_cta_one": "Order a sample",
+  "swatch_links": true,
+  "swatch_buttons": true,
+  "swatch_cta": "Order sample",
+  "patterns": [
+    {
+      "name": "Terrazzo Nuovo",
+      "caption": "#PS1901",
+      "pattern_url": "https://polygood.com/product/terrazzo-nuovo/",
+      "swatch_url": "",
+      "file": "terrazzo-nuovo.jpg",
+      "id": "PS1901"
+    },
+    {
+      "name": "Emerald Ghost",
+      "caption": "#PS1706",
+      "pattern_url": "https://polygood.com/product/emerald-ghost/",
+      "swatch_url": "",
+      "file": "emerald-ghost.jpg",
+      "id": "PS1706"
+    },
+    {
+      "name": "White Lollipop",
+      "caption": "#PS1601",
+      "pattern_url": "https://polygood.com/product/white-lollipop/",
+      "swatch_url": "",
+      "file": "white-lollipop.jpg",
+      "id": "PS1601"
+    },
+    {
+      "name": "Timeless Duo Blue",
+      "caption": "#PS1802",
+      "pattern_url": "https://polygood.com/product/timeless-duo-blue/",
+      "swatch_url": "",
+      "file": "timeless-duo-blue.jpg",
+      "id": "PS1802"
+    }
+  ],
+  "closing": "",
+  "cta_label": "Order samples",
+  "samples_url": "https://polygood.com/order-samples/",
+  "chooser": {
+    "enabled": false
+  },
+  "image_base_url": "https://raw.githubusercontent.com/pertsevaolexa-sys/claude-remote-control/60446bb03a9dd990b7e90ae2829e625bd93f4586/polygood-newsletters/2026-11-kitchens/images",
+  "signoff": "The Polygood team\nThe Good Plastic Company",
+  "closing_cta": {
+    "text": "",
+    "url": "https://polygood.com/"
+  },
+  "theme": {
+    "paper": "#f6f6fa",
+    "outer": "#dfe1ee",
+    "ink": "#1d2c52",
+    "muted": "#5e6684",
+    "accent": "#2e477e",
+    "line": "#9f9f5d",
+    "caption": "#6e6c3a",
+    "panel": "#efedd8",
+    "box": "#ffffff",
+    "note": "#4c5370",
+    "card_border": "#d3d6e6",
+    "card_bg": "#ffffff",
+    "card_bar": "#ecebd6"
+  },
+  "story_header": {
+    "title": "The life of a worktop"
+  },
+  "header_in_mailchimp": true
+}

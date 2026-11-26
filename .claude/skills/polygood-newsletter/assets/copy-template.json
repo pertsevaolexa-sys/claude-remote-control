@@ -1,0 +1,127 @@
+{
+  "_how_to": "Story-layout starter. Copy into polygood-newsletters/<yyyy-mm-theme>/copy.json, replace every TODO, duplicate a case block per chapter (3 to 5), list every pattern used in 'patterns'. Field reference: references/copy-json.md. Wording rules: references/brand-and-claims.md.",
+  "subject_lines": [
+    "TODO brand + the edition's idea, e.g. The life of a Polygood® worktop, in four kitchens",
+    "TODO concrete: places or patterns",
+    "TODO the open call or a curiosity angle"
+  ],
+  "preview_text": "TODO one line that adds what the subject doesn't say",
+  "hero": {
+    "title": "The Polygood® TODO Edit",
+    "subtitle": "TODO",
+    "intro": "TODO two sentences: what this edition follows and how it is told. Each chapter is a real project in Polygood® and shows one thing the material does.",
+    "image_url": "",
+    "image_file": "hero-strip.jpg",
+    "image_alt": "TODO close-ups from the four projects, naming the patterns"
+  },
+  "layout": "story",
+  "header_in_mailchimp": true,
+  "story_header": {
+    "title": "TODO the story's title, e.g. The life of a worktop"
+  },
+  "eyebrow": "TODO edition label",
+  "headline": "TODO",
+  "umbrella_statement": "",
+  "intro": "TODO same as hero.intro",
+  "cases": [
+    {
+      "key": "todo-first",
+      "title": "TODO client",
+      "place_title": "TODO Client, City",
+      "kicker_line": "TODO italic sentence-case line, e.g. Shaped in the workshop",
+      "toc": "TODO one word",
+      "chapter": "01 TODO",
+      "headline": "TODO",
+      "kicker": "TODO Client · City",
+      "sector": "TODO",
+      "body": "TODO 3 to 5 sentences: the problem in this kind of space, what Polygood did (one verified function), the result. Name the maker.",
+      "pattern": "TODO Pattern Name",
+      "application": "TODO",
+      "link_label": "See the project",
+      "page_url": "https://polygood.com/projects/TODO-slug/",
+      "image_url": "",
+      "image_file": "TODO-photo.jpg",
+      "image_alt": "TODO what the whole-room photo shows, naming the pattern",
+      "logos": [
+        {"file": "TODO-firm.png", "alt": "TODO Firm", "width": 60, "url": "https://TODO"}
+      ],
+      "credits": [
+        {"role": "Design", "name": "TODO", "url": ""},
+        {"role": "Fabrication", "name": "TODO", "url": ""},
+        {"role": "Client", "name": "TODO"},
+        {"role": "Photography", "name": "TODO"}
+      ]
+    },
+    {
+      "key": "todo-second",
+      "title": "TODO client",
+      "place_title": "TODO Client, City",
+      "kicker_line": "TODO",
+      "toc": "TODO",
+      "chapter": "02 TODO",
+      "headline": "TODO",
+      "kicker": "TODO Client · City",
+      "sector": "TODO",
+      "body": "TODO",
+      "pattern": "TODO Pattern Name",
+      "application": "TODO",
+      "link_label": "See the project",
+      "page_url": "https://polygood.com/projects/TODO-slug/",
+      "image_url": "",
+      "image_file": "TODO-photo.jpg",
+      "image_alt": "TODO",
+      "logos": [],
+      "credits": [
+        {"role": "Design", "name": "TODO"},
+        {"role": "Client", "name": "TODO"}
+      ]
+    }
+  ],
+  "partner": {
+    "eyebrow": "TODO Open call to …",
+    "heading": "TODO",
+    "body": "TODO who we'd like to work with.\n\nTODO what they get: the material and the team behind it (sample boxes, project advice, technical guide and adhesive matrix, custom patterns, take-back).",
+    "button_label": "TODO Tell us about your workshop",
+    "button_url": "https://polygood.com/contact-us/"
+  },
+  "patterns": [
+    {
+      "name": "TODO Pattern Name",
+      "caption": "#PSTODO",
+      "pattern_url": "https://polygood.com/product/TODO-slug/",
+      "swatch_url": "",
+      "file": "TODO-slug.jpg",
+      "id": "PSTODO"
+    }
+  ],
+  "swatch_links": true,
+  "swatch_buttons": true,
+  "swatch_cta": "Order sample",
+  "palette_label": "Project patterns",
+  "palette_label_one": "Project pattern",
+  "palette_cta": "Order samples",
+  "palette_cta_one": "Order a sample",
+  "closing": "",
+  "cta_label": "Order samples",
+  "samples_url": "https://polygood.com/order-samples/",
+  "chooser": {"enabled": false},
+  "image_base_url": "",
+  "signoff": "The Polygood team\nThe Good Plastic Company",
+  "closing_cta": {"text": "", "url": "https://polygood.com/"},
+  "_theme_note": "Green and mauve, suggested for the edition after the blue-and-olive Kitchen Edit. Show it to the user before building on it. Other palettes: SKILL.md, 'Colour themes'.",
+  "theme": {
+    "paper": "#f4f7f5",
+    "outer": "#dde8e3",
+    "ink": "#102e28",
+    "muted": "#56685f",
+    "accent": "#1d5c50",
+    "line": "#a88a80",
+    "caption": "#7a5a51",
+    "panel": "#f0e6df",
+    "box": "#ffffff",
+    "note": "#3f5550",
+    "card_border": "#cfdcd6",
+    "card_bg": "#ffffff",
+    "card_bar": "#ede2da"
+  }
+}
